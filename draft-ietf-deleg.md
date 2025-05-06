@@ -1,7 +1,7 @@
 ---
 title: Extensible Delegation for DNS
 abbrev: DELEG
-docname: draft-wesplaap-deleg-latest
+docname: draft-ietf-deleg-latest
 date: {DATE}
 category: std
 updates: 1035
