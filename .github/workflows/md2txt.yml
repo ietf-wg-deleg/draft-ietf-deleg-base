@@ -39,7 +39,7 @@ jobs:
         author_name: GitHub Action
         author_email: action@github.com
         message: "Regenerate .txt via GitHub action"
-        add: draft-ietf-deleg.txt
+        add: draft-ietf-deleg.txt draft-ietf-deleg.html
     - name: Push I-D file
       uses: ad-m/github-push-action@master
       with:
