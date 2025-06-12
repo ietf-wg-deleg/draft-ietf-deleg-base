@@ -1,0 +1,46 @@
+name: xml2rfc
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Set up Python 3.x
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.10'
+    - name: Install xml2rfc
+      run: |
+        python -m pip install --upgrade pip
+        pip install xml2rfc
+    - name: Clone kramdown-rfc repo
+      uses: GuillaumeFalourd/clone-github-repo-action@v2.3
+      with:
+        branch: master
+        owner: cabo
+        repository: kramdown-rfc
+    - name: Set up Ruby
+      uses: actions/setup-ruby@v1
+    - name: run gem install
+      run: |
+        gem install kramdown-rfc
+    - name: Make draft
+      run: |
+        make
+    - name: Commit updated file
+      uses: EndBug/add-and-commit@v9
+      with:
+        author_name: GitHub Action
+        author_email: action@github.com
+        message: "Regenerate .txt via GitHub action"
+        add: draft-ietf-deleg.txt
+    - name: Push I-D file
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
