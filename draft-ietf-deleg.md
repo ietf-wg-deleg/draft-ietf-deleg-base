@@ -118,7 +118,7 @@ An NS record contains the hostname of the nameserver for the delegated namespace
 
 # Introduction
 
-In the Domain Name System {{!STD13}}, subdomains within the domain name hierarchy are indicated by delegations to servers which are authoritative for their portion of the namespace.  The DNS records that do this, called NS records, contain hostnames of nameservers, which resolve to addresses.  No other information is available to the resolver. It is limited to connect to the authoritative servers over UDP and TCP port 53. This limitation is a barrier for efficient introduction of new DNS technology. 
+In the Domain Name System {{!STD13}}, subdomains within the domain name hierarchy are indicated by delegations to servers which are authoritative for their portion of the namespace.  The DNS records that do this, called NS records, contain hostnames of nameservers, which resolve to addresses.  No other information is available to the resolver. It is limited to connect to the authoritative servers over UDP and TCP port 53. This limitation is a barrier for efficient introduction of new DNS technology.
 
 The proposed DELEG record type remedies this problem by providing extensible parameters to indicate capabilities and additional information, such as glue that a resolver may use for the delegated authority. It is authoritative and thus signed in the parent side of the delegation making it possible to validate all delegation parameters (names and glue records) with DNSSEC.
 
@@ -139,7 +139,7 @@ Terminology regarding the Domain Name System comes from {{?BCP219}}, with additi
 
 # DELEG Record Type
 
-The DELEG record uses a new resource record type, whose contents are identical to the SVCB record defined in {{?RFC9460}}. For extensions SVCB and DELEG use Service Parameter Keys (SvcParamKeys) and new SvcParamKeys that might be needed also will use the existing IANA Registry. 
+The DELEG record uses a new resource record type, whose contents are identical to the SVCB record defined in {{?RFC9460}}. For extensions SVCB and DELEG use Service Parameter Keys (SvcParamKeys) and new SvcParamKeys that might be needed also will use the existing IANA Registry.
 
 ## Differences from SVCB
 
@@ -163,13 +163,13 @@ The DELEG record creates a zone cut similar to the NS record:
 
 A DELEG RRset MAY be present at a delegation point.  The DELEG RRset MAY contain multiple records. DELEG RRsets MUST NOT appear at a zone's apex.
 
-A DELEG RRset MAY be present with or without NS or DS RRsets at the delegation point. 
+A DELEG RRset MAY be present with or without NS or DS RRsets at the delegation point.
 
 An authoritative server that is DELEG aware MUST put all DELEG resource records for the delegation into the authority section when the resolver has signalled DELEG support. It SHOULD NOT supply DELEG records in the response when resolver has not signalled DELEG support.
 
 If the delegation does not have DELEG records the authoritative server MUST send the NS records and, if the zone is DNSSEC signed, prove the absence of the DELEG RRSet.
 
-A resolver that is DELEG aware MUST signal its support by sending the DE bit when iterating and MUST use the DELEG records in the referral response. 
+A resolver that is DELEG aware MUST signal its support by sending the DE bit when iterating and MUST use the DELEG records in the referral response.
 
 ## Signaling DELEG support
 
@@ -189,7 +189,7 @@ Setting the DE bit to one in a query indicates to the server that the resolver i
 
 ## DNSSEC
 
-As the DELEG record is authoritative in the parent zone of a zone cut similar to DS it has to be signed in the parent zone. 
+As the DELEG record is authoritative in the parent zone of a zone cut similar to DS it has to be signed in the parent zone.
 
 In order for the validator to understand that the delegation uses DELEG this draft introduces a new DNSKEY flag TBD. When this flag is set for the key that signs the DS or DELEG record, usually the zone signing key (ZSK), and the requester has signalled that it understands DELEG an authenticated denial of existence MUST be send with the referral response, so that a DELEG aware validator can prove the existence or absence of a DELEG record and detect a downgrade attack.
 
@@ -203,7 +203,7 @@ IANA is requested to assign a new bit in the DNSKEY RR Flags registry ({{!RFC403
 
 IANA is requested to assign a bit from the EDNS Header Flags registry ({{!RFC6891}}), with the abbreviation DE, the description "DELEG enabled" and referencing this document.
 
-For the RDATA parameters to a DELEG RR, the DNS Service Bindings (SVCB) registry ({{!RFC9460}}) is used.  This document requests no new assignments to that registry, though it is expected that future DELEG work will.  
+For the RDATA parameters to a DELEG RR, the DNS Service Bindings (SVCB) registry ({{!RFC9460}}) is used.  This document requests no new assignments to that registry, though it is expected that future DELEG work will.
 
 --- back
 
@@ -222,7 +222,7 @@ The "example." delegation has DELEG and NS records. The "test." delegation has D
     example.   300 IN NS    a.example.
     example.   300 IN NS    b.example.net.
     example.   300 IN NS    c.example.org.
-    example.   300 IN DS    65163 13 2 5F86F2F3AE2B02... 
+    example.   300 IN DS    65163 13 2 5F86F2F3AE2B02...
     example.   300 IN RRSIG DS 13 4 300 20250214164848 (
                             20250207134348 21261 . O0k558jHhyrC21J..= )
     example.   300 IN NSEC  a.example. NS DS RRSIG NSEC DELEG
@@ -232,14 +232,14 @@ The "example." delegation has DELEG and NS records. The "test." delegation has D
     a.example. 300 IN AAAA  2001:DB8::1
 
 The "test." delegation point has a DELEG record and no NS record.
-    
+
     test.      300 IN DELEG INCLUDE ns2.example.net
     test.      300 IN RRSIG DELEG 13 4 300 20250214164848 (
-                            20250207134348 21261 . 98Aac9f7A1Ac26Q..= ) 
+                            20250207134348 21261 . 98Aac9f7A1Ac26Q..= )
     test.      300 IN NSEC  a.test. RRSIG NSEC DELEG
     test.      300 IN RRSIG NSEC 13 4 300  20250214164848 (
                             20250207134348 21261 . kj7YY5tr9h7UqlK..= )
-    
+
 ## Responses
 
 The following sections show referral examples:
@@ -247,193 +247,193 @@ The following sections show referral examples:
 ## DO bit clear, DE bit clear
 
 ### Query for foo.example
-         
-;; Header: QR RCODE=0  
+
+;; Header: QR RCODE=0
 ;;
-    
-;; Question  
+
+;; Question
 foo.example.  IN MX
-    
-;; Answer  
+
+;; Answer
 ;; (empty)
 
-;; Authority  
-example.   300 IN NS    a.example.  
-example.   300 IN NS    b.example.net.  
-example.   300 IN NS    c.example.org.  
+;; Authority
+example.   300 IN NS    a.example.
+example.   300 IN NS    b.example.net.
+example.   300 IN NS    c.example.org.
 
-;; Additional   
-a.example. 300 IN A     192.0.2.1  
-a.example. 300 IN AAAA  2001:DB8::1  
+;; Additional
+a.example. 300 IN A     192.0.2.1
+a.example. 300 IN AAAA  2001:DB8::1
 
 ### Query for foo.test
 
 ;; Header: QR AA RCODE=3
 ;;
-    
-;; Question  
-foo.test.   IN MX 
-    
-;; Answer  
+
+;; Question
+foo.test.   IN MX
+
+;; Answer
 ;; (empty)
 
-;; Authority  
+;; Authority
 .   300 IN SOA ...
 
-;; Additional   
-;; (empty)    
-    
-     
+;; Additional
+;; (empty)
+
+
 ## DO bit set, DE bit clear
 
 ### Query for foo.example
 
 
-    ;; Header: QR DO RCODE=0  
+    ;; Header: QR DO RCODE=0
     ;;
-    
-    ;; Question  
+
+    ;; Question
     foo.example.   IN MX
-    
-    ;; Answer  
+
+    ;; Answer
     ;; (empty)
-    
-    ;; Authority  
-        
-    example.   300 IN NS    a.example.  
-    example.   300 IN NS    b.example.net.  
-    example.   300 IN NS    c.example.org.  
-    example.   300 IN DS    65163 13 2 5F86F2F3AE2B02...  
-    example.   300 IN RRSIG DS 13 4 300 20250214164848 (  
-                            20250207134348 21261 . O0k558jHhyrC21J..= )  
-    ;; Additional  
-    a.example. 300 IN A     192.0.2.1  
+
+    ;; Authority
+
+    example.   300 IN NS    a.example.
+    example.   300 IN NS    b.example.net.
+    example.   300 IN NS    c.example.org.
+    example.   300 IN DS    65163 13 2 5F86F2F3AE2B02...
+    example.   300 IN RRSIG DS 13 4 300 20250214164848 (
+                            20250207134348 21261 . O0k558jHhyrC21J..= )
+    ;; Additional
+    a.example. 300 IN A     192.0.2.1
     a.example. 300 IN AAAA  2001:DB8::1
-    
-    
+
+
 ### Query for foo.test
 
-    ;; Header: QR DO AA RCODE=3  
+    ;; Header: QR DO AA RCODE=3
     ;;
-        
-    ;; Question  
-    foo.test.      IN MX 
-        
-    ;; Answer  
+
+    ;; Question
+    foo.test.      IN MX
+
+    ;; Answer
     ;; (empty)
 
-    ;; Authority  
+    ;; Authority
     .          300 IN SOA ...
     .          300 IN RRSIG SOA ...
     .          300 IN NSEC  aaa NS SOA RRSIG NSEC DNSKEY ZONEMD
-    .          300 IN RRSIG NSEC 13 4 300  
+    .          300 IN RRSIG NSEC 13 4 300
     test.      300 IN NSEC  a.test. RRSIG NSEC DELEG
     test.      300 IN RRSIG NSEC 13 4 300  20250214164848 (
                             20250207134348 21261 . aBFYask;djf7UqlK..= )
 
-    ;; Additional   
-    ;; (empty)    
-    
+    ;; Additional
+    ;; (empty)
+
 
 ## DO bit clear, DE bit set
 
 ### Query for foo.example
 
 
-    ;; Header: QR DE RCODE=0  
+    ;; Header: QR DE RCODE=0
     ;;
 
-    ;; Question  
+    ;; Question
     foo.example.  IN MX
 
-    ;; Answer  
+    ;; Answer
     ;; (empty)
 
-    ;; Authority  
+    ;; Authority
     example.   300 IN DELEG DIRECT a.example. Glue4=192.0.2.1 (
                             Glue6=2001:DB8::1 )
     example.   300 IN DELEG INCLUDE ns2.example.net.
     example.   300 IN DELEG INCLUDE ns3.example.org.
 
-    ;; Additional   
-    ;; (empty)  
-    
+    ;; Additional
+    ;; (empty)
+
 ### Query for foo.test
 
     ;; Header: QR AA RCODE=0
     ;;
-        
-    ;; Question  
-    foo.test.   IN MX 
-        
-    ;; Answer  
+
+    ;; Question
+    foo.test.   IN MX
+
+    ;; Answer
     ;; (empty)
 
-    ;; Authority  
+    ;; Authority
     test.      300 IN DELEG INCLUDE ns2.example.net
 
-    ;; Additional   
-    ;; (empty)    
-        
+    ;; Additional
+    ;; (empty)
+
 
 
 ## DO bit set, DE bit set
 
 ### Query for foo.example
 
-    ;; Header: QR DO DE RCODE=0  
+    ;; Header: QR DO DE RCODE=0
     ;;
-    
-    ;; Question  
+
+    ;; Question
     foo.example.  IN MX
-    
-    ;; Answer  
+
+    ;; Answer
     ;; (empty)
-    
-    ;; Authority  
-        
+
+    ;; Authority
+
     example.   300 IN DELEG DIRECT a.example. Glue4=192.0.2.1 (
                             Glue6=2001:DB8::1 )
     example.   300 IN DELEG INCLUDE ns2.example.net.
     example.   300 IN DELEG INCLUDE ns3.example.org.
     example.   300 IN RRSIG DELEG 13 4 300 20250214164848 (
                             20250207134348 21261 . HyDHYVT5KcqWc7J..= )
-    example.   300 IN DS    65163 13 2 5F86F2F3AE2B02...  
-    example.   300 IN RRSIG DS 13 4 300 20250214164848 (  
-                            20250207134348 21261 . O0k558jHhyrC21J..= )  
+    example.   300 IN DS    65163 13 2 5F86F2F3AE2B02...
+    example.   300 IN RRSIG DS 13 4 300 20250214164848 (
+                            20250207134348 21261 . O0k558jHhyrC21J..= )
 
-    ;; Additional  
-    a.example. 300 IN A     192.0.2.1  
-    a.example. 300 IN AAAA  2001:DB8::1  
+    ;; Additional
+    a.example. 300 IN A     192.0.2.1
+    a.example. 300 IN AAAA  2001:DB8::1
 
 ### Query for foo.test
-    
-    
-    ;; Header: QR DO DE AA RCODE=3  
+
+
+    ;; Header: QR DO DE AA RCODE=3
     ;;
-        
-    ;; Question  
-    foo.test.      IN MX 
-        
-    ;; Answer  
+
+    ;; Question
+    foo.test.      IN MX
+
+    ;; Answer
     ;; (empty)
 
-    ;; Authority  
+    ;; Authority
     .          300 IN SOA ...
     .          300 IN RRSIG SOA ...
     .          300 IN NSEC  aaa NS SOA RRSIG NSEC DNSKEY ZONEMD
-    .          300 IN RRSIG NSEC 13 4 300  
+    .          300 IN RRSIG NSEC 13 4 300
     test.      300 IN NSEC  a.test. RRSIG NSEC DELEG
     test.      300 IN RRSIG NSEC 13 4 300  20250214164848 (
                             20250207134348 21261 . aBFYask;djf7UqlK..= )
 
-    ;; Additional   
-    ;; (empty)    
-    
-     
+    ;; Additional
+    ;; (empty)
+
+
 # Acknowledgments {:unnumbered}
 
-This document is heavily based on past work done by Tim April in 
+This document is heavily based on past work done by Tim April in
 {{?I-D.tapril-ns2}} and thus extends the thanks to the people helping on this which are:
 John Levine, Erik Nygren, Jon Reed, Ben Kaduk, Mashooq Muhaimen, Jason Moreau, Jerrod Wiesman, Billy Tiemann, Gordon Marx and Brian Wellington.
 
