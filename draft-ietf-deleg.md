@@ -1,18 +1,30 @@
 ---
 title: Extensible Delegation for DNS
 abbrev: DELEG
-docname: draft-ietf-deleg-latest
-date: {DATE}
 category: std
+
+docname: draft-ietf-deleg-latest
+submissiontype: IETF
 updates: 1035
+number:
+date:
+consensus: true
+v: 3
+area: Internet
+workgroup: DELEG
+keyword:
+ - Internet-Draft
+ - DNS
+ - delegation
+venue:
+  group: WG
+  type: Working Group
+  mail: WG@example.com
+  arch: https://example.com/WG
+  github: USER/REPO
+  latest: https://example.com/LATEST
 
 ipr: trust200902
-submissiontype: IETF
-area: Internet
-keyword: Internet-Draft
-
-stand_alone: yes
-pi: [toc, sortrefs, symrefs]
 
 author:
 -

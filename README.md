@@ -4,17 +4,12 @@ This is the working area for the Internet-Draft, "Extensible Delegation for DNS"
 
 ## Building the Draft
 
-Formatted text and HTML versions of the draft can be built using `make`.
-
-```sh
-$ make
-```
-
-This requires that you have the necessary software installed.  See
-[the instructions](https://github.com/martinthomson/i-d-template/blob/master/doc/SETUP.md).
+[Read the
+instructions](https://github.com/martinthomson/i-d-template/blob/main/doc/TEMPLATE.md)
+for more information.
 
 
 ## Contributing
 
 See the
-[guidelines for contributions](https://github.com/fl1ger/deleg/blob/master/CONTRIBUTING.md).
+[guidelines for contributions](https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/blob/main/CONTRIBUTING.md).
