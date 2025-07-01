@@ -1377,7 +1377,7 @@ all capitals, as shown here.<a href="#section-1.1-1" class="pilcrow">¶</a></p>
         </ul>
 <p id="section-2.2-3">A DELEG RRset MAY be present at a delegation point.  The DELEG RRset MAY contain multiple records. DELEG RRsets MUST NOT appear at a zone's apex.<a href="#section-2.2-3" class="pilcrow">¶</a></p>
 <p id="section-2.2-4">A DELEG RRset MAY be present with or without NS or DS RRsets at the delegation point.<a href="#section-2.2-4" class="pilcrow">¶</a></p>
-<p id="section-2.2-5">An authoritative server that is DELEG aware MUST put all DELEG resource records for the delegation into the authority section when the resolver has signalled DELEG support. It SHOULD NOT supply DELEG records in the response when resolver has not signalled DELEG support.<a href="#section-2.2-5" class="pilcrow">¶</a></p>
+<p id="section-2.2-5">An authoritative server that is DELEG aware MUST put all DELEG resource records for the delegation into the authority section when the resolver has signaled DELEG support. It SHOULD NOT supply DELEG records in the response when resolver has not signaled DELEG support.<a href="#section-2.2-5" class="pilcrow">¶</a></p>
 <p id="section-2.2-6">If the delegation does not have DELEG records the authoritative server MUST send the NS records and, if the zone is DNSSEC signed, prove the absence of the DELEG RRSet.<a href="#section-2.2-6" class="pilcrow">¶</a></p>
 <p id="section-2.2-7">A resolver that is DELEG aware MUST signal its support by sending the DE bit when iterating and MUST use the DELEG records in the referral response.<a href="#section-2.2-7" class="pilcrow">¶</a></p>
 </section>
@@ -1408,7 +1408,7 @@ all capitals, as shown here.<a href="#section-1.1-1" class="pilcrow">¶</a></p>
 <a href="#section-2.4" class="section-number selfRef">2.4. </a><a href="#name-dnssec" class="section-name selfRef">DNSSEC</a>
         </h3>
 <p id="section-2.4-1">As the DELEG record is authoritative in the parent zone of a zone cut similar to DS it has to be signed in the parent zone.<a href="#section-2.4-1" class="pilcrow">¶</a></p>
-<p id="section-2.4-2">In order for the validator to understand that the delegation uses DELEG this draft introduces a new DNSKEY flag TBD. When this flag is set for the key that signs the DS or DELEG record, usually the zone signing key (ZSK), and the requester has signalled that it understands DELEG an authenticated denial of existence MUST be send with the referral response, so that a DELEG aware validator can prove the existence or absence of a DELEG record and detect a downgrade attack.<a href="#section-2.4-2" class="pilcrow">¶</a></p>
+<p id="section-2.4-2">In order for the validator to understand that the delegation uses DELEG this draft introduces a new DNSKEY flag TBD. When this flag is set for the key that signs the DS or DELEG record, usually the zone signing key (ZSK), and the requester has signaled that it understands DELEG an authenticated denial of existence MUST be send with the referral response, so that a DELEG aware validator can prove the existence or absence of a DELEG record and detect a downgrade attack.<a href="#section-2.4-2" class="pilcrow">¶</a></p>
 <p id="section-2.4-3">A Validating Stub Resolver that is DELEG aware has to use a Security-Aware Resolver that is DELEG aware and if it is behind a forwarder this has to be security and DELEG aware as well.<a href="#section-2.4-3" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -1419,8 +1419,8 @@ all capitals, as shown here.<a href="#section-1.1-1" class="pilcrow">¶</a></p>
       <h2 id="name-iana-considerations">
 <a href="#section-3" class="section-number selfRef">3. </a><a href="#name-iana-considerations" class="section-name selfRef">IANA Considerations</a>
       </h2>
-<p id="section-3-1">IANA is requested to allocate the DELEG RR in the Resource Record (RR) TYPEs registry, with the meaning of "enchanced delegation information" and referencing this document.<a href="#section-3-1" class="pilcrow">¶</a></p>
-<p id="section-3-2">IANA is requested to assign a new bit in the DNSKEY RR Flags registry (<span>[<a href="#RFC4034" class="cite xref">RFC4034</a>]</span>) for the DELEG bit (N), with the descripion "DELEG" and referencing this document.<a href="#section-3-2" class="pilcrow">¶</a></p>
+<p id="section-3-1">IANA is requested to allocate the DELEG RR in the Resource Record (RR) TYPEs registry, with the meaning of "enhanced delegation information" and referencing this document.<a href="#section-3-1" class="pilcrow">¶</a></p>
+<p id="section-3-2">IANA is requested to assign a new bit in the DNSKEY RR Flags registry (<span>[<a href="#RFC4034" class="cite xref">RFC4034</a>]</span>) for the DELEG bit (N), with the description "DELEG" and referencing this document.<a href="#section-3-2" class="pilcrow">¶</a></p>
 <p id="section-3-3">IANA is requested to assign a bit from the EDNS Header Flags registry (<span>[<a href="#RFC6891" class="cite xref">RFC6891</a>]</span>), with the abbreviation DE, the description "DELEG enabled" and referencing this document.<a href="#section-3-3" class="pilcrow">¶</a></p>
 <p id="section-3-4">For the RDATA parameters to a DELEG RR, the DNS Service Bindings (SVCB) registry (<span>[<a href="#RFC9460" class="cite xref">RFC9460</a>]</span>) is used.  This document requests no new assignments to that registry, though it is expected that future DELEG work will.<a href="#section-3-4" class="pilcrow">¶</a></p>
 </section>
@@ -1849,7 +1849,7 @@ John Levine, Erik Nygren, Jon Reed, Ben Kaduk, Mashooq Muhaimen, Jason Moreau, J
         </h3>
 <ul class="normal">
 <li class="normal" id="appendix-D.1-1.1">
-            <p id="appendix-D.1-1.1.1">Clarified SVCB priority behaviour<a href="#appendix-D.1-1.1.1" class="pilcrow">¶</a></p>
+            <p id="appendix-D.1-1.1.1">Clarified SVCB priority behavior<a href="#appendix-D.1-1.1.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="appendix-D.1-1.2">
             <p id="appendix-D.1-1.2.1">Added section on differences to draft-homburg-deleg-incremental-deleg<a href="#appendix-D.1-1.2.1" class="pilcrow">¶</a></p>
@@ -1864,7 +1864,7 @@ John Levine, Erik Nygren, Jon Reed, Ben Kaduk, Mashooq Muhaimen, Jason Moreau, J
         </h3>
 <ul class="normal">
 <li class="normal" id="appendix-D.2-1.1">
-            <p id="appendix-D.2-1.1.1">Reorganised and streamlined the draft to the bare mininum for DELEG as an NS replacement<a href="#appendix-D.2-1.1.1" class="pilcrow">¶</a></p>
+            <p id="appendix-D.2-1.1.1">Reorganised and streamlined the draft to the bare minimum for DELEG as an NS replacement<a href="#appendix-D.2-1.1.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="appendix-D.2-1.2">
             <p id="appendix-D.2-1.2.1">Defined codepoints for temporary testing<a href="#appendix-D.2-1.2.1" class="pilcrow">¶</a></p>
