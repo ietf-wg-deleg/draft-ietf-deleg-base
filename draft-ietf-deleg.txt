@@ -6,11 +6,11 @@ deleg                                                           T. April
 Internet-Draft                                               Google, LLC
 Updates: 1035 (if approved)                                    P. Špaček
 Intended status: Standards Track                                     ISC
-Expires: 2 January 2026                                         R. Weber
+Expires: 3 January 2026                                         R. Weber
                                                      Akamai Technologies
                                                              D. Lawrence
                                                               Salesforce
-                                                             1 July 2025
+                                                             2 July 2025
 
 
                      Extensible Delegation for DNS
@@ -65,7 +65,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 2 January 2026.
+   This Internet-Draft will expire on 3 January 2026.
 
 Copyright Notice
 
@@ -533,7 +533,7 @@ A.5.1.  Query for foo.example
 
 A.5.2.  Query for foo.test
 
-   ;; Header: QR DO DE AA RCODE=3
+   ;; Header: QR DO DE AA RCODE=0
    ;;
 
    ;; Question
@@ -543,13 +543,12 @@ A.5.2.  Query for foo.test
    ;; (empty)
 
    ;; Authority
-   .          300 IN SOA ...
-   .          300 IN RRSIG SOA ...
-   .          300 IN NSEC  aaa NS SOA RRSIG NSEC DNSKEY ZONEMD
-   .          300 IN RRSIG NSEC 13 4 300
+   test.      300 IN DELEG INCLUDE ns2.example.net.
+   test.      300 IN RRSIG DELEG 13 4 300 20250214164848 (
+                           20250207134348 21261 . 98Aac9f7A1Ac26Q..= )
    test.      300 IN NSEC  a.test. RRSIG NSEC DELEG
    test.      300 IN RRSIG NSEC 13 4 300  20250214164848 (
-                           20250207134348 21261 . aBFYask;djf7UqlK..= )
+                           20250207134348 21261 . kj7YY5tr9h7UqlK..= )
 
    ;; Additional
    ;; (empty)
