@@ -1,0 +1,666 @@
+{
+  "magic": "E!vIA5L86J2I",
+  "timestamp": "2025-07-03T01:01:52.678669+00:00",
+  "repo": "ietf-wg-deleg/draft-ietf-deleg-base",
+  "labels": [
+    {
+      "name": "bug",
+      "description": "Something isn't working",
+      "color": "d73a4a"
+    },
+    {
+      "name": "documentation",
+      "description": "Improvements or additions to documentation",
+      "color": "0075ca"
+    },
+    {
+      "name": "duplicate",
+      "description": "This issue or pull request already exists",
+      "color": "cfd3d7"
+    },
+    {
+      "name": "enhancement",
+      "description": "New feature or request",
+      "color": "a2eeef"
+    },
+    {
+      "name": "good first issue",
+      "description": "Good for newcomers",
+      "color": "7057ff"
+    },
+    {
+      "name": "help wanted",
+      "description": "Extra attention is needed",
+      "color": "008672"
+    },
+    {
+      "name": "invalid",
+      "description": "This doesn't seem right",
+      "color": "e4e669"
+    },
+    {
+      "name": "question",
+      "description": "Further information is requested",
+      "color": "d876e3"
+    },
+    {
+      "name": "wontfix",
+      "description": "This will not be worked on",
+      "color": "ffffff"
+    }
+  ],
+  "issues": [
+    {
+      "number": 1,
+      "id": "I_kwDOO41rkM66pX6E",
+      "title": "history cleanup",
+      "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/issues/1",
+      "state": "CLOSED",
+      "author": "pspacek",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "I've pushed cleaned up history into branch https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/tree/base-draft-history-cleanup. If people like it we can force-push into the main branch and use it as a starting point.",
+      "createdAt": "2025-06-09T20:28:39Z",
+      "updatedAt": "2025-06-11T12:51:07Z",
+      "closedAt": "2025-06-11T12:51:07Z",
+      "comments": [
+        {
+          "author": "wessels",
+          "authorAssociation": "NONE",
+          "body": "Speaking personally, I like the idea of doing this and having a separate repo for each document.",
+          "createdAt": "2025-06-10T09:56:51Z",
+          "updatedAt": "2025-06-10T09:56:51Z"
+        },
+        {
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "body": "@fl1ger Okay with you as well?",
+          "createdAt": "2025-06-10T10:34:59Z",
+          "updatedAt": "2025-06-10T10:34:59Z"
+        },
+        {
+          "author": "fl1ger",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Moin!\n\nI am ok, but I think that your current non history version is ahead of what we have published. I think we should have at least start from the 00 in history.\n\nSo long\n-Ralf\n",
+          "createdAt": "2025-06-10T12:09:28Z",
+          "updatedAt": "2025-06-10T12:09:28Z"
+        },
+        {
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Hmm lemme see, perhaps I forgot to pull before doing this magic.",
+          "createdAt": "2025-06-10T12:30:48Z",
+          "updatedAt": "2025-06-10T12:30:48Z"
+        },
+        {
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I double checked it and it was actually the opposite. The cleaned up branch had extra commit with whitespace-only changes to placate linter. This cleaned up branch is now force-pushed over the main branch.",
+          "createdAt": "2025-06-11T12:51:07Z",
+          "updatedAt": "2025-06-11T12:51:07Z"
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "id": "I_kwDOO41rkM68AE75",
+      "title": "resolver behavior matrix",
+      "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/issues/4",
+      "state": "OPEN",
+      "author": "pspacek",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Describe what resolver does with different combinations of:\n\n- resolver does/not support DELEG\n- auth zone does/not support DELEG\n- auth zone does/not contain DELEG\n- auth zone does/not contain NS",
+      "createdAt": "2025-06-17T16:47:04Z",
+      "updatedAt": "2025-07-01T16:21:13Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "body": "This is now implemented in https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/blob/main/query-answer-combinations-table-gen.py with result available in https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/blob/main/query-answer-combinations-table-gen.csv.\n\nNow the question is in what form do we put this into draft (or not).",
+          "createdAt": "2025-07-01T16:21:13Z",
+          "updatedAt": "2025-07-01T16:21:13Z"
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "id": "I_kwDOO41rkM68AKGZ",
+      "title": "one-off or type range",
+      "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/issues/5",
+      "state": "OPEN",
+      "author": "pspacek",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Do we want to define special behavior for DELEG as a single type, or do we want to reserve a range for this purpose?\n\nhttps://mailarchive.ietf.org/arch/msg/dd/gUX9zpGAta2wwXIe-Aar7KJSZ24/",
+      "createdAt": "2025-06-17T16:55:35Z",
+      "updatedAt": "2025-06-17T16:55:53Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 6,
+      "id": "I_kwDOO41rkM68ALA_",
+      "title": "do NOT fallback from DELEG to NS",
+      "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/issues/6",
+      "state": "OPEN",
+      "author": "pspacek",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "During interim we seemed to agree resolvers MUST NOT fallback to NS when DELEG they got does not work. Put text to that effect into the draft.",
+      "createdAt": "2025-06-17T16:57:02Z",
+      "updatedAt": "2025-06-17T16:57:02Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 10,
+      "id": "I_kwDOO41rkM69E_Hk",
+      "title": "Extended DNS Error for weird DE=0 corner cases",
+      "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/issues/10",
+      "state": "OPEN",
+      "author": "pspacek",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "DELEG-only delegation in zone and query with DE=0 produces confusing (but RFC4033-valid) NXDOMAIN. We can have an EDE code to signal this weird corner case to people debugging this.\n\nSource: https://mailarchive.ietf.org/arch/msg/dd/jrXRh99606L0z7nfvTlh8e5rwjQ/",
+      "createdAt": "2025-06-24T14:20:46Z",
+      "updatedAt": "2025-06-24T14:20:46Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 11,
+      "id": "I_kwDOO41rkM69gcJU",
+      "title": "SVCB reuse/RR format question",
+      "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/issues/11",
+      "state": "OPEN",
+      "author": "pspacek",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "## Options\n- reuse SVCB wire format and presentation format (version -00)\n- reuse SVCB wire format but use different presentation format (ALIAS -> INCLUDE etc.)\n- reuse SVCB wire & presentation format elements like `key=value` list but do other changes, e.g. drop priority field\n- do our own thing completely (nobody is seriously suggesting this, but hey, complete list of options!)\n\n## Considerations\n### Presentation format\nPeople already got confused by \"ALIAS\" mode with multiple targets, which is something we definitively want to do for DELEG.\n\n### Code reuse\n- 100% compatibility not possible - we have to use new type number, so libraries need an update in any case\n- benefit - easier to implement if you just add number to an existing type implementation\n- problem - **too easy** to implement, so e.g. multiple ALIAS RRs might trip over code in existing strict SVCB parsers and similar problems",
+      "createdAt": "2025-06-26T14:49:14Z",
+      "updatedAt": "2025-07-02T11:59:00Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 12,
+      "id": "I_kwDOO41rkM69gfcz",
+      "title": "Glue behavior",
+      "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/issues/12",
+      "state": "OPEN",
+      "author": "pspacek",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Discuss!\n\n### In-domain delegation\n- Is ipv4hint just a hint and should it be overriden by data from child?\n- If not, do we need a name at all?\n\n### Sibling glue\nShould it have IP addresses as well?\n\n### [Glue for Cyclic Sibling Domain Name Servers](https://datatracker.ietf.org/doc/html/rfc9471#name-glue-for-cyclic-sibling-dom)\nDo we really need to support this?\n\n### Unnecessary glue\nWhat to do when resolver encounters it in DELEG RR?",
+      "createdAt": "2025-06-26T14:53:40Z",
+      "updatedAt": "2025-06-29T19:43:08Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "body": "P.S. Perhaps we should get rid of term `glue`.",
+          "createdAt": "2025-06-26T14:53:56Z",
+          "updatedAt": "2025-06-26T14:53:56Z"
+        },
+        {
+          "author": "moonshiner",
+          "authorAssociation": "NONE",
+          "body": "Would have to agree - the last rev of terminology document we went with \"sibling domain relationship\" for example ",
+          "createdAt": "2025-06-29T19:43:08Z",
+          "updatedAt": "2025-06-29T19:43:08Z"
+        }
+      ]
+    },
+    {
+      "number": 16,
+      "id": "I_kwDOO41rkM6-UEql",
+      "title": "Example A.5.2. Query for foo.test is incorrect",
+      "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/issues/16",
+      "state": "CLOSED",
+      "author": "pspacek",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Issue transferred from https://github.com/fl1ger/deleg/issues/48\n\nVersion: -00\n\n@chantra reported:\nI believe A.5.2 (DO bit set, DE bit set) https://github.com/fl1ger/deleg/blob/main/draft-wesplaap-deleg.md?plain=1#L404-L427 incorrectly copied the payload from A.3.2 (DO bit set, DE bit clear)\n\nand instead should be:\n\n```\n;; Header: QR AA RCODE=0\n;;\n\n;; Question\nfoo.test.   IN MX\n\n;; Answer\n;; (empty)\n\n;; Authority\ntest.      300 IN DELEG 0 ns2.example.net\ntest.      300 IN RRSIG DELEG 13 4 300 20250214164848 (\n                        20250207134348 21261 . 98Aac9f7A1Ac26Q..= )\ntest.      300 IN NSEC  a.test. RRSIG NSEC DELEG\ntest.      300 IN RRSIG NSEC 13 4 300  20250214164848 (\n                        20250207134348 21261 . kj7YY5tr9h7UqlK..= )\n\n;; Additional\n;; (empty)\n```",
+      "createdAt": "2025-07-01T15:28:07Z",
+      "updatedAt": "2025-07-02T11:46:48Z",
+      "closedAt": "2025-07-02T11:46:48Z",
+      "comments": []
+    },
+    {
+      "number": 19,
+      "id": "I_kwDOO41rkM6-ebEW",
+      "title": "SERVFAIL DE=0 queries to/under DELEG-only delegation point",
+      "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/issues/19",
+      "state": "OPEN",
+      "author": "pspacek",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Two participants (so far) expressed desire NOT to return NXDOMAIN when DE=0 query hits a DELEG-only delegation.\n\n- [Johan Stenstam](https://mailarchive.ietf.org/arch/msg/dd/nohd8lIUxFCEayxttALWyFc5SXU/)\n- [Stephane Bortzmeyer](https://mailarchive.ietf.org/arch/msg/dd/Mv7SpCuJt7mSjf3vv9oW8wtc_YI/)\n\nGiven RFC4034 + RFC 6840 DNSSEC semantics,  the only alternative option is a deliberate SERVFAIL from the auth.",
+      "createdAt": "2025-07-02T11:54:26Z",
+      "updatedAt": "2025-07-02T11:54:26Z",
+      "closedAt": null,
+      "comments": []
+    }
+  ],
+  "pulls": [
+    {
+      "number": 2,
+      "id": "PR_kwDOO41rkM6aMqUw",
+      "title": "trim trailing whitespace",
+      "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/pull/2",
+      "state": "MERGED",
+      "author": "wessels",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-06-12T11:26:39Z",
+      "updatedAt": "2025-06-20T15:27:39Z",
+      "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
+      "baseRefName": "main",
+      "baseRefOid": "013a3af3ac9b7de36f5d1ce8771ad11ab92c6633",
+      "headRepository": "wessels/draft-ietf-deleg-base",
+      "headRefName": "trim-whitespace",
+      "headRefOid": "0058d5674be11f2269763ae2a0ca7271d0c5d181",
+      "closedAt": "2025-06-20T15:27:11Z",
+      "mergedAt": "2025-06-20T15:27:11Z",
+      "mergedBy": "pspacek",
+      "mergeCommit": {
+        "oid": "887aa9df45be3b28e7fa6aeb70e814c6cf4fb406"
+      },
+      "comments": [
+        {
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Thank you and apologies for long wait. I thought I set notifications for this repo ... but in fact I did not :facepalm: ",
+          "createdAt": "2025-06-20T15:27:39Z",
+          "updatedAt": "2025-06-20T15:27:39Z"
+        }
+      ],
+      "reviews": []
+    },
+    {
+      "number": 3,
+      "id": "PR_kwDOO41rkM6aMqvf",
+      "title": "add github action that generates txt from markdown",
+      "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/pull/3",
+      "state": "CLOSED",
+      "author": "wessels",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-06-12T11:27:18Z",
+      "updatedAt": "2025-06-27T11:45:28Z",
+      "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
+      "baseRefName": "main",
+      "baseRefOid": "013a3af3ac9b7de36f5d1ce8771ad11ab92c6633",
+      "headRepository": "wessels/draft-ietf-deleg-base",
+      "headRefName": "github-action-to-generate-txt",
+      "headRefOid": "a96d62943925259299f70b79e3f4fc9c8dbe9385",
+      "closedAt": "2025-06-27T11:45:27Z",
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [
+        {
+          "author": "vcunat",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "It didn't pass:\r\nhttps://github.com/wessels/draft-ietf-deleg-base/actions/runs/15609384266/job/43966408310\r\nbut apparently just because of some linting issues?  (i.e. those might better get addressed in a different PR anyway)",
+          "createdAt": "2025-06-17T17:07:59Z",
+          "updatedAt": "2025-06-17T17:08:45Z"
+        },
+        {
+          "author": "wessels",
+          "authorAssociation": "NONE",
+          "body": "Yes it needs PR #2 first to clean up trailing whitespace.",
+          "createdAt": "2025-06-17T18:14:20Z",
+          "updatedAt": "2025-06-17T18:14:20Z"
+        },
+        {
+          "author": "vcunat",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Ah, I see.  Personally, I slightly prefer CI not failing on such nits &ndash; at least not at this phase of standardization.  (it feels like for the RFC editor phase)  But I don't mind really.",
+          "createdAt": "2025-06-17T18:34:14Z",
+          "updatedAt": "2025-06-17T18:34:14Z"
+        },
+        {
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I'm attempting to fully reuse https://github.com/martinthomson/internet-draft-template/ . Let's see if I manage to create a PR with this.",
+          "createdAt": "2025-06-27T11:11:50Z",
+          "updatedAt": "2025-06-27T11:11:50Z"
+        },
+        {
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Closing in favor of #14 ",
+          "createdAt": "2025-06-27T11:45:27Z",
+          "updatedAt": "2025-06-27T11:45:27Z"
+        }
+      ],
+      "reviews": []
+    },
+    {
+      "number": 7,
+      "id": "PR_kwDOO41rkM6a-Eb2",
+      "title": "Add temporary table for making NS and DELEG decision",
+      "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/pull/7",
+      "state": "MERGED",
+      "author": "paulehoffman",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Just to keep this in the repo for now; can be nuked later.",
+      "createdAt": "2025-06-17T21:23:02Z",
+      "updatedAt": "2025-06-20T15:28:17Z",
+      "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
+      "baseRefName": "main",
+      "baseRefOid": "013a3af3ac9b7de36f5d1ce8771ad11ab92c6633",
+      "headRepository": "paulehoffman/draft-ietf-deleg-base",
+      "headRefName": "main",
+      "headRefOid": "eeb7b805b9ac7eb4fdfa537cf827971354003597",
+      "closedAt": "2025-06-20T15:28:17Z",
+      "mergedAt": "2025-06-20T15:28:17Z",
+      "mergedBy": "pspacek",
+      "mergeCommit": {
+        "oid": "9fb8255401bbd6180fecae541bc8b6e9350e77a0"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 8,
+      "id": "PR_kwDOO41rkM6bcKaT",
+      "title": "Add helper to generate possible query-answer combinations for DELEG",
+      "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/pull/8",
+      "state": "MERGED",
+      "author": "pspacek",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Quick hack to generate giant table with all sensible and some less-sensible\r\ncombinations of query parameters, zone content, and server software versions.\r\nOutput is a table in CSV format.\r\nIt is intended as exploratory tool so we don't forget some corner case.\r\n\r\nThe tool pre-generates \"answer\" according to my understanding of the protocol\r\nand my personal taste but it does NOT represent the only possible outcome of\r\nthe design process. Reasons why it generates given \"answer\" are given in\r\nanswer() function.\r\n\r\nFile query-answer-combinations-table-gen.csv shows pre-generated table from the script.",
+      "createdAt": "2025-06-20T15:36:10Z",
+      "updatedAt": "2025-06-20T15:39:24Z",
+      "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
+      "baseRefName": "main",
+      "baseRefOid": "9fb8255401bbd6180fecae541bc8b6e9350e77a0",
+      "headRepository": "pspacek/draft-ietf-deleg-base",
+      "headRefName": "table-generator",
+      "headRefOid": "b0a7d55d60332126cf74ae26946b3ed9c53ab783",
+      "closedAt": "2025-06-20T15:39:24Z",
+      "mergedAt": "2025-06-20T15:39:24Z",
+      "mergedBy": "pspacek",
+      "mergeCommit": {
+        "oid": "a01be2d94b41e81f3f850fe8d0caccebcd70f8d2"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 9,
+      "id": "PR_kwDOO41rkM6bcVig",
+      "title": "Explain how to read the table of combinations",
+      "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/pull/9",
+      "state": "MERGED",
+      "author": "pspacek",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-06-20T15:59:52Z",
+      "updatedAt": "2025-07-02T12:03:51Z",
+      "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
+      "baseRefName": "main",
+      "baseRefOid": "a01be2d94b41e81f3f850fe8d0caccebcd70f8d2",
+      "headRepository": "pspacek/draft-ietf-deleg-base",
+      "headRefName": "table-generator",
+      "headRefOid": "66d2ea0dca88a284f44dbe174d6d5e665109cedb",
+      "closedAt": "2025-06-20T15:59:58Z",
+      "mergedAt": "2025-06-20T15:59:58Z",
+      "mergedBy": "pspacek",
+      "mergeCommit": {
+        "oid": "f861e26c02050c272a130ea086ab53406ba60957"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 13,
+      "id": "PR_kwDOO41rkM6cZ7Vh",
+      "title": "Update CONTRIBUTING guide with correct links to DELEG WG",
+      "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/pull/13",
+      "state": "MERGED",
+      "author": "pspacek",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-06-27T11:10:04Z",
+      "updatedAt": "2025-07-02T12:03:53Z",
+      "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
+      "baseRefName": "main",
+      "baseRefOid": "f861e26c02050c272a130ea086ab53406ba60957",
+      "headRepository": "pspacek/draft-ietf-deleg-base",
+      "headRefName": "contrib-update",
+      "headRefOid": "25e42f1299ae1fe9325a9d72d6a31db14ddec9a0",
+      "closedAt": "2025-06-27T11:10:58Z",
+      "mergedAt": "2025-06-27T11:10:58Z",
+      "mergedBy": "pspacek",
+      "mergeCommit": {
+        "oid": "d4618587086c70fe8cf7cf704443eacd3a378975"
+      },
+      "comments": [
+        {
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Should be uncontroversial. Merged.",
+          "createdAt": "2025-06-27T11:11:05Z",
+          "updatedAt": "2025-06-27T11:11:05Z"
+        }
+      ],
+      "reviews": []
+    },
+    {
+      "number": 14,
+      "id": "PR_kwDOO41rkM6caR2B",
+      "title": "Reuse Github build infrastructure by Martin Thompson",
+      "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/pull/14",
+      "state": "MERGED",
+      "author": "pspacek",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Let's not reinvent wheel. It's a lot of commits to import, but it does the job very nicely. Changes do the .md were just cosmetic - whitespace and other silly thing. No changes to protocol whatsoever.",
+      "createdAt": "2025-06-27T11:44:46Z",
+      "updatedAt": "2025-07-01T14:12:07Z",
+      "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
+      "baseRefName": "main",
+      "baseRefOid": "d4618587086c70fe8cf7cf704443eacd3a378975",
+      "headRepository": "pspacek/draft-ietf-deleg-base",
+      "headRefName": "main",
+      "headRefOid": "ffc4ee6ce394a3d11fc40297aa99f338a2667505",
+      "closedAt": "2025-07-01T14:12:07Z",
+      "mergedAt": "2025-07-01T14:12:07Z",
+      "mergedBy": "pspacek",
+      "mergeCommit": {
+        "oid": "1bfead41fc7204ce8ee97edc9d7713575fe043c0"
+      },
+      "comments": [
+        {
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Test round took place here: https://github.com/pspacek/draft-ietf-deleg-base\r\n\r\nRendered documents: https://pspacek.github.io/draft-ietf-deleg-base/",
+          "createdAt": "2025-06-27T11:47:21Z",
+          "updatedAt": "2025-06-27T11:47:21Z"
+        },
+        {
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I will leave this simmer over the weekend. Please complain ASAP so we can move to text-editing next week (before the cutoff).",
+          "createdAt": "2025-06-27T11:48:00Z",
+          "updatedAt": "2025-06-27T11:48:00Z"
+        },
+        {
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Seems nobody cares, so let's merge this and see how it works.",
+          "createdAt": "2025-07-01T14:11:48Z",
+          "updatedAt": "2025-07-01T14:11:48Z"
+        }
+      ],
+      "reviews": []
+    },
+    {
+      "number": 15,
+      "id": "PR_kwDOO41rkM6c63Cx",
+      "title": "Fix About This Document section",
+      "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/pull/15",
+      "state": "MERGED",
+      "author": "pspacek",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-07-01T14:24:35Z",
+      "updatedAt": "2025-07-02T12:03:42Z",
+      "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
+      "baseRefName": "main",
+      "baseRefOid": "1bfead41fc7204ce8ee97edc9d7713575fe043c0",
+      "headRepository": "pspacek/draft-ietf-deleg-base",
+      "headRefName": "pspacek/fix-venue-boilerplate",
+      "headRefOid": "3072d5d53be5d80b0d36d19eea68146f690efe05",
+      "closedAt": "2025-07-01T14:25:07Z",
+      "mergedAt": "2025-07-01T14:25:07Z",
+      "mergedBy": "pspacek",
+      "mergeCommit": {
+        "oid": "534a1ff5f767a5cba2b85712511922e3f561bcad"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 17,
+      "id": "PR_kwDOO41rkM6c7zav",
+      "title": "Fix example of DELEG-only delegation and DO=1+DE=1 query",
+      "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/pull/17",
+      "state": "MERGED",
+      "author": "pspacek",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Fixes: #16",
+      "createdAt": "2025-07-01T15:49:02Z",
+      "updatedAt": "2025-07-02T12:03:41Z",
+      "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
+      "baseRefName": "main",
+      "baseRefOid": "534a1ff5f767a5cba2b85712511922e3f561bcad",
+      "headRepository": "pspacek/draft-ietf-deleg-base",
+      "headRefName": "fix-example-a-5-2-deleg-only-de1",
+      "headRefOid": "b6a0ed142676a509b1c8abe4e37f1d3642ccba62",
+      "closedAt": "2025-07-02T11:46:46Z",
+      "mergedAt": "2025-07-02T11:46:46Z",
+      "mergedBy": "pspacek",
+      "mergeCommit": {
+        "oid": "ed69667ad94c1b7d4fe676237c7acb779a34b209"
+      },
+      "comments": [
+        {
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "body": "@RoyArends Do you agree? Reasoning is in the commit message.",
+          "createdAt": "2025-07-01T15:56:30Z",
+          "updatedAt": "2025-07-01T15:56:30Z"
+        },
+        {
+          "author": "RoyArends",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Reluctantly agree.\r\n\r\nroy\r\n\r\n> On 1 Jul 2025, at 16:56, Petr \u0160pa\u010dek ***@***.***> wrote:\r\n> \r\n> pspacek left a comment (ietf-wg-deleg/draft-ietf-deleg-base#17) [github.com]\r\n> @RoyArends [github.com] Do you agree? Reasoning is in the commit message.\r\n> \u2014\r\n> Reply to this email directly, view it on GitHub [github.com], or unsubscribe [github.com].\r\n> You are receiving this because you were mentioned.Message ID: ***@***.***>\r\n\r\n",
+          "createdAt": "2025-07-02T10:39:33Z",
+          "updatedAt": "2025-07-02T10:39:33Z"
+        },
+        {
+          "author": "RoyArends",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Heh, not reluctantly at all :-) \r\n\r\nCompletely agree\r\n\r\nRoy\r\n\r\n> On 2 Jul 2025, at 11:39, Roy Arends ***@***.***> wrote:\r\n> \r\n> Reluctantly agree.\r\n> \r\n> roy\r\n> \r\n>> On 1 Jul 2025, at 16:56, Petr \u0160pa\u010dek ***@***.***> wrote:\r\n>> \r\n>> pspacek left a comment (ietf-wg-deleg/draft-ietf-deleg-base#17) [github.com]\r\n>> @RoyArends [github.com] Do you agree? Reasoning is in the commit message.\r\n>> \u2014\r\n>> Reply to this email directly, view it on GitHub [github.com], or unsubscribe [github.com].\r\n>> You are receiving this because you were mentioned.Message ID: ***@***.***>\r\n> \r\n\r\n",
+          "createdAt": "2025-07-02T10:48:51Z",
+          "updatedAt": "2025-07-02T10:48:51Z"
+        },
+        {
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Thanks!",
+          "createdAt": "2025-07-02T11:46:52Z",
+          "updatedAt": "2025-07-02T11:46:52Z"
+        }
+      ],
+      "reviews": []
+    },
+    {
+      "number": 18,
+      "id": "PR_kwDOO41rkM6c8CGr",
+      "title": "Typo fixes",
+      "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/pull/18",
+      "state": "MERGED",
+      "author": "pspacek",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "(Presumably we use US English.)",
+      "createdAt": "2025-07-01T16:10:51Z",
+      "updatedAt": "2025-07-02T12:03:40Z",
+      "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
+      "baseRefName": "main",
+      "baseRefOid": "534a1ff5f767a5cba2b85712511922e3f561bcad",
+      "headRepository": "pspacek/draft-ietf-deleg-base",
+      "headRefName": "typo-fixes",
+      "headRefOid": "0455de4e2d5883d3e2a1f43f514c5eadd3a9511b",
+      "closedAt": "2025-07-01T16:12:27Z",
+      "mergedAt": "2025-07-01T16:12:26Z",
+      "mergedBy": "pspacek",
+      "mergeCommit": {
+        "oid": "dca619cc29b97926f1a8b0b0da743d46faab33cd"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 20,
+      "id": "PR_kwDOO41rkM6dEn8F",
+      "title": "Signal weird NXDOMAIN corner case with new EDE code",
+      "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/pull/20",
+      "state": "OPEN",
+      "author": "pspacek",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "This is an explicit signal for old clients which do not understand DELEG.\r\n\r\nRelated: #6",
+      "createdAt": "2025-07-02T12:00:55Z",
+      "updatedAt": "2025-07-02T12:00:55Z",
+      "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
+      "baseRefName": "main",
+      "baseRefOid": "ed69667ad94c1b7d4fe676237c7acb779a34b209",
+      "headRepository": "pspacek/draft-ietf-deleg-base",
+      "headRefName": "ede-for-de0-corner-case",
+      "headRefOid": "34d17fc4c39bc58ab6061947b32f5475ba04be23",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
+    }
+  ]
+}
