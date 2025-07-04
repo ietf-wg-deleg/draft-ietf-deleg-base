@@ -5,7 +5,7 @@ category: std
 
 docname: draft-ietf-deleg-latest
 submissiontype: IETF
-updates: 1035
+updates: 1035, 6840
 number:
 date:
 consensus: true
@@ -267,11 +267,56 @@ Similarly rules for DS RRset inclusion into referrals apply as specified by DNSS
 The server MUST copy the DE bit from the query into the response.
 (TODO: not really necessary protocol-wise, but might be nice for monitoring the deployment?)
 
-## DNSSEC
+## DNSSEC Signers
 
-As the DELEG record is authoritative in the parent zone of a zone cut similar to DS it has to be signed in the parent zone.
+The DELEG record is authoritative on the parent side of a zone cut and needs to be signed as such. Existing rules from DNSSEC specification apply. In summary: For DNSSEC signing, treat DELEG RR type the same way as DS RR type.
 
-In order for the validator to understand that the delegation uses DELEG this draft introduces a new DNSKEY flag TBD. When this flag is set for the key that signs the DS or DELEG record, usually the zone signing key (ZSK), and the requester has signaled that it understands DELEG an authenticated denial of existence MUST be send with the referral response, so that a DELEG aware validator can prove the existence or absence of a DELEG record and detect a downgrade attack.
+In order to protect validators from downgrade attacks this draft introduces a new DNSKEY flag ADT (Authoritative Delegation Types). In zones which contain a DELEG RRset this flag MUST be set to one in at least one DNSKEYs published in the zone.
+
+## DNSSEC Validators
+
+DELEG awareness introduces additional requirements on validators.
+
+### Clarifications on Nonexistence Proofs
+
+This document updates {{!RFC6840}} section 4.1 to include "NS or DELEG" types in type bitmap as indication of a delegation point and generalizes applicability of Ancestor delegation proof to all types authoritative at parent (i.e. DS and DELEG). Updated text follows:
+
+An "ancestor delegation" NSEC RR (or NSEC3 RR) is one with:
+
+-  the NS and/or DELEG bit set,
+
+-  the Start of Authority (SOA) bit clear, and
+
+-  a signer field that is shorter than the owner name of the NSEC RR,
+   or the original owner name for the NSEC3 RR.
+
+Ancestor delegation NSEC or NSEC3 RRs MUST NOT be used to assume
+nonexistence of any RRs below that zone cut, which include all RRs at
+that (original) owner name other types authoritative at the parent-side of
+zone cut (DS and DELEG), and all RRs below that owner name regardless of
+type.
+
+### Insecure Delegation Proofs
+
+This document updates {{!RFC6840}} section 4.4 to include secure DELEG support and explicitly states Opt-Out is not applicable to DELEG. Updated text follows:
+
+Section 5.2 of {{!RFC4035}} specifies that a validator, when proving a
+delegation is not secure, needs to check for the absence of the DS
+and SOA bits in the NSEC (or NSEC3) type bitmap.  The validator also
+MUST check for the presence of the NS or DELEG bit in the matching NSEC (or
+NSEC3) RR (proving that there is, indeed, a delegation).
+Alternately make sure that the delegation with NS record is covered by an NSEC3
+RR with the Opt-Out flag set. Opt-Out is not applicable to DELEG RR type
+because this it is authoritative at the parent side of a zone cut in the same
+say as DS RR type.
+
+### Referral downgrade protection
+
+When DNSKEY flag ADT is set to one, the DELEG aware validator MUST prove absence of a DELEG RRset in referral responses from this zone.
+
+Without this check, an attacker could strip DELEG RRset from a referral response and replace it with an unsigned (and potentially malicious) NS RRset. A referral response with an unsigned NS and signed DS RRsets does not require additional proofs of nonexistance according to pre-DELEG DNSSEC specification and it would have been accepted as a delegation without DELEG RRset.
+
+### Chaining
 
 A Validating Stub Resolver that is DELEG aware has to use a Security-Aware Resolver that is DELEG aware and if it is behind a forwarder this has to be security and DELEG aware as well.
 
@@ -279,7 +324,7 @@ A Validating Stub Resolver that is DELEG aware has to use a Security-Aware Resol
 
 IANA is requested to allocate the DELEG RR in the Resource Record (RR) TYPEs registry, with the meaning of "enhanced delegation information" and referencing this document.
 
-IANA is requested to assign a new bit in the DNSKEY RR Flags registry ({{!RFC4034}}) for the DELEG bit (N), with the description "DELEG" and referencing this document.
+IANA is requested to assign a new bit in the DNSKEY RR Flags registry ({{!RFC4034}}) for the ADT bit (N), with the description "Authoritative Delegation Types" and referencing this document. For compatibility reasons we request the bit 14 to be used. This value has been proven to work whereas bit 0 was proven to break in practical deployments (because of bugs).
 
 IANA is requested to assign a bit from the EDNS Header Flags registry ({{!RFC6891}}), with the abbreviation DE, the description "DELEG enabled" and referencing this document.
 
