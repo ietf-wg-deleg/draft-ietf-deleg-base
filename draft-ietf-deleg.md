@@ -5,7 +5,7 @@ category: std
 
 docname: draft-ietf-deleg-latest
 submissiontype: IETF
-updates: 1035, 6840
+updates: 1034, 1035, 6672, 6840
 number:
 date:
 consensus: true
@@ -207,8 +207,61 @@ DELEG unaware recursive resolvers will not be able to determine correct NS set f
 
 ### Algorithm
 
-TODO: Update RFC 1034 sec 4.3.2. Algorithm + RFC 6672 sec 3.4.1. Resolver Algorithm so implementers don't have to construct it in their heads from scratch.
+This section updates instructions for step "2. Find the best servers to ask." of RFC1034 section 5.3.3 and {{!RFC6672}} section 3.4.1.
 
+There are two important details:
+
+- The algorithm description should explicitly describe RR types authoritative at the parent side of a zone cut. This is implied by {{!RFC4035}} section 3.1.4.1 for DS RR type but the text in the algorithm description was not updated. DELEG specification simply extends this existing behavior to DELEG RR type as well, and makes this special case explicit.
+
+- When DELEG RRset exists, NS RRset is ignored on that particular zone cut by DELEG aware resolvers.
+
+- DELEG and NS RR types can be used differently at each delegation level and resolver MUST be able follow chain of delegations which combines them in arbitrary ways.
+
+Example of a valid delegation tree:
+
+    ; root zone with NS-only delegations
+    . SOA ...
+    test. NS ...
+
+    ; test. zone with NS+DELEG delegations
+    test. SOA ...
+    sld.test. NS ...
+    sld.test. DELEG ...
+
+    ; sld.test. zone with NS-only delegation
+    sld.test. SOA ...
+    nssub.sld.test. NS ...
+
+    ; nssub.sld.test. zone with DELEG-only delegation
+    delegsub.sub.sld.test. DELEG ...
+
+Terms SNAME and SLIST used in the rest of this section are defined in RFC 1034 section 5.3.2.:
+
+SNAME           the domain name we are searching for.
+
+SLIST           a structure which describes the name servers and the
+                zone which the resolver is currently trying to query.
+
+Modified description of Step 2. Find the best servers to ask follows:
+
+Step 2 looks for a name server to ask for the required data.
+
+First determine deepest possible zone cut which can potentially hold the answer for given (query name, type, class) combination:
+
+- Start with SNAME equal to QNAME.
+- If QTYPE is a type authoritative at the parent side of a zone cut (DS or DELEG), remove leftmost label from SNAME. E.g. if QNAME is Test.Example. and QTYPE is DELEG or DS, set SNAME to Example.
+- TODO: what to do about ". DELEG" (or DS) query? That leaves zero labels left. That by definition does not exist ...
+
+Further general strategy is to look for locally-available DELEG and NS RRsets, starting at current SNAME. If none are found, shorten SNAME by removing leftmost label and check again. This effectivelly finds the deepest known delegation point on the path between SNAME and the root:
+
+- For given SNAME first check existence of DELEG RRset. If it exists, resolver MUST use it's content to populate SLIST. If the DELEG RRset is known to exist but is unusable (e.g. it is found in DNSSEC BAD cache), resolver MUST NOT fallback to NS RRset, even if it is locally available. Resolver MUST treat this case as if no servers were available/reachable.
+- If a given SNAME is proven to not have a DELEG RRset but has NS RRset, resolver MUST copy it into SLIST.
+- If SLIST is populated, terminate walk up the DNS tree.
+- If SLIST is not populated, remove leftmost label from SNAME and inspect RR types for this new SNAME.
+
+Rest of the Step 2's description is not affected by this document.
+
+Please note the instructions to "Bound the amount of work" further down in the original text to apply. Suitable limits MUST be enforced to limit damage EVEN IF SOMEONE HAS INCORRECTLY CONFIGURED SOME DATA.
 
 ## Authoritative Servers
 DELEG aware authoritative servers have to act different when handling DE=0 queries from DELEG unaware clients, and DE=1 queries from DELEG aware clients.
