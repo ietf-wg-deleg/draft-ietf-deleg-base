@@ -269,6 +269,9 @@ DELEG-aware authoritative servers act differently when handling queries from DEL
 DNSSEC signing in the presence of DELEG records is unaffected.
 That is, the presence or abscence of DELEG records is always reflected in the NSEC type bitmap, regardless of the type of query.
 
+The server MUST copy the value of the DE bit from the query into the response.
+(TODO: not really necessary protocol-wise, but might be nice for monitoring the deployment?)
+
 ### DELEG-unaware Clients
 
 DELEG-unaware clients do not use DELEG records for delegation.
@@ -291,28 +294,25 @@ This result might be confusing for subdomains of zones which actually exist beca
 
 TODO: debate if WG wants to do explicit SERVFAIL for this case instead of 'just' EDE.
 
-### Aware clients, DE=1
+### DELEG-aware Clients
 
-DE flag set to one in a query enables DELEG aware behavior in authoritative servers. In summary, the server treats DELEG records create zone cut and are authoritative on parent side of zone cut. This new zone cut type has priority over legacy delegation with NS RRset.
+When the client indicates that it is DELEG-aware by setting DE=1 in the query, DELEG-aware authoritative servers treat DELEG records as zone cuts, and the servers are authoritative on parent side of zone cut. This new zone cut has priority over legacy delegation with NS RRset.
 
-#### QTYPE=DELEG
+#### DELEG-aware Clients Requesting QTYPE=DELEG
 
-An explicit query for DELEG RR type at a delegation point behaves much like query for DS RR type: Server answers authortiatively from the parent zone. All previous specifications for special handling QTYPE=DS apply equally to QTYPE=DELEG. In summary, server either provides authoritative DELEG RRset or proves non-existence of it.
+An explicit query for DELEG RR type at a delegation point behaves much like query for DS RR type: the server answers authortiatively from the parent zone. All previous specifications for special handling QTYPE=DS apply equally to QTYPE=DELEG. In summary, server either provides authoritative DELEG RRset or proves its non-existence.
 
 #### Delegation with DELEG
 
-If the delegation has a DELEG RRset, the authoritative server MUST put DELEG RRset into the authority section of the referral. In this case server MUST NOT add NS RRset into the authority section. Presence of covering RRSIG follows DNSSEC specification for answers with authoritative zone data.
+If the delegation has a DELEG RRset, the authoritative server MUST put the DELEG RRset into the Authority section of the referral. In this case, the server MUST NOT include the NS RRset into the Authority section. Presence of the covering RRSIG follows the normal DNSSEC specification for answers with authoritative zone data.
 
-Similarly rules for DS RRset inclusion into referrals apply as specified by DNSSEC protocol without changes.
+Similarly, rules for DS RRset inclusion into referrals apply as specified by DNSSEC protocol.
 
-#### Delegation without DELEG
+#### DELEG-aware Clients with NS RRs Present but No DELEG RRs
 
-If the delegation does not have DELEG RRset, the authoritative server MUST put the NS RRset into the authority section of the referral. Absence of DELEG RRset must be proven as specified by DNSSEC protocol for authoritative data.
+If the delegation does not have a DELEG RRset, the authoritative server MUST put the NS RRset into the authority section of the referral. Absence of DELEG RRset must be proven as specified by DNSSEC protocol for authoritative data.
 
-Similarly rules for DS RRset inclusion into referrals apply as specified by DNSSEC protocol without changes. Please note in practice the same process and records are used to prove non-existence of DELEG and DS RRsets.
-
-The server MUST copy the DE bit from the query into the response.
-(TODO: not really necessary protocol-wise, but might be nice for monitoring the deployment?)
+Similarly, rules for DS RRset inclusion into referrals apply as specified by the DNSSEC protocol. Please note in practice the same process and records are used to prove non-existence of DELEG and DS RRsets.
 
 ## DNSSEC Signers
 
