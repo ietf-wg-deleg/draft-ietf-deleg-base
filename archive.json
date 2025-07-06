@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-07-03T01:01:52.678669+00:00",
+  "timestamp": "2025-07-06T01:07:51.808396+00:00",
   "repo": "ietf-wg-deleg/draft-ietf-deleg-base",
   "labels": [
     {
@@ -252,6 +252,72 @@
       "updatedAt": "2025-07-02T11:54:26Z",
       "closedAt": null,
       "comments": []
+    },
+    {
+      "number": 23,
+      "id": "I_kwDOO41rkM6-2juO",
+      "title": "Downgrade protection",
+      "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/issues/23",
+      "state": "OPEN",
+      "author": "pspacek",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "(A hairy attempt to move old issue https://github.com/fl1ger/deleg/issues/19 to this repo.)\n\nTL;DR version:\n\nWithout introducing an extra check, an attacker could strip DELEG RRset from a referral response and replace it with an unsigned (and potentially malicious) NS RRset. A referral response with an unsigned NS and signed DS RRsets does not require additional proofs of nonexistance according to pre-DELEG DNSSEC specification and it would have been accepted as a delegation without DELEG RRset.",
+      "createdAt": "2025-07-04T09:29:33Z",
+      "updatedAt": "2025-07-04T09:34:34Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "body": "[Comment](https://github.com/RoyArends) by @RoyArends:\n\nA DELEG compliant, authoritative nameserver will include signed DELEG records, or authenticated denial of DELEG records. However, an adversary can remove these records from a response, and the resolver will treat the response as a legacy response, since there is no signed indication that DELEG or its authenticated denial should have been present.\n\nTwo methods of signed indication have been proposed.\n\n1) DNSKEY flag.\n\nThe DNSKEY RR contains a 16 bit flag field in the RDATA. Of these, 3 have been allocated. The ZONE, REVOKE and Secure Entry Point (SEP) flag. Trivially, a fourth can be added, such as a DELEG flag. A validating resolver that observes a DELEG flag MUST expect either a signed DELEG record in a referral, or an authenticated denial record in a referral.\n\nAdvantage of this method is that it requires no additional space in a response for the signed indication. \nA potential disadvantage is that state needs to be kept between observing the DELEG flag and parsing a response.\nA potential disadvantage is that legacy validators may not understand the DELEG flag and ignore the key completely. That behavior  is NOT standards compliant. This needs to be tested.\n\n2) DS record.\n\nThe DS record contains a digest field. If the validator does not recognise the digest field value, then the DS record should be ignored. This protects legacy validators from failing over unknown DS records, and in addition, it can be used as an indicator that a DELEG or its denial should be present.\n\nAdvantage of this method is that it is \"legacy validator safe\" (but must be tested regardless) and that the resolver doesn't have to look at the key, since the signal is in the reponse.\nA disadvantage is that this is NOT what the DS record was meant to do, i.e. Yet Another Hack.\nA disadvantage is that it causes yet another record in a response that already contains NS, DS, DELEG/NSEC/NSEC3 and RRSIGs.\n\n",
+          "createdAt": "2025-07-04T09:31:41Z",
+          "updatedAt": "2025-07-04T09:31:41Z"
+        },
+        {
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "body": "[Comment](https://github.com/fl1ger/deleg/issues/19#issuecomment-1832810251) by @bemasc:\n\nRe 1: I think we should probably call this the \"NSEC(3) referral flag\", with the promise being \"any secure delegation will be accompanied by an NSEC(3) record\".  Details aside, my point is that if we decide to add new RR types to delegation points in the future, they should also be protected by this flag.",
+          "createdAt": "2025-07-04T09:32:10Z",
+          "updatedAt": "2025-07-04T09:32:10Z"
+        },
+        {
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "body": "[Comment](https://github.com/fl1ger/deleg/issues/19#issuecomment-1832816617) by @RoyArends:\n\nGood point! That makes the flag more generic and future proof. If the flag is set, expect authenicated denial in a referral. Always. ",
+          "createdAt": "2025-07-04T09:32:31Z",
+          "updatedAt": "2025-07-04T09:32:31Z"
+        },
+        {
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "body": "[Comment](https://github.com/fl1ger/deleg/issues/19#issuecomment-1833539316) by @peterthomassen:\n\nRe 2:\n\n> A disadvantage is that this is NOT what the DS record was meant to do, i.e. Yet Another Hack.\n\nWe can change what the DS record is meant to do; my take is that it might be OK if done \"minimally invasive\" (= without risking yet more hacks in the future).\n\nThe desire for delegation-specific flags controlled by the parent has come up a few times:\n\n- DELEG signaling as discussed here\n- Parent signaling some kind of organizational (non-)boundary (--> DBOUND?)\n- DNSSEC multi-algorithm validation policy (AND vs OR in multi-signer setups with several algorithms)\n\nObviously, all of that is tentative; other use cases are also conceivable. Alas, the DS record (unlike the DNSKEY record) has no flags, which seems like an omission.\n\nBy reserving a hash digest number and repurposing the keytag+algorithm fields, one obtains 24 bits that can be used as flags.\n\nI think we should ponder whether it's time to address this gap once and for all, by adding this signaling capability as a generic mechanism, which DELEG then can build on.\n\n(One might reply that once DELEG is there, delegation-specific signaling can be done via DELEG parameters. At least for the second use case above, that's not the case though. Who knows what the future will bring.)",
+          "createdAt": "2025-07-04T09:33:13Z",
+          "updatedAt": "2025-07-04T09:33:13Z"
+        },
+        {
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "body": "[Comment](https://github.com/fl1ger/deleg/issues/19#issuecomment-1900592004) by @bemasc:\n\nAre you saying that DELEG can't be used for DBOUND?  I don't see why not.  I can certainly imagine a DELEG parameter indicating whether the delegation is \"in house\", or perhaps conveying even richer metadata about the organizational relationship.",
+          "createdAt": "2025-07-04T09:33:41Z",
+          "updatedAt": "2025-07-04T09:33:41Z"
+        },
+        {
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "body": "[Comment](https://github.com/fl1ger/deleg/issues/19#issuecomment-1903768057) by @peterthomassen:\n\n> Are you saying that DELEG can't be used for DBOUND?\n\nNo, I'm not saying that.\n\nMy point was that a signaling mechanism would be a nice thing to have in various situations, not only for protecting DELEG against downgrade. I was trying to widen the scope of the discussion to see if thinking about a more general signaling solution would be worthwhile (instead of inventing one for DELEG downgrade protection and another one for another purpose).\n\n> I can certainly imagine a DELEG parameter indicating whether the delegation is \"in house\"\n\nMaybe, maybe not. There may be multiple DELEG records, e.g. in a multi-provider setup. What are the implications of (not?) having to repeat this parameter in each of them?",
+          "createdAt": "2025-07-04T09:34:11Z",
+          "updatedAt": "2025-07-04T09:34:11Z"
+        },
+        {
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "body": "[Comment](https://github.com/fl1ger/deleg/issues/19#issuecomment-2210725414) by @pspacek:\n\nMy preference is a new DNSKEY flag with a twist: Explicitly specified behavior that presence of this new flag in **any** DNSKEY present on zone apex turns on new behavior in (i.e. even a single DNSKEY with this flag).\n\nThe main reason is that it gives operators direct control over the flag and ability to react quickly when something goes wrong in the initial rollout.\n\n- changing the flag does not require coordination with parent/registry\n- DNSKEY can have short TTL before the flag get flipped, TTL is under operator's control\n- because flag=1 in a single DNSKEY is enough the operator does not have to change existing DNSKEYs at all!\n  - For the initial rollout the operator can introduce a dummy DNSKEY like `example. DNSKEY 1024 0 251` (1024 being the new flag value, with no key blob, and with intentionally unknown algorithm).\n  - This dummy DNSKEY now acts only as flags container and nothing else, and old validators will just ignore it.\n  - This dummy DNSKEY can be easily pulled back when needed without doing key rollover etc.\n  - If the operator is comfortable with the new behavior the flag can get incorporated into regular KSK and/or ZSK on operator's schedule and then then dummy DNSKEY can be dropped\n\nI sort of agree with https://github.com/fl1ger/deleg/issues/19#issuecomment-1832810251. It should apply to all new parent-side types (e.g. like https://www.ietf.org/archive/id/draft-peetterr-dnsop-parent-side-auth-types-00.txt)",
+          "createdAt": "2025-07-04T09:34:34Z",
+          "updatedAt": "2025-07-04T09:34:34Z"
+        }
+      ]
     }
   ],
   "pulls": [
@@ -485,7 +551,7 @@
       "labels": [],
       "body": "Let's not reinvent wheel. It's a lot of commits to import, but it does the job very nicely. Changes do the .md were just cosmetic - whitespace and other silly thing. No changes to protocol whatsoever.",
       "createdAt": "2025-06-27T11:44:46Z",
-      "updatedAt": "2025-07-01T14:12:07Z",
+      "updatedAt": "2025-07-03T18:05:54Z",
       "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
       "baseRefName": "main",
       "baseRefOid": "d4618587086c70fe8cf7cf704443eacd3a378975",
@@ -519,6 +585,13 @@
           "body": "Seems nobody cares, so let's merge this and see how it works.",
           "createdAt": "2025-07-01T14:11:48Z",
           "updatedAt": "2025-07-01T14:11:48Z"
+        },
+        {
+          "author": "chantra",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Thanks! I for one appreciate and acknowledge of this change\u2026 albeit after the facts :)",
+          "createdAt": "2025-07-03T18:05:54Z",
+          "updatedAt": "2025-07-03T18:05:54Z"
         }
       ],
       "reviews": []
@@ -563,7 +636,7 @@
       "labels": [],
       "body": "Fixes: #16",
       "createdAt": "2025-07-01T15:49:02Z",
-      "updatedAt": "2025-07-02T12:03:41Z",
+      "updatedAt": "2025-07-03T18:02:04Z",
       "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
       "baseRefName": "main",
       "baseRefOid": "534a1ff5f767a5cba2b85712511922e3f561bcad",
@@ -604,6 +677,13 @@
           "body": "Thanks!",
           "createdAt": "2025-07-02T11:46:52Z",
           "updatedAt": "2025-07-02T11:46:52Z"
+        },
+        {
+          "author": "chantra",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Thanks for following through. I had this on the back burner while waiting for the administrivia of the WG to settle and then dropped the ball.",
+          "createdAt": "2025-07-03T18:02:03Z",
+          "updatedAt": "2025-07-03T18:02:03Z"
         }
       ],
       "reviews": []
@@ -641,26 +721,420 @@
       "id": "PR_kwDOO41rkM6dEn8F",
       "title": "Signal weird NXDOMAIN corner case with new EDE code",
       "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/pull/20",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "pspacek",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "This is an explicit signal for old clients which do not understand DELEG.\r\n\r\nRelated: #6",
       "createdAt": "2025-07-02T12:00:55Z",
-      "updatedAt": "2025-07-02T12:00:55Z",
+      "updatedAt": "2025-07-04T21:42:58Z",
       "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
       "baseRefName": "main",
       "baseRefOid": "ed69667ad94c1b7d4fe676237c7acb779a34b209",
       "headRepository": "pspacek/draft-ietf-deleg-base",
       "headRefName": "ede-for-de0-corner-case",
       "headRefOid": "34d17fc4c39bc58ab6061947b32f5475ba04be23",
+      "closedAt": "2025-07-04T21:42:58Z",
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [
+        {
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Incorporated in #22 , closing to avoid duplication.",
+          "createdAt": "2025-07-04T21:42:58Z",
+          "updatedAt": "2025-07-04T21:42:58Z"
+        }
+      ],
+      "reviews": []
+    },
+    {
+      "number": 21,
+      "id": "PR_kwDOO41rkM6dQGOG",
+      "title": "Clarify in table what happens with DELEG RR on an old auth",
+      "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/pull/21",
+      "state": "MERGED",
+      "author": "pspacek",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Note about 'occlusion' was confusing because occlusion is defined by RFC 9499 only for 'names', albeit it does happen on the delegation point as well.",
+      "createdAt": "2025-07-03T11:27:28Z",
+      "updatedAt": "2025-07-04T06:51:29Z",
+      "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
+      "baseRefName": "main",
+      "baseRefOid": "ed69667ad94c1b7d4fe676237c7acb779a34b209",
+      "headRepository": "pspacek/draft-ietf-deleg-base",
+      "headRefName": "fix-occlusion-note",
+      "headRefOid": "02eacf1b73ab39b95436cdd25e35d03bdfce84a9",
+      "closedAt": "2025-07-04T06:42:19Z",
+      "mergedAt": "2025-07-04T06:42:19Z",
+      "mergedBy": "pspacek",
+      "mergeCommit": {
+        "oid": "a35eefc90df9cb8e833d51d7e8b3246b86800601"
+      },
+      "comments": [
+        {
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "body": "@paulehoffman I hope this clarifies what is going on here.",
+          "createdAt": "2025-07-03T11:29:25Z",
+          "updatedAt": "2025-07-03T11:29:25Z"
+        },
+        {
+          "author": "paulehoffman",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Yep, that's excellent",
+          "createdAt": "2025-07-03T13:32:05Z",
+          "updatedAt": "2025-07-03T13:32:05Z"
+        }
+      ],
+      "reviews": []
+    },
+    {
+      "number": 22,
+      "id": "PR_kwDOO41rkM6dRhhG",
+      "title": "Restructure draft by resolver/auth roles and specify detailed behavior",
+      "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/pull/22",
+      "state": "OPEN",
+      "author": "pspacek",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-07-03T13:46:45Z",
+      "updatedAt": "2025-07-04T21:43:23Z",
+      "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
+      "baseRefName": "main",
+      "baseRefOid": "a35eefc90df9cb8e833d51d7e8b3246b86800601",
+      "headRepository": "pspacek/draft-ietf-deleg-base",
+      "headRefName": "describe-by-roles",
+      "headRefOid": "bb07cf6455db2d8ba333f4157d3bef8202a8678f",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
-      "comments": [],
+      "comments": [
+        {
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Technical part mostly reviewed by @fl1ger, mostly incorporated textual changes from @paulehoffman. Will merge and cut -01 on Monday.",
+          "createdAt": "2025-07-04T21:40:15Z",
+          "updatedAt": "2025-07-04T21:40:15Z"
+        }
+      ],
       "reviews": []
+    },
+    {
+      "number": 24,
+      "id": "PR_kwDOO41rkM6dfAfX",
+      "title": "Lots of editorial changes about authoritative servers",
+      "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/pull/24",
+      "state": "CLOSED",
+      "author": "paulehoffman",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-07-04T18:56:52Z",
+      "updatedAt": "2025-07-04T21:38:42Z",
+      "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
+      "baseRefName": "describe-by-roles",
+      "baseRefOid": "a46635736d3757fce65dc50d690ca1d7b2ea3305",
+      "headRepository": "paulehoffman/draft-ietf-deleg-base",
+      "headRefName": "fix-this",
+      "headRefOid": "d73805e3a016bc9af8946b6c6dd6074e2032fc17",
+      "closedAt": "2025-07-04T21:38:41Z",
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [
+        {
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I've changed the base branch so we can actually see only your changes for purpose of this review.",
+          "createdAt": "2025-07-04T19:24:27Z",
+          "updatedAt": "2025-07-04T19:24:27Z"
+        },
+        {
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Thank you - it definitely reads better than my quick&dirty version! I would be happy to merge this after we solve the technical changes pointed out in comments.",
+          "createdAt": "2025-07-04T19:43:54Z",
+          "updatedAt": "2025-07-04T19:43:54Z"
+        },
+        {
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Incorporated in #22, closing here to avoid confusion.",
+          "createdAt": "2025-07-04T21:38:41Z",
+          "updatedAt": "2025-07-04T21:38:41Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOO41rkM6yHA8I",
+          "commit": {
+            "abbreviatedOid": "d73805e"
+          },
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-07-04T19:26:07Z",
+          "updatedAt": "2025-07-04T19:26:07Z",
+          "comments": [
+            {
+              "originalPosition": 9,
+              "body": "I find this confusing. Signing IS affected by presence of DELEG records, but the proofs we send back to clients are not affected by DE bit in the query.",
+              "createdAt": "2025-07-04T19:26:07Z",
+              "updatedAt": "2025-07-04T19:26:07Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOO41rkM6yHB7Q",
+          "commit": {
+            "abbreviatedOid": "d73805e"
+          },
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-07-04T19:27:05Z",
+          "updatedAt": "2025-07-04T19:27:05Z",
+          "comments": [
+            {
+              "originalPosition": 32,
+              "body": "Nit: Personally instead of 'use' I would say 'understand' or 'support' or something like that. But that's probably matter of taste.",
+              "createdAt": "2025-07-04T19:27:05Z",
+              "updatedAt": "2025-07-04T19:27:06Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOO41rkM6yHD1z",
+          "commit": {
+            "abbreviatedOid": "d73805e"
+          },
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-07-04T19:29:16Z",
+          "updatedAt": "2025-07-04T19:29:16Z",
+          "comments": [
+            {
+              "originalPosition": 41,
+              "body": "Does 'legacy referral response' need to be defined?",
+              "createdAt": "2025-07-04T19:29:16Z",
+              "updatedAt": "2025-07-04T19:29:16Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOO41rkM6yHE2B",
+          "commit": {
+            "abbreviatedOid": "d73805e"
+          },
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-07-04T19:31:01Z",
+          "updatedAt": "2025-07-04T19:31:01Z",
+          "comments": [
+            {
+              "originalPosition": 37,
+              "body": "Nit: I find repetition in section title unpleasant as it will explode table of contents. But that's again personal preference.",
+              "createdAt": "2025-07-04T19:31:01Z",
+              "updatedAt": "2025-07-04T19:31:01Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOO41rkM6yHHKA",
+          "commit": {
+            "abbreviatedOid": "d73805e"
+          },
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-07-04T19:34:41Z",
+          "updatedAt": "2025-07-04T19:34:41Z",
+          "comments": [
+            {
+              "originalPosition": 49,
+              "body": "This line has changed meaning. The original said that NXDOMAIN will happen for \"for subdomains of such zone which does actually exist for DELEG aware clients.\". The new text says NXDOMAIN always, which would be incorrect (as in, cannot be DNSSEC-validated) if client asked e.g. for \"example. TXT\".",
+              "createdAt": "2025-07-04T19:34:41Z",
+              "updatedAt": "2025-07-04T19:34:41Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOO41rkM6yHJg0",
+          "commit": {
+            "abbreviatedOid": "d73805e"
+          },
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-07-04T19:42:04Z",
+          "updatedAt": "2025-07-04T19:42:04Z",
+          "comments": [
+            {
+              "originalPosition": 49,
+              "body": "Second comment: I'm not happy with referencing DO bit at all. I think we better leave the definition what needs to be proven when and to whom to DNSSEC spec.",
+              "createdAt": "2025-07-04T19:42:04Z",
+              "updatedAt": "2025-07-04T19:42:04Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOO41rkM6yHTBE",
+          "commit": {
+            "abbreviatedOid": "d73805e"
+          },
+          "author": "paulehoffman",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-07-04T20:00:38Z",
+          "updatedAt": "2025-07-04T20:00:38Z",
+          "comments": [
+            {
+              "originalPosition": 9,
+              "body": "OK, then I misunderstood your original. You had \"DNSSEC signing is unaffected by this instruction, i.e. no special handling for NSEC type bitmap is necessary.\" I propose to remove the sentence and we'll add something later about the proofs and about the DNSKEY flag.",
+              "createdAt": "2025-07-04T20:00:38Z",
+              "updatedAt": "2025-07-04T20:00:38Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOO41rkM6yHTMO",
+          "commit": {
+            "abbreviatedOid": "d73805e"
+          },
+          "author": "paulehoffman",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-07-04T20:01:33Z",
+          "updatedAt": "2025-07-04T20:01:33Z",
+          "comments": [
+            {
+              "originalPosition": 32,
+              "body": "\"Use\" is much more direct than those two.",
+              "createdAt": "2025-07-04T20:01:33Z",
+              "updatedAt": "2025-07-04T20:01:33Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOO41rkM6yHTgi",
+          "commit": {
+            "abbreviatedOid": "d73805e"
+          },
+          "author": "paulehoffman",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-07-04T20:02:00Z",
+          "updatedAt": "2025-07-04T20:02:00Z",
+          "comments": [
+            {
+              "originalPosition": 41,
+              "body": "Well, \"legacy\" is defined earlier in the document, so I don't think so.\r\n",
+              "createdAt": "2025-07-04T20:02:00Z",
+              "updatedAt": "2025-07-04T20:02:00Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOO41rkM6yHUDs",
+          "commit": {
+            "abbreviatedOid": "d73805e"
+          },
+          "author": "paulehoffman",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-07-04T20:02:41Z",
+          "updatedAt": "2025-07-04T20:02:42Z",
+          "comments": [
+            {
+              "originalPosition": 37,
+              "body": "Given that you have four level-4 heads that look alike, differentiating is good for the reader.",
+              "createdAt": "2025-07-04T20:02:41Z",
+              "updatedAt": "2025-07-04T20:02:42Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOO41rkM6yHWCc",
+          "commit": {
+            "abbreviatedOid": "d73805e"
+          },
+          "author": "paulehoffman",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-07-04T20:07:22Z",
+          "updatedAt": "2025-07-04T20:07:23Z",
+          "comments": [
+            {
+              "originalPosition": 49,
+              "body": "For the first comment, I agree that I left that off accidentally. It should instead end with \"for subdomains of zones which would exist for DELEG-aware clients\".\r\nFor the second one, I'm not sure what to do. Proof-of-nonexistence only exists for DNSSEC, and because we are talking about what to return, you only return a proof-of-nonexistence if DO=1, correct?",
+              "createdAt": "2025-07-04T20:07:23Z",
+              "updatedAt": "2025-07-04T20:07:23Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOO41rkM6yHX19",
+          "commit": {
+            "abbreviatedOid": "d73805e"
+          },
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-07-04T20:15:45Z",
+          "updatedAt": "2025-07-04T20:15:45Z",
+          "comments": [
+            {
+              "originalPosition": 32,
+              "body": "I mean - there's difference between 'I understand but will not use it' and 'WTF Martians just landed in my zone file?!'.",
+              "createdAt": "2025-07-04T20:15:45Z",
+              "updatedAt": "2025-07-04T20:15:45Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOO41rkM6yHbTZ",
+          "commit": {
+            "abbreviatedOid": "d73805e"
+          },
+          "author": "paulehoffman",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-07-04T20:29:02Z",
+          "updatedAt": "2025-07-04T20:29:02Z",
+          "comments": [
+            {
+              "originalPosition": 32,
+              "body": "\"Use\" is stil better because it is more direct.",
+              "createdAt": "2025-07-04T20:29:02Z",
+              "updatedAt": "2025-07-04T20:29:02Z"
+            }
+          ]
+        }
+      ]
     }
   ]
 }
