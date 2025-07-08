@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-07-06T01:07:51.808396+00:00",
+  "timestamp": "2025-07-08T01:02:25.192503+00:00",
   "repo": "ietf-wg-deleg/draft-ietf-deleg-base",
   "labels": [
     {
@@ -147,15 +147,15 @@
       "id": "I_kwDOO41rkM68ALA_",
       "title": "do NOT fallback from DELEG to NS",
       "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/issues/6",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "pspacek",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "During interim we seemed to agree resolvers MUST NOT fallback to NS when DELEG they got does not work. Put text to that effect into the draft.",
       "createdAt": "2025-06-17T16:57:02Z",
-      "updatedAt": "2025-06-17T16:57:02Z",
-      "closedAt": null,
+      "updatedAt": "2025-07-07T09:43:47Z",
+      "closedAt": "2025-07-07T09:43:47Z",
       "comments": []
     },
     {
@@ -163,15 +163,15 @@
       "id": "I_kwDOO41rkM69E_Hk",
       "title": "Extended DNS Error for weird DE=0 corner cases",
       "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/issues/10",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "pspacek",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "DELEG-only delegation in zone and query with DE=0 produces confusing (but RFC4033-valid) NXDOMAIN. We can have an EDE code to signal this weird corner case to people debugging this.\n\nSource: https://mailarchive.ietf.org/arch/msg/dd/jrXRh99606L0z7nfvTlh8e5rwjQ/",
       "createdAt": "2025-06-24T14:20:46Z",
-      "updatedAt": "2025-06-24T14:20:46Z",
-      "closedAt": null,
+      "updatedAt": "2025-07-07T09:43:47Z",
+      "closedAt": "2025-07-07T09:43:47Z",
       "comments": []
     },
     {
@@ -258,15 +258,15 @@
       "id": "I_kwDOO41rkM6-2juO",
       "title": "Downgrade protection",
       "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/issues/23",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "pspacek",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "(A hairy attempt to move old issue https://github.com/fl1ger/deleg/issues/19 to this repo.)\n\nTL;DR version:\n\nWithout introducing an extra check, an attacker could strip DELEG RRset from a referral response and replace it with an unsigned (and potentially malicious) NS RRset. A referral response with an unsigned NS and signed DS RRsets does not require additional proofs of nonexistance according to pre-DELEG DNSSEC specification and it would have been accepted as a delegation without DELEG RRset.",
       "createdAt": "2025-07-04T09:29:33Z",
-      "updatedAt": "2025-07-04T09:34:34Z",
-      "closedAt": null,
+      "updatedAt": "2025-07-07T09:43:47Z",
+      "closedAt": "2025-07-07T09:43:47Z",
       "comments": [
         {
           "author": "pspacek",
@@ -318,6 +318,53 @@
           "updatedAt": "2025-07-04T09:34:34Z"
         }
       ]
+    },
+    {
+      "number": 25,
+      "id": "I_kwDOO41rkM6_Tmq9",
+      "title": "Contributors list",
+      "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/issues/25",
+      "state": "OPEN",
+      "author": "paulehoffman",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "...is incomplete, not useful to the reader, and infers different things to different readers. It should be removed.",
+      "createdAt": "2025-07-07T16:18:10Z",
+      "updatedAt": "2025-07-07T17:26:26Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Honestly I don't know if there's RFC-documented meaning of this 'field' and what's difference between this and acknowledgement section. Contributors listed for this draft were participants of the IETF 118 hackaton where DELEG started.\n\nI would not mind folding this list into acknowledgement section. Up to the elders of IETF to advise, which is I guess what you just did :-)",
+          "createdAt": "2025-07-07T16:41:22Z",
+          "updatedAt": "2025-07-07T16:41:22Z"
+        },
+        {
+          "author": "paulehoffman",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "You are correct that there is no good definition of \"contributors\", and very few RFCs list them for that reason. There is also no good advice for who gets listed in the acknowledgments section. Make your best guess, which will always be wrong to someone.",
+          "createdAt": "2025-07-07T17:26:26Z",
+          "updatedAt": "2025-07-07T17:26:26Z"
+        }
+      ]
+    },
+    {
+      "number": 26,
+      "id": "I_kwDOO41rkM6_TnOi",
+      "title": "Appendix D. Change Log",
+      "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/issues/26",
+      "state": "OPEN",
+      "author": "paulehoffman",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "...is incomplete, and is not nearly as useful as the diffs provided by the Datatracker. It should be removed.",
+      "createdAt": "2025-07-07T16:18:54Z",
+      "updatedAt": "2025-07-07T16:18:54Z",
+      "closedAt": null,
+      "comments": []
     }
   ],
   "pulls": [
@@ -798,24 +845,26 @@
       "id": "PR_kwDOO41rkM6dRhhG",
       "title": "Restructure draft by resolver/auth roles and specify detailed behavior",
       "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/pull/22",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "pspacek",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2025-07-03T13:46:45Z",
-      "updatedAt": "2025-07-04T21:43:23Z",
+      "updatedAt": "2025-07-07T09:43:46Z",
       "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
       "baseRefName": "main",
       "baseRefOid": "a35eefc90df9cb8e833d51d7e8b3246b86800601",
       "headRepository": "pspacek/draft-ietf-deleg-base",
       "headRefName": "describe-by-roles",
       "headRefOid": "bb07cf6455db2d8ba333f4157d3bef8202a8678f",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2025-07-07T09:43:46Z",
+      "mergedAt": "2025-07-07T09:43:46Z",
+      "mergedBy": "pspacek",
+      "mergeCommit": {
+        "oid": "2ddf2234b2e1f67b80f05924e80d77c95190414f"
+      },
       "comments": [
         {
           "author": "pspacek",
@@ -823,6 +872,13 @@
           "body": "Technical part mostly reviewed by @fl1ger, mostly incorporated textual changes from @paulehoffman. Will merge and cut -01 on Monday.",
           "createdAt": "2025-07-04T21:40:15Z",
           "updatedAt": "2025-07-04T21:40:15Z"
+        },
+        {
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Seems there's no more feedback so I'm going to cut -01.",
+          "createdAt": "2025-07-07T09:43:39Z",
+          "updatedAt": "2025-07-07T09:43:39Z"
         }
       ],
       "reviews": []
