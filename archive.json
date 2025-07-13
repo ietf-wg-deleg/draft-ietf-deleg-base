@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-07-08T01:02:25.192503+00:00",
+  "timestamp": "2025-07-13T01:09:53.486415+00:00",
   "repo": "ietf-wg-deleg/draft-ietf-deleg-base",
   "labels": [
     {
@@ -202,7 +202,7 @@
       "labels": [],
       "body": "Discuss!\n\n### In-domain delegation\n- Is ipv4hint just a hint and should it be overriden by data from child?\n- If not, do we need a name at all?\n\n### Sibling glue\nShould it have IP addresses as well?\n\n### [Glue for Cyclic Sibling Domain Name Servers](https://datatracker.ietf.org/doc/html/rfc9471#name-glue-for-cyclic-sibling-dom)\nDo we really need to support this?\n\n### Unnecessary glue\nWhat to do when resolver encounters it in DELEG RR?",
       "createdAt": "2025-06-26T14:53:40Z",
-      "updatedAt": "2025-06-29T19:43:08Z",
+      "updatedAt": "2025-07-10T14:19:52Z",
       "closedAt": null,
       "comments": [
         {
@@ -218,6 +218,13 @@
           "body": "Would have to agree - the last rev of terminology document we went with \"sibling domain relationship\" for example ",
           "createdAt": "2025-06-29T19:43:08Z",
           "updatedAt": "2025-06-29T19:43:08Z"
+        },
+        {
+          "author": "fl1ger",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Yeah lets stick with ip4 and ip6 as names for the IP addresses of the name servers",
+          "createdAt": "2025-07-10T14:19:52Z",
+          "updatedAt": "2025-07-10T14:19:52Z"
         }
       ]
     },
@@ -363,6 +370,22 @@
       "body": "...is incomplete, and is not nearly as useful as the diffs provided by the Datatracker. It should be removed.",
       "createdAt": "2025-07-07T16:18:54Z",
       "updatedAt": "2025-07-07T16:18:54Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 27,
+      "id": "I_kwDOO41rkM6_51hr",
+      "title": "Priming",
+      "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/issues/27",
+      "state": "OPEN",
+      "author": "pspacek",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Version: -01\n\nDELEG RR type is parent-side only. Consequently, root zone cannot put DELEG RR in the apex.\n\nWe will need to define mechanism for priming so resolvers can prime/refresh root's DELEG RRs.\n\nRelated to #11 ",
+      "createdAt": "2025-07-10T14:34:23Z",
+      "updatedAt": "2025-07-10T14:34:23Z",
       "closedAt": null,
       "comments": []
     }
