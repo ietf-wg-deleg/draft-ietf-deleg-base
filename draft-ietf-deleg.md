@@ -163,8 +163,8 @@ The DELEG record uses a new resource record type, whose contents are identical t
 * The SVCB IPv4hint and IPv6hint parameters keep their key values of 4 and 6, but the presentation format with DELEG MUST be Glue4 and Glue6.
 * Glue4 and Glue6 records when present MUST be used to connect to the delegated name server.
 * The target of any DELEG record MUST NOT be '.'
-* The target of a DELEG INCLUDE record MUST be outside of the delegated domain.
-* The target of a DELEG DIRECT record MUST be a domain below the delegated domain.
+* The target of a DELEG INCLUDE record MUST be a name that is not subordinate to the delegated domain and MUST NOT contain any IP addresses.
+* If the target of a DELEG DIRECT record is a name that is subordinate to the delegated domain, it MUST also contain one or more IP addresses.
 
 # Use of DELEG record
 
