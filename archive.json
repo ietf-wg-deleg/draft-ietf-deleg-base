@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-07-13T01:09:53.486415+00:00",
+  "timestamp": "2025-07-20T01:11:26.385598+00:00",
   "repo": "ietf-wg-deleg/draft-ietf-deleg-base",
   "labels": [
     {
@@ -388,6 +388,44 @@
       "updatedAt": "2025-07-10T14:34:23Z",
       "closedAt": null,
       "comments": []
+    },
+    {
+      "number": 29,
+      "id": "I_kwDOO41rkM7Bbvyw",
+      "title": "Say when the AA bit is set",
+      "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/issues/29",
+      "state": "OPEN",
+      "author": "paulehoffman",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Don't assume \"it's obvious\"",
+      "createdAt": "2025-07-19T12:34:03Z",
+      "updatedAt": "2025-07-19T18:46:28Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "chantra",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Is this just a general comment, or do you have specific part of the draft that you have in mind? Or maybe it is just a quickly filed issue to make sure to not forget about it.\n\nI glimpsed over the current draft and it seems examples are all having AA set. I suppose the only place that would need a MUST is the \u201c3.2 auth servers\u201d and that would cover all use cases?\n",
+          "createdAt": "2025-07-19T17:26:17Z",
+          "updatedAt": "2025-07-19T17:26:17Z"
+        },
+        {
+          "author": "paulehoffman",
+          "authorAssociation": "COLLABORATOR",
+          "body": "It is a quickly filed issue to make sure it is not forgotten. I am uncomfortable documenting in examples only.",
+          "createdAt": "2025-07-19T18:13:12Z",
+          "updatedAt": "2025-07-19T18:13:12Z"
+        },
+        {
+          "author": "chantra",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "> I am uncomfortable documenting in examples only.\n\ntotally agree.",
+          "createdAt": "2025-07-19T18:46:28Z",
+          "updatedAt": "2025-07-19T18:46:28Z"
+        }
+      ]
     }
   ],
   "pulls": [
@@ -1214,6 +1252,134 @@
           ]
         }
       ]
+    },
+    {
+      "number": 28,
+      "id": "PR_kwDOO41rkM6frqKz",
+      "title": "Last two bullets of differences from SVCB",
+      "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/pull/28",
+      "state": "OPEN",
+      "author": "paulehoffman",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "From the WG discussion",
+      "createdAt": "2025-07-19T12:31:29Z",
+      "updatedAt": "2025-07-19T17:34:48Z",
+      "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
+      "baseRefName": "main",
+      "baseRefOid": "2ddf2234b2e1f67b80f05924e80d77c95190414f",
+      "headRepository": "paulehoffman/fork-deleg-base",
+      "headRefName": "bullets",
+      "headRefOid": "c686e9435a9fc2182cc692708acc56b9558e331f",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOO41rkM607Ve6",
+          "commit": {
+            "abbreviatedOid": "c686e94"
+          },
+          "author": "chantra",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "LGTM, but I think as it is, it leaves what is defined an IP parameter up in the air.",
+          "createdAt": "2025-07-19T17:31:58Z",
+          "updatedAt": "2025-07-19T17:34:48Z",
+          "comments": [
+            {
+              "originalPosition": 7,
+              "body": "Shall this directly refer to `ip4` or `ip6` parameters?\r\n\r\n```suggestion\r\n* If the target of a DELEG DIRECT record is a name that is subordinate to the delegated domain, it MUST also contain one or more IP address parameters such as ip4 or ip6.\r\n```\r\n\r\nmaybe this is also calling for what is an \u201cIP address parameter\u201d that this can be referred to. It is obvious today\u2026 but hey when ip8 will be around the corner, this may get out of sync.",
+              "createdAt": "2025-07-19T17:31:58Z",
+              "updatedAt": "2025-07-19T17:34:48Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 30,
+      "id": "PR_kwDOO41rkM6frrCM",
+      "title": "Reduce the use of the word \"glue\" to a minimum",
+      "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/pull/30",
+      "state": "OPEN",
+      "author": "paulehoffman",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-07-19T12:39:03Z",
+      "updatedAt": "2025-07-19T17:15:48Z",
+      "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
+      "baseRefName": "main",
+      "baseRefOid": "2ddf2234b2e1f67b80f05924e80d77c95190414f",
+      "headRepository": "paulehoffman/fork-deleg-base",
+      "headRefName": "less-glue",
+      "headRefOid": "9e65149113b35aa04cbdc83267e8288cf0d48caf",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOO41rkM607SwR",
+          "commit": {
+            "abbreviatedOid": "9e65149"
+          },
+          "author": "chantra",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "LGTM. I like that we remove the reference to \u201cglue\u201d. While the concept may stay, it should remove ambiguity and stigma from the past.",
+          "createdAt": "2025-07-19T17:13:50Z",
+          "updatedAt": "2025-07-19T17:15:48Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "To be pedantic, either drop \u201c(names and records)\u201d or if we want to put emphasis maybe formulate as\r\n```suggestion\r\nThe proposed DELEG record type remedies this problem by providing extensible parameters to indicate capabilities and additional information, such as address records that a resolver may use for the delegated authority. It is authoritative and thus signed in the parent side of the delegation making it possible to validate all delegation parameters (names and address records included) with DNSSEC.\r\n```",
+              "createdAt": "2025-07-19T17:13:50Z",
+              "updatedAt": "2025-07-19T17:15:49Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 31,
+      "id": "PR_kwDOO41rkM6fskJ0",
+      "title": "Link to draft preview",
+      "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/pull/31",
+      "state": "OPEN",
+      "author": "chantra",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "This makes it slightly more convinient to go from the repository to the HTML preview.",
+      "createdAt": "2025-07-19T19:01:02Z",
+      "updatedAt": "2025-07-19T19:03:41Z",
+      "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
+      "baseRefName": "main",
+      "baseRefOid": "2ddf2234b2e1f67b80f05924e80d77c95190414f",
+      "headRepository": "chantra/draft-ietf-deleg-base",
+      "headRefName": "ref_html",
+      "headRefOid": "16a08941f10c07a90c0a8562b00a367a3a79fb56",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [
+        {
+          "author": "chantra",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "I would also suggest whomever has admin access to the repo updates the \"About\" section of the repo and adds a link to the preview as the \"website\".\r\n\r\n<img width=\"1038\" height=\"549\" alt=\"image\" src=\"https://github.com/user-attachments/assets/c7d95213-ad59-45be-a107-61d77a673056\" />\r\n",
+          "createdAt": "2025-07-19T19:03:40Z",
+          "updatedAt": "2025-07-19T19:03:40Z"
+        }
+      ],
+      "reviews": []
     }
   ]
 }
