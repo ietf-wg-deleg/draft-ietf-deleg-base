@@ -137,10 +137,10 @@ Table of Contents
 
    The proposed DELEG record type remedies this problem by providing
    extensible parameters to indicate capabilities and additional
-   information, such as glue that a resolver may use for the delegated
-   authority.  It is authoritative and thus signed in the parent side of
-   the delegation making it possible to validate all delegation
-   parameters (names and glue records) with DNSSEC.
+   information, such as addresses that a resolver may use for the
+   delegated authority.  It is authoritative and thus signed in the
+   parent side of the delegation making it possible to validate all
+   delegation parameters with DNSSEC.
 
    This document only shows how DELEG can be used instead of or along
    side a NS record to create a delegation.  Future documents can use
@@ -191,11 +191,11 @@ Table of Contents
       maximum number of indirections, CNAME or AliasMode SVCB is 4.
 
    *  The SVCB IPv4hint and IPv6hint parameters keep their key values of
-      4 and 6, but the presentation format with DELEG MUST be Glue4 and
-      Glue6.
+      4 and 6, but the presentation format with DELEG MUST be ipv4 and
+      ipv6.
 
-   *  Glue4 and Glue6 records when present MUST be used to connect to
-      the delegated name server.
+   *  ipv4 and ipv6 records when present MUST be used to connect to the
+      delegated name server.
 
    *  The target of any DELEG record MUST NOT be '.'
 
@@ -635,8 +635,8 @@ Appendix A.  Examples
    The "example." delegation has DELEG and NS records.  The "test."
    delegation has DELEG but no NS records.
 
-   example.   300 IN DELEG DIRECT a.example. Glue4=192.0.2.1 (
-                           Glue6=2001:DB8::1 )
+   example.   300 IN DELEG DIRECT a.example. ipv4=192.0.2.1 (
+                           ipv6=2001:DB8::1 )
    example.   300 IN DELEG INCLUDE ns2.example.net.
    example.   300 IN DELEG INCLUDE ns3.example.org.
    example.   300 IN RRSIG DELEG 13 4 300 20250214164848 (
@@ -756,8 +756,8 @@ A.4.1.  Query for foo.example
    ;; (empty)
 
    ;; Authority
-   example.   300 IN DELEG DIRECT a.example. Glue4=192.0.2.1 (
-                           Glue6=2001:DB8::1 )
+   example.   300 IN DELEG DIRECT a.example. ipv4=192.0.2.1 (
+                           ipv6=2001:DB8::1 )
    example.   300 IN DELEG INCLUDE ns2.example.net.
    example.   300 IN DELEG INCLUDE ns3.example.org.
 
@@ -796,8 +796,8 @@ A.5.1.  Query for foo.example
 
    ;; Authority
 
-   example.   300 IN DELEG DIRECT a.example. Glue4=192.0.2.1 (
-                           Glue6=2001:DB8::1 )
+   example.   300 IN DELEG DIRECT a.example. ipv4=192.0.2.1 (
+                           ipv6=2001:DB8::1 )
    example.   300 IN DELEG INCLUDE ns2.example.net.
    example.   300 IN DELEG INCLUDE ns3.example.org.
    example.   300 IN RRSIG DELEG 13 4 300 20250214164848 (

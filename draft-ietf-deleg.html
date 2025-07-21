@@ -1321,7 +1321,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <a href="#section-1" class="section-number selfRef">1. </a><a href="#name-introduction" class="section-name selfRef">Introduction</a>
       </h2>
 <p id="section-1-1">In the Domain Name System <span>[<a href="#STD13" class="cite xref">STD13</a>]</span>, subdomains within the domain name hierarchy are indicated by delegations to servers which are authoritative for their portion of the namespace.  The DNS records that do this, called NS records, contain hostnames of nameservers, which resolve to addresses.  No other information is available to the resolver. It is limited to connect to the authoritative servers over UDP and TCP port 53. This limitation is a barrier for efficient introduction of new DNS technology.<a href="#section-1-1" class="pilcrow">¶</a></p>
-<p id="section-1-2">The proposed DELEG record type remedies this problem by providing extensible parameters to indicate capabilities and additional information, such as glue that a resolver may use for the delegated authority. It is authoritative and thus signed in the parent side of the delegation making it possible to validate all delegation parameters (names and glue records) with DNSSEC.<a href="#section-1-2" class="pilcrow">¶</a></p>
+<p id="section-1-2">The proposed DELEG record type remedies this problem by providing extensible parameters to indicate capabilities and additional information, such as addresses that a resolver may use for the delegated authority. It is authoritative and thus signed in the parent side of the delegation making it possible to validate all delegation parameters with DNSSEC.<a href="#section-1-2" class="pilcrow">¶</a></p>
 <p id="section-1-3">This document only shows how DELEG can be used instead of or along side a NS record to create a delegation. Future documents can use the extensible mechanism for more advanced features like connecting to a name server with an encrypted transport.<a href="#section-1-3" class="pilcrow">¶</a></p>
 <div id="terminology">
 <section id="section-1.1">
@@ -1374,10 +1374,10 @@ all capitals, as shown here.<a href="#section-1.1-1" class="pilcrow">¶</a></p>
             <p id="section-2.1-1.5.1">In order to not allow unbounded indirection of DELEG records the maximum number of indirections, CNAME or AliasMode SVCB is 4.<a href="#section-2.1-1.5.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-2.1-1.6">
-            <p id="section-2.1-1.6.1">The SVCB IPv4hint and IPv6hint parameters keep their key values of 4 and 6, but the presentation format with DELEG MUST be Glue4 and Glue6.<a href="#section-2.1-1.6.1" class="pilcrow">¶</a></p>
+            <p id="section-2.1-1.6.1">The SVCB IPv4hint and IPv6hint parameters keep their key values of 4 and 6, but the presentation format with DELEG MUST be ipv4 and ipv6.<a href="#section-2.1-1.6.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-2.1-1.7">
-            <p id="section-2.1-1.7.1">Glue4 and Glue6 records when present MUST be used to connect to the delegated name server.<a href="#section-2.1-1.7.1" class="pilcrow">¶</a></p>
+            <p id="section-2.1-1.7.1">ipv4 and ipv6 records when present MUST be used to connect to the delegated name server.<a href="#section-2.1-1.7.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-2.1-1.8">
             <p id="section-2.1-1.8.1">The target of any DELEG record MUST NOT be '.'<a href="#section-2.1-1.8.1" class="pilcrow">¶</a></p>
@@ -1780,8 +1780,8 @@ say as DS RR type.<a href="#section-3.4.2-2" class="pilcrow">¶</a></p>
 <p id="appendix-A-2">The "example." delegation has DELEG and NS records. The "test." delegation has DELEG but no NS records.<a href="#appendix-A-2" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="appendix-A-3">
 <pre>
-example.   300 IN DELEG DIRECT a.example. Glue4=192.0.2.1 (
-                        Glue6=2001:DB8::1 )
+example.   300 IN DELEG DIRECT a.example. ipv4=192.0.2.1 (
+                        ipv6=2001:DB8::1 )
 example.   300 IN DELEG INCLUDE ns2.example.net.
 example.   300 IN DELEG INCLUDE ns3.example.org.
 example.   300 IN RRSIG DELEG 13 4 300 20250214164848 (
@@ -1953,8 +1953,8 @@ foo.example.  IN MX
 ;; (empty)
 
 ;; Authority
-example.   300 IN DELEG DIRECT a.example. Glue4=192.0.2.1 (
-                        Glue6=2001:DB8::1 )
+example.   300 IN DELEG DIRECT a.example. ipv4=192.0.2.1 (
+                        ipv6=2001:DB8::1 )
 example.   300 IN DELEG INCLUDE ns2.example.net.
 example.   300 IN DELEG INCLUDE ns3.example.org.
 
@@ -2014,8 +2014,8 @@ foo.example.  IN MX
 
 ;; Authority
 
-example.   300 IN DELEG DIRECT a.example. Glue4=192.0.2.1 (
-                        Glue6=2001:DB8::1 )
+example.   300 IN DELEG DIRECT a.example. ipv4=192.0.2.1 (
+                        ipv6=2001:DB8::1 )
 example.   300 IN DELEG INCLUDE ns2.example.net.
 example.   300 IN DELEG INCLUDE ns3.example.org.
 example.   300 IN RRSIG DELEG 13 4 300 20250214164848 (
