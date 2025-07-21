@@ -6,11 +6,11 @@ deleg                                                           T. April
 Internet-Draft                                               Google, LLC
 Updates: 1034, 1035, 6672, 6840 (if approved)                  P. Špaček
 Intended status: Standards Track                                     ISC
-Expires: 8 January 2026                                         R. Weber
+Expires: 22 January 2026                                        R. Weber
                                                      Akamai Technologies
                                                              D. Lawrence
                                                               Salesforce
-                                                             7 July 2025
+                                                            21 July 2025
 
 
                      Extensible Delegation for DNS
@@ -65,7 +65,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 8 January 2026.
+   This Internet-Draft will expire on 22 January 2026.
 
 Copyright Notice
 
@@ -122,9 +122,6 @@ Table of Contents
        A.5.2.  Query for foo.test
    Appendix B.  Acknowledgments {:unnumbered}
    Appendix C.  TODO
-   Appendix D.  Change Log
-     D.1.  since draft-wesplaap-deleg-00
-     D.2.  since draft-wesplaap-deleg-01
    Contributors
    Authors' Addresses
 
@@ -856,26 +853,6 @@ Appendix C.  TODO
       -  DELEG EDNS Flag Bit is 3
 
       -  DELEG DNSKEY Flag Bit is 0
-
-Appendix D.  Change Log
-
-   RFC EDITOR:  PLEASE REMOVE THE THIS SECTION PRIOR TO PUBLICATION.
-
-D.1.  since draft-wesplaap-deleg-00
-
-   *  Clarified SVCB priority behavior
-
-   *  Added section on differences to draft-homburg-deleg-incremental-
-      deleg
-
-D.2.  since draft-wesplaap-deleg-01
-
-   *  Reorganised and streamlined the draft to the bare minimum for
-      DELEG as an NS replacement
-
-   *  Defined codepoints for temporary testing
-
-   *  Added examples
 
 Contributors
 
