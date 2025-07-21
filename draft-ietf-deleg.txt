@@ -122,7 +122,6 @@ Table of Contents
        A.5.2.  Query for foo.test
    Appendix B.  Acknowledgments {:unnumbered}
    Appendix C.  TODO
-   Contributors
    Authors' Addresses
 
 1.  Introduction
@@ -839,6 +838,16 @@ Appendix B.  Acknowledgments {:unnumbered}
    Mashooq Muhaimen, Jason Moreau, Jerrod Wiesman, Billy Tiemann, Gordon
    Marx and Brian Wellington.
 
+   Work on DELEG protocol has started at IETF 118 hackaton.  Hackaton
+   participants: Christian Elmerot, David Blacka, David Lawrence, Edward
+   Lewis, Erik Nygren, George Michaelson, Jan Včelák, Klaus Darilion,
+   Libor Peltan, Manu Bretelle, Peter van Dijk, Petr Špaček, Philip
+   Homburg, Ralf Weber, Roy Arends, Shane Kerr, Shumon Huque, Vandan
+   Adhvaryu, Vladimír Čunát.
+
+   Other people joined the effort after the initial hackaton: Ben
+   Schwartz, Bob Halley, Paul Hoffman, ...
+
 Appendix C.  TODO
 
    RFC EDITOR:  PLEASE REMOVE THE THIS SECTION PRIOR TO PUBLICATION.
@@ -853,98 +862,6 @@ Appendix C.  TODO
       -  DELEG EDNS Flag Bit is 3
 
       -  DELEG DNSKEY Flag Bit is 0
-
-Contributors
-
-   Christian Elmerot
-   Cloudflare
-   Email: christian@elmerot.se
-
-
-   Edward Lewis
-   ICANN
-   Email: edward.lewis@icann.org
-
-
-   Roy Arends
-   ICANN
-   Email: roy.arends@icann.org
-
-
-   Shumon Huque
-   Salesforce
-   Email: shuque@gmail.com
-
-
-   Klaus Darilion
-   nic.at
-   Email: klaus.darilion@nic.at
-
-
-   Libor Peltan
-   CZ.nic
-   Email: libor.peltan@nic.cz
-
-
-   Vladimír Čunát
-   CZ.nic
-   Email: vladimir.cunat@nic.cz
-
-
-   Shane Kerr
-   NS1
-   Email: shane@time-travellers.org
-
-
-   David Blacka
-   Verisign
-   Email: davidb@verisign.com
-
-
-   George Michaelson
-   APNIC
-   Email: ggm@algebras.org
-
-
-   Ben Schwartz
-   Meta
-   Email: bemasc@meta.com
-
-
-   Jan Včelák
-   NS1
-   Email: jvcelak@ns1.com
-
-
-   Peter van Dijk
-   PowerDNS
-   Email: peter.van.dijk@powerdns.com
-
-
-   Philip Homburg
-   NLnet Labs
-   Email: philip@nlnetlabs.nl
-
-
-   Erik Nygren
-   Akamai Technologies
-   Email: erik+ietf@nygren.org
-
-
-   Vandan Adhvaryu
-   Team Internet
-   Email: vandan@adhvaryu.uk
-
-
-   Manu Bretelle
-   Meta
-   Email: chantr4@gmail.com
-
-
-   Bob Halley
-   Cloudflare
-   Email: bhalley@cloudflare.com
-
 
 Authors' Addresses
 
