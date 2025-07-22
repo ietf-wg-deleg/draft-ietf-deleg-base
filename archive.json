@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-07-20T01:11:26.385598+00:00",
+  "timestamp": "2025-07-22T01:05:15.302819+00:00",
   "repo": "ietf-wg-deleg/draft-ietf-deleg-base",
   "labels": [
     {
@@ -331,15 +331,15 @@
       "id": "I_kwDOO41rkM6_Tmq9",
       "title": "Contributors list",
       "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/issues/25",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "paulehoffman",
-      "authorAssociation": "CONTRIBUTOR",
+      "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "...is incomplete, not useful to the reader, and infers different things to different readers. It should be removed.",
       "createdAt": "2025-07-07T16:18:10Z",
-      "updatedAt": "2025-07-07T17:26:26Z",
-      "closedAt": null,
+      "updatedAt": "2025-07-21T12:09:22Z",
+      "closedAt": "2025-07-21T12:09:22Z",
       "comments": [
         {
           "author": "pspacek",
@@ -350,7 +350,7 @@
         },
         {
           "author": "paulehoffman",
-          "authorAssociation": "CONTRIBUTOR",
+          "authorAssociation": "COLLABORATOR",
           "body": "You are correct that there is no good definition of \"contributors\", and very few RFCs list them for that reason. There is also no good advice for who gets listed in the acknowledgments section. Make your best guess, which will always be wrong to someone.",
           "createdAt": "2025-07-07T17:26:26Z",
           "updatedAt": "2025-07-07T17:26:26Z"
@@ -362,15 +362,15 @@
       "id": "I_kwDOO41rkM6_TnOi",
       "title": "Appendix D. Change Log",
       "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/issues/26",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "paulehoffman",
-      "authorAssociation": "CONTRIBUTOR",
+      "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "...is incomplete, and is not nearly as useful as the diffs provided by the Datatracker. It should be removed.",
       "createdAt": "2025-07-07T16:18:54Z",
-      "updatedAt": "2025-07-07T16:18:54Z",
-      "closedAt": null,
+      "updatedAt": "2025-07-21T11:58:48Z",
+      "closedAt": "2025-07-21T11:58:48Z",
       "comments": []
     },
     {
@@ -426,6 +426,46 @@
           "updatedAt": "2025-07-19T18:46:28Z"
         }
       ]
+    },
+    {
+      "number": 35,
+      "id": "I_kwDOO41rkM7Bquy6",
+      "title": "RR format MUST NOT violation",
+      "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/issues/35",
+      "state": "OPEN",
+      "author": "pspacek",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Version: -01\n\nIt's unclear when one of MUST/NOT constrains is violated on RR level. E.g.\n\n```\nThe target of any DELEG record MUST NOT be '.'\n\n* The target of a DELEG INCLUDE record MUST be outside of the delegated domain.\n\n* The target of a DELEG DIRECT record MUST be a domain below the delegated domain.\n```\n\nSo, what happens when this does not hold? Zone file parsing error? I hope not. What happens when that kind of crap is receiver over network? I bet attacker's don't care what the spec says.",
+      "createdAt": "2025-07-21T16:00:13Z",
+      "updatedAt": "2025-07-21T16:01:24Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Personally I think we should remove these conditions from the RR format description and leave this to 'interpretation' section where we talk about resolvers consuming the RRs. And in that case most of the stuff will not even need extra handling because it will sort itself naturally.",
+          "createdAt": "2025-07-21T16:01:24Z",
+          "updatedAt": "2025-07-21T16:01:24Z"
+        }
+      ]
+    },
+    {
+      "number": 36,
+      "id": "I_kwDOO41rkM7BttFO",
+      "title": "Avoid SVCB param reuse with same key number but different name",
+      "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/issues/36",
+      "state": "OPEN",
+      "author": "pspacek",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Renaming IPv4Hint to something else (be it IPv4Glue or ipv4) causes trouble in practical implementation.\n\nTo quote @shane-kerr:\n\n> I rage quit a PR I started against a Go DNS library because of these differences.",
+      "createdAt": "2025-07-21T20:43:32Z",
+      "updatedAt": "2025-07-21T20:43:32Z",
+      "closedAt": null,
+      "comments": []
     }
   ],
   "pulls": [
@@ -1265,7 +1305,7 @@
       "labels": [],
       "body": "From the WG discussion",
       "createdAt": "2025-07-19T12:31:29Z",
-      "updatedAt": "2025-07-19T17:34:48Z",
+      "updatedAt": "2025-07-21T16:24:58Z",
       "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
       "baseRefName": "main",
       "baseRefOid": "2ddf2234b2e1f67b80f05924e80d77c95190414f",
@@ -1297,6 +1337,106 @@
               "updatedAt": "2025-07-19T17:34:48Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOO41rkM61EFG5",
+          "commit": {
+            "abbreviatedOid": "c686e94"
+          },
+          "author": "spacekpe",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-07-21T11:50:40Z",
+          "updatedAt": "2025-07-21T11:50:40Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "I think all this should go away. We should define format of the RR and then in separate section describe what it means. Moreover MUST and MUST NOT in presentation format is bonkers without saying what happens when constraint is violated. Zone file will not parse? Whole RRset is ignored? Or just single RR? Or ...?",
+              "createdAt": "2025-07-21T11:50:40Z",
+              "updatedAt": "2025-07-21T11:50:41Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOO41rkM61HPI0",
+          "commit": {
+            "abbreviatedOid": "c686e94"
+          },
+          "author": "paulehoffman",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-07-21T15:09:53Z",
+          "updatedAt": "2025-07-21T15:09:53Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "That discussion must happen on the mailing list: it is a significant change from the the current and earlier drafts.",
+              "createdAt": "2025-07-21T15:09:53Z",
+              "updatedAt": "2025-07-21T15:09:53Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOO41rkM61H6BP",
+          "commit": {
+            "abbreviatedOid": "c686e94"
+          },
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-07-21T15:57:06Z",
+          "updatedAt": "2025-07-21T15:57:06Z",
+          "comments": [
+            {
+              "originalPosition": 7,
+              "body": "I'm not a native speaker, so excuse stupid question. Is example.com \"subordinate\" of example.com? As in, would `example.com. DELEG INCLUDE example.com.` be ruled out by the proposed text?",
+              "createdAt": "2025-07-21T15:57:06Z",
+              "updatedAt": "2025-07-21T15:57:06Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOO41rkM61ILcy",
+          "commit": {
+            "abbreviatedOid": "c686e94"
+          },
+          "author": "chantra",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-07-21T16:18:20Z",
+          "updatedAt": "2025-07-21T16:18:20Z",
+          "comments": [
+            {
+              "originalPosition": 7,
+              "body": "Neither am I, but in my native language a subordinate implies another entity that is \"below\" you. So \"example.com\" is not a subordinate of \"example.com\". merriam-webster seems to agree with this :D \r\nNow, having re-read the English definition of \"subordinate\", I am not sure this is the most inclusive word to use and can be interpreted in varying ways, but this is unrelated to this specific PR.",
+              "createdAt": "2025-07-21T16:18:20Z",
+              "updatedAt": "2025-07-21T16:18:21Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOO41rkM61IPze",
+          "commit": {
+            "abbreviatedOid": "c686e94"
+          },
+          "author": "chantra",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-07-21T16:24:58Z",
+          "updatedAt": "2025-07-21T16:24:58Z",
+          "comments": [
+            {
+              "originalPosition": 7,
+              "body": "It seems to be referenced in DNS terminology RFC9499: https://www.rfc-editor.org/rfc/rfc9499#section-9-1.24\r\n\r\nAt the same time, the existing glue refers to in-domain\r\nhttps://www.rfc-editor.org/rfc/rfc9499#section-7-2.38",
+              "createdAt": "2025-07-21T16:24:58Z",
+              "updatedAt": "2025-07-21T16:24:58Z"
+            }
+          ]
         }
       ]
     },
@@ -1305,24 +1445,26 @@
       "id": "PR_kwDOO41rkM6frrCM",
       "title": "Reduce the use of the word \"glue\" to a minimum",
       "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/pull/30",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "paulehoffman",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2025-07-19T12:39:03Z",
-      "updatedAt": "2025-07-19T17:15:48Z",
+      "updatedAt": "2025-07-21T20:40:13Z",
       "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
       "baseRefName": "main",
-      "baseRefOid": "2ddf2234b2e1f67b80f05924e80d77c95190414f",
+      "baseRefOid": "46fa2bd0c817b0d84a49780eed85007284a4cd98",
       "headRepository": "paulehoffman/fork-deleg-base",
       "headRefName": "less-glue",
-      "headRefOid": "9e65149113b35aa04cbdc83267e8288cf0d48caf",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "fbe6f505d82594d4b73a83a4519a74d1333efa90",
+      "closedAt": "2025-07-21T20:40:13Z",
+      "mergedAt": "2025-07-21T20:40:13Z",
+      "mergedBy": "pspacek",
+      "mergeCommit": {
+        "oid": "e87faa4812f6816566043f1bd6294835ead563d8"
+      },
       "comments": [],
       "reviews": [
         {
@@ -1344,6 +1486,279 @@
               "updatedAt": "2025-07-19T17:15:49Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOO41rkM61EDAg",
+          "commit": {
+            "abbreviatedOid": "9e65149"
+          },
+          "author": "spacekpe",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-07-21T11:47:14Z",
+          "updatedAt": "2025-07-21T11:47:15Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "I argue these IP addresses are not 'address records' at all. They are IP address literals within DELEG RR, but certainly not 'records' which are a separate entity in the DNS.",
+              "createdAt": "2025-07-21T11:47:14Z",
+              "updatedAt": "2025-07-21T11:47:15Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOO41rkM61EFne",
+          "commit": {
+            "abbreviatedOid": "9e65149"
+          },
+          "author": "spacekpe",
+          "authorAssociation": "NONE",
+          "state": "CHANGES_REQUESTED",
+          "body": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/pull/30/files#r2218963096",
+          "createdAt": "2025-07-21T11:51:30Z",
+          "updatedAt": "2025-07-21T11:51:30Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOO41rkM61HNj8",
+          "commit": {
+            "abbreviatedOid": "9e65149"
+          },
+          "author": "paulehoffman",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-07-21T15:08:02Z",
+          "updatedAt": "2025-07-21T15:08:02Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "Good point! It should be \"names and addresses\"",
+              "createdAt": "2025-07-21T15:08:02Z",
+              "updatedAt": "2025-07-21T15:08:02Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOO41rkM61H4YO",
+          "commit": {
+            "abbreviatedOid": "9e65149"
+          },
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-07-21T15:55:05Z",
+          "updatedAt": "2025-07-21T15:55:06Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "Happy to merge. Can you amend the commit?",
+              "createdAt": "2025-07-21T15:55:06Z",
+              "updatedAt": "2025-07-21T15:55:06Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOO41rkM61H-0s",
+          "commit": {
+            "abbreviatedOid": "9e65149"
+          },
+          "author": "chantra",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-07-21T16:02:45Z",
+          "updatedAt": "2025-07-21T16:02:45Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "> I argue these IP addresses are not 'address records' at all. \r\n\r\nfair point.",
+              "createdAt": "2025-07-21T16:02:45Z",
+              "updatedAt": "2025-07-21T16:02:46Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOO41rkM61IAN0",
+          "commit": {
+            "abbreviatedOid": "9e65149"
+          },
+          "author": "chantra",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-07-21T16:04:26Z",
+          "updatedAt": "2025-07-21T16:04:27Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "but it being address or record, I still feel the parenthesize bit needs to be either omitted, or reformulated.",
+              "createdAt": "2025-07-21T16:04:27Z",
+              "updatedAt": "2025-07-21T16:04:27Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOO41rkM61IEcR",
+          "commit": {
+            "abbreviatedOid": "9e65149"
+          },
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-07-21T16:08:23Z",
+          "updatedAt": "2025-07-21T16:08:23Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "Personally I would just omit it. Down the road we will add unspecified number of other parameters and I don't see why these two types should be called out.",
+              "createdAt": "2025-07-21T16:08:23Z",
+              "updatedAt": "2025-07-21T16:08:23Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOO41rkM61IQXB",
+          "commit": {
+            "abbreviatedOid": "9e65149"
+          },
+          "author": "chantra",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-07-21T16:25:50Z",
+          "updatedAt": "2025-07-21T16:25:50Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "> Personally I would just omit it. Down the road we will add unspecified number of other parameters and I don't see why these two types should be called out.\r\n\r\nSGTM",
+              "createdAt": "2025-07-21T16:25:50Z",
+              "updatedAt": "2025-07-21T16:25:51Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOO41rkM61LjsF",
+          "commit": {
+            "abbreviatedOid": "9e65149"
+          },
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-07-21T20:31:06Z",
+          "updatedAt": "2025-07-21T20:31:07Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "```suggestion\r\nThe proposed DELEG record type remedies this problem by providing extensible parameters to indicate capabilities and additional information, such as address records that a resolver may use for the delegated authority. It is authoritative and thus signed in the parent side of the delegation making it possible to validate all delegation parameters with DNSSEC.\r\n```",
+              "createdAt": "2025-07-21T20:31:06Z",
+              "updatedAt": "2025-07-21T20:31:07Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOO41rkM61LlLV",
+          "commit": {
+            "abbreviatedOid": "a94ed32"
+          },
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-07-21T20:32:36Z",
+          "updatedAt": "2025-07-21T20:32:37Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "```suggestion\nThe proposed DELEG record type remedies this problem by providing extensible parameters to indicate capabilities and additional information, such as addresses that a resolver may use for the delegated authority. It is authoritative and thus signed in the parent side of the delegation making it possible to validate all delegation parameters with DNSSEC.\n```",
+              "createdAt": "2025-07-21T20:32:36Z",
+              "updatedAt": "2025-07-21T20:32:37Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOO41rkM61LmmU",
+          "commit": {
+            "abbreviatedOid": "1c5cd6b"
+          },
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-07-21T20:34:14Z",
+          "updatedAt": "2025-07-21T20:34:14Z",
+          "comments": [
+            {
+              "originalPosition": 16,
+              "body": "```suggestion\n* The SVCB IPv4hint and IPv6hint parameters keep their key values of 4 and 6, but the presentation format with DELEG MUST be ipv4 and ipv6.\n* ipv4 and ipv6 records when present MUST be used to connect to the delegated name server.\n```",
+              "createdAt": "2025-07-21T20:34:14Z",
+              "updatedAt": "2025-07-21T20:34:14Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOO41rkM61Lmys",
+          "commit": {
+            "abbreviatedOid": "1c5cd6b"
+          },
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-07-21T20:34:29Z",
+          "updatedAt": "2025-07-21T20:34:29Z",
+          "comments": [
+            {
+              "originalPosition": 27,
+              "body": "```suggestion\n    example.   300 IN DELEG DIRECT a.example. ipv4=192.0.2.1 (\n                            ipv6=2001:DB8::1 )\n```",
+              "createdAt": "2025-07-21T20:34:29Z",
+              "updatedAt": "2025-07-21T20:34:29Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOO41rkM61Lm8t",
+          "commit": {
+            "abbreviatedOid": "1c5cd6b"
+          },
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-07-21T20:34:42Z",
+          "updatedAt": "2025-07-21T20:34:42Z",
+          "comments": [
+            {
+              "originalPosition": 38,
+              "body": "```suggestion\n    example.   300 IN DELEG DIRECT a.example. ipv4=192.0.2.1 (\n                            ipv6=2001:DB8::1 )\n```",
+              "createdAt": "2025-07-21T20:34:42Z",
+              "updatedAt": "2025-07-21T20:34:43Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOO41rkM61LnGT",
+          "commit": {
+            "abbreviatedOid": "1c5cd6b"
+          },
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-07-21T20:34:55Z",
+          "updatedAt": "2025-07-21T20:34:55Z",
+          "comments": [
+            {
+              "originalPosition": 49,
+              "body": "```suggestion\n    example.   300 IN DELEG DIRECT a.example. ipv4=192.0.2.1 (\n                            ipv6=2001:DB8::1 )\n```",
+              "createdAt": "2025-07-21T20:34:55Z",
+              "updatedAt": "2025-07-21T20:34:55Z"
+            }
+          ]
         }
       ]
     },
@@ -1352,24 +1767,26 @@
       "id": "PR_kwDOO41rkM6fskJ0",
       "title": "Link to draft preview",
       "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/pull/31",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "chantra",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "This makes it slightly more convinient to go from the repository to the HTML preview.",
       "createdAt": "2025-07-19T19:01:02Z",
-      "updatedAt": "2025-07-19T19:03:41Z",
+      "updatedAt": "2025-07-21T11:53:37Z",
       "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
       "baseRefName": "main",
       "baseRefOid": "2ddf2234b2e1f67b80f05924e80d77c95190414f",
       "headRepository": "chantra/draft-ietf-deleg-base",
       "headRefName": "ref_html",
       "headRefOid": "16a08941f10c07a90c0a8562b00a367a3a79fb56",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2025-07-21T11:53:37Z",
+      "mergedAt": "2025-07-21T11:53:36Z",
+      "mergedBy": "pspacek",
+      "mergeCommit": {
+        "oid": "d9814f9cae9c6801ffb3662d699330d879fb4baf"
+      },
       "comments": [
         {
           "author": "chantra",
@@ -1379,6 +1796,126 @@
           "updatedAt": "2025-07-19T19:03:40Z"
         }
       ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOO41rkM61D9jD",
+          "commit": {
+            "abbreviatedOid": "16a0894"
+          },
+          "author": "spacekpe",
+          "authorAssociation": "NONE",
+          "state": "APPROVED",
+          "body": "Makes sense - thanks!",
+          "createdAt": "2025-07-21T11:41:29Z",
+          "updatedAt": "2025-07-21T11:41:29Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 32,
+      "id": "PR_kwDOO41rkM6fu7Q5",
+      "title": "Clearer explanation of what happens for QTYPE=DELEG",
+      "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/pull/32",
+      "state": "MERGED",
+      "author": "paulehoffman",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-07-20T12:31:18Z",
+      "updatedAt": "2025-07-21T15:54:38Z",
+      "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
+      "baseRefName": "main",
+      "baseRefOid": "2ddf2234b2e1f67b80f05924e80d77c95190414f",
+      "headRepository": "paulehoffman/fork-deleg-base",
+      "headRefName": "direct-deleg-request",
+      "headRefOid": "da7150d986f8cd4619a93df51970e3ec85ed797a",
+      "closedAt": "2025-07-21T15:54:24Z",
+      "mergedAt": "2025-07-21T15:54:24Z",
+      "mergedBy": "pspacek",
+      "mergeCommit": {
+        "oid": "46fa2bd0c817b0d84a49780eed85007284a4cd98"
+      },
+      "comments": [
+        {
+          "author": "spacekpe",
+          "authorAssociation": "NONE",
+          "body": "Could you add something to the effect 'this is known and cannot be fixed' or something? That's what I originally meant with 'this is not a bug'.",
+          "createdAt": "2025-07-21T11:44:26Z",
+          "updatedAt": "2025-07-21T11:44:26Z"
+        },
+        {
+          "author": "paulehoffman",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I don't think that's appropriate for a protocol specification.",
+          "createdAt": "2025-07-21T15:10:37Z",
+          "updatedAt": "2025-07-21T15:10:37Z"
+        },
+        {
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Okay then. Let's see how many people will ask!",
+          "createdAt": "2025-07-21T15:54:38Z",
+          "updatedAt": "2025-07-21T15:54:38Z"
+        }
+      ],
+      "reviews": []
+    },
+    {
+      "number": 33,
+      "id": "PR_kwDOO41rkM6f1vAU",
+      "title": "Remove Change Log section",
+      "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/pull/33",
+      "state": "MERGED",
+      "author": "pspacek",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Closes: #26",
+      "createdAt": "2025-07-21T11:57:13Z",
+      "updatedAt": "2025-07-21T11:59:07Z",
+      "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
+      "baseRefName": "main",
+      "baseRefOid": "d9814f9cae9c6801ffb3662d699330d879fb4baf",
+      "headRepository": "pspacek/draft-ietf-deleg-base",
+      "headRefName": "remove-changelog",
+      "headRefOid": "93e9f1f913ca996b99dbb177b810845f990f7dfa",
+      "closedAt": "2025-07-21T11:58:47Z",
+      "mergedAt": "2025-07-21T11:58:47Z",
+      "mergedBy": "pspacek",
+      "mergeCommit": {
+        "oid": "23a097754a3e801f9a0a7e9093fa93ddeaa5e34e"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 34,
+      "id": "PR_kwDOO41rkM6f13GX",
+      "title": "Fold list of contributors into Acknowledgments section",
+      "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/pull/34",
+      "state": "MERGED",
+      "author": "pspacek",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "I've also added Paul Hoffman who is helping a lot.\r\n\r\nFixes: #25",
+      "createdAt": "2025-07-21T12:08:32Z",
+      "updatedAt": "2025-07-21T12:09:21Z",
+      "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
+      "baseRefName": "main",
+      "baseRefOid": "23a097754a3e801f9a0a7e9093fa93ddeaa5e34e",
+      "headRepository": "pspacek/draft-ietf-deleg-base",
+      "headRefName": "contributors-to-acknowledgments",
+      "headRefOid": "df076d9cf64b1537cd813dfbca115a99e8c9dcf0",
+      "closedAt": "2025-07-21T12:09:21Z",
+      "mergedAt": "2025-07-21T12:09:21Z",
+      "mergedBy": "pspacek",
+      "mergeCommit": {
+        "oid": "c2472f57139d5b7b23f70952e3be29115cbae26b"
+      },
+      "comments": [],
       "reviews": []
     }
   ]
