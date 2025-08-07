@@ -13,13 +13,13 @@
        A delegation in the Domain Name System (DNS) is a mechanism that enables efficient and distributed management of the DNS namespace. It involves delegating authority over subdomains to specific DNS servers via NS records, allowing for a hierarchical structure and distributing the responsibility for maintaining DNS records. 
        An NS record contains the hostname of the nameserver for the delegated namespace. Any facilities of that nameserver must be discovered through other mechanisms. This document proposes a new extensible DNS record type, DELEG, for delegation of the authority for a domain. Future documents then can use this mechanism to use additional information about the delegated namespace and the capabilities of authoritative nameservers for the delegated namespace. 
     " name="description">
-<meta content="xml2rfc 3.29.0" name="generator">
+<meta content="xml2rfc 3.30.0" name="generator">
 <meta content="Internet-Draft" name="keyword">
 <meta content="DNS" name="keyword">
 <meta content="delegation" name="keyword">
 <meta content="draft-ietf-deleg-latest" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.29.0
+  xml2rfc 3.30.0
     Python 3.12.11
     ConfigArgParse 1.7
     google-i18n-address 3.1.1
@@ -1050,11 +1050,11 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">DELEG</td>
-<td class="right">July 2025</td>
+<td class="right">August 2025</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">April, et al.</td>
-<td class="center">Expires 5 January 2026</td>
+<td class="center">Expires 8 February 2026</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1070,12 +1070,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <a href="https://www.rfc-editor.org/rfc/rfc1034" class="eref">1034</a>, <a href="https://www.rfc-editor.org/rfc/rfc1035" class="eref">1035</a>, <a href="https://www.rfc-editor.org/rfc/rfc6672" class="eref">6672</a>, <a href="https://www.rfc-editor.org/rfc/rfc6840" class="eref">6840</a> (if approved)</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2025-07-04" class="published">4 July 2025</time>
+<time datetime="2025-08-07" class="published">7 August 2025</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2026-01-05">5 January 2026</time></dd>
+<dd class="expires"><time datetime="2026-02-08">8 February 2026</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1138,7 +1138,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 5 January 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 8 February 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1199,7 +1199,10 @@ svg :is([fill="white"], [fill^="#fff"]) {
                     <p id="section-toc.1-1.3.2.1.2.3.1"><a href="#section-3.1.3" class="auto internal xref">3.1.3</a>.  <a href="#name-parent-side-types-qtypedele" class="internal xref">Parent-side types, QTYPE=DELEG</a></p>
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.1.2.4">
-                    <p id="section-toc.1-1.3.2.1.2.4.1"><a href="#section-3.1.4" class="auto internal xref">3.1.4</a>.  <a href="#name-algorithm" class="internal xref">Algorithm</a></p>
+                    <p id="section-toc.1-1.3.2.1.2.4.1"><a href="#section-3.1.4" class="auto internal xref">3.1.4</a>.  <a href="#name-algorithm-update" class="internal xref">Algorithm update</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.1.2.5">
+                    <p id="section-toc.1-1.3.2.1.2.5.1"><a href="#section-3.1.5" class="auto internal xref">3.1.5</a>.  <a href="#name-deleg-rrset-interpretation" class="internal xref">DELEG RRset Interpretation</a></p>
 </li>
                 </ul>
 </li>
@@ -1207,10 +1210,10 @@ svg :is([fill="white"], [fill^="#fff"]) {
                 <p id="section-toc.1-1.3.2.2.1"><a href="#section-3.2" class="auto internal xref">3.2</a>.  <a href="#name-authoritative-servers" class="internal xref">Authoritative Servers</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.2.2.1">
-                    <p id="section-toc.1-1.3.2.2.2.1.1"><a href="#section-3.2.1" class="auto internal xref">3.2.1</a>.  <a href="#name-unaware-clients-de0" class="internal xref">Unaware clients, DE=0</a></p>
+                    <p id="section-toc.1-1.3.2.2.2.1.1"><a href="#section-3.2.1" class="auto internal xref">3.2.1</a>.  <a href="#name-deleg-unaware-clients" class="internal xref">DELEG-unaware Clients</a></p>
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.2.2.2">
-                    <p id="section-toc.1-1.3.2.2.2.2.1"><a href="#section-3.2.2" class="auto internal xref">3.2.2</a>.  <a href="#name-aware-clients-de1" class="internal xref">Aware clients, DE=1</a></p>
+                    <p id="section-toc.1-1.3.2.2.2.2.1"><a href="#section-3.2.2" class="auto internal xref">3.2.2</a>.  <a href="#name-deleg-aware-clients" class="internal xref">DELEG-aware Clients</a></p>
 </li>
                 </ul>
 </li>
@@ -1309,21 +1312,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
             <p id="section-toc.1-1.8.1"><a href="#appendix-C" class="auto internal xref">Appendix C</a>.  <a href="#name-todo" class="internal xref">TODO</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9">
-            <p id="section-toc.1-1.9.1"><a href="#appendix-D" class="auto internal xref">Appendix D</a>.  <a href="#name-change-log" class="internal xref">Change Log</a></p>
-<ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9.2.1">
-                <p id="section-toc.1-1.9.2.1.1"><a href="#appendix-D.1" class="auto internal xref">D.1</a>.  <a href="#name-since-draft-wesplaap-deleg-" class="internal xref">since draft-wesplaap-deleg-00</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9.2.2">
-                <p id="section-toc.1-1.9.2.2.1"><a href="#appendix-D.2" class="auto internal xref">D.2</a>.  <a href="#name-since-draft-wesplaap-deleg-0" class="internal xref">since draft-wesplaap-deleg-01</a></p>
-</li>
-            </ul>
-</li>
-          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10">
-            <p id="section-toc.1-1.10.1"><a href="#appendix-E" class="auto internal xref"></a><a href="#name-contributors" class="internal xref">Contributors</a></p>
-</li>
-          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.11">
-            <p id="section-toc.1-1.11.1"><a href="#appendix-F" class="auto internal xref"></a><a href="#name-authors-addresses" class="internal xref">Authors' Addresses</a></p>
+            <p id="section-toc.1-1.9.1"><a href="#appendix-D" class="auto internal xref"></a><a href="#name-authors-addresses" class="internal xref">Authors' Addresses</a></p>
 </li>
         </ul>
 </nav>
@@ -1335,7 +1324,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <a href="#section-1" class="section-number selfRef">1. </a><a href="#name-introduction" class="section-name selfRef">Introduction</a>
       </h2>
 <p id="section-1-1">In the Domain Name System <span>[<a href="#STD13" class="cite xref">STD13</a>]</span>, subdomains within the domain name hierarchy are indicated by delegations to servers which are authoritative for their portion of the namespace.  The DNS records that do this, called NS records, contain hostnames of nameservers, which resolve to addresses.  No other information is available to the resolver. It is limited to connect to the authoritative servers over UDP and TCP port 53. This limitation is a barrier for efficient introduction of new DNS technology.<a href="#section-1-1" class="pilcrow">¶</a></p>
-<p id="section-1-2">The proposed DELEG record type remedies this problem by providing extensible parameters to indicate capabilities and additional information, such as glue that a resolver may use for the delegated authority. It is authoritative and thus signed in the parent side of the delegation making it possible to validate all delegation parameters (names and glue records) with DNSSEC.<a href="#section-1-2" class="pilcrow">¶</a></p>
+<p id="section-1-2">The proposed DELEG record type remedies this problem by providing extensible parameters to indicate capabilities and additional information, such as addresses that a resolver may use for the delegated authority. It is authoritative and thus signed in the parent side of the delegation making it possible to validate all delegation parameters with DNSSEC.<a href="#section-1-2" class="pilcrow">¶</a></p>
 <p id="section-1-3">This document only shows how DELEG can be used instead of or along side a NS record to create a delegation. Future documents can use the extensible mechanism for more advanced features like connecting to a name server with an encrypted transport.<a href="#section-1-3" class="pilcrow">¶</a></p>
 <div id="terminology">
 <section id="section-1.1">
@@ -1388,10 +1377,10 @@ all capitals, as shown here.<a href="#section-1.1-1" class="pilcrow">¶</a></p>
             <p id="section-2.1-1.5.1">In order to not allow unbounded indirection of DELEG records the maximum number of indirections, CNAME or AliasMode SVCB is 4.<a href="#section-2.1-1.5.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-2.1-1.6">
-            <p id="section-2.1-1.6.1">The SVCB IPv4hint and IPv6hint parameters keep their key values of 4 and 6, but the presentation format with DELEG MUST be Glue4 and Glue6.<a href="#section-2.1-1.6.1" class="pilcrow">¶</a></p>
+            <p id="section-2.1-1.6.1">The SVCB IPv4hint and IPv6hint parameters keep their key values of 4 and 6, but the presentation format with DELEG MUST be ipv4 and ipv6.<a href="#section-2.1-1.6.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-2.1-1.7">
-            <p id="section-2.1-1.7.1">Glue4 and Glue6 records when present MUST be used to connect to the delegated name server.<a href="#section-2.1-1.7.1" class="pilcrow">¶</a></p>
+            <p id="section-2.1-1.7.1">ipv4 and ipv6 records when present MUST be used to connect to the delegated name server.<a href="#section-2.1-1.7.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-2.1-1.8">
             <p id="section-2.1-1.8.1">The target of any DELEG record MUST NOT be '.'<a href="#section-2.1-1.8.1" class="pilcrow">¶</a></p>
@@ -1456,13 +1445,13 @@ all capitals, as shown here.<a href="#section-1.1-1" class="pilcrow">¶</a></p>
 <a href="#section-3.1.3" class="section-number selfRef">3.1.3. </a><a href="#name-parent-side-types-qtypedele" class="section-name selfRef">Parent-side types, QTYPE=DELEG</a>
           </h4>
 <p id="section-3.1.3-1">Record types defined as authoritative on the parent side of zone cut (currently DS and DELEG types) retain the same special handling as before, i.e. <span>[<a href="#RFC4035" class="cite xref">RFC4035</a>]</span> section 2.6 applies.<a href="#section-3.1.3-1" class="pilcrow">¶</a></p>
-<p id="section-3.1.3-2">DELEG unaware recursive resolvers will not be able to determine correct NS set for QTYPE=DELEG queries. This is not a bug.<a href="#section-3.1.3-2" class="pilcrow">¶</a></p>
+<p id="section-3.1.3-2">DELEG-unaware recursive resolvers can get different types of answers for QTYPE=DELEG queries based on the configuration of the server, such as whether it is DELEG-aware and whether it also is authoritative for subdomains.<a href="#section-3.1.3-2" class="pilcrow">¶</a></p>
 </section>
 </div>
-<div id="algorithm">
+<div id="algorithm-update">
 <section id="section-3.1.4">
-          <h4 id="name-algorithm">
-<a href="#section-3.1.4" class="section-number selfRef">3.1.4. </a><a href="#name-algorithm" class="section-name selfRef">Algorithm</a>
+          <h4 id="name-algorithm-update">
+<a href="#section-3.1.4" class="section-number selfRef">3.1.4. </a><a href="#name-algorithm-update" class="section-name selfRef">Algorithm update</a>
           </h4>
 <p id="section-3.1.4-1">This section updates instructions for step "2. Find the best servers to ask." of RFC1034 section 5.3.3 and <span>[<a href="#RFC6672" class="cite xref">RFC6672</a>]</span> section 3.4.1.<a href="#section-3.1.4-1" class="pilcrow">¶</a></p>
 <p id="section-3.1.4-2">There are two important details:<a href="#section-3.1.4-2" class="pilcrow">¶</a></p>
@@ -1501,37 +1490,65 @@ delegsub.sub.sld.test. DELEG ...
 <p id="section-3.1.4-7">SNAME           the domain name we are searching for.<a href="#section-3.1.4-7" class="pilcrow">¶</a></p>
 <p id="section-3.1.4-8">SLIST           a structure which describes the name servers and the
                 zone which the resolver is currently trying to query.<a href="#section-3.1.4-8" class="pilcrow">¶</a></p>
-<p id="section-3.1.4-9">Modified description of Step 2. Find the best servers to ask follows:<a href="#section-3.1.4-9" class="pilcrow">¶</a></p>
-<p id="section-3.1.4-10">Step 2 looks for a name server to ask for the required data.<a href="#section-3.1.4-10" class="pilcrow">¶</a></p>
-<p id="section-3.1.4-11">First determine deepest possible zone cut which can potentially hold the answer for given (query name, type, class) combination:<a href="#section-3.1.4-11" class="pilcrow">¶</a></p>
+<p id="section-3.1.4-9">DELEG-aware SLIST needs to be able to hold two types of information - delegations defined by NS records and also by DELEG records. DELEG and NS delegations can create cyclic dependencies and/or lead to duplicate entries which point onto the same server. Suitable limits MUST be enforced to limit damage EVEN IF SOMEONE HAS INCORRECTLY CONFIGURED SOME DATA.<a href="#section-3.1.4-9" class="pilcrow">¶</a></p>
+<p id="section-3.1.4-10">Modified description of Step 2. Find the best servers to ask follows:<a href="#section-3.1.4-10" class="pilcrow">¶</a></p>
+<p id="section-3.1.4-11">Step 2 looks for a name server to ask for the required data.<a href="#section-3.1.4-11" class="pilcrow">¶</a></p>
+<p id="section-3.1.4-12">First determine deepest possible zone cut which can potentially hold the answer for given (query name, type, class) combination:<a href="#section-3.1.4-12" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-3.1.4-12.1">
-              <p id="section-3.1.4-12.1.1">Start with SNAME equal to QNAME.<a href="#section-3.1.4-12.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="section-3.1.4-13.1">
+              <p id="section-3.1.4-13.1.1">Start with SNAME equal to QNAME.<a href="#section-3.1.4-13.1.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-3.1.4-12.2">
-              <p id="section-3.1.4-12.2.1">If QTYPE is a type authoritative at the parent side of a zone cut (DS or DELEG), remove leftmost label from SNAME. E.g. if QNAME is Test.Example. and QTYPE is DELEG or DS, set SNAME to Example.<a href="#section-3.1.4-12.2.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-3.1.4-13.2">
+              <p id="section-3.1.4-13.2.1">If QTYPE is a type authoritative at the parent side of a zone cut (DS or DELEG), remove leftmost label from SNAME. E.g. if QNAME is Test.Example. and QTYPE is DELEG or DS, set SNAME to Example.<a href="#section-3.1.4-13.2.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-3.1.4-12.3">
-              <p id="section-3.1.4-12.3.1">TODO: what to do about ". DELEG" (or DS) query? That leaves zero labels left. That by definition does not exist ...<a href="#section-3.1.4-12.3.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-3.1.4-13.3">
+              <p id="section-3.1.4-13.3.1">TODO: what to do about ". DELEG" (or DS) query? That leaves zero labels left. That by definition does not exist ...<a href="#section-3.1.4-13.3.1" class="pilcrow">¶</a></p>
 </li>
           </ul>
-<p id="section-3.1.4-13">Further general strategy is to look for locally-available DELEG and NS RRsets, starting at current SNAME. If none are found, shorten SNAME by removing leftmost label and check again. This effectivelly finds the deepest known delegation point on the path between SNAME and the root:<a href="#section-3.1.4-13" class="pilcrow">¶</a></p>
+<p id="section-3.1.4-14">Further general strategy is to look for locally-available DELEG and NS RRsets, starting at current SNAME. If none are found, shorten SNAME by removing leftmost label and check again. This effectivelly finds the deepest known delegation point on the path between SNAME and the root:<a href="#section-3.1.4-14" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-3.1.4-14.1">
-              <p id="section-3.1.4-14.1.1">For given SNAME first check existence of DELEG RRset. If it exists, resolver MUST use it's content to populate SLIST. If the DELEG RRset is known to exist but is unusable (e.g. it is found in DNSSEC BAD cache), resolver MUST NOT fallback to NS RRset, even if it is locally available. Resolver MUST treat this case as if no servers were available/reachable.<a href="#section-3.1.4-14.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="section-3.1.4-15.1">
+              <p id="section-3.1.4-15.1.1">For given SNAME first check existence of DELEG RRset. If it exists, resolver MUST use it's content to populate SLIST. If the DELEG RRset is known to exist but is unusable (e.g. it is found in DNSSEC BAD cache), resolver MUST NOT fallback to NS RRset, even if it is locally available. Resolver MUST treat this case as if no servers were available/reachable.<a href="#section-3.1.4-15.1.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-3.1.4-14.2">
-              <p id="section-3.1.4-14.2.1">If a given SNAME is proven to not have a DELEG RRset but has NS RRset, resolver MUST copy it into SLIST.<a href="#section-3.1.4-14.2.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-3.1.4-15.2">
+              <p id="section-3.1.4-15.2.1">If a given SNAME is proven to not have a DELEG RRset but has NS RRset, resolver MUST copy it into SLIST.<a href="#section-3.1.4-15.2.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-3.1.4-14.3">
-              <p id="section-3.1.4-14.3.1">If SLIST is populated, terminate walk up the DNS tree.<a href="#section-3.1.4-14.3.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-3.1.4-15.3">
+              <p id="section-3.1.4-15.3.1">If SLIST is populated, terminate walk up the DNS tree.<a href="#section-3.1.4-15.3.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-3.1.4-14.4">
-              <p id="section-3.1.4-14.4.1">If SLIST is not populated, remove leftmost label from SNAME and inspect RR types for this new SNAME.<a href="#section-3.1.4-14.4.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-3.1.4-15.4">
+              <p id="section-3.1.4-15.4.1">If SLIST is not populated, remove leftmost label from SNAME and inspect RR types for this new SNAME.<a href="#section-3.1.4-15.4.1" class="pilcrow">¶</a></p>
 </li>
           </ul>
-<p id="section-3.1.4-15">Rest of the Step 2's description is not affected by this document.<a href="#section-3.1.4-15" class="pilcrow">¶</a></p>
-<p id="section-3.1.4-16">Please note the instructions to "Bound the amount of work" further down in the original text to apply. Suitable limits MUST be enforced to limit damage EVEN IF SOMEONE HAS INCORRECTLY CONFIGURED SOME DATA.<a href="#section-3.1.4-16" class="pilcrow">¶</a></p>
+<p id="section-3.1.4-16">Rest of the Step 2's description is not affected by this document.<a href="#section-3.1.4-16" class="pilcrow">¶</a></p>
+<p id="section-3.1.4-17">Please note the instructions to "Bound the amount of work" further down in the original text to apply. Suitable limits MUST be enforced to limit damage EVEN IF SOMEONE HAS INCORRECTLY CONFIGURED SOME DATA.<a href="#section-3.1.4-17" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="deleg-rrset-interpretation">
+<section id="section-3.1.5">
+          <h4 id="name-deleg-rrset-interpretation">
+<a href="#section-3.1.5" class="section-number selfRef">3.1.5. </a><a href="#name-deleg-rrset-interpretation" class="section-name selfRef">DELEG RRset Interpretation</a>
+          </h4>
+<p id="section-3.1.5-1">DELEG protocol introduces additional level of indirection and also redefines significance of address literals in delegation. This section clarifies how to deal with ambiguities.<a href="#section-3.1.5-1" class="pilcrow">¶</a></p>
+<p id="section-3.1.5-2">Each individual DELEG RR inside a DELEG RRset can cause addition of zero or more entries to SLIST.<a href="#section-3.1.5-2" class="pilcrow">¶</a></p>
+<p id="section-3.1.5-3">For each individual DELEG RR within DELEG RRset, processing MUST happen in this order:<a href="#section-3.1.5-3" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-3.1.5-4.1">
+              <p id="section-3.1.5-4.1.1">If one or more addresses are present inside the DELEG RR, copy all these addresses into SLIST. Ignore any name indirection which might be (errorneously) present in the same RR. Stop processing this RR.<a href="#section-3.1.5-4.1.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-3.1.5-4.2">
+              <p id="section-3.1.5-4.2.1">If DELEG DIRECT mode RR contains a name, resolve it into addresses, similarly as if the name was listed in NS record. Copy resolved addresses into SLIST. Stop processing this RR.<a href="#section-3.1.5-4.2.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-3.1.5-4.3">
+              <p id="section-3.1.5-4.3.1">If DELEG INCLUDE mode RR contains a name, resolve it into SVCB record. Recursively process this new SVCB RRset as if it were DELEG RRset, using rules from this section.<a href="#section-3.1.5-4.3.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-3.1.5-4.4">
+              <p id="section-3.1.5-4.4.1">If none of the above applies, SLIST is not modified by this particular RR.<a href="#section-3.1.5-4.4.1" class="pilcrow">¶</a></p>
+</li>
+          </ul>
+<p id="section-3.1.5-5">Resolver MAY process individual RRs within RRset in an arbitrary order.<a href="#section-3.1.5-5" class="pilcrow">¶</a></p>
+<p id="section-3.1.5-6">Resolver MAY implement lazy evaluation of SLIST. E.g. resolver can defer processing remaining RRs if it already has sufficiently large pool of addresses to contact.<a href="#section-3.1.5-6" class="pilcrow">¶</a></p>
+<p id="section-3.1.5-7">The algorithm to make use of SLIST is intentionally left undefined.<a href="#section-3.1.5-7" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1541,62 +1558,52 @@ delegsub.sub.sld.test. DELEG ...
         <h3 id="name-authoritative-servers">
 <a href="#section-3.2" class="section-number selfRef">3.2. </a><a href="#name-authoritative-servers" class="section-name selfRef">Authoritative Servers</a>
         </h3>
-<p id="section-3.2-1">DELEG aware authoritative servers have to act different when handling DE=0 queries from DELEG unaware clients, and DE=1 queries from DELEG aware clients.<a href="#section-3.2-1" class="pilcrow">¶</a></p>
-<div id="unaware-clients-de0">
+<p id="section-3.2-1">DELEG-aware authoritative servers act differently when handling queries from DELEG-unaware clients (those with DE=0) and queries from DELEG-aware clients (those with DE=1).<a href="#section-3.2-1" class="pilcrow">¶</a></p>
+<p id="section-3.2-2">The server MUST copy the value of the DE bit from the query into the response.
+(TODO: not really necessary protocol-wise, but might be nice for monitoring the deployment?)<a href="#section-3.2-2" class="pilcrow">¶</a></p>
+<div id="deleg-unaware-clients">
 <section id="section-3.2.1">
-          <h4 id="name-unaware-clients-de0">
-<a href="#section-3.2.1" class="section-number selfRef">3.2.1. </a><a href="#name-unaware-clients-de0" class="section-name selfRef">Unaware clients, DE=0</a>
+          <h4 id="name-deleg-unaware-clients">
+<a href="#section-3.2.1" class="section-number selfRef">3.2.1. </a><a href="#name-deleg-unaware-clients" class="section-name selfRef">DELEG-unaware Clients</a>
           </h4>
-<p id="section-3.2.1-1">A query with DE EDNS bit cleared indicates a DELEG unaware client. Such client has no use for DELEG information. In this case DELEG aware authoritative server MUST answer as if it is DELEG unaware.<a href="#section-3.2.1-1" class="pilcrow">¶</a></p>
-<p id="section-3.2.1-2">In summary, in this specific case, DELEG RR does not create zone cut and is not returned in referral responses, and is not considered authoritative on the parent side of a zone cut. DNSSEC signing is unaffected by this instruction, i.e. no special handling for NSEC type bitmap is necessary.<a href="#section-3.2.1-2" class="pilcrow">¶</a></p>
-<p id="section-3.2.1-3">Two corner cases arise if a zone cut contains DELEG RR and server is answering a DE=0 query:<a href="#section-3.2.1-3" class="pilcrow">¶</a></p>
-<div id="qtypedeleg">
+<p id="section-3.2.1-1">DELEG-unaware clients do not use DELEG records for delegation.
+When a DELEG-aware authoritative server responds to a DELEG-unaware client, any DELEG RR in the response does not create zone cut, is not returned in referral responses, and is not considered authoritative on the parent side of a zone cut. Because of this, DELEG-aware authoritative servers MUST answer as if they are DELEG-unaware.
+Please note this instruction does not affect DNSSEC signing, i.e. no special handling for NSEC type bitmap is necessary and DELEG RR type is accuratelly represented even for DELEG-unaware clients.<a href="#section-3.2.1-1" class="pilcrow">¶</a></p>
+<p id="section-3.2.1-2">Two surprising narrow cases of DELEG-aware authoritative responding in DELEG-unaware manner are described here.<a href="#section-3.2.1-2" class="pilcrow">¶</a></p>
+<div id="deleg-unaware-clients-requesting-qtypedeleg">
 <section id="section-3.2.1.1">
-            <h5 id="name-qtypedeleg">
-<a href="#section-3.2.1.1" class="section-number selfRef">3.2.1.1. </a><a href="#name-qtypedeleg" class="section-name selfRef">QTYPE=DELEG</a>
+            <h5 id="name-deleg-unaware-clients-reque">
+<a href="#section-3.2.1.1" class="section-number selfRef">3.2.1.1. </a><a href="#name-deleg-unaware-clients-reque" class="section-name selfRef">DELEG-unaware Clients Requesting QTYPE=DELEG</a>
             </h5>
-<p id="section-3.2.1.1-1">DE=0 query indicates that for this particular client DELEG RR type is 'not authoritative' on the parent side.<a href="#section-3.2.1.1-1" class="pilcrow">¶</a></p>
-<p id="section-3.2.1.1-2">Let zone file for root zone contain following delegation with NS and DELEG records:<a href="#section-3.2.1.1-2" class="pilcrow">¶</a></p>
-<div class="alignLeft art-text artwork" id="section-3.2.1.1-3">
-<pre>
-example. NS    ...
-example. DELEG ...
-</pre><a href="#section-3.2.1.1-3" class="pilcrow">¶</a>
-</div>
-<p id="section-3.2.1.1-4">In this specific case, explicit QTYPE=DELEG query will result in referral response generated by following DELEG unaware rules:<a href="#section-3.2.1.1-4" class="pilcrow">¶</a></p>
-<div class="alignLeft art-text artwork" id="section-3.2.1.1-5">
-<pre>
-;; Authority
-example. NS    ...
-</pre><a href="#section-3.2.1.1-5" class="pilcrow">¶</a>
-</div>
-<p id="section-3.2.1.1-6">Other RRs might be included as specified by pre-DELEG protocols.<a href="#section-3.2.1.1-6" class="pilcrow">¶</a></p>
+<p id="section-3.2.1.1-1">In DELEG-unaware clients, records with the DELEG RRtype are not authoritative on the parent side.
+Thus, queries with DE=0 and QTYPE=DELEG MUST result in a legacy referral response.<a href="#section-3.2.1.1-1" class="pilcrow">¶</a></p>
 </section>
 </div>
-<div id="deleg-without-ns">
+<div id="deleg-unaware-clients-with-deleg-rrs-present-but-no-ns-rrs">
 <section id="section-3.2.1.2">
-            <h5 id="name-deleg-without-ns">
-<a href="#section-3.2.1.2" class="section-number selfRef">3.2.1.2. </a><a href="#name-deleg-without-ns" class="section-name selfRef">DELEG without NS</a>
+            <h5 id="name-deleg-unaware-clients-with-">
+<a href="#section-3.2.1.2" class="section-number selfRef">3.2.1.2. </a><a href="#name-deleg-unaware-clients-with-" class="section-name selfRef">DELEG-unaware Clients with DELEG RRs Present but No NS RRs</a>
             </h5>
-<p id="section-3.2.1.2-1">DELEG unaware client might ask for a name which belongs to a zone delegated only with DELEG RRs but without any NS RRs. Such zone is, by definition, not resolvable for DELEG unaware client. Following pre-DELEG specification, in this case DELEG RR itself cannot create a zone cut and this can result in surprising response where RCODE=NXDOMAIN is returned, with correct proof of non-existance, for subdomains of such zone which does actually exist for DELEG aware clients.<a href="#section-3.2.1.2-1" class="pilcrow">¶</a></p>
-<p id="section-3.2.1.2-2">In this specific case, authoritative server is RECOMMENDED to supplement DELEG unaware response with Extended DNS Error "New Delegation Only".<a href="#section-3.2.1.2-2" class="pilcrow">¶</a></p>
-<p id="section-3.2.1.2-3">TODO: debate if WG wants to do explicit SERVFAIL for this case instead of 'just' EDE<a href="#section-3.2.1.2-3" class="pilcrow">¶</a></p>
+<p id="section-3.2.1.2-1">DELEG-unaware clients might ask for a name which belongs to a zone delegated only with DELEG RRs (that is, without any NS RRs). Such zone is, by definition, not resolvable for DELEG-unaware clients. In this case the DELEG RR itself cannot create a zone cut, and the DELEG-aware authoritative server MUST return a legacy response.<a href="#section-3.2.1.2-1" class="pilcrow">¶</a></p>
+<p id="section-3.2.1.2-2">The legacy response might be confusing for subdomains of zones which actually exist because DELEG-aware clients would get a different answer, namely a delegation. Example of a legacy response is in <a href="#legacynxdomain" class="auto internal xref">Appendix A.3.2</a>.<a href="#section-3.2.1.2-2" class="pilcrow">¶</a></p>
+<p id="section-3.2.1.2-3">The authoritative server is RECOMMENDED to supplement DELEG unaware response with Extended DNS Error "New Delegation Only".<a href="#section-3.2.1.2-3" class="pilcrow">¶</a></p>
+<p id="section-3.2.1.2-4">TODO: debate if WG wants to do explicit SERVFAIL for this case instead of 'just' EDE.<a href="#section-3.2.1.2-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
 </div>
-<div id="aware-clients-de1">
+<div id="deleg-aware-clients">
 <section id="section-3.2.2">
-          <h4 id="name-aware-clients-de1">
-<a href="#section-3.2.2" class="section-number selfRef">3.2.2. </a><a href="#name-aware-clients-de1" class="section-name selfRef">Aware clients, DE=1</a>
+          <h4 id="name-deleg-aware-clients">
+<a href="#section-3.2.2" class="section-number selfRef">3.2.2. </a><a href="#name-deleg-aware-clients" class="section-name selfRef">DELEG-aware Clients</a>
           </h4>
-<p id="section-3.2.2-1">DE flag set to one in a query enables DELEG aware behavior in authoritative servers. In summary, the server treats DELEG records create zone cut and are authoritative on parent side of zone cut. This new zone cut type has priority over legacy delegation with NS RRset.<a href="#section-3.2.2-1" class="pilcrow">¶</a></p>
-<div id="qtypedeleg-1">
+<p id="section-3.2.2-1">When the client indicates that it is DELEG-aware by setting DE=1 in the query, DELEG-aware authoritative servers treat DELEG records as zone cuts, and the servers are authoritative on parent side of zone cut. This new zone cut has priority over legacy delegation with NS RRset.<a href="#section-3.2.2-1" class="pilcrow">¶</a></p>
+<div id="deleg-aware-clients-requesting-qtypedeleg">
 <section id="section-3.2.2.1">
-            <h5 id="name-qtypedeleg-2">
-<a href="#section-3.2.2.1" class="section-number selfRef">3.2.2.1. </a><a href="#name-qtypedeleg-2" class="section-name selfRef">QTYPE=DELEG</a>
+            <h5 id="name-deleg-aware-clients-request">
+<a href="#section-3.2.2.1" class="section-number selfRef">3.2.2.1. </a><a href="#name-deleg-aware-clients-request" class="section-name selfRef">DELEG-aware Clients Requesting QTYPE=DELEG</a>
             </h5>
-<p id="section-3.2.2.1-1">An explicit query for DELEG RR type at a delegation point behaves much like query for DS RR type: Server answers authortiatively from the parent zone. All previous specifications for special handling QTYPE=DS apply equally to QTYPE=DELEG. In summary, server either provides authoritative DELEG RRset or proves non-existence of it.<a href="#section-3.2.2.1-1" class="pilcrow">¶</a></p>
+<p id="section-3.2.2.1-1">An explicit query for DELEG RR type at a delegation point behaves much like query for DS RR type: the server answers authortiatively from the parent zone. All previous specifications for special handling QTYPE=DS apply equally to QTYPE=DELEG. In summary, server either provides authoritative DELEG RRset or proves its non-existence.<a href="#section-3.2.2.1-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="delegation-with-deleg">
@@ -1604,19 +1611,17 @@ example. NS    ...
             <h5 id="name-delegation-with-deleg">
 <a href="#section-3.2.2.2" class="section-number selfRef">3.2.2.2. </a><a href="#name-delegation-with-deleg" class="section-name selfRef">Delegation with DELEG</a>
             </h5>
-<p id="section-3.2.2.2-1">If the delegation has a DELEG RRset, the authoritative server MUST put DELEG RRset into the authority section of the referral. In this case server MUST NOT add NS RRset into the authority section. Presence of covering RRSIG follows DNSSEC specification for answers with authoritative zone data.<a href="#section-3.2.2.2-1" class="pilcrow">¶</a></p>
-<p id="section-3.2.2.2-2">Similarly rules for DS RRset inclusion into referrals apply as specified by DNSSEC protocol without changes.<a href="#section-3.2.2.2-2" class="pilcrow">¶</a></p>
+<p id="section-3.2.2.2-1">If the delegation has a DELEG RRset, the authoritative server MUST put the DELEG RRset into the Authority section of the referral. In this case, the server MUST NOT include the NS RRset into the Authority section. Presence of the covering RRSIG follows the normal DNSSEC specification for answers with authoritative zone data.<a href="#section-3.2.2.2-1" class="pilcrow">¶</a></p>
+<p id="section-3.2.2.2-2">Similarly, rules for DS RRset inclusion into referrals apply as specified by DNSSEC protocol.<a href="#section-3.2.2.2-2" class="pilcrow">¶</a></p>
 </section>
 </div>
-<div id="delegation-without-deleg">
+<div id="deleg-aware-clients-with-ns-rrs-present-but-no-deleg-rrs">
 <section id="section-3.2.2.3">
-            <h5 id="name-delegation-without-deleg">
-<a href="#section-3.2.2.3" class="section-number selfRef">3.2.2.3. </a><a href="#name-delegation-without-deleg" class="section-name selfRef">Delegation without DELEG</a>
+            <h5 id="name-deleg-aware-clients-with-ns">
+<a href="#section-3.2.2.3" class="section-number selfRef">3.2.2.3. </a><a href="#name-deleg-aware-clients-with-ns" class="section-name selfRef">DELEG-aware Clients with NS RRs Present but No DELEG RRs</a>
             </h5>
-<p id="section-3.2.2.3-1">If the delegation does not have DELEG RRset, the authoritative server MUST put the NS RRset into the authority section of the referral. Absence of DELEG RRset must be proven as specified by DNSSEC protocol for authoritative data.<a href="#section-3.2.2.3-1" class="pilcrow">¶</a></p>
-<p id="section-3.2.2.3-2">Similarly rules for DS RRset inclusion into referrals apply as specified by DNSSEC protocol without changes. Please note in practice the same process and records are used to prove non-existence of DELEG and DS RRsets.<a href="#section-3.2.2.3-2" class="pilcrow">¶</a></p>
-<p id="section-3.2.2.3-3">The server MUST copy the DE bit from the query into the response.
-(TODO: not really necessary protocol-wise, but might be nice for monitoring the deployment?)<a href="#section-3.2.2.3-3" class="pilcrow">¶</a></p>
+<p id="section-3.2.2.3-1">If the delegation does not have a DELEG RRset, the authoritative server MUST put the NS RRset into the authority section of the referral. Absence of DELEG RRset must be proven as specified by DNSSEC protocol for authoritative data.<a href="#section-3.2.2.3-1" class="pilcrow">¶</a></p>
+<p id="section-3.2.2.3-2">Similarly, rules for DS RRset inclusion into referrals apply as specified by the DNSSEC protocol. Please note in practice the same process and records are used to prove non-existence of DELEG and DS RRsets.<a href="#section-3.2.2.3-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1806,8 +1811,8 @@ say as DS RR type.<a href="#section-3.4.2-2" class="pilcrow">¶</a></p>
 <p id="appendix-A-2">The "example." delegation has DELEG and NS records. The "test." delegation has DELEG but no NS records.<a href="#appendix-A-2" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="appendix-A-3">
 <pre>
-example.   300 IN DELEG DIRECT a.example. Glue4=192.0.2.1 (
-                        Glue6=2001:DB8::1 )
+example.   300 IN DELEG DIRECT a.example. ipv4=192.0.2.1 (
+                        ipv6=2001:DB8::1 )
 example.   300 IN DELEG INCLUDE ns2.example.net.
 example.   300 IN DELEG INCLUDE ns3.example.org.
 example.   300 IN RRSIG DELEG 13 4 300 20250214164848 (
@@ -1924,7 +1929,7 @@ a.example. 300 IN AAAA  2001:DB8::1
 </div>
 </section>
 </div>
-<div id="query-for-footest-1">
+<div id="legacynxdomain">
 <section id="appendix-A.3.2">
           <h4 id="name-query-for-footest-2">
 <a href="#appendix-A.3.2" class="section-number selfRef">A.3.2. </a><a href="#name-query-for-footest-2" class="section-name selfRef">Query for foo.test</a>
@@ -1979,8 +1984,8 @@ foo.example.  IN MX
 ;; (empty)
 
 ;; Authority
-example.   300 IN DELEG DIRECT a.example. Glue4=192.0.2.1 (
-                        Glue6=2001:DB8::1 )
+example.   300 IN DELEG DIRECT a.example. ipv4=192.0.2.1 (
+                        ipv6=2001:DB8::1 )
 example.   300 IN DELEG INCLUDE ns2.example.net.
 example.   300 IN DELEG INCLUDE ns3.example.org.
 
@@ -1990,7 +1995,7 @@ example.   300 IN DELEG INCLUDE ns3.example.org.
 </div>
 </section>
 </div>
-<div id="query-for-footest-2">
+<div id="query-for-footest-1">
 <section id="appendix-A.4.2">
           <h4 id="name-query-for-footest-3">
 <a href="#appendix-A.4.2" class="section-number selfRef">A.4.2. </a><a href="#name-query-for-footest-3" class="section-name selfRef">Query for foo.test</a>
@@ -2040,8 +2045,8 @@ foo.example.  IN MX
 
 ;; Authority
 
-example.   300 IN DELEG DIRECT a.example. Glue4=192.0.2.1 (
-                        Glue6=2001:DB8::1 )
+example.   300 IN DELEG DIRECT a.example. ipv4=192.0.2.1 (
+                        ipv6=2001:DB8::1 )
 example.   300 IN DELEG INCLUDE ns2.example.net.
 example.   300 IN DELEG INCLUDE ns3.example.org.
 example.   300 IN RRSIG DELEG 13 4 300 20250214164848 (
@@ -2057,7 +2062,7 @@ a.example. 300 IN AAAA  2001:DB8::1
 </div>
 </section>
 </div>
-<div id="query-for-footest-3">
+<div id="query-for-footest-2">
 <section id="appendix-A.5.2">
           <h4 id="name-query-for-footest-4">
 <a href="#appendix-A.5.2" class="section-number selfRef">A.5.2. </a><a href="#name-query-for-footest-4" class="section-name selfRef">Query for foo.test</a>
@@ -2099,6 +2104,8 @@ test.      300 IN RRSIG NSEC 13 4 300  20250214164848 (
 <p id="appendix-B-1">This document is heavily based on past work done by Tim April in
 <span>[<a href="#I-D.tapril-ns2" class="cite xref">I-D.tapril-ns2</a>]</span> and thus extends the thanks to the people helping on this which are:
 John Levine, Erik Nygren, Jon Reed, Ben Kaduk, Mashooq Muhaimen, Jason Moreau, Jerrod Wiesman, Billy Tiemann, Gordon Marx and Brian Wellington.<a href="#appendix-B-1" class="pilcrow">¶</a></p>
+<p id="appendix-B-2">Work on DELEG protocol has started at IETF 118 hackaton. Hackaton participants: Christian Elmerot, David Blacka, David Lawrence, Edward Lewis, Erik Nygren, George Michaelson, Jan Včelák, Klaus Darilion, Libor Peltan, Manu Bretelle, Peter van Dijk, Petr Špaček, Philip Homburg, Ralf Weber, Roy Arends, Shane Kerr, Shumon Huque, Vandan Adhvaryu, Vladimír Čunát.<a href="#appendix-B-2" class="pilcrow">¶</a></p>
+<p id="appendix-B-3">Other people joined the effort after the initial hackaton: Ben Schwartz, Bob Halley, Paul Hoffman, ...<a href="#appendix-B-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="todo">
@@ -2134,206 +2141,8 @@ John Levine, Erik Nygren, Jon Reed, Ben Kaduk, Mashooq Muhaimen, Jason Moreau, J
       </ul>
 </section>
 </div>
-<div id="change-log">
-<section id="appendix-D">
-      <h2 id="name-change-log">
-<a href="#appendix-D" class="section-number selfRef">Appendix D. </a><a href="#name-change-log" class="section-name selfRef">Change Log</a>
-      </h2>
-<span class="break"></span><dl class="dlParallel" id="appendix-D-1">
-        <dt id="appendix-D-1.1">RFC EDITOR:</dt>
-        <dd style="margin-left: 1.5em" id="appendix-D-1.2">
-          <p id="appendix-D-1.2.1">PLEASE REMOVE THE THIS SECTION PRIOR TO PUBLICATION.<a href="#appendix-D-1.2.1" class="pilcrow">¶</a></p>
-</dd>
-      <dd class="break"></dd>
-</dl>
-<div id="since-draft-wesplaap-deleg-00">
-<section id="appendix-D.1">
-        <h3 id="name-since-draft-wesplaap-deleg-">
-<a href="#appendix-D.1" class="section-number selfRef">D.1. </a><a href="#name-since-draft-wesplaap-deleg-" class="section-name selfRef">since draft-wesplaap-deleg-00</a>
-        </h3>
-<ul class="normal">
-<li class="normal" id="appendix-D.1-1.1">
-            <p id="appendix-D.1-1.1.1">Clarified SVCB priority behavior<a href="#appendix-D.1-1.1.1" class="pilcrow">¶</a></p>
-</li>
-          <li class="normal" id="appendix-D.1-1.2">
-            <p id="appendix-D.1-1.2.1">Added section on differences to draft-homburg-deleg-incremental-deleg<a href="#appendix-D.1-1.2.1" class="pilcrow">¶</a></p>
-</li>
-        </ul>
-</section>
-</div>
-<div id="since-draft-wesplaap-deleg-01">
-<section id="appendix-D.2">
-        <h3 id="name-since-draft-wesplaap-deleg-0">
-<a href="#appendix-D.2" class="section-number selfRef">D.2. </a><a href="#name-since-draft-wesplaap-deleg-0" class="section-name selfRef">since draft-wesplaap-deleg-01</a>
-        </h3>
-<ul class="normal">
-<li class="normal" id="appendix-D.2-1.1">
-            <p id="appendix-D.2-1.1.1">Reorganised and streamlined the draft to the bare minimum for DELEG as an NS replacement<a href="#appendix-D.2-1.1.1" class="pilcrow">¶</a></p>
-</li>
-          <li class="normal" id="appendix-D.2-1.2">
-            <p id="appendix-D.2-1.2.1">Defined codepoints for temporary testing<a href="#appendix-D.2-1.2.1" class="pilcrow">¶</a></p>
-</li>
-          <li class="normal" id="appendix-D.2-1.3">
-            <p id="appendix-D.2-1.3.1">Added examples<a href="#appendix-D.2-1.3.1" class="pilcrow">¶</a></p>
-</li>
-        </ul>
-</section>
-</div>
-</section>
-</div>
-<div id="contributors">
-<section id="appendix-E">
-      <h2 id="name-contributors">
-<a href="#name-contributors" class="section-name selfRef">Contributors</a>
-      </h2>
-<address class="vcard">
-        <div dir="auto" class="left"><span class="fn nameRole">Christian Elmerot</span></div>
-<div dir="auto" class="left"><span class="org">Cloudflare</span></div>
-<div class="email">
-<span>Email:</span>
-<a href="mailto:christian@elmerot.se" class="email">christian@elmerot.se</a>
-</div>
-</address>
-<address class="vcard">
-        <div dir="auto" class="left"><span class="fn nameRole">Edward Lewis</span></div>
-<div dir="auto" class="left"><span class="org">ICANN</span></div>
-<div class="email">
-<span>Email:</span>
-<a href="mailto:edward.lewis@icann.org" class="email">edward.lewis@icann.org</a>
-</div>
-</address>
-<address class="vcard">
-        <div dir="auto" class="left"><span class="fn nameRole">Roy Arends</span></div>
-<div dir="auto" class="left"><span class="org">ICANN</span></div>
-<div class="email">
-<span>Email:</span>
-<a href="mailto:roy.arends@icann.org" class="email">roy.arends@icann.org</a>
-</div>
-</address>
-<address class="vcard">
-        <div dir="auto" class="left"><span class="fn nameRole">Shumon Huque</span></div>
-<div dir="auto" class="left"><span class="org">Salesforce</span></div>
-<div class="email">
-<span>Email:</span>
-<a href="mailto:shuque@gmail.com" class="email">shuque@gmail.com</a>
-</div>
-</address>
-<address class="vcard">
-        <div dir="auto" class="left"><span class="fn nameRole">Klaus Darilion</span></div>
-<div dir="auto" class="left"><span class="org">nic.at</span></div>
-<div class="email">
-<span>Email:</span>
-<a href="mailto:klaus.darilion@nic.at" class="email">klaus.darilion@nic.at</a>
-</div>
-</address>
-<address class="vcard">
-        <div dir="auto" class="left"><span class="fn nameRole">Libor Peltan</span></div>
-<div dir="auto" class="left"><span class="org">CZ.nic</span></div>
-<div class="email">
-<span>Email:</span>
-<a href="mailto:libor.peltan@nic.cz" class="email">libor.peltan@nic.cz</a>
-</div>
-</address>
-<address class="vcard">
-        <div dir="auto" class="left"><span class="fn nameRole">Vladimír Čunát</span></div>
-<div dir="auto" class="left"><span class="org">CZ.nic</span></div>
-<div class="email">
-<span>Email:</span>
-<a href="mailto:vladimir.cunat@nic.cz" class="email">vladimir.cunat@nic.cz</a>
-</div>
-</address>
-<address class="vcard">
-        <div dir="auto" class="left"><span class="fn nameRole">Shane Kerr</span></div>
-<div dir="auto" class="left"><span class="org">NS1</span></div>
-<div class="email">
-<span>Email:</span>
-<a href="mailto:shane@time-travellers.org" class="email">shane@time-travellers.org</a>
-</div>
-</address>
-<address class="vcard">
-        <div dir="auto" class="left"><span class="fn nameRole">David Blacka</span></div>
-<div dir="auto" class="left"><span class="org">Verisign</span></div>
-<div class="email">
-<span>Email:</span>
-<a href="mailto:davidb@verisign.com" class="email">davidb@verisign.com</a>
-</div>
-</address>
-<address class="vcard">
-        <div dir="auto" class="left"><span class="fn nameRole">George Michaelson</span></div>
-<div dir="auto" class="left"><span class="org">APNIC</span></div>
-<div class="email">
-<span>Email:</span>
-<a href="mailto:ggm@algebras.org" class="email">ggm@algebras.org</a>
-</div>
-</address>
-<address class="vcard">
-        <div dir="auto" class="left"><span class="fn nameRole">Ben Schwartz</span></div>
-<div dir="auto" class="left"><span class="org">Meta</span></div>
-<div class="email">
-<span>Email:</span>
-<a href="mailto:bemasc@meta.com" class="email">bemasc@meta.com</a>
-</div>
-</address>
-<address class="vcard">
-        <div dir="auto" class="left"><span class="fn nameRole">Jan Včelák</span></div>
-<div dir="auto" class="left"><span class="org">NS1</span></div>
-<div class="email">
-<span>Email:</span>
-<a href="mailto:jvcelak@ns1.com" class="email">jvcelak@ns1.com</a>
-</div>
-</address>
-<address class="vcard">
-        <div dir="auto" class="left"><span class="fn nameRole">Peter van Dijk</span></div>
-<div dir="auto" class="left"><span class="org">PowerDNS</span></div>
-<div class="email">
-<span>Email:</span>
-<a href="mailto:peter.van.dijk@powerdns.com" class="email">peter.van.dijk@powerdns.com</a>
-</div>
-</address>
-<address class="vcard">
-        <div dir="auto" class="left"><span class="fn nameRole">Philip Homburg</span></div>
-<div dir="auto" class="left"><span class="org">NLnet Labs</span></div>
-<div class="email">
-<span>Email:</span>
-<a href="mailto:philip@nlnetlabs.nl" class="email">philip@nlnetlabs.nl</a>
-</div>
-</address>
-<address class="vcard">
-        <div dir="auto" class="left"><span class="fn nameRole">Erik Nygren</span></div>
-<div dir="auto" class="left"><span class="org">Akamai Technologies</span></div>
-<div class="email">
-<span>Email:</span>
-<a href="mailto:erik+ietf@nygren.org" class="email">erik+ietf@nygren.org</a>
-</div>
-</address>
-<address class="vcard">
-        <div dir="auto" class="left"><span class="fn nameRole">Vandan Adhvaryu</span></div>
-<div dir="auto" class="left"><span class="org">Team Internet</span></div>
-<div class="email">
-<span>Email:</span>
-<a href="mailto:vandan@adhvaryu.uk" class="email">vandan@adhvaryu.uk</a>
-</div>
-</address>
-<address class="vcard">
-        <div dir="auto" class="left"><span class="fn nameRole">Manu Bretelle</span></div>
-<div dir="auto" class="left"><span class="org">Meta</span></div>
-<div class="email">
-<span>Email:</span>
-<a href="mailto:chantr4@gmail.com" class="email">chantr4@gmail.com</a>
-</div>
-</address>
-<address class="vcard">
-        <div dir="auto" class="left"><span class="fn nameRole">Bob Halley</span></div>
-<div dir="auto" class="left"><span class="org">Cloudflare</span></div>
-<div class="email">
-<span>Email:</span>
-<a href="mailto:bhalley@cloudflare.com" class="email">bhalley@cloudflare.com</a>
-</div>
-</address>
-</section>
-</div>
 <div id="authors-addresses">
-<section id="appendix-F">
+<section id="appendix-D">
       <h2 id="name-authors-addresses">
 <a href="#name-authors-addresses" class="section-name selfRef">Authors' Addresses</a>
       </h2>

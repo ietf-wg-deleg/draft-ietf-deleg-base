@@ -6,11 +6,11 @@ deleg                                                           T. April
 Internet-Draft                                               Google, LLC
 Updates: 1034, 1035, 6672, 6840 (if approved)                  P. Špaček
 Intended status: Standards Track                                     ISC
-Expires: 8 January 2026                                         R. Weber
+Expires: 8 February 2026                                        R. Weber
                                                      Akamai Technologies
                                                              D. Lawrence
                                                               Salesforce
-                                                             7 July 2025
+                                                           7 August 2025
 
 
                      Extensible Delegation for DNS
@@ -65,7 +65,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 8 January 2026.
+   This Internet-Draft will expire on 8 February 2026.
 
 Copyright Notice
 
@@ -92,7 +92,8 @@ Table of Contents
        3.1.1.  Signaling DELEG support
        3.1.2.  Referral
        3.1.3.  Parent-side types, QTYPE=DELEG
-       3.1.4.  Algorithm
+       3.1.4.  Algorithm update
+       3.1.5.  DELEG RRset Interpretation
      3.2.  Authoritative Servers
        3.2.1.  DELEG-unaware Clients
        3.2.2.  DELEG-aware Clients
@@ -122,10 +123,6 @@ Table of Contents
        A.5.2.  Query for foo.test
    Appendix B.  Acknowledgments {:unnumbered}
    Appendix C.  TODO
-   Appendix D.  Change Log
-     D.1.  since draft-wesplaap-deleg-00
-     D.2.  since draft-wesplaap-deleg-01
-   Contributors
    Authors' Addresses
 
 1.  Introduction
@@ -141,10 +138,10 @@ Table of Contents
 
    The proposed DELEG record type remedies this problem by providing
    extensible parameters to indicate capabilities and additional
-   information, such as glue that a resolver may use for the delegated
-   authority.  It is authoritative and thus signed in the parent side of
-   the delegation making it possible to validate all delegation
-   parameters (names and glue records) with DNSSEC.
+   information, such as addresses that a resolver may use for the
+   delegated authority.  It is authoritative and thus signed in the
+   parent side of the delegation making it possible to validate all
+   delegation parameters with DNSSEC.
 
    This document only shows how DELEG can be used instead of or along
    side a NS record to create a delegation.  Future documents can use
@@ -195,11 +192,11 @@ Table of Contents
       maximum number of indirections, CNAME or AliasMode SVCB is 4.
 
    *  The SVCB IPv4hint and IPv6hint parameters keep their key values of
-      4 and 6, but the presentation format with DELEG MUST be Glue4 and
-      Glue6.
+      4 and 6, but the presentation format with DELEG MUST be ipv4 and
+      ipv6.
 
-   *  Glue4 and Glue6 records when present MUST be used to connect to
-      the delegated name server.
+   *  ipv4 and ipv6 records when present MUST be used to connect to the
+      delegated name server.
 
    *  The target of any DELEG record MUST NOT be '.'
 
@@ -271,10 +268,12 @@ Table of Contents
    (currently DS and DELEG types) retain the same special handling as
    before, i.e. [RFC4035] section 2.6 applies.
 
-   DELEG unaware recursive resolvers will not be able to determine
-   correct NS set for QTYPE=DELEG queries.  This is not a bug.
+   DELEG-unaware recursive resolvers can get different types of answers
+   for QTYPE=DELEG queries based on the configuration of the server,
+   such as whether it is DELEG-aware and whether it also is
+   authoritative for subdomains.
 
-3.1.4.  Algorithm
+3.1.4.  Algorithm update
 
    This section updates instructions for step "2.  Find the best servers
    to ask." of RFC1034 section 5.3.3 and [RFC6672] section 3.4.1.
@@ -321,6 +320,13 @@ Table of Contents
    SLIST a structure which describes the name servers and the zone which
    the resolver is currently trying to query.
 
+   DELEG-aware SLIST needs to be able to hold two types of information -
+   delegations defined by NS records and also by DELEG records.  DELEG
+   and NS delegations can create cyclic dependencies and/or lead to
+   duplicate entries which point onto the same server.  Suitable limits
+   MUST be enforced to limit damage EVEN IF SOMEONE HAS INCORRECTLY
+   CONFIGURED SOME DATA.
+
    Modified description of Step 2.  Find the best servers to ask
    follows:
 
@@ -364,6 +370,43 @@ Table of Contents
    Please note the instructions to "Bound the amount of work" further
    down in the original text to apply.  Suitable limits MUST be enforced
    to limit damage EVEN IF SOMEONE HAS INCORRECTLY CONFIGURED SOME DATA.
+
+3.1.5.  DELEG RRset Interpretation
+
+   DELEG protocol introduces additional level of indirection and also
+   redefines significance of address literals in delegation.  This
+   section clarifies how to deal with ambiguities.
+
+   Each individual DELEG RR inside a DELEG RRset can cause addition of
+   zero or more entries to SLIST.
+
+   For each individual DELEG RR within DELEG RRset, processing MUST
+   happen in this order:
+
+   *  If one or more addresses are present inside the DELEG RR, copy all
+      these addresses into SLIST.  Ignore any name indirection which
+      might be (errorneously) present in the same RR.  Stop processing
+      this RR.
+
+   *  If DELEG DIRECT mode RR contains a name, resolve it into
+      addresses, similarly as if the name was listed in NS record.  Copy
+      resolved addresses into SLIST.  Stop processing this RR.
+
+   *  If DELEG INCLUDE mode RR contains a name, resolve it into SVCB
+      record.  Recursively process this new SVCB RRset as if it were
+      DELEG RRset, using rules from this section.
+
+   *  If none of the above applies, SLIST is not modified by this
+      particular RR.
+
+   Resolver MAY process individual RRs within RRset in an arbitrary
+   order.
+
+   Resolver MAY implement lazy evaluation of SLIST.  E.g. resolver can
+   defer processing remaining RRs if it already has sufficiently large
+   pool of addresses to contact.
+
+   The algorithm to make use of SLIST is intentionally left undefined.
 
 3.2.  Authoritative Servers
 
@@ -637,8 +680,8 @@ Appendix A.  Examples
    The "example." delegation has DELEG and NS records.  The "test."
    delegation has DELEG but no NS records.
 
-   example.   300 IN DELEG DIRECT a.example. Glue4=192.0.2.1 (
-                           Glue6=2001:DB8::1 )
+   example.   300 IN DELEG DIRECT a.example. ipv4=192.0.2.1 (
+                           ipv6=2001:DB8::1 )
    example.   300 IN DELEG INCLUDE ns2.example.net.
    example.   300 IN DELEG INCLUDE ns3.example.org.
    example.   300 IN RRSIG DELEG 13 4 300 20250214164848 (
@@ -758,8 +801,8 @@ A.4.1.  Query for foo.example
    ;; (empty)
 
    ;; Authority
-   example.   300 IN DELEG DIRECT a.example. Glue4=192.0.2.1 (
-                           Glue6=2001:DB8::1 )
+   example.   300 IN DELEG DIRECT a.example. ipv4=192.0.2.1 (
+                           ipv6=2001:DB8::1 )
    example.   300 IN DELEG INCLUDE ns2.example.net.
    example.   300 IN DELEG INCLUDE ns3.example.org.
 
@@ -798,8 +841,8 @@ A.5.1.  Query for foo.example
 
    ;; Authority
 
-   example.   300 IN DELEG DIRECT a.example. Glue4=192.0.2.1 (
-                           Glue6=2001:DB8::1 )
+   example.   300 IN DELEG DIRECT a.example. ipv4=192.0.2.1 (
+                           ipv6=2001:DB8::1 )
    example.   300 IN DELEG INCLUDE ns2.example.net.
    example.   300 IN DELEG INCLUDE ns3.example.org.
    example.   300 IN RRSIG DELEG 13 4 300 20250214164848 (
@@ -842,6 +885,16 @@ Appendix B.  Acknowledgments {:unnumbered}
    Mashooq Muhaimen, Jason Moreau, Jerrod Wiesman, Billy Tiemann, Gordon
    Marx and Brian Wellington.
 
+   Work on DELEG protocol has started at IETF 118 hackaton.  Hackaton
+   participants: Christian Elmerot, David Blacka, David Lawrence, Edward
+   Lewis, Erik Nygren, George Michaelson, Jan Včelák, Klaus Darilion,
+   Libor Peltan, Manu Bretelle, Peter van Dijk, Petr Špaček, Philip
+   Homburg, Ralf Weber, Roy Arends, Shane Kerr, Shumon Huque, Vandan
+   Adhvaryu, Vladimír Čunát.
+
+   Other people joined the effort after the initial hackaton: Ben
+   Schwartz, Bob Halley, Paul Hoffman, ...
+
 Appendix C.  TODO
 
    RFC EDITOR:  PLEASE REMOVE THE THIS SECTION PRIOR TO PUBLICATION.
@@ -856,118 +909,6 @@ Appendix C.  TODO
       -  DELEG EDNS Flag Bit is 3
 
       -  DELEG DNSKEY Flag Bit is 0
-
-Appendix D.  Change Log
-
-   RFC EDITOR:  PLEASE REMOVE THE THIS SECTION PRIOR TO PUBLICATION.
-
-D.1.  since draft-wesplaap-deleg-00
-
-   *  Clarified SVCB priority behavior
-
-   *  Added section on differences to draft-homburg-deleg-incremental-
-      deleg
-
-D.2.  since draft-wesplaap-deleg-01
-
-   *  Reorganised and streamlined the draft to the bare minimum for
-      DELEG as an NS replacement
-
-   *  Defined codepoints for temporary testing
-
-   *  Added examples
-
-Contributors
-
-   Christian Elmerot
-   Cloudflare
-   Email: christian@elmerot.se
-
-
-   Edward Lewis
-   ICANN
-   Email: edward.lewis@icann.org
-
-
-   Roy Arends
-   ICANN
-   Email: roy.arends@icann.org
-
-
-   Shumon Huque
-   Salesforce
-   Email: shuque@gmail.com
-
-
-   Klaus Darilion
-   nic.at
-   Email: klaus.darilion@nic.at
-
-
-   Libor Peltan
-   CZ.nic
-   Email: libor.peltan@nic.cz
-
-
-   Vladimír Čunát
-   CZ.nic
-   Email: vladimir.cunat@nic.cz
-
-
-   Shane Kerr
-   NS1
-   Email: shane@time-travellers.org
-
-
-   David Blacka
-   Verisign
-   Email: davidb@verisign.com
-
-
-   George Michaelson
-   APNIC
-   Email: ggm@algebras.org
-
-
-   Ben Schwartz
-   Meta
-   Email: bemasc@meta.com
-
-
-   Jan Včelák
-   NS1
-   Email: jvcelak@ns1.com
-
-
-   Peter van Dijk
-   PowerDNS
-   Email: peter.van.dijk@powerdns.com
-
-
-   Philip Homburg
-   NLnet Labs
-   Email: philip@nlnetlabs.nl
-
-
-   Erik Nygren
-   Akamai Technologies
-   Email: erik+ietf@nygren.org
-
-
-   Vandan Adhvaryu
-   Team Internet
-   Email: vandan@adhvaryu.uk
-
-
-   Manu Bretelle
-   Meta
-   Email: chantr4@gmail.com
-
-
-   Bob Halley
-   Cloudflare
-   Email: bhalley@cloudflare.com
-
 
 Authors' Addresses
 
