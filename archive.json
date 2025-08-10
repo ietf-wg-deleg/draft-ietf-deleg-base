@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-07-22T01:05:15.302819+00:00",
+  "timestamp": "2025-08-10T01:10:38.495728+00:00",
   "repo": "ietf-wg-deleg/draft-ietf-deleg-base",
   "labels": [
     {
@@ -1305,7 +1305,7 @@
       "labels": [],
       "body": "From the WG discussion",
       "createdAt": "2025-07-19T12:31:29Z",
-      "updatedAt": "2025-07-21T16:24:58Z",
+      "updatedAt": "2025-08-07T16:55:41Z",
       "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
       "baseRefName": "main",
       "baseRefOid": "2ddf2234b2e1f67b80f05924e80d77c95190414f",
@@ -1316,7 +1316,15 @@
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
-      "comments": [],
+      "comments": [
+        {
+          "author": "paulehoffman",
+          "authorAssociation": "COLLABORATOR",
+          "body": "The authors decided to remove these bullets instead of putting MUSTs on them. That is, the action is the same as RFC 1034/1035, and thus don't need any specification. Thus, I propose that this PR simply be closed.",
+          "createdAt": "2025-08-07T16:55:12Z",
+          "updatedAt": "2025-08-07T16:55:41Z"
+        }
+      ],
       "reviews": [
         {
           "id": "PRR_kwDOO41rkM607Ve6",
@@ -1916,6 +1924,42 @@
         "oid": "c2472f57139d5b7b23f70952e3be29115cbae26b"
       },
       "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 37,
+      "id": "PR_kwDOO41rkM6in5YF",
+      "title": "Describe RRset processing",
+      "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/pull/37",
+      "state": "MERGED",
+      "author": "pspacek",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Copied from https://mailarchive.ietf.org/arch/msg/dd/CLfbqrg6b8STH87lOrcTuPFp6M0/ with cosmetic changes.",
+      "createdAt": "2025-08-07T16:32:49Z",
+      "updatedAt": "2025-08-07T16:34:47Z",
+      "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
+      "baseRefName": "main",
+      "baseRefOid": "e87faa4812f6816566043f1bd6294835ead563d8",
+      "headRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
+      "headRefName": "rrset-processing",
+      "headRefOid": "bf7465849ac870bdf6f8034f70e4f9d2967bdc09",
+      "closedAt": "2025-08-07T16:34:47Z",
+      "mergedAt": "2025-08-07T16:34:47Z",
+      "mergedBy": "pspacek",
+      "mergeCommit": {
+        "oid": "f91f87138720291aeefe86d71657f0cf37dbfa2a"
+      },
+      "comments": [
+        {
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Merging as discussed with authors an hour ago.",
+          "createdAt": "2025-08-07T16:34:43Z",
+          "updatedAt": "2025-08-07T16:34:43Z"
+        }
+      ],
       "reviews": []
     }
   ]
