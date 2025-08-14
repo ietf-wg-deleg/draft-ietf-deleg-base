@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-08-10T01:10:38.495728+00:00",
+  "timestamp": "2025-08-14T01:02:43.707036+00:00",
   "repo": "ietf-wg-deleg/draft-ietf-deleg-base",
   "labels": [
     {
@@ -1961,6 +1961,73 @@
         }
       ],
       "reviews": []
+    },
+    {
+      "number": 38,
+      "id": "PR_kwDOO41rkM6jKGsM",
+      "title": "Major updates for new record format and key-value pairs",
+      "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/pull/38",
+      "state": "OPEN",
+      "author": "paulehoffman",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-08-12T01:23:47Z",
+      "updatedAt": "2025-08-13T15:06:46Z",
+      "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
+      "baseRefName": "main",
+      "baseRefOid": "f91f87138720291aeefe86d71657f0cf37dbfa2a",
+      "headRepository": "paulehoffman/fork-deleg-base",
+      "headRefName": "new-rr-format",
+      "headRefOid": "df863193b38c39daba66116f3ea8d231ee2ccab7",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOO41rkM65panD",
+          "commit": {
+            "abbreviatedOid": "df86319"
+          },
+          "author": "fl1ger",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-08-13T08:57:38Z",
+          "updatedAt": "2025-08-13T08:57:38Z",
+          "comments": [
+            {
+              "originalPosition": 11,
+              "body": "Wouldn't it be better to have plural DELEG and NS records?",
+              "createdAt": "2025-08-13T08:57:38Z",
+              "updatedAt": "2025-08-13T08:57:38Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOO41rkM65wWnj",
+          "commit": {
+            "abbreviatedOid": "df86319"
+          },
+          "author": "paulehoffman",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-08-13T15:06:46Z",
+          "updatedAt": "2025-08-13T15:06:46Z",
+          "comments": [
+            {
+              "originalPosition": 11,
+              "body": "Either is fine in English. You only need one NS or DELEG record to make a delegation, so singular is acceptable. If you want plural, I propose \"a DELEG RRset\" and \"an NS RRset\".",
+              "createdAt": "2025-08-13T15:06:46Z",
+              "updatedAt": "2025-08-13T15:06:46Z"
+            }
+          ]
+        }
+      ]
     }
   ]
 }
