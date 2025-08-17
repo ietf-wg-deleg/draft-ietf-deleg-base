@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-08-14T01:02:43.707036+00:00",
+  "timestamp": "2025-08-17T01:07:09.237488+00:00",
   "repo": "ietf-wg-deleg/draft-ietf-deleg-base",
   "labels": [
     {
@@ -1967,24 +1967,26 @@
       "id": "PR_kwDOO41rkM6jKGsM",
       "title": "Major updates for new record format and key-value pairs",
       "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/pull/38",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "paulehoffman",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2025-08-12T01:23:47Z",
-      "updatedAt": "2025-08-13T15:06:46Z",
+      "updatedAt": "2025-08-15T08:13:10Z",
       "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
       "baseRefName": "main",
       "baseRefOid": "f91f87138720291aeefe86d71657f0cf37dbfa2a",
       "headRepository": "paulehoffman/fork-deleg-base",
       "headRefName": "new-rr-format",
-      "headRefOid": "df863193b38c39daba66116f3ea8d231ee2ccab7",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "1642808bb57fa55cfcf452046d7bf41b1e4215d5",
+      "closedAt": "2025-08-15T08:13:10Z",
+      "mergedAt": "2025-08-15T08:13:10Z",
+      "mergedBy": "fl1ger",
+      "mergeCommit": {
+        "oid": "89b781fd002ef1139cfd0c3e5713e03a3bcef599"
+      },
       "comments": [],
       "reviews": [
         {
