@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-08-17T01:07:09.237488+00:00",
+  "timestamp": "2025-08-19T01:00:20.459187+00:00",
   "repo": "ietf-wg-deleg/draft-ietf-deleg-base",
   "labels": [
     {
@@ -2030,6 +2030,32 @@
           ]
         }
       ]
+    },
+    {
+      "number": 39,
+      "id": "PR_kwDOO41rkM6kITck",
+      "title": "Added line breaks for to make later diffs easier",
+      "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/pull/39",
+      "state": "OPEN",
+      "author": "paulehoffman",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-08-18T15:10:46Z",
+      "updatedAt": "2025-08-18T15:10:46Z",
+      "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
+      "baseRefName": "main",
+      "baseRefOid": "1da0ae517d93e266266439b6523087113632d1ea",
+      "headRepository": "paulehoffman/fork-deleg-base",
+      "headRefName": "sentence-per-line",
+      "headRefOid": "7cf29ecd4aa6b63f5a0c3da3a53f7ccc1c13f636",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
     }
   ]
 }
