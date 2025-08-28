@@ -105,7 +105,7 @@ The actions defined in this document are described briefly here, and more fully 
 
 * server-ip4: a set of IPv4 addresses for nameservers of the given zone
 * server-ip6: a set of IPv6 addresses for nameservers of the given zone
-* server-name: the domain name of a nameserver of the given zone. The addresses must be fetched using normal resolution which means the server-name MUST NOT be inside the delegated domain when used with DELEG.
+* server-name: the domain name of a nameserver of the given zone
 * include-name: the domain name of a zone that has more information about the nameservers of the given zone
 
 TODO: Add some introduction comparing how resolvers see legacy delegation (set of NS and A/AAAA records) and DELEG delegation (DELEG and DELEGI records with server-ip4 and server-ip6 keys)
@@ -257,6 +257,9 @@ A DELEG or DELEGI record SHOULD carry exactly one set of server information, cho
 - a pair consisting of one server-ip4 and one server-ip6
 - one server-name key
 - one include-name key
+
+When using server-name, the addresses must be fetched using normal DNS resolution.
+This means the value of the server-name key MUST NOT be inside the delegated domain.
 
 ### Populating the SLIST from DELEG and DELEGI Records
 
