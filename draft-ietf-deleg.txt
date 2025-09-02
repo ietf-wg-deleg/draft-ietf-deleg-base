@@ -219,10 +219,7 @@ Table of Contents
    *  server-ip6: a set of IPv6 addresses for nameservers of the given
       zone
 
-   *  server-name: the domain name of a nameserver of the given zone.
-      The addresses must be fetched using normal resolution which means
-      the server-name MUST NOT be inside the delegated domain when used
-      with DELEG.
+   *  server-name: the domain name of a nameserver of the given zone
 
    *  include-name: the domain name of a zone that has more information
       about the nameservers of the given zone
@@ -448,6 +445,10 @@ Table of Contents
    *  one server-name key
 
    *  one include-name key
+
+   When using server-name, the addresses must be fetched using normal
+   DNS resolution.  This means the value of the server-name key MUST NOT
+   be inside the delegated domain.
 
 3.1.6.  Populating the SLIST from DELEG and DELEGI Records
 

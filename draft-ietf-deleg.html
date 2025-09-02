@@ -1416,7 +1416,7 @@ The actions defined in this document are described briefly here, and more fully 
           <p id="section-2-5.2.1">server-ip6: a set of IPv6 addresses for nameservers of the given zone<a href="#section-2-5.2.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="section-2-5.3">
-          <p id="section-2-5.3.1">server-name: the domain name of a nameserver of the given zone. The addresses must be fetched using normal resolution which means the server-name MUST NOT be inside the delegated domain when used with DELEG.<a href="#section-2-5.3.1" class="pilcrow">¶</a></p>
+          <p id="section-2-5.3.1">server-name: the domain name of a nameserver of the given zone<a href="#section-2-5.3.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="section-2-5.4">
           <p id="section-2-5.4.1">include-name: the domain name of a zone that has more information about the nameservers of the given zone<a href="#section-2-5.4.1" class="pilcrow">¶</a></p>
@@ -1608,6 +1608,8 @@ The wire formats are the same as the wire formats for domain names, and MUST NOT
               <p id="section-3.1.5-7.5.1">one include-name key<a href="#section-3.1.5-7.5.1" class="pilcrow">¶</a></p>
 </li>
           </ul>
+<p id="section-3.1.5-8">When using server-name, the addresses must be fetched using normal DNS resolution.
+This means the value of the server-name key MUST NOT be inside the delegated domain.<a href="#section-3.1.5-8" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="populating-the-slist-from-deleg-and-delegi-records">
