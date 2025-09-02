@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-08-31T01:00:54.247235+00:00",
+  "timestamp": "2025-09-02T00:57:37.706633+00:00",
   "repo": "ietf-wg-deleg/draft-ietf-deleg-base",
   "labels": [
     {
@@ -2142,7 +2142,7 @@
       "labels": [],
       "body": "",
       "createdAt": "2025-08-22T15:42:44Z",
-      "updatedAt": "2025-08-22T15:42:44Z",
+      "updatedAt": "2025-09-01T13:48:13Z",
       "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
       "baseRefName": "main",
       "baseRefOid": "d2466e04c28e517b94b2aa33ba55c7c7cafaca00",
@@ -2153,7 +2153,15 @@
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
-      "comments": [],
+      "comments": [
+        {
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Please run `sed -i~ -e 's/ *$//' draft-ietf-deleg.md` fix otherwise I will have to fix it in separate PR.",
+          "createdAt": "2025-09-01T13:48:13Z",
+          "updatedAt": "2025-09-01T13:48:13Z"
+        }
+      ],
       "reviews": []
     },
     {
@@ -2261,6 +2269,120 @@
       },
       "comments": [],
       "reviews": []
+    },
+    {
+      "number": 46,
+      "id": "PR_kwDOO41rkM6mSzrK",
+      "title": "Add Security Considerations: Downgrade Attacks section",
+      "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/pull/46",
+      "state": "OPEN",
+      "author": "pspacek",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-09-01T14:01:18Z",
+      "updatedAt": "2025-09-01T14:16:30Z",
+      "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
+      "baseRefName": "main",
+      "baseRefOid": "c1e4647620555cb1010ceb01d3e37f8bae50e624",
+      "headRepository": "pspacek/draft-ietf-deleg-base",
+      "headRefName": "security-downgrade",
+      "headRefOid": "29b2bbb6dde6dec79decbd661ca1074b180d0b65",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [
+        {
+          "author": "moonshiner",
+          "authorAssociation": "NONE",
+          "body": "Thanks Petr!",
+          "createdAt": "2025-09-01T14:16:30Z",
+          "updatedAt": "2025-09-01T14:16:30Z"
+        }
+      ],
+      "reviews": []
+    },
+    {
+      "number": 47,
+      "id": "PR_kwDOO41rkM6mTUj2",
+      "title": "New Abstract and Introduction",
+      "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/pull/47",
+      "state": "OPEN",
+      "author": "pspacek",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-09-01T14:49:55Z",
+      "updatedAt": "2025-09-01T17:01:34Z",
+      "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
+      "baseRefName": "main",
+      "baseRefOid": "c1e4647620555cb1010ceb01d3e37f8bae50e624",
+      "headRepository": "pspacek/draft-ietf-deleg-base",
+      "headRefName": "abstract-into",
+      "headRefOid": "975463046d32c866390b70de137b98377205203b",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [
+        {
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "body": "@paulehoffman This is an attempt to solve my complaints from the mailing list. WDYT?",
+          "createdAt": "2025-09-01T14:50:23Z",
+          "updatedAt": "2025-09-01T14:50:23Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOO41rkM69MVCa",
+          "commit": {
+            "abbreviatedOid": "9754630"
+          },
+          "author": "paulehoffman",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "Excellent. This much more clearly separates old from new.",
+          "createdAt": "2025-09-01T16:00:02Z",
+          "updatedAt": "2025-09-01T16:00:02Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOO41rkM69MpGx",
+          "commit": {
+            "abbreviatedOid": "9754630"
+          },
+          "author": "chantra",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "LGTM. Just a couple of spelling nits.",
+          "createdAt": "2025-09-01T16:48:22Z",
+          "updatedAt": "2025-09-01T17:01:34Z",
+          "comments": [
+            {
+              "originalPosition": 22,
+              "body": "can *be* delegated",
+              "createdAt": "2025-09-01T16:48:22Z",
+              "updatedAt": "2025-09-01T17:01:34Z"
+            },
+            {
+              "originalPosition": 24,
+              "body": "that *does* this\u2026 contain*s* only\u2026",
+              "createdAt": "2025-09-01T16:49:19Z",
+              "updatedAt": "2025-09-01T17:01:34Z"
+            },
+            {
+              "originalPosition": 29,
+              "body": "I think it would be fair to say that it does not offer any type of extensibility for other parameters. The \u201cwhich might be needed..\u201d could be replaced by an actual use case (encrypted DNS), or left out entirely instead of using some future possibility.",
+              "createdAt": "2025-09-01T16:54:45Z",
+              "updatedAt": "2025-09-01T17:01:34Z"
+            }
+          ]
+        }
+      ]
     }
   ]
 }
