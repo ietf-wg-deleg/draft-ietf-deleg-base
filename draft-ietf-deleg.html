@@ -10,11 +10,10 @@
 <meta content="Ralf Weber" name="author">
 <meta content="David C Lawrence" name="author">
 <meta content="
-       A delegation in the Domain Name System (DNS) is a mechanism that enables efficient and distributed management of the DNS namespace.
-It involves delegating authority over subdomains to specific DNS servers via NS records, allowing for a hierarchical structure and distributing the responsibility for maintaining DNS records. 
-       An NS record contains the hostname of the nameserver for the delegated namespace.
-Any facilities of that nameserver must be discovered through other mechanisms.
-This document proposes a new method for delegation of the authority for a domain. 
+       This document proposes a new extensible method for delegation of the authority for a domain in Domain Name System (DNS) based in DELEG and DELEGI records. 
+       A delegation in the DNS is a mechanism that enables efficient and distributed management of the DNS namespace.
+The traiditional DNS delegation is based on NS records which contain only hostname of a server and no other parameters.
+New delegation records are extensible, can be secured with DNSSEC, and eliminate parent-child duplication from the DNS. 
     " name="description">
 <meta content="xml2rfc 3.30.0" name="generator">
 <meta content="Internet-Draft" name="keyword">
@@ -1053,11 +1052,11 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">DELEG</td>
-<td class="right">August 2025</td>
+<td class="right">September 2025</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">April, et al.</td>
-<td class="center">Expires 1 March 2026</td>
+<td class="center">Expires 6 March 2026</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1073,12 +1072,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <a href="https://www.rfc-editor.org/rfc/rfc1034" class="eref">1034</a>, <a href="https://www.rfc-editor.org/rfc/rfc1035" class="eref">1035</a>, <a href="https://www.rfc-editor.org/rfc/rfc6672" class="eref">6672</a>, <a href="https://www.rfc-editor.org/rfc/rfc6840" class="eref">6840</a> (if approved)</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2025-08-28" class="published">28 August 2025</time>
+<time datetime="2025-09-02" class="published">2 September 2025</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2026-03-01">1 March 2026</time></dd>
+<dd class="expires"><time datetime="2026-03-06">6 March 2026</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1103,11 +1102,10 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <h1 id="title">Extensible Delegation for DNS</h1>
 <section id="section-abstract">
       <h2 id="abstract"><a href="#abstract" class="selfRef">Abstract</a></h2>
-<p id="section-abstract-1">A delegation in the Domain Name System (DNS) is a mechanism that enables efficient and distributed management of the DNS namespace.
-It involves delegating authority over subdomains to specific DNS servers via NS records, allowing for a hierarchical structure and distributing the responsibility for maintaining DNS records.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
-<p id="section-abstract-2">An NS record contains the hostname of the nameserver for the delegated namespace.
-Any facilities of that nameserver must be discovered through other mechanisms.
-This document proposes a new method for delegation of the authority for a domain.<a href="#section-abstract-2" class="pilcrow">¶</a></p>
+<p id="section-abstract-1">This document proposes a new extensible method for delegation of the authority for a domain in Domain Name System (DNS) based in DELEG and DELEGI records.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
+<p id="section-abstract-2">A delegation in the DNS is a mechanism that enables efficient and distributed management of the DNS namespace.
+The traiditional DNS delegation is based on NS records which contain only hostname of a server and no other parameters.
+New delegation records are extensible, can be secured with DNSSEC, and eliminate parent-child duplication from the DNS.<a href="#section-abstract-2" class="pilcrow">¶</a></p>
 </section>
 <section class="note rfcEditorRemove" id="section-note.1">
       <h2 id="name-about-this-document">
@@ -1144,7 +1142,7 @@ This document proposes a new method for delegation of the authority for a domain
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 1 March 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 6 March 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1351,16 +1349,23 @@ This document proposes a new method for delegation of the authority for a domain
       <h2 id="name-introduction">
 <a href="#section-1" class="section-number selfRef">1. </a><a href="#name-introduction" class="section-name selfRef">Introduction</a>
       </h2>
-<p id="section-1-1">In the Domain Name System, subdomains within the domain name hierarchy are indicated by delegations to servers which are authoritative for their portion of the namespace.
-The DNS records that do this, called NS records, contain hostnames of nameservers, which resolve to addresses.
-No other information is available to the resolver.
-It is limited to connect to the authoritative servers over UDP and TCP port 53.
-This limitation is a barrier for efficient introduction of new DNS technology.<a href="#section-1-1" class="pilcrow">¶</a></p>
-<p id="section-1-2">The proposed DELEG and DELEGI record types remedy this problem by providing extensible parameters to indicate capabilities and additional information, such as addresses that a resolver may use for the delegated authority.
-The DELEG record is authoritative and thus signed in the parent side of the delegation making it possible to validate all delegation parameters with DNSSEC.
-The DELEGI record gives information about delegation; they are treated like regular authoritative records in their zone.<a href="#section-1-2" class="pilcrow">¶</a></p>
-<p id="section-1-3">This document only shows how a DELEG record can be used instead of or along side a NS record to create a delegation.
-Future documents can use the extensible mechanism for more advanced features like connecting to a name server with an encrypted transport.<a href="#section-1-3" class="pilcrow">¶</a></p>
+<p id="section-1-1">In the Domain Name System, responsibility for each subdomain within the domain name hierarchy can be delegated to different servers, which makes them authoritative for their portion of the namespace.<a href="#section-1-1" class="pilcrow">¶</a></p>
+<p id="section-1-2">The original DNS record that does this, called NS record, contains only hostname of a single nameserver and no other parameters.
+The resolver needs to resolve these names into usable addresses and infer other required parameters, such as transport protocol and any other protocol features.
+Moreover the NS record exists in two copies, at the delegation point, and in the child zone.
+DNS Security Extension (DNSSEC) protect only one copy, in the child zone.<a href="#section-1-2" class="pilcrow">¶</a></p>
+<p id="section-1-3">These properties of NS records limit resolvers to unencrypted UDP and TCP port 53, and this initial contact cannot be protected with DNSSEC.
+Even if these two problems were somehow solved, NS record does not offer extensiblity for any other parameters.
+This limitation is a barrier for efficient introduction of new DNS technology.<a href="#section-1-3" class="pilcrow">¶</a></p>
+<p id="section-1-4">The proposed DELEG and DELEGI record types remedy this problem by providing extensible parameters to indicate server capabilities and additional information, such as addresses that a resolver may use to reach the server.
+The DELEG record creates a new delegation.
+It is authoritative in the parent side of delegation and thus signed.
+This makes it possible to validate all delegation parameters with DNSSEC, including all future extensions.
+The DELEGI record is an auxilitary record which does not create delegation by itself, but can be used to share the same delegation information across any number of zones.
+DELEGI is treated like regular authoritative records in their zone.<a href="#section-1-4" class="pilcrow">¶</a></p>
+<p id="section-1-5">DELEG record can be used instead of or along side a NS record to create a delegation.
+Combination of DELEG+NS is fully compatible with old resolvers.<a href="#section-1-5" class="pilcrow">¶</a></p>
+<p id="section-1-6">Future documents can use the extensible mechanism for more advanced features like connecting to a name server with an encrypted transport.<a href="#section-1-6" class="pilcrow">¶</a></p>
 <div id="terminology">
 <section id="section-1.1">
         <h3 id="name-terminology">

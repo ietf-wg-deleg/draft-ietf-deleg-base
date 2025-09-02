@@ -6,11 +6,11 @@ deleg                                                           T. April
 Internet-Draft                                               Google, LLC
 Updates: 1034, 1035, 6672, 6840 (if approved)                  P. Špaček
 Intended status: Standards Track                                     ISC
-Expires: 1 March 2026                                           R. Weber
+Expires: 6 March 2026                                           R. Weber
                                                      Akamai Technologies
                                                              D. Lawrence
                                                               Salesforce
-                                                          28 August 2025
+                                                        2 September 2025
 
 
                      Extensible Delegation for DNS
@@ -18,16 +18,16 @@ Expires: 1 March 2026                                           R. Weber
 
 Abstract
 
-   A delegation in the Domain Name System (DNS) is a mechanism that
-   enables efficient and distributed management of the DNS namespace.
-   It involves delegating authority over subdomains to specific DNS
-   servers via NS records, allowing for a hierarchical structure and
-   distributing the responsibility for maintaining DNS records.
+   This document proposes a new extensible method for delegation of the
+   authority for a domain in Domain Name System (DNS) based in DELEG and
+   DELEGI records.
 
-   An NS record contains the hostname of the nameserver for the
-   delegated namespace.  Any facilities of that nameserver must be
-   discovered through other mechanisms.  This document proposes a new
-   method for delegation of the authority for a domain.
+   A delegation in the DNS is a mechanism that enables efficient and
+   distributed management of the DNS namespace.  The traiditional DNS
+   delegation is based on NS records which contain only hostname of a
+   server and no other parameters.  New delegation records are
+   extensible, can be secured with DNSSEC, and eliminate parent-child
+   duplication from the DNS.
 
 About This Document
 
@@ -61,7 +61,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 1 March 2026.
+   This Internet-Draft will expire on 6 March 2026.
 
 Copyright Notice
 
@@ -129,28 +129,43 @@ Table of Contents
 
 1.  Introduction
 
-   In the Domain Name System, subdomains within the domain name
-   hierarchy are indicated by delegations to servers which are
-   authoritative for their portion of the namespace.  The DNS records
-   that do this, called NS records, contain hostnames of nameservers,
-   which resolve to addresses.  No other information is available to the
-   resolver.  It is limited to connect to the authoritative servers over
-   UDP and TCP port 53.  This limitation is a barrier for efficient
-   introduction of new DNS technology.
+   In the Domain Name System, responsibility for each subdomain within
+   the domain name hierarchy can be delegated to different servers,
+   which makes them authoritative for their portion of the namespace.
+
+   The original DNS record that does this, called NS record, contains
+   only hostname of a single nameserver and no other parameters.  The
+   resolver needs to resolve these names into usable addresses and infer
+   other required parameters, such as transport protocol and any other
+   protocol features.  Moreover the NS record exists in two copies, at
+   the delegation point, and in the child zone.  DNS Security Extension
+   (DNSSEC) protect only one copy, in the child zone.
+
+   These properties of NS records limit resolvers to unencrypted UDP and
+   TCP port 53, and this initial contact cannot be protected with
+   DNSSEC.  Even if these two problems were somehow solved, NS record
+   does not offer extensiblity for any other parameters.  This
+   limitation is a barrier for efficient introduction of new DNS
+   technology.
 
    The proposed DELEG and DELEGI record types remedy this problem by
-   providing extensible parameters to indicate capabilities and
-   additional information, such as addresses that a resolver may use for
-   the delegated authority.  The DELEG record is authoritative and thus
-   signed in the parent side of the delegation making it possible to
-   validate all delegation parameters with DNSSEC.  The DELEGI record
-   gives information about delegation; they are treated like regular
-   authoritative records in their zone.
+   providing extensible parameters to indicate server capabilities and
+   additional information, such as addresses that a resolver may use to
+   reach the server.  The DELEG record creates a new delegation.  It is
+   authoritative in the parent side of delegation and thus signed.  This
+   makes it possible to validate all delegation parameters with DNSSEC,
+   including all future extensions.  The DELEGI record is an auxilitary
+   record which does not create delegation by itself, but can be used to
+   share the same delegation information across any number of zones.
+   DELEGI is treated like regular authoritative records in their zone.
 
-   This document only shows how a DELEG record can be used instead of or
-   along side a NS record to create a delegation.  Future documents can
-   use the extensible mechanism for more advanced features like
-   connecting to a name server with an encrypted transport.
+   DELEG record can be used instead of or along side a NS record to
+   create a delegation.  Combination of DELEG+NS is fully compatible
+   with old resolvers.
+
+   Future documents can use the extensible mechanism for more advanced
+   features like connecting to a name server with an encrypted
+   transport.
 
 1.1.  Terminology
 
