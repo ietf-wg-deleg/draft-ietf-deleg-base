@@ -438,6 +438,22 @@ To prevent this, the resolver SHOULD NOT walk up more than %%TODO: come up with 
 To prevent this, the resolver SHOULD NOT follow more than 3 include-name chains in an RRset when populating SLIST.
 Note that include-name chains can have CNAME steps in them; in such a case, a CNAME step is counted the same as a DELEGI step when determining when to stop following a chain.
 
+## Preventing Downgrade Attacks
+
+During the rollout of the DELEG protocol, the operator of an authoritative server can upgrade the server software to be DELEG-aware before changing any DNS zones.
+Such deployment should work and provide DELEG-aware clients with correct DELEG-aware answers.
+However, the deployment will not be protected from downgrade attacks against DELEG protocol.
+
+To protect DNSSEC-secure DNS zones that use DELEG delegations, the delegating zone needs to have at least one DNSKEY with the ADT flag set to 1.
+Failure to set this flag in a DNSKEY record in the zone allows an attacker to remove the DELEG RRset from referrals which contain the DS RRset, and replace the original signed DELEG RRset with an arbitrary unsigned NS set.
+Doing so would be a downgrade from the strong protection offered by DNSSEC for DELEG.
+That is, the DELEG protocol when used with upgraded DNSKEY records gives the same protection to DELEG that the zone's DS RRset has; without DELEG, there are no security guarantees for the legacy NS RRset on the parent side of the zone cut.
+
+Please note that a full DNSKEY rollover is not necessary to achieve the downgrade protection for DELEG.
+Any single DNSKEY with the ADT flag set to 1 is sufficient; the zone can introduce an otherwise unused record into the DNSKEY RRset.
+This DNSKEY RR can even use an unknown signing algorithm and zero-length key material to minimize size increase of the DNSKEY RRset.
+
+
 # IANA Considerations
 
 ## Changes to Existing Registries
