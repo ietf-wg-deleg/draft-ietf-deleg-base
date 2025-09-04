@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-09-02T00:57:37.706633+00:00",
+  "timestamp": "2025-09-04T00:54:27.368299+00:00",
   "repo": "ietf-wg-deleg/draft-ietf-deleg-base",
   "labels": [
     {
@@ -466,6 +466,30 @@
       "updatedAt": "2025-07-21T20:43:32Z",
       "closedAt": null,
       "comments": []
+    },
+    {
+      "number": 48,
+      "id": "I_kwDOO41rkM7JIoSO",
+      "title": "Term \"legacy\" is used often and poorly defined",
+      "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/issues/48",
+      "state": "OPEN",
+      "author": "pspacek",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Current text (a004b597781108ff150067f3c1d6dbf5ff763e93) defines:\n* legacy name servers: An authoritative server that does not support the DELEG record\n* legacy resolvers: A resolver that does not support the DELEG record\n\nReferences in text are:\n- legacy delegation\n- Legacy resolvers can get different types of answers - but it talks about resolvers sending DE=0 ...\n- legacy referral response\n- legacy response\n\nI think we need to define something like this:\n- legacy delegation - a delegation with NS RRset\n- legacy referral response - response \"as if DELEG was not present\" - NS+relevant dnssec\n- legacy resolver - resolver which does not follow DELEG protocol (as opposed to \"does not support DELEG RR type\")\n\nBut then, legacy in practice means \"NS\", so why not say \"NS delegation\" and \"NS referral response\"? Then it would not need special definitions.\n\nOpinions?",
+      "createdAt": "2025-09-02T05:40:00Z",
+      "updatedAt": "2025-09-02T06:00:29Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "body": "https://mailarchive.ietf.org/arch/msg/dd/aDh45EEARwJSG8PChqCIZdS1N0Y/",
+          "createdAt": "2025-09-02T06:00:29Z",
+          "updatedAt": "2025-09-02T06:00:29Z"
+        }
+      ]
     }
   ],
   "pulls": [
@@ -2135,24 +2159,26 @@
       "id": "PR_kwDOO41rkM6k6Gb0",
       "title": "Move server-name restriction to main body.",
       "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/pull/42",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "paulehoffman",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2025-08-22T15:42:44Z",
-      "updatedAt": "2025-09-01T13:48:13Z",
+      "updatedAt": "2025-09-02T19:24:13Z",
       "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
       "baseRefName": "main",
       "baseRefOid": "d2466e04c28e517b94b2aa33ba55c7c7cafaca00",
       "headRepository": "paulehoffman/fork-deleg-base",
       "headRefName": "move-server-name-restriction",
-      "headRefOid": "59eb28399305b09172a274fe2bc4380742c80a3f",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "cbf41cba5fe6a3d920ceb8aab64980da4ab6e0b2",
+      "closedAt": "2025-09-02T19:24:13Z",
+      "mergedAt": "2025-09-02T19:24:13Z",
+      "mergedBy": "pspacek",
+      "mergeCommit": {
+        "oid": "d14efde418192b20f679215446fe26e5e9305e23"
+      },
       "comments": [
         {
           "author": "pspacek",
@@ -2160,6 +2186,13 @@
           "body": "Please run `sed -i~ -e 's/ *$//' draft-ietf-deleg.md` fix otherwise I will have to fix it in separate PR.",
           "createdAt": "2025-09-01T13:48:13Z",
           "updatedAt": "2025-09-01T13:48:13Z"
+        },
+        {
+          "author": "paulehoffman",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Thanks for finding that; I pushed a new commit. I have absolutely no idea how those changes could have gotten in there.",
+          "createdAt": "2025-09-02T16:49:18Z",
+          "updatedAt": "2025-09-02T16:49:18Z"
         }
       ],
       "reviews": []
@@ -2282,13 +2315,13 @@
       "labels": [],
       "body": "",
       "createdAt": "2025-09-01T14:01:18Z",
-      "updatedAt": "2025-09-01T14:16:30Z",
+      "updatedAt": "2025-09-02T21:51:40Z",
       "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
       "baseRefName": "main",
       "baseRefOid": "c1e4647620555cb1010ceb01d3e37f8bae50e624",
       "headRepository": "pspacek/draft-ietf-deleg-base",
       "headRefName": "security-downgrade",
-      "headRefOid": "29b2bbb6dde6dec79decbd661ca1074b180d0b65",
+      "headRefOid": "e9031631eb658ff5a601fa2c0ddc2e13a9e34913",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
@@ -2309,24 +2342,26 @@
       "id": "PR_kwDOO41rkM6mTUj2",
       "title": "New Abstract and Introduction",
       "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/pull/47",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "pspacek",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2025-09-01T14:49:55Z",
-      "updatedAt": "2025-09-01T17:01:34Z",
+      "updatedAt": "2025-09-02T05:29:51Z",
       "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
       "baseRefName": "main",
       "baseRefOid": "c1e4647620555cb1010ceb01d3e37f8bae50e624",
       "headRepository": "pspacek/draft-ietf-deleg-base",
       "headRefName": "abstract-into",
-      "headRefOid": "975463046d32c866390b70de137b98377205203b",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "8efd8ec87f8cc326afa6625c46298e51900178a2",
+      "closedAt": "2025-09-02T05:29:51Z",
+      "mergedAt": "2025-09-02T05:29:51Z",
+      "mergedBy": "pspacek",
+      "mergeCommit": {
+        "oid": "a004b597781108ff150067f3c1d6dbf5ff763e93"
+      },
       "comments": [
         {
           "author": "pspacek",
@@ -2334,6 +2369,13 @@
           "body": "@paulehoffman This is an attempt to solve my complaints from the mailing list. WDYT?",
           "createdAt": "2025-09-01T14:50:23Z",
           "updatedAt": "2025-09-01T14:50:23Z"
+        },
+        {
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Thanks, changes applied! Please please use [triple backtick \"suggestion\" format](https://stackoverflow.com/questions/54239733/how-can-i-manually-add-suggestions-in-code-reviews-on-github) for these, it is much easier to apply them correctly if you do.",
+          "createdAt": "2025-09-02T05:06:42Z",
+          "updatedAt": "2025-09-02T05:06:42Z"
         }
       ],
       "reviews": [
@@ -2364,9 +2406,9 @@
           "comments": [
             {
               "originalPosition": 22,
-              "body": "can *be* delegated",
+              "body": "```suggestion\r\nIn the Domain Name System, responsibility for each subdomain within the domain name hierarchy can be delegated to different servers, which makes them authoritative for their portion of the namespace.\r\n```",
               "createdAt": "2025-09-01T16:48:22Z",
-              "updatedAt": "2025-09-01T17:01:34Z"
+              "updatedAt": "2025-09-02T05:01:15Z"
             },
             {
               "originalPosition": 24,
@@ -2381,8 +2423,74 @@
               "updatedAt": "2025-09-01T17:01:34Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOO41rkM69PM02",
+          "commit": {
+            "abbreviatedOid": "9754630"
+          },
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-09-02T05:02:49Z",
+          "updatedAt": "2025-09-02T05:02:49Z",
+          "comments": [
+            {
+              "originalPosition": 24,
+              "body": "```suggestion\r\nThe original DNS record that does this, called NS record, contains only hostname of a single nameserver and no other parameters.\r\n```",
+              "createdAt": "2025-09-02T05:02:49Z",
+              "updatedAt": "2025-09-02T05:02:49Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOO41rkM69PNGT",
+          "commit": {
+            "abbreviatedOid": "9754630"
+          },
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-09-02T05:03:40Z",
+          "updatedAt": "2025-09-02T05:03:40Z",
+          "comments": [
+            {
+              "originalPosition": 29,
+              "body": "```suggestion\r\nEven if these two problems were somehow solved, NS record does not offer extensiblity for any other parameters.\r\n```",
+              "createdAt": "2025-09-02T05:03:40Z",
+              "updatedAt": "2025-09-02T05:03:40Z"
+            }
+          ]
         }
       ]
+    },
+    {
+      "number": 49,
+      "id": "PR_kwDOO41rkM6mvEtF",
+      "title": "Changes from Petr's message to the WG 2025-08-28",
+      "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/pull/49",
+      "state": "OPEN",
+      "author": "paulehoffman",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-09-03T21:57:58Z",
+      "updatedAt": "2025-09-03T21:58:03Z",
+      "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
+      "baseRefName": "main",
+      "baseRefOid": "d14efde418192b20f679215446fe26e5e9305e23",
+      "headRepository": "paulehoffman/fork-deleg-base",
+      "headRefName": "from-petr-on-list",
+      "headRefOid": "4636d1caa951b0f7e323530dafc375dded791c82",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
     }
   ]
 }
