@@ -6,11 +6,11 @@ deleg                                                           T. April
 Internet-Draft                                               Google, LLC
 Updates: 1034, 1035, 6672, 6840 (if approved)                  P. Špaček
 Intended status: Standards Track                                     ISC
-Expires: 6 March 2026                                           R. Weber
+Expires: 8 March 2026                                           R. Weber
                                                      Akamai Technologies
                                                              D. Lawrence
                                                               Salesforce
-                                                        2 September 2025
+                                                        4 September 2025
 
 
                      Extensible Delegation for DNS
@@ -23,7 +23,7 @@ Abstract
    DELEGI records.
 
    A delegation in the DNS is a mechanism that enables efficient and
-   distributed management of the DNS namespace.  The traiditional DNS
+   distributed management of the DNS namespace.  The traditional DNS
    delegation is based on NS records which contain only hostname of a
    server and no other parameters.  New delegation records are
    extensible, can be secured with DNSSEC, and eliminate parent-child
@@ -61,7 +61,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 6 March 2026.
+   This Internet-Draft will expire on 8 March 2026.
 
 Copyright Notice
 
@@ -84,11 +84,11 @@ Table of Contents
    2.  DELEG and DELEGI Record Types
    3.  Use of DELEG Records
      3.1.  Resolvers
-       3.1.1.  Signaling DELEG support
+       3.1.1.  Signaling DELEG Support
        3.1.2.  Referral
        3.1.3.  Parent-side types, QTYPE=DELEG
        3.1.4.  Algorithm for "Finding the Best Servers to Ask"
-       3.1.5.  Actions in Delegation Information
+       3.1.5.  Nameserver Information for Delegation
        3.1.6.  Populating the SLIST from DELEG and DELEGI Records
      3.2.  Authoritative Servers
        3.2.1.  DELEG-unaware Clients
@@ -123,8 +123,8 @@ Table of Contents
      A.5.  DO bit set, DE bit set
        A.5.1.  Query for foo.example
        A.5.2.  Query for foo.test
-   Appendix B.  Acknowledgments {:unnumbered}
-   Appendix C.  TODO
+   Acknowledgments
+   TODO
    Authors' Addresses
 
 1.  Introduction
@@ -144,7 +144,7 @@ Table of Contents
    These properties of NS records limit resolvers to unencrypted UDP and
    TCP port 53, and this initial contact cannot be protected with
    DNSSEC.  Even if these two problems were somehow solved, NS record
-   does not offer extensiblity for any other parameters.  This
+   does not offer extensibility for any other parameters.  This
    limitation is a barrier for efficient introduction of new DNS
    technology.
 
@@ -154,7 +154,7 @@ Table of Contents
    reach the server.  The DELEG record creates a new delegation.  It is
    authoritative in the parent side of delegation and thus signed.  This
    makes it possible to validate all delegation parameters with DNSSEC,
-   including all future extensions.  The DELEGI record is an auxilitary
+   including all future extensions.  The DELEGI record is an auxiliary
    record which does not create delegation by itself, but can be used to
    share the same delegation information across any number of zones.
    DELEGI is treated like regular authoritative records in their zone.
@@ -193,14 +193,13 @@ Table of Contents
    value pairs called "delegation information".  The delegation
    information has wire and display formats that are based on the rules
    in Appendix A of [RFC9460].  A DELEG record is authoritative for the
-   named zone, and creates a delegation and thus lives in the parent of
-   the named zone.
+   zone in its owner name, and creates a delegation and thus lives in
+   the parent of that zone.
 
    The DELEGI record uses the same format as the DELEG record, but
    rather than defining a delegation, a DELEGI is used as the target of
    the "include" mechanism.  Also unlike DELEG records, DELEGI records
-   can live in any part of the DNS namespace unrelated to the delegating
-   domain.
+   can live in any part of the DNS namespace.
 
    When a resolver encounters an "include-name" key-value pair in a
    DELEG record, it queries for a DELEGI record.  Because a DELEGI
@@ -208,21 +207,19 @@ Table of Contents
    resolver must be prepared to follow the "include-name" chain by
    making additional DELEGI queries.
 
-   Some delegation information key-value pairs are actions that a DELEG-
-   aware resolver takes when it gets a DELEG or DELEGI record.  The
-   actions defined in this document are described briefly here, and more
-   fully described in Section 3.1.5.
+   Some delegation information key-value pairs are information about
+   nameservers that a DELEG-aware resolver uses when it gets a DELEG or
+   DELEGI record.  The keys defined in this document are described
+   briefly here, and more fully described in Section 3.1.5.
 
-   *  server-ip4: a set of IPv4 addresses for nameservers of the given
-      zone
+   *  server-ip4: a set of IPv4 addresses for nameservers
 
-   *  server-ip6: a set of IPv6 addresses for nameservers of the given
-      zone
+   *  server-ip6: a set of IPv6 addresses for nameservers
 
-   *  server-name: the domain name of a nameserver of the given zone
+   *  server-name: the domain name of a nameserver
 
    *  include-name: the domain name of a zone that has more information
-      about the nameservers of the given zone
+      about the nameservers
 
    TODO: Add some introduction comparing how resolvers see legacy
    delegation (set of NS and A/AAAA records) and DELEG delegation (DELEG
@@ -239,23 +236,20 @@ Table of Contents
 
 3.1.  Resolvers
 
-3.1.1.  Signaling DELEG support
+3.1.1.  Signaling DELEG Support
 
    There will be both DELEG and NS needed for delegation for a long
-   time.  Because both methods should be configured to get to a proper
-   resolution, it is not necessary to send both in a referral response.
-   Given this motivation, this document defines an EDNS flag to be used
-   similar to the DO Bit for DNSSEC to be used to signal that the sender
-   understands DELEG and does not need NS or glue information in the
-   referral.
+   time.  Both legacy delegation (using NS records) and the DELEG
+   protocol enable recursive resolution.  This document defines a new
+   EDNS flag to signal that a resolver is DELEG-aware and therefore does
+   not need NS records or glue information in a referral response.
 
-   A resolver that is DELEG-aware MUST signal its support by sending the
-   DE bit when iterating.
-
-   This bit is referred to as the "DELEG" (DE) bit.  In the context of
-   the EDNS0 OPT meta-RR, the DE bit is the TBD of the "extended RCODE
-   and flags" portion of the EDNS0 OPT meta-RR, structured as follows
-   (to be updated when assigned):
+   A resolver that is DELEG-aware MUST signal that it supports the DELEG
+   protocol by sending the DE bit when sending queries.  This bit is
+   referred to as the "DELEG" (DE) bit.  In the context of the EDNS0 OPT
+   meta-RR, the DE bit is the TBD of the "extended RCODE and flags"
+   portion of the EDNS0 OPT meta-RR, structured as follows (to be
+   updated when assigned):
 
                +0 (MSB)                +1 (LSB)
         +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
@@ -266,9 +260,9 @@ Table of Contents
 
    Setting the DE bit to one in a query indicates the resolver
    understands new DELEG semantics and does not need NS records to
-   follow a referral.  The DE bit cleared (set to zero) indicates the
-   resolver is unprepared to handle DELEG and hence can only be served
-   NS, DS and glue in a delegation response.
+   follow a referral.  The DE bit set to 0 indicates the resolver is not
+   DELEG-aware, and therefore can only be served referrals with NS
+   records and other data according to pre-DELEG specifications.
 
 3.1.2.  Referral
 
@@ -283,7 +277,9 @@ Table of Contents
    security guarantees of DELEG protocol.
 
    If no DELEG record exists at a given delegation point, DELEG-aware
-   resolvers MUST use NS records as specified by [RFC1034].
+   resolvers MUST use NS records as specified by [RFC1034].  See
+   Section 3.4 for more information about protection from downgrade
+   attacks.
 
 3.1.3.  Parent-side types, QTYPE=DELEG
 
@@ -291,9 +287,10 @@ Table of Contents
    (currently DS and DELEG types) retain the same special handling as
    described in Section 2.6 of [RFC4035].
 
-   Legacy resolvers can get different types of answers for QTYPE=DELEG
-   queries based on the configuration of the server, such as whether it
-   is DELEG-aware and whether it also is authoritative for subdomains.
+   DELEG-unaware resolvers can get different types of answers for
+   QTYPE=DELEG queries based on the configuration of the server, such as
+   whether it is DELEG-aware and whether it also is authoritative for
+   subdomains.
 
 3.1.4.  Algorithm for "Finding the Best Servers to Ask"
 
@@ -302,9 +299,8 @@ Table of Contents
    [RFC1034] and Section 3.4.1 of [RFC6672] with the text "2.  Find the
    best servers to ask."  Section 3.1.4.1 of [RFC4035] should have
    explicitly updated Section 5.3.3 of [RFC1034] for the DS RRtype, but
-   failed to do so; this was remedied by [RFC6672].  This document
-   simply extends this existing behavior to DELEG RRtype as well, and
-   makes this special case explicit.
+   failed to do so.  This document simply extends this existing behavior
+   to DELEG RRtype as well, and makes this special case explicit.
 
    When a DELEG RRset exists in a zone, DELEG-aware resolvers ignore the
    NS RRset for that zone.  This means that the DELEG-aware resolver
@@ -312,9 +308,9 @@ Table of Contents
    RRset that the resolver might have gotten by looking in the apex of
    the zone.
 
-   DELEG and NS RRtypes can be used differently at each delegation
-   level, and DELEG-aware resolvers MUST be able to follow chains of
-   delegations which combines both types in arbitrary ways.
+   Each delegation level can have a mixture of DELEG and NS RRtypes, and
+   DELEG-aware resolvers MUST be able to follow chains of delegations
+   which combines both types in arbitrary ways.
 
    An example of a valid delegation tree:
 
@@ -358,9 +354,9 @@ Table of Contents
    even if someone has incorrectly configured some of the data used to
    create an SLIST.
 
-   This leads to a modified description of find the best servers to ask"
-   from earlier documents for DELEG-aware resolvers.  That description
-   becomes:
+   This leads to a modifications of the description from earlier
+   documents for DELEG-aware resolvers can find the best servers to ask.
+   That description becomes:
 
    1.  Determine deepest possible zone cut which can potentially hold
        the answer for given (query name, type, class) combination:
@@ -398,27 +394,25 @@ Table of Contents
    The rest of the Step 2's description is not affected by this
    document.
 
-   (TODO: Determine what to do about ".  DELEG" or ".  DS" queries,
-   which by definition do not have answers in the zone.)
+   TODO: Determine what to do about ".  DELEG" or ".  DS" queries, which
+   by definition do not have answers in the zone.
 
-3.1.5.  Actions in Delegation Information
+3.1.5.  Nameserver Information for Delegation
 
-   The DELEG and DELEGI records have four keys that describe actions the
-   resolver takes.  The purpose of these actions is to populate the
-   SLIST with IP addresses of the nameservers for a zone.  The actions
-   defined in this document are:
+   The DELEG and DELEGI records have four keys that describe information
+   about nameservers.  The purpose of this information is to populate
+   the SLIST with IP addresses of the nameservers for a zone.  The types
+   of information defined in this document are:
 
-   *  server-ip4: a set of IPv4 addresses for nameservers of the given
-      zone
+   *  server-ip4: a set of IPv4 addresses for nameservers
 
-   *  server-ip6: a set of IPv6 addresses for nameservers of the given
-      zone
+   *  server-ip6: a set of IPv6 addresses for nameservers
 
-   *  server-name: the domain name of a nameserver of the given zone;
-      the addresses must be fetched
+   *  server-name: the domain name of a nameserver; the addresses must
+      be fetched
 
-   *  include-name: the domain name of a zone that has more information
-      about the nameservers of the given zone
+   *  include-name: the domain name that points to a DELEGI RRset, which
+      in turn has more information about the nameservers
 
    The presentation values for server-ip4 and server-ip6 are comma-
    separated list of one or more IP addresses of the appropriate family
@@ -429,6 +423,9 @@ Table of Contents
    The presentation values for server-name and include-name are as full-
    qualified domain names.  The wire formats are the same as the wire
    formats for domain names, and MUST NOT be compressed.
+
+   TODO: Are they?  Are we going to forbid normal zone file expansion
+   where names without trailing . get current origin appended to them?
 
    If any one of these keys is used, it MUST have a value (that is, it
    cannot be a key with a zero-length value).
@@ -460,23 +457,20 @@ Table of Contents
    RRset, or each individual DELEGI record in a DELEGI RRset, using the
    following steps:
 
-   1.  If one or more server-ip4 or server-ip6 actions are present
-       inside the record, copy all the address values from either key
-       into SLIST.  Ignore any server-name or include-name keys that are
+   1.  If one or more server-ip4 or server-ip6 keys are present inside
+       the record, copy all the address values from the record into
+       SLIST.  Ignore any server-name or include-name keys that are
        (erroneously) present in the same record.  Stop processing this
        record.
 
-   2.  If a server-name action is present in the record, resolve it into
-       addresses from the resolver cache or using A and AAAA queries.
-       Copy these addresses into SLIST.  Ignore any include-name keys
-       that are (erroneously) present in the same record.  Stop
-       processing this record.
+   2.  If a server-name key is present in the record, resolve it into
+       addresses.  Copy these addresses into SLIST.  Ignore any include-
+       name keys that are (erroneously) present in the same record.
+       Stop processing this record.
 
-   3.  If a include-name action is present in the record, resolve it
-       into a DELEGI RRset from the resolver cache or by sending queries
-       for the domain name in the value of the include-name pair.  Go
-       through these same steps with the result of the DELEGI RRset,
-       after checking that the maximum loop count described in
+   3.  If a include-name key is present in the record, resolve it into a
+       DELEGI RRset.  Recursively apply the algorithm described in this
+       section, after checking that the maximum loop count described in
        Section 4.1 has not been reached.
 
    4.  If none of the above applies, SLIST is not modified by this
@@ -516,7 +510,11 @@ Table of Contents
 
    In DELEG-unaware clients, records with the DELEG RRtype are not
    authoritative on the parent side.  Thus, queries with DE=0 and
-   QTYPE=DELEG MUST result in a legacy referral response.
+   QTYPE=DELEG MUST result in a normal legacy response, such as a legacy
+   delegation if there are NS records.
+
+   TODO: Should we have an example with auth having parent+child zone at
+   the same time, and DE=0 QTYPE=DELEG query?
 
 3.2.1.2.  DELEG-unaware Clients with DELEG RRs Present but No NS RRs
 
@@ -570,8 +568,8 @@ Table of Contents
 
    If the delegation does not have a DELEG RRset, the authoritative
    server MUST put the NS RRset into the authority section of the
-   referral.  Absence of DELEG RRset must be proven as specified by
-   DNSSEC protocol for authoritative data.
+   referral.  The absence of the DELEG RRset MUST be proven as specified
+   by DNSSEC protocol for authoritative data.
 
    Similarly, rules for DS RRset inclusion into referrals apply as
    specified by the DNSSEC protocol.  Please note in practice the same
@@ -619,9 +617,10 @@ Table of Contents
 
 3.4.2.  Insecure Delegation Proofs
 
-   This document updates Section 4.4 of [RFC6840] to include secure
-   DELEG support, and explicitly states that Opt-Out is not applicable
-   to DELEG.  The first paragraph of that section is updated to read:
+   This document updates Section 4.4 of [RFC6840] to include securing
+   DELEG records, and explicitly states that Opt-Out is not applicable
+   to the DELEG protocol.  The first paragraph of that section is
+   updated to read:
 
    Section 5.2 of [RFC4035] specifies that a validator, when proving a
    delegation is not secure, needs to check for the absence of the DS
@@ -636,8 +635,9 @@ Table of Contents
 
 3.4.3.  Referral downgrade protection
 
-   When DNSKEY flag ADT is set to 1, a DELEG-aware validator MUST prove
-   the absence of a DELEG RRset in referral responses for a zone.
+   If the zone is 'DNSSEC secure', and if any DNSKEY of the zone has ADT
+   flag set to 1, a DELEG-aware validator MUST prove the absence of a
+   DELEG RRset in referral responses from this particular zone.
 
    Without this check, an attacker could strip the DELEG RRset from a
    referral response and replace it with an unsigned (and potentially
@@ -668,13 +668,13 @@ Table of Contents
       the resolver SHOULD NOT walk up more than %%TODO: come up with a
       number%% labels in order to contribute to SLIST.
 
-   *  Long chains of include-name actions (Section 3.1.5), and those
-      with circular chains if include-name actions, can be burdensome.
-      To prevent this, the resolver SHOULD NOT follow more than 3
-      include-name chains in an RRset when populating SLIST.  Note that
-      include-name chains can have CNAME steps in them; in such a case,
-      a CNAME step is counted the same as a DELEGI step when determining
-      when to stop following a chain.
+   *  Long chains of include-name information (Section 3.1.5), and those
+      with circular chains if include-name information, can be
+      burdensome.  To prevent this, the resolver SHOULD NOT follow more
+      than 3 include-name chains in an RRset when populating SLIST.
+      Note that include-name chains can have CNAME steps in them; in
+      such a case, a CNAME step is counted the same as a DELEGI step
+      when determining when to stop following a chain.
 
 5.  IANA Considerations
 
@@ -739,25 +739,25 @@ Table of Contents
    Number:  1
    Name:  server-ip4
    Meaning:  A set of IPv4 addresses of nameservers
-   Reference:  {{actions}} of this document
+   Reference:  {{nameserver-info}} of this document
    Change Controller:  IETF
 
    Number:  2
    Name:  server-ip6
    Meaning:  A set of IPv6 addresses of nameservers
-   Reference:  {{actions}} of this document
+   Reference:  {{nameserver-info}} of this document
    Change Controller:  IETF
 
    Number:  3
    Name:  server-name
    Meaning:  The fully-qualified domain name of a nameserver
-   Reference:  {{actions}} of this document
+   Reference:  {{nameserver-info}} of this document
    Change Controller:  IETF
 
    Number:  4
    Name:  include-name
    Meaning:  The fully-qualified domain of a DELEGI record
-   Reference:  {{actions}} of this document
+   Reference:  {{nameserver-info}} of this document
    Change Controller:  IETF
 
    The registration for number 0 is reserved.
@@ -1062,7 +1062,7 @@ A.5.2.  Query for foo.test
    ;; Additional
    ;; (empty)
 
-Appendix B.  Acknowledgments {:unnumbered}
+Acknowledgments
 
    This document is heavily based on past work done by Tim April in
    [I-D.tapril-ns2] and thus extends the thanks to the people helping on
@@ -1070,7 +1070,7 @@ Appendix B.  Acknowledgments {:unnumbered}
    Mashooq Muhaimen, Jason Moreau, Jerrod Wiesman, Billy Tiemann, Gordon
    Marx and Brian Wellington.
 
-   Work on DELEG protocol has started at IETF 118 hackaton.  Hackaton
+   Work on DELEG protocol has started at IETF 118 Hackaton.  Hackaton
    participants: Christian Elmerot, David Blacka, David Lawrence, Edward
    Lewis, Erik Nygren, George Michaelson, Jan Včelák, Klaus Darilion,
    Libor Peltan, Manu Bretelle, Peter van Dijk, Petr Špaček, Philip
@@ -1080,7 +1080,7 @@ Appendix B.  Acknowledgments {:unnumbered}
    Other people joined the effort after the initial hackaton: Ben
    Schwartz, Bob Halley, Paul Hoffman, ...
 
-Appendix C.  TODO
+TODO
 
    RFC EDITOR:  PLEASE REMOVE THE THIS SECTION PRIOR TO PUBLICATION.
 
