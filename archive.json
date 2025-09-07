@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-09-04T00:54:27.368299+00:00",
+  "timestamp": "2025-09-07T01:00:08.240480+00:00",
   "repo": "ietf-wg-deleg/draft-ietf-deleg-base",
   "labels": [
     {
@@ -2471,26 +2471,284 @@
       "id": "PR_kwDOO41rkM6mvEtF",
       "title": "Changes from Petr's message to the WG 2025-08-28",
       "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/pull/49",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "paulehoffman",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2025-09-03T21:57:58Z",
-      "updatedAt": "2025-09-03T21:58:03Z",
+      "updatedAt": "2025-09-04T15:32:43Z",
       "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
       "baseRefName": "main",
       "baseRefOid": "d14efde418192b20f679215446fe26e5e9305e23",
       "headRepository": "paulehoffman/fork-deleg-base",
       "headRefName": "from-petr-on-list",
-      "headRefOid": "4636d1caa951b0f7e323530dafc375dded791c82",
+      "headRefOid": "71bfec346d00d80bc5cb49931a702b5043dae5d8",
+      "closedAt": "2025-09-04T15:32:43Z",
+      "mergedAt": "2025-09-04T15:32:43Z",
+      "mergedBy": "pspacek",
+      "mergeCommit": {
+        "oid": "ce94274f4b3660271387d4bb9d57e4e3b6328559"
+      },
+      "comments": [
+        {
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Thank you very much for implementing the proposal!\r\n\r\nI've added couple comments about the text but we also need to get the proposed text to build properly. Build log is here: https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/actions/runs/17447123964/job/49544220443?pr=49 and it complains about \r\n\r\n> /github/workspace/draft-ietf-deleg.xml(1020): Error: Did not expect a numbered section after an unnumbered section (seen on line 1011)\r\n\r\nPretty please fix it. Thank you!",
+          "createdAt": "2025-09-04T13:08:20Z",
+          "updatedAt": "2025-09-04T13:08:20Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOO41rkM692Hml",
+          "commit": {
+            "abbreviatedOid": "4636d1c"
+          },
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-09-04T12:46:04Z",
+          "updatedAt": "2025-09-04T12:46:05Z",
+          "comments": [
+            {
+              "originalPosition": 52,
+              "body": "In version 01 people complained about missing \"v\" and perceived inconsistency with SVCB's 'ipv?hint' notation, and this was repeated in review of 02 by Miek.\n\nIs omission of 'v' intentional here?",
+              "createdAt": "2025-09-04T12:46:05Z",
+              "updatedAt": "2025-09-04T12:46:05Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOO41rkM692L4B",
+          "commit": {
+            "abbreviatedOid": "4636d1c"
+          },
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-09-04T12:49:48Z",
+          "updatedAt": "2025-09-04T12:49:48Z",
+          "comments": [
+            {
+              "originalPosition": 104,
+              "body": "I don't think 6672 fixed anything in this regard. Please just omit the part after `;`.\n\n\n```suggestion\nSection 3.1.4.1 of {{!RFC4035}} should have explicitly updated Section 5.3.3 of {{!RFC1034}} for the DS RRtype, but failed to do so.\n```",
+              "createdAt": "2025-09-04T12:49:48Z",
+              "updatedAt": "2025-09-04T12:49:49Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOO41rkM692Rlu",
+          "commit": {
+            "abbreviatedOid": "4636d1c"
+          },
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-09-04T12:54:38Z",
+          "updatedAt": "2025-09-04T12:54:38Z",
+          "comments": [
+            {
+              "originalPosition": 148,
+              "body": "```suggestion\n* include-name: the domain name with DELEGI RRset, which in turn has more information about the nameservers\n```\n(a bit of emphasis on the indirection)",
+              "createdAt": "2025-09-04T12:54:38Z",
+              "updatedAt": "2025-09-04T12:57:17Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOO41rkM692WQb",
+          "commit": {
+            "abbreviatedOid": "4636d1c"
+          },
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-09-04T12:58:22Z",
+          "updatedAt": "2025-09-04T12:58:22Z",
+          "comments": [
+            {
+              "originalPosition": 148,
+              "body": "TODO: rename to `include-deleg-name`? `deleg-include-name`? Someone on the mailing list pointed out that bare `include` does not explain what is this about.",
+              "createdAt": "2025-09-04T12:58:22Z",
+              "updatedAt": "2025-09-04T12:58:22Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOO41rkM692bPt",
+          "commit": {
+            "abbreviatedOid": "4636d1c"
+          },
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-09-04T13:02:11Z",
+          "updatedAt": "2025-09-04T13:02:11Z",
+          "comments": [
+            {
+              "originalPosition": 166,
+              "body": "As a non-native speaker I'm confused. Is this to say 'if any addresses are present, copy all of them'?\n\nWith pidgin-English skills, this read better:\n\n```suggestion\n1. If one or more server-ip4 or server-ip6 keys are present inside the record, copy all the address values from the record into SLIST.\n```",
+              "createdAt": "2025-09-04T13:02:11Z",
+              "updatedAt": "2025-09-04T13:02:11Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOO41rkM692fxM",
+          "commit": {
+            "abbreviatedOid": "4636d1c"
+          },
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-09-04T13:05:27Z",
+          "updatedAt": "2025-09-04T13:05:27Z",
+          "comments": [
+            {
+              "originalPosition": 226,
+              "body": "On the mailing list I was suggesting this:\n```suggestion\nIf the zone is 'DNSSEC secure', and if any DNSKEY of the zone has ADT flag set to 1, a DELEG-aware validator MUST prove the absence of a DELEG RRset in referral responses from this particular zone. \n```\n\n'DNSSEC secure' in this proposal was reference to 'Secure' as defined in https://datatracker.ietf.org/doc/html/rfc4035#section-4.3\n\nNot sure how to explain this better in the text.",
+              "createdAt": "2025-09-04T13:05:27Z",
+              "updatedAt": "2025-09-04T13:05:28Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOO41rkM6947WP",
+          "commit": {
+            "abbreviatedOid": "4636d1c"
+          },
+          "author": "paulehoffman",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-09-04T15:13:07Z",
+          "updatedAt": "2025-09-04T15:13:07Z",
+          "comments": [
+            {
+              "originalPosition": 52,
+              "body": "Yes, because someone on the list asked for it. But now this is overcome by events: it will be server-address",
+              "createdAt": "2025-09-04T15:13:07Z",
+              "updatedAt": "2025-09-04T15:13:07Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 50,
+      "id": "PR_kwDOO41rkM6m8NR4",
+      "title": "Collection of changes from the mailing list this week",
+      "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/pull/50",
+      "state": "OPEN",
+      "author": "paulehoffman",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-09-04T20:41:12Z",
+      "updatedAt": "2025-09-06T15:26:06Z",
+      "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
+      "baseRefName": "main",
+      "baseRefOid": "ce94274f4b3660271387d4bb9d57e4e3b6328559",
+      "headRepository": "paulehoffman/fork-deleg-base",
+      "headRefName": "dark-star",
+      "headRefOid": "a16aa55b5cffa5ff91b93c415b5c1ca76ca068ee",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOO41rkM6-DXbn",
+          "commit": {
+            "abbreviatedOid": "9369cc2"
+          },
+          "author": "fl1ger",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-09-05T08:57:46Z",
+          "updatedAt": "2025-09-05T08:57:46Z",
+          "comments": [
+            {
+              "originalPosition": 99,
+              "body": "This also applies to include-name so we should mention it here also",
+              "createdAt": "2025-09-05T08:57:46Z",
+              "updatedAt": "2025-09-05T08:57:56Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOO41rkM6-DYwo",
+          "commit": {
+            "abbreviatedOid": "9369cc2"
+          },
+          "author": "fl1ger",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-09-05T08:59:36Z",
+          "updatedAt": "2025-09-05T08:59:37Z",
+          "comments": [
+            {
+              "originalPosition": 122,
+              "body": "I understand this, but it sounds a bit odd to me. Shouldn't we say resolve the name using DELGI as query type?",
+              "createdAt": "2025-09-05T08:59:37Z",
+              "updatedAt": "2025-09-05T08:59:37Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOO41rkM6-He_U",
+          "commit": {
+            "abbreviatedOid": "9369cc2"
+          },
+          "author": "paulehoffman",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-09-05T14:34:49Z",
+          "updatedAt": "2025-09-05T14:34:49Z",
+          "comments": [
+            {
+              "originalPosition": 99,
+              "body": "Good catch. Fixed in ba68e20",
+              "createdAt": "2025-09-05T14:34:49Z",
+              "updatedAt": "2025-09-05T14:34:49Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOO41rkM6-HhBP",
+          "commit": {
+            "abbreviatedOid": "9369cc2"
+          },
+          "author": "paulehoffman",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-09-05T14:37:25Z",
+          "updatedAt": "2025-09-05T14:37:25Z",
+          "comments": [
+            {
+              "originalPosition": 122,
+              "body": "Yep, that's clearer. Fixed in 0607757",
+              "createdAt": "2025-09-05T14:37:25Z",
+              "updatedAt": "2025-09-05T14:37:25Z"
+            }
+          ]
+        }
+      ]
     }
   ]
 }
