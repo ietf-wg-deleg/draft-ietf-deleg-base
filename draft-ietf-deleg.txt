@@ -6,11 +6,11 @@ deleg                                                           T. April
 Internet-Draft                                               Google, LLC
 Updates: 1034, 1035, 6672, 6840 (if approved)                  P. Špaček
 Intended status: Standards Track                                     ISC
-Expires: 8 March 2026                                           R. Weber
+Expires: 12 March 2026                                          R. Weber
                                                      Akamai Technologies
                                                              D. Lawrence
                                                               Salesforce
-                                                        4 September 2025
+                                                        8 September 2025
 
 
                      Extensible Delegation for DNS
@@ -61,7 +61,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 8 March 2026.
+   This Internet-Draft will expire on 12 March 2026.
 
 Copyright Notice
 
@@ -101,6 +101,7 @@ Table of Contents
        3.4.4.  Chaining
    4.  Security Considerations
      4.1.  Preventing Over-work Attacks
+     4.2.  Preventing Downgrade Attacks
    5.  IANA Considerations
      5.1.  Changes to Existing Registries
      5.2.  New Registry for Delegation Information
@@ -675,6 +676,34 @@ Table of Contents
       Note that include-name chains can have CNAME steps in them; in
       such a case, a CNAME step is counted the same as a DELEGI step
       when determining when to stop following a chain.
+
+4.2.  Preventing Downgrade Attacks
+
+   During the rollout of the DELEG protocol, the operator of an
+   authoritative server can upgrade the server software to be DELEG-
+   aware before changing any DNS zones.  Such deployment should work and
+   provide DELEG-aware clients with correct DELEG-aware answers.
+   However, the deployment will not be protected from downgrade attacks
+   against DELEG protocol.
+
+   To protect DNSSEC-secure DNS zones that use DELEG delegations, the
+   delegating zone needs to have at least one DNSKEY with the ADT flag
+   set to 1.  Failure to set this flag in a DNSKEY record in the zone
+   allows an attacker to remove the DELEG RRset from referrals which
+   contain the DS RRset, and replace the original signed DELEG RRset
+   with an arbitrary unsigned NS set.  Doing so would be a downgrade
+   from the strong protection offered by DNSSEC for DELEG.  That is, the
+   DELEG protocol when used with upgraded DNSKEY records gives the same
+   protection to DELEG that the zone's DS RRset has; without DELEG,
+   there are no security guarantees for the legacy NS RRset on the
+   parent side of the zone cut.
+
+   Please note that a full DNSKEY rollover is not necessary to achieve
+   the downgrade protection for DELEG.  Any single DNSKEY with the ADT
+   flag set to 1 is sufficient; the zone can introduce an otherwise
+   unused record into the DNSKEY RRset.  This DNSKEY RR can even use an
+   unknown signing algorithm and zero-length key material to minimize
+   size increase of the DNSKEY RRset.
 
 5.  IANA Considerations
 
