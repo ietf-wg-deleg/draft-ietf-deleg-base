@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-09-07T01:00:08.240480+00:00",
+  "timestamp": "2025-09-09T00:56:31.256157+00:00",
   "repo": "ietf-wg-deleg/draft-ietf-deleg-base",
   "labels": [
     {
@@ -2308,24 +2308,26 @@
       "id": "PR_kwDOO41rkM6mSzrK",
       "title": "Add Security Considerations: Downgrade Attacks section",
       "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/pull/46",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "pspacek",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2025-09-01T14:01:18Z",
-      "updatedAt": "2025-09-02T21:51:40Z",
+      "updatedAt": "2025-09-08T13:00:45Z",
       "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
       "baseRefName": "main",
       "baseRefOid": "c1e4647620555cb1010ceb01d3e37f8bae50e624",
       "headRepository": "pspacek/draft-ietf-deleg-base",
       "headRefName": "security-downgrade",
       "headRefOid": "e9031631eb658ff5a601fa2c0ddc2e13a9e34913",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2025-09-08T13:00:45Z",
+      "mergedAt": "2025-09-08T13:00:45Z",
+      "mergedBy": "pspacek",
+      "mergeCommit": {
+        "oid": "ecaaa8a1e5226b89c2e8a5b73e2305450110aade"
+      },
       "comments": [
         {
           "author": "moonshiner",
@@ -2333,6 +2335,13 @@
           "body": "Thanks Petr!",
           "createdAt": "2025-09-01T14:16:30Z",
           "updatedAt": "2025-09-01T14:16:30Z"
+        },
+        {
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "body": "No feedback for a week, so I will merge this and we will see if people wake up.",
+          "createdAt": "2025-09-08T13:00:42Z",
+          "updatedAt": "2025-09-08T13:00:42Z"
         }
       ],
       "reviews": []
@@ -2655,18 +2664,26 @@
       "labels": [],
       "body": "",
       "createdAt": "2025-09-04T20:41:12Z",
-      "updatedAt": "2025-09-06T15:26:06Z",
+      "updatedAt": "2025-09-08T16:01:16Z",
       "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
       "baseRefName": "main",
       "baseRefOid": "ce94274f4b3660271387d4bb9d57e4e3b6328559",
       "headRepository": "paulehoffman/fork-deleg-base",
       "headRefName": "dark-star",
-      "headRefOid": "a16aa55b5cffa5ff91b93c415b5c1ca76ca068ee",
+      "headRefOid": "5be6cf120a1dcb17ea8f4f48e7c7e66c531bf3bf",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
-      "comments": [],
+      "comments": [
+        {
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Relevant thread: https://mailarchive.ietf.org/arch/msg/dd/G1wBXxtZU_f9QR7_AXNOYdJCeY8/",
+          "createdAt": "2025-09-08T14:15:05Z",
+          "updatedAt": "2025-09-08T14:15:05Z"
+        }
+      ],
       "reviews": [
         {
           "id": "PRR_kwDOO41rkM6-DXbn",
@@ -2745,6 +2762,52 @@
               "body": "Yep, that's clearer. Fixed in 0607757",
               "createdAt": "2025-09-05T14:37:25Z",
               "updatedAt": "2025-09-05T14:37:25Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOO41rkM6-hbUV",
+          "commit": {
+            "abbreviatedOid": "a16aa55"
+          },
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "state": "CHANGES_REQUESTED",
+          "body": "",
+          "createdAt": "2025-09-08T12:59:21Z",
+          "updatedAt": "2025-09-08T14:16:08Z",
+          "comments": [
+            {
+              "originalPosition": 148,
+              "body": "Addition of \"referal\" to this paragraph is an error. For an old client DELEG does not create a delegation, and there is no NS, so there cannot possibly be a referral.",
+              "createdAt": "2025-09-08T12:59:21Z",
+              "updatedAt": "2025-09-08T14:16:08Z"
+            },
+            {
+              "originalPosition": 148,
+              "body": "There is several combinations and describing all of them would amount to defining the legacy protocol. I don't think it is a good idea.",
+              "createdAt": "2025-09-08T14:15:51Z",
+              "updatedAt": "2025-09-08T14:16:08Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOO41rkM6-kR9L",
+          "commit": {
+            "abbreviatedOid": "a16aa55"
+          },
+          "author": "paulehoffman",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-09-08T16:01:16Z",
+          "updatedAt": "2025-09-08T16:01:16Z",
+          "comments": [
+            {
+              "originalPosition": 148,
+              "body": "Thanks, I see I overdid that. Fixed in 5be6cf1",
+              "createdAt": "2025-09-08T16:01:16Z",
+              "updatedAt": "2025-09-08T16:01:16Z"
             }
           ]
         }
