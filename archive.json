@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-09-09T00:56:31.256157+00:00",
+  "timestamp": "2025-09-11T00:56:21.248974+00:00",
   "repo": "ietf-wg-deleg/draft-ietf-deleg-base",
   "labels": [
     {
@@ -2657,21 +2657,21 @@
       "id": "PR_kwDOO41rkM6m8NR4",
       "title": "Collection of changes from the mailing list this week",
       "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/pull/50",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "paulehoffman",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2025-09-04T20:41:12Z",
-      "updatedAt": "2025-09-08T16:01:16Z",
+      "updatedAt": "2025-09-09T07:21:54Z",
       "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
       "baseRefName": "main",
       "baseRefOid": "ce94274f4b3660271387d4bb9d57e4e3b6328559",
       "headRepository": "paulehoffman/fork-deleg-base",
       "headRefName": "dark-star",
       "headRefOid": "5be6cf120a1dcb17ea8f4f48e7c7e66c531bf3bf",
-      "closedAt": null,
+      "closedAt": "2025-09-09T07:21:53Z",
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
@@ -2682,6 +2682,13 @@
           "body": "Relevant thread: https://mailarchive.ietf.org/arch/msg/dd/G1wBXxtZU_f9QR7_AXNOYdJCeY8/",
           "createdAt": "2025-09-08T14:15:05Z",
           "updatedAt": "2025-09-08T14:15:05Z"
+        },
+        {
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Replaced by #51.",
+          "createdAt": "2025-09-09T07:21:53Z",
+          "updatedAt": "2025-09-09T07:21:53Z"
         }
       ],
       "reviews": [
@@ -2812,6 +2819,94 @@
           ]
         }
       ]
+    },
+    {
+      "number": 51,
+      "id": "PR_kwDOO41rkM6niG9B",
+      "title": "Paul's changes without address parameter merge",
+      "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/pull/51",
+      "state": "MERGED",
+      "author": "pspacek",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-09-09T07:16:00Z",
+      "updatedAt": "2025-09-09T07:22:34Z",
+      "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
+      "baseRefName": "main",
+      "baseRefOid": "ecaaa8a1e5226b89c2e8a5b73e2305450110aade",
+      "headRepository": "pspacek/draft-ietf-deleg-base",
+      "headRefName": "paul-without-address-merge",
+      "headRefOid": "c53a0c77076e6703b1bec64ab64b26ff099e46c7",
+      "closedAt": "2025-09-09T07:22:34Z",
+      "mergedAt": "2025-09-09T07:22:34Z",
+      "mergedBy": "pspacek",
+      "mergeCommit": {
+        "oid": "171b0ddc4ad2508e541d3c0d4a5ca54bd2ba28e7"
+      },
+      "comments": [
+        {
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I've removed controversial changes and left the rest, so I can merge it an work on RR format definition as promised last week.",
+          "createdAt": "2025-09-09T07:22:27Z",
+          "updatedAt": "2025-09-09T07:22:27Z"
+        }
+      ],
+      "reviews": []
+    },
+    {
+      "number": 52,
+      "id": "PR_kwDOO41rkM6nkIKq",
+      "title": "Describe DELEG and DELEGI RR formats",
+      "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/pull/52",
+      "state": "OPEN",
+      "author": "pspacek",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-09-09T09:43:55Z",
+      "updatedAt": "2025-09-09T18:01:28Z",
+      "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
+      "baseRefName": "main",
+      "baseRefOid": "171b0ddc4ad2508e541d3c0d4a5ca54bd2ba28e7",
+      "headRepository": "pspacek/draft-ietf-deleg-base",
+      "headRefName": "rr-format",
+      "headRefOid": "44715ac7721d06454f88611ebcabd9a6cb9a1508",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 53,
+      "id": "PR_kwDOO41rkM6noZ7o",
+      "title": "Clarify that we mean both types of addresses",
+      "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/pull/53",
+      "state": "OPEN",
+      "author": "paulehoffman",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-09-09T15:12:12Z",
+      "updatedAt": "2025-09-09T15:12:16Z",
+      "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
+      "baseRefName": "main",
+      "baseRefOid": "171b0ddc4ad2508e541d3c0d4a5ca54bd2ba28e7",
+      "headRepository": "paulehoffman/fork-deleg-base",
+      "headRefName": "46minor",
+      "headRefOid": "cc84dba09a3b47ea742d5e42c23fa3b96bdaab8a",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
     }
   ]
 }
