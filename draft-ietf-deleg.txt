@@ -561,8 +561,9 @@ Table of Contents
        record is malformed.  Stop processing this record.
 
    2.  If one or more server-ip4 or server-ip6 keys are present inside
-       the record, copy all the address values from the record into
-       SLIST.  Stop processing this record.
+       the record, copy all the address values from the server-ip4 or
+       server-ip6 fields in the record into SLIST.  Stop processing this
+       record.
 
    3.  If a server-name key is present in the record, resolve each name
        in the value into addresses.  Copy these addresses into SLIST.
