@@ -350,12 +350,13 @@ Table of Contents
 
 3.  Use of DELEG Records
 
-   A DELEG RRset MAY be present at a delegation point.  The DELEG RRset
-   MAY contain multiple records.  DELEG RRsets MUST NOT appear at a
-   zone's apex.
-
    A DELEG RRset MAY be present with or without NS or DS RRsets at the
-   delegation point.
+   delegation point.  The DELEG RRset MAY contain multiple records.
+
+   DELEG RRsets MUST NOT appear at a zone's apex.  Errorneous inclusion
+   of DELEG RRset at zone's apex will cause DNSSEC validation failures.
+   Servers MAY refuse to load such an invalid zone, similarly to DS
+   RRtype.
 
 3.1.  Resolvers
 
@@ -517,8 +518,9 @@ Table of Contents
    The rest of the Step 2's description is not affected by this
    document.
 
-   TODO: Determine what to do about ".  DELEG" or ".  DS" queries, which
-   by definition do not have answers in the zone.
+   TODO: Determine what to do about "QNAME=. QTYPE=DELEG" or "QNAME=.
+   QTYPE=DS" queries, which by definition do not have answers in the
+   DNS.
 
 3.1.5.  Nameserver Information for Delegation
 
@@ -552,8 +554,8 @@ Table of Contents
    TODO: Are they?  Are we going to forbid normal zone file expansion
    where names without trailing . get current origin appended to them?
 
-   If any one of these keys is used, it MUST have a value (that is, it
-   cannot be a key with a zero-length value).
+   If any one of these keys is used, they MUST have a value (that is,
+   they cannot be a key with a zero-length value).
 
    A DELEG or DELEGI record MUST NOT have more than one set of server
    information, chosen from the following:
@@ -877,8 +879,11 @@ Table of Contents
    specification or registration source Change Controller: Person or
    entity, with contact information if appropriate
 
-   The characters in the registered Name field entry MUST be lowercase
-   alphanumeric or "-".  The name MUST NOT start with "key".
+   To enable code reuse from SVCB parsers, the requirements for
+   registered Name exactly copy requirements set by [RFC9460] section
+   14.3.1: The characters in the registered Name field entry MUST be
+   lowercase alphanumeric or "-".  The name MUST NOT start with "key" or
+   "invalid".
 
    The registration policy for new entries is Expert Review ([RFC8126]).
    The designated expert MUST ensure that the reference is stable and
@@ -981,6 +986,11 @@ Table of Contents
               DOI 10.17487/RFC8914, October 2020,
               <https://www.rfc-editor.org/rfc/rfc8914>.
 
+   [RFC9460]  Schwartz, B., Bishop, M., and E. Nygren, "Service Binding
+              and Parameter Specification via the DNS (SVCB and HTTPS
+              Resource Records)", RFC 9460, DOI 10.17487/RFC9460,
+              November 2023, <https://www.rfc-editor.org/rfc/rfc9460>.
+
 6.2.  Informative References
 
    [BCP219]   Best Current Practice 219,
@@ -1016,11 +1026,6 @@ Table of Contents
    [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
               May 2017, <https://www.rfc-editor.org/rfc/rfc8174>.
-
-   [RFC9460]  Schwartz, B., Bishop, M., and E. Nygren, "Service Binding
-              and Parameter Specification via the DNS (SVCB and HTTPS
-              Resource Records)", RFC 9460, DOI 10.17487/RFC9460,
-              November 2023, <https://www.rfc-editor.org/rfc/rfc9460>.
 
 Appendix A.  Examples
 
