@@ -6,11 +6,11 @@ deleg                                                           T. April
 Internet-Draft                                               Google, LLC
 Updates: 1034, 1035, 6672, 6840 (if approved)                  P. Špaček
 Intended status: Standards Track                                     ISC
-Expires: 15 March 2026                                          R. Weber
+Expires: 16 March 2026                                          R. Weber
                                                      Akamai Technologies
                                                              D. Lawrence
                                                               Salesforce
-                                                       11 September 2025
+                                                       12 September 2025
 
 
                      Extensible Delegation for DNS
@@ -61,7 +61,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 15 March 2026.
+   This Internet-Draft will expire on 16 March 2026.
 
 Copyright Notice
 
@@ -184,6 +184,9 @@ Table of Contents
 
    *  legacy delegation: A delegation that is done with an NS RRset
 
+   *  legacy response: A response which does not take (new) special
+      semantics of DELEG RRtype into account
+
    *  legacy referral response: A response with an NS RRset in the
       AUTHORITY section, plus all relevant DNSSEC records
 
@@ -206,11 +209,12 @@ Table of Contents
    specific.
 
    The record format is based on the extensible key=value list that was
-   originally describe for "SvcParams" for the SVCB record type
-   [RFC9460].  The keys in the DELEG protocol are different than those
-   used in SVCB.  To avoid confusion between the two protocols, the list
-   of key=value parameters used by the DELEG protocol are called
-   DelegInfos.
+   originally defined for "SvcParams" for the SVCB record type
+   [RFC9460].  Unlike SVCB, DELEG protocol does not have "SvcPriority"
+   and "TargetName" fields.  The keys in the DELEG protocol are
+   different than those used in SVCB.  To avoid confusion between the
+   two protocols, the list of key=value parameters used by the DELEG
+   protocol are called DelegInfos.
 
    The following rules are adapted from SVCB, but with changed names:
 
@@ -299,16 +303,16 @@ Table of Contents
    *  DELEG has unique rules for inclusion in answers, as described in
       many parts of this specification.
 
-   *  DELEGI is an ordinary RRtype, similar to the TXT RRtype.
+   *  DELEGI is like any normal RR, as is doesn't require any special
+      processing.
 
-   *  DELEGI does not create a delegation for its owner name, similar to
-      the TXT RRtype.
+   *  DELEGI does not create a delegation for its owner name.
 
    *  DELEGI cannot coexist at the same owner name with DELEG or NS
-      RRtypes, similar to the TXT RRtype.
+      RRtypes.
 
    *  DELEGI DNSSEC signing and record placement rules are the same as
-      for any ordinary RRtype, such as the TXT RRtype.
+      for any ordinary RRtype.
 
    *  DELEGI is used as the target of the DELEG protocol's "include"
       mechanism (see section Section 3.1.6 for details).
@@ -609,10 +613,12 @@ Table of Contents
 
 3.2.1.1.  DELEG-unaware Clients Requesting QTYPE=DELEG
 
-   In DELEG-unaware clients, records with the DELEG RRtype are not
-   authoritative on the parent side.  Thus, queries with DE=0 and
-   QTYPE=DELEG MUST result in a normal legacy response, such as a legacy
-   referral response if there are NS records.
+   From the perspective of DELEG-unaware clients, DELEG RRtype does not
+   have special semantics and should behave like an old ordinary RR
+   type, e.g. TXT.  Thus, queries with DE=0 and QTYPE=DELEG MUST result
+   in a normal legacy response.  This would be a legacy referral
+   response if there are NS records, or the actual DELEG RR type if the
+   owner name does not have NS records.
 
    TODO: Should we have an example with auth having parent+child zone at
    the same time, and DE=0 QTYPE=DELEG query?
@@ -1226,7 +1232,7 @@ Acknowledgments
    Adhvaryu, Vladimír Čunát, Andreas Schulze.
 
    Other people joined the effort after the initial hackaton: Ben
-   Schwartz, Bob Halley, Paul Hoffman, ...
+   Schwartz, Bob Halley, Paul Hoffman, Miek Gieben ...
 
 Authors' Addresses
 
