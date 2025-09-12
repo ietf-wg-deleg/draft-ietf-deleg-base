@@ -1374,12 +1374,13 @@ This limitation is a barrier for efficient introduction of new DNS technology.<a
 <p id="section-1-4">The proposed DELEG and DELEGI record types remedy this problem by providing extensible parameters to indicate server capabilities and additional information, such as addresses that a resolver may use to reach the server.
 The DELEG record creates a new delegation.
 It is authoritative in the parent side of delegation and thus signed.
-This makes it possible to validate all delegation parameters with DNSSEC, including all future extensions.
-The DELEGI record is an auxiliary record which does not create delegation by itself, but can be used to share the same delegation information across any number of zones.
-DELEGI is treated like regular authoritative records in their zone.<a href="#section-1-4" class="pilcrow">¶</a></p>
-<p id="section-1-5">DELEG record can be used instead of or along side a NS record to create a delegation.
-Combination of DELEG+NS is fully compatible with old resolvers.<a href="#section-1-5" class="pilcrow">¶</a></p>
-<p id="section-1-6">Future documents can use the extensible mechanism for more advanced features like connecting to a name server with an encrypted transport.<a href="#section-1-6" class="pilcrow">¶</a></p>
+This makes it possible to validate all delegation parameters with DNSSEC, including all future extensions.<a href="#section-1-4" class="pilcrow">¶</a></p>
+<p id="section-1-5">The DELEGI record is an auxiliary record which does not create delegation by itself but provides an optional layer of indirection.
+It can be used to share the same delegation information across any number of zones.
+DELEGI is treated like regular authoritative record.<a href="#section-1-5" class="pilcrow">¶</a></p>
+<p id="section-1-6">DELEG record can be used instead of or along side a NS record to create a delegation.
+Combination of DELEG+NS is fully compatible with old resolvers.<a href="#section-1-6" class="pilcrow">¶</a></p>
+<p id="section-1-7">Future documents can use the extensible mechanism for more advanced features like connecting to a name server with an encrypted transport.<a href="#section-1-7" class="pilcrow">¶</a></p>
 <div id="terminology">
 <section id="section-1.1">
         <h3 id="name-terminology">
@@ -1539,7 +1540,7 @@ including the requirements for strictly increasing numeric order of keys and dup
             <p id="section-2.3-2.11.1">DELEGI is used as the target of the DELEG protocol's "include" mechanism (see section <a href="#slist" class="auto internal xref">Section 3.1.6</a> for details).<a href="#section-2.3-2.11.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
-<p id="section-2.3-3">TODO: Add some introduction comparing how resolvers see legacy delegation (set of NS and A/AAAA records) and DELEG delegation (DELEG and DELEGI records with server-ip4 and server-ip6 keys)<a href="#section-2.3-3" class="pilcrow">¶</a></p>
+<p id="section-2.3-3">TODO: Add some introduction comparing how resolvers see legacy delegation (set of NS and A/AAAA records) and DELEG delegation (DELEG and DELEGI records with server-ipv4 and server-ipv6 keys)<a href="#section-2.3-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1693,46 +1694,46 @@ The purpose of this information is to populate the SLIST with IP addresses of th
 The types of information defined in this document are:<a href="#section-3.1.5-1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-3.1.5-2.1">
-              <p id="section-3.1.5-2.1.1">server-ip4: a set of IPv4 addresses for nameservers<a href="#section-3.1.5-2.1.1" class="pilcrow">¶</a></p>
+              <p id="section-3.1.5-2.1.1">server-ipv4: a set of IPv4 addresses for nameservers<a href="#section-3.1.5-2.1.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-3.1.5-2.2">
-              <p id="section-3.1.5-2.2.1">server-ip6: a set of IPv6 addresses for nameservers<a href="#section-3.1.5-2.2.1" class="pilcrow">¶</a></p>
+              <p id="section-3.1.5-2.2.1">server-ipv6: a set of IPv6 addresses for nameservers<a href="#section-3.1.5-2.2.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-3.1.5-2.3">
               <p id="section-3.1.5-2.3.1">server-name: the domain name of a nameserver; the addresses must be fetched<a href="#section-3.1.5-2.3.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-3.1.5-2.4">
-              <p id="section-3.1.5-2.4.1">include-name: the domain name that points to a DELEGI RRset, which in turn has more information about the nameservers<a href="#section-3.1.5-2.4.1" class="pilcrow">¶</a></p>
+              <p id="section-3.1.5-2.4.1">include-delegi: the domain name that points to a DELEGI RRset, which in turn has more information about the nameservers<a href="#section-3.1.5-2.4.1" class="pilcrow">¶</a></p>
 </li>
           </ul>
-<p id="section-3.1.5-3">The presentation values for server-ip4 and server-ip6 are comma-separated list of one or more IP addresses of the appropriate family in standard textual format <span>[<a href="#RFC5952" class="cite xref">RFC5952</a>]</span> <span>[<a href="#RFC4001" class="cite xref">RFC4001</a>]</span>.
-The wire formats for server-ip4 and server-ip6 are a sequence of IP addresses in network byte order (for the respective address family).<a href="#section-3.1.5-3" class="pilcrow">¶</a></p>
-<p id="section-3.1.5-4">The presentation values for server-name and include-name are as sets of full-qualified domain names, separated by commas.
-The wire format for server-name and include-name are each a concatenated set of a wire-format domain names.
+<p id="section-3.1.5-3">The presentation values for server-ipv4 and server-ipv6 are comma-separated list of one or more IP addresses of the appropriate family in standard textual format <span>[<a href="#RFC5952" class="cite xref">RFC5952</a>]</span> <span>[<a href="#RFC4001" class="cite xref">RFC4001</a>]</span>.
+The wire formats for server-ipv4 and server-ipv6 are a sequence of IP addresses in network byte order (for the respective address family).<a href="#section-3.1.5-3" class="pilcrow">¶</a></p>
+<p id="section-3.1.5-4">The presentation values for server-name and include-delegi are as sets of full-qualified domain names, separated by commas.
+The wire format for server-name and include-delegi are each a concatenated set of a wire-format domain names.
 The names in the wire format MUST NOT be compressed.<a href="#section-3.1.5-4" class="pilcrow">¶</a></p>
 <p id="section-3.1.5-5">TODO: Are they? Are we going to forbid normal zone file expansion where names without trailing . get current origin appended to them?<a href="#section-3.1.5-5" class="pilcrow">¶</a></p>
 <p id="section-3.1.5-6">If any one of these keys is used, it MUST have a value (that is, it cannot be a key with a zero-length value).<a href="#section-3.1.5-6" class="pilcrow">¶</a></p>
 <p id="section-3.1.5-7">A DELEG or DELEGI record MUST NOT have more than one set of server information, chosen from the following:<a href="#section-3.1.5-7" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-3.1.5-8.1">
-              <p id="section-3.1.5-8.1.1">one server-ip4 key<a href="#section-3.1.5-8.1.1" class="pilcrow">¶</a></p>
+              <p id="section-3.1.5-8.1.1">one server-ipv4 key<a href="#section-3.1.5-8.1.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-3.1.5-8.2">
-              <p id="section-3.1.5-8.2.1">one server-ip6 key<a href="#section-3.1.5-8.2.1" class="pilcrow">¶</a></p>
+              <p id="section-3.1.5-8.2.1">one server-ipv6 key<a href="#section-3.1.5-8.2.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-3.1.5-8.3">
-              <p id="section-3.1.5-8.3.1">a pair consisting of one server-ip4 and one server-ip6<a href="#section-3.1.5-8.3.1" class="pilcrow">¶</a></p>
+              <p id="section-3.1.5-8.3.1">a pair consisting of one server-ipv4 and one server-ipv6<a href="#section-3.1.5-8.3.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-3.1.5-8.4">
               <p id="section-3.1.5-8.4.1">one server-name key<a href="#section-3.1.5-8.4.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-3.1.5-8.5">
-              <p id="section-3.1.5-8.5.1">one include-name key<a href="#section-3.1.5-8.5.1" class="pilcrow">¶</a></p>
+              <p id="section-3.1.5-8.5.1">one include-delegi key<a href="#section-3.1.5-8.5.1" class="pilcrow">¶</a></p>
 </li>
           </ul>
 <p id="section-3.1.5-9">This restriction only applies to a single DELEG or DELEGI record; a DELEG or DELEGI RRset can have records with different server information keys.<a href="#section-3.1.5-9" class="pilcrow">¶</a></p>
 <p id="section-3.1.5-10">When using server-name, the addresses for all the names in the set must be fetched using normal DNS resolution.
-This means the names in the value of the server-name key or the include-name key MUST NOT be inside the delegated domain.<a href="#section-3.1.5-10" class="pilcrow">¶</a></p>
+This means the names in the value of the server-name key or the include-delegi key MUST NOT be inside the delegated domain.<a href="#section-3.1.5-10" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="slist">
@@ -1748,7 +1749,7 @@ This means the names in the value of the server-name key or the include-name key
 Stop processing this record.<a href="#section-3.1.6-3.1.1" class="pilcrow">¶</a></p>
 </li>
             <li id="section-3.1.6-3.2">
-              <p id="section-3.1.6-3.2.1">If one or more server-ip4 or server-ip6 keys are present inside the record, copy all the address values from the server-ip4 or server-ip6 fields in the record into SLIST.
+              <p id="section-3.1.6-3.2.1">If one or more server-ipv4 or server-ipv6 keys are present inside the record, copy all the address values from the server-ipv4 or server-ipv6 fields in the record into SLIST.
 Stop processing this record.<a href="#section-3.1.6-3.2.1" class="pilcrow">¶</a></p>
 </li>
             <li id="section-3.1.6-3.3">
@@ -1757,7 +1758,7 @@ Copy these addresses into SLIST.
 Stop processing this record.<a href="#section-3.1.6-3.3.1" class="pilcrow">¶</a></p>
 </li>
             <li id="section-3.1.6-3.4">
-              <p id="section-3.1.6-3.4.1">If a include-name key is present in the record, resolve each name in the value using the DELEGI RRtype.
+              <p id="section-3.1.6-3.4.1">If a include-delegi key is present in the record, resolve each name in the value using the DELEGI RRtype.
 Recursively apply the algorithm described in this section, after checking that the maximum loop count described in <a href="#too-much-work" class="auto internal xref">Section 4.1</a> has not been reached.<a href="#section-3.1.6-3.4.1" class="pilcrow">¶</a></p>
 </li>
             <li id="section-3.1.6-3.5">
@@ -1962,9 +1963,9 @@ This document describes two sets of actions that, if not controlled, could lead 
 To prevent this, the resolver SHOULD NOT walk up more than %%TODO: come up with a number%% labels in order to contribute to SLIST.<a href="#section-4.1-2.1.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-4.1-2.2">
-            <p id="section-4.1-2.2.1">Long chains of include-name information (<a href="#nameserver-info" class="auto internal xref">Section 3.1.5</a>), and those with circular chains if include-name information, can be burdensome.
-To prevent this, the resolver SHOULD NOT follow more than 3 include-name chains in an RRset when populating SLIST.
-Note that include-name chains can have CNAME steps in them; in such a case, a CNAME step is counted the same as a DELEGI step when determining when to stop following a chain.<a href="#section-4.1-2.2.1" class="pilcrow">¶</a></p>
+            <p id="section-4.1-2.2.1">Long chains of include-delegi information (<a href="#nameserver-info" class="auto internal xref">Section 3.1.5</a>), and those with circular chains if include-delegi information, can be burdensome.
+To prevent this, the resolver SHOULD NOT follow more than 3 include-delegi chains in an RRset when populating SLIST.
+Note that include-delegi chains can have CNAME steps in them; in such a case, a CNAME step is counted the same as a DELEGI step when determining when to stop following a chain.<a href="#section-4.1-2.2.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 </section>
@@ -2042,13 +2043,13 @@ An entry MAY specify a reference of the form "Same as (other key name)" if it us
 <div class="alignLeft art-text artwork" id="section-5.2.2-2">
 <pre>
 Number:  1
-Name:  server-ip4
+Name:  server-ipv4
 Meaning:  A set of IPv4 addresses of nameservers
 Reference:  {{nameserver-info}} of this document
 Change Controller:  IETF
 
 Number:  2
-Name:  server-ip6
+Name:  server-ipv6
 Meaning:  A set of IPv6 addresses of nameservers
 Reference:  {{nameserver-info}} of this document
 Change Controller:  IETF
@@ -2060,7 +2061,7 @@ Reference:  {{nameserver-info}} of this document
 Change Controller:  IETF
 
 Number:  4
-Name:  include-name
+Name:  include-delegi
 Meaning:  The fully-qualified domain of a DELEGI record
 Reference:  {{nameserver-info}} of this document
 Change Controller:  IETF
@@ -2196,14 +2197,14 @@ The section will be removed when IANA makes permanent assignments.<a href="#sect
 It shows the delegation point for "example." and "test."<a href="#appendix-A-1" class="pilcrow">¶</a></p>
 <p id="appendix-A-2">The "example." delegation has DELEG and NS records.
 The "test." delegation has DELEG but no NS records.<a href="#appendix-A-2" class="pilcrow">¶</a></p>
-<p id="appendix-A-3">TODO: Add examples that have server-name and include-name being sets of more than one name.<a href="#appendix-A-3" class="pilcrow">¶</a></p>
+<p id="appendix-A-3">TODO: Add examples that have server-name and include-delegi being sets of more than one name.<a href="#appendix-A-3" class="pilcrow">¶</a></p>
 <p id="appendix-A-4">TODO: Examples of using server-address.<a href="#appendix-A-4" class="pilcrow">¶</a></p>
 <p id="appendix-A-5">TODO: Examples that show DELEGI records in ns2.example.net and ns3.example.org.<a href="#appendix-A-5" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="appendix-A-6">
 <pre>
 example.   300 IN DELEG server-name=a.example.
-example.   300 IN DELEG include-name=ns2.example.net.
-example.   300 IN DELEG include-name=ns3.example.org.
+example.   300 IN DELEG include-delegi=ns2.example.net.
+example.   300 IN DELEG include-delegi=ns3.example.org.
 example.   300 IN RRSIG DELEG 13 4 300 20250214164848 (
                         20250207134348 21261 . HyDHYVT5KcqWc7J..= )
 example.   300 IN NS    a.example.
@@ -2222,7 +2223,7 @@ a.example. 300 IN AAAA  2001:DB8::1
 <p id="appendix-A-7">The "test." delegation point has a DELEG record and no NS record.<a href="#appendix-A-7" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="appendix-A-8">
 <pre>
-test.      300 IN DELEG include-name=ns2.example.net
+test.      300 IN DELEG include-delegi=ns2.example.net
 test.      300 IN RRSIG DELEG 13 4 300 20250214164848 (
                         20250207134348 21261 . 98Aac9f7A1Ac26Q..= )
 test.      300 IN NSEC  a.test. RRSIG NSEC DELEG
@@ -2390,8 +2391,8 @@ foo.example.  IN MX
 
 ;; Authority
 example.   300 IN DELEG server-name=a.example.
-example.   300 IN DELEG include-name=ns2.example.net.
-example.   300 IN DELEG include-name=ns3.example.org.
+example.   300 IN DELEG include-delegi=ns2.example.net.
+example.   300 IN DELEG include-delegi=ns3.example.org.
 
 ;; Additional
 ;; (empty)
@@ -2416,7 +2417,7 @@ foo.test.   IN MX
 ;; (empty)
 
 ;; Authority
-test.      300 IN DELEG include-name=ns2.example.net
+test.      300 IN DELEG include-delegi=ns2.example.net
 
 ;; Additional
 ;; (empty)
@@ -2450,8 +2451,8 @@ foo.example.  IN MX
 ;; Authority
 
 example.   300 IN DELEG server-name=a.example.
-example.   300 IN DELEG include-name=ns2.example.net.
-example.   300 IN DELEG include-name=ns3.example.org.
+example.   300 IN DELEG include-delegi=ns2.example.net.
+example.   300 IN DELEG include-delegi=ns3.example.org.
 example.   300 IN RRSIG DELEG 13 4 300 20250214164848 (
                         20250207134348 21261 . HyDHYVT5KcqWc7J..= )
 example.   300 IN DS    65163 13 2 5F86F2F3AE2B02...
@@ -2482,7 +2483,7 @@ foo.test.      IN MX
 ;; (empty)
 
 ;; Authority
-test.      300 IN DELEG include-name=ns2.example.net.
+test.      300 IN DELEG include-delegi=ns2.example.net.
 test.      300 IN RRSIG DELEG 13 4 300 20250214164848 (
                         20250207134348 21261 . 98Aac9f7A1Ac26Q..= )
 test.      300 IN NSEC  a.test. RRSIG NSEC DELEG
