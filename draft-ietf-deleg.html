@@ -1494,9 +1494,34 @@ To avoid confusion between the two protocols, the list of key=value parameters u
         <h3 id="name-rdata-wire-format">
 <a href="#section-2.2" class="section-number selfRef">2.2. </a><a href="#name-rdata-wire-format" class="section-name selfRef">RDATA Wire Format</a>
         </h3>
-<p id="section-2.2-1">The format of the DelegInfos list is identical to SvcParams format defined in Section 2.2 <span>[<a href="#RFC9460" class="cite xref">RFC9460</a>]</span>,
-including the requirements for strictly increasing numeric order of keys and duplicate keys not being allowed.<a href="#section-2.2-1" class="pilcrow">¶</a></p>
-<p id="section-2.2-2">All the requirements in Section 2.2 of <span>[<a href="#RFC9460" class="cite xref">RFC9460</a>]</span> apply.<a href="#section-2.2-2" class="pilcrow">¶</a></p>
+<p id="section-2.2-1">RDATA portion of RRtypes is variable length and entirely consists of "DelegInfos" element:<a href="#section-2.2-1" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-2.2-2">
+<pre>
+    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+    /                         DelegInfos                            /
+    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+</pre><a href="#section-2.2-2" class="pilcrow">¶</a>
+</div>
+<p id="section-2.2-3">The format of the DelegInfos is identical to SvcParams format defined in Section 2.2 <span>[<a href="#RFC9460" class="cite xref">RFC9460</a>]</span>,
+including the requirements for strictly increasing numeric order of keys and duplicate keys not being allowed.<a href="#section-2.2-3" class="pilcrow">¶</a></p>
+<p id="section-2.2-4">All the requirements in Section 2.2 of <span>[<a href="#RFC9460" class="cite xref">RFC9460</a>]</span> apply.<a href="#section-2.2-4" class="pilcrow">¶</a></p>
+<p id="section-2.2-5">DelegInfos is a (possibly empty) sequence of individual DelegInfo elements.
+Wire format of an individual DelegInfo element is the same as SvcParam,
+but it references DelegInfo elements instead of SvcParam elements:<a href="#section-2.2-5" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-2.2-6">
+<pre>
+                +0 (MSB)                            +1 (LSB)
+    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+0:  |                          DelegInfoKey                         |
+    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+2:  |                length of DelegInfoValue                       |
+    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+4:  /                          DelegInfoValue ...                   /
+    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+</pre><a href="#section-2.2-6" class="pilcrow">¶</a>
+</div>
+<p id="section-2.2-7">Permissible lengths depend on DelegInfoKey value.
+Some future keys can use zero length DelegInfoValue.<a href="#section-2.2-7" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="overview-of-differences-between-deleg-and-delegi-semantics">
@@ -1700,10 +1725,10 @@ The types of information defined in this document are:<a href="#section-3.1.5-1"
               <p id="section-3.1.5-2.2.1">server-ipv6: a set of IPv6 addresses for nameservers<a href="#section-3.1.5-2.2.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-3.1.5-2.3">
-              <p id="section-3.1.5-2.3.1">server-name: the domain name of a nameserver; the addresses must be fetched<a href="#section-3.1.5-2.3.1" class="pilcrow">¶</a></p>
+              <p id="section-3.1.5-2.3.1">server-name: a set of hostnames of nameservers; the addresses must be fetched<a href="#section-3.1.5-2.3.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-3.1.5-2.4">
-              <p id="section-3.1.5-2.4.1">include-delegi: the domain name that points to a DELEGI RRset, which in turn has more information about the nameservers<a href="#section-3.1.5-2.4.1" class="pilcrow">¶</a></p>
+              <p id="section-3.1.5-2.4.1">include-delegi: a set of domain names that point to a DELEGI RRsets, which in turn have more information about the delegation<a href="#section-3.1.5-2.4.1" class="pilcrow">¶</a></p>
 </li>
           </ul>
 <p id="section-3.1.5-3">The presentation values for server-ipv4 and server-ipv6 are comma-separated list of one or more IP addresses of the appropriate family in standard textual format <span>[<a href="#RFC5952" class="cite xref">RFC5952</a>]</span> <span>[<a href="#RFC4001" class="cite xref">RFC4001</a>]</span>.
@@ -1963,7 +1988,7 @@ This document describes two sets of actions that, if not controlled, could lead 
 To prevent this, the resolver SHOULD NOT walk up more than %%TODO: come up with a number%% labels in order to contribute to SLIST.<a href="#section-4.1-2.1.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-4.1-2.2">
-            <p id="section-4.1-2.2.1">Long chains of include-delegi information (<a href="#nameserver-info" class="auto internal xref">Section 3.1.5</a>), and those with circular chains if include-delegi information, can be burdensome.
+            <p id="section-4.1-2.2.1">Long chains of include-delegi information (<a href="#nameserver-info" class="auto internal xref">Section 3.1.5</a>), and those with circular chains of include-delegi information, can be burdensome.
 To prevent this, the resolver SHOULD NOT follow more than 3 include-delegi chains in an RRset when populating SLIST.
 Note that include-delegi chains can have CNAME steps in them; in such a case, a CNAME step is counted the same as a DELEGI step when determining when to stop following a chain.<a href="#section-4.1-2.2.1" class="pilcrow">¶</a></p>
 </li>
@@ -2056,18 +2081,18 @@ Change Controller:  IETF
 
 Number:  3
 Name:  server-name
-Meaning:  The fully-qualified domain name of a nameserver
+Meaning:  A set of hostnames of nameservers
 Reference:  {{nameserver-info}} of this document
 Change Controller:  IETF
 
 Number:  4
 Name:  include-delegi
-Meaning:  The fully-qualified domain of a DELEGI record
+Meaning:  A set of domain names of DELEGI records
 Reference:  {{nameserver-info}} of this document
 Change Controller:  IETF
 
-The registration for number 0 is reserved.
-The registration for numbers 65280-65535 is reserved for private use.
+The registration for numbers 65280-65534 is reserved for private use.
+The registration for number 65535 is reserved.
 </pre><a href="#section-5.2.2-2" class="pilcrow">¶</a>
 </div>
 </section>
@@ -2083,16 +2108,16 @@ The registration for numbers 65280-65535 is reserved for private use.
 The section will be removed when IANA makes permanent assignments.<a href="#section-5.3-1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-5.3-2.1">
-            <p id="section-5.3-2.1.1">DELEG RRtype code is 65432<a href="#section-5.3-2.1.1" class="pilcrow">¶</a></p>
+            <p id="section-5.3-2.1.1">DELEG RRtype code is 61440<a href="#section-5.3-2.1.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-5.3-2.2">
             <p id="section-5.3-2.2.1">DELEGI RRtype code is 65433<a href="#section-5.3-2.2.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-5.3-2.3">
-            <p id="section-5.3-2.3.1">DELEG EDNS Flag Bit is 3<a href="#section-5.3-2.3.1" class="pilcrow">¶</a></p>
+            <p id="section-5.3-2.3.1">DELEG EDNS DE Flag Bit is 3<a href="#section-5.3-2.3.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-5.3-2.4">
-            <p id="section-5.3-2.4.1">DELEG DNSKEY Flag Bit is 14<a href="#section-5.3-2.4.1" class="pilcrow">¶</a></p>
+            <p id="section-5.3-2.4.1">DNSKEY flag ADT (Authoritative Delegation Types) is 14<a href="#section-5.3-2.4.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 </section>
