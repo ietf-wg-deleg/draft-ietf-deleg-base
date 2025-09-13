@@ -1484,7 +1484,7 @@ To avoid confusion between the two protocols, the list of key=value parameters u
     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 </pre><a href="#section-2.2-2" class="pilcrow">¶</a>
 </div>
-<p id="section-2.2-3">The format of the DelegInfos eleemnt is identical to the format of the SvcParams element defined in Section 2.2 <span>[<a href="#RFC9460" class="cite xref">RFC9460</a>]</span>,
+<p id="section-2.2-3">The format of the DelegInfos element is identical to the format of the SvcParams element defined in Section 2.2 <span>[<a href="#RFC9460" class="cite xref">RFC9460</a>]</span>,
 including the requirements for strictly increasing numeric order of keys and duplicate keys not being allowed.<a href="#section-2.2-3" class="pilcrow">¶</a></p>
 <p id="section-2.2-4">All the requirements in Section 2.2 of <span>[<a href="#RFC9460" class="cite xref">RFC9460</a>]</span> apply.<a href="#section-2.2-4" class="pilcrow">¶</a></p>
 <p id="section-2.2-5">The DelegInfos element is a (possibly empty) sequence of individual DelegInfo elements.
@@ -1560,7 +1560,7 @@ Some future keys may have zero length DelegInfoValue.<a href="#section-2.2-7" cl
 <p id="section-3-1">A DELEG RRset MAY be present with or without NS or DS RRsets at the delegation point.
 The DELEG RRset MAY contain multiple records.<a href="#section-3-1" class="pilcrow">¶</a></p>
 <p id="section-3-2">DELEG RRsets MUST NOT appear at a zone's apex.
-The errorneous inclusion of DELEG RRset at zone's apex will cause DNSSEC validation failures.
+The erroneous inclusion of DELEG RRset at zone's apex will cause DNSSEC validation failures.
 Servers MAY refuse to load such an invalid zone, similarly to the DS RRtype.<a href="#section-3-2" class="pilcrow">¶</a></p>
 <div id="resolvers">
 <section id="section-3.1">
@@ -2565,7 +2565,7 @@ test.      RRSIG NSEC 13 4 300 20260101000000 (
         </h3>
 <p id="appendix-A.5-1">In the examples above, test. DELEG record uses indirection and points to other domain names with DELEGI, A, and AAAA records.
 During resolution, a resolver will gradually build set of nameservers to contact, as defined in <a href="#slist" class="auto internal xref">Section 3.1.6</a>.<a href="#appendix-A.5-1" class="pilcrow">¶</a></p>
-<p id="appendix-A.5-2">To vizualize end result of this process we represent full set of nameservers in form of a 'virtual' DELEG RRset.<a href="#appendix-A.5-2" class="pilcrow">¶</a></p>
+<p id="appendix-A.5-2">To visualize end result of this process we represent full set of nameservers in form of a 'virtual' DELEG RRset.<a href="#appendix-A.5-2" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="appendix-A.5-3">
 <pre>
 test. DELEG server-ipv4=198.51.100.1

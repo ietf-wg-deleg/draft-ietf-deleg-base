@@ -280,7 +280,7 @@ Table of Contents
        /                         DelegInfos                            /
        +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 
-   The format of the DelegInfos eleemnt is identical to the format of
+   The format of the DelegInfos element is identical to the format of
    the SvcParams element defined in Section 2.2 [RFC9460], including the
    requirements for strictly increasing numeric order of keys and
    duplicate keys not being allowed.
@@ -349,7 +349,7 @@ Table of Contents
    A DELEG RRset MAY be present with or without NS or DS RRsets at the
    delegation point.  The DELEG RRset MAY contain multiple records.
 
-   DELEG RRsets MUST NOT appear at a zone's apex.  The errorneous
+   DELEG RRsets MUST NOT appear at a zone's apex.  The erroneous
    inclusion of DELEG RRset at zone's apex will cause DNSSEC validation
    failures.  Servers MAY refuse to load such an invalid zone, similarly
    to the DS RRtype.
@@ -1291,7 +1291,7 @@ A.5.  DELEGI Interpretation
    During resolution, a resolver will gradually build set of nameservers
    to contact, as defined in Section 3.1.6.
 
-   To vizualize end result of this process we represent full set of
+   To visualize end result of this process we represent full set of
    nameservers in form of a 'virtual' DELEG RRset.
 
 test. DELEG server-ipv4=198.51.100.1
