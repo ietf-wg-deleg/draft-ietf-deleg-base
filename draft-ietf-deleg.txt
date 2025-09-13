@@ -6,11 +6,11 @@ deleg                                                           T. April
 Internet-Draft                                               Google, LLC
 Updates: 1034, 1035, 6672, 6840 (if approved)                  P. Špaček
 Intended status: Standards Track                                     ISC
-Expires: 16 March 2026                                          R. Weber
+Expires: 17 March 2026                                          R. Weber
                                                      Akamai Technologies
                                                              D. Lawrence
                                                               Salesforce
-                                                       12 September 2025
+                                                       13 September 2025
 
 
                      Extensible Delegation for DNS
@@ -61,7 +61,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 16 March 2026.
+   This Internet-Draft will expire on 17 March 2026.
 
 Copyright Notice
 
@@ -273,24 +273,24 @@ Table of Contents
 
 2.2.  RDATA Wire Format
 
-   RDATA portion of RRtypes is variable length and entirely consists of
-   "DelegInfos" element:
+   The RDATA portion of the RRtypes has variable length and entirely
+   consists of a single "DelegInfos" element:
 
        +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
        /                         DelegInfos                            /
        +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 
-   The format of the DelegInfos is identical to SvcParams format defined
-   in Section 2.2 [RFC9460], including the requirements for strictly
-   increasing numeric order of keys and duplicate keys not being
-   allowed.
+   The format of the DelegInfos eleemnt is identical to the format of
+   the SvcParams element defined in Section 2.2 [RFC9460], including the
+   requirements for strictly increasing numeric order of keys and
+   duplicate keys not being allowed.
 
    All the requirements in Section 2.2 of [RFC9460] apply.
 
-   DelegInfos is a (possibly empty) sequence of individual DelegInfo
-   elements.  Wire format of an individual DelegInfo element is the same
-   as SvcParam, but it references DelegInfo elements instead of SvcParam
-   elements:
+   The DelegInfos element is a (possibly empty) sequence of individual
+   DelegInfo elements.  The wire format of an individual DelegInfo
+   element is the same as for a SvcParam element, but it references
+   DelegInfo elements instead of SvcParam elements:
 
                    +0 (MSB)                            +1 (LSB)
        +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
@@ -301,8 +301,8 @@ Table of Contents
    4:  /                          DelegInfoValue ...                   /
        +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 
-   Permissible lengths depend on DelegInfoKey value.  Some future keys
-   can use zero length DelegInfoValue.
+   The permissible lengths depend on the DelegInfoKey value.  Some
+   future keys may have zero length DelegInfoValue.
 
 2.3.  Overview of Differences between DELEG and DELEGI Semantics
 
@@ -349,10 +349,10 @@ Table of Contents
    A DELEG RRset MAY be present with or without NS or DS RRsets at the
    delegation point.  The DELEG RRset MAY contain multiple records.
 
-   DELEG RRsets MUST NOT appear at a zone's apex.  Errorneous inclusion
-   of DELEG RRset at zone's apex will cause DNSSEC validation failures.
-   Servers MAY refuse to load such an invalid zone, similarly to DS
-   RRtype.
+   DELEG RRsets MUST NOT appear at a zone's apex.  The errorneous
+   inclusion of DELEG RRset at zone's apex will cause DNSSEC validation
+   failures.  Servers MAY refuse to load such an invalid zone, similarly
+   to the DS RRtype.
 
 3.1.  Resolvers
 
@@ -550,8 +550,8 @@ Table of Contents
    TODO: Are they?  Are we going to forbid normal zone file expansion
    where names without trailing . get current origin appended to them?
 
-   If any one of these keys is used, they MUST have a value (that is,
-   they cannot be a key with a zero-length value).
+   If any one of these keys is used, it MUST have a value (that is, it
+   cannot be a key with a zero-length value).
 
    A DELEG or DELEGI record MUST NOT have more than one set of server
    information, chosen from the following:
