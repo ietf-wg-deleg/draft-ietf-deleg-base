@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-09-11T00:56:21.248974+00:00",
+  "timestamp": "2025-09-14T00:59:27.739297+00:00",
   "repo": "ietf-wg-deleg/draft-ietf-deleg-base",
   "labels": [
     {
@@ -107,15 +107,15 @@
       "id": "I_kwDOO41rkM68AE75",
       "title": "resolver behavior matrix",
       "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/issues/4",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "pspacek",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Describe what resolver does with different combinations of:\n\n- resolver does/not support DELEG\n- auth zone does/not support DELEG\n- auth zone does/not contain DELEG\n- auth zone does/not contain NS",
       "createdAt": "2025-06-17T16:47:04Z",
-      "updatedAt": "2025-07-01T16:21:13Z",
-      "closedAt": null,
+      "updatedAt": "2025-09-12T07:06:34Z",
+      "closedAt": "2025-09-12T07:06:34Z",
       "comments": [
         {
           "author": "pspacek",
@@ -456,16 +456,24 @@
       "id": "I_kwDOO41rkM7BttFO",
       "title": "Avoid SVCB param reuse with same key number but different name",
       "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/issues/36",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "pspacek",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Renaming IPv4Hint to something else (be it IPv4Glue or ipv4) causes trouble in practical implementation.\n\nTo quote @shane-kerr:\n\n> I rage quit a PR I started against a Go DNS library because of these differences.",
       "createdAt": "2025-07-21T20:43:32Z",
-      "updatedAt": "2025-07-21T20:43:32Z",
-      "closedAt": null,
-      "comments": []
+      "updatedAt": "2025-09-12T07:03:33Z",
+      "closedAt": "2025-09-12T07:03:32Z",
+      "comments": [
+        {
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "body": "We now have separate key range.",
+          "createdAt": "2025-09-12T07:03:32Z",
+          "updatedAt": "2025-09-12T07:03:32Z"
+        }
+      ]
     },
     {
       "number": 48,
@@ -1969,7 +1977,7 @@
       "labels": [],
       "body": "Copied from https://mailarchive.ietf.org/arch/msg/dd/CLfbqrg6b8STH87lOrcTuPFp6M0/ with cosmetic changes.",
       "createdAt": "2025-08-07T16:32:49Z",
-      "updatedAt": "2025-08-07T16:34:47Z",
+      "updatedAt": "2025-09-13T20:20:19Z",
       "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
       "baseRefName": "main",
       "baseRefOid": "e87faa4812f6816566043f1bd6294835ead563d8",
@@ -2861,50 +2869,362 @@
       "id": "PR_kwDOO41rkM6nkIKq",
       "title": "Describe DELEG and DELEGI RR formats",
       "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/pull/52",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "pspacek",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2025-09-09T09:43:55Z",
-      "updatedAt": "2025-09-09T18:01:28Z",
+      "updatedAt": "2025-09-11T15:59:08Z",
       "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
       "baseRefName": "main",
       "baseRefOid": "171b0ddc4ad2508e541d3c0d4a5ca54bd2ba28e7",
       "headRepository": "pspacek/draft-ietf-deleg-base",
       "headRefName": "rr-format",
       "headRefOid": "44715ac7721d06454f88611ebcabd9a6cb9a1508",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2025-09-11T15:59:08Z",
+      "mergedAt": "2025-09-11T15:59:08Z",
+      "mergedBy": "pspacek",
+      "mergeCommit": {
+        "oid": "7527c5d345b6e102f3f9534aa6efa689430a5e8f"
+      },
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOO41rkM6_Uo0e",
+          "commit": {
+            "abbreviatedOid": "bc435ad"
+          },
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-09-11T08:36:18Z",
+          "updatedAt": "2025-09-11T08:36:19Z",
+          "comments": [
+            {
+              "originalPosition": 33,
+              "body": "Funny you feel the urge to rewrite what I copy&pasted from SVCB spec :-)",
+              "createdAt": "2025-09-11T08:36:18Z",
+              "updatedAt": "2025-09-11T08:36:19Z"
+            }
+          ]
+        }
+      ]
     },
     {
       "number": 53,
       "id": "PR_kwDOO41rkM6noZ7o",
       "title": "Clarify that we mean both types of addresses",
       "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/pull/53",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "paulehoffman",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2025-09-09T15:12:12Z",
-      "updatedAt": "2025-09-09T15:12:16Z",
+      "updatedAt": "2025-09-11T15:59:31Z",
       "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
       "baseRefName": "main",
       "baseRefOid": "171b0ddc4ad2508e541d3c0d4a5ca54bd2ba28e7",
       "headRepository": "paulehoffman/fork-deleg-base",
       "headRefName": "46minor",
       "headRefOid": "cc84dba09a3b47ea742d5e42c23fa3b96bdaab8a",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2025-09-11T15:59:31Z",
+      "mergedAt": "2025-09-11T15:59:31Z",
+      "mergedBy": "pspacek",
+      "mergeCommit": {
+        "oid": "9284abd0f9e067ecdd06cee63cb4b60e05ab0493"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 54,
+      "id": "PR_kwDOO41rkM6oLO5y",
+      "title": "Minor text clarifications",
+      "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/pull/54",
+      "state": "MERGED",
+      "author": "pspacek",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-09-12T07:01:58Z",
+      "updatedAt": "2025-09-12T07:02:57Z",
+      "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
+      "baseRefName": "main",
+      "baseRefOid": "9284abd0f9e067ecdd06cee63cb4b60e05ab0493",
+      "headRepository": "pspacek/draft-ietf-deleg-base",
+      "headRefName": "pspacek/nits",
+      "headRefOid": "c28a8d81ec2d9544d01cadc64dbf455c97d8a903",
+      "closedAt": "2025-09-12T07:02:43Z",
+      "mergedAt": "2025-09-12T07:02:43Z",
+      "mergedBy": "pspacek",
+      "mergeCommit": {
+        "oid": "91e6d8c4ade6b48fa0f4d8a4670fcf8f9b2b537c"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 55,
+      "id": "PR_kwDOO41rkM6oLuQh",
+      "title": "Rename keys based on feedback from mailing list",
+      "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/pull/55",
+      "state": "MERGED",
+      "author": "pspacek",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-09-12T07:45:19Z",
+      "updatedAt": "2025-09-12T07:45:50Z",
+      "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
+      "baseRefName": "main",
+      "baseRefOid": "91e6d8c4ade6b48fa0f4d8a4670fcf8f9b2b537c",
+      "headRepository": "pspacek/draft-ietf-deleg-base",
+      "headRefName": "key-rename",
+      "headRefOid": "a2f01db16c558e36292c29562b92c1a552c23835",
+      "closedAt": "2025-09-12T07:45:49Z",
+      "mergedAt": "2025-09-12T07:45:49Z",
+      "mergedBy": "pspacek",
+      "mergeCommit": {
+        "oid": "8eee89f23961dc2f4d50cebeb1508d06fd4d7510"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 56,
+      "id": "PR_kwDOO41rkM6oMhd8",
+      "title": "Feedback from Miek about -02",
+      "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/pull/56",
+      "state": "MERGED",
+      "author": "pspacek",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Incorporates https://mailarchive.ietf.org/arch/msg/dd/y8QzeecWy9acxnDsDBBrgjDqWJA/ , related threads, plus some off-list discussions.",
+      "createdAt": "2025-09-12T08:56:36Z",
+      "updatedAt": "2025-09-12T12:11:02Z",
+      "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
+      "baseRefName": "main",
+      "baseRefOid": "8eee89f23961dc2f4d50cebeb1508d06fd4d7510",
+      "headRepository": "pspacek/draft-ietf-deleg-base",
+      "headRefName": "miek-misc-feedback",
+      "headRefOid": "4c337a746e6a54a80cfcfac847a65324069d765d",
+      "closedAt": "2025-09-12T12:11:02Z",
+      "mergedAt": "2025-09-12T12:11:02Z",
+      "mergedBy": "pspacek",
+      "mergeCommit": {
+        "oid": "ba0c4733bd10b14c6bbf7a37da6b37e456550f45"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOO41rkM6_rF7w",
+          "commit": {
+            "abbreviatedOid": "e91caeb"
+          },
+          "author": "fl1ger",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-09-12T09:39:51Z",
+          "updatedAt": "2025-09-12T09:39:51Z",
+          "comments": [
+            {
+              "originalPosition": 41,
+              "body": "That is not proper english I think (non native speaker). I would say \"a set of hostnames that point to nameservers\" or just remove the \"a\".",
+              "createdAt": "2025-09-12T09:39:51Z",
+              "updatedAt": "2025-09-12T09:39:52Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOO41rkM6_r9R_",
+          "commit": {
+            "abbreviatedOid": "e91caeb"
+          },
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-09-12T10:22:11Z",
+          "updatedAt": "2025-09-12T10:22:11Z",
+          "comments": [
+            {
+              "originalPosition": 41,
+              "body": "Indeed, that's what I get for editing preexisting text! Fixed.",
+              "createdAt": "2025-09-12T10:22:11Z",
+              "updatedAt": "2025-09-12T10:22:12Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 57,
+      "id": "PR_kwDOO41rkM6oOjX9",
+      "title": "Feedback from Mark Delany about -02",
+      "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/pull/57",
+      "state": "MERGED",
+      "author": "pspacek",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Incorporates https://mailarchive.ietf.org/arch/msg/dd/j2-4iefgXf-xZ-p4tx7g0N71rdY/",
+      "createdAt": "2025-09-12T11:40:09Z",
+      "updatedAt": "2025-09-12T12:11:19Z",
+      "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
+      "baseRefName": "main",
+      "baseRefOid": "8eee89f23961dc2f4d50cebeb1508d06fd4d7510",
+      "headRepository": "pspacek/draft-ietf-deleg-base",
+      "headRefName": "markd-misc-feedback",
+      "headRefOid": "74dfe03a1c0b5d358d7877d34562a6caed846ba8",
+      "closedAt": "2025-09-12T12:11:19Z",
+      "mergedAt": "2025-09-12T12:11:19Z",
+      "mergedBy": "pspacek",
+      "mergeCommit": {
+        "oid": "ed5e6f42b529fb7f4b837a2568a01affdec477d6"
+      },
+      "comments": [
+        {
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "body": "This is stacked on top of #56 .",
+          "createdAt": "2025-09-12T11:44:57Z",
+          "updatedAt": "2025-09-12T11:44:57Z"
+        }
+      ],
+      "reviews": []
+    },
+    {
+      "number": 58,
+      "id": "PR_kwDOO41rkM6oO-qN",
+      "title": "Fix and improve examples",
+      "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/pull/58",
+      "state": "MERGED",
+      "author": "pspacek",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-09-12T12:14:37Z",
+      "updatedAt": "2025-09-12T14:39:56Z",
+      "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
+      "baseRefName": "main",
+      "baseRefOid": "ed5e6f42b529fb7f4b837a2568a01affdec477d6",
+      "headRepository": "pspacek/draft-ietf-deleg-base",
+      "headRefName": "examples",
+      "headRefOid": "37f249785696a98220d16fe0d221888df00f9077",
+      "closedAt": "2025-09-12T14:39:56Z",
+      "mergedAt": "2025-09-12T14:39:56Z",
+      "mergedBy": "pspacek",
+      "mergeCommit": {
+        "oid": "51ff3bbdd29ba9dac4a40390189d00a7855af854"
+      },
+      "comments": [
+        {
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I will merge this because mistakes in the examples were so bad that there's no point in waiting. We can fix things in follow-up MRs.",
+          "createdAt": "2025-09-12T14:39:52Z",
+          "updatedAt": "2025-09-12T14:39:52Z"
+        }
+      ],
+      "reviews": []
+    },
+    {
+      "number": 59,
+      "id": "PR_kwDOO41rkM6oVWhu",
+      "title": "Small editorial fixes for the last raft of PRs",
+      "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/pull/59",
+      "state": "MERGED",
+      "author": "paulehoffman",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-09-12T22:40:19Z",
+      "updatedAt": "2025-09-13T20:13:28Z",
+      "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
+      "baseRefName": "main",
+      "baseRefOid": "51ff3bbdd29ba9dac4a40390189d00a7855af854",
+      "headRepository": "paulehoffman/fork-deleg-base",
+      "headRefName": "paul-editorial",
+      "headRefOid": "816cafe3a8b0b3b25a115fe4dcb9f6604c1488d9",
+      "closedAt": "2025-09-13T20:13:28Z",
+      "mergedAt": "2025-09-13T20:13:28Z",
+      "mergedBy": "pspacek",
+      "mergeCommit": {
+        "oid": "3473d5d5026dfd33eb7a6c57abcf413a36b6c6c6"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOO41rkM7AAYgZ",
+          "commit": {
+            "abbreviatedOid": "816cafe"
+          },
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-09-13T20:12:25Z",
+          "updatedAt": "2025-09-13T20:12:26Z",
+          "comments": [
+            {
+              "originalPosition": 12,
+              "body": "```suggestion\nThe format of the DelegInfos element is identical to the format of the SvcParams element defined in Section 2.2 {{?RFC9460}},\n```",
+              "createdAt": "2025-09-13T20:12:25Z",
+              "updatedAt": "2025-09-13T20:12:26Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOO41rkM7AAY3M",
+          "commit": {
+            "abbreviatedOid": "816cafe"
+          },
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "state": "CHANGES_REQUESTED",
+          "body": "Thanks, I will fix the typo in subsequent PR.",
+          "createdAt": "2025-09-13T20:13:09Z",
+          "updatedAt": "2025-09-13T20:13:09Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 60,
+      "id": "PR_kwDOO41rkM6ob6gg",
+      "title": "Typo fixes",
+      "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/pull/60",
+      "state": "MERGED",
+      "author": "pspacek",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-09-13T20:19:01Z",
+      "updatedAt": "2025-09-13T20:19:36Z",
+      "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
+      "baseRefName": "main",
+      "baseRefOid": "3473d5d5026dfd33eb7a6c57abcf413a36b6c6c6",
+      "headRepository": "pspacek/draft-ietf-deleg-base",
+      "headRefName": "typo-fixes",
+      "headRefOid": "f93bb551956bb8e136e9caac90716e7d9c53ccb0",
+      "closedAt": "2025-09-13T20:19:36Z",
+      "mergedAt": "2025-09-13T20:19:36Z",
+      "mergedBy": "pspacek",
+      "mergeCommit": {
+        "oid": "7447a86bf1364a43f8d1674c50183162fdf82042"
+      },
       "comments": [],
       "reviews": []
     }
