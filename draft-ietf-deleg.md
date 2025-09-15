@@ -393,7 +393,7 @@ DELEG-unaware clients might ask for a name which belongs to a zone delegated onl
 Such zone is, by definition, not resolvable for DELEG-unaware clients.
 In this case, the DELEG record itself cannot create a zone cut, and the DELEG-aware authoritative server MUST return a legacy response.
 
-<!-- From the mailing list: What is a "legacy response" when there are no NS RRs present? NXDOMAIN? Can this be spelled out? -->
+TODO from the mailing list: What is a "legacy response" when there are no NS RRs present? NXDOMAIN? Can this be spelled out?
 
 The legacy response might be confusing for subdomains of zones which actually exist because DELEG-aware clients would get a different answer, namely a delegation.
 An example of a legacy response is in {{legacynxdomain}}.
