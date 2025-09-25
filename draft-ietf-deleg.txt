@@ -6,11 +6,11 @@ deleg                                                           T. April
 Internet-Draft                                               Google, LLC
 Updates: 1034, 1035, 6672, 6840 (if approved)                  P. Špaček
 Intended status: Standards Track                                     ISC
-Expires: 20 March 2026                                          R. Weber
+Expires: 29 March 2026                                          R. Weber
                                                      Akamai Technologies
                                                              D. Lawrence
                                                               Salesforce
-                                                       16 September 2025
+                                                       25 September 2025
 
 
                      Extensible Delegation for DNS
@@ -61,7 +61,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 20 March 2026.
+   This Internet-Draft will expire on 29 March 2026.
 
 Copyright Notice
 
@@ -208,10 +208,7 @@ Table of Contents
    The DELEG record, RR type TBD, and the DELEGI record, RR type TBD2
    (different from that of DELEG), have the same wire and presentation
    formats, but their semantics are different as described in a
-   following section.
-
-   TODO: Decide about class: IN or class independent?  SVCB is IN-
-   specific.
+   following section.  These records are defined for the IN class.
 
    The record format is based on the extensible key=value list that was
    originally defined as "SvcParams" for the SVCB record type [RFC9460].
