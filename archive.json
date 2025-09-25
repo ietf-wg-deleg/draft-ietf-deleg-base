@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-09-18T00:54:43.047386+00:00",
+  "timestamp": "2025-09-25T00:56:03.148296+00:00",
   "repo": "ietf-wg-deleg/draft-ietf-deleg-base",
   "labels": [
     {
@@ -3288,6 +3288,32 @@
           "updatedAt": "2025-09-16T06:31:43Z"
         }
       ],
+      "reviews": []
+    },
+    {
+      "number": 63,
+      "id": "PR_kwDOO41rkM6qWAPv",
+      "title": "Define for just the IN class",
+      "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/pull/63",
+      "state": "OPEN",
+      "author": "paulehoffman",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-09-24T18:30:00Z",
+      "updatedAt": "2025-09-24T18:30:00Z",
+      "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
+      "baseRefName": "main",
+      "baseRefOid": "908241a31ae45924b065f9a009fa150b04010054",
+      "headRepository": "paulehoffman/fork-deleg-base",
+      "headRefName": "IN-class",
+      "headRefOid": "e9962039e2e5c32dde4a51290d796651e5570a7c",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
       "reviews": []
     }
   ]
