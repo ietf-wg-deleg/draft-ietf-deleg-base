@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-09-25T00:56:03.148296+00:00",
+  "timestamp": "2025-09-28T01:01:41.340395+00:00",
   "repo": "ietf-wg-deleg/draft-ietf-deleg-base",
   "labels": [
     {
@@ -3295,25 +3295,35 @@
       "id": "PR_kwDOO41rkM6qWAPv",
       "title": "Define for just the IN class",
       "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/pull/63",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "paulehoffman",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2025-09-24T18:30:00Z",
-      "updatedAt": "2025-09-24T18:30:00Z",
+      "updatedAt": "2025-09-25T07:16:54Z",
       "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
       "baseRefName": "main",
       "baseRefOid": "908241a31ae45924b065f9a009fa150b04010054",
       "headRepository": "paulehoffman/fork-deleg-base",
       "headRefName": "IN-class",
       "headRefOid": "e9962039e2e5c32dde4a51290d796651e5570a7c",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
-      "comments": [],
+      "closedAt": "2025-09-25T07:16:54Z",
+      "mergedAt": "2025-09-25T07:16:54Z",
+      "mergedBy": "pspacek",
+      "mergeCommit": {
+        "oid": "191902f5cbb9d256ae1f4b535f406dfa1cc3b530"
+      },
+      "comments": [
+        {
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Works for me. After all the keys specially defined for IP addresses are class-specific.",
+          "createdAt": "2025-09-25T07:16:49Z",
+          "updatedAt": "2025-09-25T07:16:49Z"
+        }
+      ],
       "reviews": []
     }
   ]
