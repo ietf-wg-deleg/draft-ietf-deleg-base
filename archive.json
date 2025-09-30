@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-09-28T01:01:41.340395+00:00",
+  "timestamp": "2025-09-30T00:56:44.598751+00:00",
   "repo": "ietf-wg-deleg/draft-ietf-deleg-base",
   "labels": [
     {
@@ -385,9 +385,17 @@
       "labels": [],
       "body": "Version: -01\n\nDELEG RR type is parent-side only. Consequently, root zone cannot put DELEG RR in the apex.\n\nWe will need to define mechanism for priming so resolvers can prime/refresh root's DELEG RRs.\n\nRelated to #11 ",
       "createdAt": "2025-07-10T14:34:23Z",
-      "updatedAt": "2025-07-10T14:34:23Z",
+      "updatedAt": "2025-09-30T00:30:03Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "paulehoffman",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I disagree that we \"need\" to define anything in this document. Instead, it should be done after the protocol is finished, and should likely be done by DNSOP.",
+          "createdAt": "2025-09-30T00:30:03Z",
+          "updatedAt": "2025-09-30T00:30:03Z"
+        }
+      ]
     },
     {
       "number": 29,
@@ -487,7 +495,7 @@
       "labels": [],
       "body": "Current text (a004b597781108ff150067f3c1d6dbf5ff763e93) defines:\n* legacy name servers: An authoritative server that does not support the DELEG record\n* legacy resolvers: A resolver that does not support the DELEG record\n\nReferences in text are:\n- legacy delegation\n- Legacy resolvers can get different types of answers - but it talks about resolvers sending DE=0 ...\n- legacy referral response\n- legacy response\n\nI think we need to define something like this:\n- legacy delegation - a delegation with NS RRset\n- legacy referral response - response \"as if DELEG was not present\" - NS+relevant dnssec\n- legacy resolver - resolver which does not follow DELEG protocol (as opposed to \"does not support DELEG RR type\")\n\nBut then, legacy in practice means \"NS\", so why not say \"NS delegation\" and \"NS referral response\"? Then it would not need special definitions.\n\nOpinions?",
       "createdAt": "2025-09-02T05:40:00Z",
-      "updatedAt": "2025-09-02T06:00:29Z",
+      "updatedAt": "2025-09-30T00:30:41Z",
       "closedAt": null,
       "comments": [
         {
@@ -496,6 +504,13 @@
           "body": "https://mailarchive.ietf.org/arch/msg/dd/aDh45EEARwJSG8PChqCIZdS1N0Y/",
           "createdAt": "2025-09-02T06:00:29Z",
           "updatedAt": "2025-09-02T06:00:29Z"
+        },
+        {
+          "author": "paulehoffman",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I think this is fixed by draft -03",
+          "createdAt": "2025-09-30T00:30:41Z",
+          "updatedAt": "2025-09-30T00:30:41Z"
         }
       ]
     }
@@ -3324,6 +3339,110 @@
           "updatedAt": "2025-09-25T07:16:49Z"
         }
       ],
+      "reviews": []
+    },
+    {
+      "number": 64,
+      "id": "PR_kwDOO41rkM6rNkHp",
+      "title": "Be explicit about presentation formats and relative names",
+      "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/pull/64",
+      "state": "OPEN",
+      "author": "paulehoffman",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-09-30T00:12:52Z",
+      "updatedAt": "2025-09-30T00:12:52Z",
+      "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
+      "baseRefName": "main",
+      "baseRefOid": "191902f5cbb9d256ae1f4b535f406dfa1cc3b530",
+      "headRepository": "paulehoffman/fork-deleg-base",
+      "headRefName": "fqdns",
+      "headRefOid": "29b4d40193f68b60cbb8ec8e9cfb3e818502afa3",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 65,
+      "id": "PR_kwDOO41rkM6rNkOh",
+      "title": "Specify how resolvers may respond to QNAME=.",
+      "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/pull/65",
+      "state": "OPEN",
+      "author": "paulehoffman",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-09-30T00:13:12Z",
+      "updatedAt": "2025-09-30T00:13:12Z",
+      "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
+      "baseRefName": "main",
+      "baseRefOid": "191902f5cbb9d256ae1f4b535f406dfa1cc3b530",
+      "headRepository": "paulehoffman/fork-deleg-base",
+      "headRefName": "qname=dot",
+      "headRefOid": "704530aaba1e8175665104e96ca1e01f160c1489",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 66,
+      "id": "PR_kwDOO41rkM6rNkaO",
+      "title": "Deal with zero-length DelegInfos",
+      "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/pull/66",
+      "state": "OPEN",
+      "author": "paulehoffman",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Note that only one of the two sets of wording will be chosen, based on WG discussion.",
+      "createdAt": "2025-09-30T00:13:47Z",
+      "updatedAt": "2025-09-30T00:13:47Z",
+      "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
+      "baseRefName": "main",
+      "baseRefOid": "191902f5cbb9d256ae1f4b535f406dfa1cc3b530",
+      "headRepository": "paulehoffman/fork-deleg-base",
+      "headRefName": "no-rdata",
+      "headRefOid": "01ef9fdf3173bf7a0a4a769628fdcca207938506",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 67,
+      "id": "PR_kwDOO41rkM6rNprQ",
+      "title": "Say what to do for no-NS delegation responses",
+      "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/pull/67",
+      "state": "OPEN",
+      "author": "paulehoffman",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "This was put on the mailing list 2025-09-27, so this PR should not be accepted before 202-10-06",
+      "createdAt": "2025-09-30T00:28:05Z",
+      "updatedAt": "2025-09-30T00:28:05Z",
+      "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
+      "baseRefName": "main",
+      "baseRefOid": "191902f5cbb9d256ae1f4b535f406dfa1cc3b530",
+      "headRepository": "paulehoffman/fork-deleg-base",
+      "headRefName": "no-ns",
+      "headRefOid": "c4f78f683a6913428a171cf95345d4f357ee3281",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
       "reviews": []
     }
   ]
