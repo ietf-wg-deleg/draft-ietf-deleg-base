@@ -6,11 +6,11 @@ deleg                                                           T. April
 Internet-Draft                                               Google, LLC
 Updates: 1034, 1035, 6672, 6840 (if approved)                  P. Špaček
 Intended status: Standards Track                                     ISC
-Expires: 29 March 2026                                          R. Weber
+Expires: 5 April 2026                                           R. Weber
                                                      Akamai Technologies
                                                              D. Lawrence
                                                               Salesforce
-                                                       25 September 2025
+                                                          2 October 2025
 
 
                      Extensible Delegation for DNS
@@ -61,7 +61,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 29 March 2026.
+   This Internet-Draft will expire on 5 April 2026.
 
 Copyright Notice
 
@@ -355,13 +355,13 @@ Table of Contents
 
 3.  Use of DELEG Records
 
-   The DELEG RR set MAY contain multiple records.  A DELEG RR set MAY be
-   present with or without NS or DS RR sets at the delegation point,
+   The DELEG RRset MAY contain multiple records.  A DELEG RRset MAY be
+   present with or without NS or DS RRsets at the delegation point,
    though without NS records then DELEG-unaware software will not be
    able to resolve records in the the delegated zone.
 
-   DELEG RR sets MUST NOT appear at a zone's apex.  The erroneous
-   inclusion of DELEG RR set at zone's apex will cause DNSSEC validation
+   DELEG RRsets MUST NOT appear at a zone's apex.  The erroneous
+   inclusion of DELEG RRset at zone's apex will cause DNSSEC validation
    failures.  Servers MAY refuse to load such an invalid zone, similar
    to the DS RR type.
 
@@ -435,8 +435,8 @@ Table of Contents
    failed to do so.  This document simply extends this existing behavior
    to DELEG RR type as well, and makes this special case explicit.
 
-   When a DELEG RR set exists for a delegation in a zone, DELEG-aware
-   resolvers ignore any NS RR set for the delegated zone, whether from
+   When a DELEG RRset exists for a delegation in a zone, DELEG-aware
+   resolvers ignore any NS RRset for the delegated zone, whether from
    the parent or from the apex of the child.
 
    Each delegation level can have a mixture of DELEG and NS RR types,
@@ -500,20 +500,20 @@ Table of Contents
            "test.example." and the QTYPE is DELEG or DS, set SNAME to
            "example.".
 
-   2.  Look for locally-available DELEG and NS RR sets, starting at
+   2.  Look for locally-available DELEG and NS RRsets, starting at
        current SNAME.
 
-       1.  For a given SNAME, check for the existence of a DELEG RR set.
+       1.  For a given SNAME, check for the existence of a DELEG RRset.
            If it exists, the resolver MUST use its content to populate
-           SLIST.  However, if the DELEG RR set is known to exist but is
+           SLIST.  However, if the DELEG RRset is known to exist but is
            unusable (for example, if it is found in DNSSEC BAD cache),
-           the resolver MUST NOT instead use an NS RR set; instead, the
+           the resolver MUST NOT instead use an NS RRset; instead, the
            resolver MUST treat this case as if no servers were
            available.
 
-       2.  If a given SNAME is proven to not have a DELEG RR set but
-           does have an NS RR set, the resolver MUST copy the NS RR set
-           into SLIST.
+       2.  If a given SNAME is proven to not have a DELEG RRset but does
+           have an NS RRset, the resolver MUST copy the NS RRset into
+           SLIST.
 
        3.  If SLIST is now populated, stop walking up the DNS tree.
            However, if SLIST is not populated, remove the leftmost label
@@ -542,8 +542,8 @@ Table of Contents
    *  server-name: a set of hostnames of name servers; the addresses
       must be fetched
 
-   *  include-delegi: a set of domain names that point to a DELEGI RR
-      sets, which in turn have more information about the delegation
+   *  include-delegi: a set of domain names that point to a DELEGI
+      RRsets, which in turn have more information about the delegation
 
    These keys MUST have a non-empty DelegInfoValue.
 
@@ -577,7 +577,7 @@ Table of Contents
    *  one include-delegi key
 
    This restriction only applies to a single DELEG or DELEGI record; a
-   DELEG or DELEGI RR set can have records with different server
+   DELEG or DELEGI RRset can have records with different server
    information keys.
 
    When using server-name, the addresses for all the names in the set
@@ -592,12 +592,12 @@ Table of Contents
 
 3.1.6.  Populating the SLIST from DELEG and DELEGI Records
 
-   Each individual DELEG record inside a DELEG RR set, or each
-   individual DELEGI record in a DELEGI RR set, can cause the addition
-   of zero or more entries to SLIST.
+   Each individual DELEG record inside a DELEG RRset, or each individual
+   DELEGI record in a DELEGI RRset, can cause the addition of zero or
+   more entries to SLIST.
 
-   A resolver processes each individual DELEG record within a DELEG RR
-   set, or each individual DELEGI record in a DELEGI RR set, using the
+   A resolver processes each individual DELEG record within a DELEG
+   RRset, or each individual DELEGI record in a DELEGI RRset, using the
    following steps:
 
    1.  If a record has more than one type of server information key
@@ -691,7 +691,7 @@ Table of Contents
    the query, DELEG-aware authoritative servers treat DELEG records as
    zone cuts, and the servers are authoritative on the parent side of
    the zone cut.  This new zone cut has priority over a legacy
-   delegation with NS RR set.
+   delegation with NS RRset.
 
 3.2.2.1.  DELEG-aware Clients Requesting QTYPE=DELEG
 
@@ -700,31 +700,31 @@ Table of Contents
    authoritatively from the parent zone.  All previous specifications
    for special handling queries with QTYPE=DS apply equally to
    QTYPE=DELEG.  In summary, the server either provides an authoritative
-   DELEG RR set or declares its non-existence, with relevant DNSSEC
+   DELEG RRset or declares its non-existence, with relevant DNSSEC
    proofs when requested and available.
 
 3.2.2.2.  Delegation with DELEG
 
-   If the delegation has a DELEG RR set, the authoritative server MUST
-   put the DELEG RR set into the Authority section of the referral.  In
-   this case, the server MUST NOT include the NS RR set in the Authority
+   If the delegation has a DELEG RRset, the authoritative server MUST
+   put the DELEG RRset into the Authority section of the referral.  In
+   this case, the server MUST NOT include the NS RRset in the Authority
    section.  Include the covering RRSIG following the normal DNSSEC
    procedure for answers with authoritative zone data.
 
-   Similarly, rules for DS RR set inclusion in referrals apply as
+   Similarly, rules for DS RRset inclusion in referrals apply as
    specified by the DNSSEC protocol.
 
 3.2.2.3.  DELEG-aware Clients with NS RRs Present but No DELEG RRs
 
-   If the delegation does not have a DELEG RR set, the authoritative
-   server MUST put the NS RR set into the authority section of the
-   referral.  The absence of the DELEG RR set MUST be proven as
-   specified by the DNSSEC protocol for authoritative data.
+   If the delegation does not have a DELEG RRset, the authoritative
+   server MUST put the NS RRset into the authority section of the
+   referral.  The absence of the DELEG RRset MUST be proven as specified
+   by the DNSSEC protocol for authoritative data.
 
-   Similarly, rules for DS RR set inclusion into referrals apply as
+   Similarly, rules for DS RRset inclusion into referrals apply as
    specified by the DNSSEC protocol.  Please note, in practice the same
    process and records are used to prove the non-existence of both DELEG
-   and DS RR sets.
+   and DS RRsets.
 
 3.3.  DNSSEC Signers
 
@@ -735,7 +735,7 @@ Table of Contents
 
    In order to protect validators from downgrade attacks this draft
    introduces a new DNSKEY flag ADT (Authoritative Delegation Types).
-   In zones which contain a DELEG RR set, this flag MUST be set to 1 in
+   In zones which contain a DELEG RRset, this flag MUST be set to 1 in
    at least one of the DNSKEY records published in the zone.
 
 3.4.  DNSSEC Validators
@@ -787,14 +787,14 @@ Table of Contents
 
    If the zone is DNSSEC-secure, and if any DNSKEY of the zone has the
    ADT flag set to 1, a DELEG-aware validator MUST prove the absence of
-   a DELEG RR set in referral responses from this particular zone.
+   a DELEG RRset in referral responses from this particular zone.
 
-   Without this check, an attacker could strip the DELEG RR set from a
+   Without this check, an attacker could strip the DELEG RRset from a
    referral response and replace it with an unsigned (and potentially
-   malicious) NS RR set.  A referral response with an unsigned NS and
-   signed DS RR sets does not require additional proofs of nonexistence
+   malicious) NS RRset.  A referral response with an unsigned NS and
+   signed DS RRsets does not require additional proofs of nonexistence
    according to pre-DELEG DNSSEC specification, and it would have been
-   accepted as a delegation without the DELEG RR set.
+   accepted as a delegation without the DELEG RRset.
 
 3.4.4.  Chaining
 
@@ -821,7 +821,7 @@ Table of Contents
    *  Long chains of include-delegi information (Section 3.1.5), and
       those with circular chains of include-delegi information, can be
       burdensome.  To prevent this, the resolver SHOULD NOT follow more
-      than 3 include-delegi chains in an RR set when populating SLIST.
+      than 3 include-delegi chains in an RRset when populating SLIST.
       Note that include-delegi chains can have CNAME steps in them; in
       such a case, a CNAME step is counted the same as a DELEGI step
       when determining when to stop following a chain.
@@ -841,21 +841,21 @@ Table of Contents
    To protect DNSSEC-secure DNS zones that use DELEG delegations, the
    delegating zone needs to have at least one DNSKEY with the ADT flag
    set to 1.  Failure to set this flag in a DNSKEY record in the zone
-   allows an attacker to remove the DELEG RR set from referrals which
-   contain the DS RR set, and replace the original signed DELEG RR set
+   allows an attacker to remove the DELEG RRset from referrals which
+   contain the DS RRset, and replace the original signed DELEG RRset
    with an arbitrary unsigned NS set.  Doing so would be a downgrade
    from the strong protection offered by DNSSEC for DELEG.  That is, the
    DELEG protocol when used with upgraded DNSKEY records gives the same
-   protection to DELEG that the zone's DS RR set has.  Without DELEG,
-   there are no security guarantees for the legacy NS RR set on the
+   protection to DELEG that the zone's DS RRset has.  Without DELEG,
+   there are no security guarantees for the legacy NS RRset on the
    parent side of the zone cut.
 
    Please note that a full DNSKEY rollover is not necessary to achieve
    the downgrade protection for DELEG.  Any single DNSKEY with the ADT
    flag set to 1 is sufficient; the zone can introduce an otherwise
-   unused record into the DNSKEY RR set.  This DNSKEY RR can even use an
+   unused record into the DNSKEY RRset.  This DNSKEY RR can even use an
    unknown signing algorithm and zero-length key material to minimize
-   size increase of the DNSKEY RR set.
+   size increase of the DNSKEY RRset.
 
 5.  IANA Considerations
 
@@ -1317,13 +1317,13 @@ A.5.  DELEGI Interpretation
    servers to contact, as defined in Section 3.1.6.
 
    To visualize end result of this process we represent full set of name
-   servers in form of a 'virtual' DELEG RR set.
+   servers in form of a 'virtual' DELEG RRset.
 
 test. DELEG server-ipv4=198.51.100.1
 test. DELEG server-ipv4=203.0.113.1
 test. DELEG server-ipv6=2001:DB8::6666
 test. DELEG server-ipv6=3fff::2
-; IPv6 address 3fff::33 was de-duplicated (input RR sets listed it twice)
+; IPv6 address 3fff::33 was de-duplicated (input RRsets listed it twice)
 test. DELEG server-ipv6=3fff::33
 
    Implementations are free to use arbitrary representation for this
