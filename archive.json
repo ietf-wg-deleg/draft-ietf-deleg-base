@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-09-30T00:56:44.598751+00:00",
+  "timestamp": "2025-10-02T00:54:54.538823+00:00",
   "repo": "ietf-wg-deleg/draft-ietf-deleg-base",
   "labels": [
     {
@@ -186,9 +186,17 @@
       "labels": [],
       "body": "## Options\n- reuse SVCB wire format and presentation format (version -00)\n- reuse SVCB wire format but use different presentation format (ALIAS -> INCLUDE etc.)\n- reuse SVCB wire & presentation format elements like `key=value` list but do other changes, e.g. drop priority field\n- do our own thing completely (nobody is seriously suggesting this, but hey, complete list of options!)\n\n## Considerations\n### Presentation format\nPeople already got confused by \"ALIAS\" mode with multiple targets, which is something we definitively want to do for DELEG.\n\n### Code reuse\n- 100% compatibility not possible - we have to use new type number, so libraries need an update in any case\n- benefit - easier to implement if you just add number to an existing type implementation\n- problem - **too easy** to implement, so e.g. multiple ALIAS RRs might trip over code in existing strict SVCB parsers and similar problems",
       "createdAt": "2025-06-26T14:49:14Z",
-      "updatedAt": "2025-07-02T11:59:00Z",
+      "updatedAt": "2025-09-30T18:04:53Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "paulehoffman",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Can close this issue; already resolved",
+          "createdAt": "2025-09-30T18:04:53Z",
+          "updatedAt": "2025-09-30T18:04:53Z"
+        }
+      ]
     },
     {
       "number": 12,
@@ -202,7 +210,7 @@
       "labels": [],
       "body": "Discuss!\n\n### In-domain delegation\n- Is ipv4hint just a hint and should it be overriden by data from child?\n- If not, do we need a name at all?\n\n### Sibling glue\nShould it have IP addresses as well?\n\n### [Glue for Cyclic Sibling Domain Name Servers](https://datatracker.ietf.org/doc/html/rfc9471#name-glue-for-cyclic-sibling-dom)\nDo we really need to support this?\n\n### Unnecessary glue\nWhat to do when resolver encounters it in DELEG RR?",
       "createdAt": "2025-06-26T14:53:40Z",
-      "updatedAt": "2025-07-10T14:19:52Z",
+      "updatedAt": "2025-09-30T18:04:15Z",
       "closedAt": null,
       "comments": [
         {
@@ -225,6 +233,13 @@
           "body": "Yeah lets stick with ip4 and ip6 as names for the IP addresses of the name servers",
           "createdAt": "2025-07-10T14:19:52Z",
           "updatedAt": "2025-07-10T14:19:52Z"
+        },
+        {
+          "author": "paulehoffman",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Can close this issue; we no longer use the term",
+          "createdAt": "2025-09-30T18:04:15Z",
+          "updatedAt": "2025-09-30T18:04:15Z"
         }
       ]
     },
@@ -256,9 +271,17 @@
       "labels": [],
       "body": "Two participants (so far) expressed desire NOT to return NXDOMAIN when DE=0 query hits a DELEG-only delegation.\n\n- [Johan Stenstam](https://mailarchive.ietf.org/arch/msg/dd/nohd8lIUxFCEayxttALWyFc5SXU/)\n- [Stephane Bortzmeyer](https://mailarchive.ietf.org/arch/msg/dd/Mv7SpCuJt7mSjf3vv9oW8wtc_YI/)\n\nGiven RFC4034 + RFC 6840 DNSSEC semantics,  the only alternative option is a deliberate SERVFAIL from the auth.",
       "createdAt": "2025-07-02T11:54:26Z",
-      "updatedAt": "2025-07-02T11:54:26Z",
+      "updatedAt": "2025-09-30T18:03:37Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "paulehoffman",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Being dealt with in #67 ",
+          "createdAt": "2025-09-30T18:03:37Z",
+          "updatedAt": "2025-09-30T18:03:37Z"
+        }
+      ]
     },
     {
       "number": 23,
@@ -447,7 +470,7 @@
       "labels": [],
       "body": "Version: -01\n\nIt's unclear when one of MUST/NOT constrains is violated on RR level. E.g.\n\n```\nThe target of any DELEG record MUST NOT be '.'\n\n* The target of a DELEG INCLUDE record MUST be outside of the delegated domain.\n\n* The target of a DELEG DIRECT record MUST be a domain below the delegated domain.\n```\n\nSo, what happens when this does not hold? Zone file parsing error? I hope not. What happens when that kind of crap is receiver over network? I bet attacker's don't care what the spec says.",
       "createdAt": "2025-07-21T16:00:13Z",
-      "updatedAt": "2025-07-21T16:01:24Z",
+      "updatedAt": "2025-09-30T18:01:53Z",
       "closedAt": null,
       "comments": [
         {
@@ -456,6 +479,13 @@
           "body": "Personally I think we should remove these conditions from the RR format description and leave this to 'interpretation' section where we talk about resolvers consuming the RRs. And in that case most of the stuff will not even need extra handling because it will sort itself naturally.",
           "createdAt": "2025-07-21T16:01:24Z",
           "updatedAt": "2025-07-21T16:01:24Z"
+        },
+        {
+          "author": "paulehoffman",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Suggest closing this issue; fixed in draft -03",
+          "createdAt": "2025-09-30T18:01:53Z",
+          "updatedAt": "2025-09-30T18:01:53Z"
         }
       ]
     },
@@ -495,7 +525,7 @@
       "labels": [],
       "body": "Current text (a004b597781108ff150067f3c1d6dbf5ff763e93) defines:\n* legacy name servers: An authoritative server that does not support the DELEG record\n* legacy resolvers: A resolver that does not support the DELEG record\n\nReferences in text are:\n- legacy delegation\n- Legacy resolvers can get different types of answers - but it talks about resolvers sending DE=0 ...\n- legacy referral response\n- legacy response\n\nI think we need to define something like this:\n- legacy delegation - a delegation with NS RRset\n- legacy referral response - response \"as if DELEG was not present\" - NS+relevant dnssec\n- legacy resolver - resolver which does not follow DELEG protocol (as opposed to \"does not support DELEG RR type\")\n\nBut then, legacy in practice means \"NS\", so why not say \"NS delegation\" and \"NS referral response\"? Then it would not need special definitions.\n\nOpinions?",
       "createdAt": "2025-09-02T05:40:00Z",
-      "updatedAt": "2025-09-30T00:30:41Z",
+      "updatedAt": "2025-09-30T18:00:59Z",
       "closedAt": null,
       "comments": [
         {
@@ -508,9 +538,9 @@
         {
           "author": "paulehoffman",
           "authorAssociation": "COLLABORATOR",
-          "body": "I think this is fixed by draft -03",
-          "createdAt": "2025-09-30T00:30:41Z",
-          "updatedAt": "2025-09-30T00:30:41Z"
+          "body": "PR for this: https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/pull/68",
+          "createdAt": "2025-09-30T18:00:59Z",
+          "updatedAt": "2025-09-30T18:00:59Z"
         }
       ]
     }
@@ -3438,6 +3468,58 @@
       "headRepository": "paulehoffman/fork-deleg-base",
       "headRefName": "no-ns",
       "headRefOid": "c4f78f683a6913428a171cf95345d4f357ee3281",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 68,
+      "id": "PR_kwDOO41rkM6rY4t9",
+      "title": "Clean up \"legacy\" terminology",
+      "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/pull/68",
+      "state": "OPEN",
+      "author": "paulehoffman",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-09-30T17:36:35Z",
+      "updatedAt": "2025-09-30T17:36:35Z",
+      "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
+      "baseRefName": "main",
+      "baseRefOid": "191902f5cbb9d256ae1f4b535f406dfa1cc3b530",
+      "headRepository": "paulehoffman/fork-deleg-base",
+      "headRefName": "legacy",
+      "headRefOid": "fa7640a44efab1eb693ae373b066036ccfa46801",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 69,
+      "id": "PR_kwDOO41rkM6rY451",
+      "title": "\"RR set\" is spelled \"RRset\" in RFC 9499; we should too",
+      "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/pull/69",
+      "state": "OPEN",
+      "author": "paulehoffman",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-09-30T17:36:47Z",
+      "updatedAt": "2025-09-30T17:36:47Z",
+      "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
+      "baseRefName": "main",
+      "baseRefOid": "191902f5cbb9d256ae1f4b535f406dfa1cc3b530",
+      "headRepository": "paulehoffman/fork-deleg-base",
+      "headRefName": "rrset",
+      "headRefOid": "aa8577a1bd836a1432b5f303452c3f1220b3aa4e",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
