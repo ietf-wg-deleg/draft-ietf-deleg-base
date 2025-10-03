@@ -6,11 +6,11 @@ deleg                                                           T. April
 Internet-Draft                                               Google, LLC
 Updates: 1034, 1035, 6672, 6840 (if approved)                  P. Špaček
 Intended status: Standards Track                                     ISC
-Expires: 5 April 2026                                           R. Weber
+Expires: 6 April 2026                                           R. Weber
                                                      Akamai Technologies
                                                              D. Lawrence
                                                               Salesforce
-                                                          2 October 2025
+                                                          3 October 2025
 
 
                      Extensible Delegation for DNS
@@ -61,7 +61,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 5 April 2026.
+   This Internet-Draft will expire on 6 April 2026.
 
 Copyright Notice
 
@@ -272,8 +272,9 @@ Table of Contents
 
    *  All the requirements in Section 2.1 of [RFC9460] apply.
 
-   TODO: SVCB allows an empty list.  I guess it is not a problem, it is
-   small and will simply be ignored?
+   DelegInfos MAY be zero-length; this is similar to what is allowed in
+   SVCB records.  A record with a zero-length DelegInfos field has no
+   effect on the SLIST processing for resolvers.
 
 2.2.  RDATA Wire Format
 
