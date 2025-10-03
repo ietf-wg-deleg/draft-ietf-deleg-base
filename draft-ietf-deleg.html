@@ -1721,32 +1721,31 @@ The types of information defined in this document are:<a href="#section-3.1.5-1"
 <p id="section-3.1.5-3">These keys MUST have a non-empty DelegInfoValue.<a href="#section-3.1.5-3" class="pilcrow">¶</a></p>
 <p id="section-3.1.5-4">The presentation values for server-ipv4 and server-ipv6 are comma-separated list of one or more IP addresses of the appropriate family in standard textual format <span>[<a href="#RFC5952" class="cite xref">RFC5952</a>]</span> <span>[<a href="#RFC4001" class="cite xref">RFC4001</a>]</span>.
 The wire formats for server-ipv4 and server-ipv6 are a sequence of IP addresses, in network byte order, for the respective address family.<a href="#section-3.1.5-4" class="pilcrow">¶</a></p>
-<p id="section-3.1.5-5">The presentation values for server-name and include-delegi are sets of fully-qualified domain names, separated by commas.
+<p id="section-3.1.5-5">The presentation value for server-name and include-delegi are a set of fully-qualified domain names and relative domain names, separated by commas.
 The wire format for server-name and include-delegi are each a concatenated set of a wire-format domain names, where the root label provides the separation between names.
 The names in the wire format MUST NOT be compressed.<a href="#section-3.1.5-5" class="pilcrow">¶</a></p>
-<p id="section-3.1.5-6">TODO: Are they? Are we going to forbid normal zone file expansion where names without trailing . get current origin appended to them?<a href="#section-3.1.5-6" class="pilcrow">¶</a></p>
-<p id="section-3.1.5-7">A DELEG or DELEGI record MUST have one, and only one, set of server information, chosen from the following:<a href="#section-3.1.5-7" class="pilcrow">¶</a></p>
+<p id="section-3.1.5-6">A DELEG or DELEGI record MUST have one, and only one, set of server information, chosen from the following:<a href="#section-3.1.5-6" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-3.1.5-8.1">
-              <p id="section-3.1.5-8.1.1">one server-ipv4 key<a href="#section-3.1.5-8.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="section-3.1.5-7.1">
+              <p id="section-3.1.5-7.1.1">one server-ipv4 key<a href="#section-3.1.5-7.1.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-3.1.5-8.2">
-              <p id="section-3.1.5-8.2.1">one server-ipv6 key<a href="#section-3.1.5-8.2.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-3.1.5-7.2">
+              <p id="section-3.1.5-7.2.1">one server-ipv6 key<a href="#section-3.1.5-7.2.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-3.1.5-8.3">
-              <p id="section-3.1.5-8.3.1">a pair consisting of one server-ipv4 key and one server-ipv6 key<a href="#section-3.1.5-8.3.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-3.1.5-7.3">
+              <p id="section-3.1.5-7.3.1">a pair consisting of one server-ipv4 key and one server-ipv6 key<a href="#section-3.1.5-7.3.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-3.1.5-8.4">
-              <p id="section-3.1.5-8.4.1">one server-name key<a href="#section-3.1.5-8.4.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-3.1.5-7.4">
+              <p id="section-3.1.5-7.4.1">one server-name key<a href="#section-3.1.5-7.4.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-3.1.5-8.5">
-              <p id="section-3.1.5-8.5.1">one include-delegi key<a href="#section-3.1.5-8.5.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-3.1.5-7.5">
+              <p id="section-3.1.5-7.5.1">one include-delegi key<a href="#section-3.1.5-7.5.1" class="pilcrow">¶</a></p>
 </li>
           </ul>
-<p id="section-3.1.5-9">This restriction only applies to a single DELEG or DELEGI record; a DELEG or DELEGI RRset can have records with different server information keys.<a href="#section-3.1.5-9" class="pilcrow">¶</a></p>
-<p id="section-3.1.5-10">When using server-name, the addresses for all the names in the set must be fetched using normal DNS resolution.
-This means the names in the value of the server-name key or the include-delegi key MUST NOT be inside the delegated domain.<a href="#section-3.1.5-10" class="pilcrow">¶</a></p>
-<p id="section-3.1.5-11">With this initial DELEG specification, servers are still expected to be reached on the standard DNS port for both UDP and TCP, 53.  While a future specification is expected to address other transports using other ports, its eventual semantics are not covered here.<a href="#section-3.1.5-11" class="pilcrow">¶</a></p>
+<p id="section-3.1.5-8">This restriction only applies to a single DELEG or DELEGI record; a DELEG or DELEGI RRset can have records with different server information keys.<a href="#section-3.1.5-8" class="pilcrow">¶</a></p>
+<p id="section-3.1.5-9">When using server-name, the addresses for all the names in the set must be fetched using normal DNS resolution.
+This means the names in the value of the server-name key or the include-delegi key MUST NOT be inside the delegated domain.<a href="#section-3.1.5-9" class="pilcrow">¶</a></p>
+<p id="section-3.1.5-10">With this initial DELEG specification, servers are still expected to be reached on the standard DNS port for both UDP and TCP, 53.  While a future specification is expected to address other transports using other ports, its eventual semantics are not covered here.<a href="#section-3.1.5-10" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="slist">
