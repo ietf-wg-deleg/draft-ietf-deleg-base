@@ -1812,11 +1812,21 @@ This would be a legacy response if there are NS records (the NS RRset in the AUT
             </h5>
 <p id="section-3.2.1.2-1">DELEG-unaware clients might ask for a name which belongs to a zone delegated only with DELEG RRs (that is, without any NS RRs).
 Such a zone is not resolvable for DELEG-unaware clients.
-In this case, the DELEG record itself cannot create a zone cut, and the DELEG-aware authoritative server MUST return a legacy response.<a href="#section-3.2.1.2-1" class="pilcrow">¶</a></p>
-<p id="section-3.2.1.2-2">An example of a legacy response using NXDOMAIN is in <a href="#legacynxdomain" class="auto internal xref">Appendix A.4.2.2</a>.
-This legacy response might be confusing for subdomains of zones which actually exist because DELEG-aware clients would get a different answer, namely a delegation.
-TODO: debate response code in WG.<a href="#section-3.2.1.2-2" class="pilcrow">¶</a></p>
-<p id="section-3.2.1.2-3">The authoritative server is RECOMMENDED to supplement these responses to DELEG-unaware resolvers with an <span>[<a href="#RFC8914" class="cite xref">RFC8914</a>]</span> Extended DNS Error using the (IANA-TBD) value "New Delegation Only" from the Extended DNS Error Codes registry.<a href="#section-3.2.1.2-3" class="pilcrow">¶</a></p>
+From the perspective of a DELEG-unaware client, the zone cut created by the DELEG RRs is invisible.<a href="#section-3.2.1.2-1" class="pilcrow">¶</a></p>
+<p id="section-3.2.1.2-2">DELEG-aware authoritative server implementation has two options:<a href="#section-3.2.1.2-2" class="pilcrow">¶</a></p>
+<ol start="1" type="1" class="normal type-1" id="section-3.2.1.2-3">
+<li id="section-3.2.1.2-3.1">
+                <p id="section-3.2.1.2-3.1.1">When faced with a client that sent a query with DE=0 that would lead to a delegation, but the zone has no NS records, an authoritative server MAY reply with SERVFAIL and nothing in the Answer or Authority sections.
+This response has negative side effects, namely that most resolvers will then query the remaining authoritative servers to see if any of them would give a different answer.
+The advantage of this approach is simplicity of implementation.<a href="#section-3.2.1.2-3.1.1" class="pilcrow">¶</a></p>
+</li>
+              <li id="section-3.2.1.2-3.2">
+                <p id="section-3.2.1.2-3.2.1">Because of the negative side effects of the previous option, an authoritative server SHOULD instead send an answer that accurately describes the situation to a legacy resolver.
+This, however, is difficult because the authoritative server is significantly changing its response based on the the value of the DE flag.<a href="#section-3.2.1.2-3.2.1" class="pilcrow">¶</a></p>
+</li>
+            </ol>
+<p id="section-3.2.1.2-4">TODO: List as many of the possible situations that need to be considered for variant B, and the proposed responses for each situation. This list will probably change for the next few iterations of this draft.<a href="#section-3.2.1.2-4" class="pilcrow">¶</a></p>
+<p id="section-3.2.1.2-5">The authoritative server is RECOMMENDED to supplement these responses to DELEG-unaware resolvers with an <span>[<a href="#RFC8914" class="cite xref">RFC8914</a>]</span> Extended DNS Error using the (IANA-TBD) value "New Delegation Only" from the Extended DNS Error Codes registry.<a href="#section-3.2.1.2-5" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>

@@ -661,15 +661,32 @@ Table of Contents
 
    DELEG-unaware clients might ask for a name which belongs to a zone
    delegated only with DELEG RRs (that is, without any NS RRs).  Such a
-   zone is not resolvable for DELEG-unaware clients.  In this case, the
-   DELEG record itself cannot create a zone cut, and the DELEG-aware
-   authoritative server MUST return a legacy response.
+   zone is not resolvable for DELEG-unaware clients.  From the
+   perspective of a DELEG-unaware client, the zone cut created by the
+   DELEG RRs is invisible.
 
-   An example of a legacy response using NXDOMAIN is in
-   Appendix A.4.2.2.  This legacy response might be confusing for
-   subdomains of zones which actually exist because DELEG-aware clients
-   would get a different answer, namely a delegation.  TODO: debate
-   response code in WG.
+   DELEG-aware authoritative server implementation has two options:
+
+   1.  When faced with a client that sent a query with DE=0 that would
+       lead to a delegation, but the zone has no NS records, an
+       authoritative server MAY reply with SERVFAIL and nothing in the
+       Answer or Authority sections.  This response has negative side
+       effects, namely that most resolvers will then query the remaining
+       authoritative servers to see if any of them would give a
+       different answer.  The advantage of this approach is simplicity
+       of implementation.
+
+   2.  Because of the negative side effects of the previous option, an
+       authoritative server SHOULD instead send an answer that
+       accurately describes the situation to a legacy resolver.  This,
+       however, is difficult because the authoritative server is
+       significantly changing its response based on the the value of the
+       DE flag.
+
+   TODO: List as many of the possible situations that need to be
+   considered for variant B, and the proposed responses for each
+   situation.  This list will probably change for the next few
+   iterations of this draft.
 
    The authoritative server is RECOMMENDED to supplement these responses
    to DELEG-unaware resolvers with an [RFC8914] Extended DNS Error using
