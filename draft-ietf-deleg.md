@@ -109,7 +109,7 @@ These records are defined for the IN class.
 The record format is based on the extensible key=value list that was originally defined as "SvcParams" for the SVCB record type {{?RFC9460}}.
 Unlike SVCB, the DELEG protocol does not have "SvcPriority" and "TargetName" fields.
 The keys in the DELEG protocol are different than those used in SVCB.
-To avoid confusion between the two protocols, the list of key=value parameters used by the DELEG protocol are called DelegInfos and will be tracked in their own IANA registy for Delegation Information.
+To avoid confusion between the two protocols, the list of key=value parameters used by the DELEG protocol are called DelegInfos and will be tracked in their own IANA registry for Delegation Information.
 
 The following rules are adapted from SVCB, but with changed names:
 
@@ -656,7 +656,7 @@ TODO: Examples that show DELEGI records in ns2.example.net and ns3.example.org.
 The "test." delegation point has a DELEG record and no NS or DS records.
 
 Please note:
-This is an example of unnecessairly complicated setup to demonstrate capabilities of DELEG and DELEGI RR types.
+This is an example of unnecessarily complicated setup to demonstrate capabilities of DELEG and DELEGI RR types.
 
     test.      DELEG server-ipv6=3fff::33
     test.      DELEG include-delegi=Acfg.example.org.
