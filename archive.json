@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-10-02T00:54:54.538823+00:00",
+  "timestamp": "2025-10-05T01:00:49.121630+00:00",
   "repo": "ietf-wg-deleg/draft-ietf-deleg-base",
   "labels": [
     {
@@ -3376,24 +3376,26 @@
       "id": "PR_kwDOO41rkM6rNkHp",
       "title": "Be explicit about presentation formats and relative names",
       "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/pull/64",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "paulehoffman",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2025-09-30T00:12:52Z",
-      "updatedAt": "2025-09-30T00:12:52Z",
+      "updatedAt": "2025-10-03T00:07:55Z",
       "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
       "baseRefName": "main",
       "baseRefOid": "191902f5cbb9d256ae1f4b535f406dfa1cc3b530",
       "headRepository": "paulehoffman/fork-deleg-base",
       "headRefName": "fqdns",
       "headRefOid": "29b4d40193f68b60cbb8ec8e9cfb3e818502afa3",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2025-10-03T00:07:55Z",
+      "mergedAt": "2025-10-03T00:07:55Z",
+      "mergedBy": "fl1ger",
+      "mergeCommit": {
+        "oid": "2d97eac76a608e5e211e5aea9aab4fdccccd00d7"
+      },
       "comments": [],
       "reviews": []
     },
@@ -3402,24 +3404,26 @@
       "id": "PR_kwDOO41rkM6rNkOh",
       "title": "Specify how resolvers may respond to QNAME=.",
       "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/pull/65",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "paulehoffman",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2025-09-30T00:13:12Z",
-      "updatedAt": "2025-09-30T00:13:12Z",
+      "updatedAt": "2025-10-03T00:05:38Z",
       "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
       "baseRefName": "main",
       "baseRefOid": "191902f5cbb9d256ae1f4b535f406dfa1cc3b530",
       "headRepository": "paulehoffman/fork-deleg-base",
       "headRefName": "qname=dot",
       "headRefOid": "704530aaba1e8175665104e96ca1e01f160c1489",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2025-10-03T00:05:38Z",
+      "mergedAt": "2025-10-03T00:05:38Z",
+      "mergedBy": "fl1ger",
+      "mergeCommit": {
+        "oid": "a2b1b9a89f8aa26b1fb443efdf2e89f3e01c6157"
+      },
       "comments": [],
       "reviews": []
     },
@@ -3428,25 +3432,35 @@
       "id": "PR_kwDOO41rkM6rNkaO",
       "title": "Deal with zero-length DelegInfos",
       "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/pull/66",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "paulehoffman",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Note that only one of the two sets of wording will be chosen, based on WG discussion.",
       "createdAt": "2025-09-30T00:13:47Z",
-      "updatedAt": "2025-09-30T00:13:47Z",
+      "updatedAt": "2025-10-03T00:04:55Z",
       "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
       "baseRefName": "main",
       "baseRefOid": "191902f5cbb9d256ae1f4b535f406dfa1cc3b530",
       "headRepository": "paulehoffman/fork-deleg-base",
       "headRefName": "no-rdata",
-      "headRefOid": "01ef9fdf3173bf7a0a4a769628fdcca207938506",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
-      "comments": [],
+      "headRefOid": "52af9b13add68fe8c779c457b0dbe6f1361b811b",
+      "closedAt": "2025-10-03T00:04:55Z",
+      "mergedAt": "2025-10-03T00:04:55Z",
+      "mergedBy": "fl1ger",
+      "mergeCommit": {
+        "oid": "3abe774e2360d9bb65c3a252a4041109487c23ca"
+      },
+      "comments": [
+        {
+          "author": "paulehoffman",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Changed the PR to have just the \"no Rdata is OK\" option after talking with Ralf.",
+          "createdAt": "2025-10-02T14:53:11Z",
+          "updatedAt": "2025-10-02T14:53:11Z"
+        }
+      ],
       "reviews": []
     },
     {
@@ -3454,46 +3468,226 @@
       "id": "PR_kwDOO41rkM6rNprQ",
       "title": "Say what to do for no-NS delegation responses",
       "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/pull/67",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "paulehoffman",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "This was put on the mailing list 2025-09-27, so this PR should not be accepted before 202-10-06",
       "createdAt": "2025-09-30T00:28:05Z",
-      "updatedAt": "2025-09-30T00:28:05Z",
+      "updatedAt": "2025-10-03T00:26:49Z",
       "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
       "baseRefName": "main",
-      "baseRefOid": "191902f5cbb9d256ae1f4b535f406dfa1cc3b530",
+      "baseRefOid": "90e45e7fd2a295cd59e309174ed414f8a3954e81",
       "headRepository": "paulehoffman/fork-deleg-base",
       "headRefName": "no-ns",
-      "headRefOid": "c4f78f683a6913428a171cf95345d4f357ee3281",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "f5b7ebbda3325f9bdd5bc68321b3dbc809eb9685",
+      "closedAt": "2025-10-03T00:26:49Z",
+      "mergedAt": "2025-10-03T00:26:49Z",
+      "mergedBy": "fl1ger",
+      "mergeCommit": {
+        "oid": "0bf423086be4bd1e7e21e194f866059ed865445a"
+      },
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOO41rkM7EgrtO",
+          "commit": {
+            "abbreviatedOid": "c4f78f6"
+          },
+          "author": "fl1ger",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-10-03T00:03:07Z",
+          "updatedAt": "2025-10-03T00:03:08Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "A DELEG-unaware client will never see this zone cut though so I think the original wording was more accurate.",
+              "createdAt": "2025-10-03T00:03:08Z",
+              "updatedAt": "2025-10-03T00:03:08Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOO41rkM7Egu9i",
+          "commit": {
+            "abbreviatedOid": "c4f78f6"
+          },
+          "author": "paulehoffman",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-10-03T00:15:20Z",
+          "updatedAt": "2025-10-03T00:15:20Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "This is a philosophical issue, plus another wording blunder on my part (it should say \"record itself does not create\", fixed in [e7fb3cd](https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/pull/67/commits/e7fb3cd04310166eabec935fc623aa04a2069fc4)). The DELEG record *can* and *do* create a zone cut, but that zone cut is invisible to the DELEG-unaware client. The original wording indicates that it must return a \"legacy response\", but there is no valid legacy response for \"here is a delegation but I don't know the NS records\".",
+              "createdAt": "2025-10-03T00:15:20Z",
+              "updatedAt": "2025-10-03T00:17:27Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOO41rkM7Egvkn",
+          "commit": {
+            "abbreviatedOid": "c4f78f6"
+          },
+          "author": "fl1ger",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-10-03T00:17:33Z",
+          "updatedAt": "2025-10-03T00:17:33Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "Then we should say that e.g with: \"From the perspective of the DELEG unaware client the zone cut created by DELEG is invisible\".",
+              "createdAt": "2025-10-03T00:17:33Z",
+              "updatedAt": "2025-10-03T00:17:33Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOO41rkM7EgwXc",
+          "commit": {
+            "abbreviatedOid": "c4f78f6"
+          },
+          "author": "paulehoffman",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-10-03T00:20:26Z",
+          "updatedAt": "2025-10-03T00:20:26Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "Agree; see [51c5740](https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/pull/67/commits/51c5740caadf7292c83e13b6470ffcfee41783ae)",
+              "createdAt": "2025-10-03T00:20:26Z",
+              "updatedAt": "2025-10-03T00:20:26Z"
+            }
+          ]
+        }
+      ]
     },
     {
       "number": 68,
       "id": "PR_kwDOO41rkM6rY4t9",
       "title": "Clean up \"legacy\" terminology",
       "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/pull/68",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "paulehoffman",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2025-09-30T17:36:35Z",
-      "updatedAt": "2025-09-30T17:36:35Z",
+      "updatedAt": "2025-10-03T00:15:12Z",
+      "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
+      "baseRefName": "main",
+      "baseRefOid": "2d97eac76a608e5e211e5aea9aab4fdccccd00d7",
+      "headRepository": "paulehoffman/fork-deleg-base",
+      "headRefName": "legacy",
+      "headRefOid": "7f2b483773bbcbc3f4589937da7311cf6bfbbbc0",
+      "closedAt": "2025-10-03T00:15:12Z",
+      "mergedAt": "2025-10-03T00:15:12Z",
+      "mergedBy": "fl1ger",
+      "mergeCommit": {
+        "oid": "90e45e7fd2a295cd59e309174ed414f8a3954e81"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOO41rkM7Egqn2",
+          "commit": {
+            "abbreviatedOid": "fa7640a"
+          },
+          "author": "fl1ger",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-10-02T23:58:55Z",
+          "updatedAt": "2025-10-02T23:58:56Z",
+          "comments": [
+            {
+              "originalPosition": 9,
+              "body": "\"does not use the DELEG protocol\" should be correct or am I missing something?",
+              "createdAt": "2025-10-02T23:58:55Z",
+              "updatedAt": "2025-10-02T23:58:56Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOO41rkM7Egtis",
+          "commit": {
+            "abbreviatedOid": "fa7640a"
+          },
+          "author": "paulehoffman",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-10-03T00:09:49Z",
+          "updatedAt": "2025-10-03T00:09:50Z",
+          "comments": [
+            {
+              "originalPosition": 9,
+              "body": "Arrrgh, correct. Fixed in dd5f218",
+              "createdAt": "2025-10-03T00:09:49Z",
+              "updatedAt": "2025-10-03T00:09:50Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 69,
+      "id": "PR_kwDOO41rkM6rY451",
+      "title": "\"RR set\" is spelled \"RRset\" in RFC 9499; we should too",
+      "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/pull/69",
+      "state": "MERGED",
+      "author": "paulehoffman",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-09-30T17:36:47Z",
+      "updatedAt": "2025-10-02T23:56:53Z",
       "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
       "baseRefName": "main",
       "baseRefOid": "191902f5cbb9d256ae1f4b535f406dfa1cc3b530",
       "headRepository": "paulehoffman/fork-deleg-base",
-      "headRefName": "legacy",
-      "headRefOid": "fa7640a44efab1eb693ae373b066036ccfa46801",
+      "headRefName": "rrset",
+      "headRefOid": "aa8577a1bd836a1432b5f303452c3f1220b3aa4e",
+      "closedAt": "2025-10-02T23:56:53Z",
+      "mergedAt": "2025-10-02T23:56:53Z",
+      "mergedBy": "fl1ger",
+      "mergeCommit": {
+        "oid": "e06a2b1216eea8e61bed70da0de9be5b7eb8cc45"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 70,
+      "id": "PR_kwDOO41rkM6r_Try",
+      "title": "Fix two spelling errors",
+      "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/pull/70",
+      "state": "OPEN",
+      "author": "paulehoffman",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-10-03T16:24:28Z",
+      "updatedAt": "2025-10-03T16:24:28Z",
+      "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
+      "baseRefName": "main",
+      "baseRefOid": "0bf423086be4bd1e7e21e194f866059ed865445a",
+      "headRepository": "paulehoffman/fork-deleg-base",
+      "headRefName": "spelling",
+      "headRefOid": "a97ec1ef3423268f74fa97cd9ba70817ee92d438",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
@@ -3502,24 +3696,24 @@
       "reviews": []
     },
     {
-      "number": 69,
-      "id": "PR_kwDOO41rkM6rY451",
-      "title": "\"RR set\" is spelled \"RRset\" in RFC 9499; we should too",
-      "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/pull/69",
+      "number": 71,
+      "id": "PR_kwDOO41rkM6sEr-S",
+      "title": "Exact and detailed description of authoritative server behavior around DELEGful delegation",
+      "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/pull/71",
       "state": "OPEN",
-      "author": "paulehoffman",
-      "authorAssociation": "COLLABORATOR",
+      "author": "libor-peltan-cznic",
+      "authorAssociation": "NONE",
       "assignees": [],
       "labels": [],
       "body": "",
-      "createdAt": "2025-09-30T17:36:47Z",
-      "updatedAt": "2025-09-30T17:36:47Z",
+      "createdAt": "2025-10-04T07:26:02Z",
+      "updatedAt": "2025-10-04T07:26:02Z",
       "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
       "baseRefName": "main",
-      "baseRefOid": "191902f5cbb9d256ae1f4b535f406dfa1cc3b530",
-      "headRepository": "paulehoffman/fork-deleg-base",
-      "headRefName": "rrset",
-      "headRefOid": "aa8577a1bd836a1432b5f303452c3f1220b3aa4e",
+      "baseRefOid": "0bf423086be4bd1e7e21e194f866059ed865445a",
+      "headRepository": "libor-peltan-cznic/draft-ietf-deleg-base",
+      "headRefName": "auth_behavior_lpe",
+      "headRefOid": "f78d9cc82eb36aeae3be51a979b3b3143d625d4e",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
