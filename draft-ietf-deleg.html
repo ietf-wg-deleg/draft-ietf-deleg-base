@@ -1484,8 +1484,7 @@ including the requirements for strictly increasing numeric order to keys and no 
 <p id="section-2.2-4">All the requirements in Section 2.2 of <span>[<a href="#RFC9460" class="cite xref">RFC9460</a>]</span> apply.<a href="#section-2.2-4" class="pilcrow">¶</a></p>
 <p id="section-2.2-5">The DelegInfos element is a sequence of individual DelegInfo elements.
 The wire format of an individual DelegInfo element is the same as for a SvcParam element,
-but it references DelegInfo elements instead of SvcParam elements.
-Note that though SVCB allows SvcParams to be absent, DELEG will always require at least one DelegInfo in DelegInfos.<a href="#section-2.2-5" class="pilcrow">¶</a></p>
+but it references DelegInfo elements instead of SvcParam elements.<a href="#section-2.2-5" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-2.2-6">
 <pre>
                 +0 (MSB)                            +1 (LSB)
@@ -1718,7 +1717,7 @@ The wire formats for server-ipv4 and server-ipv6 are a sequence of IP addresses,
 <p id="section-3.1.5-5">The presentation value for server-name and include-delegi are a set of fully-qualified domain names and relative domain names, separated by commas.
 The wire format for server-name and include-delegi are each a concatenated set of a wire-format domain names, where the root label provides the separation between names.
 The names in the wire format MUST NOT be compressed.<a href="#section-3.1.5-5" class="pilcrow">¶</a></p>
-<p id="section-3.1.5-6">A DELEG or DELEGI record MUST have one, and only one, set of server information, chosen from the following:<a href="#section-3.1.5-6" class="pilcrow">¶</a></p>
+<p id="section-3.1.5-6">A DELEG or DELEGI record that has a non-empty DelegInfos MUST have one, and only one, set of server information, chosen from the following:<a href="#section-3.1.5-6" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-3.1.5-7.1">
               <p id="section-3.1.5-7.1.1">one server-ipv4 key<a href="#section-3.1.5-7.1.1" class="pilcrow">¶</a></p>
