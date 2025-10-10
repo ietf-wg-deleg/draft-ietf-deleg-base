@@ -6,11 +6,11 @@ deleg                                                           T. April
 Internet-Draft                                               Google, LLC
 Updates: 1034, 1035, 6672, 6840 (if approved)                  P. Špaček
 Intended status: Standards Track                                     ISC
-Expires: 6 April 2026                                           R. Weber
+Expires: 13 April 2026                                          R. Weber
                                                      Akamai Technologies
                                                              D. Lawrence
                                                               Salesforce
-                                                          3 October 2025
+                                                         10 October 2025
 
 
                      Extensible Delegation for DNS
@@ -61,7 +61,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 6 April 2026.
+   This Internet-Draft will expire on 13 April 2026.
 
 Copyright Notice
 
@@ -238,8 +238,8 @@ Table of Contents
 
 2.1.  Presentation Format
 
-   The RDATA presentation format of the record consists of a single
-   list, DelegInfos.
+   The RDATA presentation format of the DELEG and DELEGI resource
+   records consists of a single list, DelegInfos.
 
    The DelegInfos presentation format is defined exactly the same as
    SvcParams in Section 2.1 of [RFC9460].  The following rules are
@@ -271,8 +271,9 @@ Table of Contents
 
 2.2.  RDATA Wire Format
 
-   The RDATA portion of the RR types has variable length and entirely
-   consists of a single "DelegInfos" element:
+   The RDATA portion of the DELEG and DELEGI resource record has
+   variable length and entirely consists of a single "DelegInfos"
+   element:
 
        +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
        /                         DelegInfos                            /
