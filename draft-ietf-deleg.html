@@ -1069,7 +1069,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-deleg-latest</dd>
 <dt class="label-updates">Updates:</dt>
 <dd class="updates">
-<a href="https://www.rfc-editor.org/rfc/rfc1034" class="eref">1034</a>, <a href="https://www.rfc-editor.org/rfc/rfc1035" class="eref">1035</a>, <a href="https://www.rfc-editor.org/rfc/rfc6672" class="eref">6672</a>, <a href="https://www.rfc-editor.org/rfc/rfc6840" class="eref">6840</a> (if approved)</dd>
+<a href="https://www.rfc-editor.org/rfc/rfc1034" class="eref">1034</a>, <a href="https://www.rfc-editor.org/rfc/rfc1035" class="eref">1035</a>, <a href="https://www.rfc-editor.org/rfc/rfc4035" class="eref">4035</a>, <a href="https://www.rfc-editor.org/rfc/rfc6672" class="eref">6672</a>, <a href="https://www.rfc-editor.org/rfc/rfc6840" class="eref">6840</a> (if approved)</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
 <time datetime="2025-10-13" class="published">13 October 2025</time>
@@ -1927,10 +1927,8 @@ type.<a href="#section-3.4.1-4" class="pilcrow">¶</a></p>
 The first paragraph of that section is updated to read:<a href="#section-3.4.2-1" class="pilcrow">¶</a></p>
 <p id="section-3.4.2-2">Section 5.2 of <span>[<a href="#RFC4035" class="cite xref">RFC4035</a>]</span> specifies that a validator, when proving a
 delegation is not secure, needs to check for the absence of the DS
-and SOA bits in the NSEC (or NSEC3) type bitmap.
-The validator also
-MUST check for the presence of the NS or the DELEG bit in the matching NSEC (or
-NSEC3) RR (proving that there is, indeed, a delegation).
+and SOA bits in the NSEC (or NSEC3) type bitmap; this was clarified in Section 4.1 of <span>[<a href="#RFC6840" class="cite xref">RFC6840</a>]</span>.
+This document updates <span>[<a href="#RFC4035" class="cite xref">RFC4035</a>]</span> and <span>[<a href="#RFC6840" class="cite xref">RFC6840</a>]</span> to specify that the validator MUST also check for the presence of the NS or the DELEG bit in the matching NSEC (or NSEC3) RR (proving that there is, indeed, a delegation).
 Alternately, the validator must make sure that the delegation with an NS record is covered by an NSEC3
 RR with the Opt-Out flag set.
 Opt-Out is not applicable to DELEG RR type

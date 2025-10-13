@@ -4,10 +4,10 @@
 
 deleg                                                           T. April
 Internet-Draft                                               Google, LLC
-Updates: 1034, 1035, 6672, 6840 (if approved)                  P. Špaček
-Intended status: Standards Track                                     ISC
-Expires: 16 April 2026                                          R. Weber
-                                                     Akamai Technologies
+Updates: 1034, 1035, 4035, 6672, 6840 (if                      P. Špaček
+         approved)                                                   ISC
+Intended status: Standards Track                                R. Weber
+Expires: 16 April 2026                               Akamai Technologies
                                                              D. Lawrence
                                                               Salesforce
                                                          13 October 2025
@@ -782,14 +782,16 @@ Table of Contents
 
    Section 5.2 of [RFC4035] specifies that a validator, when proving a
    delegation is not secure, needs to check for the absence of the DS
-   and SOA bits in the NSEC (or NSEC3) type bitmap.  The validator also
-   MUST check for the presence of the NS or the DELEG bit in the
-   matching NSEC (or NSEC3) RR (proving that there is, indeed, a
-   delegation).  Alternately, the validator must make sure that the
-   delegation with an NS record is covered by an NSEC3 RR with the Opt-
-   Out flag set.  Opt-Out is not applicable to DELEG RR type because
-   DELEG records are authoritative at the parent side of a zone cut in
-   the same way that DS RR types are.
+   and SOA bits in the NSEC (or NSEC3) type bitmap; this was clarified
+   in Section 4.1 of [RFC6840].  This document updates [RFC4035] and
+   [RFC6840] to specify that the validator MUST also check for the
+   presence of the NS or the DELEG bit in the matching NSEC (or NSEC3)
+   RR (proving that there is, indeed, a delegation).  Alternately, the
+   validator must make sure that the delegation with an NS record is
+   covered by an NSEC3 RR with the Opt-Out flag set.  Opt-Out is not
+   applicable to DELEG RR type because DELEG records are authoritative
+   at the parent side of a zone cut in the same way that DS RR types
+   are.
 
 3.4.3.  Referral downgrade protection
 
