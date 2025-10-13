@@ -6,11 +6,11 @@ deleg                                                           T. April
 Internet-Draft                                               Google, LLC
 Updates: 1034, 1035, 6672, 6840 (if approved)                  P. Špaček
 Intended status: Standards Track                                     ISC
-Expires: 13 April 2026                                          R. Weber
+Expires: 16 April 2026                                          R. Weber
                                                      Akamai Technologies
                                                              D. Lawrence
                                                               Salesforce
-                                                         10 October 2025
+                                                         13 October 2025
 
 
                      Extensible Delegation for DNS
@@ -61,7 +61,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 13 April 2026.
+   This Internet-Draft will expire on 16 April 2026.
 
 Copyright Notice
 
@@ -819,20 +819,15 @@ Table of Contents
    Resolvers MUST prevent situations where accidental misconfiguration
    of zones or malicious attacks cause them to perform too much work
    when resolving.  This document describes two sets of actions that, if
-   not controlled, could lead to over-work attacks:
+   not controlled, could lead to over-work attacks.
 
-   *  Names with many subdomains can cause walking up the tree to
-      populate SLIST (Section 3.1.4) to be burdensome.  To prevent this,
-      the resolver SHOULD NOT walk up more than %%TODO: come up with a
-      number%% labels in order to contribute to SLIST.
-
-   *  Long chains of include-delegi information (Section 3.1.5), and
-      those with circular chains of include-delegi information, can be
-      burdensome.  To prevent this, the resolver SHOULD NOT follow more
-      than 3 include-delegi chains in an RRset when populating SLIST.
-      Note that include-delegi chains can have CNAME steps in them; in
-      such a case, a CNAME step is counted the same as a DELEGI step
-      when determining when to stop following a chain.
+   Long chains of include-delegi information (Section 3.1.5), and those
+   with circular chains of include-delegi information, can be
+   burdensome.  To prevent this, the resolver SHOULD NOT follow more
+   than 3 include-delegi chains in an RRset when populating SLIST.  Note
+   that include-delegi chains can have CNAME steps in them; in such a
+   case, a CNAME step is counted the same as a DELEGI step when
+   determining when to stop following a chain.
 
 4.2.  Preventing Downgrade Attacks
 
