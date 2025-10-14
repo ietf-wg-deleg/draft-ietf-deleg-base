@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-10-12T00:58:54.349336+00:00",
+  "timestamp": "2025-10-14T00:56:13.216673+00:00",
   "repo": "ietf-wg-deleg/draft-ietf-deleg-base",
   "labels": [
     {
@@ -3930,13 +3930,13 @@
       "labels": [],
       "body": "",
       "createdAt": "2025-10-10T10:46:12Z",
-      "updatedAt": "2025-10-10T19:09:55Z",
+      "updatedAt": "2025-10-13T17:39:12Z",
       "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
       "baseRefName": "main",
       "baseRefOid": "14620a7ed0df82f2ad202332e415f9c7364af1d4",
       "headRepository": "pspacek/draft-ietf-deleg-base",
       "headRefName": "pspacek/de0-clients-clarif",
-      "headRefOid": "dbaeda024ab4e3bd618dc878d3a4d2621dbe84e5",
+      "headRefOid": "3a9d8df43b46d3f70190681308f66cd7c71eae40",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
@@ -3949,26 +3949,99 @@
       "id": "PR_kwDOO41rkM6tJfRm",
       "title": "Make the update to RFC 4035 explicit",
       "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/pull/76",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "paulehoffman",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2025-10-10T17:56:41Z",
-      "updatedAt": "2025-10-10T17:56:41Z",
+      "updatedAt": "2025-10-13T17:26:47Z",
       "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
       "baseRefName": "main",
       "baseRefOid": "14620a7ed0df82f2ad202332e415f9c7364af1d4",
       "headRepository": "paulehoffman/fork-deleg-base",
       "headRefName": "more-updates",
-      "headRefOid": "7ac01c567b8bb2319c2de634d2b142a992e20340",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "2ac767ec51b8fd65f1ed825392a541ea25f6de8d",
+      "closedAt": "2025-10-13T17:26:47Z",
+      "mergedAt": "2025-10-13T17:26:47Z",
+      "mergedBy": "pspacek",
+      "mergeCommit": {
+        "oid": "a4244adf7944fdf6ac8968c2c848d559cc70fcbe"
+      },
+      "comments": [
+        {
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "body": "In principle I agree we probably should update 4035 as well, but the bit you quote came from 6840 section 4.1. Care to rephrase?",
+          "createdAt": "2025-10-13T13:37:57Z",
+          "updatedAt": "2025-10-13T13:37:57Z"
+        },
+        {
+          "author": "paulehoffman",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Reading RFC 6840, it is unclear to me which RFC specifies this, so I said that both did in [2ac767e](https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/pull/76/commits/2ac767ec51b8fd65f1ed825392a541ea25f6de8d). Does this help?",
+          "createdAt": "2025-10-13T14:57:59Z",
+          "updatedAt": "2025-10-13T14:57:59Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOO41rkM7GlXaU",
+          "commit": {
+            "abbreviatedOid": "7ac01c5"
+          },
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "state": "CHANGES_REQUESTED",
+          "body": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/pull/76#issuecomment-3397577214",
+          "createdAt": "2025-10-13T13:38:24Z",
+          "updatedAt": "2025-10-13T13:38:24Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 79,
+      "id": "PR_kwDOO41rkM6tgACE",
+      "title": "Remove text about walking up tree for SLIST",
+      "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/pull/79",
+      "state": "MERGED",
+      "author": "paulehoffman",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Hold until at least 2025-10-16 to see if the list disagrees.",
+      "createdAt": "2025-10-13T16:48:16Z",
+      "updatedAt": "2025-10-13T17:18:21Z",
+      "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
+      "baseRefName": "main",
+      "baseRefOid": "14620a7ed0df82f2ad202332e415f9c7364af1d4",
+      "headRepository": "paulehoffman/fork-deleg-base",
+      "headRefName": "not-so-hard",
+      "headRefOid": "af7b7c88da8b1db9153785cd50524898c730bc6c",
+      "closedAt": "2025-10-13T17:18:20Z",
+      "mergedAt": "2025-10-13T17:18:20Z",
+      "mergedBy": "pspacek",
+      "mergeCommit": {
+        "oid": "d0cc2da4c316581a9342f89a546885cb5829661c"
+      },
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOO41rkM7GoPb_",
+          "commit": {
+            "abbreviatedOid": "af7b7c8"
+          },
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-10-13T17:18:15Z",
+          "updatedAt": "2025-10-13T17:18:15Z",
+          "comments": []
+        }
+      ]
     }
   ]
 }
