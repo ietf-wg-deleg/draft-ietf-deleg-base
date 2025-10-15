@@ -7,10 +7,10 @@ Internet-Draft                                               Google, LLC
 Updates: 1034, 1035, 4035, 6672, 6840 (if                      P. Špaček
          approved)                                                   ISC
 Intended status: Standards Track                                R. Weber
-Expires: 16 April 2026                               Akamai Technologies
+Expires: 18 April 2026                               Akamai Technologies
                                                              D. Lawrence
                                                               Salesforce
-                                                         13 October 2025
+                                                         15 October 2025
 
 
                      Extensible Delegation for DNS
@@ -61,7 +61,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 16 April 2026.
+   This Internet-Draft will expire on 18 April 2026.
 
 Copyright Notice
 
@@ -621,6 +621,13 @@ Table of Contents
 
 3.2.  Authoritative Servers
 
+   The DELEG RR type defines a zone cut in similar way as the NS RR type
+   Behavior defined for zone cuts in existing pre-DELEG specifications
+   apply to zone cuts created by the DELEG record.  A notable example of
+   this is that the occlusion (usually accidentally) created by NS
+   records in a parent zone would also be created by DELEG records in a
+   parent zone.
+
    DELEG-aware authoritative servers act differently when handling
    queries from DELEG-unaware clients (those with DE=0) than from DELEG-
    aware clients (those with DE=1).
@@ -640,7 +647,7 @@ Table of Contents
 
    An explicit query for the DELEG RR type at a delegation point behaves
    much like query for the DS RR type: the server answers
-   authoritatively from the parent zone.  All previous specifications
+   authoritatively from the parent zone.  All pre-DELEG specifications
    for special handling queries with QTYPE=DS apply equally to
    QTYPE=DELEG.  In summary, the server either provides an authoritative
    DELEG RRset or declares its non-existence, with relevant DNSSEC
@@ -671,75 +678,120 @@ Table of Contents
 
 3.2.2.  DELEG-unaware Clients
 
-   DELEG-unaware clients do not use DELEG records for delegation.  When
-   a DELEG-aware authoritative server responds to a DELEG-unaware
-   client, any DELEG record in the response would not signal a zone cut,
-   is not returned in referral responses, and is not considered
-   authoritative on the parent side of a zone cut.  Because of this,
-   DELEG-aware authoritative servers MUST answer as if they are DELEG-
-   unaware to DELEG-unaware clients.  Please note this instruction does
-   not affect DNSSEC signing, i.e. no special handling for NSEC type
-   bitmap is necessary and DELEG RR type is accurately represented even
-   for DELEG-unaware clients.
+   A general principle for DELEG-aware authoritative servers is that
+   they respond to a DELEG-unaware client by following pre-DELEG
+   specifications.
 
-   Two specific cases of DELEG-aware authoritative servers responding in
-   a DELEG-unaware manner are described here.
+   DELEG-unaware clients do not recognize DELEG records as a zone cut
+   and are not aware of the special handling rules for DELEG records.
+   They understand a DELEG RRset as an ordinary unknown RR type.
 
-3.2.2.1.  DELEG-unaware Clients Requesting QTYPE=DELEG
+   In summary, DELEG records are not returned in referral responses to
+   DELEG-unaware clients, and DELEG-unaware clients do not consider
+   DELEG records authoritative on the parent side of a zone cut.
 
-   From the perspective of DELEG-unaware clients, the DELEG RR type does
-   not have special semantics and should behave like an old ordinary RR
-   type, e.g. TXT.  Thus, queries with DE=0 and QTYPE=DELEG MUST result
-   in a legacy response.  This would be a legacy response if there are
-   NS records (the NS RRset in the AUTHORITY section, plus all relevant
-   DNSSEC records), or the actual DELEG record if the owner name does
-   not have NS records.
+   An authoritative server responding to DELEG-unaware clients has to
+   handle three distinct situations:
 
-   TODO: Should we have an example with auth having parent+child zone at
-   the same time, and DE=0 QTYPE=DELEG query?
+   *  No DELEG RRset is present.  In this case, the authoritative server
+      follows the pre-DELEG specifications.
 
-3.2.2.2.  DELEG-unaware Clients with DELEG RRs Present but No NS RRs
+   *  An NS RRset and a DELEG RRset are both present.  In this case, the
+      authoritative server uses the NS RRset when constructing referral
+      responses, following the pre-DELEG specifications.  See also
+      Section 3.3 and Appendix A.
 
-   DELEG-unaware clients might ask for a name which belongs to a zone
-   delegated only with DELEG RRs (that is, without any NS RRs).  Such a
-   zone is not resolvable for DELEG-unaware clients.  From the
-   perspective of a DELEG-unaware client, the zone cut created by the
-   DELEG RRs is invisible.
+   *  A DELEG RRset is present, but an NS RRset is not.  See
+      Section 3.2.2.1.
 
-   DELEG-aware authoritative server implementation has two options:
+3.2.2.1.  DELEG-unaware Clients with DELEG RRs Present but No NS RRs
 
-   1.  When faced with a client that sent a query with DE=0 that would
-       lead to a delegation, but the zone has no NS records, an
-       authoritative server MAY reply with SERVFAIL and nothing in the
-       Answer or Authority sections.  This response has negative side
-       effects, namely that most resolvers will then query the remaining
-       authoritative servers to see if any of them would give a
-       different answer.  The advantage of this approach is simplicity
-       of implementation.
+   Authoritative servers may receive requests from DELEG-unaware clients
+   for which the child zone is authoritative and is delegated with DELEG
+   RRs only (that is, without any NS RRs).  Such a zone is by definition
+   not resolvable for DELEG-unaware clients.  From the perspective of a
+   DELEG-unaware client, the zone cut created by the DELEG RRs is
+   invisible.  In such a situation, the authoritative server should
+   respnd in a way to limit confusion and/or colateral damage for the
+   DELEG-unaware client.
 
-   2.  Because of the negative side effects of the previous option, an
-       authoritative server SHOULD instead send an answer that
-       accurately describes the situation to a legacy resolver.  This,
-       however, is difficult because the authoritative server is
-       significantly changing its response based on the the value of the
-       DE flag.
-
-   TODO: List as many of the possible situations that need to be
-   considered for variant B, and the proposed responses for each
-   situation.  This list will probably change for the next few
-   iterations of this draft.
-
-   The authoritative server is RECOMMENDED to supplement these responses
+   The authoritative server is RECOMMENDED to supplement its responses
    to DELEG-unaware resolvers with an [RFC8914] Extended DNS Error using
    the (IANA-TBD) value "New Delegation Only" from the Extended DNS
    Error Codes registry.
+
+   A DELEG-aware authoritative server implementation has two options:
+
+   1.  When faced with a client that sent a query with DE=0 that would
+       lead to a delegation, but the zone has no NS records, an
+       authoritative server MAY reply with an RCODE of SERVFAIL and
+       nothing in the Answer and Authority sections.
+
+       This response has negative side effects, namely that most
+       resolvers will then query the remaining authoritative servers to
+       see if any of them would give a different answer.  The advantage
+       of this approach is simplicity of implementation and it is easy
+       to understand.
+
+   2.  Because of the negative side effects of the previous option, an
+       authoritative server SHOULD instead send an answer that
+       accurately describes the situation to a DELEG-unaware resolver.
+
+       The NSEC chain and the type bitmap generated according to
+       Section 3.3 leads to exactly one possible answer which is valid
+       according to pre-DELEG specifications.  See Appendix A for
+       several examples of such answers.
+
+       Please note different interpretation of DELEG RR type and zone
+       cut definitions between DELEG-aware authoritative server and
+       DELEG-unaware client.  It is confusing.
+
+   TODO: List as many of the possible situations that need to be
+   considered for variant 2, and the proposed the single appropriate
+   response for each situation.  This list will probably change for the
+   next few iterations of this draft.
+
+3.2.2.2.  DELEG-unaware Clients Requesting QTYPE=DELEG
+
+   From the perspective of DELEG-unaware clients, the DELEG RR type does
+   not have special semantics and should behave like an old ordinary RR
+   type such as TXT.  Thus, queries with DE=0 and QTYPE=DELEG MUST
+   result in a response which can be validated by DELEG-unaware client.
+
+   *  If there is an NS RRset, this will be a delegation (with the NS
+      RRset included in the AUTHORITY section, plus all relevant DNSSEC
+      records).
+
+   *  If there is no NS RRset but there is a DELEG RRset, this will be
+      the DELEG RRset in the Answer section.
+
+   *  If there is no NS RRset and no DELEG RRset, this will be a
+      standard NXDOMAIN response with an empty Answer section.
+
+   TODO: Should we have an example with auth having parent+child zone at
+   the same time, and DE=0 QTYPE=DELEG query?
 
 3.3.  DNSSEC Signers
 
    The DELEG record is authoritative on the parent side of a zone cut
    and needs to be signed as such.  Existing rules from the DNSSEC
-   specifications apply.  In summary: for DNSSEC signing, treat the
-   DELEG RR type the same way as the DS RR type.
+   specifications apply.
+
+   In summary: for DNSSEC signing, treat the DELEG RR type the same way
+   as the DS RR type.
+
+   DELEG RR type defines a zone cut in similar way as NS RR type.  This
+   has several consequences which stem from existing pre-DELEG
+   specifications:
+
+   *  All owner names below zone cut are occluded and thus not present
+      in NSEC chains.
+
+   *  All RRsets which are not permissible at the parent side of zone
+      cut are occluded too and not represented in NSEC chain type
+      bitmap.
+
+   See examples in Appendix A.1 and Appendix A.4.2.3.
 
    In order to protect validators from downgrade attacks this draft
    introduces a new DNSKEY flag ADT (Authoritative Delegation Types).
@@ -1071,7 +1123,7 @@ A.1.  Root zone file
 
    example.   DELEG server-ipv4=192.0.2.1 server-ipv6=2001:DB8::1
    example.   DELEG server-name=ns2.example.net.,ns3.example.org.
-   example.   RRSIG DELEG 13 4 300 20260101000000 (
+   example.   RRSIG DELEG 13 1 300 20260101000000 (
                            20250101000000 33333 . SigExampleDELEG/ )
 
    example.   NS    a.example.
@@ -1079,14 +1131,15 @@ A.1.  Root zone file
    example.   NS    c.example.org.
 
    example.   DS    44444 13 2 ABCDEF01234567...
-   example.   RRSIG DS 13 4 300 20260101000000 (
+   example.   RRSIG DS 13 1 300 20260101000000 (
                            20250101000000 33333 . SigExampleDS )
 
    example.   NSEC  net. NS DS RRSIG NSEC DELEG
-   example.   RRSIG NSEC 13 4 300 20260101000000 (
+   example.   RRSIG NSEC 13 1 300 20260101000000 (
                            20250101000000 33333 . SigExampleNSEC+/ )
 
    ; unsigned glue for legacy (NS) delegation
+   ; it is NOT present in NSEC chain
    a.example. A     192.0.2.1
    a.example. AAAA  2001:DB8::1
 
@@ -1099,12 +1152,16 @@ A.1.  Root zone file
    test.      DELEG server-ipv6=3fff::33
    test.      DELEG include-delegi=Acfg.example.org.
    test.      DELEG include-delegi=config2.example.net.
-   test.      RRSIG DELEG 13 4 300 20260101000000 (
+   test.      RRSIG DELEG 13 1 300 20260101000000 (
                            20250101000000 33333 . SigTestDELEG )
 
    test.      NSEC  . RRSIG NSEC DELEG
-   test.      RRSIG NSEC 13 4 300 20260101000000 (
+   test.      RRSIG NSEC 13 1 300 20260101000000 (
                            20250101000000 33333 . SigTestNSEC/ )
+
+   ; a forgotten glue from legacy (NS) delegation
+   ; it is NOT present in NSEC chain and it is occluded
+   a.test.    A     192.0.2.1
 
    Delegations to org and net zones omitted for brevity.
 
@@ -1173,6 +1230,26 @@ A.4.1.2.  Query for foo.test
    ;; Additional
    ;; OPT with Extended DNS Error: New Delegation Only
 
+A.4.1.3.  Query for a.test
+
+   A forgotten glue record under the "test." delegation point is
+   occluded by DELEG RRset.
+
+   ;; Header: QR AA RCODE=NXDOMAIN
+   ;;
+
+   ;; Question
+   a.test.   IN A
+
+   ;; Answer
+   ;; (empty)
+
+   ;; Authority
+   .   SOA ...
+
+   ;; Additional
+   ;; OPT with Extended DNS Error: New Delegation Only
+
 A.4.2.  DO bit set, DE bit clear
 
 A.4.2.1.  Query for foo.example
@@ -1192,7 +1269,7 @@ A.4.2.1.  Query for foo.example
    example.   NS    b.example.net.
    example.   NS    c.example.org.
    example.   DS    44444 13 2 ABCDEF01234567...
-   example.   RRSIG DS 13 4 300 20260101000000 (
+   example.   RRSIG DS 13 1 300 20260101000000 (
                            20250101000000 33333 . SigExampleDS )
    ;; Additional
    a.example. A     192.0.2.1
@@ -1213,7 +1290,32 @@ A.4.2.2.  Query for foo.test
    .          SOA ...
    .          RRSIG SOA ...
    test.      NSEC  . RRSIG NSEC DELEG
-   test.      RRSIG NSEC 13 4 300 20260101000000 (
+   test.      RRSIG NSEC 13 1 300 20260101000000 (
+                           20250101000000 33333 . SigTestNSEC/ )
+
+   ;; Additional
+   ;; OPT with Extended DNS Error: New Delegation Only
+
+A.4.2.3.  Query for a.test
+
+   A forgotten glue record under the "test." delegation point is
+   occluded by DELEG RRset.  This is indicated by NSEC chain which
+   "skips" over the owner name with A RRset.
+
+   ;; Header: QR DO AA RCODE=NXDOMAIN
+   ;;
+
+   ;; Question
+   a.test.      IN A
+
+   ;; Answer
+   ;; (empty)
+
+   ;; Authority
+   .          SOA ...
+   .          RRSIG SOA ...
+   test.      NSEC  . RRSIG NSEC DELEG
+   test.      RRSIG NSEC 13 1 300 20260101000000 (
                            20250101000000 33333 . SigTestNSEC/ )
 
    ;; Additional
@@ -1277,10 +1379,10 @@ A.4.4.1.  Query for foo.example
    ;; Authority
    example.   DELEG server-ipv4=192.0.2.1 server-ipv6=2001:DB8::1
    example.   DELEG server-name=ns2.example.net.,ns3.example.org.
-   example.   RRSIG DELEG 13 4 300 20260101000000 (
+   example.   RRSIG DELEG 13 1 300 20260101000000 (
                            20250101000000 33333 . SigExampleDELEG/ )
    example.   DS    44444 13 2 ABCDEF01234567...
-   example.   RRSIG DS 13 4 300 20260101000000 (
+   example.   RRSIG DS 13 1 300 20260101000000 (
                            20250101000000 33333 . SigExampleDS )
 
    ;; Additional
@@ -1302,10 +1404,10 @@ A.4.4.2.  Query for foo.test
    test.      DELEG server-ipv6=3fff::33
    test.      DELEG include-delegi=Acfg.example.org.
    test.      DELEG include-delegi=config2.example.net.
-   test.      RRSIG DELEG 13 4 300 20260101000000 (
+   test.      RRSIG DELEG 13 1 300 20260101000000 (
                            20250101000000 33333 . SigTestDELEG )
    test.      NSEC  . RRSIG NSEC DELEG
-   test.      RRSIG NSEC 13 4 300 20260101000000 (
+   test.      RRSIG NSEC 13 1 300 20260101000000 (
                            20250101000000 33333 . SigTestNSEC/ )
 
    ;; Additional
