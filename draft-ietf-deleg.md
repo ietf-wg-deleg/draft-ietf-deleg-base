@@ -318,15 +318,15 @@ The types of information defined in this document are:
 * server-ipv4: a set of IPv4 addresses for name servers
 * server-ipv6: a set of IPv6 addresses for name servers
 * server-name: a set of hostnames of name servers; the addresses must be fetched
-* include-delegi: a set of domain names that point to a DELEGI RRsets, which in turn have more information about the delegation
+* include-delegi: a set of hostnames that point to a DELEGI RRsets, which in turn have more information about the delegation
 
 These keys MUST have a non-empty DelegInfoValue.
 
 The presentation values for server-ipv4 and server-ipv6 are comma-separated list of one or more IP addresses of the appropriate family in standard textual format {{?RFC5952}} {{?RFC4001}}.
 The wire formats for server-ipv4 and server-ipv6 are a sequence of IP addresses, in network byte order, for the respective address family.
 
-The presentation value for server-name and include-delegi are a set of fully-qualified domain names and relative domain names, separated by commas.
-The wire format for server-name and include-delegi are each a concatenated set of a wire-format domain names, where the root label provides the separation between names.
+The presentation value for server-name and include-delegi are a set of hostnames as defined in {{?RFC1123}} / {{?RFC952}} either relative or absolute ending with a dot, separated by commas.
+The wire format for server-name and include-delegi are each a concatenated set of a wire-format hostnames, where the root label provides the separation between names.
 The names in the wire format MUST NOT be compressed.
 
 A DELEG or DELEGI record that has a non-empty DelegInfos MUST have one, and only one, set of server information, chosen from the following:
