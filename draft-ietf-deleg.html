@@ -1887,16 +1887,17 @@ Please note different interpretation of DELEG RR type and zone cut definitions b
 <a href="#section-3.2.2.2" class="section-number selfRef">3.2.2.2. </a><a href="#name-deleg-unaware-clients-reque" class="section-name selfRef">DELEG-unaware Clients Requesting QTYPE=DELEG</a>
             </h5>
 <p id="section-3.2.2.2-1">From the perspective of DELEG-unaware clients, the DELEG RR type does not have special semantics and should behave like an old ordinary RR type such as TXT.
-Thus, queries with DE=0 and QTYPE=DELEG MUST result in a response which can be validated by DELEG-unaware client.<a href="#section-3.2.2.2-1" class="pilcrow">¶</a></p>
+Thus, queries with DE=0 and QTYPE=DELEG MUST result in a legacy response which can be validated by DELEG-unaware client.<a href="#section-3.2.2.2-1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-3.2.2.2-2.1">
-                <p id="section-3.2.2.2-2.1.1">If there is an NS RRset, this will be a delegation (with the NS RRset included in the AUTHORITY section, plus all relevant DNSSEC records).<a href="#section-3.2.2.2-2.1.1" class="pilcrow">¶</a></p>
+                <p id="section-3.2.2.2-2.1.1">If there is an NS RRset, this will be a legacy referral to the child zone. From the perspective of a DELEG-unaware client, the DELEG RR is effectively occluded by NS RRset.
+The DELEG-unaware resolver can then obtain a final answer which can be validated from the child zone in similar fashion as described in <span>[<a href="#RFC4035" class="cite xref">RFC4035</a>]</span> section 3.1.4.1.<a href="#section-3.2.2.2-2.1.1" class="pilcrow">¶</a></p>
 </li>
               <li class="normal" id="section-3.2.2.2-2.2">
-                <p id="section-3.2.2.2-2.2.1">If there is no NS RRset but there is a DELEG RRset, this will be the DELEG RRset in the Answer section.<a href="#section-3.2.2.2-2.2.1" class="pilcrow">¶</a></p>
+                <p id="section-3.2.2.2-2.2.1">If there is no NS RRset but there is a DELEG RRset, this will be a normal authoritative response with the DELEG RRset, following pre-DELEG specifications.<a href="#section-3.2.2.2-2.2.1" class="pilcrow">¶</a></p>
 </li>
               <li class="normal" id="section-3.2.2.2-2.3">
-                <p id="section-3.2.2.2-2.3.1">If there is no NS RRset and no DELEG RRset, this will be a standard NXDOMAIN response with an empty Answer section.<a href="#section-3.2.2.2-2.3.1" class="pilcrow">¶</a></p>
+                <p id="section-3.2.2.2-2.3.1">If there is no NS RRset and no DELEG RRset, this will be a standard negative response following pre-DELEG specifications.<a href="#section-3.2.2.2-2.3.1" class="pilcrow">¶</a></p>
 </li>
             </ul>
 <p id="section-3.2.2.2-3">TODO: Should we have an example with auth having parent+child zone at the same time, and DE=0 QTYPE=DELEG query?<a href="#section-3.2.2.2-3" class="pilcrow">¶</a></p>

@@ -762,17 +762,22 @@ Table of Contents
    From the perspective of DELEG-unaware clients, the DELEG RR type does
    not have special semantics and should behave like an old ordinary RR
    type such as TXT.  Thus, queries with DE=0 and QTYPE=DELEG MUST
-   result in a response which can be validated by DELEG-unaware client.
+   result in a legacy response which can be validated by DELEG-unaware
+   client.
 
-   *  If there is an NS RRset, this will be a delegation (with the NS
-      RRset included in the AUTHORITY section, plus all relevant DNSSEC
-      records).
+   *  If there is an NS RRset, this will be a legacy referral to the
+      child zone.  From the perspective of a DELEG-unaware client, the
+      DELEG RR is effectively occluded by NS RRset.  The DELEG-unaware
+      resolver can then obtain a final answer which can be validated
+      from the child zone in similar fashion as described in [RFC4035]
+      section 3.1.4.1.
 
-   *  If there is no NS RRset but there is a DELEG RRset, this will be
-      the DELEG RRset in the Answer section.
+   *  If there is no NS RRset but there is a DELEG RRset, this will be a
+      normal authoritative response with the DELEG RRset, following pre-
+      DELEG specifications.
 
    *  If there is no NS RRset and no DELEG RRset, this will be a
-      standard NXDOMAIN response with an empty Answer section.
+      standard negative response following pre-DELEG specifications.
 
    TODO: Should we have an example with auth having parent+child zone at
    the same time, and DE=0 QTYPE=DELEG query?
