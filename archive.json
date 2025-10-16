@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-10-14T00:56:13.216673+00:00",
+  "timestamp": "2025-10-16T00:57:06.833287+00:00",
   "repo": "ietf-wg-deleg/draft-ietf-deleg-base",
   "labels": [
     {
@@ -3923,26 +3923,269 @@
       "id": "PR_kwDOO41rkM6tD7E5",
       "title": "Draft: Clarify DE=0 auth behavior",
       "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/pull/75",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "pspacek",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2025-10-10T10:46:12Z",
-      "updatedAt": "2025-10-13T17:39:12Z",
+      "updatedAt": "2025-10-15T13:51:12Z",
       "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
       "baseRefName": "main",
       "baseRefOid": "14620a7ed0df82f2ad202332e415f9c7364af1d4",
       "headRepository": "pspacek/draft-ietf-deleg-base",
       "headRefName": "pspacek/de0-clients-clarif",
-      "headRefOid": "3a9d8df43b46d3f70190681308f66cd7c71eae40",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "7d78c76a3de6052d0716146e51018356f6326078",
+      "closedAt": "2025-10-15T06:53:42Z",
+      "mergedAt": "2025-10-15T06:53:42Z",
+      "mergedBy": "fl1ger",
+      "mergeCommit": {
+        "oid": "597cbcbe919363d1e8d448e5a9b1d12a8b7bc663"
+      },
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOO41rkM7GugAB",
+          "commit": {
+            "abbreviatedOid": "3a9d8df"
+          },
+          "author": "matje",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-10-14T06:28:50Z",
+          "updatedAt": "2025-10-14T06:28:50Z",
+          "comments": [
+            {
+              "originalPosition": 53,
+              "body": "name **and** RR type?",
+              "createdAt": "2025-10-14T06:28:50Z",
+              "updatedAt": "2025-10-14T06:28:50Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOO41rkM7Gugzy",
+          "commit": {
+            "abbreviatedOid": "3a9d8df"
+          },
+          "author": "matje",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-10-14T06:30:16Z",
+          "updatedAt": "2025-10-14T06:30:17Z",
+          "comments": [
+            {
+              "originalPosition": 54,
+              "body": "Why by definition? Some DELEG records can be synthesized to NS and if done so the zone would be resolvable.",
+              "createdAt": "2025-10-14T06:30:16Z",
+              "updatedAt": "2025-10-14T06:30:17Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOO41rkM7GwSku",
+          "commit": {
+            "abbreviatedOid": "3a9d8df"
+          },
+          "author": "spacekpe",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-10-14T08:46:53Z",
+          "updatedAt": "2025-10-14T08:46:54Z",
+          "comments": [
+            {
+              "originalPosition": 54,
+              "body": "We are not defining any synthesis in the protocol. It's a hack, which will work in subset of cases only.",
+              "createdAt": "2025-10-14T08:46:53Z",
+              "updatedAt": "2025-10-14T08:46:54Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOO41rkM7GwUPF",
+          "commit": {
+            "abbreviatedOid": "3a9d8df"
+          },
+          "author": "spacekpe",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-10-14T08:48:43Z",
+          "updatedAt": "2025-10-14T08:48:43Z",
+          "comments": [
+            {
+              "originalPosition": 53,
+              "body": "What I meant is that with DELEGation like\r\n\r\ntest. DELEG server-ipv6=3ffff:\r\n\r\nthe client can ask for\r\n`sub.test. A` or `test. A` and these both belong to child side of the zone cut/are not authoritative in the parent.\r\n\r\nCan you rephrase it somehow?\r\n\r\n",
+              "createdAt": "2025-10-14T08:48:43Z",
+              "updatedAt": "2025-10-14T08:48:43Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOO41rkM7GwnrL",
+          "commit": {
+            "abbreviatedOid": "3a9d8df"
+          },
+          "author": "matje",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-10-14T09:09:55Z",
+          "updatedAt": "2025-10-14T09:09:55Z",
+          "comments": [
+            {
+              "originalPosition": 53,
+              "body": "I am unclear why you would add \"or RR type\" here. An RR type is tied to a name, so what's the purpose?",
+              "createdAt": "2025-10-14T09:09:55Z",
+              "updatedAt": "2025-10-14T09:09:55Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOO41rkM7GwoyX",
+          "commit": {
+            "abbreviatedOid": "3a9d8df"
+          },
+          "author": "matje",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-10-14T09:11:04Z",
+          "updatedAt": "2025-10-14T09:11:04Z",
+          "comments": [
+            {
+              "originalPosition": 54,
+              "body": "I don't see it as a hack, I see it as backwards incompatibility. \r\n\r\nI agree it will not work for all DELEG cases, but as long as you can specify legacy delegation in DELEG format that should be good enough.",
+              "createdAt": "2025-10-14T09:11:04Z",
+              "updatedAt": "2025-10-14T09:11:04Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOO41rkM7Gx26Y",
+          "commit": {
+            "abbreviatedOid": "3a9d8df"
+          },
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-10-14T10:43:18Z",
+          "updatedAt": "2025-10-14T10:43:18Z",
+          "comments": [
+            {
+              "originalPosition": 53,
+              "body": "Because RRtype can decide if it is from child or parent. Say DS or DELEG, or in future some other type from parent-range.",
+              "createdAt": "2025-10-14T10:43:18Z",
+              "updatedAt": "2025-10-14T10:43:18Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOO41rkM7GzA37",
+          "commit": {
+            "abbreviatedOid": "3a9d8df"
+          },
+          "author": "matje",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-10-14T12:06:47Z",
+          "updatedAt": "2025-10-14T12:06:48Z",
+          "comments": [
+            {
+              "originalPosition": 53,
+              "body": "What about:\r\n```suggestion\r\nAuthoritative servers may receive requests from DELEG-unaware clients for which the child zone is authoritative and is delegated with DELEG RRs only (that is, without any NS RRs).\r\n```\r\n?",
+              "createdAt": "2025-10-14T12:06:47Z",
+              "updatedAt": "2025-10-14T12:06:48Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOO41rkM7HG8sz",
+          "commit": {
+            "abbreviatedOid": "dbaeda0"
+          },
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-10-15T13:43:14Z",
+          "updatedAt": "2025-10-15T13:43:14Z",
+          "comments": [
+            {
+              "originalPosition": 90,
+              "body": "This is wrong. That depends on _other_ types and/or qname.",
+              "createdAt": "2025-10-15T13:43:14Z",
+              "updatedAt": "2025-10-15T13:43:14Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOO41rkM7HHDyd",
+          "commit": {
+            "abbreviatedOid": "dbaeda0"
+          },
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-10-15T13:49:23Z",
+          "updatedAt": "2025-10-15T13:49:23Z",
+          "comments": [
+            {
+              "originalPosition": 88,
+              "body": "terminology: referral, not delegation",
+              "createdAt": "2025-10-15T13:49:23Z",
+              "updatedAt": "2025-10-15T13:49:23Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOO41rkM7HHFOC",
+          "commit": {
+            "abbreviatedOid": "dbaeda0"
+          },
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-10-15T13:50:37Z",
+          "updatedAt": "2025-10-15T13:50:37Z",
+          "comments": [
+            {
+              "originalPosition": 89,
+              "body": "... plus all relevant DNSSEC records).",
+              "createdAt": "2025-10-15T13:50:37Z",
+              "updatedAt": "2025-10-15T13:50:37Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOO41rkM7HHF5L",
+          "commit": {
+            "abbreviatedOid": "dbaeda0"
+          },
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-10-15T13:51:11Z",
+          "updatedAt": "2025-10-15T13:51:12Z",
+          "comments": [
+            {
+              "originalPosition": 89,
+              "body": "```suggestion\r\n- If there is no NS RRset but there is a DELEG RRset, this will be the DELEG RRset in the Answer section, plus all relevant DNSSEC records.\r\n```",
+              "createdAt": "2025-10-15T13:51:11Z",
+              "updatedAt": "2025-10-15T13:51:12Z"
+            }
+          ]
+        }
+      ]
     },
     {
       "number": 76,
@@ -4042,6 +4285,47 @@
           "comments": []
         }
       ]
+    },
+    {
+      "number": 80,
+      "id": "PR_kwDOO41rkM6tz-eT",
+      "title": "DELEG names should be host names",
+      "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/pull/80",
+      "state": "OPEN",
+      "author": "fl1ger",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Make all names in DELEG hostnames rather then more complicated generc domain names",
+      "createdAt": "2025-10-15T07:10:16Z",
+      "updatedAt": "2025-10-15T12:15:04Z",
+      "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
+      "baseRefName": "main",
+      "baseRefOid": "597cbcbe919363d1e8d448e5a9b1d12a8b7bc663",
+      "headRepository": "fl1ger/draft-ietf-deleg-base",
+      "headRefName": "deleghostnames",
+      "headRefOid": "95641b2ee081f3393b24441b8192edf176050812",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [
+        {
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Why is that? I don't like 'hostname' because different people get different ideas what that means. Even worse, DELEGI owner is definitely not a 'host'.",
+          "createdAt": "2025-10-15T10:28:55Z",
+          "updatedAt": "2025-10-15T10:28:55Z"
+        },
+        {
+          "author": "fl1ger",
+          "authorAssociation": "COLLABORATOR",
+          "body": "This is in response to Bobs comments. I really didn't like the RFC9460 escaping rules and what you can do with them and given that NS name also is a hostname (at least per RFC1034) I wanted to limit the character space to that for all names.",
+          "createdAt": "2025-10-15T12:15:04Z",
+          "updatedAt": "2025-10-15T12:15:04Z"
+        }
+      ],
+      "reviews": []
     }
   ]
 }
