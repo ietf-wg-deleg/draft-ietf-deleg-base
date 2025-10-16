@@ -1056,7 +1056,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">April, et al.</td>
-<td class="center">Expires 18 April 2026</td>
+<td class="center">Expires 19 April 2026</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1072,12 +1072,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <a href="https://www.rfc-editor.org/rfc/rfc1034" class="eref">1034</a>, <a href="https://www.rfc-editor.org/rfc/rfc1035" class="eref">1035</a>, <a href="https://www.rfc-editor.org/rfc/rfc4035" class="eref">4035</a>, <a href="https://www.rfc-editor.org/rfc/rfc6672" class="eref">6672</a>, <a href="https://www.rfc-editor.org/rfc/rfc6840" class="eref">6840</a> (if approved)</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2025-10-15" class="published">15 October 2025</time>
+<time datetime="2025-10-16" class="published">16 October 2025</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2026-04-18">18 April 2026</time></dd>
+<dd class="expires"><time datetime="2026-04-19">19 April 2026</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1142,7 +1142,7 @@ The new delegation records are extensible, can be secured with DNSSEC, and elimi
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 18 April 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 19 April 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1699,46 +1699,48 @@ The purpose of this information is to populate the SLIST with IP addresses of th
 The types of information defined in this document are:<a href="#section-3.1.5-1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-3.1.5-2.1">
-              <p id="section-3.1.5-2.1.1">server-ipv4: a set of IPv4 addresses for name servers<a href="#section-3.1.5-2.1.1" class="pilcrow">¶</a></p>
+              <p id="section-3.1.5-2.1.1">server-ipv4: an unordered collection of IPv4 addresses for name servers<a href="#section-3.1.5-2.1.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-3.1.5-2.2">
-              <p id="section-3.1.5-2.2.1">server-ipv6: a set of IPv6 addresses for name servers<a href="#section-3.1.5-2.2.1" class="pilcrow">¶</a></p>
+              <p id="section-3.1.5-2.2.1">server-ipv6: an unordered collection of IPv6 addresses for name servers<a href="#section-3.1.5-2.2.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-3.1.5-2.3">
-              <p id="section-3.1.5-2.3.1">server-name: a set of hostnames of name servers; the addresses must be fetched<a href="#section-3.1.5-2.3.1" class="pilcrow">¶</a></p>
+              <p id="section-3.1.5-2.3.1">server-name: an unordered collection of hostnames of name servers; the addresses must be fetched<a href="#section-3.1.5-2.3.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-3.1.5-2.4">
-              <p id="section-3.1.5-2.4.1">include-delegi: a set of domain names that point to a DELEGI RRsets, which in turn have more information about the delegation<a href="#section-3.1.5-2.4.1" class="pilcrow">¶</a></p>
+              <p id="section-3.1.5-2.4.1">include-delegi: an unordered collection of domain names that point to a DELEGI RRsets, which in turn have more information about the delegation<a href="#section-3.1.5-2.4.1" class="pilcrow">¶</a></p>
 </li>
           </ul>
 <p id="section-3.1.5-3">These keys MUST have a non-empty DelegInfoValue.<a href="#section-3.1.5-3" class="pilcrow">¶</a></p>
 <p id="section-3.1.5-4">The presentation values for server-ipv4 and server-ipv6 are comma-separated list of one or more IP addresses of the appropriate family in standard textual format <span>[<a href="#RFC5952" class="cite xref">RFC5952</a>]</span> <span>[<a href="#RFC4001" class="cite xref">RFC4001</a>]</span>.
 The wire formats for server-ipv4 and server-ipv6 are a sequence of IP addresses, in network byte order, for the respective address family.<a href="#section-3.1.5-4" class="pilcrow">¶</a></p>
-<p id="section-3.1.5-5">The presentation value for server-name and include-delegi are a set of fully-qualified domain names and relative domain names, separated by commas.
+<p id="section-3.1.5-5">The presentation values for server-name and include-delegi are an unordered collection of fully-qualified domain names and relative domain names, separated by commas.
 The wire format for server-name and include-delegi are each a concatenated set of a wire-format domain names, where the root label provides the separation between names.
 The names in the wire format MUST NOT be compressed.<a href="#section-3.1.5-5" class="pilcrow">¶</a></p>
-<p id="section-3.1.5-6">A DELEG or DELEGI record that has a non-empty DelegInfos MUST have one, and only one, set of server information, chosen from the following:<a href="#section-3.1.5-6" class="pilcrow">¶</a></p>
+<p id="section-3.1.5-6">TODO: Describe how escaping works for server-name and include-delegi.
+This will be the same as the escaping mechanism defined in SVCB.<a href="#section-3.1.5-6" class="pilcrow">¶</a></p>
+<p id="section-3.1.5-7">A DELEG or DELEGI record that has a non-empty DelegInfos MUST have one, and only one, set of server information, chosen from the following:<a href="#section-3.1.5-7" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-3.1.5-7.1">
-              <p id="section-3.1.5-7.1.1">one server-ipv4 key<a href="#section-3.1.5-7.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="section-3.1.5-8.1">
+              <p id="section-3.1.5-8.1.1">one server-ipv4 key<a href="#section-3.1.5-8.1.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-3.1.5-7.2">
-              <p id="section-3.1.5-7.2.1">one server-ipv6 key<a href="#section-3.1.5-7.2.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-3.1.5-8.2">
+              <p id="section-3.1.5-8.2.1">one server-ipv6 key<a href="#section-3.1.5-8.2.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-3.1.5-7.3">
-              <p id="section-3.1.5-7.3.1">a pair consisting of one server-ipv4 key and one server-ipv6 key<a href="#section-3.1.5-7.3.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-3.1.5-8.3">
+              <p id="section-3.1.5-8.3.1">a pair consisting of one server-ipv4 key and one server-ipv6 key<a href="#section-3.1.5-8.3.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-3.1.5-7.4">
-              <p id="section-3.1.5-7.4.1">one server-name key<a href="#section-3.1.5-7.4.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-3.1.5-8.4">
+              <p id="section-3.1.5-8.4.1">one server-name key<a href="#section-3.1.5-8.4.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-3.1.5-7.5">
-              <p id="section-3.1.5-7.5.1">one include-delegi key<a href="#section-3.1.5-7.5.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-3.1.5-8.5">
+              <p id="section-3.1.5-8.5.1">one include-delegi key<a href="#section-3.1.5-8.5.1" class="pilcrow">¶</a></p>
 </li>
           </ul>
-<p id="section-3.1.5-8">This restriction only applies to a single DELEG or DELEGI record; a DELEG or DELEGI RRset can have records with different server information keys.<a href="#section-3.1.5-8" class="pilcrow">¶</a></p>
-<p id="section-3.1.5-9">When using server-name, the addresses for all the names in the set must be fetched using normal DNS resolution.
-This means the names in the value of the server-name key or the include-delegi key MUST NOT be inside the delegated domain.<a href="#section-3.1.5-9" class="pilcrow">¶</a></p>
-<p id="section-3.1.5-10">With this initial DELEG specification, servers are still expected to be reached on the standard DNS port for both UDP and TCP, 53.  While a future specification is expected to address other transports using other ports, its eventual semantics are not covered here.<a href="#section-3.1.5-10" class="pilcrow">¶</a></p>
+<p id="section-3.1.5-9">This restriction only applies to a single DELEG or DELEGI record; a DELEG or DELEGI RRset can have records with different server information keys.<a href="#section-3.1.5-9" class="pilcrow">¶</a></p>
+<p id="section-3.1.5-10">When using server-name, the addresses for all the names in the set must be fetched using normal DNS resolution.
+This means the names in the value of the server-name key or the include-delegi key MUST NOT be inside the delegated domain.<a href="#section-3.1.5-10" class="pilcrow">¶</a></p>
+<p id="section-3.1.5-11">With this initial DELEG specification, servers are still expected to be reached on the standard DNS port for both UDP and TCP, 53.  While a future specification is expected to address other transports using other ports, its eventual semantics are not covered here.<a href="#section-3.1.5-11" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="slist">
@@ -1781,7 +1783,7 @@ Recursively apply the algorithm described in this section, after checking that t
         <h3 id="name-authoritative-servers">
 <a href="#section-3.2" class="section-number selfRef">3.2. </a><a href="#name-authoritative-servers" class="section-name selfRef">Authoritative Servers</a>
         </h3>
-<p id="section-3.2-1">The DELEG RR type defines a zone cut in similar way as the NS RR type
+<p id="section-3.2-1">The DELEG RR type defines a zone cut in similar way as the NS RR type.
 Behavior defined for zone cuts in existing pre-DELEG specifications apply to zone cuts created by the DELEG record.
 A notable example of this is that the occlusion (usually accidentally) created by NS records in a parent zone would also be created by DELEG records in a parent zone.<a href="#section-3.2-1" class="pilcrow">¶</a></p>
 <p id="section-3.2-2">DELEG-aware authoritative servers act differently when handling queries from DELEG-unaware clients (those with DE=0) than from DELEG-aware clients (those with DE=1).<a href="#section-3.2-2" class="pilcrow">¶</a></p>
@@ -2094,25 +2096,25 @@ An entry MAY specify a reference of the form "Same as (other key name)" if it us
 <pre>
 Number:  1
 Name:  server-ipv4
-Meaning:  A set of IPv4 addresses of name servers
+Meaning:  An unordered collection of IPv4 addresses of name servers
 Reference:  {{nameserver-info}} of this document
 Change Controller:  IETF
 
 Number:  2
 Name:  server-ipv6
-Meaning:  A set of IPv6 addresses of name servers
+Meaning:  An unordered collection of IPv6 addresses of name servers
 Reference:  {{nameserver-info}} of this document
 Change Controller:  IETF
 
 Number:  3
 Name:  server-name
-Meaning:  A set of hostnames of name servers
+Meaning:  An unordered collection of hostnames of name servers
 Reference:  {{nameserver-info}} of this document
 Change Controller:  IETF
 
 Number:  4
 Name:  include-delegi
-Meaning:  A set of domain names of DELEGI records
+Meaning:  An unordered collection of domain names of DELEGI records
 Reference:  {{nameserver-info}} of this document
 Change Controller:  IETF
 

@@ -7,10 +7,10 @@ Internet-Draft                                               Google, LLC
 Updates: 1034, 1035, 4035, 6672, 6840 (if                      P. Špaček
          approved)                                                   ISC
 Intended status: Standards Track                                R. Weber
-Expires: 18 April 2026                               Akamai Technologies
+Expires: 19 April 2026                               Akamai Technologies
                                                              D. Lawrence
                                                               Salesforce
-                                                         15 October 2025
+                                                         16 October 2025
 
 
                      Extensible Delegation for DNS
@@ -61,7 +61,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 18 April 2026.
+   This Internet-Draft will expire on 19 April 2026.
 
 Copyright Notice
 
@@ -527,15 +527,18 @@ Table of Contents
    the SLIST with IP addresses of the name servers for a zone.  The
    types of information defined in this document are:
 
-   *  server-ipv4: a set of IPv4 addresses for name servers
+   *  server-ipv4: an unordered collection of IPv4 addresses for name
+      servers
 
-   *  server-ipv6: a set of IPv6 addresses for name servers
+   *  server-ipv6: an unordered collection of IPv6 addresses for name
+      servers
 
-   *  server-name: a set of hostnames of name servers; the addresses
-      must be fetched
+   *  server-name: an unordered collection of hostnames of name servers;
+      the addresses must be fetched
 
-   *  include-delegi: a set of domain names that point to a DELEGI
-      RRsets, which in turn have more information about the delegation
+   *  include-delegi: an unordered collection of domain names that point
+      to a DELEGI RRsets, which in turn have more information about the
+      delegation
 
    These keys MUST have a non-empty DelegInfoValue.
 
@@ -545,12 +548,15 @@ Table of Contents
    server-ipv4 and server-ipv6 are a sequence of IP addresses, in
    network byte order, for the respective address family.
 
-   The presentation value for server-name and include-delegi are a set
-   of fully-qualified domain names and relative domain names, separated
-   by commas.  The wire format for server-name and include-delegi are
-   each a concatenated set of a wire-format domain names, where the root
-   label provides the separation between names.  The names in the wire
-   format MUST NOT be compressed.
+   The presentation values for server-name and include-delegi are an
+   unordered collection of fully-qualified domain names and relative
+   domain names, separated by commas.  The wire format for server-name
+   and include-delegi are each a concatenated set of a wire-format
+   domain names, where the root label provides the separation between
+   names.  The names in the wire format MUST NOT be compressed.
+
+   TODO: Describe how escaping works for server-name and include-delegi.
+   This will be the same as the escaping mechanism defined in SVCB.
 
    A DELEG or DELEGI record that has a non-empty DelegInfos MUST have
    one, and only one, set of server information, chosen from the
@@ -621,12 +627,12 @@ Table of Contents
 
 3.2.  Authoritative Servers
 
-   The DELEG RR type defines a zone cut in similar way as the NS RR type
-   Behavior defined for zone cuts in existing pre-DELEG specifications
-   apply to zone cuts created by the DELEG record.  A notable example of
-   this is that the occlusion (usually accidentally) created by NS
-   records in a parent zone would also be created by DELEG records in a
-   parent zone.
+   The DELEG RR type defines a zone cut in similar way as the NS RR
+   type.  Behavior defined for zone cuts in existing pre-DELEG
+   specifications apply to zone cuts created by the DELEG record.  A
+   notable example of this is that the occlusion (usually accidentally)
+   created by NS records in a parent zone would also be created by DELEG
+   records in a parent zone.
 
    DELEG-aware authoritative servers act differently when handling
    queries from DELEG-unaware clients (those with DE=0) than from DELEG-
@@ -979,25 +985,25 @@ Table of Contents
 
    Number:  1
    Name:  server-ipv4
-   Meaning:  A set of IPv4 addresses of name servers
+   Meaning:  An unordered collection of IPv4 addresses of name servers
    Reference:  {{nameserver-info}} of this document
    Change Controller:  IETF
 
    Number:  2
    Name:  server-ipv6
-   Meaning:  A set of IPv6 addresses of name servers
+   Meaning:  An unordered collection of IPv6 addresses of name servers
    Reference:  {{nameserver-info}} of this document
    Change Controller:  IETF
 
    Number:  3
    Name:  server-name
-   Meaning:  A set of hostnames of name servers
+   Meaning:  An unordered collection of hostnames of name servers
    Reference:  {{nameserver-info}} of this document
    Change Controller:  IETF
 
    Number:  4
    Name:  include-delegi
-   Meaning:  A set of domain names of DELEGI records
+   Meaning:  An unordered collection of domain names of DELEGI records
    Reference:  {{nameserver-info}} of this document
    Change Controller:  IETF
 
