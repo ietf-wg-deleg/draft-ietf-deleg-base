@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-10-16T00:57:06.833287+00:00",
+  "timestamp": "2025-10-19T01:03:41.523093+00:00",
   "repo": "ietf-wg-deleg/draft-ietf-deleg-base",
   "labels": [
     {
@@ -439,15 +439,15 @@
       "id": "I_kwDOO41rkM7Bbvyw",
       "title": "Say when the AA bit is set",
       "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/issues/29",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "paulehoffman",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Don't assume \"it's obvious\"",
       "createdAt": "2025-07-19T12:34:03Z",
-      "updatedAt": "2025-07-19T18:46:28Z",
-      "closedAt": null,
+      "updatedAt": "2025-10-16T16:01:53Z",
+      "closedAt": "2025-10-16T16:01:53Z",
       "comments": [
         {
           "author": "chantra",
@@ -469,6 +469,20 @@
           "body": "> I am uncomfortable documenting in examples only.\n\ntotally agree.",
           "createdAt": "2025-07-19T18:46:28Z",
           "updatedAt": "2025-07-19T18:46:28Z"
+        },
+        {
+          "author": "paulehoffman",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Given that we are not trying to re-state how normal delegation works, we should not say \"and don't forget the AA bit\". The current draft says \"Behavior defined for zone cuts in existing pre-DELEG specifications apply to zone cuts created by the DELEG record.\" Thus, I think this can be closed without changing the doc. ",
+          "createdAt": "2025-10-16T15:04:29Z",
+          "updatedAt": "2025-10-16T15:04:29Z"
+        },
+        {
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I agree. We are not changing what https://datatracker.ietf.org/doc/html/rfc1035#page-26 said about the AA bit.",
+          "createdAt": "2025-10-16T16:01:53Z",
+          "updatedAt": "2025-10-16T16:01:53Z"
         }
       ]
     },
@@ -577,9 +591,17 @@
       "labels": [],
       "body": "We use that term a lot, but it doesn't mean what it says. For example, after DELEG is published, the old DNS will still be updated, but those updates won't be \"pre-\". This can be covered with a definition that says something like \"unrelated to the DELEG protocol\".",
       "createdAt": "2025-10-10T19:20:14Z",
-      "updatedAt": "2025-10-10T19:20:14Z",
+      "updatedAt": "2025-10-17T17:15:31Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "paulehoffman",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Addressed in #85 ",
+          "createdAt": "2025-10-17T17:15:31Z",
+          "updatedAt": "2025-10-17T17:15:31Z"
+        }
+      ]
     },
     {
       "number": 78,
@@ -596,6 +618,53 @@
       "updatedAt": "2025-10-10T19:21:18Z",
       "closedAt": null,
       "comments": []
+    },
+    {
+      "number": 82,
+      "id": "I_kwDOO41rkM7R8k0k",
+      "title": "Wire formats for key=value pairs",
+      "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/issues/82",
+      "state": "OPEN",
+      "author": "paulehoffman",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Although we don't need the wire format for DELEG/DELEGI, it would be helpful to have wire format examples for each key=value pairs. For the ones that are the same as others from SVCB, just point there, but for the others, also say it in a picture.",
+      "createdAt": "2025-10-16T15:06:29Z",
+      "updatedAt": "2025-10-16T15:06:29Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 83,
+      "id": "I_kwDOO41rkM7R9Z9q",
+      "title": "integrate draft-fobser-resinfo-deleg into draft-ietf-deleg?",
+      "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/issues/83",
+      "state": "OPEN",
+      "author": "pspacek",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Discussion between chairs ongoing.",
+      "createdAt": "2025-10-16T16:04:47Z",
+      "updatedAt": "2025-10-17T17:42:51Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "paulehoffman",
+          "authorAssociation": "COLLABORATOR",
+          "body": "This draft isn't part of draft-ietf-deleg. It was suggested to be part of the DELEG WG, not part of the protocol draft. ",
+          "createdAt": "2025-10-17T17:24:30Z",
+          "updatedAt": "2025-10-17T17:24:30Z"
+        },
+        {
+          "author": "wessels",
+          "authorAssociation": "NONE",
+          "body": "The advice from chairs/AD is that Florian's RESINFO content be incorporated into draft-ietf-deleg.   As Florian said on-list, section 3.4.4 \"Chaining\" seems like a natural place. \n\nsorry, that wasn't \"on-list\", it was a conversation with chairs and authors. ",
+          "createdAt": "2025-10-17T17:38:11Z",
+          "updatedAt": "2025-10-17T17:42:51Z"
+        }
+      ]
     }
   ],
   "pulls": [
@@ -4291,21 +4360,21 @@
       "id": "PR_kwDOO41rkM6tz-eT",
       "title": "DELEG names should be host names",
       "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/pull/80",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "fl1ger",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Make all names in DELEG hostnames rather then more complicated generc domain names",
       "createdAt": "2025-10-15T07:10:16Z",
-      "updatedAt": "2025-10-15T12:15:04Z",
+      "updatedAt": "2025-10-16T16:02:28Z",
       "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
       "baseRefName": "main",
       "baseRefOid": "597cbcbe919363d1e8d448e5a9b1d12a8b7bc663",
       "headRepository": "fl1ger/draft-ietf-deleg-base",
       "headRefName": "deleghostnames",
       "headRefOid": "95641b2ee081f3393b24441b8192edf176050812",
-      "closedAt": null,
+      "closedAt": "2025-10-16T16:02:28Z",
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
@@ -4323,6 +4392,159 @@
           "body": "This is in response to Bobs comments. I really didn't like the RFC9460 escaping rules and what you can do with them and given that NS name also is a hostname (at least per RFC1034) I wanted to limit the character space to that for all names.",
           "createdAt": "2025-10-15T12:15:04Z",
           "updatedAt": "2025-10-15T12:15:04Z"
+        },
+        {
+          "author": "paulehoffman",
+          "authorAssociation": "COLLABORATOR",
+          "body": "We agreed on the call today that we should not implement this change. I propose it be closed without merging. @pspacek : agree?",
+          "createdAt": "2025-10-16T01:35:48Z",
+          "updatedAt": "2025-10-16T15:25:24Z"
+        },
+        {
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Agreed.",
+          "createdAt": "2025-10-16T16:02:28Z",
+          "updatedAt": "2025-10-16T16:02:28Z"
+        }
+      ],
+      "reviews": []
+    },
+    {
+      "number": 81,
+      "id": "PR_kwDOO41rkM6uG7bP",
+      "title": "TODO about escaping; unordered collection; one typo",
+      "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/pull/81",
+      "state": "MERGED",
+      "author": "paulehoffman",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "A few bits from today's call",
+      "createdAt": "2025-10-16T15:00:42Z",
+      "updatedAt": "2025-10-16T16:03:57Z",
+      "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
+      "baseRefName": "main",
+      "baseRefOid": "597cbcbe919363d1e8d448e5a9b1d12a8b7bc663",
+      "headRepository": "paulehoffman/fork-deleg-base",
+      "headRefName": "escaping-todo",
+      "headRefOid": "e5453981d62d1b23fab36e796d663ec1c1e6f84b",
+      "closedAt": "2025-10-16T16:03:52Z",
+      "mergedAt": "2025-10-16T16:03:52Z",
+      "mergedBy": "pspacek",
+      "mergeCommit": {
+        "oid": "6ef4dbad92ae340199395251fd343264c741c33e"
+      },
+      "comments": [
+        {
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Thank you!",
+          "createdAt": "2025-10-16T16:03:57Z",
+          "updatedAt": "2025-10-16T16:03:57Z"
+        }
+      ],
+      "reviews": []
+    },
+    {
+      "number": 84,
+      "id": "PR_kwDOO41rkM6uH6ez",
+      "title": "Avoid redefining RFC 1035 for legacy responses",
+      "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/pull/84",
+      "state": "MERGED",
+      "author": "pspacek",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-10-16T16:19:15Z",
+      "updatedAt": "2025-10-16T16:20:56Z",
+      "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
+      "baseRefName": "main",
+      "baseRefOid": "6ef4dbad92ae340199395251fd343264c741c33e",
+      "headRepository": "pspacek/draft-ietf-deleg-base",
+      "headRefName": "no-rfc1035-redefinitions-please",
+      "headRefOid": "107dd030f452ff1a15fcc547140facc6cd3dfd0c",
+      "closedAt": "2025-10-16T16:20:56Z",
+      "mergedAt": "2025-10-16T16:20:56Z",
+      "mergedBy": "pspacek",
+      "mergeCommit": {
+        "oid": "28cabf93df19ea5d4e01ace6678b6dd9b9a2e737"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 85,
+      "id": "PR_kwDOO41rkM6uWgHR",
+      "title": "Define pre-DELEG specifications",
+      "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/pull/85",
+      "state": "OPEN",
+      "author": "paulehoffman",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-10-17T17:15:04Z",
+      "updatedAt": "2025-10-17T18:10:07Z",
+      "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
+      "baseRefName": "main",
+      "baseRefOid": "28cabf93df19ea5d4e01ace6678b6dd9b9a2e737",
+      "headRepository": "paulehoffman/fork-deleg-base",
+      "headRefName": "pre-DELEG",
+      "headRefOid": "11b960c37bcbdc7274b37a04339cfcfafd5d768c",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [
+        {
+          "author": "moonshiner",
+          "authorAssociation": "NONE",
+          "body": "It seems off to say \"pre-DELEG\" refer to updates published after DELEG.   I suck at wording but \"non-DELEG\" specifications not enough? ",
+          "createdAt": "2025-10-17T17:40:57Z",
+          "updatedAt": "2025-10-17T17:40:57Z"
+        },
+        {
+          "author": "paulehoffman",
+          "authorAssociation": "COLLABORATOR",
+          "body": "The current draft uses \"pre-DELEG\" throughout, but changing this to \"non-DELEG\" does give the term simplicity and future-proofing.",
+          "createdAt": "2025-10-17T18:10:07Z",
+          "updatedAt": "2025-10-17T18:10:07Z"
+        }
+      ],
+      "reviews": []
+    },
+    {
+      "number": 86,
+      "id": "PR_kwDOO41rkM6uefAK",
+      "title": "suggestion to change pre-DELEG to non-DELEG",
+      "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/pull/86",
+      "state": "OPEN",
+      "author": "moonshiner",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "\r\nI can never solve the hardest problem in Computer Science (naming things) but here is a suggestion on saying \"non-DELEG\" ratther than \"pre-DELEG\"\r\n\r\n",
+      "createdAt": "2025-10-19T00:00:07Z",
+      "updatedAt": "2025-10-19T00:00:49Z",
+      "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
+      "baseRefName": "main",
+      "baseRefOid": "28cabf93df19ea5d4e01ace6678b6dd9b9a2e737",
+      "headRepository": "moonshiner/draft-ietf-deleg-base",
+      "headRefName": "tjw-non-deleg",
+      "headRefOid": "296ee16ddc8e415d9f79ff859012007b0ae06a40",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [
+        {
+          "author": "moonshiner",
+          "authorAssociation": "NONE",
+          "body": "I included @paulehoffman definition as well if folks find this agreeable. ",
+          "createdAt": "2025-10-19T00:00:49Z",
+          "updatedAt": "2025-10-19T00:00:49Z"
         }
       ],
       "reviews": []
