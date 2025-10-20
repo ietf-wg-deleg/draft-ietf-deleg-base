@@ -965,9 +965,9 @@ Table of Contents
    this document.
 
    IANA is requested to add the name "deleg" to DNS Resolver Information
-   Keys registry (RFC9606), with the description of "The presence of the
-   key indicates that DELEG protocol is supported." and referencing this
-   document.
+   Keys registry ([RFC9606]), with the description of "The presence of
+   the key indicates that DELEG protocol is supported." and referencing
+   this document.
 
 5.2.  New Registry for Delegation Information
 
