@@ -1386,6 +1386,9 @@ all capitals, as shown here.<a href="#section-1.1-1" class="pilcrow">¶</a></p>
           <li class="normal" id="section-1.1-3.4">
             <p id="section-1.1-3.4.1">DELEG-unaware: An authoritative server or resolver that does not follow the protocol defined in this document<a href="#section-1.1-3.4.1" class="pilcrow">¶</a></p>
 </li>
+          <li class="normal" id="section-1.1-3.5">
+            <p id="section-1.1-3.5.1">non-DELEG specifications: DNS protocols that predate this protocol, or are written after this protocol is published but are not related to this protocol<a href="#section-1.1-3.5.1" class="pilcrow">¶</a></p>
+</li>
         </ul>
 </section>
 </div>
@@ -1585,7 +1588,7 @@ This bit referred to as the "DELEG" (DE) bit, expected to be assigned by IANA at
 </pre><a href="#section-3.1.1-3" class="pilcrow">¶</a>
 </div>
 <p id="section-3.1.1-4">Setting the DE bit to one in a query indicates the resolver understands the DELEG semantics and does not need NS records to follow a referral.
-The DE bit set to 0 indicates the resolver is not DELEG-aware, and therefore can only be served referrals with NS records and other data according to pre-DELEG specifications.<a href="#section-3.1.1-4" class="pilcrow">¶</a></p>
+The DE bit set to 0 indicates the resolver is not DELEG-aware, and therefore can only be served referrals with NS records and other data according to non-DELEG specifications.<a href="#section-3.1.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="referral">
@@ -1783,7 +1786,7 @@ Recursively apply the algorithm described in this section, after checking that t
 <a href="#section-3.2" class="section-number selfRef">3.2. </a><a href="#name-authoritative-servers" class="section-name selfRef">Authoritative Servers</a>
         </h3>
 <p id="section-3.2-1">The DELEG RR type defines a zone cut in similar way as the NS RR type.
-Behavior defined for zone cuts in existing pre-DELEG specifications apply to zone cuts created by the DELEG record.
+Behavior defined for zone cuts in existing non-DELEG specifications apply to zone cuts created by the DELEG record.
 A notable example of this is that the occlusion (usually accidentally) created by NS records in a parent zone would also be created by DELEG records in a parent zone.<a href="#section-3.2-1" class="pilcrow">¶</a></p>
 <p id="section-3.2-2">DELEG-aware authoritative servers act differently when handling queries from DELEG-unaware clients (those with DE=0) than from DELEG-aware clients (those with DE=1).<a href="#section-3.2-2" class="pilcrow">¶</a></p>
 <p id="section-3.2-3">The server MUST copy the value of the DE bit from the query into the response, to signal that it is a DELEG-aware server.<a href="#section-3.2-3" class="pilcrow">¶</a></p>
@@ -1800,7 +1803,7 @@ This new zone cut has priority over a legacy delegation.<a href="#section-3.2.1-
 <a href="#section-3.2.1.1" class="section-number selfRef">3.2.1.1. </a><a href="#name-deleg-aware-clients-request" class="section-name selfRef">DELEG-aware Clients Requesting QTYPE=DELEG</a>
             </h5>
 <p id="section-3.2.1.1-1">An explicit query for the DELEG RR type at a delegation point behaves much like query for the DS RR type: the server answers authoritatively from the parent zone.
-All pre-DELEG specifications for special handling queries with QTYPE=DS apply equally to QTYPE=DELEG.
+All non-DELEG specifications for special handling queries with QTYPE=DS apply equally to QTYPE=DELEG.
 In summary, the server either provides an authoritative DELEG RRset or declares its non-existence, with relevant DNSSEC proofs when requested and available.<a href="#section-3.2.1.1-1" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -1833,7 +1836,7 @@ Please note, in practice the same process and records are used to prove the non-
           <h4 id="name-deleg-unaware-clients">
 <a href="#section-3.2.2" class="section-number selfRef">3.2.2. </a><a href="#name-deleg-unaware-clients" class="section-name selfRef">DELEG-unaware Clients</a>
           </h4>
-<p id="section-3.2.2-1">A general principle for DELEG-aware authoritative servers is that they respond to a DELEG-unaware client by following pre-DELEG specifications.<a href="#section-3.2.2-1" class="pilcrow">¶</a></p>
+<p id="section-3.2.2-1">A general principle for DELEG-aware authoritative servers is that they respond to a DELEG-unaware client by following non-DELEG specifications.<a href="#section-3.2.2-1" class="pilcrow">¶</a></p>
 <p id="section-3.2.2-2">DELEG-unaware clients do not recognize DELEG records as a zone cut and are not aware of the special handling rules for DELEG records.
 They understand a DELEG RRset as an ordinary unknown RR type.<a href="#section-3.2.2-2" class="pilcrow">¶</a></p>
 <p id="section-3.2.2-3">In summary, DELEG records are not returned in referral responses to DELEG-unaware clients,
@@ -1841,10 +1844,10 @@ and DELEG-unaware clients do not consider DELEG records authoritative on the par
 <p id="section-3.2.2-4">An authoritative server responding to DELEG-unaware clients has to handle three distinct situations:<a href="#section-3.2.2-4" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-3.2.2-5.1">
-              <p id="section-3.2.2-5.1.1">No DELEG RRset is present. In this case, the authoritative server follows the pre-DELEG specifications.<a href="#section-3.2.2-5.1.1" class="pilcrow">¶</a></p>
+              <p id="section-3.2.2-5.1.1">No DELEG RRset is present. In this case, the authoritative server follows the non-DELEG specifications.<a href="#section-3.2.2-5.1.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-3.2.2-5.2">
-              <p id="section-3.2.2-5.2.1">An NS RRset and a DELEG RRset are both present. In this case, the authoritative server uses the NS RRset when constructing referral responses, following the pre-DELEG specifications. See also <a href="#signers" class="auto internal xref">Section 3.3</a> and <a href="#examples" class="auto internal xref">Appendix A</a>.<a href="#section-3.2.2-5.2.1" class="pilcrow">¶</a></p>
+              <p id="section-3.2.2-5.2.1">An NS RRset and a DELEG RRset are both present. In this case, the authoritative server uses the NS RRset when constructing referral responses, following the non-DELEG specifications. See also <a href="#signers" class="auto internal xref">Section 3.3</a> and <a href="#examples" class="auto internal xref">Appendix A</a>.<a href="#section-3.2.2-5.2.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-3.2.2-5.3">
               <p id="section-3.2.2-5.3.1">A DELEG RRset is present, but an NS RRset is not. See <a href="#no-ns" class="auto internal xref">Section 3.2.2.1</a>.<a href="#section-3.2.2-5.3.1" class="pilcrow">¶</a></p>
@@ -1871,7 +1874,7 @@ The advantage of this approach is simplicity of implementation and it is easy to
               <li id="section-3.2.2.1-4.2">
                 <p id="section-3.2.2.1-4.2.1">Because of the negative side effects of the previous option, an authoritative server SHOULD instead send an answer that accurately describes the situation to a DELEG-unaware resolver.<a href="#section-3.2.2.1-4.2.1" class="pilcrow">¶</a></p>
 <p id="section-3.2.2.1-4.2.2">
-The NSEC chain and the type bitmap generated according to <a href="#signers" class="auto internal xref">Section 3.3</a> leads to exactly one possible answer which is valid according to pre-DELEG specifications.
+The NSEC chain and the type bitmap generated according to <a href="#signers" class="auto internal xref">Section 3.3</a> leads to exactly one possible answer which is valid according to non-DELEG specifications.
 See <a href="#examples" class="auto internal xref">Appendix A</a> for several examples of such answers.<a href="#section-3.2.2.1-4.2.2" class="pilcrow">¶</a></p>
 <p id="section-3.2.2.1-4.2.3">
 Please note different interpretation of DELEG RR type and zone cut definitions between DELEG-aware authoritative server and DELEG-unaware client. It is confusing.<a href="#section-3.2.2.1-4.2.3" class="pilcrow">¶</a></p>
@@ -1893,10 +1896,10 @@ Thus, queries with DE=0 and QTYPE=DELEG MUST result in a legacy response which c
 The DELEG-unaware resolver can then obtain a final answer which can be validated from the child zone in similar fashion as described in <span>[<a href="#RFC4035" class="cite xref">RFC4035</a>]</span> section 3.1.4.1.<a href="#section-3.2.2.2-2.1.1" class="pilcrow">¶</a></p>
 </li>
               <li class="normal" id="section-3.2.2.2-2.2">
-                <p id="section-3.2.2.2-2.2.1">If there is no NS RRset but there is a DELEG RRset, this will be a normal authoritative response with the DELEG RRset, following pre-DELEG specifications.<a href="#section-3.2.2.2-2.2.1" class="pilcrow">¶</a></p>
+                <p id="section-3.2.2.2-2.2.1">If there is no NS RRset but there is a DELEG RRset, this will be a normal authoritative response with the DELEG RRset, following non-DELEG specifications.<a href="#section-3.2.2.2-2.2.1" class="pilcrow">¶</a></p>
 </li>
               <li class="normal" id="section-3.2.2.2-2.3">
-                <p id="section-3.2.2.2-2.3.1">If there is no NS RRset and no DELEG RRset, this will be a standard negative response following pre-DELEG specifications.<a href="#section-3.2.2.2-2.3.1" class="pilcrow">¶</a></p>
+                <p id="section-3.2.2.2-2.3.1">If there is no NS RRset and no DELEG RRset, this will be a standard negative response following non-DELEG specifications.<a href="#section-3.2.2.2-2.3.1" class="pilcrow">¶</a></p>
 </li>
             </ul>
 <p id="section-3.2.2.2-3">TODO: Should we have an example with auth having parent+child zone at the same time, and DE=0 QTYPE=DELEG query?<a href="#section-3.2.2.2-3" class="pilcrow">¶</a></p>
@@ -1914,7 +1917,7 @@ The DELEG-unaware resolver can then obtain a final answer which can be validated
 <p id="section-3.3-1">The DELEG record is authoritative on the parent side of a zone cut and needs to be signed as such.
 Existing rules from the DNSSEC specifications apply.<a href="#section-3.3-1" class="pilcrow">¶</a></p>
 <p id="section-3.3-2">In summary: for DNSSEC signing, treat the DELEG RR type the same way as the DS RR type.<a href="#section-3.3-2" class="pilcrow">¶</a></p>
-<p id="section-3.3-3">DELEG RR type defines a zone cut in similar way as NS RR type. This has several consequences which stem from existing pre-DELEG specifications:<a href="#section-3.3-3" class="pilcrow">¶</a></p>
+<p id="section-3.3-3">DELEG RR type defines a zone cut in similar way as NS RR type. This has several consequences which stem from existing non-DELEG specifications:<a href="#section-3.3-3" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-3.3-4.1">
             <p id="section-3.3-4.1.1">All owner names below zone cut are occluded and thus not present in NSEC chains.<a href="#section-3.3-4.1.1" class="pilcrow">¶</a></p>
@@ -1986,7 +1989,7 @@ way that DS RR types are.<a href="#section-3.4.2-2" class="pilcrow">¶</a></p>
           </h4>
 <p id="section-3.4.3-1">If the zone is DNSSEC-secure, and if any DNSKEY of the zone has the ADT flag set to 1, a DELEG-aware validator MUST prove the absence of a DELEG RRset in referral responses from this particular zone.<a href="#section-3.4.3-1" class="pilcrow">¶</a></p>
 <p id="section-3.4.3-2">Without this check, an attacker could strip the DELEG RRset from a referral response and replace it with an unsigned (and potentially malicious) NS RRset.
-A referral response with an unsigned NS and signed DS RRsets does not require additional proofs of nonexistence according to pre-DELEG DNSSEC specification, and it would have been accepted as a delegation without the DELEG RRset.<a href="#section-3.4.3-2" class="pilcrow">¶</a></p>
+A referral response with an unsigned NS and signed DS RRsets does not require additional proofs of nonexistence according to non-DELEG DNSSEC specification, and it would have been accepted as a delegation without the DELEG RRset.<a href="#section-3.4.3-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="chaining">
