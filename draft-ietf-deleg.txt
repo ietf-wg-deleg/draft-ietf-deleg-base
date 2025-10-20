@@ -7,10 +7,10 @@ Internet-Draft                                               Google, LLC
 Updates: 1034, 1035, 4035, 6672, 6840 (if                      P. Špaček
          approved)                                                   ISC
 Intended status: Standards Track                                R. Weber
-Expires: 19 April 2026                               Akamai Technologies
+Expires: 23 April 2026                               Akamai Technologies
                                                              D. Lawrence
                                                               Salesforce
-                                                         16 October 2025
+                                                         20 October 2025
 
 
                      Extensible Delegation for DNS
@@ -61,7 +61,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 19 April 2026.
+   This Internet-Draft will expire on 23 April 2026.
 
 Copyright Notice
 
@@ -875,6 +875,18 @@ Table of Contents
    Aware Resolver that is DELEG-aware and, if it is behind a forwarder,
    that forwarder has to be security-aware and DELEG-aware as well.
 
+   [RFC9606] specifies a DNS resource record type RESINFO to allow
+   resolvers to publish information about their capabilities and
+   policies.  This can be used to inform DNS clients that DELEG is
+   supported by the DNS resolver.
+
+   A resolver which supports [RFC9606] SHOULD add the "deleg" key if it
+   supports DELEG protocol.
+
+   Note that, per the rules for the keys defined in Section 6.4 of
+   [RFC6763], if there is no '=' in a key, then it is a boolean
+   attribute, simply identified as being present, with no value.
+
 4.  Security Considerations
 
    TODO: Add more here
@@ -947,6 +959,11 @@ Table of Contents
    IANA is requested to assign a value from the Extended DNS Error Codes
    ([RFC8914]), with the Purpose "New Delegation Only" and referencing
    this document.
+
+   IANA is requested to add the name "deleg" to DNS Resolver Information
+   Keys registry (RFC9606), with the description of "The presence of the
+   key indicates that DELEG protocol is supported." and referencing this
+   document.
 
 5.2.  New Registry for Delegation Information
 
@@ -1051,6 +1068,10 @@ Table of Contents
               DNS", RFC 6672, DOI 10.17487/RFC6672, June 2012,
               <https://www.rfc-editor.org/rfc/rfc6672>.
 
+   [RFC6763]  Cheshire, S. and M. Krochmal, "DNS-Based Service
+              Discovery", RFC 6763, DOI 10.17487/RFC6763, February 2013,
+              <https://www.rfc-editor.org/rfc/rfc6763>.
+
    [RFC6840]  Weiler, S., Ed. and D. Blacka, Ed., "Clarifications and
               Implementation Notes for DNS Security (DNSSEC)", RFC 6840,
               DOI 10.17487/RFC6840, February 2013,
@@ -1075,6 +1096,10 @@ Table of Contents
               and Parameter Specification via the DNS (SVCB and HTTPS
               Resource Records)", RFC 9460, DOI 10.17487/RFC9460,
               November 2023, <https://www.rfc-editor.org/rfc/rfc9460>.
+
+   [RFC9606]  Reddy.K, T. and M. Boucadair, "DNS Resolver Information",
+              RFC 9606, DOI 10.17487/RFC9606, June 2024,
+              <https://www.rfc-editor.org/rfc/rfc9606>.
 
 6.2.  Informative References
 
@@ -1464,6 +1489,8 @@ Acknowledgments
 
    Other people joined the effort after the initial hackaton: Ben
    Schwartz, Bob Halley, Paul Hoffman, Miek Gieben ...
+
+   RESINFO extension was contributed by Florian Obser.
 
 Authors' Addresses
 
