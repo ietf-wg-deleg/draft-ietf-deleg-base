@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-10-19T01:03:41.523093+00:00",
+  "timestamp": "2025-10-21T00:58:25.209613+00:00",
   "repo": "ietf-wg-deleg/draft-ietf-deleg-base",
   "labels": [
     {
@@ -584,15 +584,15 @@
       "id": "I_kwDOO41rkM7Q3mo-",
       "title": "Need to define \"pre-DELEG specification\"",
       "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/issues/77",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "paulehoffman",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "We use that term a lot, but it doesn't mean what it says. For example, after DELEG is published, the old DNS will still be updated, but those updates won't be \"pre-\". This can be covered with a definition that says something like \"unrelated to the DELEG protocol\".",
       "createdAt": "2025-10-10T19:20:14Z",
-      "updatedAt": "2025-10-17T17:15:31Z",
-      "closedAt": null,
+      "updatedAt": "2025-10-20T14:16:05Z",
+      "closedAt": "2025-10-20T14:16:05Z",
       "comments": [
         {
           "author": "paulehoffman",
@@ -600,6 +600,13 @@
           "body": "Addressed in #85 ",
           "createdAt": "2025-10-17T17:15:31Z",
           "updatedAt": "2025-10-17T17:15:31Z"
+        },
+        {
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I think this has been dealt with in #86 ",
+          "createdAt": "2025-10-20T14:16:05Z",
+          "updatedAt": "2025-10-20T14:16:05Z"
         }
       ]
     },
@@ -640,15 +647,15 @@
       "id": "I_kwDOO41rkM7R9Z9q",
       "title": "integrate draft-fobser-resinfo-deleg into draft-ietf-deleg?",
       "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/issues/83",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "pspacek",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Discussion between chairs ongoing.",
       "createdAt": "2025-10-16T16:04:47Z",
-      "updatedAt": "2025-10-17T17:42:51Z",
-      "closedAt": null,
+      "updatedAt": "2025-10-20T14:05:23Z",
+      "closedAt": "2025-10-20T14:05:23Z",
       "comments": [
         {
           "author": "paulehoffman",
@@ -663,6 +670,13 @@
           "body": "The advice from chairs/AD is that Florian's RESINFO content be incorporated into draft-ietf-deleg.   As Florian said on-list, section 3.4.4 \"Chaining\" seems like a natural place. \n\nsorry, that wasn't \"on-list\", it was a conversation with chairs and authors. ",
           "createdAt": "2025-10-17T17:38:11Z",
           "updatedAt": "2025-10-17T17:42:51Z"
+        },
+        {
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Integrated just now: https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/pull/87",
+          "createdAt": "2025-10-20T14:05:23Z",
+          "updatedAt": "2025-10-20T14:05:23Z"
         }
       ]
     }
@@ -4479,28 +4493,28 @@
       "id": "PR_kwDOO41rkM6uWgHR",
       "title": "Define pre-DELEG specifications",
       "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/pull/85",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "paulehoffman",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2025-10-17T17:15:04Z",
-      "updatedAt": "2025-10-17T18:10:07Z",
+      "updatedAt": "2025-10-20T14:05:52Z",
       "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
       "baseRefName": "main",
       "baseRefOid": "28cabf93df19ea5d4e01ace6678b6dd9b9a2e737",
       "headRepository": "paulehoffman/fork-deleg-base",
       "headRefName": "pre-DELEG",
       "headRefOid": "11b960c37bcbdc7274b37a04339cfcfafd5d768c",
-      "closedAt": null,
+      "closedAt": "2025-10-20T14:05:52Z",
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
       "comments": [
         {
           "author": "moonshiner",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "body": "It seems off to say \"pre-DELEG\" refer to updates published after DELEG.   I suck at wording but \"non-DELEG\" specifications not enough? ",
           "createdAt": "2025-10-17T17:40:57Z",
           "updatedAt": "2025-10-17T17:40:57Z"
@@ -4511,6 +4525,13 @@
           "body": "The current draft uses \"pre-DELEG\" throughout, but changing this to \"non-DELEG\" does give the term simplicity and future-proofing.",
           "createdAt": "2025-10-17T18:10:07Z",
           "updatedAt": "2025-10-17T18:10:07Z"
+        },
+        {
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Superseded by #86 then!",
+          "createdAt": "2025-10-20T14:05:52Z",
+          "updatedAt": "2025-10-20T14:05:52Z"
         }
       ],
       "reviews": []
@@ -4520,33 +4541,70 @@
       "id": "PR_kwDOO41rkM6uefAK",
       "title": "suggestion to change pre-DELEG to non-DELEG",
       "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/pull/86",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "moonshiner",
-      "authorAssociation": "NONE",
+      "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "\r\nI can never solve the hardest problem in Computer Science (naming things) but here is a suggestion on saying \"non-DELEG\" ratther than \"pre-DELEG\"\r\n\r\n",
       "createdAt": "2025-10-19T00:00:07Z",
-      "updatedAt": "2025-10-19T00:00:49Z",
+      "updatedAt": "2025-10-20T14:06:22Z",
       "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
       "baseRefName": "main",
       "baseRefOid": "28cabf93df19ea5d4e01ace6678b6dd9b9a2e737",
       "headRepository": "moonshiner/draft-ietf-deleg-base",
       "headRefName": "tjw-non-deleg",
       "headRefOid": "296ee16ddc8e415d9f79ff859012007b0ae06a40",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2025-10-20T14:06:22Z",
+      "mergedAt": "2025-10-20T14:06:22Z",
+      "mergedBy": "pspacek",
+      "mergeCommit": {
+        "oid": "497e1cc749ad5e8a79f036b00cdf61a1f7528ca1"
+      },
       "comments": [
         {
           "author": "moonshiner",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "body": "I included @paulehoffman definition as well if folks find this agreeable. ",
           "createdAt": "2025-10-19T00:00:49Z",
           "updatedAt": "2025-10-19T00:00:49Z"
+        },
+        {
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Makes sense - thank you!",
+          "createdAt": "2025-10-20T14:06:18Z",
+          "updatedAt": "2025-10-20T14:06:18Z"
         }
       ],
+      "reviews": []
+    },
+    {
+      "number": 87,
+      "id": "PR_kwDOO41rkM6uo20l",
+      "title": "Integrate draft-fobser-resinfo-deleg",
+      "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/pull/87",
+      "state": "MERGED",
+      "author": "pspacek",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Consensus among chairs and authors was to integrate. It is easier process wise than doing a separate document.",
+      "createdAt": "2025-10-20T13:59:59Z",
+      "updatedAt": "2025-10-20T14:02:39Z",
+      "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
+      "baseRefName": "main",
+      "baseRefOid": "28cabf93df19ea5d4e01ace6678b6dd9b9a2e737",
+      "headRepository": "pspacek/draft-ietf-deleg-base",
+      "headRefName": "integrate-draft-fobser-resinfo-deleg",
+      "headRefOid": "8fd336b8a33edd0ae4d6912c7346cf49e0bf4f06",
+      "closedAt": "2025-10-20T14:02:39Z",
+      "mergedAt": "2025-10-20T14:02:38Z",
+      "mergedBy": "pspacek",
+      "mergeCommit": {
+        "oid": "0e08e5cb46fdcdcbcfcbce509063d1162d756b4c"
+      },
+      "comments": [],
       "reviews": []
     }
   ]
