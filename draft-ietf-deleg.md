@@ -101,7 +101,39 @@ Terminology regarding the Domain Name System comes from {{?BCP219}}, with additi
 * DELEG-unaware: An authoritative server or resolver that does not follow the protocol defined in this document
 * non-DELEG specifications: DNS protocols that predate this protocol, or are written after this protocol is published but are not related to this protocol
 
-# DELEG and DELEGI Resource Record Types
+# Protocol Overview
+
+This section is a brief overview of the protocol.
+It is meant for people who want to understand the protocol before they dive deeper into the protocol specifics.
+
+When a DELEG-aware resolver sends queries, it sets the DE bit in the EDNS0 header to 1 in queries to authoritative servers as a signal that it is indeed DELEG-aware ({{de-bit}}).
+DELEG-unaware authoritative servers ignore this signal.
+
+A DELEG-aware authoritative server uses that signal to determine the type of response it will send.
+If the response is not a referral, the authoritative server doesn't change anything in the response ({{ns-no-deleg}}).
+If the response is a referral, the authoritative server checks if there is a DELEG RRset for the queried zone;
+if so, it returns the DELEG RRset instead of the NS RRset in the response ({{aware-referral}}).
+
+Records in the DELEG RRset for a zone describe how to find nameservers for that zone ({{deleg-delegi}}).
+The Rdata for DELEG records has key=value pairs ({{nameserver-info}}).
+
+* "server-ipv4" and "server-ipv6" keys have IP addresses for the delegated name servers
+* "server-name" keys have hostnames for the delegated name servers; the addresses must be fetched
+* "include-delegi" keys have hostnames of other nameservers which in turn have more information about the delegation
+
+The DELEG-aware resolver seeing the DELEG RRset uses that information to form the list of best servers to ask about the original zone ({{finding-best}}).
+If the DELEG RRset contains "include-delegi", the resolver queries those hostnames for DELEGI RRsets.
+DELEGI records have the same format as DELEG records; thus, they can have the same key=value pairs.
+
+The DELEG protocol changes how zones are signed ({{signers}}) and validated ({{dnssec-validators}}).
+The changes are primarily because DELEG RRsets are authoritative and thus are signed and validated as authoritative data (similar to DS records).
+
+There are many parts of the DELEG protocol that are not included in this brief overview.
+For example, DELEG-aware authoritative servers have many choices to make depending both on the request and the contents of the zone file.
+For those readers who learn better from examples than the definitive text, see {{examples}}.
+
+
+# DELEG and DELEGI Resource Record Types {#deleg-delegi}
 
 The DELEG record, RR type TBD, and the DELEGI record, RR type TBD2 (different from that of DELEG), have the same wire and presentation formats,
 but their semantics are different as described in a following section.
@@ -205,7 +237,7 @@ Servers MAY refuse to load such an invalid zone, similar to the DS RR type.
 
 ## Resolvers
 
-### Signaling DELEG Support
+### Signaling DELEG Support {#de-bit}
 
 There will be both DELEG and NS needed for delegation for a long time.
 Both legacy delegation and the DELEG protocol enable recursive resolution.
@@ -383,7 +415,7 @@ DELEG-aware authoritative servers act differently when handling queries from DEL
 
 The server MUST copy the value of the DE bit from the query into the response, to signal that it is a DELEG-aware server.
 
-### DELEG-aware Clients
+### DELEG-aware Clients {#aware-referral}
 
 When the client indicates that it is DELEG-aware by setting DE=1 in the query, DELEG-aware authoritative servers treat DELEG records as zone cuts, and the servers are authoritative on the parent side of the zone cut.
 This new zone cut has priority over a legacy delegation.
@@ -402,7 +434,7 @@ Include the covering RRSIG following the normal DNSSEC procedure for answers wit
 
 Similarly, rules for DS RRset inclusion in referrals apply as specified by the DNSSEC protocol.
 
-#### DELEG-aware Clients with NS RRs Present but No DELEG RRs
+#### DELEG-aware Clients with NS RRs Present but No DELEG RRs {#ns-no-deleg}
 
 If the delegation does not have a DELEG RRset, the authoritative server MUST put the NS RRset into the authority section of the referral.
 The absence of the DELEG RRset MUST be proven as specified by the DNSSEC protocol for authoritative data.
