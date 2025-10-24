@@ -96,7 +96,6 @@ all capitals, as shown here.
 Terminology regarding the Domain Name System comes from {{?BCP219}}, with addition terms defined here:
 
 * legacy delegation: A delegation that is done with an NS RRset
-* legacy response: A response that does not use the DELEG protocol described in this document
 * DELEG-aware: An authoritative server or resolver that follows the protocol defined in this document
 * DELEG-unaware: An authoritative server or resolver that does not follow the protocol defined in this document
 * non-DELEG specifications: DNS protocols that predate this protocol, or are written after this protocol is published but are not related to this protocol
@@ -454,7 +453,7 @@ TODO: List as many of the possible situations that need to be considered for var
 #### DELEG-unaware Clients Requesting QTYPE=DELEG
 
 From the perspective of DELEG-unaware clients, the DELEG RR type does not have special semantics and should behave like an old ordinary RR type such as TXT.
-Thus, queries with DE=0 and QTYPE=DELEG MUST result in a legacy response which can be validated by DELEG-unaware client.
+Thus, queries with DE=0 and QTYPE=DELEG MUST result in a response which can be validated by DELEG-unaware client.
 
 - If there is an NS RRset, this will be a legacy referral to the child zone. From the perspective of a DELEG-unaware client, the DELEG RR is effectively occluded by NS RRset.
   The DELEG-unaware resolver can then obtain a final answer which can be validated from the child zone in similar fashion as described in {{RFC4035}} section 3.1.4.1.
