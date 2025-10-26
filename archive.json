@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-10-21T00:58:25.209613+00:00",
+  "timestamp": "2025-10-26T01:01:35.771027+00:00",
   "repo": "ietf-wg-deleg/draft-ietf-deleg-base",
   "labels": [
     {
@@ -138,9 +138,17 @@
       "labels": [],
       "body": "Do we want to define special behavior for DELEG as a single type, or do we want to reserve a range for this purpose?\n\nhttps://mailarchive.ietf.org/arch/msg/dd/gUX9zpGAta2wwXIe-Aar7KJSZ24/",
       "createdAt": "2025-06-17T16:55:35Z",
-      "updatedAt": "2025-06-17T16:55:53Z",
+      "updatedAt": "2025-10-24T01:25:25Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "paulehoffman",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Propose to close this issue; overtaken by draft-arends-dnsop-delext",
+          "createdAt": "2025-10-24T01:25:24Z",
+          "updatedAt": "2025-10-24T01:25:24Z"
+        }
+      ]
     },
     {
       "number": 6,
@@ -622,9 +630,17 @@
       "labels": [],
       "body": "This term is misleading, and should be removed.",
       "createdAt": "2025-10-10T19:21:18Z",
-      "updatedAt": "2025-10-10T19:21:18Z",
+      "updatedAt": "2025-10-24T01:23:40Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "paulehoffman",
+          "authorAssociation": "COLLABORATOR",
+          "body": "PR is #89 ",
+          "createdAt": "2025-10-24T01:23:40Z",
+          "updatedAt": "2025-10-24T01:23:40Z"
+        }
+      ]
     },
     {
       "number": 82,
@@ -4604,6 +4620,58 @@
       "mergeCommit": {
         "oid": "0e08e5cb46fdcdcbcfcbce509063d1162d756b4c"
       },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 88,
+      "id": "PR_kwDOO41rkM6vZd2o",
+      "title": "Added a new protocol overview section, plus new header links",
+      "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/pull/88",
+      "state": "OPEN",
+      "author": "paulehoffman",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-10-24T01:13:01Z",
+      "updatedAt": "2025-10-24T15:08:48Z",
+      "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
+      "baseRefName": "main",
+      "baseRefOid": "a8fd920095641df8dd121ec17ec258ac3faf2d9d",
+      "headRepository": "paulehoffman/fork-deleg-base",
+      "headRefName": "overview",
+      "headRefOid": "aa951e4a1897b67f77f38e1fd867e007fcdb60d9",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 89,
+      "id": "PR_kwDOO41rkM6vZiTa",
+      "title": "Remove \"legacy response\" and the one place it was used",
+      "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/pull/89",
+      "state": "OPEN",
+      "author": "paulehoffman",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "To close issue #78 ",
+      "createdAt": "2025-10-24T01:23:20Z",
+      "updatedAt": "2025-10-24T01:23:20Z",
+      "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
+      "baseRefName": "main",
+      "baseRefOid": "a8fd920095641df8dd121ec17ec258ac3faf2d9d",
+      "headRepository": "paulehoffman/fork-deleg-base",
+      "headRefName": "legacy-response",
+      "headRefOid": "6ed6542a2fb6468bb9ff386a71e2a0e559aac503",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
       "comments": [],
       "reviews": []
     }
