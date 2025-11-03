@@ -7,10 +7,10 @@ Internet-Draft                                               Google, LLC
 Updates: 1034, 1035, 4035, 6672, 6840 (if                      P. Špaček
          approved)                                                   ISC
 Intended status: Standards Track                                R. Weber
-Expires: 23 April 2026                               Akamai Technologies
+Expires: 7 May 2026                                  Akamai Technologies
                                                              D. Lawrence
                                                               Salesforce
-                                                         20 October 2025
+                                                         3 November 2025
 
 
                      Extensible Delegation for DNS
@@ -61,7 +61,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 23 April 2026.
+   This Internet-Draft will expire on 7 May 2026.
 
 Copyright Notice
 
@@ -186,9 +186,6 @@ Table of Contents
    with addition terms defined here:
 
    *  legacy delegation: A delegation that is done with an NS RRset
-
-   *  legacy response: A response that does not use the DELEG protocol
-      described in this document
 
    *  DELEG-aware: An authoritative server or resolver that follows the
       protocol defined in this document
@@ -766,8 +763,7 @@ Table of Contents
    From the perspective of DELEG-unaware clients, the DELEG RR type does
    not have special semantics and should behave like an old ordinary RR
    type such as TXT.  Thus, queries with DE=0 and QTYPE=DELEG MUST
-   result in a legacy response which can be validated by DELEG-unaware
-   client.
+   result in a response which can be validated by DELEG-unaware client.
 
    *  If there is an NS RRset, this will be a legacy referral to the
       child zone.  From the perspective of a DELEG-unaware client, the
