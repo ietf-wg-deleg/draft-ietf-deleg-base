@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-10-26T01:01:35.771027+00:00",
+  "timestamp": "2025-11-04T00:59:25.485260+00:00",
   "repo": "ietf-wg-deleg/draft-ietf-deleg-base",
   "labels": [
     {
@@ -623,15 +623,15 @@
       "id": "I_kwDOO41rkM7Q3nTg",
       "title": "Get rid of \"legacy response\"",
       "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/issues/78",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "paulehoffman",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "This term is misleading, and should be removed.",
       "createdAt": "2025-10-10T19:21:18Z",
-      "updatedAt": "2025-10-24T01:23:40Z",
-      "closedAt": null,
+      "updatedAt": "2025-11-03T19:42:13Z",
+      "closedAt": "2025-11-03T19:42:13Z",
       "comments": [
         {
           "author": "paulehoffman",
@@ -639,6 +639,13 @@
           "body": "PR is #89 ",
           "createdAt": "2025-10-24T01:23:40Z",
           "updatedAt": "2025-10-24T01:23:40Z"
+        },
+        {
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Thanks",
+          "createdAt": "2025-11-03T19:42:13Z",
+          "updatedAt": "2025-11-03T19:42:13Z"
         }
       ]
     },
@@ -4654,24 +4661,26 @@
       "id": "PR_kwDOO41rkM6vZiTa",
       "title": "Remove \"legacy response\" and the one place it was used",
       "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/pull/89",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "paulehoffman",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "To close issue #78 ",
       "createdAt": "2025-10-24T01:23:20Z",
-      "updatedAt": "2025-10-24T01:23:20Z",
+      "updatedAt": "2025-11-03T19:41:22Z",
       "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
       "baseRefName": "main",
       "baseRefOid": "a8fd920095641df8dd121ec17ec258ac3faf2d9d",
       "headRepository": "paulehoffman/fork-deleg-base",
       "headRefName": "legacy-response",
       "headRefOid": "6ed6542a2fb6468bb9ff386a71e2a0e559aac503",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2025-11-03T19:41:22Z",
+      "mergedAt": "2025-11-03T19:41:22Z",
+      "mergedBy": "pspacek",
+      "mergeCommit": {
+        "oid": "4cb1bb2b4a915d2790deecb814146e79b1df0502"
+      },
       "comments": [],
       "reviews": []
     }
