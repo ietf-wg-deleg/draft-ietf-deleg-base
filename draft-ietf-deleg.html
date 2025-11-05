@@ -2313,17 +2313,16 @@ It shows the delegation point for "example." and "test."<a href="#appendix-A.1-1
 <p id="appendix-A.1-2">The "example." delegation has DELEG and NS records.
 The "test." delegation has DELEG but no NS records.<a href="#appendix-A.1-2" class="pilcrow">¶</a></p>
 <p id="appendix-A.1-3">TODO: Add examples that have server-name and include-delegi being sets of more than one name.<a href="#appendix-A.1-3" class="pilcrow">¶</a></p>
-<p id="appendix-A.1-4">TODO: Examples that show DELEGI records in ns2.example.net and ns3.example.org.<a href="#appendix-A.1-4" class="pilcrow">¶</a></p>
-<div class="alignLeft art-text artwork" id="appendix-A.1-5">
+<div class="alignLeft art-text artwork" id="appendix-A.1-4">
 <pre>
 example.   DELEG server-ipv4=192.0.2.1 server-ipv6=2001:DB8::1
 example.   DELEG server-name=ns2.example.net.,ns3.example.org.
 example.   RRSIG DELEG 13 1 300 20260101000000 (
                         20250101000000 33333 . SigExampleDELEG/ )
 
-example.   NS    a.example.
-example.   NS    b.example.net.
-example.   NS    c.example.org.
+example.   NS    ns1.example.
+example.   NS    ns2.example.net.
+example.   NS    ns3.example.org.
 
 example.   DS    44444 13 2 ABCDEF01234567...
 example.   RRSIG DS 13 1 300 20260101000000 (
@@ -2335,14 +2334,14 @@ example.   RRSIG NSEC 13 1 300 20260101000000 (
 
 ; unsigned glue for legacy (NS) delegation
 ; it is NOT present in NSEC chain
-a.example. A     192.0.2.1
-a.example. AAAA  2001:DB8::1
-</pre><a href="#appendix-A.1-5" class="pilcrow">¶</a>
+ns1.example. A     192.0.2.1
+ns1.example. AAAA  2001:DB8::1
+</pre><a href="#appendix-A.1-4" class="pilcrow">¶</a>
 </div>
-<p id="appendix-A.1-6">The "test." delegation point has a DELEG record and no NS or DS records.<a href="#appendix-A.1-6" class="pilcrow">¶</a></p>
-<p id="appendix-A.1-7">Please note:
-This is an example of unnecessarily complicated setup to demonstrate capabilities of DELEG and DELEGI RR types.<a href="#appendix-A.1-7" class="pilcrow">¶</a></p>
-<div class="alignLeft art-text artwork" id="appendix-A.1-8">
+<p id="appendix-A.1-5">The "test." delegation point has a DELEG record and no NS or DS records.<a href="#appendix-A.1-5" class="pilcrow">¶</a></p>
+<p id="appendix-A.1-6">Please note:
+This is an example of unnecessarily complicated setup to demonstrate capabilities of DELEG and DELEGI RR types.<a href="#appendix-A.1-6" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="appendix-A.1-7">
 <pre>
 test.      DELEG server-ipv6=3fff::33
 test.      DELEG include-delegi=Acfg.example.org.
@@ -2357,9 +2356,9 @@ test.      RRSIG NSEC 13 1 300 20260101000000 (
 ; a forgotten glue from legacy (NS) delegation
 ; it is NOT present in NSEC chain and it is occluded
 a.test.    A     192.0.2.1
-</pre><a href="#appendix-A.1-8" class="pilcrow">¶</a>
+</pre><a href="#appendix-A.1-7" class="pilcrow">¶</a>
 </div>
-<p id="appendix-A.1-9">Delegations to org and net zones omitted for brevity.<a href="#appendix-A.1-9" class="pilcrow">¶</a></p>
+<p id="appendix-A.1-8">Delegations to org and net zones omitted for brevity.<a href="#appendix-A.1-8" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="exampleorg-zone-file">
@@ -2371,10 +2370,10 @@ a.test.    A     192.0.2.1
 <div class="alignLeft art-text artwork" id="appendix-A.2-2">
 <pre>
 Acfg.example.org.    DELEGI server-ipv6=2001:DB8::6666
-Acfg.example.org.    DELEGI server-name=c.example.org.
+Acfg.example.org.    DELEGI server-name=ns3.example.org.
 Acfg.example.org.    DELEGI include-delegi=subcfg.example.org.
 
-c.example.org.       AAAA   3fff::33
+ns3.example.org.       AAAA   3fff::33
 
 subcfg.example.org.  DELEGI server-ipv4=203.0.113.1 server-ipv6=3fff::2
 </pre><a href="#appendix-A.2-2" class="pilcrow">¶</a>
@@ -2389,7 +2388,7 @@ subcfg.example.org.  DELEGI server-ipv4=203.0.113.1 server-ipv6=3fff::2
 <p id="appendix-A.3-1">The following example shows an excerpt from an unsigned example.net zone.<a href="#appendix-A.3-1" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="appendix-A.3-2">
 <pre>
-b.example.net.       A      198.51.100.1
+ns2.example.net.       A      198.51.100.1
 
 config2.example.net. DELEGI server-name=b.example.org.
 </pre><a href="#appendix-A.3-2" class="pilcrow">¶</a>
@@ -2424,13 +2423,13 @@ foo.example.  IN MX
 ;; (empty)
 
 ;; Authority
-example.   NS    a.example.
-example.   NS    b.example.net.
-example.   NS    c.example.org.
+example.   NS    ns1.example.
+example.   NS    ns2.example.net.
+example.   NS    ns3.example.org.
 
 ;; Additional
-a.example. A     192.0.2.1
-a.example. AAAA  2001:DB8::1
+ns1.example. A     192.0.2.1
+ns1.example. AAAA  2001:DB8::1
 </pre><a href="#appendix-A.4.1.1-1" class="pilcrow">¶</a>
 </div>
 </section>
@@ -2511,15 +2510,15 @@ foo.example.   IN MX
 
 ;; Authority
 
-example.   NS    a.example.
-example.   NS    b.example.net.
-example.   NS    c.example.org.
+example.   NS    ns1.example.
+example.   NS    ns2.example.net.
+example.   NS    ns3.example.org.
 example.   DS    44444 13 2 ABCDEF01234567...
 example.   RRSIG DS 13 1 300 20260101000000 (
                         20250101000000 33333 . SigExampleDS )
 ;; Additional
-a.example. A     192.0.2.1
-a.example. AAAA  2001:DB8::1
+ns1.example. A     192.0.2.1
+ns1.example. AAAA  2001:DB8::1
 </pre><a href="#appendix-A.4.2.1-1" class="pilcrow">¶</a>
 </div>
 </section>
@@ -2678,8 +2677,8 @@ example.   RRSIG DS 13 1 300 20260101000000 (
                         20250101000000 33333 . SigExampleDS )
 
 ;; Additional
-a.example. A     192.0.2.1
-a.example. AAAA  2001:DB8::1
+ns1.example. A     192.0.2.1
+ns1.example. AAAA  2001:DB8::1
 </pre><a href="#appendix-A.4.4.1-1" class="pilcrow">¶</a>
 </div>
 </section>
