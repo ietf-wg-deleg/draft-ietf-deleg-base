@@ -469,7 +469,8 @@ Table of Contents
    subdomains.  For example, a DELEG-unaware authoritative name server
    which has loaded DELEG records via the [RFC3597] unknown types
    mechanism would answer with them only if there were no NS records at
-   the owner name, and answer with an NS delegation otherwise.
+   the owner name, and answer with an NS delegation otherwise.  See
+   Section 4.2.2.2 for more information.
 
 4.1.4.  Algorithm for "Finding the Best Servers to Ask"
 
