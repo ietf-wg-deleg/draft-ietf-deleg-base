@@ -327,9 +327,9 @@ Table of Contents
    variable length and entirely consists of a single "DelegInfos"
    element:
 
-       +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-       /                         DelegInfos                            /
-       +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+   /                         DelegInfos                            /
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 
    The format of the DelegInfos element is identical to the format of
    the SvcParams element defined in [RFC9460] Section 2.2, including the
@@ -605,9 +605,15 @@ Table of Contents
    The presentation values for server-name and include-delegi are an
    unordered collection of fully-qualified domain names and relative
    domain names, separated by commas.  The wire format for server-name
-   and include-delegi are each a concatenated set of a wire-format
-   domain names, where the root label provides the separation between
-   names.  The names in the wire format MUST NOT be compressed.
+   and include-delegi are each a concatenated unordered collection of a
+   wire-format domain names, where the root label provides the
+   separation between names:
+
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-
+   | name | name | name | ... |
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-
+
+   The names in the wire format MUST NOT be compressed.
 
    TODO: Describe how escaping works for server-name and include-delegi.
    This will be the same as the escaping mechanism defined in SVCB.
