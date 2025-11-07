@@ -7,10 +7,10 @@ Internet-Draft                                               Google, LLC
 Updates: 1034, 1035, 4035, 6672, 6840 (if                      P. Špaček
          approved)                                                   ISC
 Intended status: Standards Track                                R. Weber
-Expires: 9 May 2026                                  Akamai Technologies
+Expires: 11 May 2026                                 Akamai Technologies
                                                              D. Lawrence
                                                               Salesforce
-                                                         5 November 2025
+                                                         7 November 2025
 
 
                      Extensible Delegation for DNS
@@ -61,7 +61,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 9 May 2026.
+   This Internet-Draft will expire on 11 May 2026.
 
 Copyright Notice
 
@@ -319,8 +319,7 @@ Table of Contents
    *  All the requirements in Section 2.1 of [RFC9460] apply.
 
    DelegInfos MAY be zero-length; this is similar to what is allowed in
-   SVCB records.  A record with a zero-length DelegInfos field has no
-   effect on the SLIST processing for resolvers.
+   SVCB records.
 
 3.2.  RDATA Wire Format
 
@@ -339,10 +338,10 @@ Table of Contents
 
    All the requirements in Section 2.2 of [RFC9460] apply.
 
-   The DelegInfos element is a sequence of individual DelegInfo
-   elements.  The wire format of an individual DelegInfo element is the
-   same as for a SvcParam element, but it references DelegInfo elements
-   instead of SvcParam elements.
+   The DelegInfos element is a sequence of individual DelegInfo elements
+   and MAY be empty.  The wire format of an individual DelegInfo element
+   is the same as for a SvcParam element, but it references DelegInfo
+   elements instead of SvcParam elements.
 
                    +0 (MSB)                            +1 (LSB)
        +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
@@ -553,8 +552,9 @@ Table of Contents
        1.  For a given SNAME, check for the existence of a DELEG RRset.
            If it exists, the resolver MUST use its content to populate
            SLIST.  However, if the DELEG RRset is known to exist but is
-           unusable (for example, if it is found in DNSSEC BAD cache),
-           the resolver MUST NOT instead use an NS RRset; instead, the
+           unusable (for example, if it is found in DNSSEC BAD cache, or
+           content of individual RRs is unusable for any reason), the
+           resolver MUST NOT instead use an NS RRset; instead, the
            resolver MUST treat this case as if no servers were
            available.
 
@@ -633,7 +633,9 @@ Table of Contents
    When using server-name, the addresses for all the names in the set
    must be fetched using normal DNS resolution.  This means the names in
    the value of the server-name key or the include-delegi key MUST NOT
-   be inside the delegated domain.
+   be inside the delegated domain.  If this constraint is violated the
+   whole RR (but not the whole RRset) MUST be ignored while constructing
+   SLIST (Section 4.1.6).
 
    With this initial DELEG specification, servers are still expected to
    be reached on the standard DNS port for both UDP and TCP, 53.  While
@@ -650,25 +652,36 @@ Table of Contents
    RRset, or each individual DELEGI record in a DELEGI RRset, using the
    following steps:
 
-   1.  If a record has more than one type of server information key
-       (excluding the IPv4/IPV6 case), or has multiple server
+   1.  If mandatory key is present, check that all the mandatory keys
+       are part of the DelegInfos in this RR.  If not, stop processing
+       this record.
+
+   2.  Check that all keys listed as mandatory are supported.  If not,
+       stop processing this record.
+
+   3.  Remove all DelegInfo elements with unsupported DelegInfoKey
+       values.  A resulting record with a zero-length DelegInfos field
+       has no effect on the SLIST processing for resolvers.
+
+   4.  If a record has more than one type of server information key
+       (excluding the IPv4/IPv6 case), or has multiple server
        information keys of the same type, that record is malformed.
        Stop processing this record.
 
-   2.  If server-ipv4 and/or server-ipv6 keys are present inside the
+   5.  If server-ipv4 and/or server-ipv6 keys are present inside the
        record, copy all of the address values into SLIST.  Stop
        processing this record.
 
-   3.  If a server-name key is present in the record, resolve each name
+   6.  If a server-name key is present in the record, resolve each name
        in the value into IPv4 and/or IPv6 addresses.  Copy these
        addresses into SLIST.  Stop processing this record.
 
-   4.  If an include-delegi key is present in the record, resolve each
+   7.  If an include-delegi key is present in the record, resolve each
        name in the value using the DELEGI RR type.  Recursively apply
        the algorithm described in this section, after checking that the
        maximum loop count described in Section 5.1 has not been reached.
 
-   5.  If none of the above applies, SLIST is not modified by this
+   8.  If none of the above applies, SLIST is not modified by this
        particular record.
 
    A DELEG-aware resolver MAY implement lazy filling of SLIST, such as
@@ -1057,6 +1070,12 @@ Table of Contents
 
    The "DELEG Delegation Information" registry should be populated with
    the following initial registrations:
+
+   Number:  0
+   Name:  mandatory
+   Meaning: Mandatory keys in this RR
+   Reference:  {{nameserver-info}} of this document
+   Change Controller:  IETF
 
    Number:  1
    Name:  server-ipv4

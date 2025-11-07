@@ -1055,7 +1055,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">April, et al.</td>
-<td class="center">Expires 9 May 2026</td>
+<td class="center">Expires 11 May 2026</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1071,12 +1071,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <a href="https://www.rfc-editor.org/rfc/rfc1034" class="eref">1034</a>, <a href="https://www.rfc-editor.org/rfc/rfc1035" class="eref">1035</a>, <a href="https://www.rfc-editor.org/rfc/rfc4035" class="eref">4035</a>, <a href="https://www.rfc-editor.org/rfc/rfc6672" class="eref">6672</a>, <a href="https://www.rfc-editor.org/rfc/rfc6840" class="eref">6840</a> (if approved)</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2025-11-05" class="published">5 November 2025</time>
+<time datetime="2025-11-07" class="published">7 November 2025</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2026-05-09">9 May 2026</time></dd>
+<dd class="expires"><time datetime="2026-05-11">11 May 2026</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1141,7 +1141,7 @@ The new delegation records are extensible, can be secured with DNSSEC, and elimi
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 9 May 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 11 May 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1500,8 +1500,7 @@ To avoid confusion between the two protocols, the list of key=value parameters u
             <p id="section-3.1-3.3.1">All the requirements in Section 2.1 of <span>[<a href="#RFC9460" class="cite xref">RFC9460</a>]</span> apply.<a href="#section-3.1-3.3.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
-<p id="section-3.1-4">DelegInfos MAY be zero-length; this is similar to what is allowed in SVCB records.
-A record with a zero-length DelegInfos field has no effect on the SLIST processing for resolvers.<a href="#section-3.1-4" class="pilcrow">¶</a></p>
+<p id="section-3.1-4">DelegInfos MAY be zero-length; this is similar to what is allowed in SVCB records.<a href="#section-3.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="rdata-wire-format">
@@ -1520,7 +1519,7 @@ A record with a zero-length DelegInfos field has no effect on the SLIST processi
 <p id="section-3.2-3">The format of the DelegInfos element is identical to the format of the SvcParams element defined in <span>[<a href="#RFC9460" class="cite xref">RFC9460</a>]</span> Section 2.2,
 including the requirements for strictly increasing numeric order to keys and no key duplication allowed.<a href="#section-3.2-3" class="pilcrow">¶</a></p>
 <p id="section-3.2-4">All the requirements in Section 2.2 of <span>[<a href="#RFC9460" class="cite xref">RFC9460</a>]</span> apply.<a href="#section-3.2-4" class="pilcrow">¶</a></p>
-<p id="section-3.2-5">The DelegInfos element is a sequence of individual DelegInfo elements.
+<p id="section-3.2-5">The DelegInfos element is a sequence of individual DelegInfo elements and MAY be empty.
 The wire format of an individual DelegInfo element is the same as for a SvcParam element,
 but it references DelegInfo elements instead of SvcParam elements.<a href="#section-3.2-5" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-3.2-6">
@@ -1711,7 +1710,7 @@ For example, if the QNAME is "test.example." and the QTYPE is DELEG or DS, set S
 <li id="section-4.1.4-12.2.2.1">
                   <p id="section-4.1.4-12.2.2.1.1">For a given SNAME, check for the existence of a DELEG RRset.
 If it exists, the resolver MUST use its content to populate SLIST.
-However, if the DELEG RRset is known to exist but is unusable (for example, if it is found in DNSSEC BAD cache), the resolver MUST NOT instead use an NS RRset; instead, the resolver MUST treat this case as if no servers were available.<a href="#section-4.1.4-12.2.2.1.1" class="pilcrow">¶</a></p>
+However, if the DELEG RRset is known to exist but is unusable (for example, if it is found in DNSSEC BAD cache, or content of individual RRs is unusable for any reason), the resolver MUST NOT instead use an NS RRset; instead, the resolver MUST treat this case as if no servers were available.<a href="#section-4.1.4-12.2.2.1.1" class="pilcrow">¶</a></p>
 </li>
                 <li id="section-4.1.4-12.2.2.2">
                   <p id="section-4.1.4-12.2.2.2.1">If a given SNAME is proven to not have a DELEG RRset but does have an NS RRset, the resolver MUST copy the NS RRset into SLIST.<a href="#section-4.1.4-12.2.2.2.1" class="pilcrow">¶</a></p>
@@ -1778,7 +1777,8 @@ This will be the same as the escaping mechanism defined in SVCB.<a href="#sectio
           </ul>
 <p id="section-4.1.5-9">This restriction only applies to a single DELEG or DELEGI record; a DELEG or DELEGI RRset can have records with different server information keys.<a href="#section-4.1.5-9" class="pilcrow">¶</a></p>
 <p id="section-4.1.5-10">When using server-name, the addresses for all the names in the set must be fetched using normal DNS resolution.
-This means the names in the value of the server-name key or the include-delegi key MUST NOT be inside the delegated domain.<a href="#section-4.1.5-10" class="pilcrow">¶</a></p>
+This means the names in the value of the server-name key or the include-delegi key MUST NOT be inside the delegated domain.
+If this constraint is violated the whole RR (but not the whole RRset) MUST be ignored while constructing SLIST (<a href="#slist" class="auto internal xref">Section 4.1.6</a>).<a href="#section-4.1.5-10" class="pilcrow">¶</a></p>
 <p id="section-4.1.5-11">With this initial DELEG specification, servers are still expected to be reached on the standard DNS port for both UDP and TCP, 53.  While a future specification is expected to address other transports using other ports, its eventual semantics are not covered here.<a href="#section-4.1.5-11" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -1791,24 +1791,36 @@ This means the names in the value of the server-name key or the include-delegi k
 <p id="section-4.1.6-2">A resolver processes each individual DELEG record within a DELEG RRset, or each individual DELEGI record in a DELEGI RRset, using the following steps:<a href="#section-4.1.6-2" class="pilcrow">¶</a></p>
 <ol start="1" type="1" class="normal type-1" id="section-4.1.6-3">
 <li id="section-4.1.6-3.1">
-              <p id="section-4.1.6-3.1.1">If a record has more than one type of server information key (excluding the IPv4/IPV6 case), or has multiple server information keys of the same type, that record is malformed.
-Stop processing this record.<a href="#section-4.1.6-3.1.1" class="pilcrow">¶</a></p>
+              <p id="section-4.1.6-3.1.1">If mandatory key is present, check that all the mandatory keys are part of the DelegInfos in this RR.
+If not, stop processing this record.<a href="#section-4.1.6-3.1.1" class="pilcrow">¶</a></p>
 </li>
             <li id="section-4.1.6-3.2">
-              <p id="section-4.1.6-3.2.1">If server-ipv4 and/or server-ipv6 keys are present inside the record, copy all of the address values into SLIST.
-Stop processing this record.<a href="#section-4.1.6-3.2.1" class="pilcrow">¶</a></p>
+              <p id="section-4.1.6-3.2.1">Check that all keys listed as mandatory are supported.
+If not, stop processing this record.<a href="#section-4.1.6-3.2.1" class="pilcrow">¶</a></p>
 </li>
             <li id="section-4.1.6-3.3">
-              <p id="section-4.1.6-3.3.1">If a server-name key is present in the record, resolve each name in the value into IPv4 and/or IPv6 addresses.
-Copy these addresses into SLIST.
-Stop processing this record.<a href="#section-4.1.6-3.3.1" class="pilcrow">¶</a></p>
+              <p id="section-4.1.6-3.3.1">Remove all DelegInfo elements with unsupported DelegInfoKey values.
+A resulting record with a zero-length DelegInfos field has no effect on the SLIST processing for resolvers.<a href="#section-4.1.6-3.3.1" class="pilcrow">¶</a></p>
 </li>
             <li id="section-4.1.6-3.4">
-              <p id="section-4.1.6-3.4.1">If an include-delegi key is present in the record, resolve each name in the value using the DELEGI RR type.
-Recursively apply the algorithm described in this section, after checking that the maximum loop count described in <a href="#too-much-work" class="auto internal xref">Section 5.1</a> has not been reached.<a href="#section-4.1.6-3.4.1" class="pilcrow">¶</a></p>
+              <p id="section-4.1.6-3.4.1">If a record has more than one type of server information key (excluding the IPv4/IPv6 case), or has multiple server information keys of the same type, that record is malformed.
+Stop processing this record.<a href="#section-4.1.6-3.4.1" class="pilcrow">¶</a></p>
 </li>
             <li id="section-4.1.6-3.5">
-              <p id="section-4.1.6-3.5.1">If none of the above applies, SLIST is not modified by this particular record.<a href="#section-4.1.6-3.5.1" class="pilcrow">¶</a></p>
+              <p id="section-4.1.6-3.5.1">If server-ipv4 and/or server-ipv6 keys are present inside the record, copy all of the address values into SLIST.
+Stop processing this record.<a href="#section-4.1.6-3.5.1" class="pilcrow">¶</a></p>
+</li>
+            <li id="section-4.1.6-3.6">
+              <p id="section-4.1.6-3.6.1">If a server-name key is present in the record, resolve each name in the value into IPv4 and/or IPv6 addresses.
+Copy these addresses into SLIST.
+Stop processing this record.<a href="#section-4.1.6-3.6.1" class="pilcrow">¶</a></p>
+</li>
+            <li id="section-4.1.6-3.7">
+              <p id="section-4.1.6-3.7.1">If an include-delegi key is present in the record, resolve each name in the value using the DELEGI RR type.
+Recursively apply the algorithm described in this section, after checking that the maximum loop count described in <a href="#too-much-work" class="auto internal xref">Section 5.1</a> has not been reached.<a href="#section-4.1.6-3.7.1" class="pilcrow">¶</a></p>
+</li>
+            <li id="section-4.1.6-3.8">
+              <p id="section-4.1.6-3.8.1">If none of the above applies, SLIST is not modified by this particular record.<a href="#section-4.1.6-3.8.1" class="pilcrow">¶</a></p>
 </li>
           </ol>
 <p id="section-4.1.6-4">A DELEG-aware resolver MAY implement lazy filling of SLIST, such as by deferring processing remaining records if SLIST already has what the resolver considers a sufficiently large pool of addresses to contact.<a href="#section-4.1.6-4" class="pilcrow">¶</a></p>
@@ -2140,6 +2152,12 @@ An entry MAY specify a reference of the form "Same as (other key name)" if it us
 <p id="section-6.2.2-1">The "DELEG Delegation Information" registry should be populated with the following initial registrations:<a href="#section-6.2.2-1" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-6.2.2-2">
 <pre>
+Number:  0
+Name:  mandatory
+Meaning: Mandatory keys in this RR
+Reference:  {{nameserver-info}} of this document
+Change Controller:  IETF
+
 Number:  1
 Name:  server-ipv4
 Meaning:  An unordered collection of IPv4 addresses of name servers
