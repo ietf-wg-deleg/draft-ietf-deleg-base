@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-11-06T00:59:54.069925+00:00",
+  "timestamp": "2025-11-09T01:02:39.677710+00:00",
   "repo": "ietf-wg-deleg/draft-ietf-deleg-base",
   "labels": [
     {
@@ -654,15 +654,15 @@
       "id": "I_kwDOO41rkM7R8k0k",
       "title": "Wire formats for key=value pairs",
       "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/issues/82",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "paulehoffman",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Although we don't need the wire format for DELEG/DELEGI, it would be helpful to have wire format examples for each key=value pairs. For the ones that are the same as others from SVCB, just point there, but for the others, also say it in a picture.",
       "createdAt": "2025-10-16T15:06:29Z",
-      "updatedAt": "2025-10-16T15:06:29Z",
-      "closedAt": null,
+      "updatedAt": "2025-11-07T21:37:00Z",
+      "closedAt": "2025-11-07T21:37:00Z",
       "comments": []
     },
     {
@@ -700,6 +700,141 @@
           "body": "Integrated just now: https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/pull/87",
           "createdAt": "2025-10-20T14:05:23Z",
           "updatedAt": "2025-10-20T14:05:23Z"
+        }
+      ]
+    },
+    {
+      "number": 92,
+      "id": "I_kwDOO41rkM7Wk57f",
+      "title": "mandatory keys",
+      "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/issues/92",
+      "state": "CLOSED",
+      "author": "pspacek",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Should we have `mandatory` key mechanism the same way as SVCB has?\n\nhttps://mailarchive.ietf.org/arch/msg/dd/WawGmNVaPGySv0CtebrwyZCAq-Y/ ",
+      "createdAt": "2025-11-07T11:53:02Z",
+      "updatedAt": "2025-11-07T21:27:41Z",
+      "closedAt": "2025-11-07T21:27:41Z",
+      "comments": []
+    },
+    {
+      "number": 93,
+      "id": "I_kwDOO41rkM7Wk8qZ",
+      "title": "include vs. key inheritance",
+      "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/issues/93",
+      "state": "CLOSED",
+      "author": "pspacek",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "https://mailarchive.ietf.org/arch/msg/dd/iRg8Ir2WMXpZqVXEdoowpjiFmeA/",
+      "createdAt": "2025-11-07T11:56:09Z",
+      "updatedAt": "2025-11-07T21:20:37Z",
+      "closedAt": "2025-11-07T21:20:37Z",
+      "comments": [
+        {
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "body": "WG agreed today that this will be left to be define for individual keys in the future.",
+          "createdAt": "2025-11-07T21:20:34Z",
+          "updatedAt": "2025-11-07T21:20:34Z"
+        }
+      ]
+    },
+    {
+      "number": 94,
+      "id": "I_kwDOO41rkM7Wk_JU",
+      "title": "Add example with extra keys",
+      "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/issues/94",
+      "state": "OPEN",
+      "author": "pspacek",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "`key65280=bla` in the examples will highlight the extensibility",
+      "createdAt": "2025-11-07T11:59:05Z",
+      "updatedAt": "2025-11-07T11:59:05Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 95,
+      "id": "I_kwDOO41rkM7Wk_sQ",
+      "title": "Define unknown keys are ignored?",
+      "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/issues/95",
+      "state": "CLOSED",
+      "author": "pspacek",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Currently we don't define this. We should be explicit.",
+      "createdAt": "2025-11-07T11:59:44Z",
+      "updatedAt": "2025-11-07T21:27:42Z",
+      "closedAt": "2025-11-07T21:27:42Z",
+      "comments": [
+        {
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Unknown keys MUST be ignored\n(like SVCB)\n\n?",
+          "createdAt": "2025-11-07T12:01:54Z",
+          "updatedAt": "2025-11-07T12:01:54Z"
+        }
+      ]
+    },
+    {
+      "number": 96,
+      "id": "I_kwDOO41rkM7WoSJQ",
+      "title": "Clearly specify handling around empty DelegInfos and DelegInfos not including at least one Server Identifying DelegInfo",
+      "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/issues/96",
+      "state": "OPEN",
+      "author": "enygren",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "We should define the behavior of an empty DelegInfos on both client side.\nThis is likely something like \"clients/resolvers MUST ignore DELEG/DELEGI records with empty DelegInfos, or whose DelegInfos do not contain at least one of server-ipv4, server-ipv6, server-name, include-delegi\" \n\nWe may wish to define a term (Server identifying DelegInfo?) that covers the set of {server-ipv4, server-ipv6, server-name} (and include-delegi for DELEG) so that a future specification could add additional ones (server-future?).\n\nWe should also specify something like \"DELEG and DELEGI records which contain either empty DelegInfos or which don't contain at least one Server Identiying DelegInfo are currently defined to be ignored and SHOULD generate a warning\". \n\nIf we believe there are use-cases for DELEG records not including a Server Identifying DelegInfo (for specifying a zone cut? for domain validation?)  then we should call this out and make sure that clients will properly ignore them and not explode.\n\n",
+      "createdAt": "2025-11-07T15:38:45Z",
+      "updatedAt": "2025-11-07T16:39:02Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "enygren",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "(although draft-jabley-dnsop-zone-cut-to-nowhere is a case that may want explicit coverage depending on where it goes as it overlaps into this scenario)",
+          "createdAt": "2025-11-07T16:39:02Z",
+          "updatedAt": "2025-11-07T16:39:02Z"
+        }
+      ]
+    },
+    {
+      "number": 97,
+      "id": "I_kwDOO41rkM7WoXzT",
+      "title": "Clearly define the behavior when the effective DELEG or DELEGI RRset ends up empty",
+      "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/issues/97",
+      "state": "OPEN",
+      "author": "enygren",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "As a follow-on to #96 we should clearly define the client/resolver behavior for cases where the effective DELEG or DELEGI RRsets end up as being empty.  For example, after we skip/ignore all DELEG/DELEGI RRs with:\n\n* No Server Identifying DelegInfo \n* DelegInfo parameters marked mandatory which the client doesn't understand\n* an Empty DelegInfos\n\nthen it is possible that the effective RRset is empty.  This is something that should be well-defined.\nIn the case of a DELEGI this presumably means that it should be ignored and a different DELEG record should be used.\nIn the case of a DELEG RRset, we should define if this results in a failure, and if there should be a fallback to NS records or not.\n\nThere may be some security considerations to think through in this scenario.\n",
+      "createdAt": "2025-11-07T15:44:40Z",
+      "updatedAt": "2025-11-07T18:00:58Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I think this is alredy covered by https://ietf-wg-deleg.github.io/draft-ietf-deleg-base/draft-ietf-deleg.html#section-4.1.2-2 ?",
+          "createdAt": "2025-11-07T17:57:53Z",
+          "updatedAt": "2025-11-07T17:57:53Z"
+        },
+        {
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Note for authors: In any case, add negative test vector.",
+          "createdAt": "2025-11-07T18:00:58Z",
+          "updatedAt": "2025-11-07T18:00:58Z"
         }
       ]
     }
@@ -4738,6 +4873,62 @@
       "mergedBy": "pspacek",
       "mergeCommit": {
         "oid": "88cc804847b531a9309a5bdeaddf00b4df3143a1"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 98,
+      "id": "PR_kwDOO41rkM6yOtmk",
+      "title": "RR corner cases - unknown and mandatory keys",
+      "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/pull/98",
+      "state": "MERGED",
+      "author": "pspacek",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-11-07T21:26:44Z",
+      "updatedAt": "2025-11-07T21:27:40Z",
+      "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
+      "baseRefName": "main",
+      "baseRefOid": "88cc804847b531a9309a5bdeaddf00b4df3143a1",
+      "headRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
+      "headRefName": "rr-corner-cases",
+      "headRefOid": "cfd5dc8810397f7a21c1ab6efc1f5a86dbbdfe6b",
+      "closedAt": "2025-11-07T21:27:40Z",
+      "mergedAt": "2025-11-07T21:27:40Z",
+      "mergedBy": "pspacek",
+      "mergeCommit": {
+        "oid": "f3d12650605eb3cefeeb85765d162e194ed2210d"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 99,
+      "id": "PR_kwDOO41rkM6yOyzu",
+      "title": "Value wire formats for names",
+      "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/pull/99",
+      "state": "MERGED",
+      "author": "pspacek",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-11-07T21:36:34Z",
+      "updatedAt": "2025-11-07T21:36:59Z",
+      "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
+      "baseRefName": "main",
+      "baseRefOid": "f3d12650605eb3cefeeb85765d162e194ed2210d",
+      "headRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
+      "headRefName": "value-wire-formats",
+      "headRefOid": "3d116d0d60b8b0bae1a9a8395a5487480a43c5b1",
+      "closedAt": "2025-11-07T21:36:59Z",
+      "mergedAt": "2025-11-07T21:36:59Z",
+      "mergedBy": "pspacek",
+      "mergeCommit": {
+        "oid": "e1cf9249b85ba729778777837a757ff36aa8bbd3"
       },
       "comments": [],
       "reviews": []
