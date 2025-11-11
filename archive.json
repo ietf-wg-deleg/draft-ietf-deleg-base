@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-11-09T01:02:39.677710+00:00",
+  "timestamp": "2025-11-11T01:00:39.097975+00:00",
   "repo": "ietf-wg-deleg/draft-ietf-deleg-base",
   "labels": [
     {
@@ -4930,6 +4930,32 @@
       "mergeCommit": {
         "oid": "e1cf9249b85ba729778777837a757ff36aa8bbd3"
       },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 100,
+      "id": "PR_kwDOO41rkM6yjT8e",
+      "title": "Remove a MUST that we cannot enforce",
+      "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/pull/100",
+      "state": "OPEN",
+      "author": "paulehoffman",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "The replaced text has a MUST that we cannot enforce. Further, because server-name and include-delegi can be a set of names, if one name in the set might be bad and the others fine, so we should not tell the resolver to ignore the whole set.",
+      "createdAt": "2025-11-10T14:46:41Z",
+      "updatedAt": "2025-11-10T14:46:46Z",
+      "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
+      "baseRefName": "main",
+      "baseRefOid": "e1cf9249b85ba729778777837a757ff36aa8bbd3",
+      "headRepository": "paulehoffman/fork-deleg-base",
+      "headRefName": "names-under-delegation",
+      "headRefOid": "3e1d11e71b85fba86b9c9672255c787c459b6bca",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
       "comments": [],
       "reviews": []
     }
