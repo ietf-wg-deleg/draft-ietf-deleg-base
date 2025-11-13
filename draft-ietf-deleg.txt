@@ -7,10 +7,10 @@ Internet-Draft                                               Google, LLC
 Updates: 1034, 1035, 4035, 6672, 6840 (if                      P. Špaček
          approved)                                                   ISC
 Intended status: Standards Track                                R. Weber
-Expires: 11 May 2026                                 Akamai Technologies
+Expires: 17 May 2026                                 Akamai Technologies
                                                              D. Lawrence
                                                               Salesforce
-                                                         7 November 2025
+                                                        13 November 2025
 
 
                      Extensible Delegation for DNS
@@ -61,7 +61,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 11 May 2026.
+   This Internet-Draft will expire on 17 May 2026.
 
 Copyright Notice
 
@@ -638,10 +638,10 @@ Table of Contents
 
    When using server-name, the addresses for all the names in the set
    must be fetched using normal DNS resolution.  This means the names in
-   the value of the server-name key or the include-delegi key MUST NOT
-   be inside the delegated domain.  If this constraint is violated the
-   whole RR (but not the whole RRset) MUST be ignored while constructing
-   SLIST (Section 4.1.6).
+   the value of the server-name key or the include-delegi key cannot
+   sensibly be inside the delegated domain.  Resolvers MUST ignore names
+   in the server-name key or the include-delegi key if they are in the
+   delegated domain.
 
    With this initial DELEG specification, servers are still expected to
    be reached on the standard DNS port for both UDP and TCP, 53.  While
