@@ -7,10 +7,10 @@ Internet-Draft                                               Google, LLC
 Updates: 1034, 1035, 4035, 6672, 6840 (if                      P. Špaček
          approved)                                                   ISC
 Intended status: Standards Track                                R. Weber
-Expires: 17 May 2026                                 Akamai Technologies
+Expires: 18 May 2026                                 Akamai Technologies
                                                              D. Lawrence
                                                               Salesforce
-                                                        13 November 2025
+                                                        14 November 2025
 
 
                      Extensible Delegation for DNS
@@ -61,7 +61,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 17 May 2026.
+   This Internet-Draft will expire on 18 May 2026.
 
 Copyright Notice
 
@@ -563,11 +563,10 @@ Table of Contents
            SLIST.
 
        3.  If SLIST is now populated, stop walking up the DNS tree.
-           However, if SLIST is not populated, remove the leftmost label
+
+       4.  However, if SLIST is not populated, remove the leftmost label
            from SNAME and go back to the first step, using the newly
-           shortened SNAME.  Do not go back to the first step if doing
-           so would exceed the amount of work that the resolver is
-           configured to do when processing names; see Section 5.1.
+           shortened SNAME.
 
    The rest of Step 2's description is not affected by this document.
 
@@ -980,9 +979,6 @@ Table of Contents
 
 5.2.  Preventing Downgrade Attacks
 
-   TODO: this section is a bit redundant with "Referral Downgrade
-   Protection" above; harmonize them.
-
    During the rollout of the DELEG protocol, the operator of an
    authoritative server can upgrade the server software to be DELEG-
    aware before changing any DNS zones.  Such deployment should work and
@@ -1005,9 +1001,7 @@ Table of Contents
    Please note that a full DNSKEY rollover is not necessary to achieve
    the downgrade protection for DELEG.  Any single DNSKEY with the ADT
    flag set to 1 is sufficient; the zone can introduce an otherwise
-   unused record into the DNSKEY RRset.  This DNSKEY RR can even use an
-   unknown signing algorithm and zero-length key material to minimize
-   size increase of the DNSKEY RRset.
+   unused record into the DNSKEY RRset.
 
 6.  IANA Considerations
 
