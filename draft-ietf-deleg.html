@@ -1656,9 +1656,9 @@ See <a href="#de0-deleg" class="auto internal xref">Section 4.2.2.2</a> for more
 <a href="#section-4.1.4" class="section-number selfRef">4.1.4. </a><a href="#name-algorithm-for-finding-the-b" class="section-name selfRef">Algorithm for "Finding the Best Servers to Ask"</a>
           </h4>
 <p id="section-4.1.4-1">This document updates instructions for finding the best servers to ask.
-That information currently is covered in Section 5.3.3 of <span>[<a href="#RFC1034" class="cite xref">RFC1034</a>]</span> and Section 3.4.1 of <span>[<a href="#RFC6672" class="cite xref">RFC6672</a>]</span> with the text "2. Find the best servers to ask."
-Section 3.1.4.1 of <span>[<a href="#RFC4035" class="cite xref">RFC4035</a>]</span> should have explicitly updated Section 5.3.3 of <span>[<a href="#RFC1034" class="cite xref">RFC1034</a>]</span> for the DS RR type, but failed to do so.
-This document simply extends this existing behavior to DELEG RR type as well, and makes this special case explicit.<a href="#section-4.1.4-1" class="pilcrow">¶</a></p>
+It was covered in Section 5.3.3 of <span>[<a href="#RFC1034" class="cite xref">RFC1034</a>]</span> and Section 3.4.1 of <span>[<a href="#RFC6672" class="cite xref">RFC6672</a>]</span> with the text "2. Find the best servers to ask.".
+These instructions were informally updated by section 4.2 of <span>[<a href="#RFC4035" class="cite xref">RFC4035</a>]</span> for the DS RR type but the algorithm change was not made explicit.
+This document simply extends this existing behavior from DS RR type to DELEG RR type as well, and makes this special case explicit.<a href="#section-4.1.4-1" class="pilcrow">¶</a></p>
 <p id="section-4.1.4-2">When a DELEG RRset exists for a delegation in a zone, DELEG-aware resolvers ignore any NS RRset for the delegated zone, whether from the parent or from the apex of the child.<a href="#section-4.1.4-2" class="pilcrow">¶</a></p>
 <p id="section-4.1.4-3">Each delegation level can have a mixture of DELEG and NS RR types, and DELEG-aware resolvers MUST be able to follow chains of delegations which combines both types in arbitrary ways.<a href="#section-4.1.4-3" class="pilcrow">¶</a></p>
 <p id="section-4.1.4-4">An example of a valid delegation tree:<a href="#section-4.1.4-4" class="pilcrow">¶</a></p>

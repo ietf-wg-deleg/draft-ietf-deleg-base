@@ -474,12 +474,13 @@ Table of Contents
 4.1.4.  Algorithm for "Finding the Best Servers to Ask"
 
    This document updates instructions for finding the best servers to
-   ask.  That information currently is covered in Section 5.3.3 of
-   [RFC1034] and Section 3.4.1 of [RFC6672] with the text "2.  Find the
-   best servers to ask."  Section 3.1.4.1 of [RFC4035] should have
-   explicitly updated Section 5.3.3 of [RFC1034] for the DS RR type, but
-   failed to do so.  This document simply extends this existing behavior
-   to DELEG RR type as well, and makes this special case explicit.
+   ask.  It was covered in Section 5.3.3 of [RFC1034] and Section 3.4.1
+   of [RFC6672] with the text "2.  Find the best servers to ask.".
+   These instructions were informally updated by section 4.2 of
+   [RFC4035] for the DS RR type but the algorithm change was not made
+   explicit.  This document simply extends this existing behavior from
+   DS RR type to DELEG RR type as well, and makes this special case
+   explicit.
 
    When a DELEG RRset exists for a delegation in a zone, DELEG-aware
    resolvers ignore any NS RRset for the delegated zone, whether from
