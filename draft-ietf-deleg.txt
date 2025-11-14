@@ -571,7 +571,7 @@ Table of Contents
 
    The rest of Step 2's description is not affected by this document.
 
-   Resolvers MAY respond to "QNAME=. / QTYPE=DELEG" queries in the same
+   Resolvers MUST respond to "QNAME=. / QTYPE=DELEG" queries in the same
    fashion as they respond to "QNAME=. / QTYPE=DS" queries.
 
 4.1.5.  Name Server Information for Delegation
