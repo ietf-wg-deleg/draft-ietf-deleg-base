@@ -106,6 +106,7 @@ This section is a brief overview of the protocol.
 It is meant for people who want to understand the protocol before they dive deeper into the protocol specifics.
 
 When a DELEG-aware resolver sends queries, it sets the DE bit in the EDNS0 header to 1 in queries to authoritative servers as a signal that it is indeed DELEG-aware ({{de-bit}}).
+
 DELEG-unaware authoritative servers ignore this signal.
 
 A DELEG-aware authoritative server uses that signal to determine the type of response it will send.
@@ -119,6 +120,7 @@ The Rdata for DELEG records has key=value pairs ({{nameserver-info}}).
 * "server-ipv4" and "server-ipv6" keys have IP addresses for the delegated name servers
 * "server-name" keys have hostnames for the delegated name servers; the addresses must be fetched
 * "include-delegi" keys have domain names which in turn have more information about the delegation
+* "mandatory" keys have a list of other keys which the resolver must understand in order to use the record
 
 The DELEG-aware resolver seeing the DELEG RRset uses that information to form the list of best servers to ask about the original zone ({{finding-best}}).
 If the DELEG RRset contains "include-delegi", the resolver queries those hostnames for DELEGI RRsets.
@@ -385,20 +387,33 @@ Resolvers MUST ignore names in the server-name key or the include-delegi key if 
 
 With this initial DELEG specification, servers are still expected to be reached on the standard DNS port for both UDP and TCP, 53.  While a future specification is expected to address other transports using other ports, its eventual semantics are not covered here.
 
+### Metadata keys {#mandatory}
+This specification defines a key which serves as a protocol extensibility mechanism, but is not directly used for contacting DNS servers.
+
+Any DELEG or DELEGI record can have key named "mandatory" which is similar to the key of the same name in {{!RFC9460}}.
+
+The value in the presentation value MUST be a comma-separated list of one or more valid DelegInfoKeys, either by their registered name or in the unknown-key format.
+
+The value in the wire format is a sequence of DelegInfoKey numeric values in network byte order, concatenated, in strictly increasing numeric order.
+
+The "mandatory" key itself is optional, but when it is present, the RR in which it appears MUST NOT be used by a resolver in the resolution process if any of the DelegInfoKeys referenced by the "mandatory" DelegInfo element are not supported in the resolver's implementation.
+
 ### Populating the SLIST from DELEG and DELEGI Records {#slist}
 
 Each individual DELEG record inside a DELEG RRset, or each individual DELEGI record in a DELEGI RRset, can cause the addition of zero or more entries to SLIST.
 
 A resolver processes each individual DELEG record within a DELEG RRset, or each individual DELEGI record in a DELEGI RRset, using the following steps:
 
-1. If mandatory key is present, check that all the mandatory keys are part of the DelegInfos in this RR.
-If not, stop processing this record.
-
-1. Check that all keys listed as mandatory are supported.
-If not, stop processing this record.
-
 1. Remove all DelegInfo elements with unsupported DelegInfoKey values.
-A resulting record with a zero-length DelegInfos field has no effect on the SLIST processing for resolvers.
+If the resulting record has zero-length DelegInfos field, stop processing the record.
+
+1. If a DelegInfo element with the "mandatory" DelegInfoKey is present, check its DelegInfoValue.
+The DelegInfoValue is a list of keys which MUST have a corresponding DelegInfo elements in this record.
+If any of the listed DelegInfo elements is not found, stop processing this record.
+
+1. If a DelegInfo element with the "mandatory" DelegInfoKey is present, check its DelegInfoValue.
+The DelegInfoValue is a list of keys which MUST be understood by the resolver in order to process the record.
+If any of the listed DelegInfo elements is not understood by the resolver, stop processing this record.
 
 1. If a record has more than one type of server information key (excluding the IPv4/IPv6 case), or has multiple server information keys of the same type, that record is malformed.
 Stop processing this record.
@@ -662,7 +677,7 @@ The "DELEG Delegation Information" registry should be populated with the followi
 Number:  0
 Name:  mandatory
 Meaning: Mandatory keys in this RR
-Reference:  {{nameserver-info}} of this document
+Reference:  {{mandatory}} of this document
 Change Controller:  IETF
 
 Number:  1
