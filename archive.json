@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-11-11T01:00:39.097975+00:00",
+  "timestamp": "2025-11-16T01:04:05.821499+00:00",
   "repo": "ietf-wg-deleg/draft-ietf-deleg-base",
   "labels": [
     {
@@ -423,15 +423,15 @@
       "id": "I_kwDOO41rkM6_51hr",
       "title": "Priming",
       "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/issues/27",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "pspacek",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Version: -01\n\nDELEG RR type is parent-side only. Consequently, root zone cannot put DELEG RR in the apex.\n\nWe will need to define mechanism for priming so resolvers can prime/refresh root's DELEG RRs.\n\nRelated to #11 ",
       "createdAt": "2025-07-10T14:34:23Z",
-      "updatedAt": "2025-09-30T00:30:03Z",
-      "closedAt": null,
+      "updatedAt": "2025-11-13T09:26:49Z",
+      "closedAt": "2025-11-13T09:26:45Z",
       "comments": [
         {
           "author": "paulehoffman",
@@ -439,6 +439,13 @@
           "body": "I disagree that we \"need\" to define anything in this document. Instead, it should be done after the protocol is finished, and should likely be done by DNSOP.",
           "createdAt": "2025-09-30T00:30:03Z",
           "updatedAt": "2025-09-30T00:30:03Z"
+        },
+        {
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "body": "WG agreed to solve priming in a separate document, closing.",
+          "createdAt": "2025-11-13T09:26:45Z",
+          "updatedAt": "2025-11-13T09:26:45Z"
         }
       ]
     },
@@ -499,15 +506,15 @@
       "id": "I_kwDOO41rkM7Bquy6",
       "title": "RR format MUST NOT violation",
       "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/issues/35",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "pspacek",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Version: -01\n\nIt's unclear when one of MUST/NOT constrains is violated on RR level. E.g.\n\n```\nThe target of any DELEG record MUST NOT be '.'\n\n* The target of a DELEG INCLUDE record MUST be outside of the delegated domain.\n\n* The target of a DELEG DIRECT record MUST be a domain below the delegated domain.\n```\n\nSo, what happens when this does not hold? Zone file parsing error? I hope not. What happens when that kind of crap is receiver over network? I bet attacker's don't care what the spec says.",
       "createdAt": "2025-07-21T16:00:13Z",
-      "updatedAt": "2025-09-30T18:01:53Z",
-      "closedAt": null,
+      "updatedAt": "2025-11-13T09:33:43Z",
+      "closedAt": "2025-11-13T09:33:43Z",
       "comments": [
         {
           "author": "pspacek",
@@ -522,6 +529,13 @@
           "body": "Suggest closing this issue; fixed in draft -03",
           "createdAt": "2025-09-30T18:01:53Z",
           "updatedAt": "2025-09-30T18:01:53Z"
+        },
+        {
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Finally sorted out for good in #100.",
+          "createdAt": "2025-11-13T09:33:43Z",
+          "updatedAt": "2025-11-13T09:33:43Z"
         }
       ]
     },
@@ -795,7 +809,7 @@
       "labels": [],
       "body": "We should define the behavior of an empty DelegInfos on both client side.\nThis is likely something like \"clients/resolvers MUST ignore DELEG/DELEGI records with empty DelegInfos, or whose DelegInfos do not contain at least one of server-ipv4, server-ipv6, server-name, include-delegi\" \n\nWe may wish to define a term (Server identifying DelegInfo?) that covers the set of {server-ipv4, server-ipv6, server-name} (and include-delegi for DELEG) so that a future specification could add additional ones (server-future?).\n\nWe should also specify something like \"DELEG and DELEGI records which contain either empty DelegInfos or which don't contain at least one Server Identiying DelegInfo are currently defined to be ignored and SHOULD generate a warning\". \n\nIf we believe there are use-cases for DELEG records not including a Server Identifying DelegInfo (for specifying a zone cut? for domain validation?)  then we should call this out and make sure that clients will properly ignore them and not explode.\n\n",
       "createdAt": "2025-11-07T15:38:45Z",
-      "updatedAt": "2025-11-07T16:39:02Z",
+      "updatedAt": "2025-11-14T11:57:33Z",
       "closedAt": null,
       "comments": [
         {
@@ -804,6 +818,20 @@
           "body": "(although draft-jabley-dnsop-zone-cut-to-nowhere is a case that may want explicit coverage depending on where it goes as it overlaps into this scenario)",
           "createdAt": "2025-11-07T16:39:02Z",
           "updatedAt": "2025-11-07T16:39:02Z"
+        },
+        {
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I thought a bit about this and I think the best course of action is to do nothing. We have algorithm defined which takes DELEG + DELEGI RRsets and constructs SLIST out of it. If the resulting list it empty the end state is the same as with unresolvable names from NS RRset today, plus we already have language which says MUST NOT fallback to NS under any circumstances.",
+          "createdAt": "2025-11-13T10:01:59Z",
+          "updatedAt": "2025-11-13T10:01:59Z"
+        },
+        {
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I think PR #101 clarifies this as a side effect.",
+          "createdAt": "2025-11-14T11:57:33Z",
+          "updatedAt": "2025-11-14T11:57:33Z"
         }
       ]
     },
@@ -4938,24 +4966,206 @@
       "id": "PR_kwDOO41rkM6yjT8e",
       "title": "Remove a MUST that we cannot enforce",
       "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/pull/100",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "paulehoffman",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "The replaced text has a MUST that we cannot enforce. Further, because server-name and include-delegi can be a set of names, if one name in the set might be bad and the others fine, so we should not tell the resolver to ignore the whole set.",
       "createdAt": "2025-11-10T14:46:41Z",
-      "updatedAt": "2025-11-10T14:46:46Z",
+      "updatedAt": "2025-11-13T09:33:01Z",
       "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
       "baseRefName": "main",
       "baseRefOid": "e1cf9249b85ba729778777837a757ff36aa8bbd3",
       "headRepository": "paulehoffman/fork-deleg-base",
       "headRefName": "names-under-delegation",
-      "headRefOid": "3e1d11e71b85fba86b9c9672255c787c459b6bca",
+      "headRefOid": "2842ea34b398ab95aee3f081a9639c8b4519d3f0",
+      "closedAt": "2025-11-13T09:33:01Z",
+      "mergedAt": "2025-11-13T09:33:00Z",
+      "mergedBy": "pspacek",
+      "mergeCommit": {
+        "oid": "4b1faeec3df67a5848aacb29ca39e01287daab35"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOO41rkM7OJ0ta",
+          "commit": {
+            "abbreviatedOid": "3e1d11e"
+          },
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-11-13T09:31:06Z",
+          "updatedAt": "2025-11-13T09:31:06Z",
+          "comments": [
+            {
+              "originalPosition": 7,
+              "body": "```suggestion\nResolvers MUST ignore names in the server-name key or the include-delegi key if they are in the delegated domain.\n```",
+              "createdAt": "2025-11-13T09:31:06Z",
+              "updatedAt": "2025-11-13T09:31:06Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 101,
+      "id": "PR_kwDOO41rkM6zRAVb",
+      "title": "Clarify 'mandatory' key",
+      "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/pull/101",
+      "state": "OPEN",
+      "author": "pspacek",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-11-13T16:34:45Z",
+      "updatedAt": "2025-11-14T19:40:19Z",
+      "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
+      "baseRefName": "main",
+      "baseRefOid": "4b1faeec3df67a5848aacb29ca39e01287daab35",
+      "headRepository": "pspacek/draft-ietf-deleg-base",
+      "headRefName": "mandatory-clarif",
+      "headRefOid": "2cb604a7f7fe6484bb9bde88401871735937c485",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
+      "comments": [
+        {
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "body": "@paulehoffman I think this should address your concerns.",
+          "createdAt": "2025-11-13T16:35:00Z",
+          "updatedAt": "2025-11-13T16:35:00Z"
+        }
+      ],
+      "reviews": []
+    },
+    {
+      "number": 102,
+      "id": "PR_kwDOO41rkM6ze3PM",
+      "title": "Clarify name syntax and double-escaping",
+      "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/pull/102",
+      "state": "OPEN",
+      "author": "pspacek",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-11-14T15:31:18Z",
+      "updatedAt": "2025-11-14T19:28:37Z",
+      "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
+      "baseRefName": "main",
+      "baseRefOid": "4b1faeec3df67a5848aacb29ca39e01287daab35",
+      "headRepository": "pspacek/draft-ietf-deleg-base",
+      "headRefName": "name-syntax",
+      "headRefOid": "b75e92f6d857f86d1c8aeb7eecd21b7519ad1fe4",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [
+        {
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "body": "@rthalley Hello! Would this change address your concerns?",
+          "createdAt": "2025-11-14T15:33:43Z",
+          "updatedAt": "2025-11-14T15:33:43Z"
+        },
+        {
+          "author": "rthalley",
+          "authorAssociation": "NONE",
+          "body": "Yeah, think that's good.",
+          "createdAt": "2025-11-14T19:28:37Z",
+          "updatedAt": "2025-11-14T19:28:37Z"
+        }
+      ],
+      "reviews": []
+    },
+    {
+      "number": 103,
+      "id": "PR_kwDOO41rkM6zfHFt",
+      "title": "Cleanup in Security Considerations section",
+      "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/pull/103",
+      "state": "MERGED",
+      "author": "pspacek",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-11-14T15:52:03Z",
+      "updatedAt": "2025-11-14T15:52:10Z",
+      "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
+      "baseRefName": "main",
+      "baseRefOid": "4b1faeec3df67a5848aacb29ca39e01287daab35",
+      "headRepository": "pspacek/draft-ietf-deleg-base",
+      "headRefName": "security-cleanup",
+      "headRefOid": "56fc4adf878acafe7f519ca507eea7d8d904ef60",
+      "closedAt": "2025-11-14T15:52:10Z",
+      "mergedAt": "2025-11-14T15:52:10Z",
+      "mergedBy": "pspacek",
+      "mergeCommit": {
+        "oid": "3fc335f65dd90f151ac815f929b48b9994509694"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 104,
+      "id": "PR_kwDOO41rkM6zfY47",
+      "title": "Fix reference to RFC 4035 resolution algorithm",
+      "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/pull/104",
+      "state": "MERGED",
+      "author": "pspacek",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Plus minor rephrasing to make text a bit more concise.",
+      "createdAt": "2025-11-14T16:12:39Z",
+      "updatedAt": "2025-11-14T16:12:49Z",
+      "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
+      "baseRefName": "main",
+      "baseRefOid": "3fc335f65dd90f151ac815f929b48b9994509694",
+      "headRepository": "pspacek/draft-ietf-deleg-base",
+      "headRefName": "qtype-deleg-clarif",
+      "headRefOid": "33b51f13a411990a9880b2e551a1ecd21bb2ee3e",
+      "closedAt": "2025-11-14T16:12:49Z",
+      "mergedAt": "2025-11-14T16:12:49Z",
+      "mergedBy": "pspacek",
+      "mergeCommit": {
+        "oid": "1fb74ef10d286b78443321009609481001ca1772"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 105,
+      "id": "PR_kwDOO41rkM6zfjWW",
+      "title": "Require consistency for parent-of-root responses",
+      "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/pull/105",
+      "state": "MERGED",
+      "author": "pspacek",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-11-14T16:24:54Z",
+      "updatedAt": "2025-11-14T16:25:15Z",
+      "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
+      "baseRefName": "main",
+      "baseRefOid": "1fb74ef10d286b78443321009609481001ca1772",
+      "headRepository": "pspacek/draft-ietf-deleg-base",
+      "headRefName": "root-deleg-ds-query-consistency",
+      "headRefOid": "2be2723d04ca5ae902aeb472050844e193d82e01",
+      "closedAt": "2025-11-14T16:25:14Z",
+      "mergedAt": "2025-11-14T16:25:14Z",
+      "mergedBy": "pspacek",
+      "mergeCommit": {
+        "oid": "7066ece15981dffd53d484440d5bdc12dcce9144"
+      },
       "comments": [],
       "reviews": []
     }
