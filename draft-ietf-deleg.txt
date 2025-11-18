@@ -609,19 +609,28 @@ Table of Contents
 
    The presentation values for server-name and include-delegi are an
    unordered collection of fully-qualified domain names and relative
-   domain names, separated by commas.  The wire format for server-name
-   and include-delegi are each a concatenated unordered collection of a
-   wire-format domain names, where the root label provides the
-   separation between names:
+   domain names, separated by commas.  Relative names in the
+   presentation format are interpreted according origin rules in
+   Section 5.1 of [RFC1035].  Parsing the comma-separated list is
+   specified in Section A.1 of [RFC9460].
+
+   The DELEG protocol allows the use of all valid domain names, as
+   defined in [RFC1035] and Section 11 of [RFC2181].  The presentation
+   format for names with special characters requires both double-
+   escaping by applying rules of Section 5.1 of [RFC1034] together with
+   the escaping rules from Section A.1 of [RFC9460].
+
+   TODO: add an example that requires this escaping.
+
+   The wire format for server-name and include-delegi are each a
+   concatenated unordered collection of a wire-format domain names,
+   where the root label provides the separation between names:
 
    +-+-+-+-+-+-+-+-+-+-+-+-+-+-
    | name | name | name | ... |
    +-+-+-+-+-+-+-+-+-+-+-+-+-+-
 
    The names in the wire format MUST NOT be compressed.
-
-   TODO: Describe how escaping works for server-name and include-delegi.
-   This will be the same as the escaping mechanism defined in SVCB.
 
    A DELEG or DELEGI record that has a non-empty DelegInfos MUST have
    one, and only one, set of server information, chosen from the
@@ -1153,6 +1162,14 @@ Table of Contents
    [RFC1034]  Mockapetris, P., "Domain names - concepts and facilities",
               STD 13, RFC 1034, DOI 10.17487/RFC1034, November 1987,
               <https://www.rfc-editor.org/rfc/rfc1034>.
+
+   [RFC1035]  Mockapetris, P., "Domain names - implementation and
+              specification", STD 13, RFC 1035, DOI 10.17487/RFC1035,
+              November 1987, <https://www.rfc-editor.org/rfc/rfc1035>.
+
+   [RFC2181]  Elz, R. and R. Bush, "Clarifications to the DNS
+              Specification", RFC 2181, DOI 10.17487/RFC2181, July 1997,
+              <https://www.rfc-editor.org/rfc/rfc2181>.
 
    [RFC4034]  Arends, R., Austein, R., Larson, M., Massey, D., and S.
               Rose, "Resource Records for the DNS Security Extensions",
