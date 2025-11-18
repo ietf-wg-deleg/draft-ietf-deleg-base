@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-11-16T01:04:05.821499+00:00",
+  "timestamp": "2025-11-18T00:59:59.584322+00:00",
   "repo": "ietf-wg-deleg/draft-ietf-deleg-base",
   "labels": [
     {
@@ -5022,7 +5022,7 @@
       "labels": [],
       "body": "",
       "createdAt": "2025-11-13T16:34:45Z",
-      "updatedAt": "2025-11-14T19:40:19Z",
+      "updatedAt": "2025-11-17T23:40:43Z",
       "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
       "baseRefName": "main",
       "baseRefOid": "4b1faeec3df67a5848aacb29ca39e01287daab35",
@@ -5042,7 +5042,21 @@
           "updatedAt": "2025-11-13T16:35:00Z"
         }
       ],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOO41rkM7PH1dh",
+          "commit": {
+            "abbreviatedOid": "2cb604a"
+          },
+          "author": "paulehoffman",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-11-17T23:40:43Z",
+          "updatedAt": "2025-11-17T23:40:43Z",
+          "comments": []
+        }
+      ]
     },
     {
       "number": 102,
@@ -5056,13 +5070,13 @@
       "labels": [],
       "body": "",
       "createdAt": "2025-11-14T15:31:18Z",
-      "updatedAt": "2025-11-14T19:28:37Z",
+      "updatedAt": "2025-11-17T23:48:19Z",
       "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
       "baseRefName": "main",
       "baseRefOid": "4b1faeec3df67a5848aacb29ca39e01287daab35",
       "headRepository": "pspacek/draft-ietf-deleg-base",
       "headRefName": "name-syntax",
-      "headRefOid": "b75e92f6d857f86d1c8aeb7eecd21b7519ad1fe4",
+      "headRefOid": "938e6d4a6e6383712ceaaa166be1569b30c83920",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
@@ -5166,6 +5180,32 @@
       "mergeCommit": {
         "oid": "7066ece15981dffd53d484440d5bdc12dcce9144"
       },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 106,
+      "id": "PR_kwDOO41rkM6z-ezH",
+      "title": "Make the no-NS response definition definitive.",
+      "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/pull/106",
+      "state": "OPEN",
+      "author": "paulehoffman",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Get rid of the waffly words and be clear that the answers are what would be expected if there was any other unrecognized RRtype in the delegaged name.",
+      "createdAt": "2025-11-18T00:26:42Z",
+      "updatedAt": "2025-11-18T00:26:42Z",
+      "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
+      "baseRefName": "main",
+      "baseRefOid": "7066ece15981dffd53d484440d5bdc12dcce9144",
+      "headRepository": "paulehoffman/fork-deleg-base",
+      "headRefName": "no-ns-simplification",
+      "headRefOid": "2175d89f985bf42a0b149f978618c3c67c9cce61",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
       "comments": [],
       "reviews": []
     }
