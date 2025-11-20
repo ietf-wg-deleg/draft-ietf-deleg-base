@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-11-18T00:59:59.584322+00:00",
+  "timestamp": "2025-11-20T00:58:46.201486+00:00",
   "repo": "ietf-wg-deleg/draft-ietf-deleg-base",
   "labels": [
     {
@@ -5015,24 +5015,26 @@
       "id": "PR_kwDOO41rkM6zRAVb",
       "title": "Clarify 'mandatory' key",
       "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/pull/101",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "pspacek",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2025-11-13T16:34:45Z",
-      "updatedAt": "2025-11-17T23:40:43Z",
+      "updatedAt": "2025-11-18T08:10:52Z",
       "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
       "baseRefName": "main",
       "baseRefOid": "4b1faeec3df67a5848aacb29ca39e01287daab35",
       "headRepository": "pspacek/draft-ietf-deleg-base",
       "headRefName": "mandatory-clarif",
-      "headRefOid": "2cb604a7f7fe6484bb9bde88401871735937c485",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "4444b64acaddb662b95f804c3d72ef5d3db2bf46",
+      "closedAt": "2025-11-18T08:10:51Z",
+      "mergedAt": "2025-11-18T08:10:51Z",
+      "mergedBy": "pspacek",
+      "mergeCommit": {
+        "oid": "67386f107f79dda1e1e083b1041e09fc8eecfde1"
+      },
       "comments": [
         {
           "author": "pspacek",
@@ -5055,6 +5057,66 @@
           "createdAt": "2025-11-17T23:40:43Z",
           "updatedAt": "2025-11-17T23:40:43Z",
           "comments": []
+        },
+        {
+          "id": "PRR_kwDOO41rkM7PMEMW",
+          "commit": {
+            "abbreviatedOid": "2cb604a"
+          },
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-11-18T08:07:14Z",
+          "updatedAt": "2025-11-18T08:07:14Z",
+          "comments": [
+            {
+              "originalPosition": 45,
+              "body": "This is already done in the first step - remove unsupported DelegInfoKey values.",
+              "createdAt": "2025-11-18T08:07:14Z",
+              "updatedAt": "2025-11-18T08:07:14Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOO41rkM7PMF9G",
+          "commit": {
+            "abbreviatedOid": "2cb604a"
+          },
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-11-18T08:08:34Z",
+          "updatedAt": "2025-11-18T08:08:34Z",
+          "comments": [
+            {
+              "originalPosition": 45,
+              "body": "```suggestion\r\n```",
+              "createdAt": "2025-11-18T08:08:34Z",
+              "updatedAt": "2025-11-18T08:08:34Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOO41rkM7PMHEJ",
+          "commit": {
+            "abbreviatedOid": "e56aad6"
+          },
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-11-18T08:09:35Z",
+          "updatedAt": "2025-11-18T08:09:35Z",
+          "comments": [
+            {
+              "originalPosition": 50,
+              "body": "```suggestion\n```",
+              "createdAt": "2025-11-18T08:09:35Z",
+              "updatedAt": "2025-11-18T08:09:35Z"
+            }
+          ]
         }
       ]
     },
@@ -5063,24 +5125,26 @@
       "id": "PR_kwDOO41rkM6ze3PM",
       "title": "Clarify name syntax and double-escaping",
       "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/pull/102",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "pspacek",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2025-11-14T15:31:18Z",
-      "updatedAt": "2025-11-17T23:48:19Z",
+      "updatedAt": "2025-11-18T08:16:36Z",
       "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
       "baseRefName": "main",
       "baseRefOid": "4b1faeec3df67a5848aacb29ca39e01287daab35",
       "headRepository": "pspacek/draft-ietf-deleg-base",
       "headRefName": "name-syntax",
-      "headRefOid": "938e6d4a6e6383712ceaaa166be1569b30c83920",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "5704ca3345ec65a273bcc96c86c4f5caaedbb076",
+      "closedAt": "2025-11-18T08:16:35Z",
+      "mergedAt": "2025-11-18T08:16:35Z",
+      "mergedBy": "pspacek",
+      "mergeCommit": {
+        "oid": "4247027feb067c4252e7bd3f9f35aa76843254a1"
+      },
       "comments": [
         {
           "author": "pspacek",
@@ -5097,7 +5161,28 @@
           "updatedAt": "2025-11-14T19:28:37Z"
         }
       ],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOO41rkM7PMMSP",
+          "commit": {
+            "abbreviatedOid": "938e6d4"
+          },
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-11-18T08:13:53Z",
+          "updatedAt": "2025-11-18T08:13:53Z",
+          "comments": [
+            {
+              "originalPosition": 7,
+              "body": "```suggestion\nThe DELEG protocol allows the use of all valid domain names, as defined in {{!RFC1035}} and Section 11 of {{!RFC2181}}.\n```",
+              "createdAt": "2025-11-18T08:13:53Z",
+              "updatedAt": "2025-11-18T08:13:53Z"
+            }
+          ]
+        }
+      ]
     },
     {
       "number": 103,
@@ -5195,13 +5280,54 @@
       "labels": [],
       "body": "Get rid of the waffly words and be clear that the answers are what would be expected if there was any other unrecognized RRtype in the delegaged name.",
       "createdAt": "2025-11-18T00:26:42Z",
-      "updatedAt": "2025-11-18T00:26:42Z",
+      "updatedAt": "2025-11-18T15:36:27Z",
       "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
       "baseRefName": "main",
-      "baseRefOid": "7066ece15981dffd53d484440d5bdc12dcce9144",
+      "baseRefOid": "4247027feb067c4252e7bd3f9f35aa76843254a1",
       "headRepository": "paulehoffman/fork-deleg-base",
       "headRefName": "no-ns-simplification",
-      "headRefOid": "2175d89f985bf42a0b149f978618c3c67c9cce61",
+      "headRefOid": "877e5a9747c21d5c830fade7702ac3cf00490ed0",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [
+        {
+          "author": "moonshiner",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "s/respnd in a way to makes sense/respond in a way that makes sense/\r\n\r\nrespond spell fix, and \"to makes sense\" > \"that makes sense\"",
+          "createdAt": "2025-11-18T12:01:04Z",
+          "updatedAt": "2025-11-18T12:01:04Z"
+        },
+        {
+          "author": "paulehoffman",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Thanks, @moonshiner ! Fixed.",
+          "createdAt": "2025-11-18T15:35:13Z",
+          "updatedAt": "2025-11-18T15:35:13Z"
+        }
+      ],
+      "reviews": []
+    },
+    {
+      "number": 107,
+      "id": "PR_kwDOO41rkM60F-ye",
+      "title": "moved the requirements here for now, per WG",
+      "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/pull/107",
+      "state": "OPEN",
+      "author": "moonshiner",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "I created this as a mirror of the deleg requirements, but set up to end up as an Appendix. if the WG so desires. \r\n\r\n",
+      "createdAt": "2025-11-18T11:59:41Z",
+      "updatedAt": "2025-11-18T11:59:41Z",
+      "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
+      "baseRefName": "main",
+      "baseRefOid": "4247027feb067c4252e7bd3f9f35aa76843254a1",
+      "headRepository": "moonshiner/draft-ietf-deleg-base",
+      "headRefName": "tjw-requirements",
+      "headRefOid": "b61f88e49b9e672c6356720c3e38dec9adff4222",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
