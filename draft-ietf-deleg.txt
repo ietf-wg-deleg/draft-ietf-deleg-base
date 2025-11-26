@@ -7,10 +7,10 @@ Internet-Draft                                               Google, LLC
 Updates: 1034, 1035, 4035, 6672, 6840 (if                      P. Špaček
          approved)                                                   ISC
 Intended status: Standards Track                                R. Weber
-Expires: 22 May 2026                                 Akamai Technologies
+Expires: 30 May 2026                                 Akamai Technologies
                                                              D. Lawrence
                                                               Salesforce
-                                                        18 November 2025
+                                                        26 November 2025
 
 
                      Extensible Delegation for DNS
@@ -61,7 +61,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 22 May 2026.
+   This Internet-Draft will expire on 30 May 2026.
 
 Copyright Notice
 
