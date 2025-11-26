@@ -827,44 +827,26 @@ Table of Contents
    not resolvable for DELEG-unaware clients.  From the perspective of a
    DELEG-unaware client, the zone cut created by the DELEG RRs is
    invisible.  In such a situation, the authoritative server should
-   respnd in a way to limit confusion and/or colateral damage for the
-   DELEG-unaware client.
+   respond in a way that makes sense to DELEG-unaware clients.
+
+   The primary current use case for zone owners that have zones to have
+   DELEG records but no NS records is that they want resolution of those
+   zones only if the resolver uses future features of the DELEG
+   protocol, such as encrypted DNS transports.
 
    The authoritative server is RECOMMENDED to supplement its responses
    to DELEG-unaware resolvers with an [RFC8914] Extended DNS Error using
    the (IANA-TBD) value "New Delegation Only" from the Extended DNS
    Error Codes registry.
 
-   A DELEG-aware authoritative server implementation has two options:
-
-   1.  When faced with a client that sent a query with DE=0 that would
-       lead to a delegation, but the zone has no NS records, an
-       authoritative server MAY reply with an RCODE of SERVFAIL and
-       nothing in the Answer and Authority sections.
-
-       This response has negative side effects, namely that most
-       resolvers will then query the remaining authoritative servers to
-       see if any of them would give a different answer.  The advantage
-       of this approach is simplicity of implementation and it is easy
-       to understand.
-
-   2.  Because of the negative side effects of the previous option, an
-       authoritative server SHOULD instead send an answer that
-       accurately describes the situation to a DELEG-unaware resolver.
-
-       The NSEC chain and the type bitmap generated according to
-       Section 4.3 leads to exactly one possible answer which is valid
-       according to non-DELEG specifications.  See Appendix A for
-       several examples of such answers.
-
-       Please note different interpretation of DELEG RR type and zone
-       cut definitions between DELEG-aware authoritative server and
-       DELEG-unaware client.  It is confusing.
-
-   TODO: List as many of the possible situations that need to be
-   considered for variant 2, and the proposed the single appropriate
-   response for each situation.  This list will probably change for the
-   next few iterations of this draft.
+   When there is no NS records for a delegated zone, a DELEG-aware
+   authoritative server MUST respond to DELEG-unaware clients with an
+   answer that accurately describes the situation to a DELEG-unaware
+   resolver.  For a query of the delegated zone itself, the response has
+   an RCODE of NOERROR; for a query that has more labels than the
+   delegated zone, the response has an RCODE of NXDOMAIN; this is no
+   different than what is already specified in [RFC1035].  NSEC and DS
+   records are returned following the existing rules in [RFC4035].
 
 4.2.2.2.  DELEG-unaware Clients Requesting QTYPE=DELEG
 
