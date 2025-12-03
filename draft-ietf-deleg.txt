@@ -2,15 +2,13 @@
 
 
 
-deleg                                                           T. April
-Internet-Draft                                               Google, LLC
-Updates: 1034, 1035, 4035, 6672, 6840 (if                      P. Špaček
-         approved)                                                   ISC
-Intended status: Standards Track                                R. Weber
-Expires: 30 May 2026                                 Akamai Technologies
-                                                             D. Lawrence
-                                                              Salesforce
-                                                        26 November 2025
+deleg                                                          P. Špaček
+Internet-Draft                                                       ISC
+Updates: 1034, 1035, 4035, 6672, 6840 (if                       R. Weber
+         approved)                                   Akamai Technologies
+Intended status: Standards Track                             D. Lawrence
+Expires: 6 June 2026                                          Salesforce
+                                                         3 December 2025
 
 
                      Extensible Delegation for DNS
@@ -61,7 +59,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 30 May 2026.
+   This Internet-Draft will expire on 6 June 2026.
 
 Copyright Notice
 
@@ -1589,11 +1587,6 @@ Acknowledgments
    RESINFO extension was contributed by Florian Obser.
 
 Authors' Addresses
-
-   Tim April
-   Google, LLC
-   Email: ietf@tapril.net
-
 
    Petr Špaček
    ISC
