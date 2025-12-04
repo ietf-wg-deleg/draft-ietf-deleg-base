@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-11-27T00:59:15.097388+00:00",
+  "timestamp": "2025-12-04T01:01:29.621843+00:00",
   "repo": "ietf-wg-deleg/draft-ietf-deleg-base",
   "labels": [
     {
@@ -5344,24 +5344,26 @@
       "id": "PR_kwDOO41rkM61sMKS",
       "title": "Remove Tim April as author",
       "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/pull/108",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "fl1ger",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2025-11-26T16:47:21Z",
-      "updatedAt": "2025-11-26T16:47:21Z",
+      "updatedAt": "2025-12-03T16:22:59Z",
       "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
       "baseRefName": "main",
       "baseRefOid": "dab59bad7bd50f6a00e381070fe22accb5356465",
       "headRepository": "fl1ger/draft-ietf-deleg-base",
       "headRefName": "main",
       "headRefOid": "a7b3359457ce99e324b450c05e4b58810794cfbc",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2025-12-03T16:22:59Z",
+      "mergedAt": "2025-12-03T16:22:59Z",
+      "mergedBy": "pspacek",
+      "mergeCommit": {
+        "oid": "abd6980fc6fabd7bd4a9df027fee34ff7cb4c579"
+      },
       "comments": [],
       "reviews": []
     }
