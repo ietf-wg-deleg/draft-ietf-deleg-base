@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-12-04T01:01:29.621843+00:00",
+  "timestamp": "2025-12-18T01:00:30.489587+00:00",
   "repo": "ietf-wg-deleg/draft-ietf-deleg-base",
   "labels": [
     {
@@ -802,15 +802,15 @@
       "id": "I_kwDOO41rkM7WoSJQ",
       "title": "Clearly specify handling around empty DelegInfos and DelegInfos not including at least one Server Identifying DelegInfo",
       "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/issues/96",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "enygren",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "We should define the behavior of an empty DelegInfos on both client side.\nThis is likely something like \"clients/resolvers MUST ignore DELEG/DELEGI records with empty DelegInfos, or whose DelegInfos do not contain at least one of server-ipv4, server-ipv6, server-name, include-delegi\" \n\nWe may wish to define a term (Server identifying DelegInfo?) that covers the set of {server-ipv4, server-ipv6, server-name} (and include-delegi for DELEG) so that a future specification could add additional ones (server-future?).\n\nWe should also specify something like \"DELEG and DELEGI records which contain either empty DelegInfos or which don't contain at least one Server Identiying DelegInfo are currently defined to be ignored and SHOULD generate a warning\". \n\nIf we believe there are use-cases for DELEG records not including a Server Identifying DelegInfo (for specifying a zone cut? for domain validation?)  then we should call this out and make sure that clients will properly ignore them and not explode.\n\n",
       "createdAt": "2025-11-07T15:38:45Z",
-      "updatedAt": "2025-11-14T11:57:33Z",
-      "closedAt": null,
+      "updatedAt": "2025-12-16T07:49:34Z",
+      "closedAt": "2025-12-16T07:49:34Z",
       "comments": [
         {
           "author": "enygren",
@@ -840,15 +840,15 @@
       "id": "I_kwDOO41rkM7WoXzT",
       "title": "Clearly define the behavior when the effective DELEG or DELEGI RRset ends up empty",
       "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/issues/97",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "enygren",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "As a follow-on to #96 we should clearly define the client/resolver behavior for cases where the effective DELEG or DELEGI RRsets end up as being empty.  For example, after we skip/ignore all DELEG/DELEGI RRs with:\n\n* No Server Identifying DelegInfo \n* DelegInfo parameters marked mandatory which the client doesn't understand\n* an Empty DelegInfos\n\nthen it is possible that the effective RRset is empty.  This is something that should be well-defined.\nIn the case of a DELEGI this presumably means that it should be ignored and a different DELEG record should be used.\nIn the case of a DELEG RRset, we should define if this results in a failure, and if there should be a fallback to NS records or not.\n\nThere may be some security considerations to think through in this scenario.\n",
       "createdAt": "2025-11-07T15:44:40Z",
-      "updatedAt": "2025-11-07T18:00:58Z",
-      "closedAt": null,
+      "updatedAt": "2025-12-16T07:49:59Z",
+      "closedAt": "2025-12-16T07:49:59Z",
       "comments": [
         {
           "author": "pspacek",
@@ -863,8 +863,31 @@
           "body": "Note for authors: In any case, add negative test vector.",
           "createdAt": "2025-11-07T18:00:58Z",
           "updatedAt": "2025-11-07T18:00:58Z"
+        },
+        {
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "body": "#101 also clarified this, I think",
+          "createdAt": "2025-12-16T07:49:59Z",
+          "updatedAt": "2025-12-16T07:49:59Z"
         }
       ]
+    },
+    {
+      "number": 109,
+      "id": "I_kwDOO41rkM7einzW",
+      "title": "Apex NS is not required",
+      "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/issues/109",
+      "state": "OPEN",
+      "author": "pspacek",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "While discussing implementation for BIND colleague of mine pointed out that requirement for apex NS RR in zone conflicts with DELEG-only zones. I guess we should add a paragraph to say apex-NS is not required anymore.",
+      "createdAt": "2025-12-16T07:51:09Z",
+      "updatedAt": "2025-12-16T07:51:09Z",
+      "closedAt": null,
+      "comments": []
     }
   ],
   "pulls": [
