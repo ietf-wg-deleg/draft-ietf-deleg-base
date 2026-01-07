@@ -313,28 +313,35 @@ DELEG and NS delegations can create cyclic dependencies and/or lead to duplicate
 Resolvers need to enforce suitable limits to prevent damage even if someone has incorrectly configured some of the data used to create an SLIST.
 
 This leads to a modifications of the description from earlier documents for DELEG-aware resolvers can find the best servers to ask.
+Step 2 of Section 5.3.3 of {{RFC1034}} is just "2. Find the best servers to ask."
 That description becomes:
 
-1. Determine deepest possible zone cut which can potentially hold the answer for a given (query name, type, class) combination:
+\=\=\=\=\=
 
-    1. Start with SNAME equal to QNAME.
+&#x0032;. Find the best servers to ask:
 
-    1. If QTYPE is a type that is authoritative at the parent side of a zone cut (currently, DS or DELEG), remove the leftmost label from SNAME.
+2.1. Determine deepest possible zone cut which can potentially hold the answer for a given (query name, type, class) combination:
+
+2.1.1. Start with SNAME equal to QNAME.
+
+2.1.2. If QTYPE is a type that is authoritative at the parent side of a zone cut (currently, DS or DELEG), remove the leftmost label from SNAME.
 For example, if the QNAME is "test.example." and the QTYPE is DELEG or DS, set SNAME to "example.".
 
-1. Look for locally-available DELEG and NS RRsets, starting at current SNAME.
+2.2. Look for locally-available DELEG and NS RRsets, starting at current SNAME.
 
-    1. For a given SNAME, check for the existence of a DELEG RRset.
+2.2.1. For a given SNAME, check for the existence of a DELEG RRset.
 If it exists, the resolver MUST use its content to populate SLIST.
 However, if the DELEG RRset is known to exist but is unusable (for example, if it is found in DNSSEC BAD cache, or content of individual RRs is unusable for any reason), the resolver MUST NOT instead use an NS RRset; instead, the resolver MUST treat this case as if no servers were available.
 
-    1. If a given SNAME is proven to not have a DELEG RRset but does have an NS RRset, the resolver MUST copy the NS RRset into SLIST.
+2.2.2. If a given SNAME is proven to not have a DELEG RRset but does have an NS RRset, the resolver MUST copy the NS RRset into SLIST.
 
-    1. If SLIST is now populated, stop walking up the DNS tree.
+2.2.3. If SLIST is now populated, stop walking up the DNS tree.
 
-    1. However, if SLIST is not populated, remove the leftmost label from SNAME and go back to the first step, using the newly shortened SNAME.
+2.2.4. However, if SLIST is not populated, remove the leftmost label from SNAME and go back to the first step, using the newly shortened SNAME.
 
-The rest of Step 2's description is not affected by this document.
+\=\=\=\=\=
+
+The rest of Step 2's description in Section 5.3.3 of {{RFC1034}} is not affected by this document.
 
 Resolvers MUST respond to "QNAME=. / QTYPE=DELEG" queries in the same fashion as they respond to "QNAME=. / QTYPE=DS" queries.
 
