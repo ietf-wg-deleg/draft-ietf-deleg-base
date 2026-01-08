@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-12-18T01:00:30.489587+00:00",
+  "timestamp": "2026-01-08T01:05:28.391508+00:00",
   "repo": "ietf-wg-deleg/draft-ietf-deleg-base",
   "labels": [
     {
@@ -5387,6 +5387,32 @@
       "mergeCommit": {
         "oid": "abd6980fc6fabd7bd4a9df027fee34ff7cb4c579"
       },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 110,
+      "id": "PR_kwDOO41rkM679t4j",
+      "title": "Clarify that the SLIST steps are part of 1035 step 2",
+      "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/pull/110",
+      "state": "OPEN",
+      "author": "paulehoffman",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "It is not clear that the earlier text (which I wrote...) is all part of just step 2 of the algorithm in RFC 1034. This reorganization makes that clearer.",
+      "createdAt": "2026-01-07T18:20:01Z",
+      "updatedAt": "2026-01-07T18:20:01Z",
+      "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
+      "baseRefName": "main",
+      "baseRefOid": "abd6980fc6fabd7bd4a9df027fee34ff7cb4c579",
+      "headRepository": "paulehoffman/refork-ietf-deleg-base",
+      "headRefName": "slist-step-2",
+      "headRefOid": "fb8c2936e35d68b749328041959a63cdd3e6fa5b",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
       "comments": [],
       "reviews": []
     }
