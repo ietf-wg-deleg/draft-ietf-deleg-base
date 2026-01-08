@@ -331,7 +331,7 @@ For example, if the QNAME is "test.example." and the QTYPE is DELEG or DS, set S
 
 2.2.1. For a given SNAME, check for the existence of a DELEG RRset.
 If it exists, the resolver MUST use its content to populate SLIST.
-However, if the DELEG RRset is known to exist but is unusable (for example, if it is found in DNSSEC BAD cache, or content of individual RRs is unusable for any reason), the resolver MUST NOT instead use an NS RRset; instead, the resolver MUST treat this case as if no servers were available.
+However, if the DELEG RRset is known to exist but is unusable (for example, if it is found in DNSSEC BAD cache, or content of individual RRs is unusable for any reason), the resolver MUST NOT instead use an NS RRset; instead, the resolver MUST treat this case as if SLIST is populated with unreachable servers.
 
 2.2.2. If a given SNAME is proven to not have a DELEG RRset but does have an NS RRset, the resolver MUST copy the NS RRset into SLIST.
 
