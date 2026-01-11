@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-01-08T01:05:28.391508+00:00",
+  "timestamp": "2026-01-11T01:11:51.086874+00:00",
   "repo": "ietf-wg-deleg/draft-ietf-deleg-base",
   "labels": [
     {
@@ -885,7 +885,102 @@
       "labels": [],
       "body": "While discussing implementation for BIND colleague of mine pointed out that requirement for apex NS RR in zone conflicts with DELEG-only zones. I guess we should add a paragraph to say apex-NS is not required anymore.",
       "createdAt": "2025-12-16T07:51:09Z",
-      "updatedAt": "2025-12-16T07:51:09Z",
+      "updatedAt": "2026-01-10T23:25:25Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "body": "https://mailarchive.ietf.org/arch/msg/dd/lGf6LDffXKF1-obWUQZPytYTuK4/",
+          "createdAt": "2026-01-08T16:16:28Z",
+          "updatedAt": "2026-01-08T16:16:28Z"
+        },
+        {
+          "author": "paulehoffman",
+          "authorAssociation": "COLLABORATOR",
+          "body": "See #116 ",
+          "createdAt": "2026-01-10T23:25:25Z",
+          "updatedAt": "2026-01-10T23:25:25Z"
+        }
+      ]
+    },
+    {
+      "number": 111,
+      "id": "I_kwDOO41rkM7iHGsm",
+      "title": "Define \"meaning\" of RR mnemonics",
+      "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/issues/111",
+      "state": "OPEN",
+      "author": "pspacek",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "https://mailarchive.ietf.org/arch/msg/dd/2EsbvAWIx5y6NWd58BOVjeGE_sU/",
+      "createdAt": "2026-01-08T16:14:40Z",
+      "updatedAt": "2026-01-08T16:14:40Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 112,
+      "id": "I_kwDOO41rkM7iHHP0",
+      "title": "Operational considerations for ADT flag",
+      "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/issues/112",
+      "state": "OPEN",
+      "author": "pspacek",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "https://mailarchive.ietf.org/arch/msg/dd/0AMikDlzN8LSbSuaRk-8KgxmJT8/",
+      "createdAt": "2026-01-08T16:15:23Z",
+      "updatedAt": "2026-01-10T23:26:49Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "paulehoffman",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I was going to do a PR to work on this, but then hit at the end of Section 4.3: \"In zones which contain a DELEG RRset, this flag MUST be set to 1 in at least one of the DNSKEY records published in the zone.\"",
+          "createdAt": "2026-01-10T23:26:48Z",
+          "updatedAt": "2026-01-10T23:26:48Z"
+        }
+      ]
+    },
+    {
+      "number": 113,
+      "id": "I_kwDOO41rkM7iHHlA",
+      "title": "Operational considerations about chain lengths",
+      "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/issues/113",
+      "state": "OPEN",
+      "author": "pspacek",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "\"do the same as you do for CNAME\"?",
+      "createdAt": "2026-01-08T16:15:46Z",
+      "updatedAt": "2026-01-10T23:27:19Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "paulehoffman",
+          "authorAssociation": "COLLABORATOR",
+          "body": "See #115 ",
+          "createdAt": "2026-01-10T23:27:19Z",
+          "updatedAt": "2026-01-10T23:27:19Z"
+        }
+      ]
+    },
+    {
+      "number": 114,
+      "id": "I_kwDOO41rkM7iHJOA",
+      "title": "Validator clarification ADT=0 + RRSIG DELEG",
+      "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/issues/114",
+      "state": "OPEN",
+      "author": "pspacek",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "What should validator do when all DNSKEYs have ADT=0 but validator received a signed DELEG RRset?",
+      "createdAt": "2026-01-08T16:17:34Z",
+      "updatedAt": "2026-01-08T16:17:34Z",
       "closedAt": null,
       "comments": []
     }
@@ -5395,20 +5490,89 @@
       "id": "PR_kwDOO41rkM679t4j",
       "title": "Clarify that the SLIST steps are part of 1035 step 2",
       "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/pull/110",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "paulehoffman",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "It is not clear that the earlier text (which I wrote...) is all part of just step 2 of the algorithm in RFC 1034. This reorganization makes that clearer.",
       "createdAt": "2026-01-07T18:20:01Z",
-      "updatedAt": "2026-01-07T18:20:01Z",
+      "updatedAt": "2026-01-08T16:24:46Z",
       "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
       "baseRefName": "main",
       "baseRefOid": "abd6980fc6fabd7bd4a9df027fee34ff7cb4c579",
       "headRepository": "paulehoffman/refork-ietf-deleg-base",
       "headRefName": "slist-step-2",
-      "headRefOid": "fb8c2936e35d68b749328041959a63cdd3e6fa5b",
+      "headRefOid": "9d614ab289e47f389ce6b388ab17913106a5e471",
+      "closedAt": "2026-01-08T16:24:28Z",
+      "mergedAt": "2026-01-08T16:24:28Z",
+      "mergedBy": "pspacek",
+      "mergeCommit": {
+        "oid": "5ff140d7769b59dc7543845993d8148767d35256"
+      },
+      "comments": [
+        {
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Minor clarifications added - please review.\r\n\r\nBTW is the HTML entity instead of `2.` intentional?",
+          "createdAt": "2026-01-08T10:58:56Z",
+          "updatedAt": "2026-01-08T10:58:56Z"
+        },
+        {
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> Minor clarifications added - please review.\r\n> \r\n> BTW is the HTML entity instead of `2.` intentional?\r\n\r\nSorted during call, yes, it is.",
+          "createdAt": "2026-01-08T16:24:46Z",
+          "updatedAt": "2026-01-08T16:24:46Z"
+        }
+      ],
+      "reviews": []
+    },
+    {
+      "number": 115,
+      "id": "PR_kwDOO41rkM68gcgZ",
+      "title": "Tie the reocmmendation to limit work to RFC 1034",
+      "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/pull/115",
+      "state": "OPEN",
+      "author": "paulehoffman",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2026-01-10T23:12:39Z",
+      "updatedAt": "2026-01-10T23:12:44Z",
+      "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
+      "baseRefName": "main",
+      "baseRefOid": "5ff140d7769b59dc7543845993d8148767d35256",
+      "headRepository": "paulehoffman/refork-ietf-deleg-base",
+      "headRefName": "indirection",
+      "headRefOid": "52600ed9ebb5fca74dd51fa75cd98f8761a5c501",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 116,
+      "id": "PR_kwDOO41rkM68gd_S",
+      "title": "Beginning of operational considerations section",
+      "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/pull/116",
+      "state": "OPEN",
+      "author": "paulehoffman",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2026-01-10T23:24:30Z",
+      "updatedAt": "2026-01-10T23:24:34Z",
+      "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
+      "baseRefName": "main",
+      "baseRefOid": "5ff140d7769b59dc7543845993d8148767d35256",
+      "headRepository": "paulehoffman/refork-ietf-deleg-base",
+      "headRefName": "operational-considerations",
+      "headRefOid": "7b156cc7374f96354e409e3a75255f14625bd30c",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
