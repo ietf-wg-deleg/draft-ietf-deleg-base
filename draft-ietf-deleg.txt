@@ -7,8 +7,8 @@ Internet-Draft                                                       ISC
 Updates: 1034, 1035, 4035, 6672, 6840 (if                       R. Weber
          approved)                                   Akamai Technologies
 Intended status: Standards Track                             D. Lawrence
-Expires: 12 July 2026                                         Salesforce
-                                                          8 January 2026
+Expires: 16 July 2026                                         Salesforce
+                                                         12 January 2026
 
 
                      Extensible Delegation for DNS
@@ -59,7 +59,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 12 July 2026.
+   This Internet-Draft will expire on 16 July 2026.
 
 Copyright Notice
 
@@ -531,9 +531,10 @@ Table of Contents
    information, delegations defined by NS records and delegations
    defined by DELEG records.  DELEG and NS delegations can create cyclic
    dependencies and/or lead to duplicate entries which point to the same
-   server.  Resolvers need to enforce suitable limits to prevent damage
-   even if someone has incorrectly configured some of the data used to
-   create an SLIST.
+   server.  A recommended priority for resolvers is to enforce suitable
+   limits to prevent damage even if someone has incorrectly configured
+   some of the data used to create an SLIST; this is the same
+   recommendation as is made in Section 5.3.3 of [RFC1034].
 
    This leads to a modifications of the description from earlier
    documents for DELEG-aware resolvers can find the best servers to ask.
