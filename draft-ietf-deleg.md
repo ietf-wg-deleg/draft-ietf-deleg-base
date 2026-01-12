@@ -310,7 +310,8 @@ Neither {{RFC1034}} nor this document define how a resolver uses SLIST; they onl
 
 A DELEG-aware SLIST needs to be able to hold two types of information, delegations defined by NS records and delegations defined by DELEG records.
 DELEG and NS delegations can create cyclic dependencies and/or lead to duplicate entries which point to the same server.
-Resolvers need to enforce suitable limits to prevent damage even if someone has incorrectly configured some of the data used to create an SLIST.
+A recommended priority for resolvers is to enforce suitable limits to prevent damage even if someone has incorrectly configured some of the data used to create an SLIST;
+this is the same recommendation as is made in Section 5.3.3 of {{RFC1034}}.
 
 This leads to a modifications of the description from earlier documents for DELEG-aware resolvers can find the best servers to ask.
 Step 2 of Section 5.3.3 of {{RFC1034}} is just "2. Find the best servers to ask."
