@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-01-11T01:11:51.086874+00:00",
+  "timestamp": "2026-01-13T01:02:08.344503+00:00",
   "repo": "ietf-wg-deleg/draft-ietf-deleg-base",
   "labels": [
     {
@@ -847,7 +847,7 @@
       "labels": [],
       "body": "As a follow-on to #96 we should clearly define the client/resolver behavior for cases where the effective DELEG or DELEGI RRsets end up as being empty.  For example, after we skip/ignore all DELEG/DELEGI RRs with:\n\n* No Server Identifying DelegInfo \n* DelegInfo parameters marked mandatory which the client doesn't understand\n* an Empty DelegInfos\n\nthen it is possible that the effective RRset is empty.  This is something that should be well-defined.\nIn the case of a DELEGI this presumably means that it should be ignored and a different DELEG record should be used.\nIn the case of a DELEG RRset, we should define if this results in a failure, and if there should be a fallback to NS records or not.\n\nThere may be some security considerations to think through in this scenario.\n",
       "createdAt": "2025-11-07T15:44:40Z",
-      "updatedAt": "2025-12-16T07:49:59Z",
+      "updatedAt": "2026-01-12T12:25:48Z",
       "closedAt": "2025-12-16T07:49:59Z",
       "comments": [
         {
@@ -870,6 +870,13 @@
           "body": "#101 also clarified this, I think",
           "createdAt": "2025-12-16T07:49:59Z",
           "updatedAt": "2025-12-16T07:49:59Z"
+        },
+        {
+          "author": "vcunat",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "I expect that ensuring downgrade resistance is sufficient standardization here.",
+          "createdAt": "2026-01-12T12:25:47Z",
+          "updatedAt": "2026-01-12T12:25:47Z"
         }
       ]
     },
@@ -932,7 +939,7 @@
       "labels": [],
       "body": "https://mailarchive.ietf.org/arch/msg/dd/0AMikDlzN8LSbSuaRk-8KgxmJT8/",
       "createdAt": "2026-01-08T16:15:23Z",
-      "updatedAt": "2026-01-10T23:26:49Z",
+      "updatedAt": "2026-01-12T11:27:05Z",
       "closedAt": null,
       "comments": [
         {
@@ -941,6 +948,13 @@
           "body": "I was going to do a PR to work on this, but then hit at the end of Section 4.3: \"In zones which contain a DELEG RRset, this flag MUST be set to 1 in at least one of the DNSKEY records published in the zone.\"",
           "createdAt": "2026-01-10T23:26:48Z",
           "updatedAt": "2026-01-10T23:26:48Z"
+        },
+        {
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Yes. But that does not provide guidance what to do when a DELEG RR is being added to a zone which does not have ADT=1 yet.",
+          "createdAt": "2026-01-12T11:27:05Z",
+          "updatedAt": "2026-01-12T11:27:05Z"
         }
       ]
     },
@@ -949,15 +963,15 @@
       "id": "I_kwDOO41rkM7iHHlA",
       "title": "Operational considerations about chain lengths",
       "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/issues/113",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "pspacek",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "\"do the same as you do for CNAME\"?",
       "createdAt": "2026-01-08T16:15:46Z",
-      "updatedAt": "2026-01-10T23:27:19Z",
-      "closedAt": null,
+      "updatedAt": "2026-01-12T11:38:38Z",
+      "closedAt": "2026-01-12T11:38:38Z",
       "comments": [
         {
           "author": "paulehoffman",
@@ -980,9 +994,17 @@
       "labels": [],
       "body": "What should validator do when all DNSKEYs have ADT=0 but validator received a signed DELEG RRset?",
       "createdAt": "2026-01-08T16:17:34Z",
-      "updatedAt": "2026-01-08T16:17:34Z",
+      "updatedAt": "2026-01-12T12:16:49Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "vcunat",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "I think _so far_ validators are not instructed by RFCs to fail in similar situations (you have a proof after all).  But I'm not sure if that's a good approach.  Forcing failures could help early detection and fixes.",
+          "createdAt": "2026-01-12T12:16:49Z",
+          "updatedAt": "2026-01-12T12:16:49Z"
+        }
+      ]
     }
   ],
   "pulls": [
@@ -5533,25 +5555,49 @@
       "id": "PR_kwDOO41rkM68gcgZ",
       "title": "Tie the reocmmendation to limit work to RFC 1034",
       "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/pull/115",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "paulehoffman",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
-      "body": "",
+      "body": "Fixes: #113 ",
       "createdAt": "2026-01-10T23:12:39Z",
-      "updatedAt": "2026-01-10T23:12:44Z",
+      "updatedAt": "2026-01-12T11:38:38Z",
       "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
       "baseRefName": "main",
       "baseRefOid": "5ff140d7769b59dc7543845993d8148767d35256",
       "headRepository": "paulehoffman/refork-ietf-deleg-base",
       "headRefName": "indirection",
       "headRefOid": "52600ed9ebb5fca74dd51fa75cd98f8761a5c501",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
-      "comments": [],
+      "closedAt": "2026-01-12T11:38:37Z",
+      "mergedAt": "2026-01-12T11:38:37Z",
+      "mergedBy": "fl1ger",
+      "mergeCommit": {
+        "oid": "9f0685cccff10ce1a8ab844d68af084548e388b6"
+      },
+      "comments": [
+        {
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "body": "FTR you can add something like \"Fixes: #113\" to make Github auto-close the issue when this PR is merged.",
+          "createdAt": "2026-01-12T11:23:56Z",
+          "updatedAt": "2026-01-12T11:23:56Z"
+        },
+        {
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Works for me, but I will wait for @fl1ger to chime in too.",
+          "createdAt": "2026-01-12T11:24:42Z",
+          "updatedAt": "2026-01-12T11:24:42Z"
+        },
+        {
+          "author": "fl1ger",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Works for me. Will merge now",
+          "createdAt": "2026-01-12T11:38:31Z",
+          "updatedAt": "2026-01-12T11:38:31Z"
+        }
+      ],
       "reviews": []
     },
     {
@@ -5573,6 +5619,32 @@
       "headRepository": "paulehoffman/refork-ietf-deleg-base",
       "headRefName": "operational-considerations",
       "headRefOid": "7b156cc7374f96354e409e3a75255f14625bd30c",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 117,
+      "id": "PR_kwDOO41rkM68tjCV",
+      "title": "Overhaul Changes to Existing Registries",
+      "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/pull/117",
+      "state": "OPEN",
+      "author": "pspacek",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "- Field names inside registries corrected\r\n- Grammar standardized on 'IANA is requested to assign a XXX in the RRR registry'.\r\n- RR type number range specified (was missing)\r\n- RR type meaning made consistent with draft title - \"Extensible\" and not \"Enhanced\".\r\n- ADT description made consistent with rest of the DNSKEY Flags registry",
+      "createdAt": "2026-01-12T14:21:15Z",
+      "updatedAt": "2026-01-12T14:21:15Z",
+      "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
+      "baseRefName": "main",
+      "baseRefOid": "9f0685cccff10ce1a8ab844d68af084548e388b6",
+      "headRepository": "pspacek/draft-ietf-deleg-base",
+      "headRefName": "iana-meaning",
+      "headRefOid": "4f08795b1b818db3b7397b699cd81c0d1130f4c4",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
