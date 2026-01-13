@@ -389,7 +389,7 @@ A DELEG or DELEGI record that has a non-empty DelegInfos MUST have one, and only
 
 This restriction only applies to a single DELEG or DELEGI record; a DELEG or DELEGI RRset can have records with different server information keys.
 
-When using server-name, the addresses for all the names in the set must be fetched using normal DNS resolution.
+When using server-name, the addresses for the names in the set must be fetched as if they were referenced by NS records.
 This means the names in the value of the server-name key or the include-delegi key cannot sensibly be inside the delegated domain.
 Resolvers MUST ignore names in the server-name key or the include-delegi key if they are in the delegated domain.
 
