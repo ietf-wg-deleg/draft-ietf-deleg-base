@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-01-13T01:02:08.344503+00:00",
+  "timestamp": "2026-01-15T01:03:58.987453+00:00",
   "repo": "ietf-wg-deleg/draft-ietf-deleg-base",
   "labels": [
     {
@@ -5651,6 +5651,56 @@
       "mergeCommit": null,
       "comments": [],
       "reviews": []
+    },
+    {
+      "number": 118,
+      "id": "PR_kwDOO41rkM683mwN",
+      "title": "Clarify server-name behavior",
+      "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/pull/118",
+      "state": "MERGED",
+      "author": "pspacek",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "\"Normal\" is a loaded term open to interpretation. Say named referenced by server-name key behave the same as names referenced by NS records. Hopefully that makes it clear what to do with it.",
+      "createdAt": "2026-01-13T08:09:16Z",
+      "updatedAt": "2026-01-14T12:15:39Z",
+      "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
+      "baseRefName": "main",
+      "baseRefOid": "9f0685cccff10ce1a8ab844d68af084548e388b6",
+      "headRepository": "pspacek/draft-ietf-deleg-base",
+      "headRefName": "server-name-clarif",
+      "headRefOid": "f369b8ab6ae25a1dba60c65c664f6cb530ba77f3",
+      "closedAt": "2026-01-14T12:14:03Z",
+      "mergedAt": "2026-01-14T12:14:03Z",
+      "mergedBy": "pspacek",
+      "mergeCommit": {
+        "oid": "d543426ba7549161a7e4bf06803161c65ef3e86a"
+      },
+      "comments": [
+        {
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "body": "This change is reaction to https://mailarchive.ietf.org/arch/msg/dd/-1lKvgtAncBw9_AgfeQvnJWdHGs/",
+          "createdAt": "2026-01-14T12:15:39Z",
+          "updatedAt": "2026-01-14T12:15:39Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOO41rkM7Z9Jx6",
+          "commit": {
+            "abbreviatedOid": "f369b8a"
+          },
+          "author": "paulehoffman",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "This change works for me.",
+          "createdAt": "2026-01-13T16:19:34Z",
+          "updatedAt": "2026-01-13T16:19:34Z",
+          "comments": []
+        }
+      ]
     }
   ]
 }
