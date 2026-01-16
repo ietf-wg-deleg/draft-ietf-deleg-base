@@ -623,19 +623,27 @@ Any single DNSKEY with the ADT flag set to 1 is sufficient; the zone can introdu
 
 ## Changes to Existing Registries
 
-IANA is requested to allocate the DELEG RR and the DELEGI RR in the Resource Record (RR) TYPEs registry, with the meaning "enhanced delegation information" and referencing this document.
+All new allocations should reference this document.
 
-IANA is requested to assign a new bit in the DNSKEY RR Flags registry ({{!RFC4034}}) for the ADT bit (N), with the description "Authoritative Delegation Types" and referencing this document.
-For compatibility reasons, we request the bit 14 to be used.
-This value has been proven to work whereas bit 0 was proven to break in practical deployments (because of bugs).
+IANA is requested to assign two types in the Resource Record (RR) TYPEs registry ({{!RFC6895}}):
 
-IANA is requested to assign a bit from the EDNS Header Flags registry ({{!RFC6891}}), with the abbreviation DE, the description "DELEG enabled", and referencing this document.
+- TYPE DELEG, Meaning "Extensible Delegation", Value equal to 61440.
+- TYPE DELEGI, Meaning "Extensible Delegation Indirection", Value TBA1 inside one of the ranges marked as "data TYPEs".
 
-IANA is requested to assign a value from the Extended DNS Error Codes ({{!RFC8914}}), with the Purpose "New Delegation Only" and referencing this document.
+IANA is requested to assign a new bit in the DNSKEY RR Flags registry ({{!RFC4034}}):
+Number 14, Description "Authoritative Delegation Types (ADT)".
+For compatibility reasons, we request the Number 14 to be used.
+This value has been proven to work whereas bit number 0 was proven to break in practical deployments (because of bugs).
 
-IANA is requested to add the name "deleg" to DNS Resolver Information Keys registry ({{!RFC9606}}),
-with the description of "The presence of the key indicates that DELEG protocol is supported."
-and referencing this document.
+IANA is requested to assign a bit in the EDNS Header Flags registry ({{!RFC6891}}):
+Bit TBA2, Flag DE, with the description "DELEG enabled".
+
+IANA is requested to assign a value in the Extended DNS Error Codes registry ({{!RFC8914}}):
+INFO-CODE TBA3, with the Purpose "New Delegation Only".
+
+IANA is requested to assign name "deleg" in the DNS Resolver Information Keys registry ({{!RFC9606}}):
+Name "deleg", with the Description of "The presence of the key indicates that DELEG protocol is supported.".
+
 
 ## New Registry for Delegation Information
 
