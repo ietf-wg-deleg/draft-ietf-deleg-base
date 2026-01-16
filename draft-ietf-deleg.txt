@@ -102,18 +102,19 @@ Table of Contents
        4.4.2.  Insecure Delegation Proofs
        4.4.3.  Referral downgrade protection
        4.4.4.  Chaining
-   5.  Security Considerations
-     5.1.  Preventing Over-work Attacks
-     5.2.  Preventing Downgrade Attacks
-   6.  IANA Considerations
-     6.1.  Changes to Existing Registries
-     6.2.  New Registry for Delegation Information
-       6.2.1.  Procedure
-       6.2.2.  Initial Contents
-     6.3.  Temporary Assignments
-   7.  References
-     7.1.  Normative References
-     7.2.  Informative References
+   5.  Operational Considerations
+   6.  Security Considerations
+     6.1.  Preventing Over-work Attacks
+     6.2.  Preventing Downgrade Attacks
+   7.  IANA Considerations
+     7.1.  Changes to Existing Registries
+     7.2.  New Registry for Delegation Information
+       7.2.1.  Procedure
+       7.2.2.  Initial Contents
+     7.3.  Temporary Assignments
+   8.  References
+     8.1.  Normative References
+     8.2.  Informative References
    Appendix A.  Examples
      A.1.  Root zone file
      A.2.  Example.org zone file
@@ -245,6 +246,9 @@ Table of Contents
    RRsets are authoritative on the parent side of a zone cut and thus
    are signed and validated as authoritative data (similar to DS
    records).
+
+   A zone might be delegated with only DELEG records and no NS records.
+   Such a zone would be invisible to DELEG-unaware resolvers.
 
    There are many parts of the DELEG protocol that are not included in
    this brief overview.  For example, DELEG-aware authoritative servers
@@ -724,7 +728,7 @@ Table of Contents
    6.  If an include-delegi key is present in the record, resolve each
        name in the value using the DELEGI RR type.  Recursively apply
        the algorithm described in this section, after checking that the
-       maximum loop count described in Section 5.1 has not been reached.
+       maximum loop count described in Section 6.1 has not been reached.
 
    7.  If none of the above applies, SLIST is not modified by this
        particular record.
@@ -980,11 +984,26 @@ Table of Contents
    [RFC6763], if there is no '=' in a key, then it is a boolean
    attribute, simply identified as being present, with no value.
 
-5.  Security Considerations
+5.  Operational Considerations
+
+   When an authoritative server or resolover becomes DELEG-aware, new
+   operational considerations apply to it.  This section gives an
+   overview of some of those considerations.
 
    TODO: Add more here
 
-5.1.  Preventing Over-work Attacks
+   This document explicitly allows zones to be delegated using DELEG
+   records without also using NS records; delegating a zone with both
+   DELEG and NS records is allowed.  This means that automated software
+   that creates or checks the validity of a zone before the zone can be
+   deployed many need to be updated to allow delegated zones without NS
+   records, possibly enabled by a configuration option.
+
+6.  Security Considerations
+
+   TODO: Add more here
+
+6.1.  Preventing Over-work Attacks
 
    Resolvers MUST prevent situations where accidental misconfiguration
    of zones or malicious attacks cause them to perform too much work
@@ -999,7 +1018,7 @@ Table of Contents
    case, a CNAME step is counted the same as a DELEGI step when
    determining when to stop following a chain.
 
-5.2.  Preventing Downgrade Attacks
+6.2.  Preventing Downgrade Attacks
 
    During the rollout of the DELEG protocol, the operator of an
    authoritative server can upgrade the server software to be DELEG-
@@ -1025,9 +1044,9 @@ Table of Contents
    flag set to 1 is sufficient; the zone can introduce an otherwise
    unused record into the DNSKEY RRset.
 
-6.  IANA Considerations
+7.  IANA Considerations
 
-6.1.  Changes to Existing Registries
+7.1.  Changes to Existing Registries
 
    All new allocations should reference this document.
 
@@ -1057,14 +1076,14 @@ Table of Contents
    Description of "The presence of the key indicates that DELEG protocol
    is supported.".
 
-6.2.  New Registry for Delegation Information
+7.2.  New Registry for Delegation Information
 
    IANA is requested to create the "DELEG Delegation Information"
    registry.  This registry defines the namespace for delegation
    information keys, including string representations and numeric key
    values.
 
-6.2.1.  Procedure
+7.2.1.  Procedure
 
    A registration MUST include the following fields:
 
@@ -1092,7 +1111,7 @@ Table of Contents
    This arrangement supports the development of new parameters while
    ensuring that zone files can be made interoperable.
 
-6.2.2.  Initial Contents
+7.2.2.  Initial Contents
 
    The "DELEG Delegation Information" registry should be populated with
    the following initial registrations:
@@ -1130,7 +1149,7 @@ Table of Contents
    The registration for numbers 65280-65534 is reserved for private use.
    The registration for number 65535 is reserved.
 
-6.3.  Temporary Assignments
+7.3.  Temporary Assignments
 
    This section gives the values that can be used for interoperability
    testing before IANA makes permanent assignments.  The section will be
@@ -1144,9 +1163,9 @@ Table of Contents
 
    *  DNSKEY ADT (Authoritative Delegation Types) flag bit is 14
 
-7.  References
+8.  References
 
-7.1.  Normative References
+8.1.  Normative References
 
    [RFC1034]  Mockapetris, P., "Domain names - concepts and facilities",
               STD 13, RFC 1034, DOI 10.17487/RFC1034, November 1987,
@@ -1211,7 +1230,7 @@ Table of Contents
               RFC 9606, DOI 10.17487/RFC9606, June 2024,
               <https://www.rfc-editor.org/rfc/rfc9606>.
 
-7.2.  Informative References
+8.2.  Informative References
 
    [BCP219]   Best Current Practice 219,
               <https://www.rfc-editor.org/info/bcp219>.
