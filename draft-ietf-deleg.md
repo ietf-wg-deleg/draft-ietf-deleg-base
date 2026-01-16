@@ -124,6 +124,9 @@ DELEGI records have the same format as DELEG records; thus, they can have the sa
 The DELEG protocol changes how zones are signed ({{signers}}) and validated ({{dnssec-validators}}).
 The changes are primarily because DELEG RRsets are authoritative on the parent side of a zone cut and thus are signed and validated as authoritative data (similar to DS records).
 
+A zone might be delegated with only DELEG records and no NS records.
+Such a zone would be invisible to DELEG-unaware resolvers.
+
 There are many parts of the DELEG protocol that are not included in this brief overview.
 For example, DELEG-aware authoritative servers have choices to make depending both on the request and the contents of the zone file.
 For those readers who learn better from examples than the definitive text, see {{examples}}.
@@ -590,6 +593,16 @@ A Validating Stub Resolver that is DELEG-aware has to use a Security-Aware Resol
 A resolver which supports {{!RFC9606}} SHOULD add the "deleg" key if it supports DELEG protocol.
 
 Note that, per the rules for the keys defined in Section 6.4 of {{!RFC6763}}, if there is no '=' in a key, then it is a boolean attribute, simply identified as being present, with no value.
+
+# Operational Considerations
+
+When an authoritative server or resolover becomes DELEG-aware, new operational considerations apply to it.
+This section gives an overview of some of those considerations.
+
+TODO: Add more here
+
+This document explicitly allows zones to be delegated using DELEG records without also using NS records; delegating a zone with both DELEG and NS records is allowed.
+This means that automated software that creates or checks the validity of a zone before the zone can be deployed many need to be updated to allow delegated zones without NS records, possibly enabled by a configuration option.
 
 # Security Considerations
 
