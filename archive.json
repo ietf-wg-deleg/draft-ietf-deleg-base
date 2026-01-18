@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-01-15T01:03:58.987453+00:00",
+  "timestamp": "2026-01-18T01:11:00.771868+00:00",
   "repo": "ietf-wg-deleg/draft-ietf-deleg-base",
   "labels": [
     {
@@ -885,15 +885,15 @@
       "id": "I_kwDOO41rkM7einzW",
       "title": "Apex NS is not required",
       "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/issues/109",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "pspacek",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "While discussing implementation for BIND colleague of mine pointed out that requirement for apex NS RR in zone conflicts with DELEG-only zones. I guess we should add a paragraph to say apex-NS is not required anymore.",
       "createdAt": "2025-12-16T07:51:09Z",
-      "updatedAt": "2026-01-10T23:25:25Z",
-      "closedAt": null,
+      "updatedAt": "2026-01-16T16:19:03Z",
+      "closedAt": "2026-01-16T16:19:03Z",
       "comments": [
         {
           "author": "pspacek",
@@ -908,6 +908,13 @@
           "body": "See #116 ",
           "createdAt": "2026-01-10T23:25:25Z",
           "updatedAt": "2026-01-10T23:25:25Z"
+        },
+        {
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Made explicit by #116, closing.",
+          "createdAt": "2026-01-16T16:19:03Z",
+          "updatedAt": "2026-01-16T16:19:03Z"
         }
       ]
     },
@@ -916,16 +923,24 @@
       "id": "I_kwDOO41rkM7iHGsm",
       "title": "Define \"meaning\" of RR mnemonics",
       "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/issues/111",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "pspacek",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "https://mailarchive.ietf.org/arch/msg/dd/2EsbvAWIx5y6NWd58BOVjeGE_sU/",
       "createdAt": "2026-01-08T16:14:40Z",
-      "updatedAt": "2026-01-08T16:14:40Z",
-      "closedAt": null,
-      "comments": []
+      "updatedAt": "2026-01-16T16:19:38Z",
+      "closedAt": "2026-01-16T16:19:38Z",
+      "comments": [
+        {
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Done in #117 , for now. We might as well change DELEGI name to something else - if we can come up with a better name..",
+          "createdAt": "2026-01-16T16:19:37Z",
+          "updatedAt": "2026-01-16T16:19:37Z"
+        }
+      ]
     },
     {
       "number": 112,
@@ -939,7 +954,7 @@
       "labels": [],
       "body": "https://mailarchive.ietf.org/arch/msg/dd/0AMikDlzN8LSbSuaRk-8KgxmJT8/",
       "createdAt": "2026-01-08T16:15:23Z",
-      "updatedAt": "2026-01-12T11:27:05Z",
+      "updatedAt": "2026-01-16T16:21:41Z",
       "closedAt": null,
       "comments": [
         {
@@ -955,6 +970,20 @@
           "body": "Yes. But that does not provide guidance what to do when a DELEG RR is being added to a zone which does not have ADT=1 yet.",
           "createdAt": "2026-01-12T11:27:05Z",
           "updatedAt": "2026-01-12T11:27:05Z"
+        },
+        {
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "body": "@libor-peltan-cznic Do you want to contribute some test into Operational Considerations section about this?",
+          "createdAt": "2026-01-16T16:21:12Z",
+          "updatedAt": "2026-01-16T16:21:12Z"
+        },
+        {
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> [@libor-peltan-cznic](https://github.com/libor-peltan-cznic) Do you want to contribute some test into Operational Considerations section about this?\n\nI mean \"text\", obviously :-)",
+          "createdAt": "2026-01-16T16:21:41Z",
+          "updatedAt": "2026-01-16T16:21:41Z"
         }
       ]
     },
@@ -5605,25 +5634,35 @@
       "id": "PR_kwDOO41rkM68gd_S",
       "title": "Beginning of operational considerations section",
       "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/pull/116",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "paulehoffman",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2026-01-10T23:24:30Z",
-      "updatedAt": "2026-01-10T23:24:34Z",
+      "updatedAt": "2026-01-16T16:17:58Z",
       "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
       "baseRefName": "main",
       "baseRefOid": "5ff140d7769b59dc7543845993d8148767d35256",
       "headRepository": "paulehoffman/refork-ietf-deleg-base",
       "headRefName": "operational-considerations",
       "headRefOid": "7b156cc7374f96354e409e3a75255f14625bd30c",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
-      "comments": [],
+      "closedAt": "2026-01-16T16:17:48Z",
+      "mergedAt": "2026-01-16T16:17:48Z",
+      "mergedBy": "pspacek",
+      "mergeCommit": {
+        "oid": "62d00c1cc67be657f576089ec83e19f1d4b889c8"
+      },
+      "comments": [
+        {
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Makes sense, let's expand this later on.",
+          "createdAt": "2026-01-16T16:17:58Z",
+          "updatedAt": "2026-01-16T16:17:58Z"
+        }
+      ],
       "reviews": []
     },
     {
@@ -5631,25 +5670,35 @@
       "id": "PR_kwDOO41rkM68tjCV",
       "title": "Overhaul Changes to Existing Registries",
       "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/pull/117",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "pspacek",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "- Field names inside registries corrected\r\n- Grammar standardized on 'IANA is requested to assign a XXX in the RRR registry'.\r\n- RR type number range specified (was missing)\r\n- RR type meaning made consistent with draft title - \"Extensible\" and not \"Enhanced\".\r\n- ADT description made consistent with rest of the DNSKEY Flags registry",
       "createdAt": "2026-01-12T14:21:15Z",
-      "updatedAt": "2026-01-12T14:21:15Z",
+      "updatedAt": "2026-01-16T16:17:03Z",
       "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
       "baseRefName": "main",
       "baseRefOid": "9f0685cccff10ce1a8ab844d68af084548e388b6",
       "headRepository": "pspacek/draft-ietf-deleg-base",
       "headRefName": "iana-meaning",
       "headRefOid": "4f08795b1b818db3b7397b699cd81c0d1130f4c4",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
-      "comments": [],
+      "closedAt": "2026-01-16T16:17:03Z",
+      "mergedAt": "2026-01-16T16:17:03Z",
+      "mergedBy": "pspacek",
+      "mergeCommit": {
+        "oid": "45d2ce4a2ec139ff8ff80667a165dcd9995e2df5"
+      },
+      "comments": [
+        {
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "body": "No comment on this change except for number bike-shedding:\r\nhttps://mailarchive.ietf.org/arch/msg/dd/REowkQGFlZbvR8ewhbP4aE0tNYQ/",
+          "createdAt": "2026-01-16T16:17:00Z",
+          "updatedAt": "2026-01-16T16:17:00Z"
+        }
+      ],
       "reviews": []
     },
     {
