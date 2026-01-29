@@ -447,6 +447,8 @@ A DELEG-aware resolver MAY implement lazy filling of SLIST, such as by deferring
 
 The order in which to try the servers in the final SLIST is outside the scope of this document.
 
+This document defines SLIST to be a set. I.e. each individual value MUST be represented only once in the final SLIST, even if it was encountered multiple times during SLIST construction.
+
 ## Authoritative Servers
 
 The DELEG RR type defines a zone cut in similar way as the NS RR type.
