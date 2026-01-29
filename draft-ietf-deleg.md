@@ -258,7 +258,8 @@ The wire format for server-name and include-delegi are each a concatenated unord
 
 The names in the wire format MUST NOT be compressed.
 
-A DELEG or DELEGI record that has a non-empty DelegInfos MUST have one, and only one, set of server information, chosen from the following:
+For interoperability with resolver algorithm defined in section {{slist}},
+a DELEG or DELEGI record that has a non-empty DelegInfos MUST have one, and only one, set of server information keys, chosen from the following:
 
 - one server-ipv4 key
 - one server-ipv6 key
@@ -267,6 +268,7 @@ A DELEG or DELEGI record that has a non-empty DelegInfos MUST have one, and only
 - one include-delegi key
 
 This restriction only applies to a single DELEG or DELEGI record; a DELEG or DELEGI RRset can have records with different server information keys.
+Authoritative servers MAY refuse to load zones which have a disallowed combination of keys in a single record.
 
 When using server-name, the addresses for the names in the set must be fetched as if they were referenced by NS records.
 This means the names in the value of the server-name key or the include-delegi key cannot sensibly be inside the delegated domain.
