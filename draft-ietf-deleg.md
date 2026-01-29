@@ -394,7 +394,6 @@ This restriction only applies to a single DELEG or DELEGI record; a DELEG or DEL
 
 When using server-name, the addresses for the names in the set must be fetched as if they were referenced by NS records.
 This means the names in the value of the server-name key or the include-delegi key cannot sensibly be inside the delegated domain.
-Resolvers MUST ignore names in the server-name key or the include-delegi key if they are in the delegated domain.
 
 With this initial DELEG specification, servers are still expected to be reached on the standard DNS port for both UDP and TCP, 53.  While a future specification is expected to address other transports using other ports, its eventual semantics are not covered here.
 
@@ -425,6 +424,13 @@ If any of the listed DelegInfo elements is not found, stop processing this recor
 1. If a record has more than one type of server information key (excluding the IPv4/IPv6 case), or has multiple server information keys of the same type, that record is malformed.
 Stop processing this record.
 
+1. If any DNS name referenced by server-name key or the include-delegi key is equal to or is a subdomain of the delegated domain (i.e. DELEG record owner), that record is malformed.
+Stop processing this record.
+
+   The check MUST be performed against the original owner name of the DELEG record even if the currently processed record is of DELEGI type included by the original DELEG record.
+
+   (Purpose of this check is to ensure deterministic behavior. Not doing this check would permit delegations reachable only with certain cache content and/or specific algorithm for server selection from SLIST.)
+
 1. If server-ipv4 and/or server-ipv6 keys are present inside the record, copy all of the address values into SLIST.
 Stop processing this record.
 
@@ -437,7 +443,7 @@ Recursively apply the algorithm described in this section, after checking that t
 
 1. If none of the above applies, SLIST is not modified by this particular record.
 
-A DELEG-aware resolver MAY implement lazy filling of SLIST, such as by deferring processing remaining records if SLIST already has what the resolver considers a sufficiently large pool of addresses to contact.
+A DELEG-aware resolver MAY implement lazy filling of SLIST, such as by deferring processing remaining records or even individual names or query types if SLIST already has what the resolver considers a sufficiently large pool of addresses to contact.
 
 The order in which to try the servers in the final SLIST is outside the scope of this document.
 
