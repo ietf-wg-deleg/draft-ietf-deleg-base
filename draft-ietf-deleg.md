@@ -224,6 +224,69 @@ Conversely,
 
 TODO: Add some introduction comparing how resolvers see legacy delegation (set of NS and A/AAAA records) and DELEG delegation (DELEG and DELEGI records with server-ipv4 and server-ipv6 keys)
 
+## Name Server Information for Delegation {#nameserver-info}
+
+The DELEG and DELEGI records have four keys that describe information about name servers.
+The purpose of this information is to populate the SLIST with IP addresses of the name servers for a zone. (See {{slist}}.)
+
+The types of information defined in this document are:
+
+* server-ipv4: an unordered collection of IPv4 addresses for name servers
+* server-ipv6: an unordered collection of IPv6 addresses for name servers
+* server-name: an unordered collection of hostnames of name servers; the addresses must be fetched
+* include-delegi: an unordered collection of domain names that point to a DELEGI RRsets, which in turn have more information about the delegation
+
+These keys MUST have a non-empty DelegInfoValue.
+
+The presentation values for server-ipv4 and server-ipv6 are comma-separated list of one or more IP addresses of the appropriate family in standard textual format {{?RFC5952}} {{?RFC4001}}.
+The wire formats for server-ipv4 and server-ipv6 are a sequence of IP addresses, in network byte order, for the respective address family.
+
+The presentation values for server-name and include-delegi are an unordered collection of fully-qualified domain names and relative domain names, separated by commas.
+Relative names in the presentation format are interpreted according origin rules in Section 5.1 of {{!RFC1035}}.
+Parsing the comma-separated list is specified in Section A.1 of {{!RFC9460}}.
+
+The DELEG protocol allows the use of all valid domain names, as defined in {{!RFC1035}} and Section 11 of {{!RFC2181}}.
+The presentation format for names with special characters requires both double-escaping by applying rules of Section 5.1 of {{!RFC1034}} together with the escaping rules from Section A.1 of {{RFC9460}}.
+
+TODO: add an example that requires this escaping.
+
+The wire format for server-name and include-delegi are each a concatenated unordered collection of a wire-format domain names, where the root label provides the separation between names:
+
+    +-+-+-+-+-+-+-+-+-+-+-+-+-+-
+    | name | name | name | ... |
+    +-+-+-+-+-+-+-+-+-+-+-+-+-+-
+
+The names in the wire format MUST NOT be compressed.
+
+For interoperability with resolver algorithm defined in section {{slist}},
+a DELEG or DELEGI record that has a non-empty DelegInfos MUST have one, and only one, set of server information keys, chosen from the following:
+
+- one server-ipv4 key
+- one server-ipv6 key
+- a pair consisting of one server-ipv4 key and one server-ipv6 key
+- one server-name key
+- one include-delegi key
+
+This restriction only applies to a single DELEG or DELEGI record; a DELEG or DELEGI RRset can have records with different server information keys.
+Authoritative servers MAY refuse to load zones which have a disallowed combination of keys in a single record.
+
+When using server-name, the addresses for the names in the set must be fetched as if they were referenced by NS records.
+This means the names in the value of the server-name key or the include-delegi key cannot sensibly be inside the delegated domain.
+
+With this initial DELEG specification, servers are still expected to be reached on the standard DNS port for both UDP and TCP, 53.  While a future specification is expected to address other transports using other ports, its eventual semantics are not covered here.
+
+## Metadata keys {#mandatory}
+This specification defines a key which serves as a protocol extensibility mechanism, but is not directly used for contacting DNS servers.
+
+Any DELEG or DELEGI record can have key named "mandatory" which is similar to the key of the same name in {{!RFC9460}}.
+
+The value in the presentation value MUST be a comma-separated list of one or more valid DelegInfoKeys, either by their registered name or in the unknown-key format.
+
+The value in the wire format is a sequence of DelegInfoKey numeric values in network byte order, concatenated, in strictly increasing numeric order.
+
+The "mandatory" key itself is optional, but when it is present, the RR in which it appears MUST NOT be used by a resolver in the resolution process if any of the DelegInfoKeys referenced by the "mandatory" DelegInfo element are not supported in the resolver's implementation. See {{slist}}.
+
+
 # Use of DELEG Records
 
 The DELEG RRset MAY contain multiple records.
@@ -349,66 +412,6 @@ The rest of Step 2's description in Section 5.3.3 of {{RFC1034}} is not affected
 
 Resolvers MUST respond to "QNAME=. / QTYPE=DELEG" queries in the same fashion as they respond to "QNAME=. / QTYPE=DS" queries.
 
-### Name Server Information for Delegation {#nameserver-info}
-
-The DELEG and DELEGI records have four keys that describe information about name servers.
-The purpose of this information is to populate the SLIST with IP addresses of the name servers for a zone.
-The types of information defined in this document are:
-
-* server-ipv4: an unordered collection of IPv4 addresses for name servers
-* server-ipv6: an unordered collection of IPv6 addresses for name servers
-* server-name: an unordered collection of hostnames of name servers; the addresses must be fetched
-* include-delegi: an unordered collection of domain names that point to a DELEGI RRsets, which in turn have more information about the delegation
-
-These keys MUST have a non-empty DelegInfoValue.
-
-The presentation values for server-ipv4 and server-ipv6 are comma-separated list of one or more IP addresses of the appropriate family in standard textual format {{?RFC5952}} {{?RFC4001}}.
-The wire formats for server-ipv4 and server-ipv6 are a sequence of IP addresses, in network byte order, for the respective address family.
-
-The presentation values for server-name and include-delegi are an unordered collection of fully-qualified domain names and relative domain names, separated by commas.
-Relative names in the presentation format are interpreted according origin rules in Section 5.1 of {{!RFC1035}}.
-Parsing the comma-separated list is specified in Section A.1 of {{!RFC9460}}.
-
-The DELEG protocol allows the use of all valid domain names, as defined in {{!RFC1035}} and Section 11 of {{!RFC2181}}.
-The presentation format for names with special characters requires both double-escaping by applying rules of Section 5.1 of {{!RFC1034}} together with the escaping rules from Section A.1 of {{RFC9460}}.
-
-TODO: add an example that requires this escaping.
-
-The wire format for server-name and include-delegi are each a concatenated unordered collection of a wire-format domain names, where the root label provides the separation between names:
-
-    +-+-+-+-+-+-+-+-+-+-+-+-+-+-
-    | name | name | name | ... |
-    +-+-+-+-+-+-+-+-+-+-+-+-+-+-
-
-The names in the wire format MUST NOT be compressed.
-
-A DELEG or DELEGI record that has a non-empty DelegInfos MUST have one, and only one, set of server information, chosen from the following:
-
-- one server-ipv4 key
-- one server-ipv6 key
-- a pair consisting of one server-ipv4 key and one server-ipv6 key
-- one server-name key
-- one include-delegi key
-
-This restriction only applies to a single DELEG or DELEGI record; a DELEG or DELEGI RRset can have records with different server information keys.
-
-When using server-name, the addresses for the names in the set must be fetched as if they were referenced by NS records.
-This means the names in the value of the server-name key or the include-delegi key cannot sensibly be inside the delegated domain.
-Resolvers MUST ignore names in the server-name key or the include-delegi key if they are in the delegated domain.
-
-With this initial DELEG specification, servers are still expected to be reached on the standard DNS port for both UDP and TCP, 53.  While a future specification is expected to address other transports using other ports, its eventual semantics are not covered here.
-
-### Metadata keys {#mandatory}
-This specification defines a key which serves as a protocol extensibility mechanism, but is not directly used for contacting DNS servers.
-
-Any DELEG or DELEGI record can have key named "mandatory" which is similar to the key of the same name in {{!RFC9460}}.
-
-The value in the presentation value MUST be a comma-separated list of one or more valid DelegInfoKeys, either by their registered name or in the unknown-key format.
-
-The value in the wire format is a sequence of DelegInfoKey numeric values in network byte order, concatenated, in strictly increasing numeric order.
-
-The "mandatory" key itself is optional, but when it is present, the RR in which it appears MUST NOT be used by a resolver in the resolution process if any of the DelegInfoKeys referenced by the "mandatory" DelegInfo element are not supported in the resolver's implementation.
-
 ### Populating the SLIST from DELEG and DELEGI Records {#slist}
 
 Each individual DELEG record inside a DELEG RRset, or each individual DELEGI record in a DELEGI RRset, can cause the addition of zero or more entries to SLIST.
@@ -422,8 +425,13 @@ If the resulting record has zero-length DelegInfos field, stop processing the re
 The DelegInfoValue is a list of keys which MUST have a corresponding DelegInfo elements in this record.
 If any of the listed DelegInfo elements is not found, stop processing this record.
 
-1. If a record has more than one type of server information key (excluding the IPv4/IPv6 case), or has multiple server information keys of the same type, that record is malformed.
+1. If a record has more than one type of server information key (excluding the IPv4/IPv6 case, see {{nameserver-info}}), or if it has multiple server information keys of the same type, that record is malformed.
 Stop processing this record.
+
+1. If any DNS name referenced by server-name key or the include-delegi key is equal to or is a subdomain of the delegated domain (i.e. the DELEG record owner), that record is malformed.
+Stop processing this record.
+
+   This check MUST be performed against the original owner name of the DELEG record even if the currently-processed record is a DELEGI record that was included by the original DELEG record. The purpose of this check is to ensure deterministic behavior. Not performing this check would allow delegations to be reachable only with certain cache content and/or a specific algorithm for server selection from SLIST.
 
 1. If server-ipv4 and/or server-ipv6 keys are present inside the record, copy all of the address values into SLIST.
 Stop processing this record.
@@ -437,9 +445,11 @@ Recursively apply the algorithm described in this section, after checking that t
 
 1. If none of the above applies, SLIST is not modified by this particular record.
 
-A DELEG-aware resolver MAY implement lazy filling of SLIST, such as by deferring processing remaining records if SLIST already has what the resolver considers a sufficiently large pool of addresses to contact.
+A DELEG-aware resolver MAY implement lazy filling of SLIST, such as by deferring processing remaining records, or even individual names or query types, if SLIST already has what the resolver considers a sufficiently large pool of addresses to contact.
 
 The order in which to try the servers in the final SLIST is outside the scope of this document.
+
+This document defines SLIST to be a set. Each individual value MUST be represented only once in the final SLIST even if it was encountered multiple times during SLIST construction.
 
 ## Authoritative Servers
 
