@@ -598,6 +598,14 @@ If the zone is DNSSEC-secure, and if any DNSKEY of the zone has the ADT flag ({{
 Without this check, an attacker could strip the DELEG RRset from a referral response and replace it with an unsigned (and potentially malicious) NS RRset ({{downgrade-attacks}}).
 A referral response with an unsigned NS and signed DS RRsets does not require additional proofs of nonexistence according to non-DELEG DNSSEC specification, and it would have been accepted as a delegation without the DELEG RRset.
 
+### Positive responses
+
+An existing DELEG RRset is authoritative in and signed by the parent zone, similarly to DS RRset (see {{signers}}).
+
+A validator SHOULD NOT treat a positive response with DELEG RRset as DNSSEC-bogus only because all DNSKEYs in zone have ADT flag set to 0.
+Such zone would not be protected from downgrade attacks ({{downgrade-attacks}}) but this behavior is consistent with other non-DELEG DNSSEC specifications:
+Validators are not expected to detect inconsistencies in data if a chain of trust can be established.
+
 ### Chaining
 
 A Validating Stub Resolver that is DELEG-aware has to use a Security-Aware Resolver that is DELEG-aware and, if it is behind a forwarder, that forwarder has to be security-aware and DELEG-aware as well.
