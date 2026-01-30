@@ -31,7 +31,7 @@ The new delegation records are extensible, can be secured with DNSSEC, and elimi
     pycountry 24.6.1
     PyYAML 6.0.3
     requests 2.32.5
-    wcwidth 0.2.14
+    wcwidth 0.3.0
 -->
 <link href="draft-ietf-deleg.xml" rel="alternate" type="application/rfc+xml">
 <link href="#copyright" rel="license">
@@ -572,6 +572,7 @@ aside, blockquote {
 }
 blockquote {
   margin: 1em 0;
+  border-left: 2px var(--pilcrow-strong) solid;
 }
 cite {
   display: block;
@@ -642,7 +643,7 @@ a.pilcrow {
   }
 }
 @media not print {
-  :hover > a.pilcrow {
+  :hover > a.pilcrow, a.pilcrow:focus {
     opacity: 1;
   }
   a.pilcrow[href]:hover {
@@ -1054,7 +1055,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Špaček, et al.</td>
-<td class="center">Expires 20 July 2026</td>
+<td class="center">Expires 3 August 2026</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1070,12 +1071,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <a href="https://www.rfc-editor.org/rfc/rfc1034" class="eref">1034</a>, <a href="https://www.rfc-editor.org/rfc/rfc1035" class="eref">1035</a>, <a href="https://www.rfc-editor.org/rfc/rfc4035" class="eref">4035</a>, <a href="https://www.rfc-editor.org/rfc/rfc6672" class="eref">6672</a>, <a href="https://www.rfc-editor.org/rfc/rfc6840" class="eref">6840</a> (if approved)</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2026-01-16" class="published">16 January 2026</time>
+<time datetime="2026-01-30" class="published">30 January 2026</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2026-07-20">20 July 2026</time></dd>
+<dd class="expires"><time datetime="2026-08-03">3 August 2026</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1136,7 +1137,7 @@ The new delegation records are extensible, can be secured with DNSSEC, and elimi
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 20 July 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 3 August 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1188,6 +1189,12 @@ The new delegation records are extensible, can be secured with DNSSEC, and elimi
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.3">
                 <p id="section-toc.1-1.3.2.3.1"><a href="#section-3.3" class="auto internal xref">3.3</a>.  <a href="#name-overview-of-differences-bet" class="internal xref">Overview of Differences between DELEG and DELEGI Semantics</a></p>
 </li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.4">
+                <p id="section-toc.1-1.3.2.4.1"><a href="#section-3.4" class="auto internal xref">3.4</a>.  <a href="#name-name-server-information-for" class="internal xref">Name Server Information for Delegation</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.5">
+                <p id="section-toc.1-1.3.2.5.1"><a href="#section-3.5" class="auto internal xref">3.5</a>.  <a href="#name-metadata-keys" class="internal xref">Metadata keys</a></p>
+</li>
             </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4">
@@ -1209,13 +1216,7 @@ The new delegation records are extensible, can be secured with DNSSEC, and elimi
                     <p id="section-toc.1-1.4.2.1.2.4.1"><a href="#section-4.1.4" class="auto internal xref">4.1.4</a>.  <a href="#name-algorithm-for-finding-the-b" class="internal xref">Algorithm for "Finding the Best Servers to Ask"</a></p>
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.1.2.5">
-                    <p id="section-toc.1-1.4.2.1.2.5.1"><a href="#section-4.1.5" class="auto internal xref">4.1.5</a>.  <a href="#name-name-server-information-for" class="internal xref">Name Server Information for Delegation</a></p>
-</li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.1.2.6">
-                    <p id="section-toc.1-1.4.2.1.2.6.1"><a href="#section-4.1.6" class="auto internal xref">4.1.6</a>.  <a href="#name-metadata-keys" class="internal xref">Metadata keys</a></p>
-</li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.1.2.7">
-                    <p id="section-toc.1-1.4.2.1.2.7.1"><a href="#section-4.1.7" class="auto internal xref">4.1.7</a>.  <a href="#name-populating-the-slist-from-d" class="internal xref">Populating the SLIST from DELEG and DELEGI Records</a></p>
+                    <p id="section-toc.1-1.4.2.1.2.5.1"><a href="#section-4.1.5" class="auto internal xref">4.1.5</a>.  <a href="#name-populating-the-slist-from-d" class="internal xref">Populating the SLIST from DELEG and DELEGI Records</a></p>
 </li>
                 </ul>
 </li>
@@ -1409,7 +1410,7 @@ If the response is not a referral, the authoritative server doesn't change anyth
 If the response is a referral, the authoritative server checks if there is a DELEG RRset for the queried zone;
 if so, it returns the DELEG RRset instead of the NS RRset in the response (<a href="#aware-referral" class="auto internal xref">Section 4.2.1</a>).<a href="#section-2-4" class="pilcrow">¶</a></p>
 <p id="section-2-5">Records in the DELEG RRset for a zone describe how to find nameservers for that zone (<a href="#deleg-delegi" class="auto internal xref">Section 3</a>).
-The Rdata for DELEG records has key=value pairs (<a href="#nameserver-info" class="auto internal xref">Section 4.1.5</a>).<a href="#section-2-5" class="pilcrow">¶</a></p>
+The Rdata for DELEG records has key=value pairs (<a href="#nameserver-info" class="auto internal xref">Section 3.4</a>).<a href="#section-2-5" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-2-6.1">
           <p id="section-2-6.1.1">"server-ipv4" and "server-ipv6" keys have IP addresses for the delegated name servers<a href="#section-2-6.1.1" class="pilcrow">¶</a></p>
@@ -1470,7 +1471,7 @@ To avoid confusion between the two protocols, the list of key=value parameters u
 </li>
       </ul>
 <p id="section-3-5">Implementations can reuse the same code to parse SvcParams and DelegInfos and only plug in a different list of key=value pairs for SVCB/HTTPS and DELEG/DELEGI record families.<a href="#section-3-5" class="pilcrow">¶</a></p>
-<p id="section-3-6">The initial set of DelegInfoKeys and their formats are defined in <a href="#nameserver-info" class="auto internal xref">Section 4.1.5</a>.<a href="#section-3-6" class="pilcrow">¶</a></p>
+<p id="section-3-6">The initial set of DelegInfoKeys and their formats are defined in <a href="#nameserver-info" class="auto internal xref">Section 3.4</a>.<a href="#section-3-6" class="pilcrow">¶</a></p>
 <div id="presentation-format">
 <section id="section-3.1">
         <h3 id="name-presentation-format">
@@ -1585,10 +1586,88 @@ Some future keys may have no DelegInfoValue, which would be indicated with an ex
             <p id="section-3.3-4.4.1">DELEGI DNSSEC signing and record placement rules are the same as for any ordinary RR type.<a href="#section-3.3-4.4.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-3.3-4.5">
-            <p id="section-3.3-4.5.1">DELEGI is used as the target of the DELEG protocol's "include" mechanism, as described in section <a href="#slist" class="auto internal xref">Section 4.1.7</a>.<a href="#section-3.3-4.5.1" class="pilcrow">¶</a></p>
+            <p id="section-3.3-4.5.1">DELEGI is used as the target of the DELEG protocol's "include" mechanism, as described in section <a href="#slist" class="auto internal xref">Section 4.1.5</a>.<a href="#section-3.3-4.5.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 <p id="section-3.3-5">TODO: Add some introduction comparing how resolvers see legacy delegation (set of NS and A/AAAA records) and DELEG delegation (DELEG and DELEGI records with server-ipv4 and server-ipv6 keys)<a href="#section-3.3-5" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="nameserver-info">
+<section id="section-3.4">
+        <h3 id="name-name-server-information-for">
+<a href="#section-3.4" class="section-number selfRef">3.4. </a><a href="#name-name-server-information-for" class="section-name selfRef">Name Server Information for Delegation</a>
+        </h3>
+<p id="section-3.4-1">The DELEG and DELEGI records have four keys that describe information about name servers.
+The purpose of this information is to populate the SLIST with IP addresses of the name servers for a zone. (See <a href="#slist" class="auto internal xref">Section 4.1.5</a>.)<a href="#section-3.4-1" class="pilcrow">¶</a></p>
+<p id="section-3.4-2">The types of information defined in this document are:<a href="#section-3.4-2" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-3.4-3.1">
+            <p id="section-3.4-3.1.1">server-ipv4: an unordered collection of IPv4 addresses for name servers<a href="#section-3.4-3.1.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-3.4-3.2">
+            <p id="section-3.4-3.2.1">server-ipv6: an unordered collection of IPv6 addresses for name servers<a href="#section-3.4-3.2.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-3.4-3.3">
+            <p id="section-3.4-3.3.1">server-name: an unordered collection of hostnames of name servers; the addresses must be fetched<a href="#section-3.4-3.3.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-3.4-3.4">
+            <p id="section-3.4-3.4.1">include-delegi: an unordered collection of domain names that point to a DELEGI RRsets, which in turn have more information about the delegation<a href="#section-3.4-3.4.1" class="pilcrow">¶</a></p>
+</li>
+        </ul>
+<p id="section-3.4-4">These keys MUST have a non-empty DelegInfoValue.<a href="#section-3.4-4" class="pilcrow">¶</a></p>
+<p id="section-3.4-5">The presentation values for server-ipv4 and server-ipv6 are comma-separated list of one or more IP addresses of the appropriate family in standard textual format <span>[<a href="#RFC5952" class="cite xref">RFC5952</a>]</span> <span>[<a href="#RFC4001" class="cite xref">RFC4001</a>]</span>.
+The wire formats for server-ipv4 and server-ipv6 are a sequence of IP addresses, in network byte order, for the respective address family.<a href="#section-3.4-5" class="pilcrow">¶</a></p>
+<p id="section-3.4-6">The presentation values for server-name and include-delegi are an unordered collection of fully-qualified domain names and relative domain names, separated by commas.
+Relative names in the presentation format are interpreted according origin rules in Section 5.1 of <span>[<a href="#RFC1035" class="cite xref">RFC1035</a>]</span>.
+Parsing the comma-separated list is specified in Section A.1 of <span>[<a href="#RFC9460" class="cite xref">RFC9460</a>]</span>.<a href="#section-3.4-6" class="pilcrow">¶</a></p>
+<p id="section-3.4-7">The DELEG protocol allows the use of all valid domain names, as defined in <span>[<a href="#RFC1035" class="cite xref">RFC1035</a>]</span> and Section 11 of <span>[<a href="#RFC2181" class="cite xref">RFC2181</a>]</span>.
+The presentation format for names with special characters requires both double-escaping by applying rules of Section 5.1 of <span>[<a href="#RFC1034" class="cite xref">RFC1034</a>]</span> together with the escaping rules from Section A.1 of <span>[<a href="#RFC9460" class="cite xref">RFC9460</a>]</span>.<a href="#section-3.4-7" class="pilcrow">¶</a></p>
+<p id="section-3.4-8">TODO: add an example that requires this escaping.<a href="#section-3.4-8" class="pilcrow">¶</a></p>
+<p id="section-3.4-9">The wire format for server-name and include-delegi are each a concatenated unordered collection of a wire-format domain names, where the root label provides the separation between names:<a href="#section-3.4-9" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-3.4-10">
+<pre>
++-+-+-+-+-+-+-+-+-+-+-+-+-+-
+| name | name | name | ... |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-
+</pre><a href="#section-3.4-10" class="pilcrow">¶</a>
+</div>
+<p id="section-3.4-11">The names in the wire format MUST NOT be compressed.<a href="#section-3.4-11" class="pilcrow">¶</a></p>
+<p id="section-3.4-12">For interoperability with resolver algorithm defined in section <a href="#slist" class="auto internal xref">Section 4.1.5</a>,
+a DELEG or DELEGI record that has a non-empty DelegInfos MUST have one, and only one, set of server information keys, chosen from the following:<a href="#section-3.4-12" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-3.4-13.1">
+            <p id="section-3.4-13.1.1">one server-ipv4 key<a href="#section-3.4-13.1.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-3.4-13.2">
+            <p id="section-3.4-13.2.1">one server-ipv6 key<a href="#section-3.4-13.2.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-3.4-13.3">
+            <p id="section-3.4-13.3.1">a pair consisting of one server-ipv4 key and one server-ipv6 key<a href="#section-3.4-13.3.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-3.4-13.4">
+            <p id="section-3.4-13.4.1">one server-name key<a href="#section-3.4-13.4.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-3.4-13.5">
+            <p id="section-3.4-13.5.1">one include-delegi key<a href="#section-3.4-13.5.1" class="pilcrow">¶</a></p>
+</li>
+        </ul>
+<p id="section-3.4-14">This restriction only applies to a single DELEG or DELEGI record; a DELEG or DELEGI RRset can have records with different server information keys.
+Authoritative servers MAY refuse to load zones which have a disallowed combination of keys in a single record.<a href="#section-3.4-14" class="pilcrow">¶</a></p>
+<p id="section-3.4-15">When using server-name, the addresses for the names in the set must be fetched as if they were referenced by NS records.
+This means the names in the value of the server-name key or the include-delegi key cannot sensibly be inside the delegated domain.<a href="#section-3.4-15" class="pilcrow">¶</a></p>
+<p id="section-3.4-16">With this initial DELEG specification, servers are still expected to be reached on the standard DNS port for both UDP and TCP, 53.  While a future specification is expected to address other transports using other ports, its eventual semantics are not covered here.<a href="#section-3.4-16" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="mandatory">
+<section id="section-3.5">
+        <h3 id="name-metadata-keys">
+<a href="#section-3.5" class="section-number selfRef">3.5. </a><a href="#name-metadata-keys" class="section-name selfRef">Metadata keys</a>
+        </h3>
+<p id="section-3.5-1">This specification defines a key which serves as a protocol extensibility mechanism, but is not directly used for contacting DNS servers.<a href="#section-3.5-1" class="pilcrow">¶</a></p>
+<p id="section-3.5-2">Any DELEG or DELEGI record can have key named "mandatory" which is similar to the key of the same name in <span>[<a href="#RFC9460" class="cite xref">RFC9460</a>]</span>.<a href="#section-3.5-2" class="pilcrow">¶</a></p>
+<p id="section-3.5-3">The value in the presentation value MUST be a comma-separated list of one or more valid DelegInfoKeys, either by their registered name or in the unknown-key format.<a href="#section-3.5-3" class="pilcrow">¶</a></p>
+<p id="section-3.5-4">The value in the wire format is a sequence of DelegInfoKey numeric values in network byte order, concatenated, in strictly increasing numeric order.<a href="#section-3.5-4" class="pilcrow">¶</a></p>
+<p id="section-3.5-5">The "mandatory" key itself is optional, but when it is present, the RR in which it appears MUST NOT be used by a resolver in the resolution process if any of the DelegInfoKeys referenced by the "mandatory" DelegInfo element are not supported in the resolver's implementation. See <a href="#slist" class="auto internal xref">Section 4.1.5</a>.<a href="#section-3.5-5" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1717,123 +1796,53 @@ However, if the DELEG RRset is known to exist but is unusable (for example, if i
 <p id="section-4.1.4-24">Resolvers MUST respond to "QNAME=. / QTYPE=DELEG" queries in the same fashion as they respond to "QNAME=. / QTYPE=DS" queries.<a href="#section-4.1.4-24" class="pilcrow">¶</a></p>
 </section>
 </div>
-<div id="nameserver-info">
-<section id="section-4.1.5">
-          <h4 id="name-name-server-information-for">
-<a href="#section-4.1.5" class="section-number selfRef">4.1.5. </a><a href="#name-name-server-information-for" class="section-name selfRef">Name Server Information for Delegation</a>
-          </h4>
-<p id="section-4.1.5-1">The DELEG and DELEGI records have four keys that describe information about name servers.
-The purpose of this information is to populate the SLIST with IP addresses of the name servers for a zone.
-The types of information defined in this document are:<a href="#section-4.1.5-1" class="pilcrow">¶</a></p>
-<ul class="normal">
-<li class="normal" id="section-4.1.5-2.1">
-              <p id="section-4.1.5-2.1.1">server-ipv4: an unordered collection of IPv4 addresses for name servers<a href="#section-4.1.5-2.1.1" class="pilcrow">¶</a></p>
-</li>
-            <li class="normal" id="section-4.1.5-2.2">
-              <p id="section-4.1.5-2.2.1">server-ipv6: an unordered collection of IPv6 addresses for name servers<a href="#section-4.1.5-2.2.1" class="pilcrow">¶</a></p>
-</li>
-            <li class="normal" id="section-4.1.5-2.3">
-              <p id="section-4.1.5-2.3.1">server-name: an unordered collection of hostnames of name servers; the addresses must be fetched<a href="#section-4.1.5-2.3.1" class="pilcrow">¶</a></p>
-</li>
-            <li class="normal" id="section-4.1.5-2.4">
-              <p id="section-4.1.5-2.4.1">include-delegi: an unordered collection of domain names that point to a DELEGI RRsets, which in turn have more information about the delegation<a href="#section-4.1.5-2.4.1" class="pilcrow">¶</a></p>
-</li>
-          </ul>
-<p id="section-4.1.5-3">These keys MUST have a non-empty DelegInfoValue.<a href="#section-4.1.5-3" class="pilcrow">¶</a></p>
-<p id="section-4.1.5-4">The presentation values for server-ipv4 and server-ipv6 are comma-separated list of one or more IP addresses of the appropriate family in standard textual format <span>[<a href="#RFC5952" class="cite xref">RFC5952</a>]</span> <span>[<a href="#RFC4001" class="cite xref">RFC4001</a>]</span>.
-The wire formats for server-ipv4 and server-ipv6 are a sequence of IP addresses, in network byte order, for the respective address family.<a href="#section-4.1.5-4" class="pilcrow">¶</a></p>
-<p id="section-4.1.5-5">The presentation values for server-name and include-delegi are an unordered collection of fully-qualified domain names and relative domain names, separated by commas.
-Relative names in the presentation format are interpreted according origin rules in Section 5.1 of <span>[<a href="#RFC1035" class="cite xref">RFC1035</a>]</span>.
-Parsing the comma-separated list is specified in Section A.1 of <span>[<a href="#RFC9460" class="cite xref">RFC9460</a>]</span>.<a href="#section-4.1.5-5" class="pilcrow">¶</a></p>
-<p id="section-4.1.5-6">The DELEG protocol allows the use of all valid domain names, as defined in <span>[<a href="#RFC1035" class="cite xref">RFC1035</a>]</span> and Section 11 of <span>[<a href="#RFC2181" class="cite xref">RFC2181</a>]</span>.
-The presentation format for names with special characters requires both double-escaping by applying rules of Section 5.1 of <span>[<a href="#RFC1034" class="cite xref">RFC1034</a>]</span> together with the escaping rules from Section A.1 of <span>[<a href="#RFC9460" class="cite xref">RFC9460</a>]</span>.<a href="#section-4.1.5-6" class="pilcrow">¶</a></p>
-<p id="section-4.1.5-7">TODO: add an example that requires this escaping.<a href="#section-4.1.5-7" class="pilcrow">¶</a></p>
-<p id="section-4.1.5-8">The wire format for server-name and include-delegi are each a concatenated unordered collection of a wire-format domain names, where the root label provides the separation between names:<a href="#section-4.1.5-8" class="pilcrow">¶</a></p>
-<div class="alignLeft art-text artwork" id="section-4.1.5-9">
-<pre>
-+-+-+-+-+-+-+-+-+-+-+-+-+-+-
-| name | name | name | ... |
-+-+-+-+-+-+-+-+-+-+-+-+-+-+-
-</pre><a href="#section-4.1.5-9" class="pilcrow">¶</a>
-</div>
-<p id="section-4.1.5-10">The names in the wire format MUST NOT be compressed.<a href="#section-4.1.5-10" class="pilcrow">¶</a></p>
-<p id="section-4.1.5-11">A DELEG or DELEGI record that has a non-empty DelegInfos MUST have one, and only one, set of server information, chosen from the following:<a href="#section-4.1.5-11" class="pilcrow">¶</a></p>
-<ul class="normal">
-<li class="normal" id="section-4.1.5-12.1">
-              <p id="section-4.1.5-12.1.1">one server-ipv4 key<a href="#section-4.1.5-12.1.1" class="pilcrow">¶</a></p>
-</li>
-            <li class="normal" id="section-4.1.5-12.2">
-              <p id="section-4.1.5-12.2.1">one server-ipv6 key<a href="#section-4.1.5-12.2.1" class="pilcrow">¶</a></p>
-</li>
-            <li class="normal" id="section-4.1.5-12.3">
-              <p id="section-4.1.5-12.3.1">a pair consisting of one server-ipv4 key and one server-ipv6 key<a href="#section-4.1.5-12.3.1" class="pilcrow">¶</a></p>
-</li>
-            <li class="normal" id="section-4.1.5-12.4">
-              <p id="section-4.1.5-12.4.1">one server-name key<a href="#section-4.1.5-12.4.1" class="pilcrow">¶</a></p>
-</li>
-            <li class="normal" id="section-4.1.5-12.5">
-              <p id="section-4.1.5-12.5.1">one include-delegi key<a href="#section-4.1.5-12.5.1" class="pilcrow">¶</a></p>
-</li>
-          </ul>
-<p id="section-4.1.5-13">This restriction only applies to a single DELEG or DELEGI record; a DELEG or DELEGI RRset can have records with different server information keys.<a href="#section-4.1.5-13" class="pilcrow">¶</a></p>
-<p id="section-4.1.5-14">When using server-name, the addresses for the names in the set must be fetched as if they were referenced by NS records.
-This means the names in the value of the server-name key or the include-delegi key cannot sensibly be inside the delegated domain.
-Resolvers MUST ignore names in the server-name key or the include-delegi key if they are in the delegated domain.<a href="#section-4.1.5-14" class="pilcrow">¶</a></p>
-<p id="section-4.1.5-15">With this initial DELEG specification, servers are still expected to be reached on the standard DNS port for both UDP and TCP, 53.  While a future specification is expected to address other transports using other ports, its eventual semantics are not covered here.<a href="#section-4.1.5-15" class="pilcrow">¶</a></p>
-</section>
-</div>
-<div id="mandatory">
-<section id="section-4.1.6">
-          <h4 id="name-metadata-keys">
-<a href="#section-4.1.6" class="section-number selfRef">4.1.6. </a><a href="#name-metadata-keys" class="section-name selfRef">Metadata keys</a>
-          </h4>
-<p id="section-4.1.6-1">This specification defines a key which serves as a protocol extensibility mechanism, but is not directly used for contacting DNS servers.<a href="#section-4.1.6-1" class="pilcrow">¶</a></p>
-<p id="section-4.1.6-2">Any DELEG or DELEGI record can have key named "mandatory" which is similar to the key of the same name in <span>[<a href="#RFC9460" class="cite xref">RFC9460</a>]</span>.<a href="#section-4.1.6-2" class="pilcrow">¶</a></p>
-<p id="section-4.1.6-3">The value in the presentation value MUST be a comma-separated list of one or more valid DelegInfoKeys, either by their registered name or in the unknown-key format.<a href="#section-4.1.6-3" class="pilcrow">¶</a></p>
-<p id="section-4.1.6-4">The value in the wire format is a sequence of DelegInfoKey numeric values in network byte order, concatenated, in strictly increasing numeric order.<a href="#section-4.1.6-4" class="pilcrow">¶</a></p>
-<p id="section-4.1.6-5">The "mandatory" key itself is optional, but when it is present, the RR in which it appears MUST NOT be used by a resolver in the resolution process if any of the DelegInfoKeys referenced by the "mandatory" DelegInfo element are not supported in the resolver's implementation.<a href="#section-4.1.6-5" class="pilcrow">¶</a></p>
-</section>
-</div>
 <div id="slist">
-<section id="section-4.1.7">
+<section id="section-4.1.5">
           <h4 id="name-populating-the-slist-from-d">
-<a href="#section-4.1.7" class="section-number selfRef">4.1.7. </a><a href="#name-populating-the-slist-from-d" class="section-name selfRef">Populating the SLIST from DELEG and DELEGI Records</a>
+<a href="#section-4.1.5" class="section-number selfRef">4.1.5. </a><a href="#name-populating-the-slist-from-d" class="section-name selfRef">Populating the SLIST from DELEG and DELEGI Records</a>
           </h4>
-<p id="section-4.1.7-1">Each individual DELEG record inside a DELEG RRset, or each individual DELEGI record in a DELEGI RRset, can cause the addition of zero or more entries to SLIST.<a href="#section-4.1.7-1" class="pilcrow">¶</a></p>
-<p id="section-4.1.7-2">A resolver processes each individual DELEG record within a DELEG RRset, or each individual DELEGI record in a DELEGI RRset, using the following steps:<a href="#section-4.1.7-2" class="pilcrow">¶</a></p>
-<ol start="1" type="1" class="normal type-1" id="section-4.1.7-3">
-<li id="section-4.1.7-3.1">
-              <p id="section-4.1.7-3.1.1">Remove all DelegInfo elements with unsupported DelegInfoKey values.
-If the resulting record has zero-length DelegInfos field, stop processing the record.<a href="#section-4.1.7-3.1.1" class="pilcrow">¶</a></p>
+<p id="section-4.1.5-1">Each individual DELEG record inside a DELEG RRset, or each individual DELEGI record in a DELEGI RRset, can cause the addition of zero or more entries to SLIST.<a href="#section-4.1.5-1" class="pilcrow">¶</a></p>
+<p id="section-4.1.5-2">A resolver processes each individual DELEG record within a DELEG RRset, or each individual DELEGI record in a DELEGI RRset, using the following steps:<a href="#section-4.1.5-2" class="pilcrow">¶</a></p>
+<ol start="1" type="1" class="normal type-1" id="section-4.1.5-3">
+<li id="section-4.1.5-3.1">
+              <p id="section-4.1.5-3.1.1">Remove all DelegInfo elements with unsupported DelegInfoKey values.
+If the resulting record has zero-length DelegInfos field, stop processing the record.<a href="#section-4.1.5-3.1.1" class="pilcrow">¶</a></p>
 </li>
-            <li id="section-4.1.7-3.2">
-              <p id="section-4.1.7-3.2.1">If a DelegInfo element with the "mandatory" DelegInfoKey is present, check its DelegInfoValue.
+            <li id="section-4.1.5-3.2">
+              <p id="section-4.1.5-3.2.1">If a DelegInfo element with the "mandatory" DelegInfoKey is present, check its DelegInfoValue.
 The DelegInfoValue is a list of keys which MUST have a corresponding DelegInfo elements in this record.
-If any of the listed DelegInfo elements is not found, stop processing this record.<a href="#section-4.1.7-3.2.1" class="pilcrow">¶</a></p>
+If any of the listed DelegInfo elements is not found, stop processing this record.<a href="#section-4.1.5-3.2.1" class="pilcrow">¶</a></p>
 </li>
-            <li id="section-4.1.7-3.3">
-              <p id="section-4.1.7-3.3.1">If a record has more than one type of server information key (excluding the IPv4/IPv6 case), or has multiple server information keys of the same type, that record is malformed.
-Stop processing this record.<a href="#section-4.1.7-3.3.1" class="pilcrow">¶</a></p>
+            <li id="section-4.1.5-3.3">
+              <p id="section-4.1.5-3.3.1">If a record has more than one type of server information key (excluding the IPv4/IPv6 case, see <a href="#nameserver-info" class="auto internal xref">Section 3.4</a>), or if it has multiple server information keys of the same type, that record is malformed.
+Stop processing this record.<a href="#section-4.1.5-3.3.1" class="pilcrow">¶</a></p>
 </li>
-            <li id="section-4.1.7-3.4">
-              <p id="section-4.1.7-3.4.1">If server-ipv4 and/or server-ipv6 keys are present inside the record, copy all of the address values into SLIST.
-Stop processing this record.<a href="#section-4.1.7-3.4.1" class="pilcrow">¶</a></p>
+            <li id="section-4.1.5-3.4">
+              <p id="section-4.1.5-3.4.1">If any DNS name referenced by server-name key or the include-delegi key is equal to or is a subdomain of the delegated domain (i.e. the DELEG record owner), that record is malformed.
+Stop processing this record.<a href="#section-4.1.5-3.4.1" class="pilcrow">¶</a></p>
+<p id="section-4.1.5-3.4.2">
+This check MUST be performed against the original owner name of the DELEG record even if the currently-processed record is a DELEGI record that was included by the original DELEG record. The purpose of this check is to ensure deterministic behavior. Not performing this check would allow delegations to be reachable only with certain cache content and/or a specific algorithm for server selection from SLIST.<a href="#section-4.1.5-3.4.2" class="pilcrow">¶</a></p>
 </li>
-            <li id="section-4.1.7-3.5">
-              <p id="section-4.1.7-3.5.1">If a server-name key is present in the record, resolve each name in the value into IPv4 and/or IPv6 addresses.
+            <li id="section-4.1.5-3.5">
+              <p id="section-4.1.5-3.5.1">If server-ipv4 and/or server-ipv6 keys are present inside the record, copy all of the address values into SLIST.
+Stop processing this record.<a href="#section-4.1.5-3.5.1" class="pilcrow">¶</a></p>
+</li>
+            <li id="section-4.1.5-3.6">
+              <p id="section-4.1.5-3.6.1">If a server-name key is present in the record, resolve each name in the value into IPv4 and/or IPv6 addresses.
 Copy these addresses into SLIST.
-Stop processing this record.<a href="#section-4.1.7-3.5.1" class="pilcrow">¶</a></p>
+Stop processing this record.<a href="#section-4.1.5-3.6.1" class="pilcrow">¶</a></p>
 </li>
-            <li id="section-4.1.7-3.6">
-              <p id="section-4.1.7-3.6.1">If an include-delegi key is present in the record, resolve each name in the value using the DELEGI RR type.
-Recursively apply the algorithm described in this section, after checking that the maximum loop count described in <a href="#too-much-work" class="auto internal xref">Section 6.1</a> has not been reached.<a href="#section-4.1.7-3.6.1" class="pilcrow">¶</a></p>
+            <li id="section-4.1.5-3.7">
+              <p id="section-4.1.5-3.7.1">If an include-delegi key is present in the record, resolve each name in the value using the DELEGI RR type.
+Recursively apply the algorithm described in this section, after checking that the maximum loop count described in <a href="#too-much-work" class="auto internal xref">Section 6.1</a> has not been reached.<a href="#section-4.1.5-3.7.1" class="pilcrow">¶</a></p>
 </li>
-            <li id="section-4.1.7-3.7">
-              <p id="section-4.1.7-3.7.1">If none of the above applies, SLIST is not modified by this particular record.<a href="#section-4.1.7-3.7.1" class="pilcrow">¶</a></p>
+            <li id="section-4.1.5-3.8">
+              <p id="section-4.1.5-3.8.1">If none of the above applies, SLIST is not modified by this particular record.<a href="#section-4.1.5-3.8.1" class="pilcrow">¶</a></p>
 </li>
           </ol>
-<p id="section-4.1.7-4">A DELEG-aware resolver MAY implement lazy filling of SLIST, such as by deferring processing remaining records if SLIST already has what the resolver considers a sufficiently large pool of addresses to contact.<a href="#section-4.1.7-4" class="pilcrow">¶</a></p>
-<p id="section-4.1.7-5">The order in which to try the servers in the final SLIST is outside the scope of this document.<a href="#section-4.1.7-5" class="pilcrow">¶</a></p>
+<p id="section-4.1.5-4">A DELEG-aware resolver MAY implement lazy filling of SLIST, such as by deferring processing remaining records, or even individual names or query types, if SLIST already has what the resolver considers a sufficiently large pool of addresses to contact.<a href="#section-4.1.5-4" class="pilcrow">¶</a></p>
+<p id="section-4.1.5-5">The order in which to try the servers in the final SLIST is outside the scope of this document.<a href="#section-4.1.5-5" class="pilcrow">¶</a></p>
+<p id="section-4.1.5-6">This document defines SLIST to be a set. Each individual value MUST be represented only once in the final SLIST even if it was encountered multiple times during SLIST construction.<a href="#section-4.1.5-6" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -2076,7 +2085,7 @@ This means that automated software that creates or checks the validity of a zone
         </h3>
 <p id="section-6.1-1">Resolvers MUST prevent situations where accidental misconfiguration of zones or malicious attacks cause them to perform too much work when resolving.
 This document describes two sets of actions that, if not controlled, could lead to over-work attacks.<a href="#section-6.1-1" class="pilcrow">¶</a></p>
-<p id="section-6.1-2">Long chains of include-delegi information (<a href="#nameserver-info" class="auto internal xref">Section 4.1.5</a>), and those with circular chains of include-delegi information, can be burdensome.
+<p id="section-6.1-2">Long chains of include-delegi information (<a href="#nameserver-info" class="auto internal xref">Section 3.4</a>), and those with circular chains of include-delegi information, can be burdensome.
 To prevent this, the resolver SHOULD NOT follow more than 3 include-delegi chains in an RRset when populating SLIST.
 Note that include-delegi chains can have CNAME steps in them; in such a case, a CNAME step is counted the same as a DELEGI step when determining when to stop following a chain.<a href="#section-6.1-2" class="pilcrow">¶</a></p>
 </section>
@@ -2772,7 +2781,7 @@ test.      RRSIG NSEC 13 1 300 20260101000000 (
 <a href="#appendix-A.5" class="section-number selfRef">A.5. </a><a href="#name-delegi-interpretation" class="section-name selfRef">DELEGI Interpretation</a>
         </h3>
 <p id="appendix-A.5-1">In the examples above, the test. DELEG record uses indirection and points to other domain names with DELEGI, A, and AAAA records.
-During resolution, a resolver will gradually build set of name servers to contact, as defined in <a href="#slist" class="auto internal xref">Section 4.1.7</a>.<a href="#appendix-A.5-1" class="pilcrow">¶</a></p>
+During resolution, a resolver will gradually build set of name servers to contact, as defined in <a href="#slist" class="auto internal xref">Section 4.1.5</a>.<a href="#appendix-A.5-1" class="pilcrow">¶</a></p>
 <p id="appendix-A.5-2">To visualize end result of this process we represent full set of name servers in form of a 'virtual' DELEG RRset.<a href="#appendix-A.5-2" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="appendix-A.5-3">
 <pre>
