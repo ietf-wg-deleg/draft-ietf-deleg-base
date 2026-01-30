@@ -545,8 +545,8 @@ DELEG RR type defines a zone cut in similar way as NS RR type. This has several 
 
 See examples in {{example-root}} and {{example-occluded}}.
 
-In order to protect validators from downgrade attacks (see {{downgrade-attacks}}) this draft introduces a new DNSKEY flag ADT (Authoritative Delegation Types, see {{iana-existing}}).
-For downgrade resistance, zones which contain a DELEG RRset MUST set ADT flag to 1 in at least one of the DNSKEY records published in the zone.
+In order to protect validators from downgrade attacks (see {{downgrade-attacks}}), this draft introduces a new DNSKEY flag ADT (Authoritative Delegation Types, see {{iana-existing}}).
+In order to achieve downgrade resistance, zones which contain a DELEG RRset MUST set the ADT flag to 1 in at least one of the DNSKEY records published in the zone.
 
 ## DNSSEC Validators {#dnssec-validators}
 
@@ -596,11 +596,11 @@ A referral response with an unsigned NS and signed DS RRsets does not require ad
 
 ### Positive responses
 
-An existing DELEG RRset is authoritative in and signed by the parent zone, similarly to DS RRset (see {{signers}}).
+An existing DELEG RRset is authoritative in, and signed by, the parent zone, similar to a DS RRset (see {{signers}}).
 
-A validator SHOULD NOT treat a positive response with DELEG RRset as DNSSEC-bogus only because all DNSKEYs in zone have ADT flag set to 0.
-Such zone would not be protected from downgrade attacks ({{downgrade-attacks}}) but this behavior is consistent with other non-DELEG DNSSEC specifications:
-Validators are not expected to detect inconsistencies in data if a chain of trust can be established.
+If all the DNSKEY records in zone have the ADT flag set to 0, a validator SHOULD NOT use this fact to treat a positive response with DELEG RRset as bogus for DNSSEC.
+Such a zone would not be protected from downgrade attacks ({{downgrade-attacks}}), but this behavior is consistent with DNSSEC specifications that precede this one:
+validators are not expected to detect inconsistencies in data if a chain of trust can be established.
 
 ### Chaining
 
