@@ -630,6 +630,39 @@ A zone delegated using DELEG records is not reachable by non-DELEG aware resolve
 In that case the zone is not required to have NS RRset in the child zone apex.
 Software to manage zone content or check the validity of zones need to be updated to allow zones without apex NS RRset.
 
+## Authoritative Deployment
+
+Before adding a first DELEG record into a DNS zone, these steps need to be taken, in this order:
+
+1. If a zone checker is used: Ensure checkers are DELEG-aware.
+1. Ensure all authoritative servers serving (and transfering) the zone are DELEG-aware.
+1. If a zone is DNSSEC-signed: Ensure signer is DELEG-aware.
+1. If a zone is DNSSEC-signed: Ensure at least one DNSKEY has ADT flag set to 1. Failure to do so results in loss of downgrade resistency of DELEG protocol, see {{downgrade-attacks}}.
+
+### Enabling ADT Flag
+
+According to non-DELEG DNSSEC specification, changing flags of a DNSKEY changes its Key Tag and thus requires a key rollover.
+For this reason ADT flag cannot be simply enabled on an existing key.
+It is advised to enable ADT flag while generating a new key as part of a regular key rollover using established procedures.
+A zone can safely have keys with ADT flag set to 1 even if the zone does not have any DELEG records.
+This step can be done months or even years before a first DELEG record is introduced into the zone.
+
+Please note the downgrade protection is effective if any DNSKEY with ADT flag set to 1 is present, even if this key does not sign any RRset.
+In other words, it is sufficient to pre-publish new key, as described in stage 2 of Pre-Publish Zone Signing Key Rollover, section 4.1.1.1 of {{!RFC6781}}.
+
+An extremely conservative approach might be:
+
+1. Lower DNSKEY TTL to shorten time to rollback.
+1. Add a new DNSKEY with ADT flag set to 1, but do not sign any RRsets with this key.
+1. Monitor deployment for issues.
+1. Experimentation with adding DELEG records is possible at this point, even if the key rollover is not finished.
+1. In case of a problem withdraw the new, otherwise unused key.
+1. Finish key rollover.
+1. Restore the original DNSKEY TTL.
+
+Such approach requires change only to DNSKEY RRset and resigning it.
+Consequently time required to withdraw the new is limited only by DNSKEY TTL + time to sign + time to transfer modified DNSKEY RRset.
+
 # Security Considerations
 
 TODO: Add more here
@@ -643,7 +676,7 @@ Long chains of include-delegi information ({{nameserver-info}}), and those with 
 To prevent this, the resolver SHOULD NOT follow more than 3 include-delegi chains in an RRset when populating SLIST.
 Note that include-delegi chains can have CNAME steps in them; in such a case, a CNAME step is counted the same as a DELEGI step when determining when to stop following a chain.
 
-## Preventing Downgrade Attacks
+## Preventing Downgrade Attacks {#downgrade-attacks}
 
 During the rollout of the DELEG protocol, the operator of an authoritative server can upgrade the server software to be DELEG-aware before changing any DNS zones.
 Such deployment should work and provide DELEG-aware clients with correct DELEG-aware answers.
