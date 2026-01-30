@@ -83,7 +83,7 @@ Table of Contents
    3.  DELEG and DELEGI Resource Record Types
      3.1.  Presentation Format
      3.2.  RDATA Wire Format
-     3.3.  Overview of Differences between DELEG and DELEGI Semantics
+     3.3.  Semantics
      3.4.  Name Server Information for Delegation
      3.5.  Metadata keys
    4.  Use of DELEG Records
@@ -363,7 +363,7 @@ Table of Contents
    future keys may have no DelegInfoValue, which would be indicated with
    an explicit 0 length.
 
-3.3.  Overview of Differences between DELEG and DELEGI Semantics
+3.3.  Semantics
 
    The following is a brief summary of semantic differences between the
    DELEG and DELEGI types.
