@@ -610,7 +610,7 @@ Note that, per the rules for the keys defined in Section 6.4 of {{!RFC6763}}, if
 
 # Operational Considerations
 
-When an authoritative server or resolover becomes DELEG-aware, new operational considerations apply to it.
+When an authoritative server or resolver becomes DELEG-aware, new operational considerations apply to it.
 This section gives an overview of some of those considerations.
 
 TODO: Add more here
