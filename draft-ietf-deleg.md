@@ -545,8 +545,8 @@ DELEG RR type defines a zone cut in similar way as NS RR type. This has several 
 
 See examples in {{example-root}} and {{example-occluded}}.
 
-In order to protect validators from downgrade attacks this draft introduces a new DNSKEY flag ADT (Authoritative Delegation Types).
-In zones which contain a DELEG RRset, this flag MUST be set to 1 in at least one of the DNSKEY records published in the zone.
+In order to protect validators from downgrade attacks (see {{downgrade-attacks}}) this draft introduces a new DNSKEY flag ADT (Authoritative Delegation Types, see {{iana-existing}}).
+For downgrade resistance, zones which contain a DELEG RRset MUST set ADT flag to 1 in at least one of the DNSKEY records published in the zone.
 
 ## DNSSEC Validators {#dnssec-validators}
 
@@ -627,7 +627,7 @@ Long chains of include-delegi information ({{nameserver-info}}), and those with 
 To prevent this, the resolver SHOULD NOT follow more than 3 include-delegi chains in an RRset when populating SLIST.
 Note that include-delegi chains can have CNAME steps in them; in such a case, a CNAME step is counted the same as a DELEGI step when determining when to stop following a chain.
 
-## Preventing Downgrade Attacks
+## Preventing Downgrade Attacks {#downgrade-attacks}
 
 During the rollout of the DELEG protocol, the operator of an authoritative server can upgrade the server software to be DELEG-aware before changing any DNS zones.
 Such deployment should work and provide DELEG-aware clients with correct DELEG-aware answers.
@@ -644,7 +644,7 @@ Any single DNSKEY with the ADT flag set to 1 is sufficient; the zone can introdu
 
 # IANA Considerations
 
-## Changes to Existing Registries
+## Changes to Existing Registries {#iana-existing}
 
 All new allocations should reference this document.
 
