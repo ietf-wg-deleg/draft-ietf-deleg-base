@@ -615,8 +615,20 @@ This section gives an overview of some of those considerations.
 
 TODO: Add more here
 
-This document explicitly allows zones to be delegated using DELEG records without also using NS records; delegating a zone with both DELEG and NS records is allowed.
-This means that automated software that creates or checks the validity of a zone before the zone can be deployed many need to be updated to allow delegated zones without NS records, possibly enabled by a configuration option.
+## NS and DELEG Combined
+
+This document explicitly allows zones to be delegated using DELEG records without also using NS records; delegating a zone with both DELEG and NS records is also allowed.
+Software to manage delegations or check the validity of zones need to be updated to allow delegations with all combinations of (with, without) * (NS, DELEG) records.
+
+If both NS and DELEG records are present, zone managers might want to check consistency across both RRsets, subject to local policy.
+This specification treats both NS and DELEG RRsets as completely independent on the protocol level
+but it does not prohibit a provisioning system from generating one record type from the other.
+
+## NS Not Required
+
+A zone delegated using DELEG records is not reachable by non-DELEG aware resolvers.
+In that case the zone is not required to have NS RRset in the child zone apex.
+Software to manage zone content or check the validity of zones need to be updated to allow zones without apex NS RRset.
 
 # Security Considerations
 
