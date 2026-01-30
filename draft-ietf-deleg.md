@@ -428,7 +428,7 @@ If any of the listed DelegInfo elements is not found, stop processing this recor
 1. If a record has more than one type of server information key (excluding the IPv4/IPv6 case, see {{nameserver-info}}), or if it has multiple server information keys of the same type, that record is malformed.
 Stop processing this record.
 
-1. If any DNS name referenced by server-name key or the include-delegi key is equal to or is a subdomain of the delegated domain (that is, if the name is the same as the DELEG record owner), that record is malformed.
+1. If any DNS name referenced by server-name key or the include-delegi key is equal to or is a subdomain of the delegated domain (i.e. the DELEG record owner), that record is malformed.
 Stop processing this record.
 
    This check MUST be performed against the original owner name of the DELEG record even if the currently-processed record is a DELEGI record that was included by the original DELEG record. The purpose of this check is to ensure deterministic behavior. Not performing this check would allow delegations to be reachable only with certain cache content and/or a specific algorithm for server selection from SLIST.
