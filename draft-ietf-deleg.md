@@ -203,7 +203,7 @@ but it references DelegInfo elements instead of SvcParam elements.
 The permissible lengths depend on the DelegInfoKey value.
 Some future keys may have no DelegInfoValue, which would be indicated with an explicit 0 length.
 
-## Overview of Differences between DELEG and DELEGI Semantics
+## Semantics
 
 The following is a brief summary of semantic differences between the DELEG and DELEGI types.
 
