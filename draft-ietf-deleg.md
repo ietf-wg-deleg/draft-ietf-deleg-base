@@ -286,8 +286,26 @@ The value in the wire format is a sequence of DelegInfoKey numeric values in net
 
 The "mandatory" key itself is optional, but when it is present, the RR in which it appears MUST NOT be used by a resolver in the resolution process if any of the DelegInfoKeys referenced by the "mandatory" DelegInfo element are not supported in the resolver's implementation. See {{slist}}.
 
+# Signaling DELEG Support {#de-bit}
+
+This document defines a new EDNS flag to signal that an initiator and responder are DELEG-aware.
+
+This flag is referred to as the "DELEG" (DE) bit, expected to be assigned by IANA at Bit 2 in the EDNS Header Flags registry.
+It is part of OPT RR TTL as described in {{!RFC6891}}, as follows:
+
+                +0 (MSB)                +1 (LSB)
+         +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
+      0: |   EXTENDED-RCODE      |       VERSION         |
+         +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
+      2: |DO|CO|DE|              Z                       |
+         +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
+
+If a query had DE bit set to one, and responder is DELEG-aware, it MUST set DE bit in response to one.
 
 # Use of DELEG Records
+There will be both DELEG and NS needed for delegation for a long time.
+Both legacy delegation and the DELEG protocol enable recursive resolution.
+DELEG-aware resolver therefore does not need NS records or glue information in a referral response.
 
 The DELEG RRset MAY contain multiple records.
 A DELEG RRset MAY be present with or without NS or DS RRsets at the delegation point, though without NS records then DELEG-unaware software will not be able to resolve records in the the delegated zone.
@@ -296,23 +314,9 @@ DELEG RRsets MUST NOT appear at a zone's apex.
 The erroneous inclusion of DELEG RRset at zone's apex will cause DNSSEC validation failures.
 Servers MAY refuse to load such an invalid zone, similar to the DS RR type.
 
-## Resolvers
+## Resolvers {#resolvers}
 
-### Signaling DELEG Support {#de-bit}
-
-There will be both DELEG and NS needed for delegation for a long time.
-Both legacy delegation and the DELEG protocol enable recursive resolution.
-This document defines a new EDNS flag to signal that a resolver is DELEG-aware and therefore does not need NS records or glue information in a referral response.
-
-A resolver that is DELEG-aware MUST signal in queries that it supports the DELEG protocol by setting a bit in the OPT RR TTL as described in {{!RFC6891}}.
-This bit referred to as the "DELEG" (DE) bit, expected to be assigned by IANA at Bit 2 in the EDNS Header Flags registry, as follows:
-
-                +0 (MSB)                +1 (LSB)
-         +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
-      0: |   EXTENDED-RCODE      |       VERSION         |
-         +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
-      2: |DO|CO|DE|              Z                       |
-         +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
+A resolver that is DELEG-aware MUST signal in queries that it supports the DELEG protocol by setting the DE bit (see {{de-bit}}).
 
 Setting the DE bit to one in a query indicates the resolver understands the DELEG semantics and does not need NS records to follow a referral.
 The DE bit set to 0 indicates the resolver is not DELEG-aware, and therefore can only be served referrals with NS records and other data according to non-DELEG specifications.
@@ -458,8 +462,7 @@ Behavior defined for zone cuts in existing non-DELEG specifications apply to zon
 A notable example of this is that the occlusion (usually accidentally) created by NS records in a parent zone would also be created by DELEG records in a parent zone.
 
 DELEG-aware authoritative servers act differently when handling queries from DELEG-unaware clients (those with DE=0) than from DELEG-aware clients (those with DE=1).
-
-The server MUST copy the value of the DE bit from the query into the response, to signal that it is a DELEG-aware server.
+See {{de-bit}} and {{resolvers}}.
 
 ### DELEG-aware Clients {#aware-referral}
 
