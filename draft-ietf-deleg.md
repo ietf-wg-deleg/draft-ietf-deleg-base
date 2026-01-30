@@ -545,8 +545,8 @@ DELEG RR type defines a zone cut in similar way as NS RR type. This has several 
 
 See examples in {{example-root}} and {{example-occluded}}.
 
-In order to protect validators from downgrade attacks this draft introduces a new DNSKEY flag ADT (Authoritative Delegation Types).
-In zones which contain a DELEG RRset, this flag MUST be set to 1 in at least one of the DNSKEY records published in the zone.
+In order to protect validators from downgrade attacks (see {{downgrade-attacks}}), this draft introduces a new DNSKEY flag ADT (Authoritative Delegation Types, see {{iana-existing}}).
+In order to achieve downgrade resistance, zones which contain a DELEG RRset MUST set the ADT flag to 1 in at least one of the DNSKEY records published in the zone.
 
 ## DNSSEC Validators {#dnssec-validators}
 
@@ -589,10 +589,18 @@ way that DS RR types are.
 
 ### Referral downgrade protection
 
-If the zone is DNSSEC-secure, and if any DNSKEY of the zone has the ADT flag set to 1, a DELEG-aware validator MUST prove the absence of a DELEG RRset in referral responses from this particular zone.
+If the zone is DNSSEC-secure, and if any DNSKEY of the zone has the ADT flag ({{iana-existing}}) set to 1, a DELEG-aware validator MUST prove the absence of a DELEG RRset in referral responses from this particular zone.
 
-Without this check, an attacker could strip the DELEG RRset from a referral response and replace it with an unsigned (and potentially malicious) NS RRset.
+Without this check, an attacker could strip the DELEG RRset from a referral response and replace it with an unsigned (and potentially malicious) NS RRset ({{downgrade-attacks}}).
 A referral response with an unsigned NS and signed DS RRsets does not require additional proofs of nonexistence according to non-DELEG DNSSEC specification, and it would have been accepted as a delegation without the DELEG RRset.
+
+### Positive responses
+
+An existing DELEG RRset is authoritative in, and signed by, the parent zone, similar to a DS RRset (see {{signers}}).
+
+If all the DNSKEY records in zone have the ADT flag set to 0, a validator SHOULD NOT use this fact to treat a positive response with DELEG RRset as bogus for DNSSEC.
+Such a zone would not be protected from downgrade attacks ({{downgrade-attacks}}), but this behavior is consistent with DNSSEC specifications that precede this one:
+validators are not expected to detect inconsistencies in data if a chain of trust can be established.
 
 ### Chaining
 
@@ -627,7 +635,7 @@ Long chains of include-delegi information ({{nameserver-info}}), and those with 
 To prevent this, the resolver SHOULD NOT follow more than 3 include-delegi chains in an RRset when populating SLIST.
 Note that include-delegi chains can have CNAME steps in them; in such a case, a CNAME step is counted the same as a DELEGI step when determining when to stop following a chain.
 
-## Preventing Downgrade Attacks
+## Preventing Downgrade Attacks {#downgrade-attacks}
 
 During the rollout of the DELEG protocol, the operator of an authoritative server can upgrade the server software to be DELEG-aware before changing any DNS zones.
 Such deployment should work and provide DELEG-aware clients with correct DELEG-aware answers.
@@ -644,7 +652,7 @@ Any single DNSKEY with the ADT flag set to 1 is sufficient; the zone can introdu
 
 # IANA Considerations
 
-## Changes to Existing Registries
+## Changes to Existing Registries {#iana-existing}
 
 All new allocations should reference this document.
 
