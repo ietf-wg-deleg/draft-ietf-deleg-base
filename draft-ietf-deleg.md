@@ -300,12 +300,13 @@ It is part of OPT RR TTL as described in {{!RFC6891}}, as follows:
       2: |DO|CO|DE|              Z                       |
          +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
 
-If a query had DE bit set to one, and responder is DELEG-aware, it MUST set DE bit in response to one.
+If a query has the DE bit set to one, and responder is DELEG-aware, the responder MUST set the DE bit in the response to one.
 
 # Use of DELEG Records
-There will be both DELEG and NS needed for delegation for a long time.
+
+Both the DELEG protocol and legacy delegation (that is, NS records) will be used for delegation for a long time.
 Both legacy delegation and the DELEG protocol enable recursive resolution.
-DELEG-aware resolver therefore does not need NS records or glue information in a referral response.
+A DELEG-aware resolver therefore does not need the NS records or glue information in a referral response.
 
 The DELEG RRset MAY contain multiple records.
 A DELEG RRset MAY be present with or without NS or DS RRsets at the delegation point, though without NS records then DELEG-unaware software will not be able to resolve records in the the delegated zone.
@@ -316,7 +317,7 @@ Servers MAY refuse to load such an invalid zone, similar to the DS RR type.
 
 ## Resolvers {#resolvers}
 
-A resolver that is DELEG-aware MUST signal in queries that it supports the DELEG protocol by setting the DE bit (see {{de-bit}}).
+A resolver that is DELEG-aware MUST signal in queries that it supports the DELEG protocol by setting the DE bit to one (see {{de-bit}}).
 
 Setting the DE bit to one in a query indicates the resolver understands the DELEG semantics and does not need NS records to follow a referral.
 The DE bit set to 0 indicates the resolver is not DELEG-aware, and therefore can only be served referrals with NS records and other data according to non-DELEG specifications.
