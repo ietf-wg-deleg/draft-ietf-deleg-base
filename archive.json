@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-01-18T01:11:00.771868+00:00",
+  "timestamp": "2026-02-01T01:28:19.464774+00:00",
   "repo": "ietf-wg-deleg/draft-ietf-deleg-base",
   "labels": [
     {
@@ -1034,6 +1034,101 @@
           "updatedAt": "2026-01-12T12:16:49Z"
         }
       ]
+    },
+    {
+      "number": 119,
+      "id": "I_kwDOO41rkM7mouoX",
+      "title": "Clarify SLIST is in fact a set",
+      "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/issues/119",
+      "state": "CLOSED",
+      "author": "pspacek",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Source: Feedback from implementer working on BIND",
+      "createdAt": "2026-01-29T08:23:15Z",
+      "updatedAt": "2026-01-30T09:19:05Z",
+      "closedAt": "2026-01-30T09:19:05Z",
+      "comments": []
+    },
+    {
+      "number": 123,
+      "id": "I_kwDOO41rkM7m9qcQ",
+      "title": "DE bit in responses unclear",
+      "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/issues/123",
+      "state": "OPEN",
+      "author": "pspacek",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "As @each pointed out, should resolver copy the bit into response? What if auth and resolver are in the same process?",
+      "createdAt": "2026-01-30T09:52:11Z",
+      "updatedAt": "2026-01-30T09:52:11Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 124,
+      "id": "I_kwDOO41rkM7m9v0u",
+      "title": "Ambiguity: use DELEG delegations",
+      "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/issues/124",
+      "state": "OPEN",
+      "author": "pspacek",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "@each says:\n\n> \"DNSSEC-secure DNS zones that use DELEG delegations\" \n\nI wasn't sure if you meant the zone containing the delegation or the zone that's being delegated.",
+      "createdAt": "2026-01-30T09:58:24Z",
+      "updatedAt": "2026-01-31T22:59:23Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "body": "@each Is this better?",
+          "createdAt": "2026-01-30T10:59:22Z",
+          "updatedAt": "2026-01-30T10:59:22Z"
+        },
+        {
+          "author": "each",
+          "authorAssociation": "NONE",
+          "body": "Yes, it is, thanks.",
+          "createdAt": "2026-01-31T22:59:23Z",
+          "updatedAt": "2026-01-31T22:59:23Z"
+        }
+      ]
+    },
+    {
+      "number": 126,
+      "id": "I_kwDOO41rkM7m_C2U",
+      "title": "Bit values: one/1, zero/0",
+      "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/issues/126",
+      "state": "OPEN",
+      "author": "pspacek",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Editorial nit - in several places we alternate between \"set to one\" or \"set to 1\" for individual bits. Pick one and stick to it.",
+      "createdAt": "2026-01-30T11:32:58Z",
+      "updatedAt": "2026-01-30T11:33:12Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 128,
+      "id": "I_kwDOO41rkM7nAC8S",
+      "title": "Hardcoded numeric limits",
+      "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/issues/128",
+      "state": "OPEN",
+      "author": "pspacek",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Should we hardcode numberic limits like '3 steps max'? I think we should not because rest of the DNS does not have it.\n\nI would leave it to https://datatracker.ietf.org/doc/html/draft-fujiwara-dnsop-dns-upper-limit-values",
+      "createdAt": "2026-01-30T12:43:09Z",
+      "updatedAt": "2026-01-30T12:43:17Z",
+      "closedAt": null,
+      "comments": []
     }
   ],
   "pulls": [
@@ -5747,6 +5842,237 @@
           "body": "This change works for me.",
           "createdAt": "2026-01-13T16:19:34Z",
           "updatedAt": "2026-01-13T16:19:34Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 120,
+      "id": "PR_kwDOO41rkM7AMqe7",
+      "title": "RR type and SLIST clarifications",
+      "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/pull/120",
+      "state": "MERGED",
+      "author": "pspacek",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2026-01-29T18:06:11Z",
+      "updatedAt": "2026-01-30T09:19:28Z",
+      "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
+      "baseRefName": "main",
+      "baseRefOid": "62d00c1cc67be657f576089ec83e19f1d4b889c8",
+      "headRepository": "pspacek/draft-ietf-deleg-base",
+      "headRefName": "rrtype-clarif",
+      "headRefOid": "c9b8c79291c2e8b137a65d4e4f3bc850ae749477",
+      "closedAt": "2026-01-30T09:19:04Z",
+      "mergedAt": "2026-01-30T09:19:04Z",
+      "mergedBy": "pspacek",
+      "mergeCommit": {
+        "oid": "765fe1e0020029c9853869690c6bebe983d38f29"
+      },
+      "comments": [
+        {
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "body": "@paulehoffman When I was in there I moved the RR semantics description into section 3 as we discussed today. You are right, this seems to be much cleaner. I've added bunch of cross-links, please double check.",
+          "createdAt": "2026-01-29T18:07:40Z",
+          "updatedAt": "2026-01-29T18:07:40Z"
+        },
+        {
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "body": "@paulehoffman Please see https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/pull/120/commits/c9b8c79291c2e8b137a65d4e4f3bc850ae749477 and the commit message for explanation. Feel free to propose different wording.",
+          "createdAt": "2026-01-30T09:19:28Z",
+          "updatedAt": "2026-01-30T09:19:28Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOO41rkM7eCPna",
+          "commit": {
+            "abbreviatedOid": "8103388"
+          },
+          "author": "paulehoffman",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "Seems fine, ship it. I fixed a few minor grammar bits.",
+          "createdAt": "2026-01-29T21:24:35Z",
+          "updatedAt": "2026-01-29T23:22:41Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 121,
+      "id": "PR_kwDOO41rkM7AWQDy",
+      "title": "Shorten Semantics section title",
+      "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/pull/121",
+      "state": "MERGED",
+      "author": "pspacek",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2026-01-30T09:23:02Z",
+      "updatedAt": "2026-01-30T09:23:17Z",
+      "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
+      "baseRefName": "main",
+      "baseRefOid": "765fe1e0020029c9853869690c6bebe983d38f29",
+      "headRepository": "pspacek/draft-ietf-deleg-base",
+      "headRefName": "editorial",
+      "headRefOid": "f2c0e0d58ab5d08af392594f81ec0cffd6c9cc9f",
+      "closedAt": "2026-01-30T09:23:17Z",
+      "mergedAt": "2026-01-30T09:23:17Z",
+      "mergedBy": "pspacek",
+      "mergeCommit": {
+        "oid": "c70f37a9823f92d4eee6322e1f2b39da374af6f2"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 122,
+      "id": "PR_kwDOO41rkM7AWmet",
+      "title": "Separate DE bit definition from Resolvers section, always copy DE to response",
+      "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/pull/122",
+      "state": "OPEN",
+      "author": "pspacek",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "It was raised by Evan Hunt @each that DE bit in responses was not defined for all cases. Also it gets confusing when authoritative a resolver is running in a single process and the query crosses the boundary between them.\r\n\r\nTo sort this out I separated DE bit definition from Resolver section into a new stand-alone section, and defined DE bit in responses there.\r\n\r\nFixes: #123 ",
+      "createdAt": "2026-01-30T09:51:27Z",
+      "updatedAt": "2026-01-30T19:20:49Z",
+      "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
+      "baseRefName": "main",
+      "baseRefOid": "c70f37a9823f92d4eee6322e1f2b39da374af6f2",
+      "headRepository": "pspacek/draft-ietf-deleg-base",
+      "headRefName": "de-bit-clarif",
+      "headRefOid": "6e2af5922eda56f1e955c0a04140212976d46aa2",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 125,
+      "id": "PR_kwDOO41rkM7AWy34",
+      "title": "Clarify which zone has to have ADT=1",
+      "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/pull/125",
+      "state": "OPEN",
+      "author": "pspacek",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Fixes: #124",
+      "createdAt": "2026-01-30T10:06:51Z",
+      "updatedAt": "2026-01-30T19:22:36Z",
+      "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
+      "baseRefName": "main",
+      "baseRefOid": "c70f37a9823f92d4eee6322e1f2b39da374af6f2",
+      "headRepository": "pspacek/draft-ietf-deleg-base",
+      "headRefName": "use-contain-clarif",
+      "headRefOid": "6009662111c503dcd61aeb6f691dd547c51cd47c",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOO41rkM7eUyV5",
+          "commit": {
+            "abbreviatedOid": "6009662"
+          },
+          "author": "paulehoffman",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "This new wording seems good to me.",
+          "createdAt": "2026-01-30T19:22:36Z",
+          "updatedAt": "2026-01-30T19:22:36Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 127,
+      "id": "PR_kwDOO41rkM7AYrew",
+      "title": "Clarify ADT bit",
+      "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/pull/127",
+      "state": "OPEN",
+      "author": "pspacek",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2026-01-30T12:40:06Z",
+      "updatedAt": "2026-01-30T19:29:26Z",
+      "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
+      "baseRefName": "main",
+      "baseRefOid": "c70f37a9823f92d4eee6322e1f2b39da374af6f2",
+      "headRepository": "pspacek/draft-ietf-deleg-base",
+      "headRefName": "adt-clarif",
+      "headRefOid": "fd705b2b4b916d6092c82289f8c8da4ce543438e",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOO41rkM7eU4Jt",
+          "commit": {
+            "abbreviatedOid": "fd705b2"
+          },
+          "author": "paulehoffman",
+          "authorAssociation": "COLLABORATOR",
+          "state": "CHANGES_REQUESTED",
+          "body": "I do not understand what the newly-added \"validators are not expected to detect inconsistencies in data if a chain of trust can be established\" means.",
+          "createdAt": "2026-01-30T19:29:26Z",
+          "updatedAt": "2026-01-30T19:29:26Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 129,
+      "id": "PR_kwDOO41rkM7AaFjm",
+      "title": "Operational Considerations - Authoritative",
+      "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/pull/129",
+      "state": "OPEN",
+      "author": "pspacek",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2026-01-30T14:25:29Z",
+      "updatedAt": "2026-01-30T19:41:16Z",
+      "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
+      "baseRefName": "main",
+      "baseRefOid": "c70f37a9823f92d4eee6322e1f2b39da374af6f2",
+      "headRepository": "pspacek/draft-ietf-deleg-base",
+      "headRefName": "operational",
+      "headRefOid": "11cfab74283f551be9092b28009ead82c3fc3a35",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOO41rkM7eVE3P",
+          "commit": {
+            "abbreviatedOid": "11cfab7"
+          },
+          "author": "paulehoffman",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "These look good, but I expect there will be further rewording after the draft is submitted.",
+          "createdAt": "2026-01-30T19:41:16Z",
+          "updatedAt": "2026-01-30T19:41:16Z",
           "comments": []
         }
       ]
