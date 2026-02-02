@@ -7,8 +7,8 @@ Internet-Draft                                                       ISC
 Updates: 1034, 1035, 4035, 6672, 6840 (if                       R. Weber
          approved)                                   Akamai Technologies
 Intended status: Standards Track                             D. Lawrence
-Expires: 3 August 2026                                        Salesforce
-                                                         30 January 2026
+Expires: 6 August 2026                                        Salesforce
+                                                         2 February 2026
 
 
                      Extensible Delegation for DNS
@@ -59,7 +59,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 3 August 2026.
+   This Internet-Draft will expire on 6 August 2026.
 
 Copyright Notice
 
@@ -1046,17 +1046,17 @@ Table of Contents
    However, the deployment will not be protected from downgrade attacks
    against the DELEG protocol.
 
-   To protect DNSSEC-secure DNS zones that use DELEG delegations, the
-   delegating zone needs to have at least one DNSKEY with the ADT flag
-   set to 1.  Failure to set this flag in a DNSKEY record in the zone
-   allows an attacker to remove the DELEG RRset from referrals which
-   contain the DS RRset, and replace the original signed DELEG RRset
-   with an arbitrary unsigned NS set.  Doing so would be a downgrade
-   from the strong protection offered by DNSSEC for DELEG.  That is, the
-   DELEG protocol when used with upgraded DNSKEY records gives the same
-   protection to DELEG that the zone's DS RR set has.  Without DELEG,
-   there are no security guarantees for the NS RR set on the parent side
-   of the zone cut.
+   To protect DNSSEC-secure DNS zones that contain DELEG delegations,
+   the delegating zone needs to have at least one DNSKEY with the ADT
+   flag set to 1.  Failure to set this flag in a DNSKEY record in the
+   zone allows an attacker to remove the DELEG RRset from referrals
+   which contain the DS RRset, and replace the original signed DELEG
+   RRset with an arbitrary unsigned NS set.  Doing so would be a
+   downgrade from the strong protection offered by DNSSEC for DELEG.
+   That is, the DELEG protocol when used with upgraded DNSKEY records
+   gives the same protection to DELEG that the zone's DS RR set has.
+   Without DELEG, there are no security guarantees for the NS RR set on
+   the parent side of the zone cut.
 
    Please note that a full DNSKEY rollover is not necessary to achieve
    the downgrade protection for DELEG.  Any single DNSKEY with the ADT
