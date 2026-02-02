@@ -103,6 +103,10 @@ Table of Contents
        5.4.3.  Referral downgrade protection
        5.4.4.  Chaining
    6.  Operational Considerations
+     6.1.  NS and DELEG Combined
+     6.2.  NS Not Required by Protocol
+     6.3.  Authoritative Deployment
+       6.3.1.  Enabling ADT Flag
    7.  Security Considerations
      7.1.  Preventing Over-work Attacks
      7.2.  Preventing Downgrade Attacks
@@ -1010,18 +1014,91 @@ Table of Contents
 
 6.  Operational Considerations
 
-   When an authoritative server or resolover becomes DELEG-aware, new
+   When an authoritative server or resolver becomes DELEG-aware, new
    operational considerations apply to it.  This section gives an
    overview of some of those considerations.
 
-   TODO: Add more here
+6.1.  NS and DELEG Combined
 
    This document explicitly allows zones to be delegated using DELEG
    records without also using NS records; delegating a zone with both
-   DELEG and NS records is allowed.  This means that automated software
-   that creates or checks the validity of a zone before the zone can be
-   deployed many need to be updated to allow delegated zones without NS
-   records, possibly enabled by a configuration option.
+   DELEG and NS records is also allowed.  Software to manage delegations
+   or check the validity of zones need to be updated to allow
+   delegations with all combinations of (with, without) * (NS, DELEG)
+   records.
+
+   If both NS and DELEG records are present, zone managers might want to
+   check consistency across both RRsets, subject to local policy.  This
+   specification treats both NS and DELEG RRsets as completely
+   independent on the protocol level, but it does not prohibit a
+   provisioning system from generating one record type from the other.
+
+6.2.  NS Not Required by Protocol
+
+   A zone delegated exclusively using DELEG records is not resolvable by
+   non-DELEG aware resolvers.  In that case the zone is not required to
+   have NS RRset in the child zone apex.  Software to manage zone
+   content or check the validity of zones needs to be updated to allow
+   zones without an NS RRset at the apex.
+
+6.3.  Authoritative Deployment
+
+   Before adding a first DELEG record into a DNS zone, these steps need
+   to be taken, in this order:
+
+   1.  If zone checkers are used: ensure that the zone checkers are
+       DELEG-aware.
+
+   2.  Ensure that all authoritative servers serving (and transfering)
+       the zone are DELEG-aware.
+
+   3.  If a zone is DNSSEC-signed: Ensure that the signer is DELEG-
+       aware.
+
+   4.  If a zone is DNSSEC-signed: Ensure that at least one DNSKEY
+       record has the ADT flag set to 1.  Failure to do so results in
+       loss of downgrade resistence of the DELEG protocol for this zone;
+       see Section 7.2.
+
+6.3.1.  Enabling ADT Flag
+
+   According to the DNSSEC specification, changing flags of a DNSKEY
+   record changes its Key Tag and thus requires a key rollover.  For
+   this reason, the ADT flag cannot be simply enabled on an existing key
+   without other changes to the record.  Operators are advised to set
+   the ADT flag at the time of generating a new key, as part of a
+   regular key rollover using established procedures.  A zone can safely
+   have keys with ADT flag set to 1 even if the zone does not have any
+   DELEG records.  Turning on the ADT flag can be done months or even
+   years before a first DELEG record is introduced into the zone.
+
+   Please note the downgrade protection is effective if any DNSKEY with
+   ADT flag set to 1 is present, even if this key does not sign any
+   RRset.  In other words, it is sufficient to pre-publish new key, as
+   described in stage 2 of Pre-Publish Zone Signing Key Rollover,
+   section 4.1.1.1 of [RFC6781].
+
+   An extremely conservative approach might be:
+
+   1.  Lower DNSKEY TTL to shorten time to rollback.
+
+   2.  Add a new DNSKEY with ADT flag set to 1, but do not sign any
+       RRsets with this key.
+
+   3.  Monitor deployment for issues.
+
+   4.  Experiment with adding DELEG records at this point, even if the
+       key rollover is not finished.  If there is a problem, withdraw
+       the new, otherwise unused key.
+
+   5.  Finish the key rollover.
+
+   6.  Restore the original DNSKEY TTL.
+
+   Such an approach requires changing only to DNSKEY RRset and resigning
+   it.  Consequently, the time required to withdraw the new DNSKEY
+   record is limited only by DNSKEY TTL + time to sign + time to
+   transfer modified DNSKEY RRset.
 
 7.  Security Considerations
 
@@ -1220,6 +1297,11 @@ Table of Contents
    [RFC6763]  Cheshire, S. and M. Krochmal, "DNS-Based Service
               Discovery", RFC 6763, DOI 10.17487/RFC6763, February 2013,
               <https://www.rfc-editor.org/rfc/rfc6763>.
+
+   [RFC6781]  Kolkman, O., Mekking, W., and R. Gieben, "DNSSEC
+              Operational Practices, Version 2", RFC 6781,
+              DOI 10.17487/RFC6781, December 2012,
+              <https://www.rfc-editor.org/rfc/rfc6781>.
 
    [RFC6840]  Weiler, S., Ed. and D. Blacka, Ed., "Clarifications and
               Implementation Notes for DNS Security (DNSSEC)", RFC 6840,
@@ -1638,7 +1720,8 @@ Acknowledgments
    Adhvaryu, Vladimír Čunát, Andreas Schulze.
 
    Other people joined the effort after the initial hackaton: Ben
-   Schwartz, Bob Halley, Paul Hoffman, Miek Gieben ...
+   Schwartz, Bob Halley, Paul Hoffman, Miek Gieben, Ray Hunter, Håvard
+   Eidnes ...
 
    RESINFO extension was contributed by Florian Obser.
 
