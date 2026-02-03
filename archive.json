@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-02-01T01:28:19.464774+00:00",
+  "timestamp": "2026-02-03T01:20:35.614024+00:00",
   "repo": "ietf-wg-deleg/draft-ietf-deleg-base",
   "labels": [
     {
@@ -1056,15 +1056,15 @@
       "id": "I_kwDOO41rkM7m9qcQ",
       "title": "DE bit in responses unclear",
       "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/issues/123",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "pspacek",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "As @each pointed out, should resolver copy the bit into response? What if auth and resolver are in the same process?",
       "createdAt": "2026-01-30T09:52:11Z",
-      "updatedAt": "2026-01-30T09:52:11Z",
-      "closedAt": null,
+      "updatedAt": "2026-02-02T09:46:13Z",
+      "closedAt": "2026-02-02T09:46:13Z",
       "comments": []
     },
     {
@@ -1072,15 +1072,15 @@
       "id": "I_kwDOO41rkM7m9v0u",
       "title": "Ambiguity: use DELEG delegations",
       "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/issues/124",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "pspacek",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "@each says:\n\n> \"DNSSEC-secure DNS zones that use DELEG delegations\" \n\nI wasn't sure if you meant the zone containing the delegation or the zone that's being delegated.",
       "createdAt": "2026-01-30T09:58:24Z",
-      "updatedAt": "2026-01-31T22:59:23Z",
-      "closedAt": null,
+      "updatedAt": "2026-02-02T09:12:35Z",
+      "closedAt": "2026-02-02T09:12:35Z",
       "comments": [
         {
           "author": "pspacek",
@@ -1095,6 +1095,13 @@
           "body": "Yes, it is, thanks.",
           "createdAt": "2026-01-31T22:59:23Z",
           "updatedAt": "2026-01-31T22:59:23Z"
+        },
+        {
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Excellent, merging then. Thank you!",
+          "createdAt": "2026-02-02T09:12:13Z",
+          "updatedAt": "2026-02-02T09:12:13Z"
         }
       ]
     },
@@ -5936,25 +5943,35 @@
       "id": "PR_kwDOO41rkM7AWmet",
       "title": "Separate DE bit definition from Resolvers section, always copy DE to response",
       "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/pull/122",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "pspacek",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "It was raised by Evan Hunt @each that DE bit in responses was not defined for all cases. Also it gets confusing when authoritative a resolver is running in a single process and the query crosses the boundary between them.\r\n\r\nTo sort this out I separated DE bit definition from Resolver section into a new stand-alone section, and defined DE bit in responses there.\r\n\r\nFixes: #123 ",
       "createdAt": "2026-01-30T09:51:27Z",
-      "updatedAt": "2026-01-30T19:20:49Z",
+      "updatedAt": "2026-02-02T09:46:14Z",
       "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
       "baseRefName": "main",
       "baseRefOid": "c70f37a9823f92d4eee6322e1f2b39da374af6f2",
       "headRepository": "pspacek/draft-ietf-deleg-base",
       "headRefName": "de-bit-clarif",
       "headRefOid": "6e2af5922eda56f1e955c0a04140212976d46aa2",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
-      "comments": [],
+      "closedAt": "2026-02-02T09:46:12Z",
+      "mergedAt": "2026-02-02T09:46:12Z",
+      "mergedBy": "pspacek",
+      "mergeCommit": {
+        "oid": "b5509599a9eac25f65053a6e69a5583d78af5958"
+      },
+      "comments": [
+        {
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Seems the discussion on the list about DE bit is about other things than this change, so I'm going to merge it and take it from there.",
+          "createdAt": "2026-02-02T09:46:14Z",
+          "updatedAt": "2026-02-02T09:46:14Z"
+        }
+      ],
       "reviews": []
     },
     {
@@ -5962,24 +5979,26 @@
       "id": "PR_kwDOO41rkM7AWy34",
       "title": "Clarify which zone has to have ADT=1",
       "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/pull/125",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "pspacek",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Fixes: #124",
       "createdAt": "2026-01-30T10:06:51Z",
-      "updatedAt": "2026-01-30T19:22:36Z",
+      "updatedAt": "2026-02-02T09:12:34Z",
       "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
       "baseRefName": "main",
       "baseRefOid": "c70f37a9823f92d4eee6322e1f2b39da374af6f2",
       "headRepository": "pspacek/draft-ietf-deleg-base",
       "headRefName": "use-contain-clarif",
       "headRefOid": "6009662111c503dcd61aeb6f691dd547c51cd47c",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2026-02-02T09:12:34Z",
+      "mergedAt": "2026-02-02T09:12:34Z",
+      "mergedBy": "pspacek",
+      "mergeCommit": {
+        "oid": "383b90b1e6d63b4f1b1c610da1b7ec8d18a00d7f"
+      },
       "comments": [],
       "reviews": [
         {
@@ -6009,7 +6028,7 @@
       "labels": [],
       "body": "",
       "createdAt": "2026-01-30T12:40:06Z",
-      "updatedAt": "2026-01-30T19:29:26Z",
+      "updatedAt": "2026-02-02T17:49:26Z",
       "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
       "baseRefName": "main",
       "baseRefOid": "c70f37a9823f92d4eee6322e1f2b39da374af6f2",
@@ -6020,7 +6039,15 @@
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
-      "comments": [],
+      "comments": [
+        {
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "body": "@vcunat Do you happen to have a better wording for this? I tried to say just to what you did in the last 20 years, but in more technical terms.",
+          "createdAt": "2026-02-02T17:49:26Z",
+          "updatedAt": "2026-02-02T17:49:26Z"
+        }
+      ],
       "reviews": [
         {
           "id": "PRR_kwDOO41rkM7eU4Jt",
@@ -6042,24 +6069,26 @@
       "id": "PR_kwDOO41rkM7AaFjm",
       "title": "Operational Considerations - Authoritative",
       "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/pull/129",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "pspacek",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2026-01-30T14:25:29Z",
-      "updatedAt": "2026-01-30T19:41:16Z",
+      "updatedAt": "2026-02-02T17:48:31Z",
       "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
       "baseRefName": "main",
-      "baseRefOid": "c70f37a9823f92d4eee6322e1f2b39da374af6f2",
+      "baseRefOid": "b5509599a9eac25f65053a6e69a5583d78af5958",
       "headRepository": "pspacek/draft-ietf-deleg-base",
       "headRefName": "operational",
-      "headRefOid": "11cfab74283f551be9092b28009ead82c3fc3a35",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "5db776745e2978bc59b28d8974f2f743ec4986a7",
+      "closedAt": "2026-02-02T17:48:31Z",
+      "mergedAt": "2026-02-02T17:48:31Z",
+      "mergedBy": "pspacek",
+      "mergeCommit": {
+        "oid": "750652cdda9bb50581edb604004471d1bacb1456"
+      },
       "comments": [],
       "reviews": [
         {
