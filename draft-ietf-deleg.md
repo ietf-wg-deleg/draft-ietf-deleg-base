@@ -474,13 +474,14 @@ This new zone cut has priority over a legacy delegation.
 
 An explicit query for the DELEG RR type at a delegation point behaves much like query for the DS RR type: the server answers authoritatively from the parent zone.
 All non-DELEG specifications for special handling queries with QTYPE=DS apply equally to QTYPE=DELEG.
-In summary, the server either provides an authoritative DELEG RRset or declares its non-existence, with relevant DNSSEC proofs when requested and available.
+In summary, the server either provides an authoritative DELEG RRset or declares its non-existence, with relevant DNSSEC proofs when requested and available, and with AA bit set.
 
 #### Delegation with DELEG
 
 If the delegation has a DELEG RRset, the authoritative server MUST put the DELEG RRset into the Authority section of the referral.
 In this case, the server MUST NOT include the NS RRset in the Authority section.
 Include the covering RRSIG following the normal DNSSEC procedure for answers with authoritative zone data.
+Note that because the response is a referral with empty Answer section, the AA bit is not set in the header.
 
 Similarly, rules for DS RRset inclusion in referrals apply as specified by the DNSSEC protocol.
 
