@@ -7,8 +7,8 @@ Internet-Draft                                                       ISC
 Updates: 1034, 1035, 4035, 6672, 6840 (if                       R. Weber
          approved)                                   Akamai Technologies
 Intended status: Standards Track                             D. Lawrence
-Expires: 6 August 2026                                        Salesforce
-                                                         2 February 2026
+Expires: 9 August 2026                                        Salesforce
+                                                         5 February 2026
 
 
                      Extensible Delegation for DNS
@@ -59,7 +59,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 6 August 2026.
+   This Internet-Draft will expire on 9 August 2026.
 
 Copyright Notice
 
@@ -101,7 +101,8 @@ Table of Contents
        5.4.1.  Clarifications on Nonexistence Proofs
        5.4.2.  Insecure Delegation Proofs
        5.4.3.  Referral downgrade protection
-       5.4.4.  Chaining
+       5.4.4.  Positive responses
+       5.4.5.  Chaining
    6.  Operational Considerations
      6.1.  NS and DELEG Combined
      6.2.  NS Not Required by Protocol
@@ -929,10 +930,11 @@ Table of Contents
 
    See examples in Appendix A.1 and Appendix A.4.2.3.
 
-   In order to protect validators from downgrade attacks this draft
-   introduces a new DNSKEY flag ADT (Authoritative Delegation Types).
-   In zones which contain a DELEG RRset, this flag MUST be set to 1 in
-   at least one of the DNSKEY records published in the zone.
+   In order to protect validators from downgrade attacks (see
+   Section 7.2) this draft introduces a new DNSKEY flag ADT
+   (Authoritative Delegation Types, see Section 8.1).  For downgrade
+   resistance, zones which contain a DELEG RRset MUST set ADT flag to 1
+   in at least one of the DNSKEY records published in the zone.
 
 5.4.  DNSSEC Validators
 
@@ -984,17 +986,30 @@ Table of Contents
 5.4.3.  Referral downgrade protection
 
    If the zone is DNSSEC-secure, and if any DNSKEY of the zone has the
-   ADT flag set to 1, a DELEG-aware validator MUST prove the absence of
-   a DELEG RRset in referral responses from this particular zone.
+   ADT flag (Section 8.1) set to 1, a DELEG-aware validator MUST prove
+   the absence of a DELEG RRset in referral responses from this
+   particular zone.
 
    Without this check, an attacker could strip the DELEG RRset from a
    referral response and replace it with an unsigned (and potentially
-   malicious) NS RRset.  A referral response with an unsigned NS and
-   signed DS RRsets does not require additional proofs of nonexistence
-   according to non-DELEG DNSSEC specification, and it would have been
-   accepted as a delegation without the DELEG RRset.
+   malicious) NS RRset (Section 7.2).  A referral response with an
+   unsigned NS and signed DS RRsets does not require additional proofs
+   of nonexistence according to non-DELEG DNSSEC specification, and it
+   would have been accepted as a delegation without the DELEG RRset.
 
-5.4.4.  Chaining
+5.4.4.  Positive responses
+
+   An existing DELEG RRset is authoritative in and signed by the parent
+   zone, similarly to DS RRset (see Section 5.3).
+
+   A validator SHOULD NOT treat a positive response with DELEG RRset as
+   DNSSEC-bogus only because all DNSKEYs in zone have ADT flag set to 0.
+   Such zone would not be protected from downgrade attacks (Section 7.2)
+   but this behavior is consistent with other non-DELEG DNSSEC
+   specifications: Validators are not expected to detect inconsistencies
+   in data if a chain of trust can be established.
+
+5.4.5.  Chaining
 
    A Validating Stub Resolver that is DELEG-aware has to use a Security-
    Aware Resolver that is DELEG-aware and, if it is behind a forwarder,

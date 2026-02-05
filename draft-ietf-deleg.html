@@ -1055,7 +1055,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Špaček, et al.</td>
-<td class="center">Expires 6 August 2026</td>
+<td class="center">Expires 9 August 2026</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1071,12 +1071,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <a href="https://www.rfc-editor.org/rfc/rfc1034" class="eref">1034</a>, <a href="https://www.rfc-editor.org/rfc/rfc1035" class="eref">1035</a>, <a href="https://www.rfc-editor.org/rfc/rfc4035" class="eref">4035</a>, <a href="https://www.rfc-editor.org/rfc/rfc6672" class="eref">6672</a>, <a href="https://www.rfc-editor.org/rfc/rfc6840" class="eref">6840</a> (if approved)</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2026-02-02" class="published">2 February 2026</time>
+<time datetime="2026-02-05" class="published">5 February 2026</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2026-08-06">6 August 2026</time></dd>
+<dd class="expires"><time datetime="2026-08-09">9 August 2026</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1137,7 +1137,7 @@ The new delegation records are extensible, can be secured with DNSSEC, and elimi
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 6 August 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 9 August 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1247,7 +1247,10 @@ The new delegation records are extensible, can be secured with DNSSEC, and elimi
                     <p id="section-toc.1-1.5.2.4.2.3.1"><a href="#section-5.4.3" class="auto internal xref">5.4.3</a>.  <a href="#name-referral-downgrade-protecti" class="internal xref">Referral downgrade protection</a></p>
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.4.2.4">
-                    <p id="section-toc.1-1.5.2.4.2.4.1"><a href="#section-5.4.4" class="auto internal xref">5.4.4</a>.  <a href="#name-chaining" class="internal xref">Chaining</a></p>
+                    <p id="section-toc.1-1.5.2.4.2.4.1"><a href="#section-5.4.4" class="auto internal xref">5.4.4</a>.  <a href="#name-positive-responses" class="internal xref">Positive responses</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.4.2.5">
+                    <p id="section-toc.1-1.5.2.4.2.5.1"><a href="#section-5.4.5" class="auto internal xref">5.4.5</a>.  <a href="#name-chaining" class="internal xref">Chaining</a></p>
 </li>
                 </ul>
 </li>
@@ -1999,8 +2002,8 @@ Existing rules from the DNSSEC specifications apply.<a href="#section-5.3-1" cla
 </li>
         </ul>
 <p id="section-5.3-5">See examples in <a href="#example-root" class="auto internal xref">Appendix A.1</a> and <a href="#example-occluded" class="auto internal xref">Appendix A.4.2.3</a>.<a href="#section-5.3-5" class="pilcrow">¶</a></p>
-<p id="section-5.3-6">In order to protect validators from downgrade attacks this draft introduces a new DNSKEY flag ADT (Authoritative Delegation Types).
-In zones which contain a DELEG RRset, this flag MUST be set to 1 in at least one of the DNSKEY records published in the zone.<a href="#section-5.3-6" class="pilcrow">¶</a></p>
+<p id="section-5.3-6">In order to protect validators from downgrade attacks (see <a href="#downgrade-attacks" class="auto internal xref">Section 7.2</a>) this draft introduces a new DNSKEY flag ADT (Authoritative Delegation Types, see <a href="#iana-existing" class="auto internal xref">Section 8.1</a>).
+For downgrade resistance, zones which contain a DELEG RRset MUST set ADT flag to 1 in at least one of the DNSKEY records published in the zone.<a href="#section-5.3-6" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="dnssec-validators">
@@ -2059,20 +2062,31 @@ way that DS RR types are.<a href="#section-5.4.2-2" class="pilcrow">¶</a></p>
           <h4 id="name-referral-downgrade-protecti">
 <a href="#section-5.4.3" class="section-number selfRef">5.4.3. </a><a href="#name-referral-downgrade-protecti" class="section-name selfRef">Referral downgrade protection</a>
           </h4>
-<p id="section-5.4.3-1">If the zone is DNSSEC-secure, and if any DNSKEY of the zone has the ADT flag set to 1, a DELEG-aware validator MUST prove the absence of a DELEG RRset in referral responses from this particular zone.<a href="#section-5.4.3-1" class="pilcrow">¶</a></p>
-<p id="section-5.4.3-2">Without this check, an attacker could strip the DELEG RRset from a referral response and replace it with an unsigned (and potentially malicious) NS RRset.
+<p id="section-5.4.3-1">If the zone is DNSSEC-secure, and if any DNSKEY of the zone has the ADT flag (<a href="#iana-existing" class="auto internal xref">Section 8.1</a>) set to 1, a DELEG-aware validator MUST prove the absence of a DELEG RRset in referral responses from this particular zone.<a href="#section-5.4.3-1" class="pilcrow">¶</a></p>
+<p id="section-5.4.3-2">Without this check, an attacker could strip the DELEG RRset from a referral response and replace it with an unsigned (and potentially malicious) NS RRset (<a href="#downgrade-attacks" class="auto internal xref">Section 7.2</a>).
 A referral response with an unsigned NS and signed DS RRsets does not require additional proofs of nonexistence according to non-DELEG DNSSEC specification, and it would have been accepted as a delegation without the DELEG RRset.<a href="#section-5.4.3-2" class="pilcrow">¶</a></p>
 </section>
 </div>
-<div id="chaining">
+<div id="positive-responses">
 <section id="section-5.4.4">
-          <h4 id="name-chaining">
-<a href="#section-5.4.4" class="section-number selfRef">5.4.4. </a><a href="#name-chaining" class="section-name selfRef">Chaining</a>
+          <h4 id="name-positive-responses">
+<a href="#section-5.4.4" class="section-number selfRef">5.4.4. </a><a href="#name-positive-responses" class="section-name selfRef">Positive responses</a>
           </h4>
-<p id="section-5.4.4-1">A Validating Stub Resolver that is DELEG-aware has to use a Security-Aware Resolver that is DELEG-aware and, if it is behind a forwarder, that forwarder has to be security-aware and DELEG-aware as well.<a href="#section-5.4.4-1" class="pilcrow">¶</a></p>
-<p id="section-5.4.4-2"><span>[<a href="#RFC9606" class="cite xref">RFC9606</a>]</span> specifies a DNS resource record type RESINFO to allow resolvers to publish information about their capabilities and policies. This can be used to inform DNS clients that DELEG is supported by the DNS resolver.<a href="#section-5.4.4-2" class="pilcrow">¶</a></p>
-<p id="section-5.4.4-3">A resolver which supports <span>[<a href="#RFC9606" class="cite xref">RFC9606</a>]</span> SHOULD add the "deleg" key if it supports DELEG protocol.<a href="#section-5.4.4-3" class="pilcrow">¶</a></p>
-<p id="section-5.4.4-4">Note that, per the rules for the keys defined in Section 6.4 of <span>[<a href="#RFC6763" class="cite xref">RFC6763</a>]</span>, if there is no '=' in a key, then it is a boolean attribute, simply identified as being present, with no value.<a href="#section-5.4.4-4" class="pilcrow">¶</a></p>
+<p id="section-5.4.4-1">An existing DELEG RRset is authoritative in and signed by the parent zone, similarly to DS RRset (see <a href="#signers" class="auto internal xref">Section 5.3</a>).<a href="#section-5.4.4-1" class="pilcrow">¶</a></p>
+<p id="section-5.4.4-2">A validator SHOULD NOT treat a positive response with DELEG RRset as DNSSEC-bogus only because all DNSKEYs in zone have ADT flag set to 0.
+Such zone would not be protected from downgrade attacks (<a href="#downgrade-attacks" class="auto internal xref">Section 7.2</a>) but this behavior is consistent with other non-DELEG DNSSEC specifications:
+Validators are not expected to detect inconsistencies in data if a chain of trust can be established.<a href="#section-5.4.4-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="chaining">
+<section id="section-5.4.5">
+          <h4 id="name-chaining">
+<a href="#section-5.4.5" class="section-number selfRef">5.4.5. </a><a href="#name-chaining" class="section-name selfRef">Chaining</a>
+          </h4>
+<p id="section-5.4.5-1">A Validating Stub Resolver that is DELEG-aware has to use a Security-Aware Resolver that is DELEG-aware and, if it is behind a forwarder, that forwarder has to be security-aware and DELEG-aware as well.<a href="#section-5.4.5-1" class="pilcrow">¶</a></p>
+<p id="section-5.4.5-2"><span>[<a href="#RFC9606" class="cite xref">RFC9606</a>]</span> specifies a DNS resource record type RESINFO to allow resolvers to publish information about their capabilities and policies. This can be used to inform DNS clients that DELEG is supported by the DNS resolver.<a href="#section-5.4.5-2" class="pilcrow">¶</a></p>
+<p id="section-5.4.5-3">A resolver which supports <span>[<a href="#RFC9606" class="cite xref">RFC9606</a>]</span> SHOULD add the "deleg" key if it supports DELEG protocol.<a href="#section-5.4.5-3" class="pilcrow">¶</a></p>
+<p id="section-5.4.5-4">Note that, per the rules for the keys defined in Section 6.4 of <span>[<a href="#RFC6763" class="cite xref">RFC6763</a>]</span>, if there is no '=' in a key, then it is a boolean attribute, simply identified as being present, with no value.<a href="#section-5.4.5-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -2211,7 +2225,7 @@ Any single DNSKEY with the ADT flag set to 1 is sufficient; the zone can introdu
       <h2 id="name-iana-considerations">
 <a href="#section-8" class="section-number selfRef">8. </a><a href="#name-iana-considerations" class="section-name selfRef">IANA Considerations</a>
       </h2>
-<div id="changes-to-existing-registries">
+<div id="iana-existing">
 <section id="section-8.1">
         <h3 id="name-changes-to-existing-registr">
 <a href="#section-8.1" class="section-number selfRef">8.1. </a><a href="#name-changes-to-existing-registr" class="section-name selfRef">Changes to Existing Registries</a>
