@@ -124,7 +124,7 @@ DELEGPARAM records have the same format as DELEG records; thus, they can have th
 The DELEG protocol changes how zones are signed ({{signers}}) and validated ({{dnssec-validators}}).
 The changes are primarily because DELEG RRsets are authoritative on the parent side of a zone cut and thus are signed and validated as authoritative data (similar to DS records).
 
-A zone might be delegated with only DELEG records and no NS records.
+A zone might be delegated with only DELEG records but no NS records.
 Such a zone would be invisible to DELEG-unaware resolvers.
 
 There are many parts of the DELEG protocol that are not included in this brief overview.
@@ -381,7 +381,7 @@ Neither {{RFC1034}} nor this document define how a resolver uses SLIST; they onl
 
 A DELEG-aware SLIST needs to be able to hold two types of information, delegations defined by NS records and delegations defined by DELEG records.
 DELEG and NS delegations can create cyclic dependencies and/or lead to duplicate entries which point to the same server.
-A recommended priority for resolvers is to enforce suitable limits to prevent damage even if someone has incorrectly configured some of the data used to create an SLIST;
+A recommended practice for resolvers is to enforce suitable limits to prevent damage even if someone has incorrectly configured the data used to create an SLIST;
 this is the same recommendation as is made in Section 5.3.3 of {{RFC1034}}.
 
 This leads to a modifications of the description from earlier documents for DELEG-aware resolvers can find the best servers to ask.
@@ -550,7 +550,7 @@ DELEG RR type defines a zone cut in similar way as NS RR type. This has several 
 See examples in {{example-root}} and {{example-occluded}}.
 
 In order to protect validators from downgrade attacks (see {{downgrade-attacks}}) this draft introduces a new DNSKEY flag ADT (Authoritative Delegation Types, see {{iana-existing}}).
-For downgrade resistance, zones which contain a DELEG RRset MUST set ADT flag to 1 in at least one of the DNSKEY records published in the zone.
+To achieve downgrade resistance, zones which contain a DELEG RRset MUST set ADT flag to 1 in at least one of the DNSKEY records published in the zone.
 
 ## DNSSEC Validators {#dnssec-validators}
 
@@ -604,7 +604,7 @@ An existing DELEG RRset is authoritative in and signed by the parent zone, simil
 
 A validator SHOULD NOT treat a positive response with DELEG RRset as DNSSEC-bogus only because all DNSKEYs in zone have ADT flag set to 0.
 Such zone would not be protected from downgrade attacks ({{downgrade-attacks}}) but this behavior is consistent with other non-DELEG DNSSEC specifications:
-Validators are not expected to detect inconsistencies in data if a chain of trust can be established.
+validators are not expected to detect inconsistencies in data if a chain of trust can be established.
 
 ### Chaining
 
@@ -638,7 +638,7 @@ The decision to drop NS records should be guided by operational measurements of 
 ## NS and DELEG Combined
 
 This document explicitly allows zones to be delegated using DELEG records without also using NS records; delegating a zone with both DELEG and NS records is also allowed.
-Software to manage delegations or check the validity of zones need to be updated to allow delegations with all combinations of (with, without) * (NS, DELEG) records.
+Software that manages delegations or checks the validity of zones need to be updated to allow delegations with all combinations of (with, without) * (NS, DELEG) records.
 
 If both NS and DELEG records are present, zone managers might want to check consistency across both RRsets, subject to local policy.
 This specification treats both NS and DELEG RRsets as completely independent on the protocol level,
@@ -650,8 +650,8 @@ Before adding a first DELEG record into a DNS zone, these steps need to be taken
 
 1. If zone checkers are used: ensure that the zone checkers are DELEG-aware.
 1. Ensure that all authoritative servers serving (and transfering) the zone are DELEG-aware.
-1. If a zone is DNSSEC-signed: Ensure that the signer is DELEG-aware.
-1. If a zone is DNSSEC-signed: Ensure that at least one DNSKEY record has the ADT flag set to 1. Failure to do so results in loss of downgrade resistence of the DELEG protocol for this zone; see {{downgrade-attacks}}.
+1. If a zone is DNSSEC-signed: ensure that the signer is DELEG-aware.
+1. If a zone is DNSSEC-signed: ensure that at least one DNSKEY record has the ADT flag set to 1. Failure to do so results in loss of downgrade resistence of the DELEG protocol for this zone; see {{downgrade-attacks}}.
 
 ### Enabling ADT Flag
 
@@ -661,7 +661,7 @@ Operators are advised to set the ADT flag at the time of generating a new key, a
 A zone can safely have keys with ADT flag set to 1 even if the zone does not have any DELEG records.
 Turning on the ADT flag can be done months or even years before a first DELEG record is introduced into the zone.
 
-Please note the downgrade protection is effective if any DNSKEY with ADT flag set to 1 is present, even if this key does not sign any RRset.
+Downgrade protection is effective if any DNSKEY with ADT flag set to 1 is present, even if this key does not sign any RRset.
 In other words, it is sufficient to pre-publish new key, as described in stage 2 of Pre-Publish Zone Signing Key Rollover, section 4.1.1.1 of {{!RFC6781}}.
 
 An extremely conservative approach might be:
