@@ -300,7 +300,7 @@ It is part of OPT RR TTL as described in {{!RFC6891}}, as follows:
       2: |DO|CO|DE|              Z                       |
          +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
 
-If a query has the DE bit set to one, and responder is DELEG-aware, the responder MUST set the DE bit in the response to one.
+If a query has the DE bit set to 1, and responder is DELEG-aware, the responder MUST set the DE bit in the response to 1.
 
 # Use of DELEG Records
 
@@ -317,9 +317,9 @@ Servers MAY refuse to load such an invalid zone, similar to the DS RR type.
 
 ## Resolvers {#resolvers}
 
-A resolver that is DELEG-aware MUST signal in queries that it supports the DELEG protocol by setting the DE bit to one (see {{de-bit}}).
+A resolver that is DELEG-aware MUST signal in queries that it supports the DELEG protocol by setting the DE bit to 1 (see {{de-bit}}).
 
-Setting the DE bit to one in a query indicates the resolver understands the DELEG semantics and does not need NS records to follow a referral.
+Setting the DE bit to 1 in a query indicates the resolver understands the DELEG semantics and does not need NS records to follow a referral.
 The DE bit set to 0 indicates the resolver is not DELEG-aware, and therefore can only be served referrals with NS records and other data according to non-DELEG specifications.
 
 ### Referral
