@@ -1119,6 +1119,10 @@ To visualize end result of this process we represent full set of name servers in
 
 Implementations are free to use arbitrary representation for this data as it is not directly exposed via DNS protocol.
 
+# Test Vectors
+
+TODO: In what format? Machine readable would be a win. Perhaps a combination of {{?RFC8427}} and {{?I-D.peltan-edns-presentation-format}}?
+
 # Acknowledgments
 {:numbered="false"}
 
