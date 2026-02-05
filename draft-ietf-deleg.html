@@ -1354,10 +1354,13 @@ The new delegation records are extensible, can be secured with DNSSEC, and elimi
             </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.11">
-            <p id="section-toc.1-1.11.1"><a href="#appendix-B" class="auto internal xref"></a><a href="#name-acknowledgments" class="internal xref">Acknowledgments</a></p>
+            <p id="section-toc.1-1.11.1"><a href="#appendix-B" class="auto internal xref">Appendix B</a>.  <a href="#name-test-vectors" class="internal xref">Test Vectors</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.12">
-            <p id="section-toc.1-1.12.1"><a href="#appendix-C" class="auto internal xref"></a><a href="#name-authors-addresses" class="internal xref">Authors' Addresses</a></p>
+            <p id="section-toc.1-1.12.1"><a href="#appendix-C" class="auto internal xref"></a><a href="#name-acknowledgments" class="internal xref">Acknowledgments</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.13">
+            <p id="section-toc.1-1.13.1"><a href="#appendix-D" class="auto internal xref"></a><a href="#name-authors-addresses" class="internal xref">Authors' Addresses</a></p>
 </li>
         </ul>
 </nav>
@@ -2439,6 +2442,10 @@ The section will be removed when IANA makes permanent assignments.<a href="#sect
             <span class="refAuthor">Hoffman, P.</span> and <span class="refAuthor">K. Fujiwara</span>, <span class="refTitle">"DNS Terminology"</span>, <span class="seriesInfo">BCP 219</span>, <span class="seriesInfo">RFC 9499</span>, <span class="seriesInfo">DOI 10.17487/RFC9499</span>, <time datetime="2024-03" class="refDate">March 2024</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc9499">https://www.rfc-editor.org/info/rfc9499</a>&gt;</span>. </div>
 </dd>
 <dd class="break"></dd>
+<dt id="I-D.peltan-edns-presentation-format">[I-D.peltan-edns-presentation-format]</dt>
+        <dd>
+<span class="refAuthor">Peltan, L.</span> and <span class="refAuthor">T. Carpay</span>, <span class="refTitle">"EDNS Presentation and JSON Format"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-peltan-edns-presentation-format-03</span>, <time datetime="2024-04-19" class="refDate">19 April 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-peltan-edns-presentation-format-03">https://datatracker.ietf.org/doc/html/draft-peltan-edns-presentation-format-03</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="I-D.tapril-ns2">[I-D.tapril-ns2]</dt>
         <dd>
 <span class="refAuthor">April, T.</span>, <span class="refTitle">"Parameterized Nameserver Delegation with NS2 and NS2T"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-tapril-ns2-01</span>, <time datetime="2020-07-13" class="refDate">13 July 2020</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-tapril-ns2-01">https://datatracker.ietf.org/doc/html/draft-tapril-ns2-01</a>&gt;</span>. </dd>
@@ -2460,8 +2467,12 @@ The section will be removed when IANA makes permanent assignments.<a href="#sect
 <span class="refAuthor">Kawamura, S.</span> and <span class="refAuthor">M. Kawashima</span>, <span class="refTitle">"A Recommendation for IPv6 Address Text Representation"</span>, <span class="seriesInfo">RFC 5952</span>, <span class="seriesInfo">DOI 10.17487/RFC5952</span>, <time datetime="2010-08" class="refDate">August 2010</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc5952">https://www.rfc-editor.org/rfc/rfc5952</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC8174">[RFC8174]</dt>
-      <dd>
+        <dd>
 <span class="refAuthor">Leiba, B.</span>, <span class="refTitle">"Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 8174</span>, <span class="seriesInfo">DOI 10.17487/RFC8174</span>, <time datetime="2017-05" class="refDate">May 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8174">https://www.rfc-editor.org/rfc/rfc8174</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC8427">[RFC8427]</dt>
+      <dd>
+<span class="refAuthor">Hoffman, P.</span>, <span class="refTitle">"Representing DNS Messages in JSON"</span>, <span class="seriesInfo">RFC 8427</span>, <span class="seriesInfo">DOI 10.17487/RFC8427</span>, <time datetime="2018-07" class="refDate">July 2018</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8427">https://www.rfc-editor.org/rfc/rfc8427</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 </dl>
 </section>
@@ -2913,22 +2924,30 @@ test. DELEG server-ipv6=3fff::33
 </div>
 </section>
 </div>
-<div id="acknowledgments">
+<div id="test-vectors">
 <section id="appendix-B">
+      <h2 id="name-test-vectors">
+<a href="#appendix-B" class="section-number selfRef">Appendix B. </a><a href="#name-test-vectors" class="section-name selfRef">Test Vectors</a>
+      </h2>
+<p id="appendix-B-1">TODO: In what format? Machine readable would be a win. Perhaps a combination of <span>[<a href="#RFC8427" class="cite xref">RFC8427</a>]</span> and <span>[<a href="#I-D.peltan-edns-presentation-format" class="cite xref">I-D.peltan-edns-presentation-format</a>]</span>?<a href="#appendix-B-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="acknowledgments">
+<section id="appendix-C">
       <h2 id="name-acknowledgments">
 <a href="#name-acknowledgments" class="section-name selfRef">Acknowledgments</a>
       </h2>
-<p id="appendix-B-1">This document is heavily based on past work done by Tim April in
+<p id="appendix-C-1">This document is heavily based on past work done by Tim April in
 <span>[<a href="#I-D.tapril-ns2" class="cite xref">I-D.tapril-ns2</a>]</span> and thus extends the thanks to the people helping on this which are:
-John Levine, Erik Nygren, Jon Reed, Ben Kaduk, Mashooq Muhaimen, Jason Moreau, Jerrod Wiesman, Billy Tiemann, Gordon Marx and Brian Wellington.<a href="#appendix-B-1" class="pilcrow">¶</a></p>
-<p id="appendix-B-2">Work on DELEG protocol has started at IETF 118 Hackaton.
-Hackaton participants: Christian Elmerot, David Blacka, David Lawrence, Edward Lewis, Erik Nygren, George Michaelson, Jan Včelák, Klaus Darilion, Libor Peltan, Manu Bretelle, Peter van Dijk, Petr Špaček, Philip Homburg, Ralf Weber, Roy Arends, Shane Kerr, Shumon Huque, Vandan Adhvaryu, Vladimír Čunát, Andreas Schulze.<a href="#appendix-B-2" class="pilcrow">¶</a></p>
-<p id="appendix-B-3">Other people joined the effort after the initial hackaton: Ben Schwartz, Bob Halley, Paul Hoffman, Miek Gieben, Ray Hunter, Håvard Eidnes ...<a href="#appendix-B-3" class="pilcrow">¶</a></p>
-<p id="appendix-B-4">RESINFO extension was contributed by Florian Obser.<a href="#appendix-B-4" class="pilcrow">¶</a></p>
+John Levine, Erik Nygren, Jon Reed, Ben Kaduk, Mashooq Muhaimen, Jason Moreau, Jerrod Wiesman, Billy Tiemann, Gordon Marx and Brian Wellington.<a href="#appendix-C-1" class="pilcrow">¶</a></p>
+<p id="appendix-C-2">Work on DELEG protocol has started at IETF 118 Hackaton.
+Hackaton participants: Christian Elmerot, David Blacka, David Lawrence, Edward Lewis, Erik Nygren, George Michaelson, Jan Včelák, Klaus Darilion, Libor Peltan, Manu Bretelle, Peter van Dijk, Petr Špaček, Philip Homburg, Ralf Weber, Roy Arends, Shane Kerr, Shumon Huque, Vandan Adhvaryu, Vladimír Čunát, Andreas Schulze.<a href="#appendix-C-2" class="pilcrow">¶</a></p>
+<p id="appendix-C-3">Other people joined the effort after the initial hackaton: Ben Schwartz, Bob Halley, Paul Hoffman, Miek Gieben, Ray Hunter, Håvard Eidnes ...<a href="#appendix-C-3" class="pilcrow">¶</a></p>
+<p id="appendix-C-4">RESINFO extension was contributed by Florian Obser.<a href="#appendix-C-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="authors-addresses">
-<section id="appendix-C">
+<section id="appendix-D">
       <h2 id="name-authors-addresses">
 <a href="#name-authors-addresses" class="section-name selfRef">Authors' Addresses</a>
       </h2>

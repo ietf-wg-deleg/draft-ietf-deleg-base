@@ -130,6 +130,7 @@ Table of Contents
        A.4.3.  DO bit clear, DE bit set
        A.4.4.  DO bit set, DE bit set
      A.5.  DELEGI Interpretation
+   Appendix B.  Test Vectors
    Acknowledgments
    Authors' Addresses
 
@@ -1361,6 +1362,13 @@ Table of Contents
               RFC 9499, DOI 10.17487/RFC9499, March 2024,
               <https://www.rfc-editor.org/info/rfc9499>.
 
+   [I-D.peltan-edns-presentation-format]
+              Peltan, L. and T. Carpay, "EDNS Presentation and JSON
+              Format", Work in Progress, Internet-Draft, draft-peltan-
+              edns-presentation-format-03, 19 April 2024,
+              <https://datatracker.ietf.org/doc/html/draft-peltan-edns-
+              presentation-format-03>.
+
    [I-D.tapril-ns2]
               April, T., "Parameterized Nameserver Delegation with NS2
               and NS2T", Work in Progress, Internet-Draft, draft-tapril-
@@ -1390,6 +1398,10 @@ Table of Contents
    [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
               May 2017, <https://www.rfc-editor.org/rfc/rfc8174>.
+
+   [RFC8427]  Hoffman, P., "Representing DNS Messages in JSON",
+              RFC 8427, DOI 10.17487/RFC8427, July 2018,
+              <https://www.rfc-editor.org/rfc/rfc8427>.
 
 Appendix A.  Examples
 
@@ -1718,6 +1730,11 @@ test. DELEG server-ipv6=3fff::33
 
    Implementations are free to use arbitrary representation for this
    data as it is not directly exposed via DNS protocol.
+
+Appendix B.  Test Vectors
+
+   TODO: In what format?  Machine readable would be a win.  Perhaps a
+   combination of [RFC8427] and [I-D.peltan-edns-presentation-format]?
 
 Acknowledgments
 
