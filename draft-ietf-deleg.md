@@ -44,7 +44,7 @@ author:
     email: tale@dd.org
 
 --- abstract
-This document proposes a new extensible method for the delegation of authority for a domain in the Domain Name System (DNS) using DELEG and DELEGI records.
+This document proposes a new extensible method for the delegation of authority for a domain in the Domain Name System (DNS) using DELEG and DELEGPARAM records.
 
 A delegation in the DNS enables efficient and distributed management of the DNS namespace.
 The traditional DNS delegation is based on NS records which contain only hostnames of servers and no other parameters.
@@ -65,15 +65,15 @@ These properties of NS records limit resolvers to unencrypted UDP and TCP port 5
 Even if these two problems were somehow solved, the NS record does not offer extensibility for any other parameters.
 This limitation is a barrier for the efficient introduction of new DNS technology.
 
-The proposed DELEG and DELEGI resource record (RR) types remedy this problem by providing extensible parameters to indicate server capabilities and additional information, such as other transport protocols that a resolver may use.
+The proposed DELEG and DELEGPARAM resource record (RR) types remedy this problem by providing extensible parameters to indicate server capabilities and additional information, such as other transport protocols that a resolver may use.
 
 The DELEG record creates a new delegation.
 It is authoritative in the parent side of delegation and thus can be signed with DNSSEC.
 This makes it possible to validate all delegation parameters, including those of future extensions.
 
-The DELEGI record is an auxiliary record which does not create a delegation by itself but provides an optional layer of indirection.
+The DELEGPARAM record is an auxiliary record which does not create a delegation by itself but provides an optional layer of indirection.
 It can be used to share the same delegation information across any number of zones.
-DELEGI is treated like regular authoritative record.
+DELEGPARAM is treated like regular authoritative record.
 
 The DELEG record can be used instead of or alongside a NS record to create a delegation.
 The combination of DELEG+NS is fully compatible with old resolvers, facilitating the incremental rollout of this new method of delegation.
@@ -109,17 +109,17 @@ If the response is not a referral, the authoritative server doesn't change anyth
 If the response is a referral, the authoritative server checks if there is a DELEG RRset for the queried zone;
 if so, it returns the DELEG RRset instead of the NS RRset in the response ({{aware-referral}}).
 
-Records in the DELEG RRset for a zone describe how to find nameservers for that zone ({{deleg-delegi}}).
+Records in the DELEG RRset for a zone describe how to find nameservers for that zone ({{deleg-delegparam}}).
 The Rdata for DELEG records has key=value pairs ({{nameserver-info}}).
 
 * "server-ipv4" and "server-ipv6" keys have IP addresses for the delegated name servers
 * "server-name" keys have hostnames for the delegated name servers; the addresses must be fetched
-* "include-delegi" keys have domain names which in turn have more information about the delegation
+* "include-delegparam" keys have domain names which in turn have more information about the delegation
 * "mandatory" keys have a list of other keys which the resolver must understand in order to use the record
 
 The DELEG-aware resolver seeing the DELEG RRset uses that information to form the list of best servers to ask about the original zone ({{finding-best}}).
-If the DELEG RRset contains "include-delegi", the resolver queries those hostnames for DELEGI RRsets.
-DELEGI records have the same format as DELEG records; thus, they can have the same key=value pairs.
+If the DELEG RRset contains "include-delegparam", the resolver queries those hostnames for DELEGPARAM RRsets.
+DELEGPARAM records have the same format as DELEG records; thus, they can have the same key=value pairs.
 
 The DELEG protocol changes how zones are signed ({{signers}}) and validated ({{dnssec-validators}}).
 The changes are primarily because DELEG RRsets are authoritative on the parent side of a zone cut and thus are signed and validated as authoritative data (similar to DS records).
@@ -132,9 +132,9 @@ For example, DELEG-aware authoritative servers have choices to make depending bo
 For those readers who learn better from examples than the definitive text, see {{examples}}.
 
 
-# DELEG and DELEGI Resource Record Types {#deleg-delegi}
+# DELEG and DELEGPARAM Resource Record Types {#deleg-delegparam}
 
-The DELEG record, RR type TBD, and the DELEGI record, RR type TBD2 (different from that of DELEG), have the same wire and presentation formats,
+The DELEG record, RR type TBD, and the DELEGPARAM record, RR type TBD2 (different from that of DELEG), have the same wire and presentation formats,
 but their semantics are different as described in a following section.
 These records are defined for the IN class.
 
@@ -152,13 +152,13 @@ The following rules are adapted from SVCB, but with changed names:
 - Each DelegInfoKey has a presentation name and a registered key number.
 - Each DelegInfoValue is in a format specific to its DelegInfoKey.
 
-Implementations can reuse the same code to parse SvcParams and DelegInfos and only plug in a different list of key=value pairs for SVCB/HTTPS and DELEG/DELEGI record families.
+Implementations can reuse the same code to parse SvcParams and DelegInfos and only plug in a different list of key=value pairs for SVCB/HTTPS and DELEG/DELEGPARAM record families.
 
 The initial set of DelegInfoKeys and their formats are defined in {{nameserver-info}}.
 
 ## Presentation Format
 
-The RDATA presentation format of the DELEG and DELEGI resource records consists of a single list, DelegInfos.
+The RDATA presentation format of the DELEG and DELEGPARAM resource records consists of a single list, DelegInfos.
 
 The DelegInfos presentation format is defined exactly the same as SvcParams in Section 2.1 of {{?RFC9460}}. The following rules are adapted from SVCB, but with changed names:
 
@@ -176,7 +176,7 @@ DelegInfos MAY be zero-length; this is similar to what is allowed in SVCB record
 
 ## RDATA Wire Format
 
-The RDATA portion of the DELEG and DELEGI resource record has variable length and entirely consists of a single "DelegInfos" element:
+The RDATA portion of the DELEG and DELEGPARAM resource record has variable length and entirely consists of a single "DelegInfos" element:
 
     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
     /                         DelegInfos                            /
@@ -205,7 +205,7 @@ Some future keys may have no DelegInfoValue, which would be indicated with an ex
 
 ## Semantics
 
-The following is a brief summary of semantic differences between the DELEG and DELEGI types.
+The following is a brief summary of semantic differences between the DELEG and DELEGPARAM types.
 
 - DELEG creates a delegation for its owner name, similar to the NS RR type.
 - DELEG and NS RR types can coexist at the same owner name.
@@ -216,17 +216,17 @@ The following is a brief summary of semantic differences between the DELEG and D
 
 Conversely,
 
-- DELEGI is like any normal RR and doesn't require any special processing.
-- DELEGI does not create a delegation for its owner name.
-- DELEGI cannot coexist at the same owner name with DELEG or NS RR types.
-- DELEGI DNSSEC signing and record placement rules are the same as for any ordinary RR type.
-- DELEGI is used as the target of the DELEG protocol's "include" mechanism, as described in section {{slist}}.
+- DELEGPARAM is like any normal RR and doesn't require any special processing.
+- DELEGPARAM does not create a delegation for its owner name.
+- DELEGPARAM cannot coexist at the same owner name with DELEG or NS RR types.
+- DELEGPARAM DNSSEC signing and record placement rules are the same as for any ordinary RR type.
+- DELEGPARAM is used as the target of the DELEG protocol's "include" mechanism, as described in section {{slist}}.
 
-TODO: Add some introduction comparing how resolvers see legacy delegation (set of NS and A/AAAA records) and DELEG delegation (DELEG and DELEGI records with server-ipv4 and server-ipv6 keys)
+TODO: Add some introduction comparing how resolvers see legacy delegation (set of NS and A/AAAA records) and DELEG delegation (DELEG and DELEGPARAM records with server-ipv4 and server-ipv6 keys)
 
 ## Name Server Information for Delegation {#nameserver-info}
 
-The DELEG and DELEGI records have four keys that describe information about name servers.
+The DELEG and DELEGPARAM records have four keys that describe information about name servers.
 The purpose of this information is to populate the SLIST with IP addresses of the name servers for a zone. (See {{slist}}.)
 
 The types of information defined in this document are:
@@ -234,14 +234,14 @@ The types of information defined in this document are:
 * server-ipv4: an unordered collection of IPv4 addresses for name servers
 * server-ipv6: an unordered collection of IPv6 addresses for name servers
 * server-name: an unordered collection of hostnames of name servers; the addresses must be fetched
-* include-delegi: an unordered collection of domain names that point to a DELEGI RRsets, which in turn have more information about the delegation
+* include-delegparam: an unordered collection of domain names that point to a DELEGPARAM RRsets, which in turn have more information about the delegation
 
 These keys MUST have a non-empty DelegInfoValue.
 
 The presentation values for server-ipv4 and server-ipv6 are comma-separated list of one or more IP addresses of the appropriate family in standard textual format {{?RFC5952}} {{?RFC4001}}.
 The wire formats for server-ipv4 and server-ipv6 are a sequence of IP addresses, in network byte order, for the respective address family.
 
-The presentation values for server-name and include-delegi are an unordered collection of fully-qualified domain names and relative domain names, separated by commas.
+The presentation values for server-name and include-delegparam are an unordered collection of fully-qualified domain names and relative domain names, separated by commas.
 Relative names in the presentation format are interpreted according origin rules in Section 5.1 of {{!RFC1035}}.
 Parsing the comma-separated list is specified in Section A.1 of {{!RFC9460}}.
 
@@ -250,7 +250,7 @@ The presentation format for names with special characters requires both double-e
 
 TODO: add an example that requires this escaping.
 
-The wire format for server-name and include-delegi are each a concatenated unordered collection of a wire-format domain names, where the root label provides the separation between names:
+The wire format for server-name and include-delegparam are each a concatenated unordered collection of a wire-format domain names, where the root label provides the separation between names:
 
     +-+-+-+-+-+-+-+-+-+-+-+-+-+-
     | name | name | name | ... |
@@ -259,26 +259,26 @@ The wire format for server-name and include-delegi are each a concatenated unord
 The names in the wire format MUST NOT be compressed.
 
 For interoperability with resolver algorithm defined in section {{slist}},
-a DELEG or DELEGI record that has a non-empty DelegInfos MUST have one, and only one, set of server information keys, chosen from the following:
+a DELEG or DELEGPARAM record that has a non-empty DelegInfos MUST have one, and only one, set of server information keys, chosen from the following:
 
 - one server-ipv4 key
 - one server-ipv6 key
 - a pair consisting of one server-ipv4 key and one server-ipv6 key
 - one server-name key
-- one include-delegi key
+- one include-delegparam key
 
-This restriction only applies to a single DELEG or DELEGI record; a DELEG or DELEGI RRset can have records with different server information keys.
+This restriction only applies to a single DELEG or DELEGPARAM record; a DELEG or DELEGPARAM RRset can have records with different server information keys.
 Authoritative servers MAY refuse to load zones which have a disallowed combination of keys in a single record.
 
 When using server-name, the addresses for the names in the set must be fetched as if they were referenced by NS records.
-This means the names in the value of the server-name key or the include-delegi key cannot sensibly be inside the delegated domain.
+This means the names in the value of the server-name key or the include-delegparam key cannot sensibly be inside the delegated domain.
 
 With this initial DELEG specification, servers are still expected to be reached on the standard DNS port for both UDP and TCP, 53.  While a future specification is expected to address other transports using other ports, its eventual semantics are not covered here.
 
 ## Metadata keys {#mandatory}
 This specification defines a key which serves as a protocol extensibility mechanism, but is not directly used for contacting DNS servers.
 
-Any DELEG or DELEGI record can have key named "mandatory" which is similar to the key of the same name in {{!RFC9460}}.
+Any DELEG or DELEGPARAM record can have key named "mandatory" which is similar to the key of the same name in {{!RFC9460}}.
 
 The value in the presentation value MUST be a comma-separated list of one or more valid DelegInfoKeys, either by their registered name or in the unknown-key format.
 
@@ -417,11 +417,11 @@ The rest of Step 2's description in Section 5.3.3 of {{RFC1034}} is not affected
 
 Resolvers MUST respond to "QNAME=. / QTYPE=DELEG" queries in the same fashion as they respond to "QNAME=. / QTYPE=DS" queries.
 
-### Populating the SLIST from DELEG and DELEGI Records {#slist}
+### Populating the SLIST from DELEG and DELEGPARAM Records {#slist}
 
-Each individual DELEG record inside a DELEG RRset, or each individual DELEGI record in a DELEGI RRset, can cause the addition of zero or more entries to SLIST.
+Each individual DELEG record inside a DELEG RRset, or each individual DELEGPARAM record in a DELEGPARAM RRset, can cause the addition of zero or more entries to SLIST.
 
-A resolver processes each individual DELEG record within a DELEG RRset, or each individual DELEGI record in a DELEGI RRset, using the following steps:
+A resolver processes each individual DELEG record within a DELEG RRset, or each individual DELEGPARAM record in a DELEGPARAM RRset, using the following steps:
 
 1. Remove all DelegInfo elements with unsupported DelegInfoKey values.
 If the resulting record has zero-length DelegInfos field, stop processing the record.
@@ -433,10 +433,10 @@ If any of the listed DelegInfo elements is not found, stop processing this recor
 1. If a record has more than one type of server information key (excluding the IPv4/IPv6 case, see {{nameserver-info}}), or if it has multiple server information keys of the same type, that record is malformed.
 Stop processing this record.
 
-1. If any DNS name referenced by server-name key or the include-delegi key is equal to or is a subdomain of the delegated domain (i.e. the DELEG record owner), that record is malformed.
+1. If any DNS name referenced by server-name key or the include-delegparam key is equal to or is a subdomain of the delegated domain (i.e. the DELEG record owner), that record is malformed.
 Stop processing this record.
 
-   This check MUST be performed against the original owner name of the DELEG record even if the currently-processed record is a DELEGI record that was included by the original DELEG record. The purpose of this check is to ensure deterministic behavior. Not performing this check would allow delegations to be reachable only with certain cache content and/or a specific algorithm for server selection from SLIST.
+   This check MUST be performed against the original owner name of the DELEG record even if the currently-processed record is a DELEGPARAM record that was included by the original DELEG record. The purpose of this check is to ensure deterministic behavior. Not performing this check would allow delegations to be reachable only with certain cache content and/or a specific algorithm for server selection from SLIST.
 
 1. If server-ipv4 and/or server-ipv6 keys are present inside the record, copy all of the address values into SLIST.
 Stop processing this record.
@@ -445,7 +445,7 @@ Stop processing this record.
 Copy these addresses into SLIST.
 Stop processing this record.
 
-1. If an include-delegi key is present in the record, resolve each name in the value using the DELEGI RR type.
+1. If an include-delegparam key is present in the record, resolve each name in the value using the DELEGPARAM RR type.
 Recursively apply the algorithm described in this section, after checking that the maximum loop count described in {{too-much-work}} has not been reached.
 
 1. If none of the above applies, SLIST is not modified by this particular record.
@@ -677,9 +677,9 @@ TODO: Add more here
 Resolvers MUST prevent situations where accidental misconfiguration of zones or malicious attacks cause them to perform too much work when resolving.
 This document describes two sets of actions that, if not controlled, could lead to over-work attacks.
 
-Long chains of include-delegi information ({{nameserver-info}}), and those with circular chains of include-delegi information, can be burdensome.
-To prevent this, the resolver SHOULD NOT follow more than 3 include-delegi chains in an RRset when populating SLIST.
-Note that include-delegi chains can have CNAME steps in them; in such a case, a CNAME step is counted the same as a DELEGI step when determining when to stop following a chain.
+Long chains of include-delegparam information ({{nameserver-info}}), and those with circular chains of include-delegparam information, can be burdensome.
+To prevent this, the resolver SHOULD NOT follow more than 3 include-delegparam chains in an RRset when populating SLIST.
+Note that include-delegparam chains can have CNAME steps in them; in such a case, a CNAME step is counted the same as a DELEGPARAM step when determining when to stop following a chain.
 
 ## Preventing Downgrade Attacks {#downgrade-attacks}
 
@@ -705,7 +705,7 @@ All new allocations should reference this document.
 IANA is requested to assign two types in the Resource Record (RR) TYPEs registry ({{!RFC6895}}):
 
 - TYPE DELEG, Meaning "Extensible Delegation", Value equal to 61440.
-- TYPE DELEGI, Meaning "Extensible Delegation Indirection", Value TBA1 inside one of the ranges marked as "data TYPEs".
+- TYPE DELEGPARAM, Meaning "Extensible Delegation Indirection", Value TBA1 inside one of the ranges marked as "data TYPEs".
 
 IANA is requested to assign a new bit in the DNSKEY RR Flags registry ({{!RFC4034}}):
 Number 14, Description "Authoritative Delegation Types (ADT)".
@@ -778,8 +778,8 @@ Reference:  {{nameserver-info}} of this document
 Change Controller:  IETF
 
 Number:  4
-Name:  include-delegi
-Meaning:  An unordered collection of domain names of DELEGI records
+Name:  include-delegparam
+Meaning:  An unordered collection of domain names of DELEGPARAM records
 Reference:  {{nameserver-info}} of this document
 Change Controller:  IETF
 
@@ -793,7 +793,7 @@ This section gives the values that can be used for interoperability testing befo
 The section will be removed when IANA makes permanent assignments.
 
   * DELEG RR type code is 61440
-  * DELEGI RR type code is 65433
+  * DELEGPARAM RR type code is 65433
   * DELEG EDNS DE flag bit is 2
   * DNSKEY ADT (Authoritative Delegation Types) flag bit is 14
 
@@ -808,7 +808,7 @@ It shows the delegation point for "example." and "test."
 The "example." delegation has DELEG and NS records.
 The "test." delegation has DELEG but no NS records.
 
-TODO: Add examples that have server-name and include-delegi being sets of more than one name.
+TODO: Add examples that have server-name and include-delegparam being sets of more than one name.
 
     example.   DELEG server-ipv4=192.0.2.1 server-ipv6=2001:DB8::1
     example.   DELEG server-name=ns2.example.net.,ns3.example.org.
@@ -835,11 +835,11 @@ TODO: Add examples that have server-name and include-delegi being sets of more t
 The "test." delegation point has a DELEG record and no NS or DS records.
 
 Please note:
-This is an example of unnecessarily complicated setup to demonstrate capabilities of DELEG and DELEGI RR types.
+This is an example of unnecessarily complicated setup to demonstrate capabilities of DELEG and DELEGPARAM RR types.
 
     test.      DELEG server-ipv6=3fff::33
-    test.      DELEG include-delegi=Acfg.example.org.
-    test.      DELEG include-delegi=config2.example.net.
+    test.      DELEG include-delegparam=Acfg.example.org.
+    test.      DELEG include-delegparam=config2.example.net.
     test.      RRSIG DELEG 13 1 300 20260101000000 (
                             20250101000000 33333 . SigTestDELEG )
 
@@ -856,20 +856,20 @@ Delegations to org and net zones omitted for brevity.
 ## Example.org zone file
 The following example shows an excerpt from an unsigned example.org zone.
 
-    Acfg.example.org.    DELEGI server-ipv6=2001:DB8::6666
-    Acfg.example.org.    DELEGI server-name=ns3.example.org.
-    Acfg.example.org.    DELEGI include-delegi=subcfg.example.org.
+    Acfg.example.org.    DELEGPARAM server-ipv6=2001:DB8::6666
+    Acfg.example.org.    DELEGPARAM server-name=ns3.example.org.
+    Acfg.example.org.    DELEGPARAM include-delegparam=subcfg.example.org.
 
     ns3.example.org.       AAAA   3fff::33
 
-    subcfg.example.org.  DELEGI server-ipv4=203.0.113.1 server-ipv6=3fff::2
+    subcfg.example.org.  DELEGPARAM server-ipv4=203.0.113.1 server-ipv6=3fff::2
 
 ## Example.net zone file
 The following example shows an excerpt from an unsigned example.net zone.
 
     ns2.example.net.       A      198.51.100.1
 
-    config2.example.net. DELEGI server-name=b.example.org.
+    config2.example.net. DELEGPARAM server-name=b.example.org.
 
 
 ## Responses
@@ -1043,13 +1043,13 @@ This is indicated by NSEC chain which "skips" over the owner name with A RRset.
 
     ;; Authority
     test.      DELEG server-ipv6=3fff::33
-    test.      DELEG include-delegi=Acfg.example.org.
-    test.      DELEG include-delegi=config2.example.net.
+    test.      DELEG include-delegparam=Acfg.example.org.
+    test.      DELEG include-delegparam=config2.example.net.
 
     ;; Additional
     ;; (empty)
 
-Follow-up example in {{delegi-example}} explains ultimate meaning of this response.
+Follow-up example in {{delegparam-example}} explains ultimate meaning of this response.
 
 ### DO bit set, DE bit set
 
@@ -1090,8 +1090,8 @@ Follow-up example in {{delegi-example}} explains ultimate meaning of this respon
 
     ;; Authority
     test.      DELEG server-ipv6=3fff::33
-    test.      DELEG include-delegi=Acfg.example.org.
-    test.      DELEG include-delegi=config2.example.net.
+    test.      DELEG include-delegparam=Acfg.example.org.
+    test.      DELEG include-delegparam=config2.example.net.
     test.      RRSIG DELEG 13 1 300 20260101000000 (
                             20250101000000 33333 . SigTestDELEG )
     test.      NSEC  . RRSIG NSEC DELEG
@@ -1101,11 +1101,11 @@ Follow-up example in {{delegi-example}} explains ultimate meaning of this respon
     ;; Additional
     ;; (empty)
 
-Follow-up example in {{delegi-example}} explains the ultimate meaning of this response.
+Follow-up example in {{delegparam-example}} explains the ultimate meaning of this response.
 
-## DELEGI Interpretation {#delegi-example}
+## DELEGPARAM Interpretation {#delegparam-example}
 
-In the examples above, the test. DELEG record uses indirection and points to other domain names with DELEGI, A, and AAAA records.
+In the examples above, the test. DELEG record uses indirection and points to other domain names with DELEGPARAM, A, and AAAA records.
 During resolution, a resolver will gradually build set of name servers to contact, as defined in {{slist}}.
 
 To visualize end result of this process we represent full set of name servers in form of a 'virtual' DELEG RRset.
