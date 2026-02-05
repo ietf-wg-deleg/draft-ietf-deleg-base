@@ -1032,7 +1032,7 @@ This is indicated by NSEC chain which "skips" over the owner name with A RRset.
 
 #### Query for foo.test
 
-    ;; Header: QR AA RCODE=NOERROR
+    ;; Header: QR RCODE=NOERROR
     ;;
 
     ;; Question
@@ -1079,7 +1079,7 @@ Follow-up example in {{delegparam-example}} explains ultimate meaning of this re
 
 #### Query for foo.test
 
-    ;; Header: QR DO DE AA RCODE=NOERROR
+    ;; Header: QR DO DE RCODE=NOERROR
     ;;
 
     ;; Question
