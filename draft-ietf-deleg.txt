@@ -104,10 +104,11 @@ Table of Contents
        5.4.4.  Positive responses
        5.4.5.  Chaining
    6.  Operational Considerations
-     6.1.  NS and DELEG Combined
-     6.2.  NS Not Required by Protocol
-     6.3.  Authoritative Deployment
-       6.3.1.  Enabling ADT Flag
+     6.1.  NS Not Required by Protocol
+     6.2.  NS Maybe Required in Practice
+     6.3.  NS and DELEG Combined
+     6.4.  Authoritative Deployment
+       6.4.1.  Enabling ADT Flag
    7.  Security Considerations
      7.1.  Preventing Over-work Attacks
      7.2.  Preventing Downgrade Attacks
@@ -1035,7 +1036,28 @@ Table of Contents
    operational considerations apply to it.  This section gives an
    overview of some of those considerations.
 
-6.1.  NS and DELEG Combined
+6.1.  NS Not Required by Protocol
+
+   A zone delegated exclusively using DELEG records is not resolvable by
+   non-DELEG aware resolvers.  In that case the zone is not required to
+   have NS RRset in the child zone apex.  Software to manage zone
+   content or check the validity of zones needs to be updated to allow
+   zones without an NS RRset at the apex.
+
+6.2.  NS Maybe Required in Practice
+
+   Although DELEG removes the protocol requirement for NS records,
+   resolver support for DELEG will be incomplete for a long time after
+   this protocol is first deployed.  Zones intended for global
+   reachability need to continue publishing NS records until DELEG
+   support is sufficiently widespread.  DELEG-only delegation is
+   appropriate only where all intended users are known to use DELEG-
+   capable resolvers.  This might be the case when a zone operator wants
+   a zone be reachable only over secure transport, for example.  The
+   decision to drop NS records should be guided by operational
+   measurements of resolver adoption of the DELEG protocol.
+
+6.3.  NS and DELEG Combined
 
    This document explicitly allows zones to be delegated using DELEG
    records without also using NS records; delegating a zone with both
@@ -1050,15 +1072,7 @@ Table of Contents
    independent on the protocol level, but it does not prohibit a
    provisioning system from generating one record type from the other.
 
-6.2.  NS Not Required by Protocol
-
-   A zone delegated exclusively using DELEG records is not resolvable by
-   non-DELEG aware resolvers.  In that case the zone is not required to
-   have NS RRset in the child zone apex.  Software to manage zone
-   content or check the validity of zones needs to be updated to allow
-   zones without an NS RRset at the apex.
-
-6.3.  Authoritative Deployment
+6.4.  Authoritative Deployment
 
    Before adding a first DELEG record into a DNS zone, these steps need
    to be taken, in this order:
@@ -1077,7 +1091,7 @@ Table of Contents
        loss of downgrade resistence of the DELEG protocol for this zone;
        see Section 7.2.
 
-6.3.1.  Enabling ADT Flag
+6.4.1.  Enabling ADT Flag
 
    According to the DNSSEC specification, changing flags of a DNSKEY
    record changes its Key Tag and thus requires a key rollover.  For
