@@ -621,6 +621,20 @@ Note that, per the rules for the keys defined in Section 6.4 of {{!RFC6763}}, if
 When an authoritative server or resolver becomes DELEG-aware, new operational considerations apply to it.
 This section gives an overview of some of those considerations.
 
+## NS Not Required by Protocol
+
+A zone delegated exclusively using DELEG records is not resolvable by non-DELEG aware resolvers.
+In that case the zone is not required to have NS RRset in the child zone apex.
+Software to manage zone content or check the validity of zones needs to be updated to allow zones without an NS RRset at the apex.
+
+## NS Maybe Required in Practice
+
+Although DELEG removes the protocol requirement for NS records, resolver support for DELEG will be incomplete for a prolonged period.
+Zones intended for global reachability need to continue publishing NS records until DELEG support is sufficiently widespread.
+DELEG-only delegation is appropriate only where all intended users are known to use DELEG-capable resolvers.
+This might be the case when a zone should be reachable only via secure transport.
+The decision to drop NS records should be guided by operational measurements of resolver adoption.
+
 ## NS and DELEG Combined
 
 This document explicitly allows zones to be delegated using DELEG records without also using NS records; delegating a zone with both DELEG and NS records is also allowed.
@@ -629,12 +643,6 @@ Software to manage delegations or check the validity of zones need to be updated
 If both NS and DELEG records are present, zone managers might want to check consistency across both RRsets, subject to local policy.
 This specification treats both NS and DELEG RRsets as completely independent on the protocol level,
 but it does not prohibit a provisioning system from generating one record type from the other.
-
-## NS Not Required by Protocol
-
-A zone delegated exclusively using DELEG records is not resolvable by non-DELEG aware resolvers.
-In that case the zone is not required to have NS RRset in the child zone apex.
-Software to manage zone content or check the validity of zones needs to be updated to allow zones without an NS RRset at the apex.
 
 ## Authoritative Deployment
 
