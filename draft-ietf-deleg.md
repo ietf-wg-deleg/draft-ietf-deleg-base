@@ -479,8 +479,8 @@ In summary, the server either provides an authoritative DELEG RRset or declares 
 
 If the delegation has a DELEG RRset, the authoritative server MUST put the DELEG RRset into the Authority section of the referral.
 In this case, the server MUST NOT include the NS RRset in the Authority section.
-Include the covering RRSIG following the normal DNSSEC procedure for answers with authoritative zone data.
 
+Non-DELEG DNSSEC specifications for RRSIG inclusion in answers with authoritative RRsets ({!RFC4035} section 3.1.1) MUST be followed.
 Similarly, rules for DS RRset inclusion in referrals apply as specified by the DNSSEC protocol.
 
 #### DELEG-aware Clients with NS RRs Present but No DELEG RRs {#ns-no-deleg}
