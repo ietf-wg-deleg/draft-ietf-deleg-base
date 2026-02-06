@@ -226,8 +226,7 @@ The significance of this difference is addressed more in the next section.
 ## Name Server Information for Delegation {#nameserver-info}
 
 The DELEG and DELEGPARAM records have four keys that describe information about name servers.
-The purpose of this information is to populate the SLIST ({{RFC1034, Section 5.3.3}}) with IP addresses of the name servers for a zone. 
-(See {{slist}}.)
+The purpose of this information is to populate the SLIST (see {{slist}}) with IP addresses of the name servers for a zone.
 
 The types of information defined in this document are:
 
