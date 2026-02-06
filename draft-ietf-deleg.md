@@ -459,6 +459,7 @@ This document defines SLIST to be a set. Each individual value MUST be represent
 The DELEG RR type defines a zone cut in similar way as the NS RR type.
 Behavior defined for zone cuts in existing non-DELEG specifications apply to zone cuts created by the DELEG record.
 A notable example of this is that the occlusion (usually accidentally) created by NS records in a parent zone would also be created by DELEG records in a parent zone (see {{occluded-example}}).
+Rules for setting Authoritative Answer (AA) bit in answers also remain unchanged: the DELEG RR type has the same special treatment as DS RR type.
 
 DELEG-aware authoritative servers act differently when handling queries from DELEG-unaware clients (those with DE=0) than from DELEG-aware clients (those with DE=1).
 See {{de-bit}} and {{resolvers}}.
