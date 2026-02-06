@@ -458,7 +458,8 @@ This document defines SLIST to be a set. Each individual value MUST be represent
 
 The DELEG RR type defines a zone cut in similar way as the NS RR type.
 Behavior defined for zone cuts in existing non-DELEG specifications apply to zone cuts created by the DELEG record.
-A notable example of this is that the occlusion (usually accidentally) created by NS records in a parent zone would also be created by DELEG records in a parent zone.
+A notable example of this is that the occlusion (usually accidentally) created by NS records in a parent zone would also be created by DELEG records in a parent zone (see {{occluded-example}}).
+Rules for setting Authoritative Answer (AA) bit in answers also remain unchanged: the DELEG RR type has the same special treatment as DS RR type.
 
 DELEG-aware authoritative servers act differently when handling queries from DELEG-unaware clients (those with DE=0) than from DELEG-aware clients (those with DE=1).
 See {{de-bit}} and {{resolvers}}.
@@ -920,7 +921,7 @@ The following sections show referral examples:
     ;; Additional
     ;; OPT with Extended DNS Error: New Delegation Only
 
-#### Query for a.test
+#### Query for a.test {#occluded-example}
 
 A forgotten glue record under the "test." delegation point is occluded by DELEG RRset.
 
@@ -1037,7 +1038,7 @@ This is indicated by NSEC chain which "skips" over the owner name with A RRset.
 
 #### Query for foo.test
 
-    ;; Header: QR AA RCODE=NOERROR
+    ;; Header: QR RCODE=NOERROR
     ;;
 
     ;; Question
@@ -1084,7 +1085,7 @@ A follow-up example in {{delegparam-example}} explains the ultimate meaning of t
 
 #### Query for foo.test
 
-    ;; Header: QR DO DE AA RCODE=NOERROR
+    ;; Header: QR DO DE RCODE=NOERROR
     ;;
 
     ;; Question
