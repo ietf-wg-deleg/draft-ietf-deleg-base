@@ -1003,10 +1003,10 @@ Table of Contents
 
    Without this check, an attacker could strip the DELEG RRset from a
    referral response and replace it with an unsigned (and potentially
-   malicious) NS RRset (Section 7.2).  A referral response with an
-   unsigned NS and signed DS RRsets does not require additional proofs
-   of nonexistence according to non-DELEG DNSSEC specification, and it
-   would have been accepted as a delegation without the DELEG RRset.
+   malicious) NS RRset (Section 7.2).  The reason for this is that
+   according to non-DELEG DNSSEC specification, a referral response with
+   an unsigned NS and signed DS RRsets does not require additional
+   proofs of nonexistence.
 
 5.4.4.  Positive responses
 

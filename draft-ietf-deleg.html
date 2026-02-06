@@ -2067,7 +2067,7 @@ way that DS RR types are.<a href="#section-5.4.2-2" class="pilcrow">¶</a></p>
           </h4>
 <p id="section-5.4.3-1">If the zone is DNSSEC-secure, and if any DNSKEY of the zone has the ADT flag (<a href="#iana-existing" class="auto internal xref">Section 8.1</a>) set to 1, a DELEG-aware validator MUST prove the absence of a DELEG RRset in referral responses from this particular zone.<a href="#section-5.4.3-1" class="pilcrow">¶</a></p>
 <p id="section-5.4.3-2">Without this check, an attacker could strip the DELEG RRset from a referral response and replace it with an unsigned (and potentially malicious) NS RRset (<a href="#downgrade-attacks" class="auto internal xref">Section 7.2</a>).
-A referral response with an unsigned NS and signed DS RRsets does not require additional proofs of nonexistence according to non-DELEG DNSSEC specification, and it would have been accepted as a delegation without the DELEG RRset.<a href="#section-5.4.3-2" class="pilcrow">¶</a></p>
+The reason for this is that according to non-DELEG DNSSEC specification, a referral response with an unsigned NS and signed DS RRsets does not require additional proofs of nonexistence.<a href="#section-5.4.3-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="positive-responses">
