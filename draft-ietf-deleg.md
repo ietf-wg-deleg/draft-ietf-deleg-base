@@ -642,7 +642,6 @@ Software that manages delegations or checks the validity of zones need to be upd
 If both NS and DELEG records are present, zone managers might want to check consistency across both RRsets, subject to local policy.
 This specification treats both NS and DELEG RRsets as completely independent on the protocol level,
 but it does not prohibit a provisioning system from generating one record type from the other.
-n
 ## Authoritative Deployment
 
 Before adding a first DELEG record into a DNS zone, these steps need to be taken, in this order:
