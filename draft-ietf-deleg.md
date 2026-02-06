@@ -312,7 +312,7 @@ Servers MAY refuse to load such an invalid zone, similar to the DS RR type.
 
 Both the DELEG protocol and legacy delegations (that is, NS records) will be used for delegation for a long time.
 Both legacy delegations and the DELEG protocol enable recursive resolution.
-A DELEG-aware resolver therefore does not need the NS records or glue information in a DELEG referral response, and MUST NOT get them; see {{#downgrade-attacks}}.
+A DELEG-aware resolver therefore does not need the NS records or glue information in a DELEG referral response, and MUST NOT get them; see {{downgrade-attacks}}.
 
 ## Resolvers {#resolvers}
 
@@ -320,7 +320,7 @@ A resolver that is DELEG-aware MUST signal in queries that it supports the DELEG
 This indicates that the resolver understands the DELEG semantics and does not need NS records to follow a referral.
 
 The DE bit set to 0 indicates the resolver is not DELEG-aware, and therefore can only be served referrals with NS records and other data according to non-DELEG specifications.
-Other special scenarios with DE=0 queries to DELEG-aware authorities are addressed in {{#authoritative-servers}}.
+Other special scenarios with DE=0 queries to DELEG-aware authorities are addressed in {{authoritative-servers}}.
 
 ### Referral
 
@@ -328,7 +328,7 @@ The DELEG record creates a zone cut similar to the NS record.
 
 If one or more DELEG records exist at a given delegation point, a DELEG-aware resolver MUST treat the name servers from those DELEG records as authoritative for the child zone.
 In such a case, a DELEG-aware resolver MUST NOT use NS records for the zone if they are learned, even if resolution using DELEG records has failed.
-Such fallback from DELEG to NS would invalidate the security guarantees of the DELEG protocol; see {{#downgrade-attacks}}.
+Such fallback from DELEG to NS would invalidate the security guarantees of the DELEG protocol; see {{downgrade-attacks}}.
 
 If no DELEG record exists at a given delegation point, DELEG-aware resolvers MUST use NS records as specified by {{!RFC1034}}.
 
