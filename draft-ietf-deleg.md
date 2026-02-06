@@ -90,8 +90,8 @@ all capitals, as shown here.
 Terminology regarding the Domain Name System comes from {{?BCP219}}, with additional terms defined here:
 
 * legacy delegation: A delegation that is done with an NS RRset
-* DELEG-aware: An authoritative name server or resolver that follows the protocol defined in this document
-* DELEG-unaware: An authoritative server or resolver that does not follow the protocol defined in this document
+* DELEG-aware: A DNS software that follows the protocol defined in this document
+* DELEG-unaware: A DNS software that does not follow the protocol defined in this document
 * non-DELEG specifications: DNS protocols that predate this protocol, or are written after this protocol is published but are not related to this protocol
 
 # Protocol Overview
