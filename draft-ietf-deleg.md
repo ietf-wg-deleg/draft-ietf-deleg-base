@@ -316,7 +316,8 @@ A DELEG-aware resolver therefore does not need the NS records or glue informatio
 
 ## Resolvers {#resolvers}
 
-A resolver that is DELEG-aware MUST signal in queries that it supports the DELEG protocol by setting the DE bit to 1 in queries (see {{de-bit}}).  This indicates that the resolver understands the DELEG semantics and does not need NS records to follow a referral.
+A resolver that is DELEG-aware MUST signal in queries that it supports the DELEG protocol by setting the DE bit to 1 in (see {{de-bit}}).
+This indicates that the resolver understands the DELEG semantics and does not need NS records to follow a referral.
 
 The DE bit set to 0 indicates the resolver is not DELEG-aware, and therefore can only be served referrals with NS records and other data according to non-DELEG specifications.  Other special scenarios with DE=0 queries to DELEG-aware authorities are addressed in {{#authoritative-servers}}.
 
