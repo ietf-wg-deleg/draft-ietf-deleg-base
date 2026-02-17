@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-02-08T01:52:28.215575+00:00",
+  "timestamp": "2026-02-17T01:19:56.912384+00:00",
   "repo": "ietf-wg-deleg/draft-ietf-deleg-base",
   "labels": [
     {
@@ -1199,6 +1199,22 @@
           "updatedAt": "2026-02-06T12:37:49Z"
         }
       ]
+    },
+    {
+      "number": 141,
+      "id": "I_kwDOO41rkM7rGbsR",
+      "title": "Treatment of DELEG records",
+      "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/issues/141",
+      "state": "OPEN",
+      "author": "paulehoffman",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "\"A DELEG-enabled nameserver SHOULD NOT supply DELEG records in the response when resolver has not signalled DELEG support.\"\n. . .\n\"The DELEG RRset is authoritative and the authoritative server MUST treat it like any other authoritative RRsets, regardless of the value of the DE flag.\"\n\nClearly, it is the second that we want. I believe the correct change for the first is \"...should not supply DELEG records in a delegation response when...\"\n",
+      "createdAt": "2026-02-15T15:40:30Z",
+      "updatedAt": "2026-02-15T15:40:30Z",
+      "closedAt": null,
+      "comments": []
     }
   ],
   "pulls": [
