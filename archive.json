@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-02-17T01:19:56.912384+00:00",
+  "timestamp": "2026-03-08T01:19:46.967488+00:00",
   "repo": "ietf-wg-deleg/draft-ietf-deleg-base",
   "labels": [
     {
@@ -131,15 +131,15 @@
       "id": "I_kwDOO41rkM68AKGZ",
       "title": "one-off or type range",
       "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/issues/5",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "pspacek",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Do we want to define special behavior for DELEG as a single type, or do we want to reserve a range for this purpose?\n\nhttps://mailarchive.ietf.org/arch/msg/dd/gUX9zpGAta2wwXIe-Aar7KJSZ24/",
       "createdAt": "2025-06-17T16:55:35Z",
-      "updatedAt": "2025-10-24T01:25:25Z",
-      "closedAt": null,
+      "updatedAt": "2026-03-05T15:56:10Z",
+      "closedAt": "2026-03-05T15:49:22Z",
       "comments": [
         {
           "author": "paulehoffman",
@@ -147,6 +147,13 @@
           "body": "Propose to close this issue; overtaken by draft-arends-dnsop-delext",
           "createdAt": "2025-10-24T01:25:24Z",
           "updatedAt": "2025-10-24T01:25:24Z"
+        },
+        {
+          "author": "paulehoffman",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Now is draft-ietf-dnsop-delext",
+          "createdAt": "2026-03-05T15:56:10Z",
+          "updatedAt": "2026-03-05T15:56:10Z"
         }
       ]
     },
@@ -947,15 +954,15 @@
       "id": "I_kwDOO41rkM7iHHP0",
       "title": "Operational considerations for ADT flag",
       "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/issues/112",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "pspacek",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "https://mailarchive.ietf.org/arch/msg/dd/0AMikDlzN8LSbSuaRk-8KgxmJT8/",
       "createdAt": "2026-01-08T16:15:23Z",
-      "updatedAt": "2026-01-16T16:21:41Z",
-      "closedAt": null,
+      "updatedAt": "2026-03-05T15:49:33Z",
+      "closedAt": "2026-03-05T15:49:09Z",
       "comments": [
         {
           "author": "paulehoffman",
@@ -984,6 +991,13 @@
           "body": "> [@libor-peltan-cznic](https://github.com/libor-peltan-cznic) Do you want to contribute some test into Operational Considerations section about this?\n\nI mean \"text\", obviously :-)",
           "createdAt": "2026-01-16T16:21:41Z",
           "updatedAt": "2026-01-16T16:21:41Z"
+        },
+        {
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Section 6.3.1 https://datatracker.ietf.org/doc/html/draft-ietf-deleg-07#name-enabling-adt-flag",
+          "createdAt": "2026-03-05T15:49:33Z",
+          "updatedAt": "2026-03-05T15:49:33Z"
         }
       ]
     },
@@ -1148,7 +1162,7 @@
       "labels": [],
       "body": "Should we hardcode numberic limits like '3 steps max'? I think we should not because rest of the DNS does not have it.\n\nI would leave it to https://datatracker.ietf.org/doc/html/draft-fujiwara-dnsop-dns-upper-limit-values",
       "createdAt": "2026-01-30T12:43:09Z",
-      "updatedAt": "2026-02-05T01:53:46Z",
+      "updatedAt": "2026-03-05T17:19:58Z",
       "closedAt": null,
       "comments": [
         {
@@ -1157,6 +1171,13 @@
           "body": "No. ",
           "createdAt": "2026-02-05T01:53:45Z",
           "updatedAt": "2026-02-05T01:53:45Z"
+        },
+        {
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Well then we need to de-harcode them.",
+          "createdAt": "2026-03-05T17:19:58Z",
+          "updatedAt": "2026-03-05T17:19:58Z"
         }
       ]
     },
