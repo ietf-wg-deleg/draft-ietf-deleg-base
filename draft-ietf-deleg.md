@@ -618,7 +618,8 @@ Note that, per the rules for the keys defined in Section 6.4 of {{!RFC6763}}, if
 
 # Operational Considerations
 
-When an authoritative server or resolver becomes DELEG-aware, new operational considerations apply to it.
+When DELEG is deployed, new operational considerations will apply.
+While the majority of these relate to the operation of DELEG-aware servers or resolvers, there is a more general set of operational practices which will need to apply because not all resolvers will be DELEG-aware.
 This section gives an overview of some of those considerations.
 
 ## NS Not Required by Protocol
@@ -643,6 +644,12 @@ Software that manages delegations or checks the validity of zones need to be upd
 If both NS and DELEG records are present, zone managers might want to check consistency across both RRsets, subject to local policy.
 This specification treats both NS and DELEG RRsets as completely independent on the protocol level,
 but it does not prohibit a provisioning system from generating one record type from the other.
+
+The deployment of DELEG-only zones crates a new situation in which DNS servers that are authoritative for a particular set of domains provide partly or completely different answers.
+Where "split DNS" or "split-horizon DNS" [RFC 9499] differences depend on the source of the query, this situation will depend on whether or not the resolver is aware of or using DELEG.
+For any part of the namespace that is intended to be globally visible, operators should avoid DELEG-only zones, as some resolvers will be unaware of DELEG.
+For other parts of the namespace, operators should take care to ensure that any variability in responses introduced maps correctly to the client capabilities.
+
 ## Authoritative Deployment
 
 Before adding a first DELEG record into a DNS zone, these steps need to be taken, in this order:
@@ -1134,7 +1141,7 @@ TODO: In what format? Machine readable would be a win. Perhaps a combination of 
 
 This document is heavily based on past work done by Tim April in
 {{?I-D.tapril-ns2}} and thus extends the thanks to the people helping on this which are:
-John Levine, Erik Nygren, Jon Reed, Ben Kaduk, Mashooq Muhaimen, Jason Moreau, Jerrod Wiesman, Billy Tiemann, Gordon Marx and Brian Wellington.
+John Levine, Erik Nygren, Jon Reed, Ben Kaduk, Mashooq Muhaimen, Jason Moreau, Jerrod Wiesman, Billy Tiemann, Gordon Marx and Brian Wellington, Ted Hardie.
 
 Work on DELEG protocol has started at IETF 118 Hackaton.
 Hackaton participants: Christian Elmerot, David Blacka, David Lawrence, Edward Lewis, Erik Nygren, George Michaelson, Jan Včelák, Klaus Darilion, Libor Peltan, Manu Bretelle, Peter van Dijk, Petr Špaček, Philip Homburg, Ralf Weber, Roy Arends, Shane Kerr, Shumon Huque, Vandan Adhvaryu, Vladimír Čunát, Andreas Schulze.
