@@ -685,7 +685,7 @@ Consequently, the time required to withdraw the new DNSKEY record is limited onl
 
 # Security Considerations
 
-TODO: Add more here
+TODO: More people should check this section is complete!
 
 ## Preventing Over-work Attacks {#too-much-work}
 
@@ -695,6 +695,8 @@ This document describes two sets of actions that, if not controlled, could lead 
 Long chains of include-delegparam information ({{nameserver-info}}), and those with circular chains of include-delegparam information, can be burdensome.
 To prevent this, the resolver SHOULD NOT follow more than 3 include-delegparam chains in an RRset when populating SLIST.
 Note that include-delegparam chains can have CNAME steps in them; in such a case, a CNAME step is counted the same as a DELEGPARAM step when determining when to stop following a chain.
+
+TODO: No other DNS spec specifies hard maximum number of indirections. Perhaps we should not specify it either? After all DELEG value can contain a name in NS-only delegation and then we get into realm of 'count DELEG but NS is uncounted' and other fun combinations like this. Perhaps this is better dealt with for the whole DNS protocol within draft-fujiwara-dnsop-dns-upper-limit-values?
 
 ## Preventing Downgrade Attacks {#downgrade-attacks}
 
@@ -822,7 +824,7 @@ It shows the delegation point for "example." and "test."
 The "example." delegation has DELEG and NS records.
 The "test." delegation has DELEG but no NS records.
 
-TODO: Add examples that have server-name and include-delegparam being sets of more than one name.
+TODO: Add examples that have include-delegparam being sets of more than one name.
 
     example.   DELEG server-ipv4=192.0.2.1 server-ipv6=2001:DB8::1
     example.   DELEG server-name=ns2.example.net.,ns3.example.org.
