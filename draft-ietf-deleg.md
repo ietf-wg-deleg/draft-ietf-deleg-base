@@ -610,7 +610,7 @@ validators are not expected to detect inconsistencies in data if a chain of trus
 
 A Validating Stub Resolver that is DELEG-aware MUST only use security-aware resolvers that are DELEG-aware.
 A DELEG-aware Validating Resolver that uses forwarders MUST only use DELEG-aware and security-aware forwarders.
-Otherwise inconsistent zone content can be observed, for example a DELEG-unaware resolver sees NXDOMAIN while a DELEG-aware resolver sees NOERROR.
+Otherwise DNSSEC-secure zones might fail to validate and DNSSEC-insecure zones might observe inconsistent answers (see {{operational-considerations}).
 
 {{!RFC9606}} specifies a DNS resource record type, RESINFO, to allow resolvers to publish information about their capabilities and policies. This can be used to inform DNS clients that DELEG is supported by the DNS resolver.
 
