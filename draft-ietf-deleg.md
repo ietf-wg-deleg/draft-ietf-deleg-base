@@ -608,11 +608,14 @@ validators are not expected to detect inconsistencies in data if a chain of trus
 
 ### Chaining
 
-A Validating Stub Resolver that is DELEG-aware has to use a Security-Aware Resolver that is DELEG-aware and, if it is behind a forwarder, that forwarder has to be security-aware and DELEG-aware as well.
+A Validating Stub Resolver that is DELEG-aware MUST only use security-aware resolvers that are DELEG-aware.
+A DELEG-aware Validating Resolver that uses forwarders MUST only use DELEG-aware and security-aware forwarders.
+Otherwise DNSSEC-secure zones might fail to validate and DNSSEC-insecure zones might observe inconsistent answers (see {{operational-considerations}).
 
 {{!RFC9606}} specifies a DNS resource record type, RESINFO, to allow resolvers to publish information about their capabilities and policies. This can be used to inform DNS clients that DELEG is supported by the DNS resolver.
 
 A resolver which supports {{!RFC9606}} SHOULD add the "deleg" key if it supports DELEG protocol.
+A resolver that uses forwarders MAY use a RESINFO query to determine if the configured forwarders are DELEG-aware.
 
 Note that, per the rules for the keys defined in Section 6.4 of {{!RFC6763}}, if there is no '=' in a key, then it is a boolean attribute, simply identified as being present with no value.
 
