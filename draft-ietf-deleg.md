@@ -371,11 +371,14 @@ An example of a valid delegation tree:
 
 TODO: after the text below, refer back to this figure and show the order that a DELEG-aware resolver would take when there is a failure to find any good DELEG addresses at sub.sld.test, then any usable name servers at sub.sld.test, and then maybe a good DELEG record at test.
 
-The terms SNAME and SLIST used here are defined in Section 5.3.2 of {{!RFC1034}}:
+The terms SNAME and SLIST used here are defined in Section 5.3.2 of {{!RFC1034}}. Quote:
 
-SNAME is the domain name we are searching for.
+- SNAME is the domain name we are searching for.
 
-SLIST is a structure which describes the name servers and the zone which the resolver is currently trying to query.
+- SLIST is a structure which describes the name servers and the zone which the resolver is currently trying to query.
+
+This document defines SLIST to be a set. Each individual value MUST be represented only once in the final SLIST even if it was encountered multiple times during SLIST construction.
+
 Neither {{RFC1034}} nor this document define how a resolver uses SLIST; they only define how to populate it.
 
 A DELEG-aware SLIST needs to be able to hold two types of information, delegations defined by NS records and delegations defined by DELEG records.
@@ -451,8 +454,6 @@ Recursively apply the algorithm described in this section, after checking that t
 A DELEG-aware resolver MAY implement lazy filling of SLIST, such as by deferring processing of remaining records, or even individual names or query types, if SLIST already has what the resolver considers a sufficiently large pool of addresses to contact.
 
 The order in which to try the servers in the final SLIST is outside the scope of this document.
-
-This document defines SLIST to be a set. Each individual value MUST be represented only once in the final SLIST even if it was encountered multiple times during SLIST construction.
 
 ## Authoritative Servers {#authoritative-servers}
 
