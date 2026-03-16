@@ -914,6 +914,8 @@ The following sections show referral examples:
 
 #### Query for foo.test
 
+See {{no-ns}}.
+
     ;; Header: QR AA RCODE=NXDOMAIN
     ;;
 
@@ -977,6 +979,8 @@ A forgotten glue record under the "test." delegation point is occluded by DELEG 
 
 
 #### Query for foo.test {#legacynxdomain}
+
+See {{no-ns}}.
 
     ;; Header: QR DO AA RCODE=NXDOMAIN
     ;;
