@@ -550,7 +550,7 @@ This has several consequences which stem from existing non-DELEG specifications:
 See examples in {{example-root}} and {{example-occluded}}.
 
 In order to protect validators from downgrade attacks (see {{downgrade-attacks}}) this draft introduces a new DNSKEY flag ADT (Authoritative Delegation Types, see {{iana-existing}}).
-To achieve downgrade resistance, zones which contain a DELEG RRset MUST set ADT flag to 1 in at least one of the DNSKEY records published in the zone.
+To achieve downgrade resistance, DNSSEC-signed zones which contain a DELEG RRset MUST set ADT flag to 1 in at least one of the DNSKEY records published in the zone.
 
 ## DNSSEC Validators {#dnssec-validators}
 
@@ -1175,6 +1175,6 @@ John Levine, Erik Nygren, Jon Reed, Ben Kaduk, Mashooq Muhaimen, Jason Moreau, J
 Work on DELEG protocol has started at IETF 118 Hackaton.
 Hackaton participants: Christian Elmerot, David Blacka, David Lawrence, Edward Lewis, Erik Nygren, George Michaelson, Jan Včelák, Klaus Darilion, Libor Peltan, Manu Bretelle, Peter van Dijk, Petr Špaček, Philip Homburg, Ralf Weber, Roy Arends, Shane Kerr, Shumon Huque, Vandan Adhvaryu, Vladimír Čunát, Andreas Schulze.
 
-Other people joined the effort after the initial hackaton: Ben Schwartz, Bob Halley, Paul Hoffman, Miek Gieben, Ray Hunter, Håvard Eidnes, Ted Hardie, Michael Richardson, Florian Obser ...
+Other people joined the effort after the initial hackaton: Ben Schwartz, Bob Halley, Paul Hoffman, Miek Gieben, Ray Hunter, Håvard Eidnes, Ted Hardie, Michael Richardson, Florian Obser, Evan Hunt, ...
 
 The RESINFO extension was contributed by Florian Obser.
