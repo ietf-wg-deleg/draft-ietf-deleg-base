@@ -1288,6 +1288,9 @@ The new delegation records are extensible, can be secured with DNSSEC, and elimi
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.2">
                 <p id="section-toc.1-1.7.2.2.1"><a href="#section-7.2" class="auto internal xref">7.2</a>.  <a href="#name-preventing-downgrade-attack" class="internal xref">Preventing Downgrade Attacks</a></p>
 </li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.3">
+                <p id="section-toc.1-1.7.2.3.1"><a href="#section-7.3" class="auto internal xref">7.3</a>.  <a href="#name-deleg-is-stronger-than-ns" class="internal xref">DELEG Is Stronger Than NS</a></p>
+</li>
             </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8">
@@ -2241,6 +2244,23 @@ That is, the DELEG protocol when used with upgraded DNSKEY records gives the sam
 Without DELEG, there are no security guarantees for the NS RRset on the parent side of the zone cut.<a href="#section-7.2-2" class="pilcrow">¶</a></p>
 <p id="section-7.2-3">Please note that a full DNSKEY rollover is not necessary to achieve the downgrade protection for DELEG.
 Any single DNSKEY with the ADT flag set to 1 is sufficient; the zone can introduce an otherwise unused record into the DNSKEY RRset.<a href="#section-7.2-3" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="deleg-is-stronger-than-ns">
+<section id="section-7.3">
+        <h3 id="name-deleg-is-stronger-than-ns">
+<a href="#section-7.3" class="section-number selfRef">7.3. </a><a href="#name-deleg-is-stronger-than-ns" class="section-name selfRef">DELEG Is Stronger Than NS</a>
+        </h3>
+<p id="section-7.3-1">DELEG RRtype has stronger protection (by DNSSEC) than NS and glue records on the parent side of a zone cut.
+A child zone that does not need to be resolvable by DELEG-unaware clients (see {operational-considerations}),
+and is delegated only with DELEG records,
+will have a smaller attack surface compared to a zone delegated with both DELEG and NS records.<a href="#section-7.3-1" class="pilcrow">¶</a></p>
+<p id="section-7.3-2">The additional attack surface of legacy delegations stems from the possibility of replacing NS and glue records in referrals with arbitrary values,
+which is not detectable by DNSSEC (by design in <span>[<a href="#RFC4035" class="cite xref">RFC4035</a>]</span> Section 2.2).<a href="#section-7.3-2" class="pilcrow">¶</a></p>
+<p id="section-7.3-3">For example, this allows redirecting a referral to names and/or addresses under an attacker's control.
+Even for DNSSEC-secure zones, an attacker can use this ability to continuously proxy queries and responses,
+observe traffic, and also monitor the network addresses involved, which might be a privacy concern for roaming clients.<a href="#section-7.3-3" class="pilcrow">¶</a></p>
+<p id="section-7.3-4">The feasibility and impact of such attacks depend on the threat model, which is outside the scope of this document.<a href="#section-7.3-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>

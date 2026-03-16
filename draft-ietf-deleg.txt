@@ -112,6 +112,7 @@ Table of Contents
    7.  Security Considerations
      7.1.  Preventing Over-work Attacks
      7.2.  Preventing Downgrade Attacks
+     7.3.  DELEG Is Stronger Than NS
    8.  IANA Considerations
      8.1.  Changes to Existing Registries
      8.2.  New Registry for Delegation Information
@@ -1210,6 +1211,29 @@ Table of Contents
    the downgrade protection for DELEG.  Any single DNSKEY with the ADT
    flag set to 1 is sufficient; the zone can introduce an otherwise
    unused record into the DNSKEY RRset.
+
+7.3.  DELEG Is Stronger Than NS
+
+   DELEG RRtype has stronger protection (by DNSSEC) than NS and glue
+   records on the parent side of a zone cut.  A child zone that does not
+   need to be resolvable by DELEG-unaware clients (see {operational-
+   considerations}), and is delegated only with DELEG records, will have
+   a smaller attack surface compared to a zone delegated with both DELEG
+   and NS records.
+
+   The additional attack surface of legacy delegations stems from the
+   possibility of replacing NS and glue records in referrals with
+   arbitrary values, which is not detectable by DNSSEC (by design in
+   [RFC4035] Section 2.2).
+
+   For example, this allows redirecting a referral to names and/or
+   addresses under an attacker's control.  Even for DNSSEC-secure zones,
+   an attacker can use this ability to continuously proxy queries and
+   responses, observe traffic, and also monitor the network addresses
+   involved, which might be a privacy concern for roaming clients.
+
+   The feasibility and impact of such attacks depend on the threat
+   model, which is outside the scope of this document.
 
 8.  IANA Considerations
 
