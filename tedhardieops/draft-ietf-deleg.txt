@@ -7,8 +7,8 @@ Internet-Draft                                                       ISC
 Updates: 1034, 1035, 4035, 6672, 6840 (if                       R. Weber
          approved)                                   Akamai Technologies
 Intended status: Standards Track                             D. Lawrence
-Expires: 16 September 2026                                    Salesforce
-                                                           15 March 2026
+Expires: 17 September 2026                                    Salesforce
+                                                           16 March 2026
 
 
                      Extensible Delegation for DNS
@@ -59,7 +59,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 16 September 2026.
+   This Internet-Draft will expire on 17 September 2026.
 
 Copyright Notice
 
@@ -1085,7 +1085,7 @@ Table of Contents
    independent on the protocol level, but it does not prohibit a
    provisioning system from generating one record type from the other.
 
-   The deployment of DELEG-only zones crates a new situation in which
+   The deployment of DELEG-only zones creates a new situation in which
    DNS servers that are authoritative for a particular set of domains
    provide partly or completely different answers.  Where "split DNS" or
    "split-horizon DNS" [RFC 9499] differences depend on the source of
