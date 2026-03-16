@@ -2013,7 +2013,7 @@ This has several consequences which stem from existing non-DELEG specifications:
         </ul>
 <p id="section-5.3-5">See examples in <a href="#example-root" class="auto internal xref">Appendix A.1</a> and <a href="#example-occluded" class="auto internal xref">Appendix A.4.2.3</a>.<a href="#section-5.3-5" class="pilcrow">¶</a></p>
 <p id="section-5.3-6">In order to protect validators from downgrade attacks (see <a href="#downgrade-attacks" class="auto internal xref">Section 7.2</a>) this draft introduces a new DNSKEY flag ADT (Authoritative Delegation Types, see <a href="#iana-existing" class="auto internal xref">Section 8.1</a>).
-To achieve downgrade resistance, zones which contain a DELEG RRset MUST set ADT flag to 1 in at least one of the DNSKEY records published in the zone.<a href="#section-5.3-6" class="pilcrow">¶</a></p>
+To achieve downgrade resistance, DNSSEC-signed zones which contain a DELEG RRset MUST set ADT flag to 1 in at least one of the DNSKEY records published in the zone.<a href="#section-5.3-6" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="dnssec-validators">
@@ -2990,7 +2990,7 @@ test. DELEG server-ipv6=3fff::33
 John Levine, Erik Nygren, Jon Reed, Ben Kaduk, Mashooq Muhaimen, Jason Moreau, Jerrod Wiesman, Billy Tiemann, Gordon Marx and Brian Wellington.<a href="#appendix-C-1" class="pilcrow">¶</a></p>
 <p id="appendix-C-2">Work on DELEG protocol has started at IETF 118 Hackaton.
 Hackaton participants: Christian Elmerot, David Blacka, David Lawrence, Edward Lewis, Erik Nygren, George Michaelson, Jan Včelák, Klaus Darilion, Libor Peltan, Manu Bretelle, Peter van Dijk, Petr Špaček, Philip Homburg, Ralf Weber, Roy Arends, Shane Kerr, Shumon Huque, Vandan Adhvaryu, Vladimír Čunát, Andreas Schulze.<a href="#appendix-C-2" class="pilcrow">¶</a></p>
-<p id="appendix-C-3">Other people joined the effort after the initial hackaton: Ben Schwartz, Bob Halley, Paul Hoffman, Miek Gieben, Ray Hunter, Håvard Eidnes, Ted Hardie, Michael Richardson, Florian Obser ...<a href="#appendix-C-3" class="pilcrow">¶</a></p>
+<p id="appendix-C-3">Other people joined the effort after the initial hackaton: Ben Schwartz, Bob Halley, Paul Hoffman, Miek Gieben, Ray Hunter, Håvard Eidnes, Ted Hardie, Michael Richardson, Florian Obser, Evan Hunt, ...<a href="#appendix-C-3" class="pilcrow">¶</a></p>
 <p id="appendix-C-4">The RESINFO extension was contributed by Florian Obser.<a href="#appendix-C-4" class="pilcrow">¶</a></p>
 </section>
 </div>

@@ -945,9 +945,9 @@ Table of Contents
    In order to protect validators from downgrade attacks (see
    Section 7.2) this draft introduces a new DNSKEY flag ADT
    (Authoritative Delegation Types, see Section 8.1).  To achieve
-   downgrade resistance, zones which contain a DELEG RRset MUST set ADT
-   flag to 1 in at least one of the DNSKEY records published in the
-   zone.
+   downgrade resistance, DNSSEC-signed zones which contain a DELEG RRset
+   MUST set ADT flag to 1 in at least one of the DNSKEY records
+   published in the zone.
 
 5.4.  DNSSEC Validators
 
@@ -1840,7 +1840,7 @@ Acknowledgments
 
    Other people joined the effort after the initial hackaton: Ben
    Schwartz, Bob Halley, Paul Hoffman, Miek Gieben, Ray Hunter, Håvard
-   Eidnes, Ted Hardie, Michael Richardson, Florian Obser ...
+   Eidnes, Ted Hardie, Michael Richardson, Florian Obser, Evan Hunt, ...
 
    The RESINFO extension was contributed by Florian Obser.
 
