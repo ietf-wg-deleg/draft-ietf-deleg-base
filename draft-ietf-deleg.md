@@ -618,7 +618,8 @@ Note that, per the rules for the keys defined in Section 6.4 of {{!RFC6763}}, if
 
 # Operational Considerations
 
-When an authoritative server or resolver becomes DELEG-aware, new operational considerations apply to it.
+When DELEG is deployed, new operational considerations will apply.
+While the majority of these relate to the operation of DELEG-aware servers or resolvers, there is a more general set of operational practices which will need to apply because not all resolvers will be DELEG-aware.
 This section gives an overview of some of those considerations.
 
 ## NS Not Required by Protocol
@@ -629,8 +630,14 @@ Software to manage zone content or check the validity of zones needs to be updat
 
 ## NS Maybe Required in Practice
 
-Although DELEG removes the protocol requirement for NS records, resolver support for DELEG will be incomplete for a long time after this protocol is first deployed.
-Zones intended for global reachability need to continue publishing NS records until DELEG support is sufficiently widespread.
+Although DELEG removes the protocol requirement for NS records, resolver support for DELEG will not be universal for a long time after this protocol is first deployed.
+The deployment of DELEG-only delegation creates a new situation in which DNS servers that are authoritative for a particular set of domains provide partly or completely different answers.
+Where "split DNS" or "split-horizon DNS" {{RFC9499}} differences depend on the source of the query, resolution of DELEG-only delegations will depend on whether or not the resolver is aware of and using DELEG.
+Compare examples of DELEG-only delegation and respective answers for DELEG-unaware client in {{legacynxdomain}} and DELEG-aware client in {{aware-new-delegation-only}}.
+
+For any part of the namespace that is intended to be globally reachable, operators should avoid DELEG-only delegations, as some resolvers will be unaware of DELEG.
+For other parts of the namespace, operators should take care to ensure that any variability in responses introduced maps correctly to the client capabilities.
+
 DELEG-only delegation is appropriate only where all intended users are known to use DELEG-capable resolvers.
 This might be the case when a zone operator wants a zone be reachable only over secure transport, for example.
 The decision to drop NS records should be guided by operational measurements of resolver adoption of the DELEG protocol.
@@ -643,6 +650,7 @@ Software that manages delegations or checks the validity of zones need to be upd
 If both NS and DELEG records are present, zone managers might want to check consistency across both RRsets, subject to local policy.
 This specification treats both NS and DELEG RRsets as completely independent on the protocol level,
 but it does not prohibit a provisioning system from generating one record type from the other.
+
 ## Authoritative Deployment
 
 Before adding a first DELEG record into a DNS zone, these steps need to be taken, in this order:
@@ -906,6 +914,8 @@ The following sections show referral examples:
 
 #### Query for foo.test
 
+See {{no-ns}}.
+
     ;; Header: QR AA RCODE=NXDOMAIN
     ;;
 
@@ -969,6 +979,8 @@ A forgotten glue record under the "test." delegation point is occluded by DELEG 
 
 
 #### Query for foo.test {#legacynxdomain}
+
+See {{no-ns}}.
 
     ;; Header: QR DO AA RCODE=NXDOMAIN
     ;;
@@ -1083,7 +1095,7 @@ A follow-up example in {{delegparam-example}} explains the ultimate meaning of t
     ns1.example. A     192.0.2.1
     ns1.example. AAAA  2001:DB8::1
 
-#### Query for foo.test
+#### Query for foo.test {#aware-new-delegation-only}
 
     ;; Header: QR DO DE RCODE=NOERROR
     ;;
@@ -1139,6 +1151,6 @@ John Levine, Erik Nygren, Jon Reed, Ben Kaduk, Mashooq Muhaimen, Jason Moreau, J
 Work on DELEG protocol has started at IETF 118 Hackaton.
 Hackaton participants: Christian Elmerot, David Blacka, David Lawrence, Edward Lewis, Erik Nygren, George Michaelson, Jan Včelák, Klaus Darilion, Libor Peltan, Manu Bretelle, Peter van Dijk, Petr Špaček, Philip Homburg, Ralf Weber, Roy Arends, Shane Kerr, Shumon Huque, Vandan Adhvaryu, Vladimír Čunát, Andreas Schulze.
 
-Other people joined the effort after the initial hackaton: Ben Schwartz, Bob Halley, Paul Hoffman, Miek Gieben, Ray Hunter, Håvard Eidnes ...
+Other people joined the effort after the initial hackaton: Ben Schwartz, Bob Halley, Paul Hoffman, Miek Gieben, Ray Hunter, Håvard Eidnes, Ted Hardie ...
 
 The RESINFO extension was contributed by Florian Obser.
