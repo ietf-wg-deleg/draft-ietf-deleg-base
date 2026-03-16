@@ -2212,7 +2212,7 @@ Consequently, the time required to withdraw the new DNSKEY record is limited onl
       <h2 id="name-security-considerations">
 <a href="#section-7" class="section-number selfRef">7. </a><a href="#name-security-considerations" class="section-name selfRef">Security Considerations</a>
       </h2>
-<p id="section-7-1">TODO: Add more here<a href="#section-7-1" class="pilcrow">¶</a></p>
+<p id="section-7-1">TODO: More people should check this section is complete!<a href="#section-7-1" class="pilcrow">¶</a></p>
 <div id="too-much-work">
 <section id="section-7.1">
         <h3 id="name-preventing-over-work-attack">
@@ -2223,6 +2223,7 @@ This document describes two sets of actions that, if not controlled, could lead 
 <p id="section-7.1-2">Long chains of include-delegparam information (<a href="#nameserver-info" class="auto internal xref">Section 3.4</a>), and those with circular chains of include-delegparam information, can be burdensome.
 To prevent this, the resolver SHOULD NOT follow more than 3 include-delegparam chains in an RRset when populating SLIST.
 Note that include-delegparam chains can have CNAME steps in them; in such a case, a CNAME step is counted the same as a DELEGPARAM step when determining when to stop following a chain.<a href="#section-7.1-2" class="pilcrow">¶</a></p>
+<p id="section-7.1-3">TODO: No other DNS spec specifies hard maximum number of indirections. Perhaps we should not specify it either? After all DELEG value can contain a name in NS-only delegation and then we get into realm of 'count DELEG but NS is uncounted' and other fun combinations like this. Perhaps this is better dealt with for the whole DNS protocol within draft-fujiwara-dnsop-dns-upper-limit-values?<a href="#section-7.1-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="downgrade-attacks">
@@ -2513,7 +2514,7 @@ The section will be removed when IANA makes permanent assignments.<a href="#sect
 It shows the delegation point for "example." and "test."<a href="#appendix-A.1-1" class="pilcrow">¶</a></p>
 <p id="appendix-A.1-2">The "example." delegation has DELEG and NS records.
 The "test." delegation has DELEG but no NS records.<a href="#appendix-A.1-2" class="pilcrow">¶</a></p>
-<p id="appendix-A.1-3">TODO: Add examples that have server-name and include-delegparam being sets of more than one name.<a href="#appendix-A.1-3" class="pilcrow">¶</a></p>
+<p id="appendix-A.1-3">TODO: Add examples that have include-delegparam being sets of more than one name.<a href="#appendix-A.1-3" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="appendix-A.1-4">
 <pre>
 example.   DELEG server-ipv4=192.0.2.1 server-ipv6=2001:DB8::1
