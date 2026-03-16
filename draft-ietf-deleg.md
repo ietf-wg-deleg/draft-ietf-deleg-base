@@ -635,7 +635,7 @@ The deployment of DELEG-only delegation creates a new situation in which DNS ser
 Where "split DNS" or "split-horizon DNS" {{RFC9499}} differences depend on the source of the query, resolution of DELEG-only delegations will depend on whether or not the resolver is aware of and using DELEG.
 Compare examples of DELEG-only delegation and respective answers for DELEG-unaware client in {{legacynxdomain}} and DELEG-aware client in {{aware-new-delegation-only}}.
 
-For any part of the namespace that is intended to be globally visible, operators should avoid DELEG-only delegations, as some resolvers will be unaware of DELEG.
+For any part of the namespace that is intended to be globally reachable, operators should avoid DELEG-only delegations, as some resolvers will be unaware of DELEG.
 For other parts of the namespace, operators should take care to ensure that any variability in responses introduced maps correctly to the client capabilities.
 
 DELEG-only delegation is appropriate only where all intended users are known to use DELEG-capable resolvers.
