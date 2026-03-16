@@ -7,8 +7,8 @@ Internet-Draft                                                       ISC
 Updates: 1034, 1035, 4035, 6672, 6840 (if                       R. Weber
          approved)                                   Akamai Technologies
 Intended status: Standards Track                             D. Lawrence
-Expires: 10 August 2026                                       Salesforce
-                                                         6 February 2026
+Expires: 17 September 2026                                    Salesforce
+                                                           16 March 2026
 
 
                      Extensible Delegation for DNS
@@ -59,7 +59,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 10 August 2026.
+   This Internet-Draft will expire on 17 September 2026.
 
 Copyright Notice
 
@@ -107,7 +107,8 @@ Table of Contents
      6.1.  NS Not Required by Protocol
      6.2.  NS Maybe Required in Practice
      6.3.  NS and DELEG Combined
-       6.3.1.  Enabling ADT Flag
+     6.4.  Authoritative Deployment
+       6.4.1.  Enabling ADT Flag
    7.  Security Considerations
      7.1.  Preventing Over-work Attacks
      7.2.  Preventing Downgrade Attacks
@@ -1041,9 +1042,12 @@ Table of Contents
 
 6.  Operational Considerations
 
-   When an authoritative server or resolver becomes DELEG-aware, new
-   operational considerations apply to it.  This section gives an
-   overview of some of those considerations.
+   When DELEG is deployed, new operational considerations will apply.
+   While the majority of these relate to the operation of DELEG-aware
+   servers or resolvers, there is a more general set of operational
+   practices which will need to apply because not all resolvers will be
+   DELEG-aware.  This section gives an overview of some of those
+   considerations.
 
 6.1.  NS Not Required by Protocol
 
@@ -1056,15 +1060,29 @@ Table of Contents
 6.2.  NS Maybe Required in Practice
 
    Although DELEG removes the protocol requirement for NS records,
-   resolver support for DELEG will be incomplete for a long time after
-   this protocol is first deployed.  Zones intended for global
-   reachability need to continue publishing NS records until DELEG
-   support is sufficiently widespread.  DELEG-only delegation is
-   appropriate only where all intended users are known to use DELEG-
-   capable resolvers.  This might be the case when a zone operator wants
-   a zone be reachable only over secure transport, for example.  The
-   decision to drop NS records should be guided by operational
-   measurements of resolver adoption of the DELEG protocol.
+   resolver support for DELEG will not be universal for a long time
+   after this protocol is first deployed.  The deployment of DELEG-only
+   delegation creates a new situation in which DNS servers that are
+   authoritative for a particular set of domains provide partly or
+   completely different answers.  Where "split DNS" or "split-horizon
+   DNS" RFC9499 differences depend on the source of the query,
+   resolution of DELEG-only delegations will depend on whether or not
+   the resolver is aware of and using DELEG.  Compare examples of DELEG-
+   only delegation and respective answers for DELEG-unaware client in
+   Appendix A.4.2.2 and DELEG-aware client in Appendix A.4.4.2.
+
+   For any part of the namespace that is intended to be globally
+   reachable, operators should avoid DELEG-only delegations, as some
+   resolvers will be unaware of DELEG.  For other parts of the
+   namespace, operators should take care to ensure that any variability
+   in responses introduced maps correctly to the client capabilities.
+
+   DELEG-only delegation is appropriate only where all intended users
+   are known to use DELEG-capable resolvers.  This might be the case
+   when a zone operator wants a zone be reachable only over secure
+   transport, for example.  The decision to drop NS records should be
+   guided by operational measurements of resolver adoption of the DELEG
+   protocol.
 
 6.3.  NS and DELEG Combined
 
@@ -1080,7 +1098,8 @@ Table of Contents
    specification treats both NS and DELEG RRsets as completely
    independent on the protocol level, but it does not prohibit a
    provisioning system from generating one record type from the other.
-   ## Authoritative Deployment
+
+6.4.  Authoritative Deployment
 
    Before adding a first DELEG record into a DNS zone, these steps need
    to be taken, in this order:
@@ -1099,7 +1118,7 @@ Table of Contents
        loss of downgrade resistence of the DELEG protocol for this zone;
        see Section 7.2.
 
-6.3.1.  Enabling ADT Flag
+6.4.1.  Enabling ADT Flag
 
    According to the DNSSEC specification, changing flags of a DNSKEY
    record changes its Key Tag and thus requires a key rollover.  For
@@ -1532,6 +1551,8 @@ A.4.1.1.  Query for foo.example
 
 A.4.1.2.  Query for foo.test
 
+   See Section 5.2.2.1.
+
    ;; Header: QR AA RCODE=NXDOMAIN
    ;;
 
@@ -1593,6 +1614,8 @@ A.4.2.1.  Query for foo.example
    ns1.example. AAAA  2001:DB8::1
 
 A.4.2.2.  Query for foo.test
+
+   See Section 5.2.2.1.
 
    ;; Header: QR DO AA RCODE=NXDOMAIN
    ;;
@@ -1775,7 +1798,7 @@ Acknowledgments
 
    Other people joined the effort after the initial hackaton: Ben
    Schwartz, Bob Halley, Paul Hoffman, Miek Gieben, Ray Hunter, Håvard
-   Eidnes ...
+   Eidnes, Ted Hardie ...
 
    The RESINFO extension was contributed by Florian Obser.
 

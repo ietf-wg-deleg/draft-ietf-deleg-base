@@ -14,24 +14,24 @@
 The traditional DNS delegation is based on NS records which contain only hostnames of servers and no other parameters.
 The new delegation records are extensible, can be secured with DNSSEC, and eliminate the problem of having two sources of truth for delegation information. 
     " name="description">
-<meta content="xml2rfc 3.31.0" name="generator">
+<meta content="xml2rfc 3.32.0" name="generator">
 <meta content="Internet-Draft" name="keyword">
 <meta content="DNS" name="keyword">
 <meta content="delegation" name="keyword">
 <meta content="draft-ietf-deleg-latest" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.31.0
+  xml2rfc 3.32.0
     Python 3.12.12
     ConfigArgParse 1.7
     google-i18n-address 3.1.1
     intervaltree 3.2.1
     Jinja2 3.1.6
     lxml 6.0.2
-    platformdirs 4.5.1
+    platformdirs 4.9.4
     pycountry 24.6.1
     PyYAML 6.0.3
     requests 2.32.5
-    wcwidth 0.3.0
+    wcwidth 0.6.0
 -->
 <link href="draft-ietf-deleg.xml" rel="alternate" type="application/rfc+xml">
 <link href="#copyright" rel="license">
@@ -172,7 +172,7 @@ The new delegation records are extensible, can be secured with DNSSEC, and elimi
   font-weight: 400;
   font-display: swap;
   src: local('Oxygen Mono'), local('OxygenMono-Regular'), url('https://martinthomson.github.io/rfc-css/fonts/oxygenmono-regular-latin-ext.woff2') format('woff2');
-  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
 }
 @font-face {
   font-family: 'Oxygen Mono';
@@ -180,7 +180,8 @@ The new delegation records are extensible, can be secured with DNSSEC, and elimi
   font-weight: 400;
   font-display: swap;
   src: local('Oxygen Mono'), local('OxygenMono-Regular'), url('https://martinthomson.github.io/rfc-css/fonts/oxygenmono-regular-latin.woff2') format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
 }
 
 @font-face {
@@ -1051,11 +1052,11 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">DELEG</td>
-<td class="right">February 2026</td>
+<td class="right">March 2026</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Špaček, et al.</td>
-<td class="center">Expires 10 August 2026</td>
+<td class="center">Expires 17 September 2026</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1071,12 +1072,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <a href="https://www.rfc-editor.org/rfc/rfc1034" class="eref">1034</a>, <a href="https://www.rfc-editor.org/rfc/rfc1035" class="eref">1035</a>, <a href="https://www.rfc-editor.org/rfc/rfc4035" class="eref">4035</a>, <a href="https://www.rfc-editor.org/rfc/rfc6672" class="eref">6672</a>, <a href="https://www.rfc-editor.org/rfc/rfc6840" class="eref">6840</a> (if approved)</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2026-02-06" class="published">6 February 2026</time>
+<time datetime="2026-03-16" class="published">16 March 2026</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2026-08-10">10 August 2026</time></dd>
+<dd class="expires"><time datetime="2026-09-17">17 September 2026</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1137,7 +1138,7 @@ The new delegation records are extensible, can be secured with DNSSEC, and elimi
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 10 August 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 17 September 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1267,9 +1268,12 @@ The new delegation records are extensible, can be secured with DNSSEC, and elimi
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.3">
                 <p id="section-toc.1-1.6.2.3.1"><a href="#section-6.3" class="auto internal xref">6.3</a>.  <a href="#name-ns-and-deleg-combined" class="internal xref">NS and DELEG Combined</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.4">
+                <p id="section-toc.1-1.6.2.4.1"><a href="#section-6.4" class="auto internal xref">6.4</a>.  <a href="#name-authoritative-deployment" class="internal xref">Authoritative Deployment</a></p>
 <ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.3.2.1">
-                    <p id="section-toc.1-1.6.2.3.2.1.1"><a href="#section-6.3.1" class="auto internal xref">6.3.1</a>.  <a href="#name-enabling-adt-flag" class="internal xref">Enabling ADT Flag</a></p>
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.4.2.1">
+                    <p id="section-toc.1-1.6.2.4.2.1.1"><a href="#section-6.4.1" class="auto internal xref">6.4.1</a>.  <a href="#name-enabling-adt-flag" class="internal xref">Enabling ADT Flag</a></p>
 </li>
                 </ul>
 </li>
@@ -2101,7 +2105,8 @@ validators are not expected to detect inconsistencies in data if a chain of trus
       <h2 id="name-operational-considerations">
 <a href="#section-6" class="section-number selfRef">6. </a><a href="#name-operational-considerations" class="section-name selfRef">Operational Considerations</a>
       </h2>
-<p id="section-6-1">When an authoritative server or resolver becomes DELEG-aware, new operational considerations apply to it.
+<p id="section-6-1">When DELEG is deployed, new operational considerations will apply.
+While the majority of these relate to the operation of DELEG-aware servers or resolvers, there is a more general set of operational practices which will need to apply because not all resolvers will be DELEG-aware.
 This section gives an overview of some of those considerations.<a href="#section-6-1" class="pilcrow">¶</a></p>
 <div id="ns-not-required-by-protocol">
 <section id="section-6.1">
@@ -2118,11 +2123,15 @@ Software to manage zone content or check the validity of zones needs to be updat
         <h3 id="name-ns-maybe-required-in-practi">
 <a href="#section-6.2" class="section-number selfRef">6.2. </a><a href="#name-ns-maybe-required-in-practi" class="section-name selfRef">NS Maybe Required in Practice</a>
         </h3>
-<p id="section-6.2-1">Although DELEG removes the protocol requirement for NS records, resolver support for DELEG will be incomplete for a long time after this protocol is first deployed.
-Zones intended for global reachability need to continue publishing NS records until DELEG support is sufficiently widespread.
-DELEG-only delegation is appropriate only where all intended users are known to use DELEG-capable resolvers.
+<p id="section-6.2-1">Although DELEG removes the protocol requirement for NS records, resolver support for DELEG will not be universal for a long time after this protocol is first deployed.
+The deployment of DELEG-only delegation creates a new situation in which DNS servers that are authoritative for a particular set of domains provide partly or completely different answers.
+Where "split DNS" or "split-horizon DNS" <a href="#RFC9499" class="auto internal xref">RFC9499</a> differences depend on the source of the query, resolution of DELEG-only delegations will depend on whether or not the resolver is aware of and using DELEG.
+Compare examples of DELEG-only delegation and respective answers for DELEG-unaware client in <a href="#legacynxdomain" class="auto internal xref">Appendix A.4.2.2</a> and DELEG-aware client in <a href="#aware-new-delegation-only" class="auto internal xref">Appendix A.4.4.2</a>.<a href="#section-6.2-1" class="pilcrow">¶</a></p>
+<p id="section-6.2-2">For any part of the namespace that is intended to be globally reachable, operators should avoid DELEG-only delegations, as some resolvers will be unaware of DELEG.
+For other parts of the namespace, operators should take care to ensure that any variability in responses introduced maps correctly to the client capabilities.<a href="#section-6.2-2" class="pilcrow">¶</a></p>
+<p id="section-6.2-3">DELEG-only delegation is appropriate only where all intended users are known to use DELEG-capable resolvers.
 This might be the case when a zone operator wants a zone be reachable only over secure transport, for example.
-The decision to drop NS records should be guided by operational measurements of resolver adoption of the DELEG protocol.<a href="#section-6.2-1" class="pilcrow">¶</a></p>
+The decision to drop NS records should be guided by operational measurements of resolver adoption of the DELEG protocol.<a href="#section-6.2-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="ns-and-deleg-combined">
@@ -2134,58 +2143,64 @@ The decision to drop NS records should be guided by operational measurements of 
 Software that manages delegations or checks the validity of zones need to be updated to allow delegations with all combinations of (with, without) * (NS, DELEG) records.<a href="#section-6.3-1" class="pilcrow">¶</a></p>
 <p id="section-6.3-2">If both NS and DELEG records are present, zone managers might want to check consistency across both RRsets, subject to local policy.
 This specification treats both NS and DELEG RRsets as completely independent on the protocol level,
-but it does not prohibit a provisioning system from generating one record type from the other.
-## Authoritative Deployment<a href="#section-6.3-2" class="pilcrow">¶</a></p>
-<p id="section-6.3-3">Before adding a first DELEG record into a DNS zone, these steps need to be taken, in this order:<a href="#section-6.3-3" class="pilcrow">¶</a></p>
-<ol start="1" type="1" class="normal type-1" id="section-6.3-4">
-<li id="section-6.3-4.1">
-            <p id="section-6.3-4.1.1">If zone checkers are used: ensure that the zone checkers are DELEG-aware.<a href="#section-6.3-4.1.1" class="pilcrow">¶</a></p>
+but it does not prohibit a provisioning system from generating one record type from the other.<a href="#section-6.3-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="authoritative-deployment">
+<section id="section-6.4">
+        <h3 id="name-authoritative-deployment">
+<a href="#section-6.4" class="section-number selfRef">6.4. </a><a href="#name-authoritative-deployment" class="section-name selfRef">Authoritative Deployment</a>
+        </h3>
+<p id="section-6.4-1">Before adding a first DELEG record into a DNS zone, these steps need to be taken, in this order:<a href="#section-6.4-1" class="pilcrow">¶</a></p>
+<ol start="1" type="1" class="normal type-1" id="section-6.4-2">
+<li id="section-6.4-2.1">
+            <p id="section-6.4-2.1.1">If zone checkers are used: ensure that the zone checkers are DELEG-aware.<a href="#section-6.4-2.1.1" class="pilcrow">¶</a></p>
 </li>
-          <li id="section-6.3-4.2">
-            <p id="section-6.3-4.2.1">Ensure that all authoritative servers serving (and transfering) the zone are DELEG-aware.<a href="#section-6.3-4.2.1" class="pilcrow">¶</a></p>
+          <li id="section-6.4-2.2">
+            <p id="section-6.4-2.2.1">Ensure that all authoritative servers serving (and transfering) the zone are DELEG-aware.<a href="#section-6.4-2.2.1" class="pilcrow">¶</a></p>
 </li>
-          <li id="section-6.3-4.3">
-            <p id="section-6.3-4.3.1">If a zone is DNSSEC-signed: ensure that the signer is DELEG-aware.<a href="#section-6.3-4.3.1" class="pilcrow">¶</a></p>
+          <li id="section-6.4-2.3">
+            <p id="section-6.4-2.3.1">If a zone is DNSSEC-signed: ensure that the signer is DELEG-aware.<a href="#section-6.4-2.3.1" class="pilcrow">¶</a></p>
 </li>
-          <li id="section-6.3-4.4">
-            <p id="section-6.3-4.4.1">If a zone is DNSSEC-signed: ensure that at least one DNSKEY record has the ADT flag set to 1. Failure to do so results in loss of downgrade resistence of the DELEG protocol for this zone; see <a href="#downgrade-attacks" class="auto internal xref">Section 7.2</a>.<a href="#section-6.3-4.4.1" class="pilcrow">¶</a></p>
+          <li id="section-6.4-2.4">
+            <p id="section-6.4-2.4.1">If a zone is DNSSEC-signed: ensure that at least one DNSKEY record has the ADT flag set to 1. Failure to do so results in loss of downgrade resistence of the DELEG protocol for this zone; see <a href="#downgrade-attacks" class="auto internal xref">Section 7.2</a>.<a href="#section-6.4-2.4.1" class="pilcrow">¶</a></p>
 </li>
         </ol>
 <div id="enabling-adt-flag">
-<section id="section-6.3.1">
+<section id="section-6.4.1">
           <h4 id="name-enabling-adt-flag">
-<a href="#section-6.3.1" class="section-number selfRef">6.3.1. </a><a href="#name-enabling-adt-flag" class="section-name selfRef">Enabling ADT Flag</a>
+<a href="#section-6.4.1" class="section-number selfRef">6.4.1. </a><a href="#name-enabling-adt-flag" class="section-name selfRef">Enabling ADT Flag</a>
           </h4>
-<p id="section-6.3.1-1">According to the DNSSEC specification, changing flags of a DNSKEY record changes its Key Tag and thus requires a key rollover.
+<p id="section-6.4.1-1">According to the DNSSEC specification, changing flags of a DNSKEY record changes its Key Tag and thus requires a key rollover.
 For this reason, the ADT flag cannot be simply enabled on an existing key without other changes to the record.
 Operators are advised to set the ADT flag at the time of generating a new key, as part of a regular key rollover using established procedures.
 A zone can safely have keys with the ADT flag set to 1 even if the zone does not have any DELEG records.
-Turning on the ADT flag can be done months or even years before a first DELEG record is introduced into the zone.<a href="#section-6.3.1-1" class="pilcrow">¶</a></p>
-<p id="section-6.3.1-2">Downgrade protection is effective if any DNSKEY with ADT flag set to 1 is present, even if this key does not sign any RRset.
-In other words, it is sufficient to pre-publish new key, as described in stage 2 of Pre-Publish Zone Signing Key Rollover, section 4.1.1.1 of <span>[<a href="#RFC6781" class="cite xref">RFC6781</a>]</span>.<a href="#section-6.3.1-2" class="pilcrow">¶</a></p>
-<p id="section-6.3.1-3">An extremely conservative approach might be:<a href="#section-6.3.1-3" class="pilcrow">¶</a></p>
-<ol start="1" type="1" class="normal type-1" id="section-6.3.1-4">
-<li id="section-6.3.1-4.1">
-              <p id="section-6.3.1-4.1.1">Lower DNSKEY TTL to shorten time to rollback.<a href="#section-6.3.1-4.1.1" class="pilcrow">¶</a></p>
+Turning on the ADT flag can be done months or even years before a first DELEG record is introduced into the zone.<a href="#section-6.4.1-1" class="pilcrow">¶</a></p>
+<p id="section-6.4.1-2">Downgrade protection is effective if any DNSKEY with ADT flag set to 1 is present, even if this key does not sign any RRset.
+In other words, it is sufficient to pre-publish new key, as described in stage 2 of Pre-Publish Zone Signing Key Rollover, section 4.1.1.1 of <span>[<a href="#RFC6781" class="cite xref">RFC6781</a>]</span>.<a href="#section-6.4.1-2" class="pilcrow">¶</a></p>
+<p id="section-6.4.1-3">An extremely conservative approach might be:<a href="#section-6.4.1-3" class="pilcrow">¶</a></p>
+<ol start="1" type="1" class="normal type-1" id="section-6.4.1-4">
+<li id="section-6.4.1-4.1">
+              <p id="section-6.4.1-4.1.1">Lower DNSKEY TTL to shorten time to rollback.<a href="#section-6.4.1-4.1.1" class="pilcrow">¶</a></p>
 </li>
-            <li id="section-6.3.1-4.2">
-              <p id="section-6.3.1-4.2.1">Add a new DNSKEY with ADT flag set to 1, but do not sign any RRsets with this key.<a href="#section-6.3.1-4.2.1" class="pilcrow">¶</a></p>
+            <li id="section-6.4.1-4.2">
+              <p id="section-6.4.1-4.2.1">Add a new DNSKEY with ADT flag set to 1, but do not sign any RRsets with this key.<a href="#section-6.4.1-4.2.1" class="pilcrow">¶</a></p>
 </li>
-            <li id="section-6.3.1-4.3">
-              <p id="section-6.3.1-4.3.1">Monitor deployment for issues.<a href="#section-6.3.1-4.3.1" class="pilcrow">¶</a></p>
+            <li id="section-6.4.1-4.3">
+              <p id="section-6.4.1-4.3.1">Monitor deployment for issues.<a href="#section-6.4.1-4.3.1" class="pilcrow">¶</a></p>
 </li>
-            <li id="section-6.3.1-4.4">
-              <p id="section-6.3.1-4.4.1">Experiment with adding DELEG records at this point, even if the key rollover is not finished. If there is a problem, withdraw the new, otherwise unused key.<a href="#section-6.3.1-4.4.1" class="pilcrow">¶</a></p>
+            <li id="section-6.4.1-4.4">
+              <p id="section-6.4.1-4.4.1">Experiment with adding DELEG records at this point, even if the key rollover is not finished. If there is a problem, withdraw the new, otherwise unused key.<a href="#section-6.4.1-4.4.1" class="pilcrow">¶</a></p>
 </li>
-            <li id="section-6.3.1-4.5">
-              <p id="section-6.3.1-4.5.1">Finish the key rollover.<a href="#section-6.3.1-4.5.1" class="pilcrow">¶</a></p>
+            <li id="section-6.4.1-4.5">
+              <p id="section-6.4.1-4.5.1">Finish the key rollover.<a href="#section-6.4.1-4.5.1" class="pilcrow">¶</a></p>
 </li>
-            <li id="section-6.3.1-4.6">
-              <p id="section-6.3.1-4.6.1">Restore the original DNSKEY TTL.<a href="#section-6.3.1-4.6.1" class="pilcrow">¶</a></p>
+            <li id="section-6.4.1-4.6">
+              <p id="section-6.4.1-4.6.1">Restore the original DNSKEY TTL.<a href="#section-6.4.1-4.6.1" class="pilcrow">¶</a></p>
 </li>
           </ol>
-<p id="section-6.3.1-5">Such an approach requires changing only to DNSKEY RRset and resigning it.
-Consequently, the time required to withdraw the new DNSKEY record is limited only by DNSKEY TTL + time to sign + time to transfer modified DNSKEY RRset.<a href="#section-6.3.1-5" class="pilcrow">¶</a></p>
+<p id="section-6.4.1-5">Such an approach requires changing only to DNSKEY RRset and resigning it.
+Consequently, the time required to withdraw the new DNSKEY record is limited only by DNSKEY TTL + time to sign + time to transfer modified DNSKEY RRset.<a href="#section-6.4.1-5" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -2625,7 +2640,8 @@ ns1.example. AAAA  2001:DB8::1
             <h5 id="name-query-for-footest">
 <a href="#appendix-A.4.1.2" class="section-number selfRef">A.4.1.2. </a><a href="#name-query-for-footest" class="section-name selfRef">Query for foo.test</a>
             </h5>
-<div class="alignLeft art-text artwork" id="appendix-A.4.1.2-1">
+<p id="appendix-A.4.1.2-1">See <a href="#no-ns" class="auto internal xref">Section 5.2.2.1</a>.<a href="#appendix-A.4.1.2-1" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="appendix-A.4.1.2-2">
 <pre>
 ;; Header: QR AA RCODE=NXDOMAIN
 ;;
@@ -2641,7 +2657,7 @@ foo.test.   IN MX
 
 ;; Additional
 ;; OPT with Extended DNS Error: New Delegation Only
-</pre><a href="#appendix-A.4.1.2-1" class="pilcrow">¶</a>
+</pre><a href="#appendix-A.4.1.2-2" class="pilcrow">¶</a>
 </div>
 </section>
 </div>
@@ -2714,7 +2730,8 @@ ns1.example. AAAA  2001:DB8::1
             <h5 id="name-query-for-footest-2">
 <a href="#appendix-A.4.2.2" class="section-number selfRef">A.4.2.2. </a><a href="#name-query-for-footest-2" class="section-name selfRef">Query for foo.test</a>
             </h5>
-<div class="alignLeft art-text artwork" id="appendix-A.4.2.2-1">
+<p id="appendix-A.4.2.2-1">See <a href="#no-ns" class="auto internal xref">Section 5.2.2.1</a>.<a href="#appendix-A.4.2.2-1" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="appendix-A.4.2.2-2">
 <pre>
 ;; Header: QR DO AA RCODE=NXDOMAIN
 ;;
@@ -2734,7 +2751,7 @@ test.      RRSIG NSEC 13 1 300 20260101000000 (
 
 ;; Additional
 ;; OPT with Extended DNS Error: New Delegation Only
-</pre><a href="#appendix-A.4.2.2-1" class="pilcrow">¶</a>
+</pre><a href="#appendix-A.4.2.2-2" class="pilcrow">¶</a>
 </div>
 </section>
 </div>
@@ -2869,7 +2886,7 @@ ns1.example. AAAA  2001:DB8::1
 </div>
 </section>
 </div>
-<div id="query-for-footest-2">
+<div id="aware-new-delegation-only">
 <section id="appendix-A.4.4.2">
             <h5 id="name-query-for-footest-4">
 <a href="#appendix-A.4.4.2" class="section-number selfRef">A.4.4.2. </a><a href="#name-query-for-footest-4" class="section-name selfRef">Query for foo.test</a>
@@ -2947,7 +2964,7 @@ test. DELEG server-ipv6=3fff::33
 John Levine, Erik Nygren, Jon Reed, Ben Kaduk, Mashooq Muhaimen, Jason Moreau, Jerrod Wiesman, Billy Tiemann, Gordon Marx and Brian Wellington.<a href="#appendix-C-1" class="pilcrow">¶</a></p>
 <p id="appendix-C-2">Work on DELEG protocol has started at IETF 118 Hackaton.
 Hackaton participants: Christian Elmerot, David Blacka, David Lawrence, Edward Lewis, Erik Nygren, George Michaelson, Jan Včelák, Klaus Darilion, Libor Peltan, Manu Bretelle, Peter van Dijk, Petr Špaček, Philip Homburg, Ralf Weber, Roy Arends, Shane Kerr, Shumon Huque, Vandan Adhvaryu, Vladimír Čunát, Andreas Schulze.<a href="#appendix-C-2" class="pilcrow">¶</a></p>
-<p id="appendix-C-3">Other people joined the effort after the initial hackaton: Ben Schwartz, Bob Halley, Paul Hoffman, Miek Gieben, Ray Hunter, Håvard Eidnes ...<a href="#appendix-C-3" class="pilcrow">¶</a></p>
+<p id="appendix-C-3">Other people joined the effort after the initial hackaton: Ben Schwartz, Bob Halley, Paul Hoffman, Miek Gieben, Ray Hunter, Håvard Eidnes, Ted Hardie ...<a href="#appendix-C-3" class="pilcrow">¶</a></p>
 <p id="appendix-C-4">The RESINFO extension was contributed by Florian Obser.<a href="#appendix-C-4" class="pilcrow">¶</a></p>
 </section>
 </div>
