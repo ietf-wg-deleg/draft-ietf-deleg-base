@@ -14,24 +14,24 @@
 The traditional DNS delegation is based on NS records which contain only hostnames of servers and no other parameters.
 The new delegation records are extensible, can be secured with DNSSEC, and eliminate the problem of having two sources of truth for delegation information. 
     " name="description">
-<meta content="xml2rfc 3.31.0" name="generator">
+<meta content="xml2rfc 3.32.0" name="generator">
 <meta content="Internet-Draft" name="keyword">
 <meta content="DNS" name="keyword">
 <meta content="delegation" name="keyword">
 <meta content="draft-ietf-deleg-latest" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.31.0
+  xml2rfc 3.32.0
     Python 3.12.12
     ConfigArgParse 1.7
     google-i18n-address 3.1.1
     intervaltree 3.2.1
     Jinja2 3.1.6
     lxml 6.0.2
-    platformdirs 4.5.1
+    platformdirs 4.9.4
     pycountry 24.6.1
     PyYAML 6.0.3
     requests 2.32.5
-    wcwidth 0.3.0
+    wcwidth 0.6.0
 -->
 <link href="draft-ietf-deleg.xml" rel="alternate" type="application/rfc+xml">
 <link href="#copyright" rel="license">
@@ -2123,11 +2123,15 @@ Software to manage zone content or check the validity of zones needs to be updat
         <h3 id="name-ns-maybe-required-in-practi">
 <a href="#section-6.2" class="section-number selfRef">6.2. </a><a href="#name-ns-maybe-required-in-practi" class="section-name selfRef">NS Maybe Required in Practice</a>
         </h3>
-<p id="section-6.2-1">Although DELEG removes the protocol requirement for NS records, resolver support for DELEG will be incomplete for a long time after this protocol is first deployed.
-Zones intended for global reachability need to continue publishing NS records until DELEG support is sufficiently widespread.
-DELEG-only delegation is appropriate only where all intended users are known to use DELEG-capable resolvers.
+<p id="section-6.2-1">Although DELEG removes the protocol requirement for NS records, resolver support for DELEG will not be universal for a long time after this protocol is first deployed.
+The deployment of DELEG-only delegation creates a new situation in which DNS servers that are authoritative for a particular set of domains provide partly or completely different answers.
+Where "split DNS" or "split-horizon DNS" <a href="#RFC9499" class="auto internal xref">RFC9499</a> differences depend on the source of the query, resolution of DELEG-only delegations will depend on whether or not the resolver is aware of and using DELEG.
+Compare examples of DELEG-only delegation and respective answers for DELEG-unaware client in <a href="#legacynxdomain" class="auto internal xref">Appendix A.4.2.2</a> and DELEG-aware client in <a href="#aware-new-delegation-only" class="auto internal xref">Appendix A.4.4.2</a>.<a href="#section-6.2-1" class="pilcrow">¶</a></p>
+<p id="section-6.2-2">For any part of the namespace that is intended to be globally reachable, operators should avoid DELEG-only delegations, as some resolvers will be unaware of DELEG.
+For other parts of the namespace, operators should take care to ensure that any variability in responses introduced maps correctly to the client capabilities.<a href="#section-6.2-2" class="pilcrow">¶</a></p>
+<p id="section-6.2-3">DELEG-only delegation is appropriate only where all intended users are known to use DELEG-capable resolvers.
 This might be the case when a zone operator wants a zone be reachable only over secure transport, for example.
-The decision to drop NS records should be guided by operational measurements of resolver adoption of the DELEG protocol.<a href="#section-6.2-1" class="pilcrow">¶</a></p>
+The decision to drop NS records should be guided by operational measurements of resolver adoption of the DELEG protocol.<a href="#section-6.2-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="ns-and-deleg-combined">
@@ -2140,10 +2144,6 @@ Software that manages delegations or checks the validity of zones need to be upd
 <p id="section-6.3-2">If both NS and DELEG records are present, zone managers might want to check consistency across both RRsets, subject to local policy.
 This specification treats both NS and DELEG RRsets as completely independent on the protocol level,
 but it does not prohibit a provisioning system from generating one record type from the other.<a href="#section-6.3-2" class="pilcrow">¶</a></p>
-<p id="section-6.3-3">The deployment of DELEG-only zones creates a new situation in which DNS servers that are authoritative for a particular set of domains provide partly or completely different answers.
-Where "split DNS" or "split-horizon DNS" [RFC 9499] differences depend on the source of the query, this situation will depend on whether or not the resolver is aware of or using DELEG.
-For any part of the namespace that is intended to be globally visible, operators should avoid DELEG-only zones, as some resolvers will be unaware of DELEG.
-For other parts of the namespace, operators should take care to ensure that any variability in responses introduced maps correctly to the client capabilities.<a href="#section-6.3-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="authoritative-deployment">
@@ -2640,7 +2640,8 @@ ns1.example. AAAA  2001:DB8::1
             <h5 id="name-query-for-footest">
 <a href="#appendix-A.4.1.2" class="section-number selfRef">A.4.1.2. </a><a href="#name-query-for-footest" class="section-name selfRef">Query for foo.test</a>
             </h5>
-<div class="alignLeft art-text artwork" id="appendix-A.4.1.2-1">
+<p id="appendix-A.4.1.2-1">See <a href="#no-ns" class="auto internal xref">Section 5.2.2.1</a>.<a href="#appendix-A.4.1.2-1" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="appendix-A.4.1.2-2">
 <pre>
 ;; Header: QR AA RCODE=NXDOMAIN
 ;;
@@ -2656,7 +2657,7 @@ foo.test.   IN MX
 
 ;; Additional
 ;; OPT with Extended DNS Error: New Delegation Only
-</pre><a href="#appendix-A.4.1.2-1" class="pilcrow">¶</a>
+</pre><a href="#appendix-A.4.1.2-2" class="pilcrow">¶</a>
 </div>
 </section>
 </div>
@@ -2729,7 +2730,8 @@ ns1.example. AAAA  2001:DB8::1
             <h5 id="name-query-for-footest-2">
 <a href="#appendix-A.4.2.2" class="section-number selfRef">A.4.2.2. </a><a href="#name-query-for-footest-2" class="section-name selfRef">Query for foo.test</a>
             </h5>
-<div class="alignLeft art-text artwork" id="appendix-A.4.2.2-1">
+<p id="appendix-A.4.2.2-1">See <a href="#no-ns" class="auto internal xref">Section 5.2.2.1</a>.<a href="#appendix-A.4.2.2-1" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="appendix-A.4.2.2-2">
 <pre>
 ;; Header: QR DO AA RCODE=NXDOMAIN
 ;;
@@ -2749,7 +2751,7 @@ test.      RRSIG NSEC 13 1 300 20260101000000 (
 
 ;; Additional
 ;; OPT with Extended DNS Error: New Delegation Only
-</pre><a href="#appendix-A.4.2.2-1" class="pilcrow">¶</a>
+</pre><a href="#appendix-A.4.2.2-2" class="pilcrow">¶</a>
 </div>
 </section>
 </div>
@@ -2884,7 +2886,7 @@ ns1.example. AAAA  2001:DB8::1
 </div>
 </section>
 </div>
-<div id="query-for-footest-2">
+<div id="aware-new-delegation-only">
 <section id="appendix-A.4.4.2">
             <h5 id="name-query-for-footest-4">
 <a href="#appendix-A.4.4.2" class="section-number selfRef">A.4.4.2. </a><a href="#name-query-for-footest-4" class="section-name selfRef">Query for foo.test</a>
