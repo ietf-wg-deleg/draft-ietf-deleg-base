@@ -591,7 +591,7 @@ Opt-Out is not applicable to DELEG RR type
 because DELEG records are authoritative at the parent side of a zone cut in the same
 way that DS RR types are.
 
-### Referral downgrade protection
+### Referral downgrade protection {#validator-downgrade-protection}
 
 If the zone is DNSSEC-secure, and if any DNSKEY of the zone has the ADT flag ({{iana-existing}}) set to 1, a DELEG-aware validator MUST prove the absence of a DELEG RRset in referral responses from this particular zone.
 
@@ -610,7 +610,7 @@ validators are not expected to detect inconsistencies in data if a chain of trus
 
 A Validating Stub Resolver that is DELEG-aware MUST only use security-aware resolvers that are DELEG-aware.
 A DELEG-aware Validating Resolver that uses forwarders MUST only use DELEG-aware and security-aware forwarders.
-Otherwise DNSSEC-secure zones might fail to validate and DNSSEC-insecure zones might observe inconsistent answers (see {{operational-considerations}).
+Otherwise DNSSEC-secure zones might fail to validate (see {{legacynxdomain}}) and DNSSEC-insecure zones might observe inconsistent answers (see {{operational-considerations}}).
 
 {{!RFC9606}} specifies a DNS resource record type, RESINFO, to allow resolvers to publish information about their capabilities and policies. This can be used to inform DNS clients that DELEG is supported by the DNS resolver.
 
@@ -1001,6 +1001,10 @@ A forgotten glue record under the "test." delegation point is occluded by DELEG 
 #### Query for foo.test {#legacynxdomain}
 
 See {{no-ns}}.
+
+DELEG-unaware validators would treat this answer as DNSSEC-secure.
+
+DELEG-aware validators would treat it as DNSSEC-bogus because the DELEG bit in NSEC type bitmap would trigger downgrade attack detection (see {{validator-downgrade-protection}}).
 
     ;; Header: QR DO AA RCODE=NXDOMAIN
     ;;
