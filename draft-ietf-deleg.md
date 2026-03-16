@@ -633,6 +633,8 @@ Software to manage zone content or check the validity of zones needs to be updat
 Although DELEG removes the protocol requirement for NS records, resolver support for DELEG will not be universal for a long time after this protocol is first deployed.
 The deployment of DELEG-only zones creates a new situation in which DNS servers that are authoritative for a particular set of domains provide partly or completely different answers.
 Where "split DNS" or "split-horizon DNS" {{RFC9499}} differences depend on the source of the query, resolution of DELEG-only delegations will depend on whether or not the resolver is aware of and using DELEG.
+Compare examples of DELEG-only zone and respective answers for DELEG-unaware client in {{legacynxdomain}} and DELEG-aware client in {{aware-new-delegation-only}}.
+
 For any part of the namespace that is intended to be globally visible, operators should avoid DELEG-only zones, as some resolvers will be unaware of DELEG.
 For other parts of the namespace, operators should take care to ensure that any variability in responses introduced maps correctly to the client capabilities.
 
@@ -1089,7 +1091,7 @@ A follow-up example in {{delegparam-example}} explains the ultimate meaning of t
     ns1.example. A     192.0.2.1
     ns1.example. AAAA  2001:DB8::1
 
-#### Query for foo.test
+#### Query for foo.test {#aware-new-delegation-only}
 
     ;; Header: QR DO DE RCODE=NOERROR
     ;;
