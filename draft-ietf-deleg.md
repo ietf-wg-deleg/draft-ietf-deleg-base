@@ -632,7 +632,7 @@ Software to manage zone content or check the validity of zones needs to be updat
 
 Although DELEG removes the protocol requirement for NS records, resolver support for DELEG will be incomplete for a long time after this protocol is first deployed.
 The deployment of DELEG-only zones creates a new situation in which DNS servers that are authoritative for a particular set of domains provide partly or completely different answers.
-Where "split DNS" or "split-horizon DNS" [RFC 9499] differences depend on the source of the query, this situation will depend on whether or not the resolver is aware of or using DELEG.
+Where "split DNS" or "split-horizon DNS" {{RFC9499}} differences depend on the source of the query, this situation will depend on whether or not the resolver is aware of or using DELEG.
 For any part of the namespace that is intended to be globally visible, operators should avoid DELEG-only zones, as some resolvers will be unaware of DELEG.
 For other parts of the namespace, operators should take care to ensure that any variability in responses introduced maps correctly to the client capabilities.
 
