@@ -405,8 +405,7 @@ Table of Contents
 
    *  DELEGPARAM does not create a delegation for its owner name.
 
-   *  DELEGPARAM cannot coexist at the same owner name with DELEG or NS
-      RR types.
+   *  DELEGPARAM cannot exist at the parent side of a zone cut.
 
    *  DELEGPARAM DNSSEC-signing and record-placement rules are the same
       as for any ordinary RR type.
@@ -1830,7 +1829,7 @@ Acknowledgments
 
    Other people joined the effort after the initial hackaton: Ben
    Schwartz, Bob Halley, Paul Hoffman, Miek Gieben, Ray Hunter, Håvard
-   Eidnes, Ted Hardie, Michael Richardson ...
+   Eidnes, Ted Hardie, Michael Richardson, Florian Obser ...
 
    The RESINFO extension was contributed by Florian Obser.
 
