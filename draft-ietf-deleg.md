@@ -696,6 +696,8 @@ Long chains of include-delegparam information ({{nameserver-info}}), and those w
 To prevent this, the resolver SHOULD NOT follow more than 3 include-delegparam chains in an RRset when populating SLIST.
 Note that include-delegparam chains can have CNAME steps in them; in such a case, a CNAME step is counted the same as a DELEGPARAM step when determining when to stop following a chain.
 
+TODO: No other DNS spec specifies hard maximum number of indirections. Perhaps we should not specify it either? After all DELEG value can contain a name in NS-only delegation and then we get into realm of 'count DELEG but NS is uncounted' and other fun combinations like this. Perhaps this is better dealt with for the whole DNS protocol within draft-fujiwara-dnsop-dns-upper-limit-values?
+
 ## Preventing Downgrade Attacks {#downgrade-attacks}
 
 During the rollout of the DELEG protocol, the operator of an authoritative server can upgrade the server software to be DELEG-aware before changing any DNS zones.
