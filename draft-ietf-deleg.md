@@ -685,7 +685,7 @@ Consequently, the time required to withdraw the new DNSKEY record is limited onl
 
 # Security Considerations
 
-TODO: Add more here
+TODO: More people should check this section is complete!
 
 ## Preventing Over-work Attacks {#too-much-work}
 
