@@ -616,7 +616,7 @@ A resolver which supports {{!RFC9606}} SHOULD add the "deleg" key if it supports
 
 Note that, per the rules for the keys defined in Section 6.4 of {{!RFC6763}}, if there is no '=' in a key, then it is a boolean attribute, simply identified as being present with no value.
 
-# Operational Considerations
+# Operational Considerations {#operational-considerations}
 
 When DELEG is deployed, new operational considerations will apply.
 While the majority of these relate to the operation of DELEG-aware servers or resolvers, there is a more general set of operational practices which will need to apply because not all resolvers will be DELEG-aware.
@@ -712,6 +712,21 @@ Without DELEG, there are no security guarantees for the NS RRset on the parent s
 
 Please note that a full DNSKEY rollover is not necessary to achieve the downgrade protection for DELEG.
 Any single DNSKEY with the ADT flag set to 1 is sufficient; the zone can introduce an otherwise unused record into the DNSKEY RRset.
+
+## DELEG Is Stronger Than NS
+DELEG RRtype has stronger protection (by DNSSEC) than NS and glue records on the parent side of a zone cut.
+A child zone that does not need to be resolvable by DELEG-unaware clients (see {operational-considerations}),
+and is delegated only with DELEG records,
+will have a smaller attack surface compared to a zone delegated with both DELEG and NS records.
+
+The additional attack surface of legacy delegations stems from the possibility of replacing NS and glue records in referrals with arbitrary values,
+which is not detectable by DNSSEC (by design in {{RFC4035}} Section 2.2).
+
+For example, this allows redirecting a referral to names and/or addresses under an attacker's control.
+Even for DNSSEC-secure zones, an attacker can use this ability to continuously proxy queries and responses,
+observe traffic, and also monitor the network addresses involved, which might be a privacy concern for roaming clients.
+
+The feasibility and impact of such attacks depend on the threat model, which is outside the scope of this document.
 
 # IANA Considerations
 
