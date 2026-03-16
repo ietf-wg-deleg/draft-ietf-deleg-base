@@ -1830,7 +1830,7 @@ Acknowledgments
 
    Other people joined the effort after the initial hackaton: Ben
    Schwartz, Bob Halley, Paul Hoffman, Miek Gieben, Ray Hunter, Håvard
-   Eidnes, Ted Hardie ...
+   Eidnes, Ted Hardie, Michael Richardson ...
 
    The RESINFO extension was contributed by Florian Obser.
 
