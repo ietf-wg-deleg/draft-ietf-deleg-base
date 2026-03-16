@@ -1781,7 +1781,7 @@ Acknowledgments
    [I-D.tapril-ns2] and thus extends the thanks to the people helping on
    this which are: John Levine, Erik Nygren, Jon Reed, Ben Kaduk,
    Mashooq Muhaimen, Jason Moreau, Jerrod Wiesman, Billy Tiemann, Gordon
-   Marx and Brian Wellington, Ted Hardie.
+   Marx and Brian Wellington.
 
    Work on DELEG protocol has started at IETF 118 Hackaton.  Hackaton
    participants: Christian Elmerot, David Blacka, David Lawrence, Edward
@@ -1792,7 +1792,7 @@ Acknowledgments
 
    Other people joined the effort after the initial hackaton: Ben
    Schwartz, Bob Halley, Paul Hoffman, Miek Gieben, Ray Hunter, Håvard
-   Eidnes ...
+   Eidnes, Ted Hardie ...
 
    The RESINFO extension was contributed by Florian Obser.
 
