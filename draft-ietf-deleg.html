@@ -2067,7 +2067,7 @@ because DELEG records are authoritative at the parent side of a zone cut in the 
 way that DS RR types are.<a href="#section-5.4.2-2" class="pilcrow">¶</a></p>
 </section>
 </div>
-<div id="referral-downgrade-protection">
+<div id="validator-downgrade-protection">
 <section id="section-5.4.3">
           <h4 id="name-referral-downgrade-protecti">
 <a href="#section-5.4.3" class="section-number selfRef">5.4.3. </a><a href="#name-referral-downgrade-protecti" class="section-name selfRef">Referral downgrade protection</a>
@@ -2095,7 +2095,7 @@ validators are not expected to detect inconsistencies in data if a chain of trus
           </h4>
 <p id="section-5.4.5-1">A Validating Stub Resolver that is DELEG-aware MUST only use security-aware resolvers that are DELEG-aware.
 A DELEG-aware Validating Resolver that uses forwarders MUST only use DELEG-aware and security-aware forwarders.
-Otherwise DNSSEC-secure zones might fail to validate and DNSSEC-insecure zones might observe inconsistent answers (see <a href="#operational-considerations" class="auto internal xref">Section 6</a>).<a href="#section-5.4.5-1" class="pilcrow">¶</a></p>
+Otherwise DNSSEC-secure zones might fail to validate (see <a href="#legacynxdomain" class="auto internal xref">Appendix A.4.2.2</a>) and DNSSEC-insecure zones might observe inconsistent answers (see <a href="#operational-considerations" class="auto internal xref">Section 6</a>).<a href="#section-5.4.5-1" class="pilcrow">¶</a></p>
 <p id="section-5.4.5-2"><span>[<a href="#RFC9606" class="cite xref">RFC9606</a>]</span> specifies a DNS resource record type, RESINFO, to allow resolvers to publish information about their capabilities and policies. This can be used to inform DNS clients that DELEG is supported by the DNS resolver.<a href="#section-5.4.5-2" class="pilcrow">¶</a></p>
 <p id="section-5.4.5-3">A resolver which supports <span>[<a href="#RFC9606" class="cite xref">RFC9606</a>]</span> SHOULD add the "deleg" key if it supports DELEG protocol.
 A resolver that uses forwarders MAY use a RESINFO query to determine if the configured forwarders are DELEG-aware.<a href="#section-5.4.5-3" class="pilcrow">¶</a></p>
@@ -2755,7 +2755,9 @@ ns1.example. AAAA  2001:DB8::1
 <a href="#appendix-A.4.2.2" class="section-number selfRef">A.4.2.2. </a><a href="#name-query-for-footest-2" class="section-name selfRef">Query for foo.test</a>
             </h5>
 <p id="appendix-A.4.2.2-1">See <a href="#no-ns" class="auto internal xref">Section 5.2.2.1</a>.<a href="#appendix-A.4.2.2-1" class="pilcrow">¶</a></p>
-<div class="alignLeft art-text artwork" id="appendix-A.4.2.2-2">
+<p id="appendix-A.4.2.2-2">DELEG-unaware validators would treat this answer as DNSSEC-secure.<a href="#appendix-A.4.2.2-2" class="pilcrow">¶</a></p>
+<p id="appendix-A.4.2.2-3">DELEG-aware validators would treat it as DNSSEC-bogus because the DELEG bit in NSEC type bitmap would trigger downgrade attack detection (see <a href="#validator-downgrade-protection" class="auto internal xref">Section 5.4.3</a>).<a href="#appendix-A.4.2.2-3" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="appendix-A.4.2.2-4">
 <pre>
 ;; Header: QR DO AA RCODE=NXDOMAIN
 ;;
@@ -2775,7 +2777,7 @@ test.      RRSIG NSEC 13 1 300 20260101000000 (
 
 ;; Additional
 ;; OPT with Extended DNS Error: New Delegation Only
-</pre><a href="#appendix-A.4.2.2-2" class="pilcrow">¶</a>
+</pre><a href="#appendix-A.4.2.2-4" class="pilcrow">¶</a>
 </div>
 </section>
 </div>

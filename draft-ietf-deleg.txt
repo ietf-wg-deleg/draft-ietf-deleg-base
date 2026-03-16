@@ -1028,8 +1028,8 @@ Table of Contents
    security-aware resolvers that are DELEG-aware.  A DELEG-aware
    Validating Resolver that uses forwarders MUST only use DELEG-aware
    and security-aware forwarders.  Otherwise DNSSEC-secure zones might
-   fail to validate and DNSSEC-insecure zones might observe inconsistent
-   answers (see Section 6).
+   fail to validate (see Appendix A.4.2.2) and DNSSEC-insecure zones
+   might observe inconsistent answers (see Section 6).
 
    [RFC9606] specifies a DNS resource record type, RESINFO, to allow
    resolvers to publish information about their capabilities and
@@ -1652,6 +1652,12 @@ A.4.2.1.  Query for foo.example
 A.4.2.2.  Query for foo.test
 
    See Section 5.2.2.1.
+
+   DELEG-unaware validators would treat this answer as DNSSEC-secure.
+
+   DELEG-aware validators would treat it as DNSSEC-bogus because the
+   DELEG bit in NSEC type bitmap would trigger downgrade attack
+   detection (see Section 5.4.3).
 
    ;; Header: QR DO AA RCODE=NXDOMAIN
    ;;
