@@ -216,7 +216,7 @@ Conversely,
 
 - DELEGPARAM is an ordinary RR and doesn't require any special processing.
 - DELEGPARAM does not create a delegation for its owner name.
-- DELEGPARAM cannot coexist at the same owner name with DELEG or NS RR types.
+- DELEGPARAM cannot exist at the parent side of a zone cut.
 - DELEGPARAM DNSSEC-signing and record-placement rules are the same as for any ordinary RR type.
 - DELEGPARAM is used as the target of the DELEG protocol's "include-delegparam" mechanism, as described in section {{slist}}.
 
@@ -1168,6 +1168,6 @@ John Levine, Erik Nygren, Jon Reed, Ben Kaduk, Mashooq Muhaimen, Jason Moreau, J
 Work on DELEG protocol has started at IETF 118 Hackaton.
 Hackaton participants: Christian Elmerot, David Blacka, David Lawrence, Edward Lewis, Erik Nygren, George Michaelson, Jan Včelák, Klaus Darilion, Libor Peltan, Manu Bretelle, Peter van Dijk, Petr Špaček, Philip Homburg, Ralf Weber, Roy Arends, Shane Kerr, Shumon Huque, Vandan Adhvaryu, Vladimír Čunát, Andreas Schulze.
 
-Other people joined the effort after the initial hackaton: Ben Schwartz, Bob Halley, Paul Hoffman, Miek Gieben, Ray Hunter, Håvard Eidnes, Ted Hardie, Michael Richardson ...
+Other people joined the effort after the initial hackaton: Ben Schwartz, Bob Halley, Paul Hoffman, Miek Gieben, Ray Hunter, Håvard Eidnes, Ted Hardie, Michael Richardson, Florian Obser ...
 
 The RESINFO extension was contributed by Florian Obser.
