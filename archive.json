@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-03-08T01:19:46.967488+00:00",
+  "timestamp": "2026-03-17T01:20:04.739401+00:00",
   "repo": "ietf-wg-deleg/draft-ietf-deleg-base",
   "labels": [
     {
@@ -1233,9 +1233,17 @@
       "labels": [],
       "body": "\"A DELEG-enabled nameserver SHOULD NOT supply DELEG records in the response when resolver has not signalled DELEG support.\"\n. . .\n\"The DELEG RRset is authoritative and the authoritative server MUST treat it like any other authoritative RRsets, regardless of the value of the DE flag.\"\n\nClearly, it is the second that we want. I believe the correct change for the first is \"...should not supply DELEG records in a delegation response when...\"\n",
       "createdAt": "2026-02-15T15:40:30Z",
-      "updatedAt": "2026-02-15T15:40:30Z",
+      "updatedAt": "2026-03-16T13:20:58Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "body": "@paulehoffman Paul, where in the text is this? I can't find it.",
+          "createdAt": "2026-03-16T13:20:58Z",
+          "updatedAt": "2026-03-16T13:20:58Z"
+        }
+      ]
     }
   ],
   "pulls": [
@@ -6852,6 +6860,315 @@
           "updatedAt": "2026-02-06T12:37:08Z"
         }
       ],
+      "reviews": []
+    },
+    {
+      "number": 142,
+      "id": "PR_kwDOO41rkM7KtUFj",
+      "title": "Added Ted Hardies text suggestion for the operational section",
+      "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/pull/142",
+      "state": "MERGED",
+      "author": "fl1ger",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Moin!\r\n\r\nAdded the text Ted Hardie suggested on the dd mailing list. Please add before pushing -08 unless you object Peter.\r\n\r\nSo long\r\n-Ralf\r\n",
+      "createdAt": "2026-03-15T09:59:28Z",
+      "updatedAt": "2026-03-16T12:27:12Z",
+      "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
+      "baseRefName": "main",
+      "baseRefOid": "178bfff46436406b4e17e6a2bf4ed2a784955dc5",
+      "headRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
+      "headRefName": "tedhardieops",
+      "headRefOid": "736970c9ae722dcc957e8bb239d6684ba5da195a",
+      "closedAt": "2026-03-16T12:21:26Z",
+      "mergedAt": "2026-03-16T12:21:26Z",
+      "mergedBy": "pspacek",
+      "mergeCommit": {
+        "oid": "e8080aaef37a62578c386a345fa9284a21c3a0aa"
+      },
+      "comments": [
+        {
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Minor changes against the original:\r\n- text added into Ops section \"NS Maybe Required in Practice\"\r\n- terminology fix DELEG-only s/zone/delegation/\r\n- added links back and forth between examples and definitions\r\n- minor wordsmithing ",
+          "createdAt": "2026-03-16T12:27:12Z",
+          "updatedAt": "2026-03-16T12:27:12Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOO41rkM7rhO2r",
+          "commit": {
+            "abbreviatedOid": "7c7d9ab"
+          },
+          "author": "hardie",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-03-16T04:26:42Z",
+          "updatedAt": "2026-03-16T04:26:42Z",
+          "comments": [
+            {
+              "originalPosition": 15,
+              "body": "There's a typo here--\"crates a new situation\" should be \"creates a new situation\".\n\nSorry for my spellcheck failure.",
+              "createdAt": "2026-03-16T04:26:42Z",
+              "updatedAt": "2026-03-16T04:26:42Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOO41rkM7rhYI5",
+          "commit": {
+            "abbreviatedOid": "7c7d9ab"
+          },
+          "author": "fl1ger",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-03-16T04:41:59Z",
+          "updatedAt": "2026-03-16T04:41:59Z",
+          "comments": [
+            {
+              "originalPosition": 15,
+              "body": "I think I fixed that after our breakfast conversation. The latest update to the pull request seems to have it. Can you see that?",
+              "createdAt": "2026-03-16T04:41:59Z",
+              "updatedAt": "2026-03-16T04:41:59Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOO41rkM7rihr1",
+          "commit": {
+            "abbreviatedOid": "7c7d9ab"
+          },
+          "author": "hardie",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-03-16T06:26:31Z",
+          "updatedAt": "2026-03-16T06:26:31Z",
+          "comments": [
+            {
+              "originalPosition": 15,
+              "body": "Yes, I see it now.  I guess I was looking at an outdated branch.  Thanks.",
+              "createdAt": "2026-03-16T06:26:31Z",
+              "updatedAt": "2026-03-16T06:26:31Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 143,
+      "id": "PR_kwDOO41rkM7K6La4",
+      "title": "TODO wording updates",
+      "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/pull/143",
+      "state": "MERGED",
+      "author": "pspacek",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2026-03-16T12:35:56Z",
+      "updatedAt": "2026-03-16T12:36:26Z",
+      "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
+      "baseRefName": "main",
+      "baseRefOid": "e8080aaef37a62578c386a345fa9284a21c3a0aa",
+      "headRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
+      "headRefName": "todo-update",
+      "headRefOid": "6f601134f43a008f9ce954d1c678335e61af6c95",
+      "closedAt": "2026-03-16T12:36:26Z",
+      "mergedAt": "2026-03-16T12:36:26Z",
+      "mergedBy": "pspacek",
+      "mergeCommit": {
+        "oid": "68f935b3d0bde9e9bceb15f1aa900acf46e6904f"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 144,
+      "id": "PR_kwDOO41rkM7K6hH0",
+      "title": "Describe consequences of DELEG referral protected by DNSSEC",
+      "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/pull/144",
+      "state": "MERGED",
+      "author": "pspacek",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2026-03-16T12:56:31Z",
+      "updatedAt": "2026-03-16T13:06:14Z",
+      "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
+      "baseRefName": "main",
+      "baseRefOid": "68f935b3d0bde9e9bceb15f1aa900acf46e6904f",
+      "headRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
+      "headRefName": "sec-deleg-stronger",
+      "headRefOid": "d8511f6f86083b37b6cb91d3087cbf86dc2dc4d6",
+      "closedAt": "2026-03-16T13:06:14Z",
+      "mergedAt": "2026-03-16T13:06:14Z",
+      "mergedBy": "pspacek",
+      "mergeCommit": {
+        "oid": "184fa3bcf348506453445d6af3523652324c62fa"
+      },
+      "comments": [
+        {
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "body": "This is reworded and extended version of original proposal from thread\r\nhttps://mailarchive.ietf.org/arch/msg/dd/topDQqRXzT0JZDTeEz9KP206kdE/\r\nwhich took a detour to discuss RFC1035 semantics.\r\n\r\nThe actually relevant subthreads were:\r\n- https://mailarchive.ietf.org/arch/msg/dd/egG3GvOAtu1FIdlinFqWtWOG1fA/\r\n- https://mailarchive.ietf.org/arch/msg/dd/cuRROCZq5YD_S-cOvXB4nTLENtE/\r\n\r\nThis version also mentions glue, which suffers from the same problem as NS, but was not originally mentioned.",
+          "createdAt": "2026-03-16T13:03:11Z",
+          "updatedAt": "2026-03-16T13:03:11Z"
+        }
+      ],
+      "reviews": []
+    },
+    {
+      "number": 145,
+      "id": "PR_kwDOO41rkM7K7MtY",
+      "title": "DELEGPARAM cannot exist at the parent side of a zone cut",
+      "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/pull/145",
+      "state": "MERGED",
+      "author": "pspacek",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2026-03-16T13:35:39Z",
+      "updatedAt": "2026-03-16T14:36:00Z",
+      "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
+      "baseRefName": "main",
+      "baseRefOid": "22f6482eada7f8a5b4985e3771e93de8782fec4a",
+      "headRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
+      "headRefName": "DELEGPARAM-coexistence-rules",
+      "headRefOid": "32b8e9b7d0074b4250cff6d3f7d88e8ee7eb8b5f",
+      "closedAt": "2026-03-16T14:36:00Z",
+      "mergedAt": "2026-03-16T14:36:00Z",
+      "mergedBy": "pspacek",
+      "mergeCommit": {
+        "oid": "06e852d83859d74a2357a2e74e4bce90cedb6df8"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 146,
+      "id": "PR_kwDOO41rkM7K8rps",
+      "title": "Clarify conditions for resolver chaining",
+      "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/pull/146",
+      "state": "MERGED",
+      "author": "pspacek",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2026-03-16T14:55:01Z",
+      "updatedAt": "2026-03-16T14:55:26Z",
+      "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
+      "baseRefName": "main",
+      "baseRefOid": "06e852d83859d74a2357a2e74e4bce90cedb6df8",
+      "headRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
+      "headRefName": "chaining-clarif",
+      "headRefOid": "299fd55b94b5ab3bf17269a6b630bba51c1790c9",
+      "closedAt": "2026-03-16T14:55:26Z",
+      "mergedAt": "2026-03-16T14:55:26Z",
+      "mergedBy": "pspacek",
+      "mergeCommit": {
+        "oid": "c4ceebf2a96112259795347b1ffb4f917ad28698"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 147,
+      "id": "PR_kwDOO41rkM7K9dx3",
+      "title": "Add commentary to examples with legacy/aware validator",
+      "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/pull/147",
+      "state": "MERGED",
+      "author": "pspacek",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2026-03-16T15:36:03Z",
+      "updatedAt": "2026-03-16T15:40:12Z",
+      "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
+      "baseRefName": "main",
+      "baseRefOid": "c4ceebf2a96112259795347b1ffb4f917ad28698",
+      "headRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
+      "headRefName": "examples-legacy-validator",
+      "headRefOid": "674e06e93786afb8ac18f8f13e9ccf875d7d7edc",
+      "closedAt": "2026-03-16T15:40:12Z",
+      "mergedAt": "2026-03-16T15:40:12Z",
+      "mergedBy": "pspacek",
+      "mergeCommit": {
+        "oid": "2cc9e30df49d256c60e9301407127a8d8b8d74e6"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 148,
+      "id": "PR_kwDOO41rkM7K9oNh",
+      "title": "Clarify ADT flag applies only to signed zones",
+      "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/pull/148",
+      "state": "MERGED",
+      "author": "pspacek",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2026-03-16T15:44:24Z",
+      "updatedAt": "2026-03-16T15:45:02Z",
+      "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
+      "baseRefName": "main",
+      "baseRefOid": "2cc9e30df49d256c60e9301407127a8d8b8d74e6",
+      "headRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
+      "headRefName": "clarif-adt-only-signed",
+      "headRefOid": "a7e292f0ec28c262eea40bab8e0ba347e4425da6",
+      "closedAt": "2026-03-16T15:45:02Z",
+      "mergedAt": "2026-03-16T15:45:02Z",
+      "mergedBy": "pspacek",
+      "mergeCommit": {
+        "oid": "8d8061789559719e8a606fa1f431b48ae8c70214"
+      },
+      "comments": [
+        {
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Was mentioned during the interim meeting. Proposed change is now applied.",
+          "createdAt": "2026-03-16T15:44:45Z",
+          "updatedAt": "2026-03-16T15:44:45Z"
+        }
+      ],
+      "reviews": []
+    },
+    {
+      "number": 149,
+      "id": "PR_kwDOO41rkM7K938G",
+      "title": "Clearly separate original SLIST definition from our modifications",
+      "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/pull/149",
+      "state": "MERGED",
+      "author": "pspacek",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2026-03-16T15:57:38Z",
+      "updatedAt": "2026-03-16T16:01:17Z",
+      "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
+      "baseRefName": "main",
+      "baseRefOid": "8d8061789559719e8a606fa1f431b48ae8c70214",
+      "headRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
+      "headRefName": "slist-clarif",
+      "headRefOid": "33de1fdb4788a1aba35af1d3619231d0d6a7d447",
+      "closedAt": "2026-03-16T16:01:17Z",
+      "mergedAt": "2026-03-16T16:01:17Z",
+      "mergedBy": "pspacek",
+      "mergeCommit": {
+        "oid": "f6cb1abd8c12836c02b08ac647ddef93158d2482"
+      },
+      "comments": [],
       "reviews": []
     }
   ]
