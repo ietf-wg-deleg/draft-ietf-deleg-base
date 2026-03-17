@@ -1769,8 +1769,7 @@ A.4.4.1.  Query for foo.example
                            20250101000000 33333 . SigExampleDS )
 
    ;; Additional
-   ns1.example. A     192.0.2.1
-   ns1.example. AAAA  2001:DB8::1
+   ;; (empty)
 
 A.4.4.2.  Query for foo.test
 
