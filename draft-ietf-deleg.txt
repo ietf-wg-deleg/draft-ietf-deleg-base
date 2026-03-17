@@ -7,8 +7,8 @@ Internet-Draft                                                       ISC
 Updates: 1034, 1035, 4035, 6672, 6840 (if                       R. Weber
          approved)                                   Akamai Technologies
 Intended status: Standards Track                             D. Lawrence
-Expires: 17 September 2026                                    Salesforce
-                                                           16 March 2026
+Expires: 18 September 2026                                    Salesforce
+                                                           17 March 2026
 
 
                      Extensible Delegation for DNS
@@ -59,7 +59,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 17 September 2026.
+   This Internet-Draft will expire on 18 September 2026.
 
 Copyright Notice
 
@@ -1842,8 +1842,6 @@ Acknowledgments
    Other people joined the effort after the initial hackaton: Ben
    Schwartz, Bob Halley, Paul Hoffman, Miek Gieben, Ray Hunter, Håvard
    Eidnes, Ted Hardie, Michael Richardson, Florian Obser, Evan Hunt, ...
-
-   The RESINFO extension was contributed by Florian Obser.
 
 Authors' Addresses
 
