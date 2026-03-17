@@ -1117,8 +1117,7 @@ A follow-up example in {{delegparam-example}} explains the ultimate meaning of t
                             20250101000000 33333 . SigExampleDS )
 
     ;; Additional
-    ns1.example. A     192.0.2.1
-    ns1.example. AAAA  2001:DB8::1
+    ;; (empty)
 
 #### Query for foo.test {#aware-new-delegation-only}
 
