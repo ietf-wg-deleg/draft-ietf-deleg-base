@@ -905,7 +905,7 @@ The following example shows an excerpt from an unsigned example.org zone.
 ## Example.net zone file
 The following example shows an excerpt from an unsigned example.net zone.
 
-    ns2.example.net.       A      198.51.100.1
+    ns2.example.net.     A          198.51.100.1
 
     config2.example.net. DELEGPARAM server-name=b.example.org.
 
