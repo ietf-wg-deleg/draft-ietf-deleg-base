@@ -1168,6 +1168,34 @@ This would have caused duplication of all values if each SLIST was not treated a
 
 Implementations are free to use alternative representations for this data, as it is not directly exposed via DNS protocol.
 
+## Failure Cases
+Several examples of misconfigured delegations which cannot be resolved follow.
+
+Self-references to names without any addresses:
+
+    1p.invalid. DELEG include-delegparam=params.invalid.,sub.params.invalid.
+    2n.invalid. DELEG server-name=ns1.invalid.,ns2.sub.invalid.
+
+Cycles:
+
+    c1.invalid. DELEG server-name=ns1.c2.invalid.
+    c2.invalid. DELEG include-delegparam=params.c1.invalid.,c3.invalid.
+    c3.invalid. CNAME c2.invalid.
+
+Syntactically valid DELEG records without any {{nameserver-info}} keys:
+
+    00.invalid. DELEG key65280=\032\037\041\045
+    00.invalid. DELEG key65281="char-string with whitespace"
+
+A delegation missing the value for a mandatory key:
+
+    m1.invalid. DELEG mandatory=key65534
+
+Records which are not even allowed in zone file (see also {{RFC9460}} appendix D.3) but might be sent in wire format:
+
+    m2.invalid. DELEG mandatory
+    ik.invalid. DELEG invalid
+
 # Test Vectors
 
 TODO: In what format? Machine readable would be a win. Perhaps a combination of {{?RFC8427}} and {{?I-D.peltan-edns-presentation-format}}?
