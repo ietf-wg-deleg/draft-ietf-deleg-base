@@ -7,8 +7,8 @@ Internet-Draft                                                       ISC
 Updates: 1034, 1035, 4035, 6672, 6840 (if                       R. Weber
          approved)                                   Akamai Technologies
 Intended status: Standards Track                             D. Lawrence
-Expires: 19 September 2026                                    Salesforce
-                                                           18 March 2026
+Expires: 20 September 2026                                    Salesforce
+                                                           19 March 2026
 
 
                      Extensible Delegation for DNS
@@ -59,7 +59,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 19 September 2026.
+   This Internet-Draft will expire on 20 September 2026.
 
 Copyright Notice
 
@@ -1522,19 +1522,19 @@ A.1.  Root zone file
    Please note: This is an example of an unnecessarily complicated setup
    to demonstrate the capabilities of the DELEG and DELEGPARAM RR types.
 
-   test.      DELEG server-ipv6=3fff::33
-   test.      DELEG include-delegparam=Acfg.example.org.
-   test.      DELEG include-delegparam=config2.example.net.
-   test.      RRSIG DELEG 13 1 300 20260101000000 (
-                           20250101000000 33333 . SigTestDELEG )
+test.      DELEG server-ipv6=3fff::33
+test.      DELEG include-delegparam=Acfg.example.org.,cname.example.org.
+test.      DELEG include-delegparam=config2.example.net.
+test.      RRSIG DELEG 13 1 300 20260101000000 (
+                        20250101000000 33333 . SigTestDELEG )
 
-   test.      NSEC  . RRSIG NSEC DELEG
-   test.      RRSIG NSEC 13 1 300 20260101000000 (
-                           20250101000000 33333 . SigTestNSEC/ )
+test.      NSEC  . RRSIG NSEC DELEG
+test.      RRSIG NSEC 13 1 300 20260101000000 (
+                        20250101000000 33333 . SigTestNSEC/ )
 
-   ; a forgotten glue record from legacy (NS) delegation
-   ; it is NOT present in NSEC chain and it is occluded
-   a.test.    A     192.0.2.1
+; a forgotten glue record from legacy (NS) delegation
+; it is NOT present in NSEC chain and it is occluded
+a.test.    A     192.0.2.1
 
    Delegations to org and net zones omitted for brevity.
 
@@ -1547,7 +1547,10 @@ Acfg.example.org.    DELEGPARAM server-ipv6=2001:DB8::6666
 Acfg.example.org.    DELEGPARAM server-name=ns3.example.org.
 Acfg.example.org.    DELEGPARAM include-delegparam=subcfg.example.org.
 
-ns3.example.org.       AAAA   3fff::33
+; unhelpful but technically legal CNAME
+cname.example.org.   CNAME      Acfg.example.org.
+
+ns3.example.org.     AAAA       3fff::33
 
 subcfg.example.org.  DELEGPARAM server-ipv4=203.0.113.1 server-ipv6=3fff::2
 
@@ -1556,7 +1559,7 @@ A.3.  Example.net zone file
    The following example shows an excerpt from an unsigned example.net
    zone.
 
-   ns2.example.net.       A      198.51.100.1
+   ns2.example.net.     A          198.51.100.1
 
    config2.example.net. DELEGPARAM server-name=b.example.org.
 
@@ -1801,9 +1804,9 @@ A.4.4.2.  Query for foo.test
 A.5.  DELEGPARAM Interpretation
 
    In the examples above, the test.  DELEG record uses indirection and
-   points to other domain names with DELEGPARAM, A, and AAAA records.
-   During resolution, a resolver will gradually build set of name
-   servers to contact, as defined in Section 5.1.4.
+   points to other domain names with DELEGPARAM, A, AAAA, and CNAME
+   records.  During resolution, a resolver will gradually build set of
+   name servers to contact, as defined in Section 5.1.4.
 
    To visualize the end result of this process, we represent full set of
    name servers in form of a 'virtual' DELEG RRset.
@@ -1814,6 +1817,13 @@ test. DELEG server-ipv6=2001:DB8::6666
 test. DELEG server-ipv6=3fff::2
 ; IPv6 address 3fff::33 was de-duplicated (input RRsets listed it twice)
 test. DELEG server-ipv6=3fff::33
+
+   Note the "cname.example.org." value in "include-
+   delegparam=Acfg.example.org.,cname.example.org."  DELEG record has no
+   visible effect.  The included name loops via CNAME back to
+   "Acfg.example.org." which is already included.  This would have
+   caused duplication of all values if each SLIST was not treated as a
+   set.
 
    Implementations are free to use alternative representations for this
    data, as it is not directly exposed via DNS protocol.
