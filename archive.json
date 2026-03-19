@@ -1,32 +1,12 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-03-17T01:20:04.739401+00:00",
+  "timestamp": "2026-03-19T01:24:09.013414+00:00",
   "repo": "ietf-wg-deleg/draft-ietf-deleg-base",
   "labels": [
     {
-      "name": "bug",
-      "description": "Something isn't working",
+      "name": "protocol",
+      "description": "",
       "color": "d73a4a"
-    },
-    {
-      "name": "documentation",
-      "description": "Improvements or additions to documentation",
-      "color": "0075ca"
-    },
-    {
-      "name": "duplicate",
-      "description": "This issue or pull request already exists",
-      "color": "cfd3d7"
-    },
-    {
-      "name": "enhancement",
-      "description": "New feature or request",
-      "color": "a2eeef"
-    },
-    {
-      "name": "good first issue",
-      "description": "Good for newcomers",
-      "color": "7057ff"
     },
     {
       "name": "help wanted",
@@ -34,19 +14,19 @@
       "color": "008672"
     },
     {
-      "name": "invalid",
-      "description": "This doesn't seem right",
-      "color": "e4e669"
-    },
-    {
-      "name": "question",
-      "description": "Further information is requested",
-      "color": "d876e3"
-    },
-    {
       "name": "wontfix",
       "description": "This will not be worked on",
       "color": "ffffff"
+    },
+    {
+      "name": "examples",
+      "description": "",
+      "color": "2e6708"
+    },
+    {
+      "name": "nits",
+      "description": "",
+      "color": "888888"
     }
   ],
   "issues": [
@@ -773,10 +753,12 @@
       "author": "pspacek",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
-      "labels": [],
+      "labels": [
+        "examples"
+      ],
       "body": "`key65280=bla` in the examples will highlight the extensibility",
       "createdAt": "2025-11-07T11:59:05Z",
-      "updatedAt": "2025-11-07T11:59:05Z",
+      "updatedAt": "2026-03-17T10:12:53Z",
       "closedAt": null,
       "comments": []
     },
@@ -1159,10 +1141,12 @@
       "author": "pspacek",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
-      "labels": [],
+      "labels": [
+        "protocol"
+      ],
       "body": "Should we hardcode numberic limits like '3 steps max'? I think we should not because rest of the DNS does not have it.\n\nI would leave it to https://datatracker.ietf.org/doc/html/draft-fujiwara-dnsop-dns-upper-limit-values",
       "createdAt": "2026-01-30T12:43:09Z",
-      "updatedAt": "2026-03-05T17:19:58Z",
+      "updatedAt": "2026-03-17T10:13:45Z",
       "closedAt": null,
       "comments": [
         {
@@ -1190,10 +1174,13 @@
       "author": "pspacek",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
-      "labels": [],
+      "labels": [
+        "protocol",
+        "help wanted"
+      ],
       "body": "## Format\nIn what format? Machine readable would be a win. Perhaps a combination of {{?RFC8427}} and {{?I-D.peltan-edns-presentation-format}}\n\n## What to test\nFor RD=0, the CSV table we already have + occlusion for sure. \n\nRD=1 RA=1, I'm not sure. Perhaps smoke test it is able to return DELEG RR or proof of nonexistance in ANSWER section?",
       "createdAt": "2026-02-05T14:07:12Z",
-      "updatedAt": "2026-02-05T14:07:12Z",
+      "updatedAt": "2026-03-17T10:13:45Z",
       "closedAt": null,
       "comments": []
     },
@@ -1226,15 +1213,15 @@
       "id": "I_kwDOO41rkM7rGbsR",
       "title": "Treatment of DELEG records",
       "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/issues/141",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "paulehoffman",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "\"A DELEG-enabled nameserver SHOULD NOT supply DELEG records in the response when resolver has not signalled DELEG support.\"\n. . .\n\"The DELEG RRset is authoritative and the authoritative server MUST treat it like any other authoritative RRsets, regardless of the value of the DE flag.\"\n\nClearly, it is the second that we want. I believe the correct change for the first is \"...should not supply DELEG records in a delegation response when...\"\n",
       "createdAt": "2026-02-15T15:40:30Z",
-      "updatedAt": "2026-03-16T13:20:58Z",
-      "closedAt": null,
+      "updatedAt": "2026-03-17T01:40:49Z",
+      "closedAt": "2026-03-17T01:40:49Z",
       "comments": [
         {
           "author": "pspacek",
@@ -1242,8 +1229,237 @@
           "body": "@paulehoffman Paul, where in the text is this? I can't find it.",
           "createdAt": "2026-03-16T13:20:58Z",
           "updatedAt": "2026-03-16T13:20:58Z"
+        },
+        {
+          "author": "paulehoffman",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I can't find it either; closing.",
+          "createdAt": "2026-03-17T01:40:49Z",
+          "updatedAt": "2026-03-17T01:40:49Z"
         }
       ]
+    },
+    {
+      "number": 150,
+      "id": "I_kwDOO41rkM7zhxFU",
+      "title": "\"Parent side of the zone cut\"",
+      "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/issues/150",
+      "state": "CLOSED",
+      "author": "paulehoffman",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [
+        "nits"
+      ],
+      "body": "We are still using this term, but the list agreed that it is bad. I'll do a pass for it later.\n",
+      "createdAt": "2026-03-17T01:42:18Z",
+      "updatedAt": "2026-03-18T10:06:16Z",
+      "closedAt": "2026-03-18T10:06:16Z",
+      "comments": [
+        {
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Paul, @RoyArends said to me he will do it. Please coordinate with him.",
+          "createdAt": "2026-03-17T07:42:06Z",
+          "updatedAt": "2026-03-17T07:42:06Z"
+        },
+        {
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Fixed by #162 162",
+          "createdAt": "2026-03-18T10:06:16Z",
+          "updatedAt": "2026-03-18T10:06:16Z"
+        }
+      ]
+    },
+    {
+      "number": 151,
+      "id": "I_kwDOO41rkM7zh2GT",
+      "title": "Not a quote",
+      "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/issues/151",
+      "state": "OPEN",
+      "author": "paulehoffman",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [
+        "nits"
+      ],
+      "body": "-08 as new wording:\n```\n   The terms SNAME and SLIST used here are defined in Section 5.3.2 of\n   [RFC1034].  Quote:\n\n   *  SNAME is the domain name we are searching for.\n\n   *  SLIST is a structure which describes the name servers and the zone\n      which the resolver is currently trying to query.\n```\nThat is not a quote, so we should say it it. I'll fix.",
+      "createdAt": "2026-03-17T01:50:17Z",
+      "updatedAt": "2026-03-18T23:34:27Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "body": "What do you mean? I checked the definitions are exactly the same.",
+          "createdAt": "2026-03-17T07:41:32Z",
+          "updatedAt": "2026-03-17T07:41:32Z"
+        },
+        {
+          "author": "paulehoffman",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Punctuation counts",
+          "createdAt": "2026-03-17T22:43:26Z",
+          "updatedAt": "2026-03-17T22:43:26Z"
+        },
+        {
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Sorry, you lost me. Please submit PR to fix what you think needs to be fixed.",
+          "createdAt": "2026-03-18T08:00:36Z",
+          "updatedAt": "2026-03-18T08:00:36Z"
+        },
+        {
+          "author": "paulehoffman",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I will; this was a note for me.",
+          "createdAt": "2026-03-18T23:34:27Z",
+          "updatedAt": "2026-03-18T23:34:27Z"
+        }
+      ]
+    },
+    {
+      "number": 153,
+      "id": "I_kwDOO41rkM7znsjQ",
+      "title": "Consider QTYPE=ANY",
+      "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/issues/153",
+      "state": "OPEN",
+      "author": "pspacek",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [
+        "protocol"
+      ],
+      "body": "Do we need an example? Perhaps just say 'do as you please' because https://datatracker.ietf.org/doc/html/rfc8482 makes it so unreliable to the point it does not make sense anymore?",
+      "createdAt": "2026-03-17T09:26:48Z",
+      "updatedAt": "2026-03-17T10:13:46Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 154,
+      "id": "I_kwDOO41rkM7znuFa",
+      "title": "Example auth having parent+child zone at the same time",
+      "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/issues/154",
+      "state": "OPEN",
+      "author": "pspacek",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [
+        "examples"
+      ],
+      "body": "DE=0 QTYPE=DELEG query? Something else?",
+      "createdAt": "2026-03-17T09:28:00Z",
+      "updatedAt": "2026-03-17T10:12:54Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 155,
+      "id": "I_kwDOO41rkM7znvtj",
+      "title": "IANA Early Allocation",
+      "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/issues/155",
+      "state": "OPEN",
+      "author": "pspacek",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "- [ ] DELEG RR type\n- [ ] DELEGPARAM RR type\n- [ ] ADT flag\n- [ ] DE flag\n- [ ] EDE code point\n- [ ] resinfo code point",
+      "createdAt": "2026-03-17T09:29:21Z",
+      "updatedAt": "2026-03-18T15:51:55Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 156,
+      "id": "I_kwDOO41rkM7zn1y8",
+      "title": "Example that requires escaping",
+      "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/issues/156",
+      "state": "OPEN",
+      "author": "pspacek",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [
+        "examples"
+      ],
+      "body": "Exercise SVCB escaping somehow.",
+      "createdAt": "2026-03-17T09:33:53Z",
+      "updatedAt": "2026-03-17T10:12:54Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 157,
+      "id": "I_kwDOO41rkM7zn5cZ",
+      "title": "Example for 5.1.3. Algorithm for \"Finding the Best Servers to Ask\"",
+      "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/issues/157",
+      "state": "OPEN",
+      "author": "pspacek",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [
+        "examples"
+      ],
+      "body": "Currently the TODO says:\nafter the text below, refer back to this figure and show the order that a DELEG-aware resolver would take when there is a failure to find any good DELEG addresses at sub.sld.test, then any usable name servers at sub.sld.test, and then maybe a good DELEG record at test.",
+      "createdAt": "2026-03-17T09:36:41Z",
+      "updatedAt": "2026-03-17T10:12:55Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 158,
+      "id": "I_kwDOO41rkM7zn6gs",
+      "title": "Examples of include-delegparam with more than one name",
+      "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/issues/158",
+      "state": "OPEN",
+      "author": "pspacek",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [
+        "examples"
+      ],
+      "body": "TODO: Add examples that have include-delegparam being sets of more than one name.",
+      "createdAt": "2026-03-17T09:37:36Z",
+      "updatedAt": "2026-03-17T10:12:55Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 159,
+      "id": "I_kwDOO41rkM7zopcC",
+      "title": "Example with mandatory key present",
+      "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/issues/159",
+      "state": "OPEN",
+      "author": "pspacek",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [
+        "examples"
+      ],
+      "body": "Requested by BIND implementer: https://gitlab.isc.org/isc-projects/bind9/-/merge_requests/10995#note_657661",
+      "createdAt": "2026-03-17T10:11:27Z",
+      "updatedAt": "2026-03-17T10:12:56Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 160,
+      "id": "I_kwDOO41rkM7zpCzl",
+      "title": "Example of SLIST deduplication",
+      "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/issues/160",
+      "state": "OPEN",
+      "author": "pspacek",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [
+        "examples"
+      ],
+      "body": "Perhaps with CNAME and other indirection magic.",
+      "createdAt": "2026-03-17T10:30:30Z",
+      "updatedAt": "2026-03-17T10:30:37Z",
+      "closedAt": null,
+      "comments": []
     }
   ],
   "pulls": [
@@ -5268,7 +5484,7 @@
       "labels": [],
       "body": "Solved by renaming NS names {a,b,c} to ns{1,2,3}.",
       "createdAt": "2025-11-05T23:54:24Z",
-      "updatedAt": "2025-11-05T23:55:32Z",
+      "updatedAt": "2026-03-17T16:45:37Z",
       "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
       "baseRefName": "main",
       "baseRefOid": "436d8c4a31f009877906244a89e4cc0d63efd8b9",
@@ -5296,7 +5512,7 @@
       "labels": [],
       "body": "",
       "createdAt": "2025-11-07T21:26:44Z",
-      "updatedAt": "2025-11-07T21:27:40Z",
+      "updatedAt": "2026-03-17T16:45:15Z",
       "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
       "baseRefName": "main",
       "baseRefOid": "88cc804847b531a9309a5bdeaddf00b4df3143a1",
@@ -5324,7 +5540,7 @@
       "labels": [],
       "body": "",
       "createdAt": "2025-11-07T21:36:34Z",
-      "updatedAt": "2025-11-07T21:36:59Z",
+      "updatedAt": "2026-03-17T16:44:36Z",
       "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
       "baseRefName": "main",
       "baseRefOid": "f3d12650605eb3cefeeb85765d162e194ed2210d",
@@ -6874,7 +7090,7 @@
       "labels": [],
       "body": "Moin!\r\n\r\nAdded the text Ted Hardie suggested on the dd mailing list. Please add before pushing -08 unless you object Peter.\r\n\r\nSo long\r\n-Ralf\r\n",
       "createdAt": "2026-03-15T09:59:28Z",
-      "updatedAt": "2026-03-16T12:27:12Z",
+      "updatedAt": "2026-03-17T16:34:36Z",
       "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
       "baseRefName": "main",
       "baseRefOid": "178bfff46436406b4e17e6a2bf4ed2a784955dc5",
@@ -6971,7 +7187,7 @@
       "labels": [],
       "body": "",
       "createdAt": "2026-03-16T12:35:56Z",
-      "updatedAt": "2026-03-16T12:36:26Z",
+      "updatedAt": "2026-03-17T16:34:33Z",
       "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
       "baseRefName": "main",
       "baseRefOid": "e8080aaef37a62578c386a345fa9284a21c3a0aa",
@@ -6999,7 +7215,7 @@
       "labels": [],
       "body": "",
       "createdAt": "2026-03-16T12:56:31Z",
-      "updatedAt": "2026-03-16T13:06:14Z",
+      "updatedAt": "2026-03-17T16:33:46Z",
       "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
       "baseRefName": "main",
       "baseRefOid": "68f935b3d0bde9e9bceb15f1aa900acf46e6904f",
@@ -7035,7 +7251,7 @@
       "labels": [],
       "body": "",
       "createdAt": "2026-03-16T13:35:39Z",
-      "updatedAt": "2026-03-16T14:36:00Z",
+      "updatedAt": "2026-03-17T16:33:41Z",
       "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
       "baseRefName": "main",
       "baseRefOid": "22f6482eada7f8a5b4985e3771e93de8782fec4a",
@@ -7063,7 +7279,7 @@
       "labels": [],
       "body": "",
       "createdAt": "2026-03-16T14:55:01Z",
-      "updatedAt": "2026-03-16T14:55:26Z",
+      "updatedAt": "2026-03-17T16:33:35Z",
       "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
       "baseRefName": "main",
       "baseRefOid": "06e852d83859d74a2357a2e74e4bce90cedb6df8",
@@ -7091,7 +7307,7 @@
       "labels": [],
       "body": "",
       "createdAt": "2026-03-16T15:36:03Z",
-      "updatedAt": "2026-03-16T15:40:12Z",
+      "updatedAt": "2026-03-17T16:33:29Z",
       "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
       "baseRefName": "main",
       "baseRefOid": "c4ceebf2a96112259795347b1ffb4f917ad28698",
@@ -7119,7 +7335,7 @@
       "labels": [],
       "body": "",
       "createdAt": "2026-03-16T15:44:24Z",
-      "updatedAt": "2026-03-16T15:45:02Z",
+      "updatedAt": "2026-03-17T16:33:24Z",
       "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
       "baseRefName": "main",
       "baseRefOid": "2cc9e30df49d256c60e9301407127a8d8b8d74e6",
@@ -7155,7 +7371,7 @@
       "labels": [],
       "body": "",
       "createdAt": "2026-03-16T15:57:38Z",
-      "updatedAt": "2026-03-16T16:01:17Z",
+      "updatedAt": "2026-03-17T16:33:11Z",
       "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
       "baseRefName": "main",
       "baseRefOid": "8d8061789559719e8a606fa1f431b48ae8c70214",
@@ -7169,6 +7385,223 @@
         "oid": "f6cb1abd8c12836c02b08ac647ddef93158d2482"
       },
       "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 152,
+      "id": "PR_kwDOO41rkM7LJTm1",
+      "title": "Remove duplicate acknowledgement to Florian Obser",
+      "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/pull/152",
+      "state": "MERGED",
+      "author": "pspacek",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "https://mailarchive.ietf.org/arch/msg/dd/lXY6iHWEAlhfjpviqjOHU2MnJA0/",
+      "createdAt": "2026-03-17T08:21:18Z",
+      "updatedAt": "2026-03-17T16:33:04Z",
+      "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
+      "baseRefName": "main",
+      "baseRefOid": "f6cb1abd8c12836c02b08ac647ddef93158d2482",
+      "headRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
+      "headRefName": "ack-clenaup",
+      "headRefOid": "77d2445bb2e9eafdc3fdf3820e9a0bcd46dcbe9b",
+      "closedAt": "2026-03-17T08:22:43Z",
+      "mergedAt": "2026-03-17T08:22:43Z",
+      "mergedBy": "pspacek",
+      "mergeCommit": {
+        "oid": "efa3e70a0bd2a45c1fccd037bf04a4cccf064528"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 161,
+      "id": "PR_kwDOO41rkM7LR_zn",
+      "title": "Fix example A.4.4",
+      "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/pull/161",
+      "state": "MERGED",
+      "author": "pspacek",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2026-03-17T16:23:42Z",
+      "updatedAt": "2026-03-17T16:32:47Z",
+      "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
+      "baseRefName": "main",
+      "baseRefOid": "efa3e70a0bd2a45c1fccd037bf04a4cccf064528",
+      "headRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
+      "headRefName": "fix-example-a44-additional-section",
+      "headRefOid": "919a358b6ff6b29e08a4e9630f2c269e425a323b",
+      "closedAt": "2026-03-17T16:25:12Z",
+      "mergedAt": "2026-03-17T16:25:12Z",
+      "mergedBy": "pspacek",
+      "mergeCommit": {
+        "oid": "cdfee804640338b014ab0339fe94fccb170bf833"
+      },
+      "comments": [
+        {
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "body": "This is clearly a bug, merging. @fl1ger Not sure if you want to mention it in slides, or if we want to cut 09 before ... I don't know yet.",
+          "createdAt": "2026-03-17T16:25:07Z",
+          "updatedAt": "2026-03-17T16:25:07Z"
+        }
+      ],
+      "reviews": []
+    },
+    {
+      "number": 162,
+      "id": "PR_kwDOO41rkM7LYAES",
+      "title": "Improve wording for parent/child description",
+      "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/pull/162",
+      "state": "MERGED",
+      "author": "RoyArends",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Updated the use of \"Parent side of a zone cut\" to \"delegation point\" and \"child zone\" to delegated zone.",
+      "createdAt": "2026-03-17T23:14:06Z",
+      "updatedAt": "2026-03-18T09:25:57Z",
+      "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
+      "baseRefName": "main",
+      "baseRefOid": "cdfee804640338b014ab0339fe94fccb170bf833",
+      "headRepository": "RoyArends/draft-ietf-deleg-base",
+      "headRefName": "parent-child-wordsmithing",
+      "headRefOid": "c30363feb845addef6d1bf083e378c835b78c775",
+      "closedAt": "2026-03-18T09:25:30Z",
+      "mergedAt": "2026-03-18T09:25:30Z",
+      "mergedBy": "pspacek",
+      "mergeCommit": {
+        "oid": "2c22a99d6319826f3149ef7bcddcdd6a82d0f536"
+      },
+      "comments": [
+        {
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I like the idea, but it makes me nervous it goes beyond Delegation/Authoritative NS RRset. Namely 'delegating zone' is undefined here and is not present in RFC 9499. Similarly 'delegation point'.\r\n\r\nI completely agree 'parent side of zone cut' is more than mouthful, but fixing it by using undefined terms is IMHO not good.\r\n\r\nPlease define everything properly first.",
+          "createdAt": "2026-03-18T08:07:29Z",
+          "updatedAt": "2026-03-18T08:07:29Z"
+        },
+        {
+          "author": "RoyArends",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "\"Delegating zone\" is self explanatory, I'm using \"delegation\" as a noun here. \r\n\r\nRFC9499 defines that \"Delegation:\" is also commonly a noun, and gives an example of the use of the term delegation as a noun: \"the new zone that is created by the act of delegating.\"\r\n\r\n\"delegation point\" is used in definitions throughout RFC9499. It is safe to use here.",
+          "createdAt": "2026-03-18T08:42:33Z",
+          "updatedAt": "2026-03-18T08:42:33Z"
+        },
+        {
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Starting countdown until we get beating ... 3, 2, 1 ...\r\n\r\n@fl1ger Okay to merge?",
+          "createdAt": "2026-03-18T08:52:06Z",
+          "updatedAt": "2026-03-18T08:52:06Z"
+        },
+        {
+          "author": "fl1ger",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Yes go for it.",
+          "createdAt": "2026-03-18T09:04:40Z",
+          "updatedAt": "2026-03-18T09:04:40Z"
+        },
+        {
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "body": "@fl1ger Do you want 09 for Friday? Up to you.",
+          "createdAt": "2026-03-18T09:25:57Z",
+          "updatedAt": "2026-03-18T09:25:57Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOO41rkM7sYQey",
+          "commit": {
+            "abbreviatedOid": "c30363f"
+          },
+          "author": "paulehoffman",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "All these changes look correct to me. ",
+          "createdAt": "2026-03-18T08:00:49Z",
+          "updatedAt": "2026-03-18T08:00:49Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 163,
+      "id": "PR_kwDOO41rkM7Lmfcr",
+      "title": "Example for de-duplication and multi-value include-delegparam",
+      "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/pull/163",
+      "state": "OPEN",
+      "author": "pspacek",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Closes: #158\r\nCloses: #160",
+      "createdAt": "2026-03-18T16:35:57Z",
+      "updatedAt": "2026-03-19T01:20:48Z",
+      "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
+      "baseRefName": "main",
+      "baseRefOid": "2c22a99d6319826f3149ef7bcddcdd6a82d0f536",
+      "headRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
+      "headRefName": "example-duplication",
+      "headRefOid": "54daf466c9968ba37a25d8337eaca7b5a7474ea6",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [
+        {
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "body": "@paulehoffman I believe it was you who requested this multi-value example.",
+          "createdAt": "2026-03-18T16:36:19Z",
+          "updatedAt": "2026-03-18T16:36:19Z"
+        },
+        {
+          "author": "paulehoffman",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Yep, and this looks right to me. I'll test all these when I can, but I think this change can be accepted.",
+          "createdAt": "2026-03-19T01:20:48Z",
+          "updatedAt": "2026-03-19T01:20:48Z"
+        }
+      ],
+      "reviews": []
+    },
+    {
+      "number": 164,
+      "id": "PR_kwDOO41rkM7LnLUD",
+      "title": "Example failure cases",
+      "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/pull/164",
+      "state": "OPEN",
+      "author": "pspacek",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2026-03-18T17:13:00Z",
+      "updatedAt": "2026-03-18T17:13:11Z",
+      "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
+      "baseRefName": "main",
+      "baseRefOid": "2c22a99d6319826f3149ef7bcddcdd6a82d0f536",
+      "headRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
+      "headRefName": "example-failure-cases",
+      "headRefOid": "55a298a6f3379173186398dd95496ca866877088",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [
+        {
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "body": "This surely needs more examples.",
+          "createdAt": "2026-03-18T17:13:11Z",
+          "updatedAt": "2026-03-18T17:13:11Z"
+        }
+      ],
       "reviews": []
     }
   ]
