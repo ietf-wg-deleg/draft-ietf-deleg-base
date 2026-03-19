@@ -873,7 +873,7 @@ Please note:
 This is an example of an unnecessarily complicated setup to demonstrate the capabilities of the DELEG and DELEGPARAM RR types.
 
     test.      DELEG server-ipv6=3fff::33
-    test.      DELEG include-delegparam=Acfg.example.org.
+    test.      DELEG include-delegparam=Acfg.example.org.,cname.example.org.
     test.      DELEG include-delegparam=config2.example.net.
     test.      RRSIG DELEG 13 1 300 20260101000000 (
                             20250101000000 33333 . SigTestDELEG )
@@ -895,14 +895,17 @@ The following example shows an excerpt from an unsigned example.org zone.
     Acfg.example.org.    DELEGPARAM server-name=ns3.example.org.
     Acfg.example.org.    DELEGPARAM include-delegparam=subcfg.example.org.
 
-    ns3.example.org.       AAAA   3fff::33
+    ; unhelpful but technically legal CNAME
+    cname.example.org.   CNAME      Acfg.example.org.
+
+    ns3.example.org.     AAAA       3fff::33
 
     subcfg.example.org.  DELEGPARAM server-ipv4=203.0.113.1 server-ipv6=3fff::2
 
 ## Example.net zone file
 The following example shows an excerpt from an unsigned example.net zone.
 
-    ns2.example.net.       A      198.51.100.1
+    ns2.example.net.     A          198.51.100.1
 
     config2.example.net. DELEGPARAM server-name=b.example.org.
 
@@ -1147,7 +1150,7 @@ A follow-up example in {{delegparam-example}} explains the ultimate meaning of t
 
 ## DELEGPARAM Interpretation {#delegparam-example}
 
-In the examples above, the test. DELEG record uses indirection and points to other domain names with DELEGPARAM, A, and AAAA records.
+In the examples above, the test. DELEG record uses indirection and points to other domain names with DELEGPARAM, A, AAAA, and CNAME records.
 During resolution, a resolver will gradually build set of name servers to contact, as defined in {{slist}}.
 
 To visualize the end result of this process, we represent full set of name servers in form of a 'virtual' DELEG RRset.
@@ -1158,6 +1161,10 @@ To visualize the end result of this process, we represent full set of name serve
     test. DELEG server-ipv6=3fff::2
     ; IPv6 address 3fff::33 was de-duplicated (input RRsets listed it twice)
     test. DELEG server-ipv6=3fff::33
+
+Note the "cname.example.org." value in "include-delegparam=Acfg.example.org.,cname.example.org." DELEG record has no visible effect.
+The included name loops via CNAME back to "Acfg.example.org." which is already included.
+This would have caused duplication of all values if each SLIST was not treated as a set.
 
 Implementations are free to use alternative representations for this data, as it is not directly exposed via DNS protocol.
 
