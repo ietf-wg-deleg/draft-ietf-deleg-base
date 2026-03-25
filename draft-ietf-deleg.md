@@ -285,7 +285,11 @@ The presentation format for the value MUST be a comma-separated list of one or m
 
 The wire format for the value is a sequence of DelegInfoKey numeric values in network byte order, concatenated, in strictly increasing numeric order.
 
-The "mandatory" key itself is optional, but when it is present, the RR in which it appears MUST NOT be used by a resolver in the resolution process if any of the DelegInfoKeys referenced by the "mandatory" DelegInfoValue are not supported in the resolver's implementation. See {{slist}}.
+The "mandatory" key is optional, but when it is present, the RR in which it appears MUST also contain all of the DelegInfoKeys referenced in its DelegInfoValue.
+Resolvers MUST handle non-compliant RRs as specified in {{slist}}.
+
+A resolver MUST NOT use an RR with a "mandatory" key in the resolution process unless all of the DelegInfoKeys referenced by the "mandatory" DelegInfoValue are supported in the resolver's implementation.
+See {{slist}}.
 
 # Signaling DELEG Support {#de-bit}
 
