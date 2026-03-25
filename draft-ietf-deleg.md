@@ -115,7 +115,7 @@ The RDATA for DELEG records has key=value pairs ({{nameserver-info}}).
 * "server-ipv4" and "server-ipv6" keys contain one or more IP addresses for the delegated name servers
 * "server-name" key contains one or more hostnames for the delegated name servers; the addresses must be fetched separately
 * "include-delegparam" key contains one or more domain names which in turn have more information about the delegation
-* "mandatory" keys have a list of other keys which the resolver must understand in order to use the specific record in which "mandatory" appears
+* "mandatory" key contains a list of other keys which must be present in the same record, and which the resolver must understand in order to use that record
 
 The DELEG-aware resolver uses the information in the DELEG RRset to form the list of best servers to ask about the original zone ({{finding-best}}).
 If the DELEG RRset contains "include-delegparam", the resolver queries those hostnames for DELEGPARAM RRsets.
