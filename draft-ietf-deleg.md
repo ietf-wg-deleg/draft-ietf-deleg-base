@@ -426,12 +426,13 @@ Each individual DELEG record inside a DELEG RRset, or each individual DELEGPARAM
 
 A resolver processes each individual DELEG record within a DELEG RRset, or each individual DELEGPARAM record in a DELEGPARAM RRset, using the following steps:
 
-1. Remove all DelegInfo elements with unsupported DelegInfoKey values.
-If the resulting record has zero-length DelegInfos field, stop processing the record.
+1.  Discard all DelegInfo elements with DelegInfoKey values that are not supported by the resolver implementation.
+If no DelegInfo elements remain after this filtering, stop processing the record.
+Otherwise, continue using only the supported DelegInfo elements.
 
 1. If a DelegInfo element with the "mandatory" DelegInfoKey is present, check its DelegInfoValue.
-The DelegInfoValue is a list of keys which MUST have a corresponding DelegInfo elements in this record.
-If any of the listed DelegInfo elements is not found, stop processing this record.
+The DelegInfoValue is a list of keys which MUST have corresponding DelegInfo elements in the record after the filtering in the previous steps.
+If any of the listed DelegInfo elements is not present, stop processing this record.
 
 1. If a record has more than one type of server information key (excluding the IPv4/IPv6 case, see {{nameserver-info}}), or if it has multiple server information keys of the same type, that record is malformed.
 Stop processing this record.
