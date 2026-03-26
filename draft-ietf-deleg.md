@@ -112,9 +112,9 @@ If the response is a referral, the authoritative server checks if there is a DEL
 Records in the DELEG RRset for a zone describe how to find name servers for that zone ({{deleg-delegparam}}).
 The RDATA for DELEG records has key=value pairs ({{nameserver-info}}).
 
-* "server-ipv4" and "server-ipv6" keys have IP addresses for the delegated name servers
-* "server-name" keys have hostnames for the delegated name servers; the addresses must be fetched separately
-* "include-delegparam" keys have domain names which in turn have more information about the delegation
+* "server-ipv4" and "server-ipv6" keys contain one or more IP addresses for the delegated name servers
+* "server-name" key contains one or more hostnames for the delegated name servers; the addresses must be fetched separately
+* "include-delegparam" key contains one or more domain names which in turn have more information about the delegation
 * "mandatory" keys have a list of other keys which the resolver must understand in order to use the specific record in which "mandatory" appears
 
 The DELEG-aware resolver uses the information in the DELEG RRset to form the list of best servers to ask about the original zone ({{finding-best}}).
