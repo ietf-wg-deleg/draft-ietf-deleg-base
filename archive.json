@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-03-22T01:23:19.184525+00:00",
+  "timestamp": "2026-03-29T01:43:20.946640+00:00",
   "repo": "ietf-wg-deleg/draft-ietf-deleg-base",
   "labels": [
     {
@@ -7636,6 +7636,32 @@
           "updatedAt": "2026-03-18T17:13:11Z"
         }
       ],
+      "reviews": []
+    },
+    {
+      "number": 167,
+      "id": "PR_kwDOO41rkM7Nq8DN",
+      "title": "\"mandatory\" key description tweaks from ISC",
+      "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/pull/167",
+      "state": "OPEN",
+      "author": "pspacek",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Feedback provided by Evan Hunt.",
+      "createdAt": "2026-03-26T10:55:00Z",
+      "updatedAt": "2026-03-26T13:19:00Z",
+      "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
+      "baseRefName": "main",
+      "baseRefOid": "779f654935409a3caf10a36d1c7e959ea7ba90fd",
+      "headRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
+      "headRefName": "isc-feedback-mandatory-key",
+      "headRefOid": "4edcd992c4a64ff52283c76fb57ea7904473b1ad",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
       "reviews": []
     }
   ]
