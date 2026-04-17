@@ -687,6 +687,13 @@ An extremely conservative approach might be:
 Such an approach requires changing only to DNSKEY RRset and resigning it.
 Consequently, the time required to withdraw the new DNSKEY record is limited only by DNSKEY TTL + time to sign + time to transfer modified DNSKEY RRset.
 
+## Interaction with Dynamic DNS Upate ( {{!RFC2136}} )
+
+DELEG records can be updated like other regular zone data at the delegation point, similar to NS records, as dynamic updates work on zone data and not queries. 
+A DELEG-only delegation would not need an NS record in the delegated zone, but the NS record in the delegated zone can not be deleted because of section RFC2136 section 7.13.
+This should cause no immediate problems as dynamic DNS updates with DELEG are most useful at the delegation point.
+DELEGPARAM will be handled like any other record.
+
 # Security Considerations
 
 TODO: More people should check this section is complete!
