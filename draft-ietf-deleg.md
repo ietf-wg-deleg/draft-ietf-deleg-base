@@ -127,6 +127,8 @@ The changes are primarily because DELEG RRsets are authoritative at the delegati
 A zone might be delegated with only DELEG records but no NS records.
 Such a zone would be invisible to DELEG-unaware resolvers.
 
+In order to protect validators from downgrade attacks, this document introduces a new DNSKEY flag called ADT (Authoritative Delegation Types), described in {{validator-downgrade-protection}}.
+
 There are many parts of the DELEG protocol that are not included in this brief overview.
 For example, DELEG-aware authoritative servers have choices to make depending both on the request and the contents of the zone file.
 For those readers who learn better from examples than the definitive text, see {{examples}}.
@@ -552,7 +554,7 @@ This has several consequences which stem from existing non-DELEG specifications:
 
 See examples in {{example-root}} and {{example-occluded}}.
 
-In order to protect validators from downgrade attacks (see {{downgrade-attacks}}) this draft introduces a new DNSKEY flag ADT (Authoritative Delegation Types, see {{iana-existing}}).
+In order to protect validators from downgrade attacks (see {{downgrade-attacks}}) this draft introduces a new DNSKEY flag ADT (Authoritative Delegation Types, see {{validator-downgrade-protection}}).
 To achieve downgrade resistance, DNSSEC-signed zones which contain a DELEG RRset MUST set ADT flag to 1 in at least one of the DNSKEY records published in the zone.
 
 ## DNSSEC Validators {#dnssec-validators}
@@ -594,7 +596,7 @@ way that DS RR types are.
 
 ### Referral downgrade protection {#validator-downgrade-protection}
 
-If the zone is DNSSEC-secure, and if any DNSKEY of the zone has the ADT flag ({{iana-existing}}) set to 1, a DELEG-aware validator MUST prove the absence of a DELEG RRset in referral responses from this particular zone.
+If the zone is DNSSEC-secure, and if any DNSKEY of the zone has the ADT flag ({{validator-downgrade-protection}}) set to 1, a DELEG-aware validator MUST prove the absence of a DELEG RRset in referral responses from this particular zone.
 
 Without this check, an attacker could strip the DELEG RRset from a referral response and replace it with an unsigned (and potentially malicious) NS RRset ({{downgrade-attacks}}).
 The reason for this is that according to non-DELEG DNSSEC specification, a referral response with an unsigned NS and signed DS RRsets does not require additional proofs of nonexistence.
