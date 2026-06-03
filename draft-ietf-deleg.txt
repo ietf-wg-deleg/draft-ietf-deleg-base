@@ -7,8 +7,8 @@ Internet-Draft                                                       ISC
 Updates: 1034, 1035, 4035, 6672, 6840 (if                       R. Weber
          approved)                                   Akamai Technologies
 Intended status: Standards Track                             D. Lawrence
-Expires: 20 September 2026                                    Salesforce
-                                                           19 March 2026
+Expires: 5 December 2026                                      Salesforce
+                                                             3 June 2026
 
 
                      Extensible Delegation for DNS
@@ -59,7 +59,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 20 September 2026.
+   This Internet-Draft will expire on 5 December 2026.
 
 Copyright Notice
 
@@ -266,6 +266,10 @@ Table of Contents
 
    A zone might be delegated with only DELEG records but no NS records.
    Such a zone would be invisible to DELEG-unaware resolvers.
+
+   In order to protect validators from downgrade attacks, this document
+   introduces a new DNSKEY flag called ADT (Authoritative Delegation
+   Types), described in Section 5.4.3.
 
    There are many parts of the DELEG protocol that are not included in
    this brief overview.  For example, DELEG-aware authoritative servers
@@ -947,7 +951,7 @@ Table of Contents
 
    In order to protect validators from downgrade attacks (see
    Section 7.2) this draft introduces a new DNSKEY flag ADT
-   (Authoritative Delegation Types, see Section 8.1).  To achieve
+   (Authoritative Delegation Types, see Section 5.4.3).  To achieve
    downgrade resistance, DNSSEC-signed zones which contain a DELEG RRset
    MUST set ADT flag to 1 in at least one of the DNSKEY records
    published in the zone.
@@ -1001,7 +1005,7 @@ Table of Contents
 5.4.3.  Referral downgrade protection
 
    If the zone is DNSSEC-secure, and if any DNSKEY of the zone has the
-   ADT flag (Section 8.1) set to 1, a DELEG-aware validator MUST prove
+   ADT flag (Section 5.4.3) set to 1, a DELEG-aware validator MUST prove
    the absence of a DELEG RRset in referral responses from this
    particular zone.
 
@@ -1465,7 +1469,7 @@ Table of Contents
 
    [RFC4001]  Daniele, M., Haberman, B., Routhier, S., and J.
               Schoenwaelder, "Textual Conventions for Internet Network
-              Addresses", RFC 4001, DOI 10.17487/RFC4001, February 2005,
+              Addresses", RFC 4001, DOI 10.17487/RFC4001, March 2005,
               <https://www.rfc-editor.org/rfc/rfc4001>.
 
    [RFC5952]  Kawamura, S. and M. Kawashima, "A Recommendation for IPv6
