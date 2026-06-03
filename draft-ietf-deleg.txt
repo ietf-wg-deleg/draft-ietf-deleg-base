@@ -109,6 +109,7 @@ Table of Contents
      6.3.  NS and DELEG Combined
      6.4.  Authoritative Deployment
        6.4.1.  Enabling ADT Flag
+     6.5.  Interaction with Dynamic DNS Upate ( RFC2136 )
    7.  Security Considerations
      7.1.  Preventing Over-work Attacks
      7.2.  Preventing Downgrade Attacks
@@ -132,6 +133,7 @@ Table of Contents
        A.4.3.  DO bit clear, DE bit set
        A.4.4.  DO bit set, DE bit set
      A.5.  DELEGPARAM Interpretation
+     A.6.  Failure Cases
    Appendix B.  Test Vectors
    Acknowledgments
    Authors' Addresses
@@ -239,18 +241,18 @@ Table of Contents
    servers for that zone (Section 3).  The RDATA for DELEG records has
    key=value pairs (Section 3.4).
 
-   *  "server-ipv4" and "server-ipv6" keys have IP addresses for the
-      delegated name servers
+   *  "server-ipv4" and "server-ipv6" keys contain one or more IP
+      addresses for the delegated name servers
 
-   *  "server-name" keys have hostnames for the delegated name servers;
-      the addresses must be fetched separately
+   *  "server-name" key contains one or more hostnames for the delegated
+      name servers; the addresses must be fetched separately
 
-   *  "include-delegparam" keys have domain names which in turn have
-      more information about the delegation
+   *  "include-delegparam" key contains one or more domain names which
+      in turn have more information about the delegation
 
-   *  "mandatory" keys have a list of other keys which the resolver must
-      understand in order to use the specific record in which
-      "mandatory" appears
+   *  "mandatory" key contains a list of other keys which must be
+      present in the same record, and which the resolver must understand
+      in order to use that record
 
    The DELEG-aware resolver uses the information in the DELEG RRset to
    form the list of best servers to ask about the original zone
@@ -527,10 +529,14 @@ Table of Contents
    values in network byte order, concatenated, in strictly increasing
    numeric order.
 
-   The "mandatory" key itself is optional, but when it is present, the
-   RR in which it appears MUST NOT be used by a resolver in the
-   resolution process if any of the DelegInfoKeys referenced by the
-   "mandatory" DelegInfoValue are not supported in the resolver's
+   The "mandatory" key is optional, but when it is present, the RR in
+   which it appears MUST also contain all of the DelegInfoKeys
+   referenced in its DelegInfoValue.  Resolvers MUST handle non-
+   compliant RRs as specified in Section 5.1.4.
+
+   A resolver MUST NOT use an RR with a "mandatory" key in the
+   resolution process unless all of the DelegInfoKeys referenced by the
+   "mandatory" DelegInfoValue are supported in the resolver's
    implementation.  See Section 5.1.4.
 
 4.  Signaling DELEG Support
@@ -735,15 +741,17 @@ Table of Contents
    RRset, or each individual DELEGPARAM record in a DELEGPARAM RRset,
    using the following steps:
 
-   1.  Remove all DelegInfo elements with unsupported DelegInfoKey
-       values.  If the resulting record has zero-length DelegInfos
-       field, stop processing the record.
+   1.  Discard all DelegInfo elements with DelegInfoKey values that are
+       not supported by the resolver implementation.  If no DelegInfo
+       elements remain after this filtering, stop processing the record.
+       Otherwise, continue using only the supported DelegInfo elements.
 
    2.  If a DelegInfo element with the "mandatory" DelegInfoKey is
        present, check its DelegInfoValue.  The DelegInfoValue is a list
-       of keys which MUST have a corresponding DelegInfo elements in
-       this record.  If any of the listed DelegInfo elements is not
-       found, stop processing this record.
+       of keys which MUST have corresponding DelegInfo elements in the
+       record after the filtering in the previous steps.  If any of the
+       listed DelegInfo elements is not present, stop processing this
+       record.
 
    3.  If a record has more than one type of server information key
        (excluding the IPv4/IPv6 case, see Section 3.4), or if it has
@@ -1169,6 +1177,17 @@ Table of Contents
    record is limited only by DNSKEY TTL + time to sign + time to
    transfer modified DNSKEY RRset.
 
+6.5.  Interaction with Dynamic DNS Upate ( [RFC2136] )
+
+   DELEG records can be updated like other regular zone data at the
+   delegation point, similar to NS records, as dynamic updates work on
+   zone data and not queries.  A DELEG-only delegation would not need an
+   NS record in the delegated zone, but the NS record in the delegated
+   zone can not be deleted because of section RFC2136 section 7.13.
+   This should cause no immediate problems as dynamic DNS updates with
+   DELEG are most useful at the delegation point.  DELEGPARAM will be
+   handled like any other record.
+
 7.  Security Considerations
 
    TODO: More people should check this section is complete!
@@ -1373,6 +1392,11 @@ Table of Contents
    [RFC1035]  Mockapetris, P., "Domain names - implementation and
               specification", STD 13, RFC 1035, DOI 10.17487/RFC1035,
               November 1987, <https://www.rfc-editor.org/rfc/rfc1035>.
+
+   [RFC2136]  Vixie, P., Ed., Thomson, S., Rekhter, Y., and J. Bound,
+              "Dynamic Updates in the Domain Name System (DNS UPDATE)",
+              RFC 2136, DOI 10.17487/RFC2136, April 1997,
+              <https://www.rfc-editor.org/rfc/rfc2136>.
 
    [RFC2181]  Elz, R. and R. Bush, "Clarifications to the DNS
               Specification", RFC 2181, DOI 10.17487/RFC2181, July 1997,
@@ -1831,6 +1855,37 @@ test. DELEG server-ipv6=3fff::33
 
    Implementations are free to use alternative representations for this
    data, as it is not directly exposed via DNS protocol.
+
+A.6.  Failure Cases
+
+   Several examples of misconfigured delegations which cannot be
+   resolved follow.
+
+   Self-references to names without any addresses:
+
+1p.invalid. DELEG include-delegparam=params.invalid.,sub.params.invalid.
+2n.invalid. DELEG server-name=ns1.invalid.,ns2.sub.invalid.
+
+   Cycles:
+
+   c1.invalid. DELEG server-name=ns1.c2.invalid.
+   c2.invalid. DELEG include-delegparam=params.c1.invalid.,c3.invalid.
+   c3.invalid. CNAME c2.invalid.
+
+   Syntactically valid DELEG records without any Section 3.4 keys:
+
+   00.invalid. DELEG key65280=\032\037\041\045
+   00.invalid. DELEG key65281="char-string with whitespace"
+
+   A delegation missing the value for a mandatory key:
+
+   m1.invalid. DELEG mandatory=key65534
+
+   Records which are not even allowed in zone file (see also [RFC9460]
+   appendix D.3) but might be sent in wire format:
+
+   m2.invalid. DELEG mandatory
+   ik.invalid. DELEG invalid
 
 Appendix B.  Test Vectors
 
