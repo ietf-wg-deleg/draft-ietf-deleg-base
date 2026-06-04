@@ -726,14 +726,15 @@ To protect DNSSEC-secure DNS zones that contain DELEG delegations, the delegatin
 Failure to set this flag in a DNSKEY record in the zone allows an attacker to remove the DELEG RRset from referrals which contain the DS RRset, and replace the original signed DELEG RRset with an arbitrary unsigned NS set.
 Doing so would be a downgrade from the strong protection offered by DNSSEC for DELEG.
 That is, the DELEG protocol when used with upgraded DNSKEY records gives the same protection to DELEG that the zone's DS RRset has.
-Without DELEG, there are no security guarantees for delegation NS Records.
+Without DELEG, there are no security guarantees for delegation NS records.
 
 Please note that a full DNSKEY rollover is not necessary to achieve the downgrade protection for DELEG.
 Any single DNSKEY with the ADT flag set to 1 is sufficient; the zone can introduce an otherwise unused record into the DNSKEY RRset.
 
 ## DELEG Is Stronger Than NS
+
 DELEG RRtype has stronger protection (by DNSSEC) than delegation NS records and glue records.
-A zone that does not need to be resolvable by DELEG-unaware clients (see {operational-considerations}),
+A zone that does not need to be resolvable by DELEG-unaware clients (see {{operational-considerations}}),
 and is delegated only with DELEG records,
 will have a smaller attack surface compared to a zone delegated with both DELEG and NS records.
 
