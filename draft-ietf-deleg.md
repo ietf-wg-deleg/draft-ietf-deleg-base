@@ -851,8 +851,6 @@ It shows the delegation point for "example." and "test."
 The "example." delegation has DELEG and NS records.
 The "test." delegation has DELEG but no NS records.
 
-TODO: Add examples that have include-delegparam being sets of more than one name.
-
     example.   DELEG server-ipv4=192.0.2.1 server-ipv6=2001:DB8::1
     example.   DELEG server-name=ns2.example.net.,ns3.example.org.
     example.   RRSIG DELEG 13 1 300 20260101000000 (
@@ -1203,10 +1201,6 @@ Records which are not even allowed in zone file (see also {{RFC9460}} appendix D
 
     m2.invalid. DELEG mandatory
     ik.invalid. DELEG invalid
-
-# Test Vectors
-
-TODO: In what format? Machine readable would be a win. Perhaps a combination of {{?RFC8427}} and {{?I-D.peltan-edns-presentation-format}}?
 
 # Acknowledgments
 {:numbered="false"}
