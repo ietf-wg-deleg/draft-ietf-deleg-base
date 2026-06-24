@@ -377,8 +377,6 @@ An example of a valid delegation tree:
     ; nssub.sld.test. zone with DELEG-only delegation
     delegsub.sub.sld.test. DELEG ...
 
-TODO: after the text below, refer back to this figure and show the order that a DELEG-aware resolver would take when there is a failure to find any good DELEG addresses at sub.sld.test, then any usable name servers at sub.sld.test, and then maybe a good DELEG record at test.
-
 The terms SNAME and SLIST used here are defined in Section 5.3.2 of {{!RFC1034}}. Quote:
 
 - SNAME is the domain name we are searching for.
@@ -542,7 +540,7 @@ Thus, queries with DE=0 and QTYPE=DELEG MUST result in a response which can be v
 - If there is no NS RRset but there is a DELEG RRset, this will be a normal authoritative response with the DELEG RRset, following non-DELEG specifications.
 - If there is no NS RRset and no DELEG RRset, this will be a standard negative response following non-DELEG specifications.
 
-TODO: Should we have an example with auth having parent+child zone at the same time, and DE=0 QTYPE=DELEG query?  What about QTYPE=ANY?
+The above rules apply to authoritative servers that are serving both a parent and a child zone when a DELEG-unaware client sends a QTYPE=DELEG query.
 
 ## DNSSEC Signers {#signers}
 
