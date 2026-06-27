@@ -7,8 +7,8 @@ Internet-Draft                                                       ISC
 Updates: 1034, 1035, 4035, 6672, 6840 (if                       R. Weber
          approved)                                   Akamai Technologies
 Intended status: Standards Track                             D. Lawrence
-Expires: 5 December 2026                                      Salesforce
-                                                             3 June 2026
+Expires: 29 December 2026                                     Salesforce
+                                                            27 June 2026
 
 
                      Extensible Delegation for DNS
@@ -59,7 +59,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 5 December 2026.
+   This Internet-Draft will expire on 29 December 2026.
 
 Copyright Notice
 
@@ -109,7 +109,7 @@ Table of Contents
      6.3.  NS and DELEG Combined
      6.4.  Authoritative Deployment
        6.4.1.  Enabling ADT Flag
-     6.5.  Interaction with Dynamic DNS Upate ( RFC2136 )
+     6.5.  Interaction with Dynamic DNS Upate
    7.  Security Considerations
      7.1.  Preventing Over-work Attacks
      7.2.  Preventing Downgrade Attacks
@@ -1177,16 +1177,16 @@ Table of Contents
    record is limited only by DNSKEY TTL + time to sign + time to
    transfer modified DNSKEY RRset.
 
-6.5.  Interaction with Dynamic DNS Upate ( [RFC2136] )
+6.5.  Interaction with Dynamic DNS Upate
 
    DELEG records can be updated like other regular zone data at the
-   delegation point, similar to NS records, as dynamic updates work on
-   zone data and not queries.  A DELEG-only delegation would not need an
-   NS record in the delegated zone, but the NS record in the delegated
-   zone can not be deleted because of section RFC2136 section 7.13.
-   This should cause no immediate problems as dynamic DNS updates with
-   DELEG are most useful at the delegation point.  DELEGPARAM will be
-   handled like any other record.
+   delegation point, similar to NS records, because dynamic updates work
+   on zone data but not on queries.  A DELEG-only delegation would not
+   need an NS record in the delegated zone, but the NS record in the
+   delegated zone cannot be deleted because of Section 7.13 in
+   [RFC2136].  This should cause no immediate problems because dynamic
+   DNS updates with DELEG are most useful at the delegation point.  A
+   DELEGPARAM record will be handled like any other record.
 
 7.  Security Considerations
 
@@ -1234,7 +1234,7 @@ Table of Contents
    That is, the DELEG protocol when used with upgraded DNSKEY records
    gives the same protection to DELEG that the zone's DS RRset has.
    Without DELEG, there are no security guarantees for delegation NS
-   Records.
+   records.
 
    Please note that a full DNSKEY rollover is not necessary to achieve
    the downgrade protection for DELEG.  Any single DNSKEY with the ADT
@@ -1245,9 +1245,9 @@ Table of Contents
 
    DELEG RRtype has stronger protection (by DNSSEC) than delegation NS
    records and glue records.  A zone that does not need to be resolvable
-   by DELEG-unaware clients (see {operational-considerations}), and is
-   delegated only with DELEG records, will have a smaller attack surface
-   compared to a zone delegated with both DELEG and NS records.
+   by DELEG-unaware clients (see Section 6), and is delegated only with
+   DELEG records, will have a smaller attack surface compared to a zone
+   delegated with both DELEG and NS records.
 
    The additional attack surface of legacy delegations stems from the
    possibility of replacing NS and glue records in referrals with

@@ -14,24 +14,25 @@
 The traditional DNS delegation is based on NS records which contain only hostnames of servers and no other parameters.
 The new delegation records are extensible, can be secured with DNSSEC, and eliminate the problem of having two sources of truth for delegation information. 
     " name="description">
-<meta content="xml2rfc 3.33.0" name="generator">
+<meta content="xml2rfc 3.34.0" name="generator">
 <meta content="Internet-Draft" name="keyword">
 <meta content="DNS" name="keyword">
 <meta content="delegation" name="keyword">
 <meta content="draft-ietf-deleg-latest" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.33.0
-    Python 3.12.13
-    ConfigArgParse 1.7
+  xml2rfc 3.34.0
+    Python 3.14.5
+    ConfigArgParse 1.7.5
     google-i18n-address 3.1.1
     intervaltree 3.2.1
     Jinja2 3.1.6
-    lxml 6.0.2
-    platformdirs 4.9.6
+    lxml 6.1.1
+    natsort 8.4.0
+    platformdirs 4.10.0
     pycountry 24.6.1
     PyYAML 6.0.3
     requests 2.33.1
-    wcwidth 0.7.0
+    wcwidth 0.8.1
 -->
 <link href="draft-ietf-deleg.xml" rel="alternate" type="application/rfc+xml">
 <link href="#copyright" rel="license">
@@ -1054,7 +1055,7 @@ svg {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Špaček, et al.</td>
-<td class="center">Expires 5 December 2026</td>
+<td class="center">Expires 29 December 2026</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1070,12 +1071,12 @@ svg {
 <a href="https://www.rfc-editor.org/rfc/rfc1034" class="eref">1034</a>, <a href="https://www.rfc-editor.org/rfc/rfc1035" class="eref">1035</a>, <a href="https://www.rfc-editor.org/rfc/rfc4035" class="eref">4035</a>, <a href="https://www.rfc-editor.org/rfc/rfc6672" class="eref">6672</a>, <a href="https://www.rfc-editor.org/rfc/rfc6840" class="eref">6840</a> (if approved)</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2026-06-03" class="published">3 June 2026</time>
+<time datetime="2026-06-27" class="published">27 June 2026</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2026-12-05">5 December 2026</time></dd>
+<dd class="expires"><time datetime="2026-12-29">29 December 2026</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1136,7 +1137,7 @@ The new delegation records are extensible, can be secured with DNSSEC, and elimi
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 5 December 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 29 December 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1276,7 +1277,7 @@ The new delegation records are extensible, can be secured with DNSSEC, and elimi
                 </ul>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.5">
-                <p id="section-toc.1-1.6.2.5.1"><a href="#section-6.5" class="auto internal xref">6.5</a>.  <a href="#name-interaction-with-dynamic-dn" class="internal xref">Interaction with Dynamic DNS Upate ( RFC2136 )</a></p>
+                <p id="section-toc.1-1.6.2.5.1"><a href="#section-6.5" class="auto internal xref">6.5</a>.  <a href="#name-interaction-with-dynamic-dn" class="internal xref">Interaction with Dynamic DNS Upate</a></p>
 </li>
             </ul>
 </li>
@@ -2230,15 +2231,15 @@ Consequently, the time required to withdraw the new DNSKEY record is limited onl
 </div>
 </section>
 </div>
-<div id="interaction-with-dynamic-dns-upate-rfc2136-">
+<div id="interaction-with-dynamic-dns-upate">
 <section id="section-6.5">
         <h3 id="name-interaction-with-dynamic-dn">
-<a href="#section-6.5" class="section-number selfRef">6.5. </a><a href="#name-interaction-with-dynamic-dn" class="section-name selfRef">Interaction with Dynamic DNS Upate ( <span class="cite xref">[RFC2136]</span> )</a>
+<a href="#section-6.5" class="section-number selfRef">6.5. </a><a href="#name-interaction-with-dynamic-dn" class="section-name selfRef">Interaction with Dynamic DNS Upate</a>
         </h3>
-<p id="section-6.5-1">DELEG records can be updated like other regular zone data at the delegation point, similar to NS records, as dynamic updates work on zone data and not queries.
-A DELEG-only delegation would not need an NS record in the delegated zone, but the NS record in the delegated zone can not be deleted because of section RFC2136 section 7.13.
-This should cause no immediate problems as dynamic DNS updates with DELEG are most useful at the delegation point.
-DELEGPARAM will be handled like any other record.<a href="#section-6.5-1" class="pilcrow">¶</a></p>
+<p id="section-6.5-1">DELEG records can be updated like other regular zone data at the delegation point, similar to NS records, because dynamic updates work on zone data but not on queries.
+A DELEG-only delegation would not need an NS record in the delegated zone, but the NS record in the delegated zone cannot be deleted because of Section 7.13 in <span>[<a href="#RFC2136" class="cite xref">RFC2136</a>]</span>.
+This should cause no immediate problems because dynamic DNS updates with DELEG are most useful at the delegation point.
+A DELEGPARAM record will be handled like any other record.<a href="#section-6.5-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -2274,7 +2275,7 @@ However, the deployment will not be protected from downgrade attacks against the
 Failure to set this flag in a DNSKEY record in the zone allows an attacker to remove the DELEG RRset from referrals which contain the DS RRset, and replace the original signed DELEG RRset with an arbitrary unsigned NS set.
 Doing so would be a downgrade from the strong protection offered by DNSSEC for DELEG.
 That is, the DELEG protocol when used with upgraded DNSKEY records gives the same protection to DELEG that the zone's DS RRset has.
-Without DELEG, there are no security guarantees for delegation NS Records.<a href="#section-7.2-2" class="pilcrow">¶</a></p>
+Without DELEG, there are no security guarantees for delegation NS records.<a href="#section-7.2-2" class="pilcrow">¶</a></p>
 <p id="section-7.2-3">Please note that a full DNSKEY rollover is not necessary to achieve the downgrade protection for DELEG.
 Any single DNSKEY with the ADT flag set to 1 is sufficient; the zone can introduce an otherwise unused record into the DNSKEY RRset.<a href="#section-7.2-3" class="pilcrow">¶</a></p>
 </section>
@@ -2285,7 +2286,7 @@ Any single DNSKEY with the ADT flag set to 1 is sufficient; the zone can introdu
 <a href="#section-7.3" class="section-number selfRef">7.3. </a><a href="#name-deleg-is-stronger-than-ns" class="section-name selfRef">DELEG Is Stronger Than NS</a>
         </h3>
 <p id="section-7.3-1">DELEG RRtype has stronger protection (by DNSSEC) than delegation NS records and glue records.
-A zone that does not need to be resolvable by DELEG-unaware clients (see {operational-considerations}),
+A zone that does not need to be resolvable by DELEG-unaware clients (see <a href="#operational-considerations" class="auto internal xref">Section 6</a>),
 and is delegated only with DELEG records,
 will have a smaller attack surface compared to a zone delegated with both DELEG and NS records.<a href="#section-7.3-1" class="pilcrow">¶</a></p>
 <p id="section-7.3-2">The additional attack surface of legacy delegations stems from the possibility of replacing NS and glue records in referrals with arbitrary values,
