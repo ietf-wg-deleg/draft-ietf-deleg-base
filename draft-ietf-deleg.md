@@ -251,7 +251,7 @@ Parsing the comma-separated list is specified in Section A.1 of {{!RFC9460}}.
 The DELEG protocol allows the use of all valid domain names, as defined in {{!RFC1035}} and Section 11 of {{!RFC2181}}.
 The presentation format for names with special characters requires both double-escaping by applying rules of Section 5.1 of {{!RFC1034}} together with the escaping rules from Section A.1 of {{RFC9460}}.
 
-TODO: add an example that requires this escaping.
+For example, assume a list of two domain names. The first domain name is "simple.example". The second domain name is under ".example" whose leftmost label is "abc" followed by a escape character (U+001B), followed by "def", followed by a comma, followed by "ghi". This list would hoave a presentation value of "simple.example,abc\\027def\,ghi.example". 
 
 The wire format for server-name and include-delegparam are each a concatenated unordered collection of wire-format domain names, where the root label provides the separation between names:
 
@@ -376,8 +376,6 @@ An example of a valid delegation tree:
 
     ; nssub.sld.test. zone with DELEG-only delegation
     delegsub.sub.sld.test. DELEG ...
-
-TODO: after the text below, refer back to this figure and show the order that a DELEG-aware resolver would take when there is a failure to find any good DELEG addresses at sub.sld.test, then any usable name servers at sub.sld.test, and then maybe a good DELEG record at test.
 
 The terms SNAME and SLIST used here are defined in Section 5.3.2 of {{!RFC1034}}. Quote:
 
@@ -542,7 +540,7 @@ Thus, queries with DE=0 and QTYPE=DELEG MUST result in a response which can be v
 - If there is no NS RRset but there is a DELEG RRset, this will be a normal authoritative response with the DELEG RRset, following non-DELEG specifications.
 - If there is no NS RRset and no DELEG RRset, this will be a standard negative response following non-DELEG specifications.
 
-TODO: Should this document have an example with auth having parent+child zone at the same time, and DE=0 QTYPE=DELEG query?  What about QTYPE=ANY?
+The above rules apply to authoritative servers that are serving both a parent and a child zone when a DELEG-unaware client sends a QTYPE=DELEG query.
 
 ## DNSSEC Signers {#signers}
 
@@ -702,8 +700,6 @@ This should cause no immediate problems because dynamic DNS updates with DELEG a
 A DELEGPARAM record will be handled like any other record.
 
 # Security Considerations
-
-TODO: More people should check this section is complete!
 
 ## Preventing Over-work Attacks {#too-much-work}
 
@@ -1211,10 +1207,6 @@ Records which are not even allowed in zone file (see also {{RFC9460}} appendix D
 
     m2.invalid. DELEG mandatory
     ik.invalid. DELEG invalid
-
-# Test Vectors
-
-TODO: In what format? Machine readable would be a win. Perhaps a combination of {{?RFC8427}} and {{?I-D.peltan-edns-presentation-format}}?
 
 # Acknowledgments
 {:numbered="false"}
