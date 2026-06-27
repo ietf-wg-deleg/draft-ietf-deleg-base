@@ -711,8 +711,6 @@ To prevent this, the resolver SHOULD NOT follow more than 3 include-delegparam c
 otherwise, the resolver could exhaust some of its resources.
 Note that include-delegparam chains can have CNAME steps in them; in such a case, a CNAME step is counted the same as a DELEGPARAM step when determining when to stop following a chain.
 
-TODO: No other DNS spec specifies hard maximum number of indirections. Perhaps this document should not specify it either? After all DELEG value can contain a name in NS-only delegation and then this document gets into realm of 'count DELEG but NS is uncounted' and other fun combinations like this. Perhaps this is better dealt with for the whole DNS protocol within draft-fujiwara-dnsop-dns-upper-limit-values?
-
 ## Preventing Downgrade Attacks {#downgrade-attacks}
 
 During the rollout of the DELEG protocol, the operator of an authoritative server can upgrade the server software to be DELEG-aware before changing any DNS zones.
@@ -854,8 +852,6 @@ It shows the delegation point for "example." and "test."
 
 The "example." delegation has DELEG and NS records.
 The "test." delegation has DELEG but no NS records.
-
-TODO: Add examples that have include-delegparam being sets of more than one name.
 
     example.   DELEG server-ipv4=192.0.2.1 server-ipv6=2001:db8::1
     example.   DELEG server-name=ns2.example.net.,ns3.example.org.
