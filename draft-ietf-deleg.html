@@ -9,7 +9,7 @@
 <meta content="Ralf Weber" name="author">
 <meta content="David C Lawrence" name="author">
 <meta content="
-       This document proposes a new extensible method for the delegation of authority for a domain in the Domain Name System (DNS) using DELEG and DELEGPARAM records. 
+       This document specifies a new extensible method for the delegation of authority for a domain in the Domain Name System (DNS) using DELEG and DELEGPARAM records. 
        A delegation in the DNS enables efficient and distributed management of the DNS namespace.
 The traditional DNS delegation is based on NS records which contain only hostnames of servers and no other parameters.
 The new delegation records are extensible, can be secured with DNSSEC, and eliminate the problem of having two sources of truth for delegation information. 
@@ -1097,7 +1097,7 @@ svg {
 <h1 id="title">Extensible Delegation for DNS</h1>
 <section id="section-abstract">
       <h2 id="abstract"><a href="#abstract" class="selfRef">Abstract</a></h2>
-<p id="section-abstract-1">This document proposes a new extensible method for the delegation of authority for a domain in the Domain Name System (DNS) using DELEG and DELEGPARAM records.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
+<p id="section-abstract-1">This document specifies a new extensible method for the delegation of authority for a domain in the Domain Name System (DNS) using DELEG and DELEGPARAM records.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
 <p id="section-abstract-2">A delegation in the DNS enables efficient and distributed management of the DNS namespace.
 The traditional DNS delegation is based on NS records which contain only hostnames of servers and no other parameters.
 The new delegation records are extensible, can be secured with DNSSEC, and eliminate the problem of having two sources of truth for delegation information.<a href="#section-abstract-2" class="pilcrow">¶</a></p>
@@ -1390,7 +1390,7 @@ Moreover, the NS record set exists in two places--one at the delegation point, a
 The DNS Security Extensions (DNSSEC) protect only one copy, those in the apex.<a href="#section-1-2" class="pilcrow">¶</a></p>
 <p id="section-1-3">These properties of NS records limit resolvers to unencrypted messages on UDP and TCP port 53, and this initial contact cannot be protected with DNSSEC.
 These limitations are a barrier for the efficient introduction of new DNS technology.<a href="#section-1-3" class="pilcrow">¶</a></p>
-<p id="section-1-4">The proposed DELEG and DELEGPARAM resource record (RR) types remedy this problem by providing extensible parameters to indicate authoritative name server capabilities and additional information, such as other transport protocols that a resolver may use.<a href="#section-1-4" class="pilcrow">¶</a></p>
+<p id="section-1-4">The DELEG and DELEGPARAM resource record (RR) types remedy this problem by providing extensible parameters to indicate authoritative name server capabilities and additional information, such as other transport protocols that a resolver may use.<a href="#section-1-4" class="pilcrow">¶</a></p>
 <p id="section-1-5">The DELEG record creates a new delegation.
 It is authoritative at the delegation point and thus can be signed with DNSSEC.
 This makes it possible to validate all delegation parameters, including those of future extensions.<a href="#section-1-5" class="pilcrow">¶</a></p>
@@ -1826,7 +1826,7 @@ delegsub.sub.sld.test. DELEG ...
 <p id="section-5.1.3-10">Neither <span>[<a href="#RFC1034" class="cite xref">RFC1034</a>]</span> nor this document define how a resolver uses SLIST; they only define how to populate it.<a href="#section-5.1.3-10" class="pilcrow">¶</a></p>
 <p id="section-5.1.3-11">A DELEG-aware SLIST needs to be able to hold two types of information, delegations defined by NS records and delegations defined by DELEG records.
 DELEG and NS delegations can create cyclic dependencies and/or lead to duplicate entries which point to the same server.
-Resolvers SHOULD enforce suitable limits to prevent runaway processing even if someone has incorrectly configured some of the data used to create an SLIST;
+Resolvers need to enforce suitable limits to prevent runaway processing even if someone has incorrectly configured some of the data used to create an SLIST;
 this is the same recommendation to bound the amount of work as is made in Section 5.3.3 of <span>[<a href="#RFC1034" class="cite xref">RFC1034</a>]</span>.<a href="#section-5.1.3-11" class="pilcrow">¶</a></p>
 <p id="section-5.1.3-12">Step 2 of Section 5.3.3 of <span>[<a href="#RFC1034" class="cite xref">RFC1034</a>]</span> is just "2. Find the best servers to ask."
 For DELEG-aware resolvers, this description becomes:<a href="#section-5.1.3-12" class="pilcrow">¶</a></p>
@@ -2008,7 +2008,7 @@ The DELEG-unaware resolver can then obtain a final answer which can be validated
                 <p id="section-5.2.2.2-2.3.1">If there is no NS RRset and no DELEG RRset, this will be a standard negative response following non-DELEG specifications.<a href="#section-5.2.2.2-2.3.1" class="pilcrow">¶</a></p>
 </li>
             </ul>
-<p id="section-5.2.2.2-3">TODO: Should we have an example with auth having parent+child zone at the same time, and DE=0 QTYPE=DELEG query?  What about QTYPE=ANY?<a href="#section-5.2.2.2-3" class="pilcrow">¶</a></p>
+<p id="section-5.2.2.2-3">TODO: Should this document have an example with auth having parent+child zone at the same time, and DE=0 QTYPE=DELEG query?  What about QTYPE=ANY?<a href="#section-5.2.2.2-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -2104,7 +2104,7 @@ The reason for this is that according to non-DELEG DNSSEC specification, a refer
           </h4>
 <p id="section-5.4.4-1">An existing DELEG RRset is authoritative in, and signed by, the delegating zone, similarly to a DS RRset (see <a href="#signers" class="auto internal xref">Section 5.3</a>).<a href="#section-5.4.4-1" class="pilcrow">¶</a></p>
 <p id="section-5.4.4-2">A validator SHOULD NOT treat a positive response with a DELEG RRset as DNSSEC-bogus only because all DNSKEYs in the zone have the ADT flag set to 0.
-Such a zone would not be protected from downgrade attacks (<a href="#downgrade-attacks" class="auto internal xref">Section 7.2</a>) but this behavior is consistent with other non-DELEG DNSSEC specifications:
+If the validator did ths, such a zone would not be protected from downgrade attacks (<a href="#downgrade-attacks" class="auto internal xref">Section 7.2</a>), but this behavior is consistent with other non-DELEG DNSSEC specifications:
 validators are not expected to detect inconsistencies in data if a chain of trust can be established.<a href="#section-5.4.4-2" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -2117,7 +2117,7 @@ validators are not expected to detect inconsistencies in data if a chain of trus
 A DELEG-aware Validating Resolver that uses forwarders MUST only use DELEG-aware and security-aware forwarders.
 Otherwise DNSSEC-secure zones might fail to validate (see <a href="#legacynxdomain" class="auto internal xref">Appendix A.4.2.2</a>) and DNSSEC-insecure zones might observe inconsistent answers (see <a href="#operational-considerations" class="auto internal xref">Section 6</a>).<a href="#section-5.4.5-1" class="pilcrow">¶</a></p>
 <p id="section-5.4.5-2"><span>[<a href="#RFC9606" class="cite xref">RFC9606</a>]</span> specifies a DNS resource record type, RESINFO, to allow resolvers to publish information about their capabilities and policies. This can be used to inform DNS clients that DELEG is supported by the DNS resolver.<a href="#section-5.4.5-2" class="pilcrow">¶</a></p>
-<p id="section-5.4.5-3">A resolver which supports <span>[<a href="#RFC9606" class="cite xref">RFC9606</a>]</span> SHOULD add the "deleg" key if it supports DELEG protocol.
+<p id="section-5.4.5-3">A resolver which supports <span>[<a href="#RFC9606" class="cite xref">RFC9606</a>]</span> SHOULD add the "deleg" key if it supports DELEG protocol; otherwise, a DNS client would not know that the resolver is DELEG-aware.
 A resolver that uses forwarders MAY use a RESINFO query to determine if the configured forwarders are DELEG-aware.<a href="#section-5.4.5-3" class="pilcrow">¶</a></p>
 <p id="section-5.4.5-4">Note that, per the rules for the keys defined in Section 6.4 of <span>[<a href="#RFC6763" class="cite xref">RFC6763</a>]</span>, if there is no '=' in a key, then it is a boolean attribute, simply identified as being present with no value.<a href="#section-5.4.5-4" class="pilcrow">¶</a></p>
 </section>
@@ -2258,9 +2258,10 @@ A DELEGPARAM record will be handled like any other record.<a href="#section-6.5-
 <p id="section-7.1-1">Resolvers MUST prevent situations where accidental misconfiguration of zones or malicious attacks cause them to perform too much work when resolving.
 This document describes two sets of actions that, if not controlled, could lead to over-work attacks.<a href="#section-7.1-1" class="pilcrow">¶</a></p>
 <p id="section-7.1-2">Long chains of include-delegparam information (<a href="#nameserver-info" class="auto internal xref">Section 3.4</a>), and those with circular chains of include-delegparam information, can be burdensome.
-To prevent this, the resolver SHOULD NOT follow more than 3 include-delegparam chains in an RRset when populating SLIST.
+To prevent this, the resolver SHOULD NOT follow more than 3 include-delegparam chains in an RRset when populating SLIST;
+otherwise, the resolver could exhaust some of its resources.
 Note that include-delegparam chains can have CNAME steps in them; in such a case, a CNAME step is counted the same as a DELEGPARAM step when determining when to stop following a chain.<a href="#section-7.1-2" class="pilcrow">¶</a></p>
-<p id="section-7.1-3">TODO: No other DNS spec specifies hard maximum number of indirections. Perhaps we should not specify it either? After all DELEG value can contain a name in NS-only delegation and then we get into realm of 'count DELEG but NS is uncounted' and other fun combinations like this. Perhaps this is better dealt with for the whole DNS protocol within draft-fujiwara-dnsop-dns-upper-limit-values?<a href="#section-7.1-3" class="pilcrow">¶</a></p>
+<p id="section-7.1-3">TODO: No other DNS spec specifies hard maximum number of indirections. Perhaps this document should not specify it either? After all DELEG value can contain a name in NS-only delegation and then this document gets into realm of 'count DELEG but NS is uncounted' and other fun combinations like this. Perhaps this is better dealt with for the whole DNS protocol within draft-fujiwara-dnsop-dns-upper-limit-values?<a href="#section-7.1-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="downgrade-attacks">
@@ -2321,7 +2322,7 @@ observe traffic, and also monitor the network addresses involved, which might be
         </ul>
 <p id="section-8.1-4">IANA is requested to assign a new bit in the DNSKEY RR Flags registry (<span>[<a href="#RFC4034" class="cite xref">RFC4034</a>]</span>):
 Number 14, Description "Authoritative Delegation Types (ADT)".
-For compatibility reasons, we request the Number 14 to be used.
+For compatibility reasons, this document requests the Number 14 to be used.
 This value has been proven to work whereas bit number 0 was proven to break in practical deployments (because of bugs).<a href="#section-8.1-4" class="pilcrow">¶</a></p>
 <p id="section-8.1-5">IANA is requested to assign a bit in the EDNS Header Flags registry (<span>[<a href="#RFC6891" class="cite xref">RFC6891</a>]</span>):
 Bit TBA2, Flag DE, with the description "DELEG enabled".<a href="#section-8.1-5" class="pilcrow">¶</a></p>
@@ -2575,7 +2576,7 @@ The "test." delegation has DELEG but no NS records.<a href="#appendix-A.1-2" cla
 <p id="appendix-A.1-3">TODO: Add examples that have include-delegparam being sets of more than one name.<a href="#appendix-A.1-3" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="appendix-A.1-4">
 <pre>
-example.   DELEG server-ipv4=192.0.2.1 server-ipv6=2001:DB8::1
+example.   DELEG server-ipv4=192.0.2.1 server-ipv6=2001:db8::1
 example.   DELEG server-name=ns2.example.net.,ns3.example.org.
 example.   RRSIG DELEG 13 1 300 20260101000000 (
                         20250101000000 33333 . SigExampleDELEG/ )
@@ -2595,7 +2596,7 @@ example.   RRSIG NSEC 13 1 300 20260101000000 (
 ; unsigned glue for legacy (NS) delegation
 ; it is NOT present in NSEC chain
 ns1.example. A     192.0.2.1
-ns1.example. AAAA  2001:DB8::1
+ns1.example. AAAA  2001:db8::1
 </pre><a href="#appendix-A.1-4" class="pilcrow">¶</a>
 </div>
 <p id="appendix-A.1-5">The "test." delegation point has a DELEG record and no NS or DS records.<a href="#appendix-A.1-5" class="pilcrow">¶</a></p>
@@ -2629,7 +2630,7 @@ a.test.    A     192.0.2.1
 <p id="appendix-A.2-1">The following example shows an excerpt from an unsigned example.org zone.<a href="#appendix-A.2-1" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="appendix-A.2-2">
 <pre>
-Acfg.example.org.    DELEGPARAM server-ipv6=2001:DB8::6666
+Acfg.example.org.    DELEGPARAM server-ipv6=2001:db8::6666
 Acfg.example.org.    DELEGPARAM server-name=ns3.example.org.
 Acfg.example.org.    DELEGPARAM include-delegparam=subcfg.example.org.
 
@@ -2692,7 +2693,7 @@ example.   NS    ns3.example.org.
 
 ;; Additional
 ns1.example. A     192.0.2.1
-ns1.example. AAAA  2001:DB8::1
+ns1.example. AAAA  2001:db8::1
 </pre><a href="#appendix-A.4.1.1-1" class="pilcrow">¶</a>
 </div>
 </section>
@@ -2782,7 +2783,7 @@ example.   RRSIG DS 13 1 300 20260101000000 (
                         20250101000000 33333 . SigExampleDS )
 ;; Additional
 ns1.example. A     192.0.2.1
-ns1.example. AAAA  2001:DB8::1
+ns1.example. AAAA  2001:db8::1
 </pre><a href="#appendix-A.4.2.1-1" class="pilcrow">¶</a>
 </div>
 </section>
@@ -2874,7 +2875,7 @@ foo.example.  IN MX
 ;; (empty)
 
 ;; Authority
-example.   DELEG server-ipv4=192.0.2.1 server-ipv6=2001:DB8::1
+example.   DELEG server-ipv4=192.0.2.1 server-ipv6=2001:db8::1
 example.   DELEG server-name=ns2.example.net.,ns3.example.org.
 
 ;; Additional
@@ -2935,7 +2936,7 @@ foo.example.  IN MX
 ;; (empty)
 
 ;; Authority
-example.   DELEG server-ipv4=192.0.2.1 server-ipv6=2001:DB8::1
+example.   DELEG server-ipv4=192.0.2.1 server-ipv6=2001:db8::1
 example.   DELEG server-name=ns2.example.net.,ns3.example.org.
 example.   RRSIG DELEG 13 1 300 20260101000000 (
                         20250101000000 33333 . SigExampleDELEG/ )
@@ -2993,12 +2994,12 @@ test.      RRSIG NSEC 13 1 300 20260101000000 (
         </h3>
 <p id="appendix-A.5-1">In the examples above, the test. DELEG record uses indirection and points to other domain names with DELEGPARAM, A, AAAA, and CNAME records.
 During resolution, a resolver will gradually build set of name servers to contact, as defined in <a href="#slist" class="auto internal xref">Section 5.1.4</a>.<a href="#appendix-A.5-1" class="pilcrow">¶</a></p>
-<p id="appendix-A.5-2">To visualize the end result of this process, we represent full set of name servers in form of a 'virtual' DELEG RRset.<a href="#appendix-A.5-2" class="pilcrow">¶</a></p>
+<p id="appendix-A.5-2">To visualize the end result of this process, the full set of name servers in form of a 'virtual' DELEG RRset is represented here.<a href="#appendix-A.5-2" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="appendix-A.5-3">
 <pre>
 test. DELEG server-ipv4=198.51.100.1
 test. DELEG server-ipv4=203.0.113.1
-test. DELEG server-ipv6=2001:DB8::6666
+test. DELEG server-ipv6=2001:db8::6666
 test. DELEG server-ipv6=3fff::2
 ; IPv6 address 3fff::33 was de-duplicated (input RRsets listed it twice)
 test. DELEG server-ipv6=3fff::33
