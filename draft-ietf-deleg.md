@@ -67,6 +67,7 @@ These limitations are a barrier for the efficient introduction of new DNS techno
 The proposed DELEG and DELEGPARAM resource record (RR) types remedy this problem by providing extensible parameters to indicate authoritative name server capabilities and additional information, such as other transport protocols that a resolver may use.
 
 The DELEG record creates a new delegation.
+It is a Delegation Type record as defined in {{!I-D.ietf-dnsop-delext}}.
 It is authoritative at the delegation point and thus can be signed with DNSSEC.
 This makes it possible to validate all delegation parameters, including those of future extensions.
 
@@ -90,10 +91,13 @@ all capitals, as shown here.
 Terminology regarding the Domain Name System comes from {{?BCP219}}, with additional terms defined here:
 
 * legacy delegation: A delegation that is done with an NS RRset
-* DELEG-aware: A DNS software that follows the protocol defined in this document
-* DELEG-unaware: A DNS software that does not follow the protocol defined in this document
-* non-DELEG specifications: DNS protocols that predate this protocol, or are written after this protocol is published but are not related to this protocol
-* Delegation NS RRset: An NS RRset that delegates authority of subdomain to a set of authoritative servers
+* Delegation Type: Defined in {{!I-D.ietf-dnsop-delext}}.
+* Delegation-Extension-aware: Defined in {{!I-D.ietf-dnsop-delext}}.
+* DELEG-aware: DNS software that follows the protocol defined in this document.
+DELEG-aware software is inherently Delegation-Extension-aware.
+* DELEG-unaware: A DNS software that does not follow the protocol defined in this document.
+* non-DELEG specifications: DNS protocols that predate this protocol, or are written after this protocol is published but are not related to this protocol.
+* Delegation NS RRset: An NS RRset that delegates authority of subdomain to a set of authoritative servers.
 * Authoritative NS RRset: An NS RRset at the apex of a zone.
 
 # Protocol Overview
@@ -101,7 +105,7 @@ Terminology regarding the Domain Name System comes from {{?BCP219}}, with additi
 This section is a brief overview of the protocol.
 It is meant for people who want to understand the protocol before they dive deeper into the specifics.
 
-When a DELEG-aware resolver sends queries, it sets the DE bit in the EDNS0 header to 1 in queries to authoritative servers, as a signal that it is DELEG-aware ({{de-bit}}).
+When a DELEG-aware resolver sends queries, it sets the DE bit in the EDNS0 header to 1 in queries to authoritative servers, as a signal that it is DELEG-aware.
 
 DELEG-unaware authoritative servers intrinsically ignore this signal.
 
@@ -127,7 +131,7 @@ The changes are primarily because DELEG RRsets are authoritative at the delegati
 A zone might be delegated with only DELEG records but no NS records.
 Such a zone would be invisible to DELEG-unaware resolvers.
 
-In order to protect validators from downgrade attacks, this document introduces a new DNSKEY flag called ADT (Authoritative Delegation Types), described in {{validator-downgrade-protection}}.
+In order to protect validators from downgrade attacks, this document uses a DNSKEY flag described in {{!I-D.ietf-dnsop-delext}}.
 
 There are many parts of the DELEG protocol that are not included in this brief overview.
 For example, DELEG-aware authoritative servers have choices to make depending both on the request and the contents of the zone file.
@@ -136,9 +140,13 @@ For those readers who learn better from examples than the definitive text, see {
 
 # DELEG and DELEGPARAM Resource Record Types {#deleg-delegparam}
 
-The DELEG record, RR type TBD, and the DELEGPARAM record, RR type TBD2 (different from that of DELEG), have the same wire and presentation formats,
+The DELEG record has an RR type that is TBD1.
+It is a Delegation Type, as defined in {{!I-D.ietf-dnsop-delext}}; thus, TBD1 will be from the 0xF000-0xF1EF.
+The DELEGPARAM record has an RR type of TBD2.
+It is not a Delegation Type, and thus will not come from the range defined in {{!I-D.ietf-dnsop-delext}}.
+
+The DELEG record and the DELEGPARAM record have the same wire and presentation formats,
 but their semantics are different as described in a following section.
-These records are defined for the IN class.
 
 The record format is based on the extensible key=value list that was originally defined as "SvcParams" for the SVCB record type {{?RFC9460}}.
 Unlike SVCB, the DELEG protocol does not have "SvcPriority" and "TargetName" fields.
@@ -295,36 +303,18 @@ See {{slist}}.
 
 # Signaling DELEG Support {#de-bit}
 
-This document defines a new EDNS flag to signal that an initiator and responder are DELEG-aware.
-
-This flag is referred to as the "DELEG" (DE) bit, expected to be assigned by IANA as Bit 2 in the EDNS Header Flags registry.
-It is part of OPT RR TTL as described in {{!RFC6891}}, as follows:
-
-                +0 (MSB)                +1 (LSB)
-         +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
-      0: |   EXTENDED-RCODE      |       VERSION         |
-         +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
-      2: |DO|CO|DE|              Z                       |
-         +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
-
-If a query has the DE bit set to 1, and the responder is DELEG-aware, the responder MUST set the DE bit in the response to 1, independent of whether the response includes any DELEG or DELEGPARAM records.
+This document requires the use of the EDNS0 DE flag and its requirements from {{!I-D.ietf-dnsop-delext}}.
 
 # Use of DELEG Records
 
+This document requires DELEG records meet the requirements for Delegation types from {{!I-D.ietf-dnsop-delext}}.
 The DELEG RRset MAY contain multiple records.
-A DELEG RRset MAY be present with or without NS or DS RRsets at the delegation point, though without NS records then DELEG-unaware software will not be able to resolve records in the the delegated zone.
 
-DELEG RRsets MUST NOT appear at a zone's apex.
-The erroneous inclusion of DELEG RRset at zone's apex will cause DNSSEC validation failures.
-Servers MAY refuse to load such an invalid zone, similar to the DS RR type.
-
-Both the DELEG protocol and legacy delegations (that is, NS records) will be used for delegation for a long time.
-Both legacy delegations and the DELEG protocol enable recursive resolution.
-A DELEG-aware resolver therefore does not need the NS records or glue information in a DELEG referral response, and MUST NOT get them; see {{downgrade-attacks}}.
+Servers MAY refuse to load a zone with DELEG records at a zone's apex, similar to the DS RR type.
 
 ## Resolvers {#resolvers}
 
-A resolver that is DELEG-aware MUST signal in queries that it supports the DELEG protocol by setting the DE bit to 1 in (see {{de-bit}}).
+A resolver that is DELEG-aware MUST signal in queries that it supports the DELEG protocol by setting the DE bit to 1 as described in {{de-bit}}.
 This indicates that the resolver understands the DELEG semantics and does not need NS records to follow a referral.
 
 The DE bit set to 0 indicates the resolver is not DELEG-aware, and therefore can only be served referrals with NS records and other data according to non-DELEG specifications.
@@ -336,7 +326,7 @@ The DELEG record creates a delegation point similar to the NS record.
 
 If one or more DELEG records exist at a given delegation point, a DELEG-aware resolver MUST treat the name servers from those DELEG records as authoritative for the delegated zone.
 In such a case, a DELEG-aware resolver MUST NOT use NS records for the zone if they are learned, even if resolution using DELEG records has failed.
-Such fallback from DELEG to NS would invalidate the security guarantees of the DELEG protocol; see {{downgrade-attacks}}.
+Such fallback from DELEG to NS would invalidate the security guarantees of the DELEG protocol as described in {{!I-D.ietf-dnsop-delext}}.
 
 If no DELEG record exists at a given delegation point, DELEG-aware resolvers MUST use NS records as specified by {{!RFC1034}}.
 
