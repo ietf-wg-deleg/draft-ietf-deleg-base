@@ -111,7 +111,7 @@ DELEG-unaware authoritative servers intrinsically ignore this signal.
 
 A DELEG-aware authoritative server uses that signal to determine the type of response it will send.
 If the response is not a referral, the authoritative server doesn't change anything about how it responds.
-If the response is a referral, the authoritative server checks if there is a DELEG RRset for the queried zone. If so, it returns the DELEG RRset instead of any NS RRset in the response ({{aware-referral}}).
+If the response is a referral, the authoritative server checks if there is a DELEG RRset for the queried zone. If so, it returns the DELEG RRset instead of any NS RRset in the response.
 
 Records in the DELEG RRset for a zone describe how to find name servers for that zone ({{deleg-delegparam}}).
 The RDATA for DELEG records has key=value pairs ({{nameserver-info}}).
@@ -306,30 +306,17 @@ See {{slist}}.
 
 This document requires the use of the EDNS0 DE flag and its requirements from {{!I-D.ietf-dnsop-delext}}.
 
-# Use of DELEG Records
-
-This document requires DELEG records meet the requirements for Delegation types from {{!I-D.ietf-dnsop-delext}}.
-The DELEG RRset MAY contain multiple records.
-
-Servers MAY refuse to load a zone with DELEG records at a zone's apex, similar to the DS RR type.
-
-## Resolvers {#resolvers}
-
 A resolver that is DELEG-aware MUST signal in queries that it supports the DELEG protocol by setting the DE bit to 1 as described in {{!I-D.ietf-dnsop-delext}}.
-This indicates that the resolver understands the DELEG semantics and does not need NS records to follow a referral.
 
 The DE bit set to 0 indicates the resolver is not DELEG-aware, and therefore can only be served referrals with NS records and other data according to non-DELEG specifications.
 Other special scenarios with DE=0 queries to DELEG-aware authorities are addressed in {{authoritative-servers}}.
 
-### Referral
 
-The DELEG record creates a delegation point similar to the NS record.
+# Use of DELEG Records in the Protocols
 
-If one or more DELEG records exist at a given delegation point, a DELEG-aware resolver MUST treat the name servers from those DELEG records as authoritative for the delegated zone.
-In such a case, a DELEG-aware resolver MUST NOT use NS records for the zone if they are learned, even if resolution using DELEG records has failed.
-Such fallback from DELEG to NS would invalidate the security guarantees of the DELEG protocol as described in {{!I-D.ietf-dnsop-delext}}.
+## Resolvers {#resolvers}
 
-If no DELEG record exists at a given delegation point, DELEG-aware resolvers MUST use NS records as specified by {{!RFC1034}}.
+Resolvers use DELEG records for referrals following the rules from {{!I-D.ietf-dnsop-delext}}.
 
 ### Delegation point types, QTYPE=DELEG
 
@@ -456,34 +443,12 @@ The order in which to try the servers in the final SLIST is outside the scope of
 
 ## Authoritative Servers {#authoritative-servers}
 
-The DELEG RR type defines a zone cut in similar way as the NS RR type.
-Behavior defined for zone cuts in existing non-DELEG specifications apply to zone cuts created by the DELEG record.
-A notable example of this is that the occlusion (usually accidentally) created by delegation NS records would also be created by DELEG records at a delegation point (see {{occluded-example}}).
-Rules for setting Authoritative Answer (AA) bit in answers also remain unchanged: the DELEG RR type has the same special treatment as DS RR type.
+This document requires DELEG records meet the requirements for Delegation types from {{!I-D.ietf-dnsop-delext}}.
+The DELEG RRset MAY contain multiple records.
 
-DELEG-aware authoritative servers act differently when handling queries from DELEG-unaware clients (those with DE=0) than from DELEG-aware clients (those with DE=1).
-See {{de-bit}} and {{resolvers}}.
+Servers MAY refuse to load a zone with DELEG records at a zone's apex, similar to the DS RR type.
 
-### DELEG-aware Clients {#aware-referral}
-
-When the client indicates that it is DELEG-aware by setting DE=1 in the query, DELEG-aware authoritative servers act as specified in {{!I-D.ietf-dnsop-delext}} for Delegation-Extension-aware name servers.
-
-An explicit query for the DELEG RR type at a delegation point behaves much like a query for the DS RR type: the server answers authoritatively from the delegating zone.
-All non-DELEG specifications for the special handling of queries with QTYPE=DS apply equally to QTYPE=DELEG.
-In summary, the server either provides an authoritative DELEG RRset or declares its non-existence, with relevant DNSSEC proofs when requested and available.
-
-### DELEG-unaware Clients
-
-A general principle for DELEG-aware authoritative servers is that they respond to a DELEG-unaware client by following non-DELEG specifications.
-When the client indicates that it is DELEG-unaware by setting DE=0 in the query, DELEG-aware authoritative servers act as specified in {{!I-D.ietf-dnsop-delext}} for Delegation-Extension-aware name servers.
-
-An authoritative server responding to DELEG-unaware clients has to handle three distinct situations:
-
-- No DELEG RRset is present. In this case, the authoritative server follows the non-DELEG specifications.
-- An NS RRset and a DELEG RRset are both present. In this case, the authoritative server uses the NS RRset when constructing referral responses, following the non-DELEG specifications. See also {{signers}} and {{examples}}.
-- A DELEG RRset is present, but an NS RRset is not.  This is addressed in the next section.
-
-#### DELEG-unaware Clients with DELEG RRs Present but No NS RRs {#no-ns}
+### DELEG-unaware Clients with DELEG RRs Present but No NS RRs {#no-ns}
 
 Authoritative servers may receive requests from DELEG-unaware clients for which the child zone is authoritative and is delegated with DELEG RRs only (that is, without any NS RRs).
 Such a zone is, by definition, not resolvable for DELEG-unaware clients.
@@ -546,7 +511,7 @@ way that DS RR types are.
 
 ### Referral downgrade protection {#validator-downgrade-protection}
 
-If the zone is DNSSEC-secure, and if any DNSKEY of the zone has the ADT flag ({{validator-downgrade-protection}}) set to 1, a DELEG-aware validator MUST prove the absence of a DELEG RRset in referral responses from this particular zone.
+If the zone is DNSSEC-secure, and if any DNSKEY of the zone has the DNSKEY-ADT flag ({{validator-downgrade-protection}}) set to 1, a DELEG-aware validator MUST prove the absence of a DELEG RRset in referral responses from this particular zone.
 
 Without this check, an attacker could strip the DELEG RRset from a referral response and replace it with an unsigned (and potentially malicious) NS RRset ({{downgrade-attacks}}).
 The reason for this is that according to non-DELEG DNSSEC specification, a referral response with an unsigned NS and signed DS RRsets does not require additional proofs of nonexistence.
@@ -555,7 +520,7 @@ The reason for this is that according to non-DELEG DNSSEC specification, a refer
 
 An existing DELEG RRset is authoritative in, and signed by, the delegating zone, similarly to a DS RRset (see {{signers}}).
 
-A validator SHOULD NOT treat a positive response with a DELEG RRset as DNSSEC-bogus only because all DNSKEYs in the zone have the ADT flag set to 0.
+A validator SHOULD NOT treat a positive response with a DELEG RRset as DNSSEC-bogus only because all DNSKEYs in the zone have the DNSKEY-ADT flag set to 0.
 Such a zone would not be protected from downgrade attacks ({{downgrade-attacks}}) but this behavior is consistent with other non-DELEG DNSSEC specifications:
 validators are not expected to detect inconsistencies in data if a chain of trust can be established.
 
@@ -614,15 +579,15 @@ Before adding a first DELEG record into a DNS zone, these steps need to be taken
 1. If zone checkers are used: ensure that the zone checkers are DELEG-aware.
 1. Ensure that all authoritative servers serving (and transfering) the zone are DELEG-aware.
 1. If a zone is DNSSEC-signed: ensure that the signer is DELEG-aware.
-1. If a zone is DNSSEC-signed: ensure that at least one DNSKEY record has the ADT flag set to 1. Failure to do so results in loss of downgrade resistence of the DELEG protocol for this zone; see {{downgrade-attacks}}.
+1. If a zone is DNSSEC-signed: ensure that at least one DNSKEY record has the DNSKEY-ADT flag set to 1. Failure to do so results in loss of downgrade resistence of the DELEG protocol for this zone; see {{downgrade-attacks}}.
 
-### Enabling ADT Flag
+### Enabling the DNSKEY-ADT Flag
 
 According to the DNSSEC specification, changing flags of a DNSKEY record changes its Key Tag and thus requires a key rollover.
-For this reason, the ADT flag cannot be simply enabled on an existing key without other changes to the record.
-Operators are advised to set the ADT flag at the time of generating a new key, as part of a regular key rollover using established procedures.
-A zone can safely have keys with the ADT flag set to 1 even if the zone does not have any DELEG records.
-Turning on the ADT flag can be done months or even years before a first DELEG record is introduced into the zone.
+For this reason, the DNSKEY-ADT flag cannot be simply enabled on an existing key without other changes to the record.
+Operators are advised to set the DNSKEY-ADT flag at the time of generating a new key, as part of a regular key rollover using established procedures.
+A zone can safely have keys with the DNSKEY-ADT flag set to 1 even if the zone does not have any DELEG records.
+Turning on the DNSKEY-ADT flag can be done months or even years before a first DELEG record is introduced into the zone.
 
 Downgrade protection is effective if any DNSKEY with ADT flag set to 1 is present, even if this key does not sign any RRset.
 In other words, it is sufficient to pre-publish new key, as described in stage 2 of Pre-Publish Zone Signing Key Rollover, section 4.1.1.1 of {{!RFC6781}}.
@@ -667,14 +632,14 @@ During the rollout of the DELEG protocol, the operator of an authoritative serve
 Such deployment should work and provide DELEG-aware clients with correct DELEG-aware answers.
 However, the deployment will not be protected from downgrade attacks against the DELEG protocol.
 
-To protect DNSSEC-secure DNS zones that contain DELEG delegations, the delegating zone needs to have at least one DNSKEY with the ADT flag set to 1.
+To protect DNSSEC-secure DNS zones that contain DELEG delegations, the delegating zone needs to have at least one DNSKEY with the DNSKEY-ADT flag set to 1.
 Failure to set this flag in a DNSKEY record in the zone allows an attacker to remove the DELEG RRset from referrals which contain the DS RRset, and replace the original signed DELEG RRset with an arbitrary unsigned NS set.
 Doing so would be a downgrade from the strong protection offered by DNSSEC for DELEG.
 That is, the DELEG protocol when used with upgraded DNSKEY records gives the same protection to DELEG that the zone's DS RRset has.
 Without DELEG, there are no security guarantees for delegation NS Records.
 
 Please note that a full DNSKEY rollover is not necessary to achieve the downgrade protection for DELEG.
-Any single DNSKEY with the ADT flag set to 1 is sufficient; the zone can introduce an otherwise unused record into the DNSKEY RRset.
+Any single DNSKEY with the DNSKEY-ADT flag set to 1 is sufficient; the zone can introduce an otherwise unused record into the DNSKEY RRset.
 
 ## DELEG Is Stronger Than NS
 
