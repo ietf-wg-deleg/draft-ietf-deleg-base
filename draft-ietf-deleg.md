@@ -84,7 +84,7 @@ Future documents can use the extensibility mechanism for more advanced features,
 
 The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
 "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and
-"OPTIONAL" in this document are to be interpreted as described in \\
+"OPTIONAL" in this document are to be interpreted as described in
 BCP 14 {{?RFC2119}} {{?RFC8174}} when, and only when, they appear in
 all capitals, as shown here.
 
@@ -141,7 +141,7 @@ For those readers who learn better from examples than the definitive text, see {
 # DELEG and DELEGPARAM Resource Record Types {#deleg-delegparam}
 
 The DELEG record has an RR type that is TBD1.
-It is a Delegation Type, as defined in {{!I-D.ietf-dnsop-delext}}; thus, TBD1 will be from the 0xF000-0xF1EF.
+It is a Delegation Type, as defined in {{!I-D.ietf-dnsop-delext}}; thus, TBD1 will be from the 0xF000-0xF1EF range.
 The DELEGPARAM record has an RR type of TBD2.
 It is not a Delegation Type, and thus will not come from the range defined in {{!I-D.ietf-dnsop-delext}}.
 
@@ -287,6 +287,7 @@ Because of the lack of Additional Section processing, there are no "glue" record
 With this initial DELEG specification, servers are still expected to be reached on the standard DNS port for both UDP and TCP, 53.  While a future specification is expected to address other transports using other ports, its eventual semantics are not covered here.
 
 ## Metadata keys {#mandatory}
+
 This specification defines a key which serves as a protocol extensibility mechanism, but is not directly used for contacting DNS servers.
 
 Any DELEG or DELEGPARAM record can have key named "mandatory" which is similar to the key of the same name in {{!RFC9460}}.
@@ -301,7 +302,7 @@ Resolvers MUST handle non-compliant RRs as specified in {{slist}}.
 A resolver MUST NOT use an RR with a "mandatory" key in the resolution process unless all of the DelegInfoKeys referenced by the "mandatory" DelegInfoValue are supported in the resolver's implementation.
 See {{slist}}.
 
-# Signaling DELEG Support {#de-bit}
+# Signaling DELEG Support
 
 This document requires the use of the EDNS0 DE flag and its requirements from {{!I-D.ietf-dnsop-delext}}.
 
@@ -314,7 +315,7 @@ Servers MAY refuse to load a zone with DELEG records at a zone's apex, similar t
 
 ## Resolvers {#resolvers}
 
-A resolver that is DELEG-aware MUST signal in queries that it supports the DELEG protocol by setting the DE bit to 1 as described in {{de-bit}}.
+A resolver that is DELEG-aware MUST signal in queries that it supports the DELEG protocol by setting the DE bit to 1 as described in {{!I-D.ietf-dnsop-delext}}.
 This indicates that the resolver understands the DELEG semantics and does not need NS records to follow a referral.
 
 The DE bit set to 0 indicates the resolver is not DELEG-aware, and therefore can only be served referrals with NS records and other data according to non-DELEG specifications.
