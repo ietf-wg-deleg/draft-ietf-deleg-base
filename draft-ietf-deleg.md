@@ -44,7 +44,7 @@ author:
     email: tale@dd.org
 
 --- abstract
-This document proposes a new extensible method for the delegation of authority for a domain in the Domain Name System (DNS) using DELEG and DELEGPARAM records.
+This document specifies a new extensible method for the delegation of authority for a domain in the Domain Name System (DNS) using DELEG and DELEGPARAM records.
 
 A delegation in the DNS enables efficient and distributed management of the DNS namespace.
 The traditional DNS delegation is based on NS records which contain only hostnames of servers and no other parameters.
@@ -64,7 +64,7 @@ The DNS Security Extensions (DNSSEC) protect only one copy, those in the apex.
 These properties of NS records limit resolvers to unencrypted messages on UDP and TCP port 53, and this initial contact cannot be protected with DNSSEC.
 These limitations are a barrier for the efficient introduction of new DNS technology.
 
-The proposed DELEG and DELEGPARAM resource record (RR) types remedy this problem by providing extensible parameters to indicate authoritative name server capabilities and additional information, such as other transport protocols that a resolver may use.
+The DELEG and DELEGPARAM resource record (RR) types remedy this problem by providing extensible parameters to indicate authoritative name server capabilities and additional information, such as other transport protocols that a resolver may use.
 
 The DELEG record creates a new delegation.
 It is a Delegation Type record as defined in {{!I-D.ietf-dnsop-delext}}.
@@ -259,7 +259,7 @@ Parsing the comma-separated list is specified in Section A.1 of {{!RFC9460}}.
 The DELEG protocol allows the use of all valid domain names, as defined in {{!RFC1035}} and Section 11 of {{!RFC2181}}.
 The presentation format for names with special characters requires both double-escaping by applying rules of Section 5.1 of {{!RFC1034}} together with the escaping rules from Section A.1 of {{RFC9460}}.
 
-TODO: add an example that requires this escaping.
+For example, assume a list of two domain names. The first domain name is "simple.example". The second domain name is under ".example" whose leftmost label is "abc" followed by a escape character (U+001B), followed by "def", followed by a comma, followed by "ghi". This list would hoave a presentation value of "simple.example,abc\\027def\,ghi.example". 
 
 The wire format for server-name and include-delegparam are each a concatenated unordered collection of wire-format domain names, where the root label provides the separation between names:
 
@@ -354,8 +354,6 @@ An example of a valid delegation tree:
     ; nssub.sld.test. zone with DELEG-only delegation
     delegsub.sub.sld.test. DELEG ...
 
-TODO: after the text below, refer back to this figure and show the order that a DELEG-aware resolver would take when there is a failure to find any good DELEG addresses at sub.sld.test, then any usable name servers at sub.sld.test, and then maybe a good DELEG record at test.
-
 The terms SNAME and SLIST used here are defined in Section 5.3.2 of {{!RFC1034}}. Quote:
 
 - SNAME is the domain name we are searching for.
@@ -368,7 +366,7 @@ Neither {{RFC1034}} nor this document define how a resolver uses SLIST; they onl
 
 A DELEG-aware SLIST needs to be able to hold two types of information, delegations defined by NS records and delegations defined by DELEG records.
 DELEG and NS delegations can create cyclic dependencies and/or lead to duplicate entries which point to the same server.
-Resolvers SHOULD enforce suitable limits to prevent runaway processing even if someone has incorrectly configured some of the data used to create an SLIST;
+Resolvers need to enforce suitable limits to prevent runaway processing even if someone has incorrectly configured some of the data used to create an SLIST;
 this is the same recommendation to bound the amount of work as is made in Section 5.3.3 of {{RFC1034}}.
 
 Step 2 of Section 5.3.3 of {{RFC1034}} is just "2. Find the best servers to ask."
@@ -519,7 +517,7 @@ Thus, queries with DE=0 and QTYPE=DELEG MUST result in a response which can be v
 - If there is no NS RRset but there is a DELEG RRset, this will be a normal authoritative response with the DELEG RRset, following non-DELEG specifications.
 - If there is no NS RRset and no DELEG RRset, this will be a standard negative response following non-DELEG specifications.
 
-TODO: Should we have an example with auth having parent+child zone at the same time, and DE=0 QTYPE=DELEG query?  What about QTYPE=ANY?
+The above rules apply to authoritative servers that are serving both a parent and a child zone when a DELEG-unaware client sends a QTYPE=DELEG query.
 
 ## DNSSEC Signers {#signers}
 
@@ -607,7 +605,7 @@ Otherwise DNSSEC-secure zones might fail to validate (see {{legacynxdomain}}) an
 
 {{!RFC9606}} specifies a DNS resource record type, RESINFO, to allow resolvers to publish information about their capabilities and policies. This can be used to inform DNS clients that DELEG is supported by the DNS resolver.
 
-A resolver which supports {{!RFC9606}} SHOULD add the "deleg" key if it supports DELEG protocol.
+A resolver which supports {{!RFC9606}} SHOULD add the "deleg" key if it supports DELEG protocol; otherwise, a DNS client would not know that the resolver is DELEG-aware.
 A resolver that uses forwarders MAY use a RESINFO query to determine if the configured forwarders are DELEG-aware.
 
 Note that, per the rules for the keys defined in Section 6.4 of {{!RFC6763}}, if there is no '=' in a key, then it is a boolean attribute, simply identified as being present with no value.
@@ -679,16 +677,14 @@ An extremely conservative approach might be:
 Such an approach requires changing only to DNSKEY RRset and resigning it.
 Consequently, the time required to withdraw the new DNSKEY record is limited only by DNSKEY TTL + time to sign + time to transfer modified DNSKEY RRset.
 
-## Interaction with Dynamic DNS Upate ( {{!RFC2136}} )
+## Interaction with Dynamic DNS Upate
 
-DELEG records can be updated like other regular zone data at the delegation point, similar to NS records, as dynamic updates work on zone data and not queries.
-A DELEG-only delegation would not need an NS record in the delegated zone, but the NS record in the delegated zone can not be deleted because of section RFC2136 section 7.13.
-This should cause no immediate problems as dynamic DNS updates with DELEG are most useful at the delegation point.
-DELEGPARAM will be handled like any other record.
+DELEG records can be updated like other regular zone data at the delegation point, similar to NS records, because dynamic updates work on zone data but not on queries.
+A DELEG-only delegation would not need an NS record in the delegated zone, but the NS record in the delegated zone cannot be deleted because of Section 7.13 in {{!RFC2136}}.
+This should cause no immediate problems because dynamic DNS updates with DELEG are most useful at the delegation point.
+A DELEGPARAM record will be handled like any other record.
 
 # Security Considerations
-
-TODO: More people should check this section is complete!
 
 ## Preventing Over-work Attacks {#too-much-work}
 
@@ -696,10 +692,9 @@ Resolvers MUST prevent situations where accidental misconfiguration of zones or 
 This document describes two sets of actions that, if not controlled, could lead to over-work attacks.
 
 Long chains of include-delegparam information ({{nameserver-info}}), and those with circular chains of include-delegparam information, can be burdensome.
-To prevent this, the resolver SHOULD NOT follow more than 3 include-delegparam chains in an RRset when populating SLIST.
+To prevent this, the resolver SHOULD NOT follow more than 3 include-delegparam chains in an RRset when populating SLIST;
+otherwise, the resolver could exhaust some of its resources.
 Note that include-delegparam chains can have CNAME steps in them; in such a case, a CNAME step is counted the same as a DELEGPARAM step when determining when to stop following a chain.
-
-TODO: No other DNS spec specifies hard maximum number of indirections. Perhaps we should not specify it either? After all DELEG value can contain a name in NS-only delegation and then we get into realm of 'count DELEG but NS is uncounted' and other fun combinations like this. Perhaps this is better dealt with for the whole DNS protocol within draft-fujiwara-dnsop-dns-upper-limit-values?
 
 ## Preventing Downgrade Attacks {#downgrade-attacks}
 
@@ -711,7 +706,7 @@ To protect DNSSEC-secure DNS zones that contain DELEG delegations, the delegatin
 Failure to set this flag in a DNSKEY record in the zone allows an attacker to remove the DELEG RRset from referrals which contain the DS RRset, and replace the original signed DELEG RRset with an arbitrary unsigned NS set.
 Doing so would be a downgrade from the strong protection offered by DNSSEC for DELEG.
 That is, the DELEG protocol when used with upgraded DNSKEY records gives the same protection to DELEG that the zone's DS RRset has.
-Without DELEG, there are no security guarantees for delegation NS Records.
+Without DELEG, there are no security guarantees for delegation NS records.
 
 Please note that a full DNSKEY rollover is not necessary to achieve the downgrade protection for DELEG.
 Any single DNSKEY with the DNSKEY-ADT flag set to 1 is sufficient; the zone can introduce an otherwise unused record into the DNSKEY RRset.
@@ -719,7 +714,7 @@ Any single DNSKEY with the DNSKEY-ADT flag set to 1 is sufficient; the zone can 
 ## DELEG Is Stronger Than NS
 
 DELEG RRtype has stronger protection (by DNSSEC) than delegation NS records and glue records.
-A zone that does not need to be resolvable by DELEG-unaware clients (see {operational-considerations}),
+A zone that does not need to be resolvable by DELEG-unaware clients (see {{operational-considerations}}),
 and is delegated only with DELEG records,
 will have a smaller attack surface compared to a zone delegated with both DELEG and NS records.
 
@@ -826,9 +821,7 @@ It shows the delegation point for "example." and "test."
 The "example." delegation has DELEG and NS records.
 The "test." delegation has DELEG but no NS records.
 
-TODO: Add examples that have include-delegparam being sets of more than one name.
-
-    example.   DELEG server-ipv4=192.0.2.1 server-ipv6=2001:DB8::1
+    example.   DELEG server-ipv4=192.0.2.1 server-ipv6=2001:db8::1
     example.   DELEG server-name=ns2.example.net.,ns3.example.org.
     example.   RRSIG DELEG 13 1 300 20260101000000 (
                             20250101000000 33333 . SigExampleDELEG/ )
@@ -848,7 +841,7 @@ TODO: Add examples that have include-delegparam being sets of more than one name
     ; unsigned glue for legacy (NS) delegation
     ; it is NOT present in NSEC chain
     ns1.example. A     192.0.2.1
-    ns1.example. AAAA  2001:DB8::1
+    ns1.example. AAAA  2001:db8::1
 
 The "test." delegation point has a DELEG record and no NS or DS records.
 
@@ -874,7 +867,7 @@ Delegations to org and net zones omitted for brevity.
 ## Example.org zone file
 The following example shows an excerpt from an unsigned example.org zone.
 
-    Acfg.example.org.    DELEGPARAM server-ipv6=2001:DB8::6666
+    Acfg.example.org.    DELEGPARAM server-ipv6=2001:db8::6666
     Acfg.example.org.    DELEGPARAM server-name=ns3.example.org.
     Acfg.example.org.    DELEGPARAM include-delegparam=subcfg.example.org.
 
@@ -917,7 +910,7 @@ The following sections show referral examples:
 
     ;; Additional
     ns1.example. A     192.0.2.1
-    ns1.example. AAAA  2001:DB8::1
+    ns1.example. AAAA  2001:db8::1
 
 #### Query for foo.test
 
@@ -982,7 +975,7 @@ A forgotten glue record under the "test." delegation point is occluded by DELEG 
                             20250101000000 33333 . SigExampleDS )
     ;; Additional
     ns1.example. A     192.0.2.1
-    ns1.example. AAAA  2001:DB8::1
+    ns1.example. AAAA  2001:db8::1
 
 
 #### Query for foo.test {#legacynxdomain}
@@ -1053,7 +1046,7 @@ This is indicated by NSEC chain which "skips" over the owner name with A RRset.
     ;; (empty)
 
     ;; Authority
-    example.   DELEG server-ipv4=192.0.2.1 server-ipv6=2001:DB8::1
+    example.   DELEG server-ipv4=192.0.2.1 server-ipv6=2001:db8::1
     example.   DELEG server-name=ns2.example.net.,ns3.example.org.
 
     ;; Additional
@@ -1094,7 +1087,7 @@ A follow-up example in {{delegparam-example}} explains the ultimate meaning of t
     ;; (empty)
 
     ;; Authority
-    example.   DELEG server-ipv4=192.0.2.1 server-ipv6=2001:DB8::1
+    example.   DELEG server-ipv4=192.0.2.1 server-ipv6=2001:db8::1
     example.   DELEG server-name=ns2.example.net.,ns3.example.org.
     example.   RRSIG DELEG 13 1 300 20260101000000 (
                             20250101000000 33333 . SigExampleDELEG/ )
@@ -1136,11 +1129,11 @@ A follow-up example in {{delegparam-example}} explains the ultimate meaning of t
 In the examples above, the test. DELEG record uses indirection and points to other domain names with DELEGPARAM, A, AAAA, and CNAME records.
 During resolution, a resolver will gradually build set of name servers to contact, as defined in {{slist}}.
 
-To visualize the end result of this process, we represent full set of name servers in form of a 'virtual' DELEG RRset.
+To visualize the end result of this process, the full set of name servers in form of a 'virtual' DELEG RRset is represented here.
 
     test. DELEG server-ipv4=198.51.100.1
     test. DELEG server-ipv4=203.0.113.1
-    test. DELEG server-ipv6=2001:DB8::6666
+    test. DELEG server-ipv6=2001:db8::6666
     test. DELEG server-ipv6=3fff::2
     ; IPv6 address 3fff::33 was de-duplicated (input RRsets listed it twice)
     test. DELEG server-ipv6=3fff::33
@@ -1178,10 +1171,6 @@ Records which are not even allowed in zone file (see also {{RFC9460}} appendix D
 
     m2.invalid. DELEG mandatory
     ik.invalid. DELEG invalid
-
-# Test Vectors
-
-TODO: In what format? Machine readable would be a win. Perhaps a combination of {{?RFC8427}} and {{?I-D.peltan-edns-presentation-format}}?
 
 # Acknowledgments
 {:numbered="false"}
