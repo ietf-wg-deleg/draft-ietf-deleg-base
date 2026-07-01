@@ -443,12 +443,58 @@ The order in which to try the servers in the final SLIST is outside the scope of
 
 ## Authoritative Servers {#authoritative-servers}
 
-This document requires DELEG records meet the requirements for Delegation types from {{!I-D.ietf-dnsop-delext}}.
-The DELEG RRset MAY contain multiple records.
+The DELEG RR type defines a zone cut in similar way as the NS RR type.
+Behavior defined for zone cuts in existing non-DELEG specifications apply to zone cuts created by the DELEG record.
+A notable example of this is that the occlusion (usually accidentally) created by delegation NS records would also be created by DELEG records at a delegation point (see {{occluded-example}}).
+Rules for setting Authoritative Answer (AA) bit in answers also remain unchanged: the DELEG RR type has the same special treatment as DS RR type.
 
-Servers MAY refuse to load a zone with DELEG records at a zone's apex, similar to the DS RR type.
+DELEG-aware authoritative servers act differently when handling queries from DELEG-unaware clients (those with DE=0) than from DELEG-aware clients (those with DE=1).
+See {{de-bit}} and {{resolvers}}.
 
-### DELEG-unaware Clients with DELEG RRs Present but No NS RRs {#no-ns}
+### DELEG-aware Clients {#aware-referral}
+
+When the client indicates that it is DELEG-aware by setting DE=1 in the query, DELEG-aware authoritative servers treat DELEG records as delegations, and the servers are authoritative.
+This new zone cut has priority over a legacy delegation.
+
+#### DELEG-aware Clients Requesting QTYPE=DELEG
+
+An explicit query for the DELEG RR type at a delegation point behaves much like a query for the DS RR type: the server answers authoritatively from the delegating zone.
+All non-DELEG specifications for the special handling of queries with QTYPE=DS apply equally to QTYPE=DELEG.
+In summary, the server either provides an authoritative DELEG RRset or declares its non-existence, with relevant DNSSEC proofs when requested and available.
+
+#### Delegation with DELEG
+
+If the delegation has a DELEG RRset, the authoritative server MUST put the DELEG RRset into the Authority section of the referral.
+In this case, the server MUST NOT include the NS RRset in the Authority section.
+
+Non-DELEG DNSSEC specifications for RRSIG inclusion in answers with authoritative RRsets ({!RFC4035} section 3.1.1) MUST be followed.
+Similarly, rules for DS RRset inclusion in referrals apply as specified by the DNSSEC protocol.
+
+#### DELEG-aware Clients with NS RRs Present but No DELEG RRs {#ns-no-deleg}
+
+If the delegation does not have a DELEG RRset, the authoritative server MUST put the NS RRset into the authority section of the referral.
+The absence of the DELEG RRset MUST be proven as specified by the DNSSEC protocol for authoritative data.
+
+Similarly, rules for DS RRset inclusion into referrals apply as specified by the DNSSEC protocol.
+Please note, in practice the same process and records are used to prove the non-existence of both DELEG and DS RRsets.
+
+### DELEG-unaware Clients
+
+A general principle for DELEG-aware authoritative servers is that they respond to a DELEG-unaware client by following non-DELEG specifications.
+
+DELEG-unaware clients do not recognize DELEG records as a delegation point and are not aware of the special handling rules for DELEG records.
+They understand a DELEG RRset as an ordinary unknown RR type.
+
+In summary, DELEG records are not returned in referral responses to DELEG-unaware clients,
+and DELEG-unaware clients do not consider DELEG records authoritative at a delegation point.
+
+An authoritative server responding to DELEG-unaware clients has to handle three distinct situations:
+
+- No DELEG RRset is present. In this case, the authoritative server follows the non-DELEG specifications.
+- An NS RRset and a DELEG RRset are both present. In this case, the authoritative server uses the NS RRset when constructing referral responses, following the non-DELEG specifications. See also {{signers}} and {{examples}}.
+- A DELEG RRset is present, but an NS RRset is not.  This is addressed in the next section.
+
+#### DELEG-unaware Clients with DELEG RRs Present but No NS RRs {#no-ns}
 
 Authoritative servers may receive requests from DELEG-unaware clients for which the child zone is authoritative and is delegated with DELEG RRs only (that is, without any NS RRs).
 Such a zone is, by definition, not resolvable for DELEG-unaware clients.
@@ -457,12 +503,41 @@ The authoritative server should respond in a way that makes sense to DELEG-unawa
 
 The current, primary use case for zone owners that have zones to have DELEG records but no NS records is that they want resolution of those zones only if the resolver uses future features of the DELEG protocol, such as encrypted DNS transports.
 
-The authoritative server is RECOMMENDED to supplement its responses to DELEG-unaware resolvers with an {{!RFC8914}} Extended DNS Error using the TBD3 value "New Delegation Only" from the Extended DNS Error Codes registry.
+The authoritative server is RECOMMENDED to supplement its responses to DELEG-unaware resolvers with an {{!RFC8914}} Extended DNS Error using the (IANA-TBD) value "New Delegation Only" from the Extended DNS Error Codes registry.
 
 When there is no NS records for a delegated zone, a DELEG-aware authoritative server MUST respond to DELEG-unaware clients with an answer that accurately describes the situation to a DELEG-unaware resolver.
 For a query of the delegated zone itself, the response has an RCODE of NOERROR; for a query that has more labels than the delegated zone, the response has an RCODE of NXDOMAIN; this is no different than what is already specified by algorithms in {{!RFC1034}} and subsequent updates.
 NSEC and DS records are returned following the existing rules in {{!RFC4035}}.
 
+#### DELEG-unaware Clients Requesting QTYPE=DELEG {#de0-deleg}
+
+From the perspective of DELEG-unaware clients, the DELEG RR type does not have special semantics and should behave like an old ordinary RR type such as TXT.
+Thus, queries with DE=0 and QTYPE=DELEG MUST result in a response which can be validated by a DELEG-unaware client.
+
+- If there is an NS RRset, this will be a legacy referral. From the perspective of a DELEG-unaware client, the DELEG RR is effectively occluded by NS RRset.
+  The DELEG-unaware resolver can then obtain a final answer which can be validated from the delegated zone in similar fashion as described in {{RFC4035}} section 3.1.4.1.
+- If there is no NS RRset but there is a DELEG RRset, this will be a normal authoritative response with the DELEG RRset, following non-DELEG specifications.
+- If there is no NS RRset and no DELEG RRset, this will be a standard negative response following non-DELEG specifications.
+
+TODO: Should we have an example with auth having parent+child zone at the same time, and DE=0 QTYPE=DELEG query?  What about QTYPE=ANY?
+
+## DNSSEC Signers {#signers}
+
+The DELEG record is authoritative at the delegation point and needs to be signed as such.
+Existing rules from the DNSSEC specifications apply.
+
+In summary: for DNSSEC signing, treat the DELEG RR type the same way as the DS RR type.
+
+The DELEG RR type defines a zone cut in similar way as the NS RR type.
+This has several consequences which stem from existing non-DELEG specifications:
+
+- All owner names below zone cut are occluded and thus not present in NSEC chains.
+- All RRsets which are not permissible at the delegation point are occluded too and not represented in NSEC chain type bitmap.
+
+See examples in {{example-root}} and {{example-occluded}}.
+
+In order to protect validators from downgrade attacks (see {{downgrade-attacks}}) this draft introduces a new DNSKEY flag ADT (Authoritative Delegation Types, see {{validator-downgrade-protection}}).
+To achieve downgrade resistance, DNSSEC-signed zones which contain a DELEG RRset MUST set ADT flag to 1 in at least one of the DNSKEY records published in the zone.
 ## DNSSEC Signers {#signers}
 
 The DELEG record is authoritative at the delegation point and needs to be signed as such.
