@@ -696,6 +696,9 @@ To prevent this, the resolver MUST limit include-delegparam chain processing whe
 otherwise, the resolver could exhaust some of its resources.
 Note that include-delegparam chains can have CNAME/DNAME steps in them; in such a case, a CNAME step is counted the same as a DELEGPARAM step when determining when to stop following a chain.
 
+Content of SLIST MUST be deduplicated to prevent amplification attacks similar to CVE-2026-3592 which use the resolver to attack other systems.
+See {{finding-best}}.
+
 ## Preventing Downgrade Attacks {#downgrade-attacks}
 
 During the rollout of the DELEG protocol, the operator of an authoritative server can upgrade the server software to be DELEG-aware before changing any DNS zones.
