@@ -692,9 +692,12 @@ Resolvers MUST prevent situations where accidental misconfiguration of zones or 
 This document describes two sets of actions that, if not controlled, could lead to over-work attacks.
 
 Long chains of include-delegparam information ({{nameserver-info}}), and those with circular chains of include-delegparam information, can be burdensome.
-To prevent this, the resolver SHOULD NOT follow more than 3 include-delegparam chains in an RRset when populating SLIST;
+To prevent this, the resolver MUST limit include-delegparam chain processing when populating SLIST similarly to CNAME processing in {{!RFC1034}};
 otherwise, the resolver could exhaust some of its resources.
-Note that include-delegparam chains can have CNAME steps in them; in such a case, a CNAME step is counted the same as a DELEGPARAM step when determining when to stop following a chain.
+Note that include-delegparam chains can have CNAME/DNAME steps in them; in such a case, a CNAME step is counted the same as a DELEGPARAM step when determining when to stop following a chain.
+
+Content of SLIST MUST be deduplicated to prevent amplification attacks similar to CVE-2026-3592 which use the resolver to attack other systems.
+See {{finding-best}}.
 
 ## Preventing Downgrade Attacks {#downgrade-attacks}
 
