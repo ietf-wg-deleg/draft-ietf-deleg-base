@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-06-28T02:39:56.843913+00:00",
+  "timestamp": "2026-07-02T02:30:23.333765+00:00",
   "repo": "ietf-wg-deleg/draft-ietf-deleg-base",
   "labels": [
     {
@@ -7814,6 +7814,40 @@
         "oid": "efd33a97cedd036397c86f5402e0bd6ff369c121"
       },
       "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 173,
+      "id": "PR_kwDOO41rkM7syFGQ",
+      "title": "Dealing with DELEXT",
+      "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/pull/173",
+      "state": "OPEN",
+      "author": "paulehoffman",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "This will have some merge issues. ",
+      "createdAt": "2026-07-01T17:08:28Z",
+      "updatedAt": "2026-07-01T17:10:44Z",
+      "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
+      "baseRefName": "main",
+      "baseRefOid": "0cf205ba02b4605abd0c3994f433ddd62d5f3e69",
+      "headRepository": "paulehoffman/refork-ietf-deleg-base",
+      "headRefName": "new-for-delext",
+      "headRefOid": "10952309a4ccb02bdc547ae04350bae90e4e9455",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [
+        {
+          "author": "paulehoffman",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I fixed the two merge issues, so this is ready to go if others approve.",
+          "createdAt": "2026-07-01T17:10:44Z",
+          "updatedAt": "2026-07-01T17:10:44Z"
+        }
+      ],
       "reviews": []
     }
   ]
