@@ -1172,12 +1172,17 @@ Table of Contents
 
    Long chains of include-delegparam information (Section 3.4), and
    those with circular chains of include-delegparam information, can be
-   burdensome.  To prevent this, the resolver SHOULD NOT follow more
-   than 3 include-delegparam chains in an RRset when populating SLIST;
-   otherwise, the resolver could exhaust some of its resources.  Note
-   that include-delegparam chains can have CNAME steps in them; in such
-   a case, a CNAME step is counted the same as a DELEGPARAM step when
-   determining when to stop following a chain.
+   burdensome.  To prevent this, the resolver MUST limit include-
+   delegparam chain processing when populating SLIST similarly to CNAME
+   processing in [RFC1034]; otherwise, the resolver could exhaust some
+   of its resources.  Note that include-delegparam chains can have
+   CNAME/DNAME steps in them; in such a case, a CNAME step is counted
+   the same as a DELEGPARAM step when determining when to stop following
+   a chain.
+
+   Content of SLIST MUST be deduplicated to prevent amplification
+   attacks similar to CVE-2026-3592 which use the resolver to attack
+   other systems.  See Section 5.1.2.
 
 7.2.  Preventing Downgrade Attacks
 

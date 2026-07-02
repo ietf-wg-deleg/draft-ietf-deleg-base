@@ -2230,9 +2230,11 @@ A DELEGPARAM record will be handled like any other record.<a href="#section-6.5-
 <p id="section-7.1-1">Resolvers MUST prevent situations where accidental misconfiguration of zones or malicious attacks cause them to perform too much work when resolving.
 This document describes two sets of actions that, if not controlled, could lead to over-work attacks.<a href="#section-7.1-1" class="pilcrow">¶</a></p>
 <p id="section-7.1-2">Long chains of include-delegparam information (<a href="#nameserver-info" class="auto internal xref">Section 3.4</a>), and those with circular chains of include-delegparam information, can be burdensome.
-To prevent this, the resolver SHOULD NOT follow more than 3 include-delegparam chains in an RRset when populating SLIST;
+To prevent this, the resolver MUST limit include-delegparam chain processing when populating SLIST similarly to CNAME processing in <span>[<a href="#RFC1034" class="cite xref">RFC1034</a>]</span>;
 otherwise, the resolver could exhaust some of its resources.
-Note that include-delegparam chains can have CNAME steps in them; in such a case, a CNAME step is counted the same as a DELEGPARAM step when determining when to stop following a chain.<a href="#section-7.1-2" class="pilcrow">¶</a></p>
+Note that include-delegparam chains can have CNAME/DNAME steps in them; in such a case, a CNAME step is counted the same as a DELEGPARAM step when determining when to stop following a chain.<a href="#section-7.1-2" class="pilcrow">¶</a></p>
+<p id="section-7.1-3">Content of SLIST MUST be deduplicated to prevent amplification attacks similar to CVE-2026-3592 which use the resolver to attack other systems.
+See <a href="#finding-best" class="auto internal xref">Section 5.1.2</a>.<a href="#section-7.1-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="downgrade-attacks">
