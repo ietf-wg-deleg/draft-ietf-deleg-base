@@ -259,7 +259,7 @@ Parsing the comma-separated list is specified in Section A.1 of {{!RFC9460}}.
 The DELEG protocol allows the use of all valid domain names, as defined in {{!RFC1035}} and Section 11 of {{!RFC2181}}.
 The presentation format for names with special characters requires both double-escaping by applying rules of Section 5.1 of {{!RFC1034}} together with the escaping rules from Section A.1 of {{RFC9460}}.
 
-For example, assume a list of two domain names. The first domain name is "simple.example". The second domain name is under ".example" whose leftmost label is "abc" followed by a escape character (U+001B), followed by "def", followed by a comma, followed by "ghi". This list would hoave a presentation value of "simple.example,abc\\027def\,ghi.example". 
+For example, assume a list of two domain names. The first domain name is "simple.example". The second domain name is under ".example" whose leftmost label is "abc" followed by a escape character (U+001B), followed by "def", followed by a comma, followed by "ghi". This list would hoave a presentation value of "simple.example,abc\\027def\,ghi.example".
 
 The wire format for server-name and include-delegparam are each a concatenated unordered collection of wire-format domain names, where the root label provides the separation between names:
 
@@ -302,7 +302,7 @@ Resolvers MUST handle non-compliant RRs as specified in {{slist}}.
 A resolver MUST NOT use an RR with a "mandatory" key in the resolution process unless all of the DelegInfoKeys referenced by the "mandatory" DelegInfoValue are supported in the resolver's implementation.
 See {{slist}}.
 
-# Signaling DELEG Support
+# Signaling DELEG Support {#de-bit}
 
 This document requires the use of the EDNS0 DE flag and its requirements from {{!I-D.ietf-dnsop-delext}}.
 
