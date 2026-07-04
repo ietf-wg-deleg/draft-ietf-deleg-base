@@ -314,9 +314,22 @@ Other special scenarios with DE=0 queries to DELEG-aware authorities are address
 
 # Use of DELEG Records in the Protocols
 
+The DELEG RRset MAY contain multiple records.
+A DELEG RRset MAY be present with or without NS or DS RRsets at the delegation point, though without NS records then DELEG-unaware software will not be able to resolve records in the the delegated zone.
+
+DELEG RRsets MUST NOT appear at a zone's apex.
+The erroneous inclusion of DELEG RRset at zone's apex will cause DNSSEC validation failures.
+Servers MAY refuse to load such an invalid zone, similar to the DS RR type.
+
 ## Resolvers {#resolvers}
 
 Resolvers use DELEG records for referrals following the rules from {{!I-D.ietf-dnsop-delext}}.
+
+A resolver that is DELEG-aware MUST signal in queries that it supports the DELEG protocol by setting the DE bit to 1 in (see {{de-bit}}).
+This indicates that the resolver understands the DELEG semantics and does not need NS records to follow a referral.
+
+The DE bit set to 0 indicates the resolver is not DELEG-aware, and therefore can only be served referrals with NS records and other data according to non-DELEG specifications.
+Other special scenarios with DE=0 queries to DELEG-aware authorities are addressed in {{authoritative-servers}}.
 
 ### Delegation point types, QTYPE=DELEG
 
