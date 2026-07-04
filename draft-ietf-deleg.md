@@ -229,7 +229,7 @@ Conversely,
 
 - DELEGPARAM is an ordinary RR and doesn't require any special processing.
 - DELEGPARAM does not create a delegation for its owner name.
-- DELEGPARAM cannot exist at a delegation point.
+- DELEGPARAM cannot exist at a delegation point or at the apex of the delegated zone.
 - DELEGPARAM DNSSEC-signing and record-placement rules are the same as for any ordinary RR type.
 - DELEGPARAM is used as the target of the DELEG protocol's "include-delegparam" mechanism, as described in section {{slist}}.
 
@@ -282,8 +282,8 @@ a DELEG or DELEGPARAM record that has a non-empty DelegInfos MUST have one, and 
 This restriction only applies to a single DELEG or DELEGPARAM record; a DELEG or DELEGPARAM RRset can have records with different server information keys.
 Authoritative servers MAY refuse to load zones which have a disallowed combination of keys in a single record.
 
-When using server-name or include-delegparam, the addresses for the names in the set must be fetched as if they were referenced by NS records.
-Because of the lack of Additional Section processing, there are no "glue" records provided for these names, so they cannot be for names inside the delegated domain.
+When using server-name or include-delegparam, the addresses for the names in the set must be resolved as if they were referenced by NS records.
+Because of the lack of Additional Section processing, there are no "glue" records provided for these names, so they MUST NOT be for names inside the delegated domain.
 
 With this initial DELEG specification, servers are still expected to be reached on the standard DNS port for both UDP and TCP, 53.  While a future specification is expected to address other transports using other ports, its eventual semantics are not covered here.
 
@@ -297,7 +297,7 @@ The presentation format for the value MUST be a comma-separated list of one or m
 
 The wire format for the value is a sequence of DelegInfoKey numeric values in network byte order, concatenated, in strictly increasing numeric order.
 
-The "mandatory" key is optional, but when it is present, the RR in which it appears MUST also contain all of the DelegInfoKeys referenced in its DelegInfoValue.
+The "mandatory" key is optional. If present, the DELEG or DELEGPARAM RR in which it appears MUST also contain all of the DelegInfoKeys referenced in its DelegInfoValue.
 Resolvers MUST handle non-compliant RRs as specified in {{slist}}.
 
 A resolver MUST NOT use an RR with a "mandatory" key in the resolution process unless all of the DelegInfoKeys referenced by the "mandatory" DelegInfoValue are supported in the resolver's implementation.
