@@ -47,7 +47,7 @@ author:
 This document specifies a new extensible method for the delegation of authority for a domain in the Domain Name System (DNS) using DELEG and DELEGPARAM records.
 
 A delegation in the DNS enables efficient and distributed management of the DNS namespace.
-The traditional DNS delegation is based on NS records which contain only hostnames of servers and no other parameters.
+The traditional DNS delegation is based on NS records which contain only hostnames of servers and no other parameters.  In classic DNS, both parent and child zones contain copies of NS delegation records, which can be potentially out of sync and confusing.
 The new delegation records are extensible, can be secured with DNSSEC, and eliminate the problem of having two sources of truth for delegation information.
 
 --- middle
