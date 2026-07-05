@@ -741,6 +741,8 @@ For example, this allows redirecting a referral to names and/or addresses under 
 Even for DNSSEC-secure zones, an attacker can use this ability to continuously proxy queries and responses,
 observe traffic, and also monitor the network addresses involved, which might be a privacy concern for roaming clients.
 
+To prevent redirection attacks when following regular NS record delegations, validating resolvers SHOULD become child-centric and verify all NS records and associated address records using the signed RRsets in the children.
+
 The feasibility and impact of such attacks depend on the threat model, which is outside the scope of this document.
 
 # IANA Considerations
