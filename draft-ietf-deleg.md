@@ -204,6 +204,8 @@ The DelegInfos element is a sequence of individual DelegInfo elements and MAY be
 The wire format of an individual DelegInfo element is the same as for a SvcParam element,
 but it references DelegInfo elements instead of SvcParam elements.
 
+The structure of a single "DelegInfo" element is:
+
                     +0 (MSB)                            +1 (LSB)
         +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
     0:  |                          DelegInfoKey                         |
