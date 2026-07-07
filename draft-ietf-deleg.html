@@ -1386,7 +1386,7 @@ These limitations are a barrier for the efficient introduction of new DNS techno
 It is a Delegation Type record as defined in <span>[<a href="#I-D.ietf-dnsop-delext" class="cite xref">I-D.ietf-dnsop-delext</a>]</span>.
 It is authoritative at the delegation point and thus can be signed with DNSSEC.
 This makes it possible to validate all delegation parameters, including those of future extensions.<a href="#section-1-5" class="pilcrow">¶</a></p>
-<p id="section-1-6">The DELEGPARAM record is an auxiliary record which does not create a delegation provides an optional layer of indirection.
+<p id="section-1-6">The DELEGPARAM record is an auxiliary record which does not create a delegation, but instead provides an optional layer of indirection.
 It can be used to share the same delegation information across any number of zones, simplifying operations management by reducing the number of situations for which the delegation information for a domain would need to be changed at the delegation point.
 For example, if the customers of a DNS operator point their delegations to a DELEGPARAM record managed by the DNS operator, then the operator can make changes without requiring the customers to have to update the delegation point.<a href="#section-1-6" class="pilcrow">¶</a></p>
 <p id="section-1-7">The DELEG record can be used alongside, or even instead of, an NS record to create a delegation.
