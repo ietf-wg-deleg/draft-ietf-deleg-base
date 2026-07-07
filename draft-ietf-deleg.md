@@ -517,7 +517,7 @@ The authoritative server should respond in a way that makes sense to DELEG-unawa
 
 The current, primary use case for zone owners that have zones to have DELEG records but no NS records is that they want resolution of those zones only if the resolver uses future features of the DELEG protocol, such as encrypted DNS transports.
 
-The authoritative server is RECOMMENDED to supplement its responses to DELEG-unaware resolvers with an {{!RFC8914}} Extended DNS Error using the (IANA-TBD) value "New Delegation Only" from the Extended DNS Error Codes registry.
+The authoritative server is RECOMMENDED to supplement its responses to DELEG-unaware resolvers with an {{!RFC8914}} Extended DNS Error using the value "New Delegation Only" (decimal 34) from the Extended DNS Error Codes registry.
 
 When there is no NS records for a delegated zone, a DELEG-aware authoritative server MUST respond to DELEG-unaware clients with an answer that accurately describes the situation to a DELEG-unaware resolver.
 For a query of the delegated zone itself, the response has an RCODE of NOERROR; for a query that has more labels than the delegated zone, the response has an RCODE of NXDOMAIN; this is no different than what is already specified by algorithms in {{!RFC1034}} and subsequent updates.
@@ -752,7 +752,7 @@ IANA is requested to assign two types in the Resource Record (RR) TYPEs registry
 
 IANA is requested to assign a value in the Extended DNS Error Codes registry ({{!RFC8914}}):
 
-- INFO-CODE TBD3, with the Purpose "New Delegation Only".
+- Decimal 34 with the Purpose "New Delegation Only".
 
 IANA is requested to create this assignment in the DNS Resolver Information Keys registry ({{!RFC9606}}): Name "deleg", Description "The presence of the key indicates that DELEG protocol is supported."
 
