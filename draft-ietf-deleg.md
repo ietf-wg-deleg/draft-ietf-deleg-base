@@ -56,17 +56,17 @@ The new delegation records are extensible, can be secured with DNSSEC, and elimi
 
 In the Domain Name System, responsibility for each subdomain within the domain name hierarchy can be delegated to different servers, which makes them authoritative for their portion of the namespace.
 
-The original DNS record that does this, called an NS record, contains only the hostname of a single name server and no other parameters (aside from potentially supplemental address records when the NS records require them).
+The original DNS record that does this, called an NS record, contains only the hostname of a single name server and no other parameters.
 The resolver needs to resolve these names into usable addresses and infer other required parameters, such as the transport protocol and any other protocol features.
 Moreover, the NS record set exists in two places--one at the delegation point, and the other at the apex of the delegated zone, which might not match the NS records at the delegation.
 The DNS Security Extensions (DNSSEC) protect only one copy, those in the apex.
 
-These properties of NS records limit resolvers to unencrypted messages on UDP and TCP port 53, and this initial contact cannot be protected with DNSSEC, without verifying the NS references using the child's versions. 
+These properties of NS records limit resolvers to unencrypted messages on UDP and TCP port 53, and this initial contact cannot be protected with DNSSEC.
 These limitations are a barrier for the efficient introduction of new DNS technology.
 
 The DELEG and DELEGPARAM resource record (RR) types remedy this problem by providing extensible parameters to indicate authoritative name server capabilities and additional information, such as other transport protocols that a resolver may use.
 
-The DELEG record creates a new method for delegations.
+The DELEG record creates a new delegation.
 It is a Delegation Type record as defined in {{!I-D.ietf-dnsop-delext}}.
 It is authoritative at the delegation point and thus can be signed with DNSSEC.
 This makes it possible to validate all delegation parameters, including those of future extensions.
@@ -90,10 +90,10 @@ all capitals, as shown here.
 
 Terminology regarding the Domain Name System comes from {{?BCP219}}, with additional terms defined here:
 
-* legacy delegation: A delegation that is done only with an NS RRset
+* legacy delegation: A delegation that is done with an NS RRset
 * Delegation Type: Defined in {{!I-D.ietf-dnsop-delext}}.
 * Delegation-Extension-aware: Defined in {{!I-D.ietf-dnsop-delext}}.
-* DELEG-aware: DNS software that understands the protocol defined in this document.
+* DELEG-aware: DNS software that follows the protocol defined in this document.
 DELEG-aware software is inherently Delegation-Extension-aware.
 * DELEG-unaware: A DNS software that does not follow the protocol defined in this document.
 * non-DELEG specifications: DNS protocols that predate this protocol, or are written after this protocol is published but are not related to this protocol.
