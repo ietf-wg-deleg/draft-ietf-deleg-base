@@ -7,8 +7,8 @@ Internet-Draft                                                       ISC
 Updates: 1034, 1035, 4035, 6672, 6840 (if                       R. Weber
          approved)                                   Akamai Technologies
 Intended status: Standards Track                             D. Lawrence
-Expires: 5 January 2027                                       Salesforce
-                                                             4 July 2026
+Expires: 8 January 2027                                       Salesforce
+                                                             7 July 2026
 
 
                      Extensible Delegation for DNS
@@ -23,7 +23,9 @@ Abstract
    A delegation in the DNS enables efficient and distributed management
    of the DNS namespace.  The traditional DNS delegation is based on NS
    records which contain only hostnames of servers and no other
-   parameters.  The new delegation records are extensible, can be
+   parameters.  In classic DNS, both parent and child zones contain
+   copies of NS delegation records, which can be potentially out of sync
+   and confusing.  The new delegation records are extensible, can be
    secured with DNSSEC, and eliminate the problem of having two sources
    of truth for delegation information.
 
@@ -59,7 +61,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 5 January 2027.
+   This Internet-Draft will expire on 8 January 2027.
 
 Copyright Notice
 
@@ -1357,9 +1359,9 @@ Table of Contents
    [I-D.ietf-dnsop-delext]
               Arends, R., van Dijk, P., and P. Špaček, "DNS Protocol
               Modifications for Delegation Extensions", Work in
-              Progress, Internet-Draft, draft-ietf-dnsop-delext-07, 29
-              June 2026, <https://datatracker.ietf.org/doc/html/draft-
-              ietf-dnsop-delext-07>.
+              Progress, Internet-Draft, draft-ietf-dnsop-delext-08, 6
+              July 2026, <https://datatracker.ietf.org/doc/html/draft-
+              ietf-dnsop-delext-08>.
 
    [RFC1034]  Mockapetris, P., "Domain names - concepts and facilities",
               STD 13, RFC 1034, DOI 10.17487/RFC1034, November 1987,
