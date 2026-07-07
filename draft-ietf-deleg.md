@@ -71,7 +71,7 @@ It is a Delegation Type record as defined in {{!I-D.ietf-dnsop-delext}}.
 It is authoritative at the delegation point and thus can be signed with DNSSEC.
 This makes it possible to validate all delegation parameters, including those of future extensions.
 
-The DELEGPARAM record is an auxiliary record which does not create a delegation provides an optional layer of indirection.
+The DELEGPARAM record is an auxiliary record which does not create a delegation, but instead provides an optional layer of indirection.
 It can be used to share the same delegation information across any number of zones, simplifying operations management by reducing the number of situations for which the delegation information for a domain would need to be changed at the delegation point.
 For example, if the customers of a DNS operator point their delegations to a DELEGPARAM record managed by the DNS operator, then the operator can make changes without requiring the customers to have to update the delegation point.
 
