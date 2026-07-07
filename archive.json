@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-07-05T02:12:12.457697+00:00",
+  "timestamp": "2026-07-07T02:12:27.030608+00:00",
   "repo": "ietf-wg-deleg/draft-ietf-deleg-base",
   "labels": [
     {
@@ -1562,16 +1562,24 @@
       "id": "I_kwDOO41rkM8AAAABHsD6ew",
       "title": "To pass LC, all TODOs need to be handled",
       "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/issues/183",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "hardaker",
       "authorAssociation": "NONE",
       "assignees": [],
       "labels": [],
       "body": "(but you probably knew this)",
       "createdAt": "2026-07-04T23:47:20Z",
-      "updatedAt": "2026-07-04T23:47:20Z",
-      "closedAt": null,
-      "comments": []
+      "updatedAt": "2026-07-06T15:47:27Z",
+      "closedAt": "2026-07-06T15:47:26Z",
+      "comments": [
+        {
+          "author": "vttale",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I know you reviewed -09 and these are all out of -10, so I'll close this one.",
+          "createdAt": "2026-07-06T15:47:27Z",
+          "updatedAt": "2026-07-06T15:47:27Z"
+        }
+      ]
     },
     {
       "number": 185,
@@ -1633,9 +1641,24 @@
       "labels": [],
       "body": "I'd suggest rewording this bullet for clarity",
       "createdAt": "2026-07-05T00:06:53Z",
-      "updatedAt": "2026-07-05T00:06:53Z",
+      "updatedAt": "2026-07-07T00:05:41Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "vttale",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Perhaps, but note that mainly what 5.4.1 did was add \"and DELEG\" to two spots in the original 6840 text that said only \"NS\".\n\nThat said, I agree with you that it's hard to parse and I can't quite make sense out of how to reconcile it with RFC 8020.  6840 says, \"In particular, the algorithm as presented would  allow a validator to interpret an NSEC or NSEC3 RR from an ancestor zone as proving the nonexistence of an RR in a child zone.\"   Maybe 5.4.1 should just defer to 8020.  That said, 8020 doesn't mention either 6840 4.1 or 4035 5.4.\n\nMaybe Shumon would like to comment on behalf of 8020.  I can't tag him here, but I'll ping him on Slack.\n\n\n\n",
+          "createdAt": "2026-07-06T15:18:34Z",
+          "updatedAt": "2026-07-06T15:18:34Z"
+        },
+        {
+          "author": "shuque",
+          "authorAssociation": "NONE",
+          "body": "I've been away from DELEG for a while, so I really need to read the whole draft, which I will attempt to do soon.\n\nBut just reading section section 5.4.1 in isolation, at first glance I don't see any direct conflict with RFC 8020. Presumably, the owner name of the \"ancestor delegation NSEC/3 RR\" is a zone cut (or the hash of a zone cut). Assuming so, 8020 doesn't apply. The owner name of an NSEC/3 RR positively exists, so 8020 has nothing to say about names under it.\n",
+          "createdAt": "2026-07-07T00:05:41Z",
+          "updatedAt": "2026-07-07T00:05:41Z"
+        }
+      ]
     },
     {
       "number": 189,
@@ -1649,9 +1672,17 @@
       "labels": [],
       "body": "I suspect this was discussed (and I've forgotten) but it would highly helpful to the reader to describe how generation could happen (section 6.3)",
       "createdAt": "2026-07-05T00:10:10Z",
-      "updatedAt": "2026-07-05T00:10:10Z",
+      "updatedAt": "2026-07-06T15:02:04Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "vttale",
+          "authorAssociation": "COLLABORATOR",
+          "body": "We've discussed it, yes, and the position of the authors has remained that while it is completely reasonable for a zone manager (\ud83d\ude09) to want to have some sort of mechanism to create NS records from DELEG records, and for DNS software packages to offer such a feature, how that would be done is outside the scope of the base protocol.  \n\nTo the extent that an IETF document does provide guidance on it, it would be more relevant in a deleg transports document, though I'd be a little surprised to see it show up in draft-hoffman-deleg-secure-transports-00 too.",
+          "createdAt": "2026-07-06T15:02:04Z",
+          "updatedAt": "2026-07-06T15:02:04Z"
+        }
+      ]
     },
     {
       "number": 190,
@@ -1665,9 +1696,38 @@
       "labels": [],
       "body": "I mean really really undefined.  It's used in about 6 RFCs, but never actually defined in any of them.\n\n```\nrfc2535.txt\n409:   (RRset) signed by a special private key held by the zone manager.\n\nrfc3658.txt\n297:   private key held by the zone manager.  But the DNS protocol views the\n\nrfc4290.txt\n738:   Of course, zone managers should inform all current registrants when\n\nrfc5891.txt\n347:   actually reaches the zone manager (\"registry\") are outside the scope\n\nrfc5893.txt\n781:   private zone managers can check for this particular condition before\n\nrfc6841.txt\n349:   Most zone managers using DNSSEC will not have the need to create a\n353:   In other cases, a zone manager may provide registration services with\n650:   This subcomponent describes how the child zone manager has initially\n664:   circumstances the child zone manager is required to provide proof of\n1295:        3.2.  Identification and authentication of child zone manager\n\nrfc7583.txt\n123:   When a zone is secured with DNSSEC, the zone manager must be prepared\n365:   timings are not wholly under the control of the zone manager.  If the\n367:   the case where authentication is via a DS record, the zone manager\n868:   record has been submitted to the parent zone manager for it to be\n1416:   control of the zone manager.\n1535:   L         lifetime: interval set by the zone manager\n1544:   control of the zone manager, and an \"L\" interval (lifetime) is chosen\n1545:   by the zone manager and is a feature of policy.\n```\n",
       "createdAt": "2026-07-05T00:11:39Z",
-      "updatedAt": "2026-07-05T00:11:39Z",
+      "updatedAt": "2026-07-07T00:00:33Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "vttale",
+          "authorAssociation": "COLLABORATOR",
+          "body": "While true, given the prior art of its use it seems that the next round of updates to DNS Terminology should handle it.  In the mean time, I would think its use in the vernacular as understood by two and half decades of DNS RFCs is sufficient for its use in this draft without additional exposition.",
+          "createdAt": "2026-07-06T14:04:14Z",
+          "updatedAt": "2026-07-06T14:04:14Z"
+        },
+        {
+          "author": "hardaker",
+          "authorAssociation": "NONE",
+          "body": "if that was the case, why do we bother publishing terminology RFCs?",
+          "createdAt": "2026-07-06T19:03:28Z",
+          "updatedAt": "2026-07-06T19:03:28Z"
+        },
+        {
+          "author": "vttale",
+          "authorAssociation": "COLLABORATOR",
+          "body": "To collate the knowledge that we have spread out over multiple DNS RFCs.  This term was just missed and seems quite well handled in the next update.  It isn't clear to me why this draft should be the one to remedy the oversight.",
+          "createdAt": "2026-07-06T20:20:31Z",
+          "updatedAt": "2026-07-06T20:20:31Z"
+        },
+        {
+          "author": "moonshiner",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "The question I have - is \"zone manager\" a human(oid) entity ala zone administrator , or is it a process, toolchain, etc that manages the zone data ? ",
+          "createdAt": "2026-07-07T00:00:33Z",
+          "updatedAt": "2026-07-07T00:00:33Z"
+        }
+      ]
     }
   ],
   "pulls": [
@@ -8254,6 +8314,47 @@
       "mergedBy": null,
       "mergeCommit": null,
       "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 191,
+      "id": "PR_kwDOO41rkM7uETG-",
+      "title": "Recommend child centric ns",
+      "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/pull/191",
+      "state": "OPEN",
+      "author": "hardaker",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "The DELEG is stronger section is good, but some mitigation can be obtained by being child centric.",
+      "createdAt": "2026-07-05T16:05:32Z",
+      "updatedAt": "2026-07-06T19:02:10Z",
+      "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
+      "baseRefName": "main",
+      "baseRefOid": "ac9a6629cb98d701293105bda2b3fe098135c48d",
+      "headRepository": "hardaker/draft-ietf-deleg-base",
+      "headRefName": "recommend-child-centric-NS",
+      "headRefOid": "460576e008bbf41be23ceb5a273cc8edb3f9d0a6",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [
+        {
+          "author": "vttale",
+          "authorAssociation": "COLLABORATOR",
+          "body": "It seems to me that addressing the long-standing NS centrism debate is out of scope for a document that is all about how to use the DELEG record type.",
+          "createdAt": "2026-07-06T15:52:37Z",
+          "updatedAt": "2026-07-06T15:52:37Z"
+        },
+        {
+          "author": "hardaker",
+          "authorAssociation": "NONE",
+          "body": "Yeah, I recognize it was on the fence for me.  But the document specifically states to fall back to NS records, which gives a very different security strength if you do so and are parent-centric.  Hence I decided to suggest it.  (if there wasn't instructions about how to fall back when DELEG didn't exist, it would make more sense to not include it).",
+          "createdAt": "2026-07-06T19:02:10Z",
+          "updatedAt": "2026-07-06T19:02:10Z"
+        }
+      ],
       "reviews": []
     }
   ]
