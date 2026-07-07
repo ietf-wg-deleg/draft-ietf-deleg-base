@@ -1573,7 +1573,8 @@ including the requirements for strictly increasing numeric order to keys and no 
 <p id="section-3.2-5">The DelegInfos element is a sequence of individual DelegInfo elements and MAY be empty.
 The wire format of an individual DelegInfo element is the same as for a SvcParam element,
 but it references DelegInfo elements instead of SvcParam elements.<a href="#section-3.2-5" class="pilcrow">¶</a></p>
-<div class="alignLeft art-text artwork" id="section-3.2-6">
+<p id="section-3.2-6">The structure of a single "DelegInfo" element is:<a href="#section-3.2-6" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-3.2-7">
 <pre>
                 +0 (MSB)                            +1 (LSB)
     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
@@ -1583,10 +1584,10 @@ but it references DelegInfo elements instead of SvcParam elements.<a href="#sect
     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 4:  /                          DelegInfoValue ...                   /
     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-</pre><a href="#section-3.2-6" class="pilcrow">¶</a>
+</pre><a href="#section-3.2-7" class="pilcrow">¶</a>
 </div>
-<p id="section-3.2-7">The permissible lengths depend on the DelegInfoKey value.
-Some future keys may have no DelegInfoValue, which would be indicated with an explicit 0 length.<a href="#section-3.2-7" class="pilcrow">¶</a></p>
+<p id="section-3.2-8">The permissible lengths depend on the DelegInfoKey value.
+Some future keys may have no DelegInfoValue, which would be indicated with an explicit 0 length.<a href="#section-3.2-8" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="semantics">
