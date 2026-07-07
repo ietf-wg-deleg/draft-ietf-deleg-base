@@ -71,12 +71,15 @@ It is a Delegation Type record as defined in {{!I-D.ietf-dnsop-delext}}.
 It is authoritative at the delegation point and thus can be signed with DNSSEC.
 This makes it possible to validate all delegation parameters, including those of future extensions.
 
-The DELEGPARAM record is an auxiliary record which does not create a delegation, but instead provides an optional layer of indirection.
-It can be used to share the same delegation information across any number of zones, simplifying operations management by reducing the number of situations for which the delegation information for a domain would need to be changed at the delegation point.
-For example, if the customers of a DNS operator point their delegations to a DELEGPARAM record managed by the DNS operator, then the operator can make changes without requiring the customers to have to update the delegation point.
-
 The DELEG record can be used alongside, or even instead of, an NS record to create a delegation.
 The combination of DELEG+NS is fully compatible with old resolvers, facilitating the incremental rollout of this new method.
+
+The DELEGPARAM record is an auxiliary record which contains the same data as DELEG, but does not create a delegation.
+Instead it is used as the target when DELEG is optionally using indirection.
+This indirection can, for example,
+be used to share the same delegation information across multiple zones and simplify operations management by reducing the number of locations for the delegation information for those zones.
+For example: if the customers of a DNS operator point their delegations to a DELEGPARAM record managed by the DNS operator,
+then the operator will be able to make delegation information changes without further customer involvement, and affect all of those customer's delegations with a single change.
 
 Future documents can use the extensibility mechanism for more advanced features, like connecting to a name server with an encrypted transport.
 
@@ -131,7 +134,7 @@ The changes are primarily because DELEG RRsets are authoritative at the delegati
 A zone might be delegated with only DELEG records but no NS records.
 Such a zone would be invisible to DELEG-unaware resolvers.
 
-In order to protect validators from downgrade attacks, this document uses a DNSKEY flag described in {{!I-D.ietf-dnsop-delext}}.
+In order to protect validators from downgrade attacks, this document mandates the use of DNSKEY-ADT flag described in {{!I-D.ietf-dnsop-delext}}.
 
 There are many parts of the DELEG protocol that are not included in this brief overview.
 For example, DELEG-aware authoritative servers have choices to make depending both on the request and the contents of the zone file.
@@ -365,7 +368,7 @@ An example of a valid delegation tree:
     nssub.sld.test. NS ...
 
     ; nssub.sld.test. zone with DELEG-only delegation
-    delegsub.sub.sld.test. DELEG ...
+    delegsub.nssub.sld.test. DELEG ...
 
 The terms SNAME and SLIST used here are defined in Section 5.3.2 of {{!RFC1034}}. Quote:
 
@@ -393,7 +396,7 @@ For DELEG-aware resolvers, this description becomes:
 
 2.1.1. Start with SNAME equal to QNAME.
 
-2.1.2. If QTYPE is a type that is authoritative at the delegation point (currently, DS or DELEG), remove the leftmost label from SNAME.
+2.1.2. If QTYPE is a type that is authoritative at the delegation point (DS or the range defined by {{!I-D.ietf-dnsop-delext}}, which includes DELEG), remove the leftmost label from SNAME.
 For example, if the QNAME is "test.example." and the QTYPE is DELEG or DS, set SNAME to "example.".
 
 2.2. Look for locally-available DELEG and NS RRsets, starting at current SNAME.
@@ -456,7 +459,7 @@ The order in which to try the servers in the final SLIST is outside the scope of
 
 The DELEG RR type defines a zone cut in similar way as the NS RR type.
 Behavior defined for zone cuts in existing non-DELEG specifications apply to zone cuts created by the DELEG record.
-A notable example of this is that the occlusion (usually accidentally) created by delegation NS records would also be created by DELEG records at a delegation point (see {{occluded-example}}).
+A notable example of this is that the occlusion (usually accidentally) created by delegation NS records would also be created by DELEG records at the same name (see {{occluded-example}}).
 Rules for setting Authoritative Answer (AA) bit in answers also remain unchanged: the DELEG RR type has the same special treatment as DS RR type.
 
 DELEG-aware authoritative servers act differently when handling queries from DELEG-unaware clients (those with DE=0) than from DELEG-aware clients (those with DE=1).
@@ -478,7 +481,7 @@ In summary, the server either provides an authoritative DELEG RRset or declares 
 If the delegation has a DELEG RRset, the authoritative server MUST put the DELEG RRset into the Authority section of the referral.
 In this case, the server MUST NOT include the NS RRset in the Authority section.
 
-Non-DELEG DNSSEC specifications for RRSIG inclusion in answers with authoritative RRsets ({!RFC4035} section 3.1.1) MUST be followed.
+Non-DELEG DNSSEC specifications for RRSIG inclusion in answers with authoritative RRsets ({{!RFC4035}} section 3.1.1) MUST be followed.
 Similarly, rules for DS RRset inclusion in referrals apply as specified by the DNSSEC protocol.
 
 #### DELEG-aware Clients with NS RRs Present but No DELEG RRs {#ns-no-deleg}
@@ -536,6 +539,7 @@ The above rules apply to authoritative servers that are serving both a parent an
 
 The DELEG record is authoritative at the delegation point and needs to be signed as such.
 Existing rules from the DNSSEC specifications apply.
+These are defined in {{!I-D.ietf-dnsop-delext}}.
 
 In summary: for DNSSEC signing, treat the DELEG RR type the same way as the DS RR type.
 
@@ -546,14 +550,6 @@ This has several consequences which stem from existing non-DELEG specifications:
 - All RRsets which are not permissible at the delegation point are occluded too and not represented in NSEC chain type bitmap.
 
 See examples in {{example-root}} and {{example-occluded}}.
-
-In order to protect validators from downgrade attacks (see {{downgrade-attacks}}) this draft introduces a new DNSKEY flag ADT (Authoritative Delegation Types, see {{validator-downgrade-protection}}).
-To achieve downgrade resistance, DNSSEC-signed zones which contain a DELEG RRset MUST set ADT flag to 1 in at least one of the DNSKEY records published in the zone.
-## DNSSEC Signers {#signers}
-
-The DELEG record is authoritative at the delegation point and needs to be signed as such.
-Existing rules from the DNSSEC specifications apply.
-These are defined in {{!I-D.ietf-dnsop-delext}}.
 
 In order to protect validators from downgrade attacks (see {{downgrade-attacks}}), {{!I-D.ietf-dnsop-delext}} introduces a the DNSKEY flag called DNSKEY-ADT.
 To achieve downgrade resistance, DNSSEC-signed zones which contain a DELEG RRset MUST follow the rules in  {{!I-D.ietf-dnsop-delext}}.
@@ -597,7 +593,7 @@ way that DS RR types are.
 
 ### Referral downgrade protection {#validator-downgrade-protection}
 
-If the zone is DNSSEC-secure, and if any DNSKEY of the zone has the DNSKEY-ADT flag ({{validator-downgrade-protection}}) set to 1, a DELEG-aware validator MUST prove the absence of a DELEG RRset in referral responses from this particular zone.
+If the zone is DNSSEC-secure, and if any DNSKEY of the zone has the DNSKEY-ADT flag ({{signers}}) set to 1, a DELEG-aware validator MUST prove the absence of a DELEG RRset in referral responses from this particular zone.
 
 Without this check, an attacker could strip the DELEG RRset from a referral response and replace it with an unsigned (and potentially malicious) NS RRset ({{downgrade-attacks}}).
 The reason for this is that according to non-DELEG DNSSEC specification, a referral response with an unsigned NS and signed DS RRsets does not require additional proofs of nonexistence.
@@ -770,11 +766,13 @@ This registry defines the namespace for delegation information keys, including s
 
 A registration MUST include the following fields:
 
+~~~
 Number:  Wire-format numeric identifier (range 0-65535)
 Name:  Unique presentation name
 Meaning:  A short description
 Reference:  Location of specification or registration source
 Change Controller:  Person or entity, with contact information if appropriate
+~~~
 
 To enable code reuse from SVCB parsers, the requirements for registered Name exactly copy requirements set by {{!RFC9460}} section 14.3.1:
 The characters in the registered Name field entry MUST be lowercase alphanumeric or "-".
@@ -1165,8 +1163,8 @@ Several examples of misconfigured delegations which cannot be resolved follow.
 
 Self-references to names without any addresses:
 
-    1p.invalid. DELEG include-delegparam=params.invalid.,sub.params.invalid.
-    2n.invalid. DELEG server-name=ns1.invalid.,ns2.sub.invalid.
+    1p.invalid. DELEG include-delegparam=1p.invalid.,sub.params.1p.invalid.
+    2n.invalid. DELEG server-name=ns1.2n.invalid.,ns2.sub.2n.invalid.
 
 Cycles:
 
