@@ -1962,7 +1962,7 @@ Such a zone is, by definition, not resolvable for DELEG-unaware clients.
 From the perspective of a DELEG-unaware client, the zone cut created by the DELEG RRs is invisible.
 The authoritative server should respond in a way that makes sense to DELEG-unaware clients.<a href="#section-5.2.2.1-1" class="pilcrow">¶</a></p>
 <p id="section-5.2.2.1-2">The current, primary use case for zone owners that have zones to have DELEG records but no NS records is that they want resolution of those zones only if the resolver uses future features of the DELEG protocol, such as encrypted DNS transports.<a href="#section-5.2.2.1-2" class="pilcrow">¶</a></p>
-<p id="section-5.2.2.1-3">The authoritative server is RECOMMENDED to supplement its responses to DELEG-unaware resolvers with an <span>[<a href="#RFC8914" class="cite xref">RFC8914</a>]</span> Extended DNS Error using the (IANA-TBD) value "New Delegation Only" from the Extended DNS Error Codes registry.<a href="#section-5.2.2.1-3" class="pilcrow">¶</a></p>
+<p id="section-5.2.2.1-3">The authoritative server is RECOMMENDED to supplement its responses to DELEG-unaware resolvers with an <span>[<a href="#RFC8914" class="cite xref">RFC8914</a>]</span> Extended DNS Error using the value "New Delegation Only" (decimal 34) from the Extended DNS Error Codes registry.<a href="#section-5.2.2.1-3" class="pilcrow">¶</a></p>
 <p id="section-5.2.2.1-4">When there is no NS records for a delegated zone, a DELEG-aware authoritative server MUST respond to DELEG-unaware clients with an answer that accurately describes the situation to a DELEG-unaware resolver.
 For a query of the delegated zone itself, the response has an RCODE of NOERROR; for a query that has more labels than the delegated zone, the response has an RCODE of NXDOMAIN; this is no different than what is already specified by algorithms in <span>[<a href="#RFC1034" class="cite xref">RFC1034</a>]</span> and subsequent updates.
 NSEC and DS records are returned following the existing rules in <span>[<a href="#RFC4035" class="cite xref">RFC4035</a>]</span>.<a href="#section-5.2.2.1-4" class="pilcrow">¶</a></p>
@@ -2303,7 +2303,7 @@ observe traffic, and also monitor the network addresses involved, which might be
 <p id="section-8.1-4">IANA is requested to assign a value in the Extended DNS Error Codes registry (<span>[<a href="#RFC8914" class="cite xref">RFC8914</a>]</span>):<a href="#section-8.1-4" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-8.1-5.1">
-            <p id="section-8.1-5.1.1">INFO-CODE TBD3, with the Purpose "New Delegation Only".<a href="#section-8.1-5.1.1" class="pilcrow">¶</a></p>
+            <p id="section-8.1-5.1.1">Decimal 34 with the Purpose "New Delegation Only".<a href="#section-8.1-5.1.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 <p id="section-8.1-6">IANA is requested to create this assignment in the DNS Resolver Information Keys registry (<span>[<a href="#RFC9606" class="cite xref">RFC9606</a>]</span>): Name "deleg", Description "The presence of the key indicates that DELEG protocol is supported."<a href="#section-8.1-6" class="pilcrow">¶</a></p>

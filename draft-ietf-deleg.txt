@@ -884,7 +884,7 @@ Table of Contents
 
    The authoritative server is RECOMMENDED to supplement its responses
    to DELEG-unaware resolvers with an [RFC8914] Extended DNS Error using
-   the (IANA-TBD) value "New Delegation Only" from the Extended DNS
+   the value "New Delegation Only" (decimal 34) from the Extended DNS
    Error Codes registry.
 
    When there is no NS records for a delegated zone, a DELEG-aware
@@ -1265,7 +1265,7 @@ Table of Contents
    IANA is requested to assign a value in the Extended DNS Error Codes
    registry ([RFC8914]):
 
-   *  INFO-CODE TBD3, with the Purpose "New Delegation Only".
+   *  Decimal 34 with the Purpose "New Delegation Only".
 
    IANA is requested to create this assignment in the DNS Resolver
    Information Keys registry ([RFC9606]): Name "deleg", Description "The
