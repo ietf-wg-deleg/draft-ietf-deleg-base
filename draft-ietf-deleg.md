@@ -97,31 +97,31 @@ Terminology regarding the Domain Name System comes from {{?BCP219}}, with additi
 DELEG-aware software is inherently Delegation-Extension-aware.
 * DELEG-unaware: A DNS software that does not follow the protocol defined in this document.
 * non-DELEG specifications: DNS protocols that predate this protocol, or are written after this protocol is published but are not related to this protocol.
-* Delegation NS RRset: An NS RRset that delegates authority of subdomain to a set of authoritative servers.
+* Delegation NS RRset: An NS RRset that delegates authority of a subdomain to a set of authoritative servers.
 * Authoritative NS RRset: An NS RRset at the apex of a zone.
 
 # Protocol Overview
 
-This section is a brief overview of the protocol.
+This section is a brief overview of the DELEG protocol.
 It is meant for people who want to understand the protocol before they dive deeper into the specifics.
 
-When a DELEG-aware resolver sends queries, it sets the DE bit in the EDNS0 header to 1 in queries to authoritative servers, as a signal that it is DELEG-aware.
+When a DELEG-aware resolver sends DNS queries, it sets the DE bit in the EDNS0 header to 1 in queries to authoritative servers, as a signal that it is DELEG-aware.
 
 DELEG-unaware authoritative servers intrinsically ignore this signal.
 
 A DELEG-aware authoritative server uses that signal to determine the type of response it will send.
-If the response is not a referral, the authoritative server doesn't change anything about how it responds.
+If the response is not a referral (i.e. a delegation), the authoritative server doesn't change anything about how it responds.
 If the response is a referral, the authoritative server checks if there is a DELEG RRset for the queried zone. If so, it returns the DELEG RRset instead of any NS RRset in the response.
 
 Records in the DELEG RRset for a zone describe how to find name servers for that zone ({{deleg-delegparam}}).
 The RDATA for DELEG records has key=value pairs ({{nameserver-info}}).
 
 * "server-ipv4" and "server-ipv6" keys contain one or more IP addresses for the delegated name servers
-* "server-name" key contains one or more hostnames for the delegated name servers; the addresses must be fetched separately
+* "server-name" key contains one or more hostnames for the delegated name servers; the addresses must be resolved separately
 * "include-delegparam" key contains one or more domain names which in turn have more information about the delegation
 * "mandatory" key contains a list of other keys which must be present in the same record, and which the resolver must understand in order to use that record
 
-The DELEG-aware resolver uses the information in the DELEG RRset to form the list of best servers to ask about the original zone ({{finding-best}}).
+The DELEG-aware resolver uses the information in the DELEG RRset to form the list of best servers to ask about the delegated zone ({{finding-best}}).
 If the DELEG RRset contains "include-delegparam", the resolver queries those hostnames for DELEGPARAM RRsets.
 DELEGPARAM records have the same format as DELEG records; thus, they can have the same key=value pairs.
 
