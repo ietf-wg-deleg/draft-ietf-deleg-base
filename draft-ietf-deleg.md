@@ -54,34 +54,34 @@ The new delegation records are extensible, can be secured with DNSSEC, and elimi
 
 # Introduction
 
-In the Domain Name System, responsibility for each subdomain within the domain name hierarchy can be delegated to different servers, which makes them authoritative for their portion of the namespace.
+In the Domain Name System, authority for each subdomain within the domain name hierarchy can be delegated to different servers, which makes them authoritative for their portion of the namespace.
 
-The original DNS record that does this, called an NS record, contains only the hostname of a single name server and no other parameters.
-The resolver needs to resolve these names into usable addresses and infer other required parameters, such as the transport protocol and any other protocol features.
-Moreover, the NS record set exists in two places--one at the delegation point, and the other at the apex of the delegated zone, which might not match the NS records at the delegation.
-The DNS Security Extensions (DNSSEC) protect only one copy, those in the apex.
+Traditionally, a delegation is represented by an NS RRset, which contains the hostnames of name servers, though no other parameters.
+The resolver resolves these names into usable addresses and uses default protocol parameters, for transport protocol and any other protocol features.
+Moreover, the NS RRset set exists in two places--one at the delegation point, and the other at the apex of the delegated zone, which might not match the NS records at the delegation.
+DNSSEC authenticates the authoritative NS RRset in the delegated zone but does not authenticate the delegation NS RRset.
 
-These properties of NS records limit resolvers to unencrypted messages on UDP and TCP port 53, and this initial contact cannot be protected with DNSSEC.
+The lack of properities of delegation NS RRsets limits resolvers to unencrypted transport to default ports, and this initial contact is not protected with DNSSEC.
 These limitations are a barrier for the efficient introduction of new DNS technology.
 
 The DELEG and DELEGPARAM resource record (RR) types remedy this problem by providing extensible parameters to indicate authoritative name server capabilities and additional information, such as other transport protocols that a resolver may use.
 
-The DELEG record creates a new delegation.
+The DELEG RRset creates a new delegation.
 It is a Delegation Type record as defined in {{!I-D.ietf-dnsop-delext}}.
-It is authoritative at the delegation point and thus can be signed with DNSSEC.
-This makes it possible to validate all delegation parameters, including those of future extensions.
+It is authoritative in the delegating zone and is signed with DNSSEC.
+This makes it possible to authenticate the delegation parameters carried by DELEG, including future extensions.
 
-The DELEG record can be used alongside, or even instead of, an NS record to create a delegation.
-The combination of DELEG+NS is fully compatible with old resolvers, facilitating the incremental rollout of this new method.
+The DELEG RRset can be used alongside, or instead of, an NS RRset to create a delegation.
+The combination of DELEG and NS RRsets is compatible with resolvers that do not support DELEG, facilitating the incremental rollout of this new method.
 
 The DELEGPARAM record is an auxiliary record which contains the same data as DELEG, but does not create a delegation.
 Instead it is used as the target when DELEG is optionally using indirection.
 This indirection can, for example,
-be used to share the same delegation information across multiple zones and simplify operations management by reducing the number of locations for the delegation information for those zones.
+be used to share the same delegation information across multiple zones and simplify operational management by reducing the number of locations for the delegation information for those zones.
 For example: if the customers of a DNS operator point their delegations to a DELEGPARAM record managed by the DNS operator,
 then the operator will be able to make delegation information changes without further customer involvement, and affect all of those customer's delegations with a single change.
 
-Future documents can use the extensibility mechanism for more advanced features, like connecting to a name server with an encrypted transport.
+Future documents can define addtional delegation parameters, for example to advertise support for encrypted transports.
 
 ## Terminology
 
