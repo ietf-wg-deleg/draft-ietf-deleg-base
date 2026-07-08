@@ -68,7 +68,7 @@ The DELEG and DELEGPARAM resource record (RR) types remedy this problem by provi
 
 The DELEG RRset creates a new delegation.
 It is a Delegation Type record as defined in {{!I-D.ietf-dnsop-delext}}.
-It is authoritative in the delegating zone and is signed with DNSSEC.
+It is authoritative in the delegating zone and can be signed with DNSSEC.
 This makes it possible to authenticate the delegation parameters carried by DELEG, including future extensions.
 
 The DELEG RRset can be used alongside, or instead of, an NS RRset to create a delegation.
