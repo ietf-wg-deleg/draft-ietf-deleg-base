@@ -113,8 +113,8 @@ When a DELEG-aware resolver sends DNS queries, it sets the DE bit in the EDNS0 h
 DELEG-unaware authoritative servers intrinsically ignore this signal.
 
 A DELEG-aware authoritative server uses that signal to determine the type of response it will send.
-If the response is not a referral (i.e. a delegation), the authoritative server doesn't change anything about how it responds.
-If the response is a referral, the authoritative server checks if there is a DELEG RRset for the queried zone. If so, it returns the DELEG RRset instead of any NS RRset in the response.
+If the response is a referral (i.e., a delegation), the authoritative server checks if there is a DELEG RRset for the queried zone. If so, it returns the DELEG RRset instead of any NS RRset in the response.
+If the response is not a referral, the authoritative server doesn't change anything about how it responds.
 
 Records in the DELEG RRset for a zone describe how to find name servers for that zone ({{deleg-delegparam}}).
 The RDATA for DELEG records has key=value pairs ({{nameserver-info}}).
