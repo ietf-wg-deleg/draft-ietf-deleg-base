@@ -11,7 +11,7 @@
 <meta content="
        This document specifies a new extensible method for the delegation of authority for a domain in the Domain Name System (DNS) using DELEG and DELEGPARAM records. 
        A delegation in the DNS enables efficient and distributed management of the DNS namespace.
-The traditional DNS delegation is based on NS records which contain only hostnames of servers and no other parameters.  In classic DNS, both parent and child zones contain copies of NS delegation records, which can be potentially out of sync and confusing.
+The traditional DNS delegation is based on NS records which contain only hostnames of servers and no other parameters.  In classic DNS, both parent and child zones contain copies of NS delegation records, which can potentially be out of sync and confusing.
 The new delegation records are extensible, can be secured with DNSSEC, and eliminate the problem of having two sources of truth for delegation information. 
     " name="description">
 <meta content="xml2rfc 3.34.0" name="generator">
@@ -1099,7 +1099,7 @@ svg {
       <h2 id="abstract"><a href="#abstract" class="selfRef">Abstract</a></h2>
 <p id="section-abstract-1">This document specifies a new extensible method for the delegation of authority for a domain in the Domain Name System (DNS) using DELEG and DELEGPARAM records.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
 <p id="section-abstract-2">A delegation in the DNS enables efficient and distributed management of the DNS namespace.
-The traditional DNS delegation is based on NS records which contain only hostnames of servers and no other parameters.  In classic DNS, both parent and child zones contain copies of NS delegation records, which can be potentially out of sync and confusing.
+The traditional DNS delegation is based on NS records which contain only hostnames of servers and no other parameters.  In classic DNS, both parent and child zones contain copies of NS delegation records, which can potentially be out of sync and confusing.
 The new delegation records are extensible, can be secured with DNSSEC, and eliminate the problem of having two sources of truth for delegation information.<a href="#section-abstract-2" class="pilcrow">¶</a></p>
 </section>
 <section class="note rfcEditorRemove" id="section-note.1">
@@ -1274,7 +1274,7 @@ The new delegation records are extensible, can be secured with DNSSEC, and elimi
                 </ul>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.5">
-                <p id="section-toc.1-1.6.2.5.1"><a href="#section-6.5" class="auto internal xref">6.5</a>.  <a href="#name-interaction-with-dynamic-dn" class="internal xref">Interaction with Dynamic DNS Upate</a></p>
+                <p id="section-toc.1-1.6.2.5.1"><a href="#section-6.5" class="auto internal xref">6.5</a>.  <a href="#name-interaction-with-dynamic-dn" class="internal xref">Interaction with Dynamic DNS Update</a></p>
 </li>
             </ul>
 </li>
@@ -1377,9 +1377,9 @@ The new delegation records are extensible, can be secured with DNSSEC, and elimi
 <p id="section-1-1">In the Domain Name System, authority for each subdomain within the domain name hierarchy can be delegated to different servers, which makes them authoritative for their portion of the namespace.<a href="#section-1-1" class="pilcrow">¶</a></p>
 <p id="section-1-2">Traditionally, a delegation is represented by an NS RRset, which contains the hostnames of name servers, though no other parameters.
 The resolver resolves these names into usable addresses and uses default protocol parameters, for transport protocol and any other protocol features.
-Moreover, the NS RRset set exists in two places--one at the delegation point, and the other at the apex of the delegated zone, which might not match the NS records at the delegation.
+Moreover, the NS RRset exists in two places--one at the delegation point, and the other at the apex of the delegated zone, which might not match the NS records at the delegation.
 DNSSEC authenticates the authoritative NS RRset in the delegated zone but does not authenticate the delegation NS RRset.<a href="#section-1-2" class="pilcrow">¶</a></p>
-<p id="section-1-3">The lack of properities of delegation NS RRsets limits resolvers to unanthenticated transport on default ports, and this initial contact is not protected with DNSSEC.
+<p id="section-1-3">The lack of properties of delegation NS RRsets limits resolvers to unauthenticated transport on default ports, and this initial contact is not protected with DNSSEC.
 These limitations are a barrier for the efficient introduction of new DNS technology.<a href="#section-1-3" class="pilcrow">¶</a></p>
 <p id="section-1-4">The DELEG and DELEGPARAM resource record (RR) types remedy this problem by providing extensible parameters to indicate authoritative name server capabilities and additional information, such as other transport protocols that a resolver may use.<a href="#section-1-4" class="pilcrow">¶</a></p>
 <p id="section-1-5">The DELEG RRset creates a new delegation.
@@ -1392,9 +1392,9 @@ The combination of DELEG and NS RRsets is compatible with resolvers that do not 
 Instead it is used as the target when DELEG is optionally using indirection.
 This indirection can, for example,
 be used to share the same delegation information across multiple zones and simplify operational management by reducing the number of locations for the delegation information for those zones.
-For example: if the customers of a DNS operator point their delegations to a DELEGPARAM record managed by the DNS operator,
+For example, if the customers of a DNS operator point their delegations to a DELEGPARAM record managed by the DNS operator,
 then the operator will be able to make delegation information changes without further customer involvement, and affect all of those customer's delegations with a single change.<a href="#section-1-7" class="pilcrow">¶</a></p>
-<p id="section-1-8">Future documents can define addtional delegation parameters, for example to advertise support for encrypted transports.<a href="#section-1-8" class="pilcrow">¶</a></p>
+<p id="section-1-8">Future documents can define additional delegation parameters, for example to advertise support for encrypted transports.<a href="#section-1-8" class="pilcrow">¶</a></p>
 <div id="terminology">
 <section id="section-1.1">
         <h3 id="name-terminology">
@@ -1421,7 +1421,7 @@ all capitals, as shown here.<a href="#section-1.1-1" class="pilcrow">¶</a></p>
 DELEG-aware software is inherently Delegation-Extension-aware.<a href="#section-1.1-3.4.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-1.1-3.5">
-            <p id="section-1.1-3.5.1">DELEG-unaware: A DNS software that does not follow the protocol defined in this document.<a href="#section-1.1-3.5.1" class="pilcrow">¶</a></p>
+            <p id="section-1.1-3.5.1">DELEG-unaware: DNS software that does not follow the protocol defined in this document.<a href="#section-1.1-3.5.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-1.1-3.6">
             <p id="section-1.1-3.6.1">non-DELEG specifications: DNS protocols that predate this protocol, or are written after this protocol is published but are not related to this protocol.<a href="#section-1.1-3.6.1" class="pilcrow">¶</a></p>
@@ -1447,8 +1447,8 @@ It is meant for people who want to understand the protocol before they dive deep
 <p id="section-2-2">When a DELEG-aware resolver sends DNS queries, it sets the DE bit in the EDNS0 header to 1 in queries to authoritative servers, as a signal that it is DELEG-aware.<a href="#section-2-2" class="pilcrow">¶</a></p>
 <p id="section-2-3">DELEG-unaware authoritative servers intrinsically ignore this signal.<a href="#section-2-3" class="pilcrow">¶</a></p>
 <p id="section-2-4">A DELEG-aware authoritative server uses that signal to determine the type of response it will send.
-If the response is not a referral (i.e. a delegation), the authoritative server doesn't change anything about how it responds.
-If the response is a referral, the authoritative server checks if there is a DELEG RRset for the queried zone. If so, it returns the DELEG RRset instead of any NS RRset in the response.<a href="#section-2-4" class="pilcrow">¶</a></p>
+If the response is a referral (i.e., a delegation), the authoritative server checks if there is a DELEG RRset for the queried zone. If so, it returns the DELEG RRset instead of any NS RRset in the response.
+If the response is not a referral, the authoritative server doesn't change anything about how it responds.<a href="#section-2-4" class="pilcrow">¶</a></p>
 <p id="section-2-5">Records in the DELEG RRset for a zone describe how to find name servers for that zone (<a href="#deleg-delegparam" class="auto internal xref">Section 3</a>).
 The RDATA for DELEG records has key=value pairs (<a href="#nameserver-info" class="auto internal xref">Section 3.4</a>).<a href="#section-2-5" class="pilcrow">¶</a></p>
 <ul class="normal">
@@ -1631,7 +1631,7 @@ Some future keys may have no DelegInfoValue, which would be indicated with an ex
             <p id="section-3.3-4.4.1">DELEGPARAM DNSSEC-signing and record-placement rules are the same as for any ordinary RR type.<a href="#section-3.3-4.4.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-3.3-4.5">
-            <p id="section-3.3-4.5.1">DELEGPARAM is used as the target of the DELEG protocol's "include-delegparam" mechanism, as described in section <a href="#slist" class="auto internal xref">Section 5.1.3</a>.<a href="#section-3.3-4.5.1" class="pilcrow">¶</a></p>
+            <p id="section-3.3-4.5.1">DELEGPARAM is used as the target of the DELEG protocol's "include-delegparam" mechanism, as described in <a href="#slist" class="auto internal xref">Section 5.1.3</a>.<a href="#section-3.3-4.5.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 <p id="section-3.3-5">Note that neither DELEG nor DELEGPARAM trigger Additional Section processing like NS does.
@@ -1668,7 +1668,7 @@ Relative names in the presentation format are interpreted according to the origi
 Parsing the comma-separated list is specified in Section A.1 of <span>[<a href="#RFC9460" class="cite xref">RFC9460</a>]</span>.<a href="#section-3.4-6" class="pilcrow">¶</a></p>
 <p id="section-3.4-7">The DELEG protocol allows the use of all valid domain names, as defined in <span>[<a href="#RFC1035" class="cite xref">RFC1035</a>]</span> and Section 11 of <span>[<a href="#RFC2181" class="cite xref">RFC2181</a>]</span>.
 The presentation format for names with special characters requires both double-escaping by applying rules of Section 5.1 of <span>[<a href="#RFC1034" class="cite xref">RFC1034</a>]</span> together with the escaping rules from Section A.1 of <span>[<a href="#RFC9460" class="cite xref">RFC9460</a>]</span>.<a href="#section-3.4-7" class="pilcrow">¶</a></p>
-<p id="section-3.4-8">For example, assume a list of two domain names. The first domain name is "simple.example". The second domain name is under ".example" whose leftmost label is "abc" followed by a escape character (U+001B), followed by "def", followed by a comma, followed by "ghi". This list would hoave a presentation value of "simple.example,abc\027def\,ghi.example".<a href="#section-3.4-8" class="pilcrow">¶</a></p>
+<p id="section-3.4-8">For example, assume a list of two domain names. The first domain name is "simple.example". The second domain name is under ".example" whose leftmost label is "abc" followed by a escape character (U+001B), followed by "def", followed by a comma, followed by "ghi". This list would have a presentation value of "simple.example,abc\027def\,ghi.example".<a href="#section-3.4-8" class="pilcrow">¶</a></p>
 <p id="section-3.4-9">The wire format for server-name and include-delegparam are each a concatenated unordered collection of wire-format domain names, where the root label provides the separation between names:<a href="#section-3.4-9" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-3.4-10">
 <pre>
@@ -1678,7 +1678,7 @@ The presentation format for names with special characters requires both double-e
 </pre><a href="#section-3.4-10" class="pilcrow">¶</a>
 </div>
 <p id="section-3.4-11">The names in the wire format MUST NOT be compressed, per <span>[<a href="#RFC3597" class="cite xref">RFC3597</a>]</span>.<a href="#section-3.4-11" class="pilcrow">¶</a></p>
-<p id="section-3.4-12">For interoperability with the resolver algorithm defined in section <a href="#slist" class="auto internal xref">Section 5.1.3</a>,
+<p id="section-3.4-12">For interoperability with the resolver algorithm defined in <a href="#slist" class="auto internal xref">Section 5.1.3</a>,
 a DELEG or DELEGPARAM record that has a non-empty DelegInfos MUST have one, and only one, set of server information keys, chosen from the following:<a href="#section-3.4-12" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-3.4-13.1">
@@ -1710,7 +1710,7 @@ Because of the lack of Additional Section processing, there are no "glue" record
 <a href="#section-3.5" class="section-number selfRef">3.5. </a><a href="#name-metadata-keys" class="section-name selfRef">Metadata keys</a>
         </h3>
 <p id="section-3.5-1">This specification defines a key which serves as a protocol extensibility mechanism, but is not directly used for contacting DNS servers.<a href="#section-3.5-1" class="pilcrow">¶</a></p>
-<p id="section-3.5-2">Any DELEG or DELEGPARAM record can have key named "mandatory" which is similar to the key of the same name in <span>[<a href="#RFC9460" class="cite xref">RFC9460</a>]</span>.<a href="#section-3.5-2" class="pilcrow">¶</a></p>
+<p id="section-3.5-2">Any DELEG or DELEGPARAM record can have a key named "mandatory" which is similar to the key of the same name in <span>[<a href="#RFC9460" class="cite xref">RFC9460</a>]</span>.<a href="#section-3.5-2" class="pilcrow">¶</a></p>
 <p id="section-3.5-3">The presentation format for the value MUST be a comma-separated list of one or more valid DelegInfoKeys, either by their registered name or in the unknown-key format.<a href="#section-3.5-3" class="pilcrow">¶</a></p>
 <p id="section-3.5-4">The wire format for the value is a sequence of DelegInfoKey numeric values in network byte order, concatenated, in strictly increasing numeric order.<a href="#section-3.5-4" class="pilcrow">¶</a></p>
 <p id="section-3.5-5">The "mandatory" key is optional, but when it is present, the RR in which it appears MUST also contain all of the DelegInfoKeys referenced in its DelegInfoValue.
@@ -1738,7 +1738,7 @@ Other special scenarios with DE=0 queries to DELEG-aware authorities are address
 <a href="#section-5" class="section-number selfRef">5. </a><a href="#name-use-of-deleg-records-in-the" class="section-name selfRef">Use of DELEG Records in the Protocols</a>
       </h2>
 <p id="section-5-1">The DELEG RRset MAY contain multiple records.
-A DELEG RRset MAY be present with or without NS or DS RRsets at the delegation point, though without NS records then DELEG-unaware software will not be able to resolve records in the the delegated zone.<a href="#section-5-1" class="pilcrow">¶</a></p>
+A DELEG RRset MAY be present with or without NS or DS RRsets at the delegation point, though without NS records then DELEG-unaware software will not be able to resolve records in the delegated zone.<a href="#section-5-1" class="pilcrow">¶</a></p>
 <p id="section-5-2">DELEG RRsets MUST NOT appear at a zone's apex.
 The erroneous inclusion of DELEG RRset at zone's apex will cause DNSSEC validation failures.
 Servers MAY refuse to load such an invalid zone, similar to the DS RR type.<a href="#section-5-2" class="pilcrow">¶</a></p>
@@ -1748,7 +1748,7 @@ Servers MAY refuse to load such an invalid zone, similar to the DS RR type.<a hr
 <a href="#section-5.1" class="section-number selfRef">5.1. </a><a href="#name-resolvers" class="section-name selfRef">Resolvers</a>
         </h3>
 <p id="section-5.1-1">Resolvers use DELEG records for referrals following the rules from <span>[<a href="#I-D.ietf-dnsop-delext" class="cite xref">I-D.ietf-dnsop-delext</a>]</span>.<a href="#section-5.1-1" class="pilcrow">¶</a></p>
-<p id="section-5.1-2">A resolver that is DELEG-aware MUST signal in queries that it supports the DELEG protocol by setting the DE bit to 1 in (see <a href="#de-bit" class="auto internal xref">Section 4</a>).
+<p id="section-5.1-2">A resolver that is DELEG-aware MUST signal in queries that it supports the DELEG protocol by setting the DE bit to 1 (see <a href="#de-bit" class="auto internal xref">Section 4</a>).
 This indicates that the resolver understands the DELEG semantics and does not need NS records to follow a referral.<a href="#section-5.1-2" class="pilcrow">¶</a></p>
 <p id="section-5.1-3">The DE bit set to 0 indicates the resolver is not DELEG-aware, and therefore can only be served referrals with NS records and other data according to non-DELEG specifications.
 Other special scenarios with DE=0 queries to DELEG-aware authorities are addressed in <a href="#authoritative-servers" class="auto internal xref">Section 5.2</a>.<a href="#section-5.1-3" class="pilcrow">¶</a></p>
@@ -1768,8 +1768,8 @@ For example, a DELEG-unaware authoritative name server which has loaded DELEG re
 <a href="#section-5.1.2" class="section-number selfRef">5.1.2. </a><a href="#name-algorithm-for-finding-the-b" class="section-name selfRef">Algorithm for "Finding the Best Servers to Ask"</a>
           </h4>
 <p id="section-5.1.2-1">This document updates instructions for finding the best servers to ask.
-It was covered in Section 5.3.3 of <span>[<a href="#RFC1034" class="cite xref">RFC1034</a>]</span> and Section 3.4.1 of <span>[<a href="#RFC6672" class="cite xref">RFC6672</a>]</span> with the text "2. Find the best servers to ask.".
-These instructions were informally updated by section 4.2 of <span>[<a href="#RFC4035" class="cite xref">RFC4035</a>]</span> for the DS RR type but the algorithm change was not made explicit.
+It was covered in <span>[<a href="#RFC1034" class="cite xref">RFC1034</a>]</span> Section 5.3.3 and <span>[<a href="#RFC6672" class="cite xref">RFC6672</a>]</span> Section 3.4.1 with the text "2. Find the best servers to ask.".
+These instructions were informally updated by <span>[<a href="#RFC4035" class="cite xref">RFC4035</a>]</span> Section 4.2 for the DS RR type but the algorithm change was not made explicit.
 This document simply extends this existing behavior from the DS RR type to the DELEG RR type as well, and makes this special case explicit.<a href="#section-5.1.2-1" class="pilcrow">¶</a></p>
 <p id="section-5.1.2-2">When a DELEG RRset exists for a delegation in a zone, DELEG-aware resolvers ignore any NS RRset for the delegated zone, whether from the delegation point or from the apex of the delegated zone.<a href="#section-5.1.2-2" class="pilcrow">¶</a></p>
 <p id="section-5.1.2-3">Each delegation level can have a mixture of DELEG and NS RR types, and DELEG-aware resolvers MUST be able to follow chains of delegations which combines both types in arbitrary ways.<a href="#section-5.1.2-3" class="pilcrow">¶</a></p>
@@ -1884,7 +1884,7 @@ Recursively apply the algorithm described in this section, after checking that t
         <h3 id="name-authoritative-servers">
 <a href="#section-5.2" class="section-number selfRef">5.2. </a><a href="#name-authoritative-servers" class="section-name selfRef">Authoritative Servers</a>
         </h3>
-<p id="section-5.2-1">The DELEG RR type defines a zone cut in similar way as the NS RR type.
+<p id="section-5.2-1">The DELEG RR type defines a zone cut in a similar way as the NS RR type.
 Behavior defined for zone cuts in existing non-DELEG specifications apply to zone cuts created by the DELEG record.
 A notable example of this is that the occlusion (usually accidentally) created by delegation NS records would also be created by DELEG records at the same name (see <a href="#occluded-example" class="auto internal xref">Appendix A.4.1.3</a>).
 Rules for setting Authoritative Answer (AA) bit in answers also remain unchanged: the DELEG RR type has the same special treatment as DS RR type.<a href="#section-5.2-1" class="pilcrow">¶</a></p>
@@ -1914,7 +1914,7 @@ In summary, the server either provides an authoritative DELEG RRset or declares 
             </h5>
 <p id="section-5.2.1.2-1">If the delegation has a DELEG RRset, the authoritative server MUST put the DELEG RRset into the Authority section of the referral.
 In this case, the server MUST NOT include the NS RRset in the Authority section.<a href="#section-5.2.1.2-1" class="pilcrow">¶</a></p>
-<p id="section-5.2.1.2-2">Non-DELEG DNSSEC specifications for RRSIG inclusion in answers with authoritative RRsets (<span>[<a href="#RFC4035" class="cite xref">RFC4035</a>]</span> section 3.1.1) MUST be followed.
+<p id="section-5.2.1.2-2">Non-DELEG DNSSEC specifications for RRSIG inclusion in answers with authoritative RRsets (<span>[<a href="#RFC4035" class="cite xref">RFC4035</a>]</span> Section 3.1.1) MUST be followed.
 Similarly, rules for DS RRset inclusion in referrals apply as specified by the DNSSEC protocol.<a href="#section-5.2.1.2-2" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -1926,7 +1926,7 @@ Similarly, rules for DS RRset inclusion in referrals apply as specified by the D
 <p id="section-5.2.1.3-1">If the delegation does not have a DELEG RRset, the authoritative server MUST put the NS RRset into the authority section of the referral.
 The absence of the DELEG RRset MUST be proven as specified by the DNSSEC protocol for authoritative data.<a href="#section-5.2.1.3-1" class="pilcrow">¶</a></p>
 <p id="section-5.2.1.3-2">Similarly, rules for DS RRset inclusion into referrals apply as specified by the DNSSEC protocol.
-Please note, in practice the same process and records are used to prove the non-existence of both DELEG and DS RRsets.<a href="#section-5.2.1.3-2" class="pilcrow">¶</a></p>
+Please note that, in practice, the same process and records are used to prove the non-existence of both DELEG and DS RRsets.<a href="#section-5.2.1.3-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1964,7 +1964,7 @@ From the perspective of a DELEG-unaware client, the zone cut created by the DELE
 The authoritative server should respond in a way that makes sense to DELEG-unaware clients.<a href="#section-5.2.2.1-1" class="pilcrow">¶</a></p>
 <p id="section-5.2.2.1-2">The current, primary use case for zone owners that have zones to have DELEG records but no NS records is that they want resolution of those zones only if the resolver uses future features of the DELEG protocol, such as encrypted DNS transports.<a href="#section-5.2.2.1-2" class="pilcrow">¶</a></p>
 <p id="section-5.2.2.1-3">The authoritative server is RECOMMENDED to supplement its responses to DELEG-unaware resolvers with an <span>[<a href="#RFC8914" class="cite xref">RFC8914</a>]</span> Extended DNS Error using the value "New Delegation Only" (decimal 34) from the Extended DNS Error Codes registry.<a href="#section-5.2.2.1-3" class="pilcrow">¶</a></p>
-<p id="section-5.2.2.1-4">When there is no NS records for a delegated zone, a DELEG-aware authoritative server MUST respond to DELEG-unaware clients with an answer that accurately describes the situation to a DELEG-unaware resolver.
+<p id="section-5.2.2.1-4">When there is no NS RRset for a delegated zone, a DELEG-aware authoritative server MUST respond to DELEG-unaware clients with an answer that accurately describes the situation to a DELEG-unaware resolver.
 For a query of the delegated zone itself, the response has an RCODE of NOERROR; for a query that has more labels than the delegated zone, the response has an RCODE of NXDOMAIN; this is no different than what is already specified by algorithms in <span>[<a href="#RFC1034" class="cite xref">RFC1034</a>]</span> and subsequent updates.
 NSEC and DS records are returned following the existing rules in <span>[<a href="#RFC4035" class="cite xref">RFC4035</a>]</span>.<a href="#section-5.2.2.1-4" class="pilcrow">¶</a></p>
 </section>
@@ -1979,7 +1979,7 @@ Thus, queries with DE=0 and QTYPE=DELEG MUST result in a response which can be v
 <ul class="normal">
 <li class="normal" id="section-5.2.2.2-2.1">
                 <p id="section-5.2.2.2-2.1.1">If there is an NS RRset, this will be a legacy referral. From the perspective of a DELEG-unaware client, the DELEG RR is effectively occluded by NS RRset.
-The DELEG-unaware resolver can then obtain a final answer which can be validated from the delegated zone in similar fashion as described in <span>[<a href="#RFC4035" class="cite xref">RFC4035</a>]</span> section 3.1.4.1.<a href="#section-5.2.2.2-2.1.1" class="pilcrow">¶</a></p>
+The DELEG-unaware resolver can then obtain a final answer which can be validated from the delegated zone in similar fashion as described in <span>[<a href="#RFC4035" class="cite xref">RFC4035</a>]</span> Section 3.1.4.1.<a href="#section-5.2.2.2-2.1.1" class="pilcrow">¶</a></p>
 </li>
               <li class="normal" id="section-5.2.2.2-2.2">
                 <p id="section-5.2.2.2-2.2.1">If there is no NS RRset but there is a DELEG RRset, this will be a normal authoritative response with the DELEG RRset, following non-DELEG specifications.<a href="#section-5.2.2.2-2.2.1" class="pilcrow">¶</a></p>
@@ -2004,7 +2004,7 @@ The DELEG-unaware resolver can then obtain a final answer which can be validated
 Existing rules from the DNSSEC specifications apply.
 These are defined in <span>[<a href="#I-D.ietf-dnsop-delext" class="cite xref">I-D.ietf-dnsop-delext</a>]</span>.<a href="#section-5.3-1" class="pilcrow">¶</a></p>
 <p id="section-5.3-2">In summary: for DNSSEC signing, treat the DELEG RR type the same way as the DS RR type.<a href="#section-5.3-2" class="pilcrow">¶</a></p>
-<p id="section-5.3-3">The DELEG RR type defines a zone cut in similar way as the NS RR type.
+<p id="section-5.3-3">The DELEG RR type defines a zone cut in a similar way as the NS RR type.
 This has several consequences which stem from existing non-DELEG specifications:<a href="#section-5.3-3" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-5.3-4.1">
@@ -2015,7 +2015,7 @@ This has several consequences which stem from existing non-DELEG specifications:
 </li>
         </ul>
 <p id="section-5.3-5">See examples in <a href="#example-root" class="auto internal xref">Appendix A.1</a> and <a href="#example-occluded" class="auto internal xref">Appendix A.4.2.3</a>.<a href="#section-5.3-5" class="pilcrow">¶</a></p>
-<p id="section-5.3-6">In order to protect validators from downgrade attacks (see <a href="#downgrade-attacks" class="auto internal xref">Section 7.2</a>), <span>[<a href="#I-D.ietf-dnsop-delext" class="cite xref">I-D.ietf-dnsop-delext</a>]</span> introduces a the DNSKEY flag called DNSKEY-ADT.
+<p id="section-5.3-6">In order to protect validators from downgrade attacks (see <a href="#downgrade-attacks" class="auto internal xref">Section 7.2</a>), <span>[<a href="#I-D.ietf-dnsop-delext" class="cite xref">I-D.ietf-dnsop-delext</a>]</span> introduces the DNSKEY flag called DNSKEY-ADT.
 To achieve downgrade resistance, DNSSEC-signed zones which contain a DELEG RRset MUST follow the rules in  <span>[<a href="#I-D.ietf-dnsop-delext" class="cite xref">I-D.ietf-dnsop-delext</a>]</span>.<a href="#section-5.3-6" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -2030,7 +2030,7 @@ To achieve downgrade resistance, DNSSEC-signed zones which contain a DELEG RRset
           <h4 id="name-clarifications-on-nonexiste">
 <a href="#section-5.4.1" class="section-number selfRef">5.4.1. </a><a href="#name-clarifications-on-nonexiste" class="section-name selfRef">Clarifications on Nonexistence Proofs</a>
           </h4>
-<p id="section-5.4.1-1">This document updates Section 4.1 of <span>[<a href="#RFC6840" class="cite xref">RFC6840</a>]</span> to include "NS or DELEG" types in the type bitmap as indication of a delegation point, and generalizes applicability of ancestor delegation proof to all RR types that are authoritative at a delegation point (that is, both DS and DELEG).
+<p id="section-5.4.1-1">This document updates <span>[<a href="#RFC6840" class="cite xref">RFC6840</a>]</span> Section 4.1 to include "NS or DELEG" types in the type bitmap as indication of a delegation point, and generalizes applicability of ancestor delegation proof to all RR types that are authoritative at a delegation point (that is, both DS and DELEG).
 The text in that section is updated as follows:<a href="#section-5.4.1-1" class="pilcrow">¶</a></p>
 <p id="section-5.4.1-2">An "ancestor delegation" NSEC RR (or NSEC3 RR) is one with:<a href="#section-5.4.1-2" class="pilcrow">¶</a></p>
 <ul class="normal">
@@ -2055,7 +2055,7 @@ that original owner name, other than types authoritative at the delegation point
           <h4 id="name-insecure-delegation-proofs">
 <a href="#section-5.4.2" class="section-number selfRef">5.4.2. </a><a href="#name-insecure-delegation-proofs" class="section-name selfRef">Insecure Delegation Proofs</a>
           </h4>
-<p id="section-5.4.2-1">This document updates Section 4.4 of <span>[<a href="#RFC6840" class="cite xref">RFC6840</a>]</span> to include securing DELEG records, and explicitly states that Opt-Out is not applicable to the DELEG protocol.
+<p id="section-5.4.2-1">This document updates <span>[<a href="#RFC6840" class="cite xref">RFC6840</a>]</span> Section 4.4 to include securing DELEG records, and explicitly states that Opt-Out is not applicable to the DELEG protocol.
 The first paragraph of that section is updated to read:<a href="#section-5.4.2-1" class="pilcrow">¶</a></p>
 <p id="section-5.4.2-2">Section 5.2 of <span>[<a href="#RFC4035" class="cite xref">RFC4035</a>]</span> specifies that a validator, when proving a
 delegation is not secure, needs to check for the absence of the DS
@@ -2121,7 +2121,7 @@ This section gives an overview of some of those considerations.<a href="#section
 <a href="#section-6.1" class="section-number selfRef">6.1. </a><a href="#name-ns-not-required-by-protocol" class="section-name selfRef">NS Not Required by Protocol</a>
         </h3>
 <p id="section-6.1-1">A zone delegated exclusively using DELEG records is not resolvable by non-DELEG aware resolvers.
-In that case the zone is not required to have NS RRset in the apex of the delegated zone.
+In that case the zone is not required to have an NS RRset in the apex of the delegated zone.
 Software to manage zone content or check the validity of zones needs to be updated to allow zones without an NS RRset at the apex.<a href="#section-6.1-1" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -2137,7 +2137,7 @@ Compare examples of DELEG-only delegation and respective answers for DELEG-unawa
 <p id="section-6.2-2">For any part of the namespace that is intended to be globally reachable, operators should avoid DELEG-only delegations, as some resolvers will be unaware of DELEG.
 For other parts of the namespace, operators should take care to ensure that any variability in responses introduced maps correctly to the client capabilities.<a href="#section-6.2-2" class="pilcrow">¶</a></p>
 <p id="section-6.2-3">DELEG-only delegation is appropriate only where all intended users are known to use DELEG-capable resolvers.
-This might be the case when a zone operator wants a zone be reachable only over secure transport, for example.
+This might be the case when a zone operator wants a zone to be reachable only over secure transport, for example.
 The decision to drop NS records should be guided by operational measurements of resolver adoption of the DELEG protocol.<a href="#section-6.2-3" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -2149,7 +2149,7 @@ The decision to drop NS records should be guided by operational measurements of 
 <p id="section-6.3-1">This document explicitly allows zones to be delegated using DELEG records without also using NS records; delegating a zone with both DELEG and NS records is also allowed.
 Software that manages delegations or checks the validity of zones need to be updated to allow delegations with all combinations of (with, without) * (NS, DELEG) records.<a href="#section-6.3-1" class="pilcrow">¶</a></p>
 <p id="section-6.3-2">If both NS and DELEG records are present, zone managers might want to check consistency across both RRsets, subject to local policy.
-This specification treats both NS and DELEG RRsets as completely independent on the protocol level,
+This specification treats both NS and DELEG RRsets as completely independent at the protocol layer,
 but it does not prohibit a provisioning system from generating one record type from the other.<a href="#section-6.3-2" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -2164,13 +2164,13 @@ but it does not prohibit a provisioning system from generating one record type f
             <p id="section-6.4-2.1.1">If zone checkers are used: ensure that the zone checkers are DELEG-aware.<a href="#section-6.4-2.1.1" class="pilcrow">¶</a></p>
 </li>
           <li id="section-6.4-2.2">
-            <p id="section-6.4-2.2.1">Ensure that all authoritative servers serving (and transfering) the zone are DELEG-aware.<a href="#section-6.4-2.2.1" class="pilcrow">¶</a></p>
+            <p id="section-6.4-2.2.1">Ensure that all authoritative servers serving (and transferring) the zone are DELEG-aware.<a href="#section-6.4-2.2.1" class="pilcrow">¶</a></p>
 </li>
           <li id="section-6.4-2.3">
             <p id="section-6.4-2.3.1">If a zone is DNSSEC-signed: ensure that the signer is DELEG-aware.<a href="#section-6.4-2.3.1" class="pilcrow">¶</a></p>
 </li>
           <li id="section-6.4-2.4">
-            <p id="section-6.4-2.4.1">If a zone is DNSSEC-signed: ensure that at least one DNSKEY record has the DNSKEY-ADT flag set to 1. Failure to do so results in loss of downgrade resistence of the DELEG protocol for this zone; see <a href="#downgrade-attacks" class="auto internal xref">Section 7.2</a>.<a href="#section-6.4-2.4.1" class="pilcrow">¶</a></p>
+            <p id="section-6.4-2.4.1">If a zone is DNSSEC-signed: ensure that at least one DNSKEY record has the DNSKEY-ADT flag set to 1. Failure to do so results in loss of downgrade resistance of the DELEG protocol for this zone; see <a href="#downgrade-attacks" class="auto internal xref">Section 7.2</a>.<a href="#section-6.4-2.4.1" class="pilcrow">¶</a></p>
 </li>
         </ol>
 <div id="enabling-the-dnskey-adt-flag">
@@ -2184,7 +2184,7 @@ Operators are advised to set the DNSKEY-ADT flag at the time of generating a new
 A zone can safely have keys with the DNSKEY-ADT flag set to 1 even if the zone does not have any DELEG records.
 Turning on the DNSKEY-ADT flag can be done months or even years before a first DELEG record is introduced into the zone.<a href="#section-6.4.1-1" class="pilcrow">¶</a></p>
 <p id="section-6.4.1-2">Downgrade protection is effective if any DNSKEY with ADT flag set to 1 is present, even if this key does not sign any RRset.
-In other words, it is sufficient to pre-publish new key, as described in stage 2 of Pre-Publish Zone Signing Key Rollover, section 4.1.1.1 of <span>[<a href="#RFC6781" class="cite xref">RFC6781</a>]</span>.<a href="#section-6.4.1-2" class="pilcrow">¶</a></p>
+In other words, it is sufficient to pre-publish new key, as described in stage 2 of Pre-Publish Zone Signing Key Rollover of <span>[<a href="#RFC6781" class="cite xref">RFC6781</a>]</span> Section 4.1.1.1.<a href="#section-6.4.1-2" class="pilcrow">¶</a></p>
 <p id="section-6.4.1-3">An extremely conservative approach might be:<a href="#section-6.4.1-3" class="pilcrow">¶</a></p>
 <ol start="1" type="1" class="normal type-1" id="section-6.4.1-4">
 <li id="section-6.4.1-4.1">
@@ -2206,16 +2206,16 @@ In other words, it is sufficient to pre-publish new key, as described in stage 2
               <p id="section-6.4.1-4.6.1">Restore the original DNSKEY TTL.<a href="#section-6.4.1-4.6.1" class="pilcrow">¶</a></p>
 </li>
           </ol>
-<p id="section-6.4.1-5">Such an approach requires changing only to DNSKEY RRset and resigning it.
+<p id="section-6.4.1-5">Such an approach requires changing only the DNSKEY RRset and resigning it.
 Consequently, the time required to withdraw the new DNSKEY record is limited only by DNSKEY TTL + time to sign + time to transfer modified DNSKEY RRset.<a href="#section-6.4.1-5" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
 </div>
-<div id="interaction-with-dynamic-dns-upate">
+<div id="interaction-with-dynamic-dns-update">
 <section id="section-6.5">
         <h3 id="name-interaction-with-dynamic-dn">
-<a href="#section-6.5" class="section-number selfRef">6.5. </a><a href="#name-interaction-with-dynamic-dn" class="section-name selfRef">Interaction with Dynamic DNS Upate</a>
+<a href="#section-6.5" class="section-number selfRef">6.5. </a><a href="#name-interaction-with-dynamic-dn" class="section-name selfRef">Interaction with Dynamic DNS Update</a>
         </h3>
 <p id="section-6.5-1">DELEG records can be updated like other regular zone data at the delegation point, similar to NS records, because dynamic updates work on zone data but not on queries.
 A DELEG-only delegation would not need an NS record in the delegated zone, but the NS record in the delegated zone cannot be deleted because of Section 7.13 in <span>[<a href="#RFC2136" class="cite xref">RFC2136</a>]</span>.
@@ -2307,7 +2307,7 @@ observe traffic, and also monitor the network addresses involved, which might be
             <p id="section-8.1-5.1.1">Decimal 34 with the Purpose "New Delegation Only".<a href="#section-8.1-5.1.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
-<p id="section-8.1-6">IANA is requested to create this assignment in the DNS Resolver Information Keys registry (<span>[<a href="#RFC9606" class="cite xref">RFC9606</a>]</span>): Name "deleg", Description "The presence of the key indicates that DELEG protocol is supported."<a href="#section-8.1-6" class="pilcrow">¶</a></p>
+<p id="section-8.1-6">IANA is requested to create this assignment in the DNS Resolver Information Keys registry (<span>[<a href="#RFC9606" class="cite xref">RFC9606</a>]</span>): Name "deleg", Description "The presence of the key indicates that the DELEG protocol is supported."<a href="#section-8.1-6" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="new-registry-for-delegation-information">
@@ -2332,7 +2332,7 @@ Reference:  Location of specification or registration source
 Change Controller:  Person or entity, with contact information if appropriate
 </pre><a href="#section-8.2.1-2" class="pilcrow">¶</a>
 </div>
-<p id="section-8.2.1-3">To enable code reuse from SVCB parsers, the requirements for registered Name exactly copy requirements set by <span>[<a href="#RFC9460" class="cite xref">RFC9460</a>]</span> section 14.3.1:
+<p id="section-8.2.1-3">To enable code reuse from SVCB parsers, the requirements for registered Name exactly copy requirements set by <span>[<a href="#RFC9460" class="cite xref">RFC9460</a>]</span> Section 14.3.1:
 The characters in the registered Name field entry MUST be lowercase alphanumeric or "-".
 The name MUST NOT start with "key" or "invalid".<a href="#section-8.2.1-3" class="pilcrow">¶</a></p>
 <p id="section-8.2.1-4">The registration policy for new entries is Expert Review (<span>[<a href="#RFC8126" class="cite xref">RFC8126</a>]</span>).
@@ -3011,8 +3011,8 @@ ik.invalid. DELEG invalid
 <p id="appendix-B-1">This document is heavily based on past work done by Tim April in
 <span>[<a href="#I-D.tapril-ns2" class="cite xref">I-D.tapril-ns2</a>]</span> and thus extends the thanks to the people helping on this which are:
 John Levine, Erik Nygren, Jon Reed, Ben Kaduk, Mashooq Muhaimen, Jason Moreau, Jerrod Wiesman, Billy Tiemann, Gordon Marx and Brian Wellington.<a href="#appendix-B-1" class="pilcrow">¶</a></p>
-<p id="appendix-B-2">Work on DELEG protocol has started at IETF 118 Hackaton.
-Hackaton participants: Christian Elmerot, David Blacka, David Lawrence, Edward Lewis, Erik Nygren, George Michaelson, Jan Včelák, Klaus Darilion, Libor Peltan, Manu Bretelle, Peter van Dijk, Petr Špaček, Philip Homburg, Ralf Weber, Roy Arends, Shane Kerr, Shumon Huque, Vandan Adhvaryu, Vladimír Čunát, Andreas Schulze.<a href="#appendix-B-2" class="pilcrow">¶</a></p>
+<p id="appendix-B-2">Work on DELEG protocol has started at IETF 118 Hackathon.
+Hackathon participants: Christian Elmerot, David Blacka, David Lawrence, Edward Lewis, Erik Nygren, George Michaelson, Jan Včelák, Klaus Darilion, Libor Peltan, Manu Bretelle, Peter van Dijk, Petr Špaček, Philip Homburg, Ralf Weber, Roy Arends, Shane Kerr, Shumon Huque, Vandan Adhvaryu, Vladimír Čunát, Andreas Schulze.<a href="#appendix-B-2" class="pilcrow">¶</a></p>
 <p id="appendix-B-3">Other people joined the effort after the initial hackaton: Ben Schwartz, Bob Halley, Paul Hoffman, Miek Gieben, Ray Hunter, Håvard Eidnes, Ted Hardie, Michael Richardson, Florian Obser, Evan Hunt, ...<a href="#appendix-B-3" class="pilcrow">¶</a></p>
 </section>
 </div>
