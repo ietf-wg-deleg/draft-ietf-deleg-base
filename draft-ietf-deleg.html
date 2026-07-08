@@ -1055,7 +1055,7 @@ svg {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Špaček, et al.</td>
-<td class="center">Expires 8 January 2027</td>
+<td class="center">Expires 9 January 2027</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1071,12 +1071,12 @@ svg {
 <a href="https://www.rfc-editor.org/rfc/rfc1034" class="eref">1034</a>, <a href="https://www.rfc-editor.org/rfc/rfc1035" class="eref">1035</a>, <a href="https://www.rfc-editor.org/rfc/rfc4035" class="eref">4035</a>, <a href="https://www.rfc-editor.org/rfc/rfc6672" class="eref">6672</a>, <a href="https://www.rfc-editor.org/rfc/rfc6840" class="eref">6840</a> (if approved)</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2026-07-07" class="published">7 July 2026</time>
+<time datetime="2026-07-08" class="published">8 July 2026</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2027-01-08">8 January 2027</time></dd>
+<dd class="expires"><time datetime="2027-01-09">9 January 2027</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1137,7 +1137,7 @@ The new delegation records are extensible, can be secured with DNSSEC, and elimi
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 8 January 2027.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 9 January 2027.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1374,27 +1374,27 @@ The new delegation records are extensible, can be secured with DNSSEC, and elimi
       <h2 id="name-introduction">
 <a href="#section-1" class="section-number selfRef">1. </a><a href="#name-introduction" class="section-name selfRef">Introduction</a>
       </h2>
-<p id="section-1-1">In the Domain Name System, responsibility for each subdomain within the domain name hierarchy can be delegated to different servers, which makes them authoritative for their portion of the namespace.<a href="#section-1-1" class="pilcrow">¶</a></p>
-<p id="section-1-2">The original DNS record that does this, called an NS record, contains only the hostname of a single name server and no other parameters.
-The resolver needs to resolve these names into usable addresses and infer other required parameters, such as the transport protocol and any other protocol features.
-Moreover, the NS record set exists in two places--one at the delegation point, and the other at the apex of the delegated zone, which might not match the NS records at the delegation.
-The DNS Security Extensions (DNSSEC) protect only one copy, those in the apex.<a href="#section-1-2" class="pilcrow">¶</a></p>
-<p id="section-1-3">These properties of NS records limit resolvers to unencrypted messages on UDP and TCP port 53, and this initial contact cannot be protected with DNSSEC.
+<p id="section-1-1">In the Domain Name System, authority for each subdomain within the domain name hierarchy can be delegated to different servers, which makes them authoritative for their portion of the namespace.<a href="#section-1-1" class="pilcrow">¶</a></p>
+<p id="section-1-2">Traditionally, a delegation is represented by an NS RRset, which contains the hostnames of name servers, though no other parameters.
+The resolver resolves these names into usable addresses and uses default protocol parameters, for transport protocol and any other protocol features.
+Moreover, the NS RRset set exists in two places--one at the delegation point, and the other at the apex of the delegated zone, which might not match the NS records at the delegation.
+DNSSEC authenticates the authoritative NS RRset in the delegated zone but does not authenticate the delegation NS RRset.<a href="#section-1-2" class="pilcrow">¶</a></p>
+<p id="section-1-3">The lack of properities of delegation NS RRsets limits resolvers to unanthenticated transport on default ports, and this initial contact is not protected with DNSSEC.
 These limitations are a barrier for the efficient introduction of new DNS technology.<a href="#section-1-3" class="pilcrow">¶</a></p>
 <p id="section-1-4">The DELEG and DELEGPARAM resource record (RR) types remedy this problem by providing extensible parameters to indicate authoritative name server capabilities and additional information, such as other transport protocols that a resolver may use.<a href="#section-1-4" class="pilcrow">¶</a></p>
-<p id="section-1-5">The DELEG record creates a new delegation.
+<p id="section-1-5">The DELEG RRset creates a new delegation.
 It is a Delegation Type record as defined in <span>[<a href="#I-D.ietf-dnsop-delext" class="cite xref">I-D.ietf-dnsop-delext</a>]</span>.
-It is authoritative at the delegation point and thus can be signed with DNSSEC.
-This makes it possible to validate all delegation parameters, including those of future extensions.<a href="#section-1-5" class="pilcrow">¶</a></p>
-<p id="section-1-6">The DELEG record can be used alongside, or even instead of, an NS record to create a delegation.
-The combination of DELEG+NS is fully compatible with old resolvers, facilitating the incremental rollout of this new method.<a href="#section-1-6" class="pilcrow">¶</a></p>
+It is authoritative in the delegating zone and can be signed with DNSSEC.
+This makes it possible to authenticate the delegation parameters carried by DELEG, including future extensions.<a href="#section-1-5" class="pilcrow">¶</a></p>
+<p id="section-1-6">The DELEG RRset can be used alongside, or instead of, an NS RRset to create a delegation.
+The combination of DELEG and NS RRsets is compatible with resolvers that do not support DELEG, facilitating the incremental rollout of this new method.<a href="#section-1-6" class="pilcrow">¶</a></p>
 <p id="section-1-7">The DELEGPARAM record is an auxiliary record which contains the same data as DELEG, but does not create a delegation.
 Instead it is used as the target when DELEG is optionally using indirection.
 This indirection can, for example,
-be used to share the same delegation information across multiple zones and simplify operations management by reducing the number of locations for the delegation information for those zones.
+be used to share the same delegation information across multiple zones and simplify operational management by reducing the number of locations for the delegation information for those zones.
 For example: if the customers of a DNS operator point their delegations to a DELEGPARAM record managed by the DNS operator,
 then the operator will be able to make delegation information changes without further customer involvement, and affect all of those customer's delegations with a single change.<a href="#section-1-7" class="pilcrow">¶</a></p>
-<p id="section-1-8">Future documents can use the extensibility mechanism for more advanced features, like connecting to a name server with an encrypted transport.<a href="#section-1-8" class="pilcrow">¶</a></p>
+<p id="section-1-8">Future documents can define addtional delegation parameters, for example to advertise support for encrypted transports.<a href="#section-1-8" class="pilcrow">¶</a></p>
 <div id="terminology">
 <section id="section-1.1">
         <h3 id="name-terminology">
