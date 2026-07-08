@@ -61,7 +61,7 @@ The resolver resolves these names into usable addresses and uses default protoco
 Moreover, the NS RRset set exists in two places--one at the delegation point, and the other at the apex of the delegated zone, which might not match the NS records at the delegation.
 DNSSEC authenticates the authoritative NS RRset in the delegated zone but does not authenticate the delegation NS RRset.
 
-The lack of properities of delegation NS RRsets limits resolvers to unencrypted transport to default ports, and this initial contact is not protected with DNSSEC.
+The lack of properities of delegation NS RRsets limits resolvers to unanthenticated transport on default ports, and this initial contact is not protected with DNSSEC.
 These limitations are a barrier for the efficient introduction of new DNS technology.
 
 The DELEG and DELEGPARAM resource record (RR) types remedy this problem by providing extensible parameters to indicate authoritative name server capabilities and additional information, such as other transport protocols that a resolver may use.
