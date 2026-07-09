@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-07-07T02:12:27.030608+00:00",
+  "timestamp": "2026-07-09T02:05:56.996875+00:00",
   "repo": "ietf-wg-deleg/draft-ietf-deleg-base",
   "labels": [
     {
@@ -1381,11 +1381,19 @@
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
-      "body": "- [ ] DELEG RR type\n- [ ] DELEGPARAM RR type\n- [ ] ADT flag\n- [ ] DE flag\n- [ ] EDE code point\n- [ ] resinfo code point",
+      "body": "- [ ] DELEG RR type\n- [ ] DELEGPARAM RR type\n- [ ] ADT flag\n- [ ] DE flag\n- [x] EDE code point\n- [ ] resinfo code point",
       "createdAt": "2026-03-17T09:29:21Z",
-      "updatedAt": "2026-03-18T15:51:55Z",
+      "updatedAt": "2026-07-07T16:06:08Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "body": "EDE allocated - IANA #1455469",
+          "createdAt": "2026-07-07T16:06:08Z",
+          "updatedAt": "2026-07-07T16:06:08Z"
+        }
+      ]
     },
     {
       "number": 156,
@@ -1530,32 +1538,48 @@
       "id": "I_kwDOO41rkM8AAAABHsBrbw",
       "title": "The 2nd diagram in 3.2 is hanging out without references",
       "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/issues/180",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "hardaker",
-      "authorAssociation": "NONE",
+      "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "The second diagram could use a reference saying what it is, probably at the end of the previous paragraph at least.",
       "createdAt": "2026-07-04T23:30:20Z",
-      "updatedAt": "2026-07-04T23:30:20Z",
-      "closedAt": null,
-      "comments": []
+      "updatedAt": "2026-07-07T16:16:38Z",
+      "closedAt": "2026-07-07T16:16:38Z",
+      "comments": [
+        {
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "body": "You are right! Added.",
+          "createdAt": "2026-07-07T16:12:40Z",
+          "updatedAt": "2026-07-07T16:12:40Z"
+        }
+      ]
     },
     {
       "number": 182,
       "id": "I_kwDOO41rkM8AAAABHsDTJg",
       "title": "Describe in 3.1.4 what happens when SLIST is empty at the end",
       "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/issues/182",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "hardaker",
-      "authorAssociation": "NONE",
+      "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "(error handling could be better in general, I tried to improve some of it in PR4)",
       "createdAt": "2026-07-04T23:42:21Z",
-      "updatedAt": "2026-07-04T23:42:21Z",
-      "closedAt": null,
-      "comments": []
+      "updatedAt": "2026-07-07T16:18:32Z",
+      "closedAt": "2026-07-07T16:18:28Z",
+      "comments": [
+        {
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "body": "That's implementation dependent. We describe how to populate SLIST, not how to actually use it. Same as RFC 1034/1035...",
+          "createdAt": "2026-07-07T16:18:28Z",
+          "updatedAt": "2026-07-07T16:18:28Z"
+        }
+      ]
     },
     {
       "number": 183,
@@ -1588,14 +1612,22 @@
       "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/issues/185",
       "state": "OPEN",
       "author": "hardaker",
-      "authorAssociation": "NONE",
+      "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "it would be helpful to the reader to explain why this is true.\n\n(differing signatures from parent to child I assume, but didn't want to guess)",
       "createdAt": "2026-07-04T23:55:31Z",
-      "updatedAt": "2026-07-04T23:55:31Z",
+      "updatedAt": "2026-07-07T16:17:38Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Would a reference to DNSSEC section do? I don't want to re-state rules several times in various places.",
+          "createdAt": "2026-07-07T16:17:38Z",
+          "updatedAt": "2026-07-07T16:17:38Z"
+        }
+      ]
     },
     {
       "number": 186,
@@ -1604,14 +1636,22 @@
       "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/issues/186",
       "state": "OPEN",
       "author": "hardaker",
-      "authorAssociation": "NONE",
+      "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "for section 5.1.3: I think that just relisting step 2 from 1034, which is also affected by 6672, is confusing and prone to error issues by someone trying to piece everything together properly.  I'd suggest that the entire set of steps required for DELEG from start to finish for finding the best servers to ask could be simply restated here to ensure no one makes a mistake.",
       "createdAt": "2026-07-04T23:58:09Z",
-      "updatedAt": "2026-07-04T23:58:09Z",
+      "updatedAt": "2026-07-08T11:27:59Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I tried to compare the texts and I'm confused.\n\nRight now rfc1034#section-5.3.3 step 2 is literally this:\n>    2. Find the best servers to ask.\n\nIt has description further down on page 34:\n> Step 2 looks for a name server to ask for the required data.  The ...\n\nand the description goes on for rest of page 34 and first half of page 35.\n\nrfc6672#section-3.4.1 has only:\n>    2.  Find the best servers to ask.\n\nWithout further description.\n\nWhat we are trying to do is to replace textual description of \"Step 2\" from RFC 1034 pages 34 and 35.\n\n\nPerhaps I'm misunderstanding, but it seemed you wanted to re-state also steps 1-4? But why? Steps 1, 3, 4 and not changed by DELEG. Can you rephrase what you want to see?",
+          "createdAt": "2026-07-08T11:27:59Z",
+          "updatedAt": "2026-07-08T11:27:59Z"
+        }
+      ]
     },
     {
       "number": 187,
@@ -1620,29 +1660,37 @@
       "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/issues/187",
       "state": "OPEN",
       "author": "hardaker",
-      "authorAssociation": "NONE",
+      "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "I mean, I CAN interpret it -- but a bit of clean up would be nice.  In particular \"MUST NOT instead use\" is an odd phrase.",
       "createdAt": "2026-07-05T00:00:22Z",
-      "updatedAt": "2026-07-05T00:00:22Z",
+      "updatedAt": "2026-07-07T16:23:36Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "body": "The current text is:\n> 2.2.1. For a given SNAME, check for the existence of a DELEG RRset. If it exists, the resolver MUST use its content to populate SLIST. However, if the DELEG RRset is known to exist but is unusable (for example, if it is found in DNSSEC BAD cache, or content of individual RRs is unusable for any reason), the resolver MUST NOT instead use an NS RRset; instead, the resolver MUST treat this case as if SLIST is populated with unreachable servers.\n\nI'm open to suggestions - I'm just coming up blank.",
+          "createdAt": "2026-07-07T16:23:35Z",
+          "updatedAt": "2026-07-07T16:23:35Z"
+        }
+      ]
     },
     {
       "number": 188,
       "id": "I_kwDOO41rkM8AAAABHsGgkg",
       "title": "Last bullet of 5.4.1 (a signer field....) is hard to parse",
       "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/issues/188",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "hardaker",
-      "authorAssociation": "NONE",
+      "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "I'd suggest rewording this bullet for clarity",
       "createdAt": "2026-07-05T00:06:53Z",
-      "updatedAt": "2026-07-07T00:05:41Z",
-      "closedAt": null,
+      "updatedAt": "2026-07-07T16:22:11Z",
+      "closedAt": "2026-07-07T16:22:11Z",
       "comments": [
         {
           "author": "vttale",
@@ -1657,6 +1705,20 @@
           "body": "I've been away from DELEG for a while, so I really need to read the whole draft, which I will attempt to do soon.\n\nBut just reading section section 5.4.1 in isolation, at first glance I don't see any direct conflict with RFC 8020. Presumably, the owner name of the \"ancestor delegation NSEC/3 RR\" is a zone cut (or the hash of a zone cut). Assuming so, 8020 doesn't apply. The owner name of an NSEC/3 RR positively exists, so 8020 has nothing to say about names under it.\n",
           "createdAt": "2026-07-07T00:05:41Z",
           "updatedAt": "2026-07-07T00:05:41Z"
+        },
+        {
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Sounds like RFC 6840 bis to me. We literally just add \"DELEG\" to several places where it had \"NS\" before, that's all.",
+          "createdAt": "2026-07-07T10:19:14Z",
+          "updatedAt": "2026-07-07T10:19:14Z"
+        },
+        {
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I was told I'm too brief, lemme try again: I really really don't want to risk we will try to reword it and end up with different rules for DELEG and non-DELEG DNSSEC validators (beyond the minimalistic change of extending the range from DS to DS+DELEG). DNS spec is total minefield and in several places we tried to formulate 'better' rules, then failed, and then moved back to 'do as previous specs say' style of wording because things were too fragile when restated.\n\nIf someone wants to hire me for doing DNS(SEC) Omnibus RFC, I'm all open! but me and I think I can say the other authors too concluded that deleg draft is not the document to do it.",
+          "createdAt": "2026-07-07T16:22:11Z",
+          "updatedAt": "2026-07-07T16:22:11Z"
         }
       ]
     },
@@ -1665,15 +1727,15 @@
       "id": "I_kwDOO41rkM8AAAABHsHBtg",
       "title": "describe cross generation of NS and DELEG",
       "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/issues/189",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "hardaker",
-      "authorAssociation": "NONE",
+      "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "I suspect this was discussed (and I've forgotten) but it would highly helpful to the reader to describe how generation could happen (section 6.3)",
       "createdAt": "2026-07-05T00:10:10Z",
-      "updatedAt": "2026-07-06T15:02:04Z",
-      "closedAt": null,
+      "updatedAt": "2026-07-08T05:46:40Z",
+      "closedAt": "2026-07-08T03:36:46Z",
       "comments": [
         {
           "author": "vttale",
@@ -1681,6 +1743,13 @@
           "body": "We've discussed it, yes, and the position of the authors has remained that while it is completely reasonable for a zone manager (\ud83d\ude09) to want to have some sort of mechanism to create NS records from DELEG records, and for DNS software packages to offer such a feature, how that would be done is outside the scope of the base protocol.  \n\nTo the extent that an IETF document does provide guidance on it, it would be more relevant in a deleg transports document, though I'd be a little surprised to see it show up in draft-hoffman-deleg-secure-transports-00 too.",
           "createdAt": "2026-07-06T15:02:04Z",
           "updatedAt": "2026-07-06T15:02:04Z"
+        },
+        {
+          "author": "hardaker",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "ok,  \"won't do it\" is an exceptable answer.\n\n(in part: does it need to be standardized: no, would it help: probably)",
+          "createdAt": "2026-07-08T03:36:46Z",
+          "updatedAt": "2026-07-08T03:36:46Z"
         }
       ]
     },
@@ -1691,12 +1760,12 @@
       "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/issues/190",
       "state": "OPEN",
       "author": "hardaker",
-      "authorAssociation": "NONE",
+      "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "I mean really really undefined.  It's used in about 6 RFCs, but never actually defined in any of them.\n\n```\nrfc2535.txt\n409:   (RRset) signed by a special private key held by the zone manager.\n\nrfc3658.txt\n297:   private key held by the zone manager.  But the DNS protocol views the\n\nrfc4290.txt\n738:   Of course, zone managers should inform all current registrants when\n\nrfc5891.txt\n347:   actually reaches the zone manager (\"registry\") are outside the scope\n\nrfc5893.txt\n781:   private zone managers can check for this particular condition before\n\nrfc6841.txt\n349:   Most zone managers using DNSSEC will not have the need to create a\n353:   In other cases, a zone manager may provide registration services with\n650:   This subcomponent describes how the child zone manager has initially\n664:   circumstances the child zone manager is required to provide proof of\n1295:        3.2.  Identification and authentication of child zone manager\n\nrfc7583.txt\n123:   When a zone is secured with DNSSEC, the zone manager must be prepared\n365:   timings are not wholly under the control of the zone manager.  If the\n367:   the case where authentication is via a DS record, the zone manager\n868:   record has been submitted to the parent zone manager for it to be\n1416:   control of the zone manager.\n1535:   L         lifetime: interval set by the zone manager\n1544:   control of the zone manager, and an \"L\" interval (lifetime) is chosen\n1545:   by the zone manager and is a feature of policy.\n```\n",
       "createdAt": "2026-07-05T00:11:39Z",
-      "updatedAt": "2026-07-07T00:00:33Z",
+      "updatedAt": "2026-07-08T05:47:02Z",
       "closedAt": null,
       "comments": [
         {
@@ -1708,7 +1777,7 @@
         },
         {
           "author": "hardaker",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "body": "if that was the case, why do we bother publishing terminology RFCs?",
           "createdAt": "2026-07-06T19:03:28Z",
           "updatedAt": "2026-07-06T19:03:28Z"
@@ -1726,6 +1795,27 @@
           "body": "The question I have - is \"zone manager\" a human(oid) entity ala zone administrator , or is it a process, toolchain, etc that manages the zone data ? ",
           "createdAt": "2026-07-07T00:00:33Z",
           "updatedAt": "2026-07-07T00:00:33Z"
+        },
+        {
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Would it make a difference?",
+          "createdAt": "2026-07-07T10:17:30Z",
+          "updatedAt": "2026-07-07T10:17:30Z"
+        },
+        {
+          "author": "hardaker",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "yes",
+          "createdAt": "2026-07-08T03:35:45Z",
+          "updatedAt": "2026-07-08T03:35:45Z"
+        },
+        {
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Can you describe the difference? I'm failing to see it.",
+          "createdAt": "2026-07-08T05:47:02Z",
+          "updatedAt": "2026-07-08T05:47:02Z"
         }
       ]
     }
@@ -8191,25 +8281,35 @@
       "id": "PR_kwDOO41rkM7t8gwV",
       "title": "Fix the discontinuity in the second paragraph.",
       "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/pull/177",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "hardaker",
-      "authorAssociation": "NONE",
+      "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "The last sentence in the abstract seems to come out of nowhere.  This adds a sentence to offer a transition.",
       "createdAt": "2026-07-04T23:17:39Z",
-      "updatedAt": "2026-07-04T23:17:39Z",
+      "updatedAt": "2026-07-07T10:23:09Z",
       "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
       "baseRefName": "main",
       "baseRefOid": "ac9a6629cb98d701293105bda2b3fe098135c48d",
       "headRepository": "hardaker/draft-ietf-deleg-base",
       "headRefName": "fix-abstract",
       "headRefOid": "5a95c89bb17184157011541e64594ea88f69ebb2",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
-      "comments": [],
+      "closedAt": "2026-07-07T10:23:09Z",
+      "mergedAt": "2026-07-07T10:23:09Z",
+      "mergedBy": "pspacek",
+      "mergeCommit": {
+        "oid": "74b84a14b576ffc23255829bb397355f2b58e8f0"
+      },
+      "comments": [
+        {
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Makes sense, thank you.",
+          "createdAt": "2026-07-07T10:23:05Z",
+          "updatedAt": "2026-07-07T10:23:05Z"
+        }
+      ],
       "reviews": []
     },
     {
@@ -8217,51 +8317,232 @@
       "id": "PR_kwDOO41rkM7t8i3k",
       "title": "wording / clarity suggestions for the introduction",
       "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/pull/178",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "hardaker",
-      "authorAssociation": "NONE",
+      "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2026-07-04T23:22:55Z",
-      "updatedAt": "2026-07-04T23:22:55Z",
+      "updatedAt": "2026-07-07T13:33:40Z",
       "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
       "baseRefName": "main",
       "baseRefOid": "ac9a6629cb98d701293105bda2b3fe098135c48d",
       "headRepository": "hardaker/draft-ietf-deleg-base",
       "headRefName": "introduction-suggestions",
-      "headRefOid": "c03655b0ea8847b001aebf3dbaf1fff9637c95bb",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
-      "comments": [],
-      "reviews": []
+      "headRefOid": "2ca1b948a5f16429f394196322ea37d1562a8852",
+      "closedAt": "2026-07-07T13:33:39Z",
+      "mergedAt": "2026-07-07T13:33:39Z",
+      "mergedBy": "pspacek",
+      "mergeCommit": {
+        "oid": "19e8d968b79efb8dbaee6db09b1091bf8a126996"
+      },
+      "comments": [
+        {
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I've pushed additional commit which reverts changes I disagreed with above and I will proceed to merge the agreeable changes. For the rest please take it to the mailing list first.",
+          "createdAt": "2026-07-07T13:33:26Z",
+          "updatedAt": "2026-07-07T13:33:26Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOO41rkM8AAAABFNZnnQ",
+          "commit": {
+            "abbreviatedOid": "c03655b"
+          },
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-07-07T11:27:44Z",
+          "updatedAt": "2026-07-07T11:27:44Z",
+          "comments": [
+            {
+              "originalPosition": 11,
+              "body": "The sentence explicitly says \"this initial contact\" which indeed cannot be protected by DNSSEC. After-the-fact check can be made, sure, but that's not what this sentence is about.",
+              "createdAt": "2026-07-07T11:27:44Z",
+              "updatedAt": "2026-07-07T11:27:44Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOO41rkM8AAAABFNaBFA",
+          "commit": {
+            "abbreviatedOid": "c03655b"
+          },
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-07-07T11:28:26Z",
+          "updatedAt": "2026-07-07T11:28:26Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "This is strictly about NS records. Let's not drag glue records into the picture, it only muddies waters.",
+              "createdAt": "2026-07-07T11:28:26Z",
+              "updatedAt": "2026-07-07T11:28:26Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOO41rkM8AAAABFNaspg",
+          "commit": {
+            "abbreviatedOid": "c03655b"
+          },
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-07-07T11:29:47Z",
+          "updatedAt": "2026-07-07T11:29:47Z",
+          "comments": [
+            {
+              "originalPosition": 17,
+              "body": "Not really. DELEG protocol is method, DELEG RR creates the delegation the same way as NS.",
+              "createdAt": "2026-07-07T11:29:47Z",
+              "updatedAt": "2026-07-07T11:29:47Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOO41rkM8AAAABFNbEwg",
+          "commit": {
+            "abbreviatedOid": "c03655b"
+          },
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-07-07T11:30:37Z",
+          "updatedAt": "2026-07-07T11:30:37Z",
+          "comments": [
+            {
+              "originalPosition": 32,
+              "body": "Sorry but no. Legacy delegation is the delegation created by NS RRset. It can coexist with new fancy delegation created by DELEG RR.",
+              "createdAt": "2026-07-07T11:30:37Z",
+              "updatedAt": "2026-07-07T11:30:37Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOO41rkM8AAAABFNbVgA",
+          "commit": {
+            "abbreviatedOid": "c03655b"
+          },
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-07-07T11:31:12Z",
+          "updatedAt": "2026-07-07T11:31:12Z",
+          "comments": [
+            {
+              "originalPosition": 36,
+              "body": "That's not how it is used through the document.",
+              "createdAt": "2026-07-07T11:31:12Z",
+              "updatedAt": "2026-07-07T11:31:12Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOO41rkM8AAAABFNgIng",
+          "commit": {
+            "abbreviatedOid": "c03655b"
+          },
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-07-07T11:41:15Z",
+          "updatedAt": "2026-07-07T11:41:15Z",
+          "comments": [
+            {
+              "originalPosition": 32,
+              "body": "(See e.g. section DELEG-aware Clients)",
+              "createdAt": "2026-07-07T11:41:15Z",
+              "updatedAt": "2026-07-07T11:41:16Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOO41rkM8AAAABFNiNrg",
+          "commit": {
+            "abbreviatedOid": "c03655b"
+          },
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-07-07T11:45:35Z",
+          "updatedAt": "2026-07-07T11:45:35Z",
+          "comments": [
+            {
+              "originalPosition": 41,
+              "body": "ok",
+              "createdAt": "2026-07-07T11:45:35Z",
+              "updatedAt": "2026-07-07T11:45:35Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOO41rkM8AAAABFNiR1g",
+          "commit": {
+            "abbreviatedOid": "c03655b"
+          },
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-07-07T11:45:44Z",
+          "updatedAt": "2026-07-07T11:45:44Z",
+          "comments": [
+            {
+              "originalPosition": 23,
+              "body": "good catch",
+              "createdAt": "2026-07-07T11:45:44Z",
+              "updatedAt": "2026-07-07T11:45:44Z"
+            }
+          ]
+        }
+      ]
     },
     {
       "number": 179,
       "id": "PR_kwDOO41rkM7t8k_d",
       "title": "wording and clarity for section 2",
       "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/pull/179",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "hardaker",
-      "authorAssociation": "NONE",
+      "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2026-07-04T23:27:59Z",
-      "updatedAt": "2026-07-04T23:27:59Z",
+      "updatedAt": "2026-07-07T10:24:47Z",
       "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
       "baseRefName": "main",
       "baseRefOid": "ac9a6629cb98d701293105bda2b3fe098135c48d",
       "headRepository": "hardaker/draft-ietf-deleg-base",
       "headRefName": "section-2-suggestions",
       "headRefOid": "719ec263a9f0ad0dfb573656cb0fe66205c857c4",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
-      "comments": [],
+      "closedAt": "2026-07-07T10:24:47Z",
+      "mergedAt": "2026-07-07T10:24:47Z",
+      "mergedBy": "pspacek",
+      "mergeCommit": {
+        "oid": "340d59edae28f1b844d474834cebcaebb24bec07"
+      },
+      "comments": [
+        {
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "body": "All good, merging. Thank you!",
+          "createdAt": "2026-07-07T10:24:43Z",
+          "updatedAt": "2026-07-07T10:24:43Z"
+        }
+      ],
       "reviews": []
     },
     {
@@ -8271,12 +8552,12 @@
       "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/pull/181",
       "state": "OPEN",
       "author": "hardaker",
-      "authorAssociation": "NONE",
+      "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2026-07-04T23:41:52Z",
-      "updatedAt": "2026-07-04T23:41:52Z",
+      "updatedAt": "2026-07-07T14:00:09Z",
       "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
       "baseRefName": "main",
       "baseRefOid": "ac9a6629cb98d701293105bda2b3fe098135c48d",
@@ -8288,7 +8569,21 @@
       "mergedBy": null,
       "mergeCommit": null,
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOO41rkM8AAAABFOoklw",
+          "commit": {
+            "abbreviatedOid": "87e01fe"
+          },
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "state": "CHANGES_REQUESTED",
+          "body": "Comments in #181 apply here too, I just noticed this is subset of it.",
+          "createdAt": "2026-07-07T14:00:09Z",
+          "updatedAt": "2026-07-07T14:00:09Z",
+          "comments": []
+        }
+      ]
     },
     {
       "number": 184,
@@ -8297,12 +8592,12 @@
       "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/pull/184",
       "state": "OPEN",
       "author": "hardaker",
-      "authorAssociation": "NONE",
+      "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2026-07-04T23:50:24Z",
-      "updatedAt": "2026-07-04T23:50:24Z",
+      "updatedAt": "2026-07-08T05:52:41Z",
       "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
       "baseRefName": "main",
       "baseRefOid": "ac9a6629cb98d701293105bda2b3fe098135c48d",
@@ -8314,7 +8609,196 @@
       "mergedBy": null,
       "mergeCommit": null,
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOO41rkM8AAAABFOdwiQ",
+          "commit": {
+            "abbreviatedOid": "d0df1db"
+          },
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "state": "CHANGES_REQUESTED",
+          "body": "Typo fixes and minor link addition seemed okay but most of the changes seem wrong to me.",
+          "createdAt": "2026-07-07T13:39:46Z",
+          "updatedAt": "2026-07-07T13:58:11Z",
+          "comments": [
+            {
+              "originalPosition": 62,
+              "body": "I don't know what \"successful addresses\" means. We are not standardizing address reputation or anything like that.",
+              "createdAt": "2026-07-07T13:39:46Z",
+              "updatedAt": "2026-07-07T13:58:11Z"
+            },
+            {
+              "originalPosition": 52,
+              "body": "I don't think it is a good idea to silently remove malformed keys. What if `mandatory` was malformed, for example ...",
+              "createdAt": "2026-07-07T13:40:28Z",
+              "updatedAt": "2026-07-07T13:58:11Z"
+            },
+            {
+              "originalPosition": 30,
+              "body": "ok",
+              "createdAt": "2026-07-07T13:40:53Z",
+              "updatedAt": "2026-07-07T13:58:11Z"
+            },
+            {
+              "originalPosition": 31,
+              "body": "Not ok. As it was explained on the mailing list, we cannot prevent anyone from sending such message over the wire or actually putting it in their own implementation. MUST NOT opens can of worms like - it is unparseable from zone file? Will it cause FORMERR when parsing message with such name? etc. For this reason it is lowercase 'cannot' and the algorithms are defined so they work with malformed data as well in a deterministic way.",
+              "createdAt": "2026-07-07T13:43:07Z",
+              "updatedAt": "2026-07-07T13:58:11Z"
+            },
+            {
+              "originalPosition": 40,
+              "body": "ok",
+              "createdAt": "2026-07-07T13:43:30Z",
+              "updatedAt": "2026-07-07T13:58:11Z"
+            },
+            {
+              "originalPosition": 4,
+              "body": "I think it has better definition in section \"Name Server Information for Delegation\". Feel free to propose an alternative which avoids redefining it, please.",
+              "createdAt": "2026-07-07T13:45:41Z",
+              "updatedAt": "2026-07-07T13:58:11Z"
+            },
+            {
+              "originalPosition": 13,
+              "body": "ok",
+              "createdAt": "2026-07-07T13:45:56Z",
+              "updatedAt": "2026-07-07T13:58:11Z"
+            },
+            {
+              "originalPosition": 20,
+              "body": "maybe ok? I wonder if it can be confused somehow in case of cross-zone linkage.\n\nAs in:\n```\nchild. DELEG include-delegparam=elsewhere.\nelsewhere. DELEG server-ipv6=3fff::1\n```\nis permissible while\n```\nchild. DELEG include-delegparam=child.\n```\nis not.",
+              "createdAt": "2026-07-07T13:48:29Z",
+              "updatedAt": "2026-07-07T13:58:11Z"
+            },
+            {
+              "originalPosition": 49,
+              "body": "I don't think so. The beginning of the sentence already said resolver might look at all RRs. Further down in this section, we have:\n> A DELEG-aware resolver MAY implement lazy filling of SLIST,\n\nAnd that's by design! That's what current resolvers actually do - they are not going to chase 1000 RRs just because someone sent them in a DNS message. There were CVEs on that topic in recent years.",
+              "createdAt": "2026-07-07T13:53:22Z",
+              "updatedAt": "2026-07-07T13:58:11Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOO41rkM8AAAABFTRQAw",
+          "commit": {
+            "abbreviatedOid": "d0df1db"
+          },
+          "author": "hardaker",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-07-08T03:40:11Z",
+          "updatedAt": "2026-07-08T03:40:11Z",
+          "comments": [
+            {
+              "originalPosition": 49,
+              "body": "My primary point was there are instructions for \"stop processing\" all over the place, but no where does it say what to do in the error handling case.  What happens when you stop?  It left me confused so i tried to fix it.  I started adding it in bullet one, when I realized it was most of the bullets that had that instruction so i tried to add it more generically instead.",
+              "createdAt": "2026-07-08T03:40:11Z",
+              "updatedAt": "2026-07-08T03:40:11Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOO41rkM8AAAABFTRe7Q",
+          "commit": {
+            "abbreviatedOid": "d0df1db"
+          },
+          "author": "hardaker",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-07-08T03:41:14Z",
+          "updatedAt": "2026-07-08T03:41:15Z",
+          "comments": [
+            {
+              "originalPosition": 52,
+              "body": "Ok, but my point is: it doesn't currently say what to do when a record is not parsable.  If my suggestion isn't right, what do you expect the implementations to do?",
+              "createdAt": "2026-07-08T03:41:14Z",
+              "updatedAt": "2026-07-08T03:41:15Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOO41rkM8AAAABFTRpVg",
+          "commit": {
+            "abbreviatedOid": "d0df1db"
+          },
+          "author": "hardaker",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-07-08T03:41:56Z",
+          "updatedAt": "2026-07-08T03:41:56Z",
+          "comments": [
+            {
+              "originalPosition": 62,
+              "body": "you don't define what to do when addresses can't be resolved.  That's my only point -- it should be clarified that if you have NS1 and NS2 and only NS2 is resolvable, then ......",
+              "createdAt": "2026-07-08T03:41:56Z",
+              "updatedAt": "2026-07-08T03:41:56Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOO41rkM8AAAABFTzOUQ",
+          "commit": {
+            "abbreviatedOid": "d0df1db"
+          },
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-07-08T05:51:22Z",
+          "updatedAt": "2026-07-08T05:51:22Z",
+          "comments": [
+            {
+              "originalPosition": 52,
+              "body": "We expect them to do the same as if they received unparseable NS RRset, or unparseable DS RRset - same as for the rest of DNS. Different implementations might handle it differently, and there's no reason to prescribe special handling extra for DELEG and diverge from what they do with other records.\n\nIf you have compelling reason to diverge please share it.",
+              "createdAt": "2026-07-08T05:51:22Z",
+              "updatedAt": "2026-07-08T05:51:22Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOO41rkM8AAAABFTzb8A",
+          "commit": {
+            "abbreviatedOid": "d0df1db"
+          },
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-07-08T05:52:04Z",
+          "updatedAt": "2026-07-08T05:52:05Z",
+          "comments": [
+            {
+              "originalPosition": 49,
+              "body": "The exact terms used are \"processes **each individual** DELEG record within a DELEG RRset\" ... and \"Stop processing **this** record.\"\n\nWould it help if we prefixed the itemized list again with 'Algorithm to process single record' or something like that?",
+              "createdAt": "2026-07-08T05:52:04Z",
+              "updatedAt": "2026-07-08T05:52:05Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOO41rkM8AAAABFTzniQ",
+          "commit": {
+            "abbreviatedOid": "d0df1db"
+          },
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-07-08T05:52:40Z",
+          "updatedAt": "2026-07-08T05:52:41Z",
+          "comments": [
+            {
+              "originalPosition": 62,
+              "body": "Last 40 years that was implementation defined. It continues to be so.",
+              "createdAt": "2026-07-08T05:52:41Z",
+              "updatedAt": "2026-07-08T05:52:41Z"
+            }
+          ]
+        }
+      ]
     },
     {
       "number": 191,
@@ -8323,12 +8807,12 @@
       "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/pull/191",
       "state": "OPEN",
       "author": "hardaker",
-      "authorAssociation": "NONE",
+      "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "The DELEG is stronger section is good, but some mitigation can be obtained by being child centric.",
       "createdAt": "2026-07-05T16:05:32Z",
-      "updatedAt": "2026-07-06T19:02:10Z",
+      "updatedAt": "2026-07-07T16:16:14Z",
       "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
       "baseRefName": "main",
       "baseRefOid": "ac9a6629cb98d701293105bda2b3fe098135c48d",
@@ -8349,13 +8833,221 @@
         },
         {
           "author": "hardaker",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "body": "Yeah, I recognize it was on the fence for me.  But the document specifically states to fall back to NS records, which gives a very different security strength if you do so and are parent-centric.  Hence I decided to suggest it.  (if there wasn't instructions about how to fall back when DELEG didn't exist, it would make more sense to not include it).",
           "createdAt": "2026-07-06T19:02:10Z",
           "updatedAt": "2026-07-06T19:02:10Z"
+        },
+        {
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I think this is out of scope. There's whole other document on this conundrum - ns-revalidation - which addresses this at length. DELEG does not prescribe if fallback is child or parent centric and that's intentional.",
+          "createdAt": "2026-07-07T10:21:01Z",
+          "updatedAt": "2026-07-07T10:21:01Z"
+        },
+        {
+          "author": "paulehoffman",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I am *really* uncomfortable with this type of discussion happening in the repo and not on the WG mailing list.",
+          "createdAt": "2026-07-07T16:16:14Z",
+          "updatedAt": "2026-07-07T16:16:14Z"
         }
       ],
       "reviews": []
+    },
+    {
+      "number": 192,
+      "id": "PR_kwDOO41rkM7u5u7v",
+      "title": "Editorial from David Blacka",
+      "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/pull/192",
+      "state": "MERGED",
+      "author": "pspacek",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2026-07-07T15:48:18Z",
+      "updatedAt": "2026-07-07T15:57:22Z",
+      "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
+      "baseRefName": "main",
+      "baseRefOid": "19e8d968b79efb8dbaee6db09b1091bf8a126996",
+      "headRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
+      "headRefName": "editorial-blacka",
+      "headRefOid": "433abeb28440004cb2e47a89694393237010a906",
+      "closedAt": "2026-07-07T15:57:22Z",
+      "mergedAt": "2026-07-07T15:57:22Z",
+      "mergedBy": "pspacek",
+      "mergeCommit": {
+        "oid": "2a527cbe5bb0a94f9566ecd8f563eb466105b630"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 193,
+      "id": "PR_kwDOO41rkM7u6IFe",
+      "title": "IANA has allocated value decimal 34 to New Delegation Only EDE",
+      "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/pull/193",
+      "state": "MERGED",
+      "author": "pspacek",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "IANA #1455469",
+      "createdAt": "2026-07-07T16:04:29Z",
+      "updatedAt": "2026-07-07T16:05:15Z",
+      "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
+      "baseRefName": "main",
+      "baseRefOid": "2a527cbe5bb0a94f9566ecd8f563eb466105b630",
+      "headRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
+      "headRefName": "iana-ede-34-allocated",
+      "headRefOid": "ac1ffbc461cd40afc9262156946ddeedda3a61c5",
+      "closedAt": "2026-07-07T16:05:15Z",
+      "mergedAt": "2026-07-07T16:05:15Z",
+      "mergedBy": "pspacek",
+      "mergeCommit": {
+        "oid": "a1d56f206712e45f3f4958aa7c443d8a0c498398"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 194,
+      "id": "PR_kwDOO41rkM7u6UUN",
+      "title": "Add title to DelegInfo element wire format diagram",
+      "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/pull/194",
+      "state": "MERGED",
+      "author": "pspacek",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Closes: #180",
+      "createdAt": "2026-07-07T16:12:51Z",
+      "updatedAt": "2026-07-07T16:17:19Z",
+      "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
+      "baseRefName": "main",
+      "baseRefOid": "a1d56f206712e45f3f4958aa7c443d8a0c498398",
+      "headRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
+      "headRefName": "rdata-wire-diagram",
+      "headRefOid": "28d8cd7f5830ae63e8b2aceee66d4b1598fc2587",
+      "closedAt": "2026-07-07T16:16:37Z",
+      "mergedAt": "2026-07-07T16:16:37Z",
+      "mergedBy": "pspacek",
+      "mergeCommit": {
+        "oid": "ff2dc74099e675d4fd0d780093ea8511bf7888ea"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOO41rkM8AAAABFPs-CQ",
+          "commit": {
+            "abbreviatedOid": "28d8cd7"
+          },
+          "author": "paulehoffman",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "Looks good to me.",
+          "createdAt": "2026-07-07T16:17:18Z",
+          "updatedAt": "2026-07-07T16:17:18Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 195,
+      "id": "PR_kwDOO41rkM7vQO_h",
+      "title": "Updated abstract",
+      "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/pull/195",
+      "state": "CLOSED",
+      "author": "RoyArends",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "I've suggested changes to the abstract.",
+      "createdAt": "2026-07-08T11:25:05Z",
+      "updatedAt": "2026-07-08T11:57:09Z",
+      "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
+      "baseRefName": "main",
+      "baseRefOid": "ff2dc74099e675d4fd0d780093ea8511bf7888ea",
+      "headRepository": "RoyArends/draft-ietf-deleg-base",
+      "headRefName": "main",
+      "headRefOid": "ff2dc74099e675d4fd0d780093ea8511bf7888ea",
+      "closedAt": "2026-07-08T11:57:09Z",
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 196,
+      "id": "PR_kwDOO41rkM7vSVvE",
+      "title": "various wordsmithing to the introduction",
+      "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/pull/196",
+      "state": "MERGED",
+      "author": "RoyArends",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2026-07-08T12:52:59Z",
+      "updatedAt": "2026-07-08T13:53:47Z",
+      "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
+      "baseRefName": "main",
+      "baseRefOid": "ff2dc74099e675d4fd0d780093ea8511bf7888ea",
+      "headRepository": "RoyArends/draft-ietf-deleg-base",
+      "headRefName": "my-edits",
+      "headRefOid": "00b9ea7f2feed7e8665d835b6ad71cdc07d1ed83",
+      "closedAt": "2026-07-08T13:53:47Z",
+      "mergedAt": "2026-07-08T13:53:47Z",
+      "mergedBy": "pspacek",
+      "mergeCommit": {
+        "oid": "f2a643faecbe5a179cf24cadbcfa1c788506f650"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 197,
+      "id": "PR_kwDOO41rkM7vVv2p",
+      "title": "Nits",
+      "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/pull/197",
+      "state": "MERGED",
+      "author": "RoyArends",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "None of these should be controversial. All changes are simply typos, punctuation, slight grammar, etc.",
+      "createdAt": "2026-07-08T15:01:09Z",
+      "updatedAt": "2026-07-08T15:15:17Z",
+      "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
+      "baseRefName": "main",
+      "baseRefOid": "f2a643faecbe5a179cf24cadbcfa1c788506f650",
+      "headRepository": "RoyArends/draft-ietf-deleg-base",
+      "headRefName": "edits",
+      "headRefOid": "54a4e33e2417d5ab2e594aebb810bb89866fe87c",
+      "closedAt": "2026-07-08T15:15:06Z",
+      "mergedAt": "2026-07-08T15:15:06Z",
+      "mergedBy": "pspacek",
+      "mergeCommit": {
+        "oid": "f0a8d57fc6619452ca5750f54cda61de7f9d2bd9"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOO41rkM8AAAABFX1ejQ",
+          "commit": {
+            "abbreviatedOid": "54a4e33"
+          },
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "Thank you, merging!",
+          "createdAt": "2026-07-08T15:14:56Z",
+          "updatedAt": "2026-07-08T15:14:56Z",
+          "comments": []
+        }
+      ]
     }
   ]
 }
