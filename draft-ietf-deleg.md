@@ -1176,8 +1176,15 @@ Cycles:
 
 Syntactically valid DELEG records without any {{nameserver-info}} keys:
 
-    00.invalid. DELEG key65280=\032\037\041\045
-    00.invalid. DELEG key65281="char-string with whitespace"
+    00.invalid. DELEG \# 0
+    01.invalid. DELEG key65280=\032\037\041\045
+    02.invalid. DELEG key65281="char-string with whitespace"
+
+DELEG records with disallowed/ambiguous combination of {{nameserver-info}} keys:
+
+    k1.invalid. DELEG server-name=ns1.test. include-delegparam=i2.test.
+    k2.invalid. DELEG server-ipv4=192.0.2.1 server-name=ns1.test.
+    k3.invalid. DELEG server-ipv6=3fff::2 include-delegparam=i2.test.
 
 A delegation missing the value for a mandatory key:
 
