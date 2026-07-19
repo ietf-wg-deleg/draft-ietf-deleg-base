@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-07-09T02:05:56.996875+00:00",
+  "timestamp": "2026-07-19T01:51:56.430799+00:00",
   "repo": "ietf-wg-deleg/draft-ietf-deleg-base",
   "labels": [
     {
@@ -9048,6 +9048,32 @@
           "comments": []
         }
       ]
+    },
+    {
+      "number": 198,
+      "id": "PR_kwDOO41rkM7zaMCT",
+      "title": "Extend failure cases with disallowed combinations of keys",
+      "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/pull/198",
+      "state": "OPEN",
+      "author": "pspacek",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2026-07-18T21:04:41Z",
+      "updatedAt": "2026-07-18T21:04:41Z",
+      "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
+      "baseRefName": "main",
+      "baseRefOid": "f0a8d57fc6619452ca5750f54cda61de7f9d2bd9",
+      "headRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
+      "headRefName": "failure-cases-keys",
+      "headRefOid": "a1d6d1e1fab61af8d0ced569e5612173f87b37b7",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
     }
   ]
 }
