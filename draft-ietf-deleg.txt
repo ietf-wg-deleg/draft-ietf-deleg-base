@@ -7,8 +7,8 @@ Internet-Draft                                                       ISC
 Updates: 1034, 1035, 4035, 6672, 6840 (if                       R. Weber
          approved)                                   Akamai Technologies
 Intended status: Standards Track                             D. Lawrence
-Expires: 9 January 2027                                       Salesforce
-                                                             8 July 2026
+Expires: 20 January 2027                                      Salesforce
+                                                            19 July 2026
 
 
                      Extensible Delegation for DNS
@@ -61,7 +61,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 9 January 2027.
+   This Internet-Draft will expire on 20 January 2027.
 
 Copyright Notice
 
@@ -1822,8 +1822,16 @@ A.6.  Failure Cases
 
    Syntactically valid DELEG records without any Section 3.4 keys:
 
-   00.invalid. DELEG key65280=\032\037\041\045
-   00.invalid. DELEG key65281="char-string with whitespace"
+   00.invalid. DELEG \# 0
+   01.invalid. DELEG key65280=\032\037\041\045
+   02.invalid. DELEG key65281="char-string with whitespace"
+
+   DELEG records with disallowed/ambiguous combination of Section 3.4
+   keys:
+
+   k1.invalid. DELEG server-name=ns1.test. include-delegparam=i2.test.
+   k2.invalid. DELEG server-ipv4=192.0.2.1 server-name=ns1.test.
+   k3.invalid. DELEG server-ipv6=3fff::2 include-delegparam=i2.test.
 
    A delegation missing the value for a mandatory key:
 
