@@ -7,8 +7,8 @@ Internet-Draft                                                       ISC
 Updates: 1034, 1035, 4035, 6672, 6840 (if                       R. Weber
          approved)                                   Akamai Technologies
 Intended status: Standards Track                             D. Lawrence
-Expires: 20 January 2027                                      Salesforce
-                                                            19 July 2026
+Expires: 21 January 2027                                      Salesforce
+                                                            20 July 2026
 
 
                      Extensible Delegation for DNS
@@ -61,7 +61,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 20 January 2027.
+   This Internet-Draft will expire on 21 January 2027.
 
 Copyright Notice
 
@@ -649,7 +649,7 @@ Table of Contents
    delegsub.nssub.sld.test. DELEG ...
 
    The terms SNAME and SLIST used here are defined in Section 5.3.2 of
-   [RFC1034].  Quote:
+   [RFC1034]:
 
    *  SNAME is the domain name we are searching for.
 
