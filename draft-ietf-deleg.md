@@ -372,7 +372,7 @@ An example of a valid delegation tree:
     ; nssub.sld.test. zone with DELEG-only delegation
     delegsub.nssub.sld.test. DELEG ...
 
-The terms SNAME and SLIST used here are defined in Section 5.3.2 of {{!RFC1034}}. Quote:
+The terms SNAME and SLIST used here are defined in Section 5.3.2 of {{!RFC1034}}:
 
 - SNAME is the domain name we are searching for.
 
