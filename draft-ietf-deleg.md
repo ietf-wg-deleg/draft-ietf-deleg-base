@@ -522,7 +522,7 @@ The current, primary use case for zone owners that have zones to have DELEG reco
 The authoritative server is RECOMMENDED to supplement its responses to DELEG-unaware resolvers with an {{!RFC8914}} Extended DNS Error using the value "New Delegation Only" (decimal 34) from the Extended DNS Error Codes registry.
 
 When there is no NS RRset for a delegated zone, a DELEG-aware authoritative server MUST respond to DELEG-unaware clients with an answer that accurately describes the situation to a DELEG-unaware resolver.
-For a query of the delegated zone itself, the response has an RCODE of NOERROR; for a query that has more labels than the delegated zone, the response has an RCODE of NXDOMAIN; this is no different than what is already specified by algorithms in {{!RFC1034}} and subsequent updates.
+For a query of the delegated zone itself, the response has an RCODE of NOERROR; for a query that has more labels than the delegated zone, the response has an RCODE of NXDOMAIN; this is no different than the {{!RFC1034}} algorithm applicable to DELEG-unaware authoritative servers.
 NSEC and DS records are returned following the existing rules in {{!RFC4035}}.
 
 #### DELEG-unaware Clients Requesting QTYPE=DELEG {#de0-deleg}
