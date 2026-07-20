@@ -587,7 +587,7 @@ Section 5.2 of {{!RFC4035}} specifies that a validator, when proving a
 delegation is not secure, needs to check for the absence of the DS
 and SOA bits in the NSEC (or NSEC3) type bitmap; this was clarified in Section 4.1 of {{RFC6840}}.
 This document updates {{RFC4035}} and {{RFC6840}} to specify that the validator MUST also check for the presence of the NS or the DELEG bit in the matching NSEC (or NSEC3) RR (proving that there is, indeed, a delegation).
-Alternately, the validator must make sure that the delegation with an NS record is covered by an NSEC3
+Alternatively, the validator must make sure that the delegation with an NS record is covered by an NSEC3
 RR with the Opt-Out flag set.
 Opt-Out is not applicable to DELEG RR type
 because DELEG records are authoritative at the delegation point in the same
