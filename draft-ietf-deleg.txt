@@ -990,7 +990,7 @@ Table of Contents
    in Section 4.1 of [RFC6840].  This document updates [RFC4035] and
    [RFC6840] to specify that the validator MUST also check for the
    presence of the NS or the DELEG bit in the matching NSEC (or NSEC3)
-   RR (proving that there is, indeed, a delegation).  Alternately, the
+   RR (proving that there is, indeed, a delegation).  Alternatively, the
    validator must make sure that the delegation with an NS record is
    covered by an NSEC3 RR with the Opt-Out flag set.  Opt-Out is not
    applicable to DELEG RR type because DELEG records are authoritative
