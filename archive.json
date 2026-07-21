@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-07-19T01:51:56.430799+00:00",
+  "timestamp": "2026-07-21T01:51:31.270149+00:00",
   "repo": "ietf-wg-deleg/draft-ietf-deleg-base",
   "labels": [
     {
@@ -27,6 +27,11 @@
       "name": "nits",
       "description": "",
       "color": "888888"
+    },
+    {
+      "name": "delext",
+      "description": "",
+      "color": "01047b"
     }
   ],
   "issues": [
@@ -1183,12 +1188,12 @@
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [
-        "protocol",
-        "help wanted"
+        "help wanted",
+        "examples"
       ],
       "body": "## Format\nIn what format? Machine readable would be a win. Perhaps a combination of {{?RFC8427}} and {{?I-D.peltan-edns-presentation-format}}\n\n## What to test\nFor RD=0, the CSV table we already have + occlusion for sure. \n\nRD=1 RA=1, I'm not sure. Perhaps smoke test it is able to return DELEG RR or proof of nonexistance in ANSWER section?",
       "createdAt": "2026-02-05T14:07:12Z",
-      "updatedAt": "2026-03-17T10:13:45Z",
+      "updatedAt": "2026-07-19T08:51:50Z",
       "closedAt": null,
       "comments": []
     },
@@ -1285,7 +1290,7 @@
       "id": "I_kwDOO41rkM7zh2GT",
       "title": "Not a quote",
       "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/issues/151",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "paulehoffman",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
@@ -1294,8 +1299,8 @@
       ],
       "body": "-08 as new wording:\n```\n   The terms SNAME and SLIST used here are defined in Section 5.3.2 of\n   [RFC1034].  Quote:\n\n   *  SNAME is the domain name we are searching for.\n\n   *  SLIST is a structure which describes the name servers and the zone\n      which the resolver is currently trying to query.\n```\nThat is not a quote, so we should say it it. I'll fix.",
       "createdAt": "2026-03-17T01:50:17Z",
-      "updatedAt": "2026-03-18T23:34:27Z",
-      "closedAt": null,
+      "updatedAt": "2026-07-20T09:56:42Z",
+      "closedAt": "2026-07-20T09:56:42Z",
       "comments": [
         {
           "author": "pspacek",
@@ -1324,6 +1329,13 @@
           "body": "I will; this was a note for me.",
           "createdAt": "2026-03-18T23:34:27Z",
           "updatedAt": "2026-03-18T23:34:27Z"
+        },
+        {
+          "author": "paulehoffman",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Simply remove the word \"Quote:\" from the DELEG document. 1034 has similar, not identical wording.",
+          "createdAt": "2026-07-19T08:34:06Z",
+          "updatedAt": "2026-07-19T08:34:06Z"
         }
       ]
     },
@@ -1337,11 +1349,12 @@
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [
-        "protocol"
+        "protocol",
+        "delext"
       ],
       "body": "Do we need an example? Perhaps just say 'do as you please' because https://datatracker.ietf.org/doc/html/rfc8482 makes it so unreliable to the point it does not make sense anymore?",
       "createdAt": "2026-03-17T09:26:48Z",
-      "updatedAt": "2026-03-17T10:13:46Z",
+      "updatedAt": "2026-07-20T08:40:41Z",
       "closedAt": null,
       "comments": []
     },
@@ -1426,7 +1439,7 @@
       "id": "I_kwDOO41rkM7zn5cZ",
       "title": "Example for 5.1.3. Algorithm for \"Finding the Best Servers to Ask\"",
       "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/issues/157",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "pspacek",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
@@ -1435,9 +1448,17 @@
       ],
       "body": "Currently the TODO says:\nafter the text below, refer back to this figure and show the order that a DELEG-aware resolver would take when there is a failure to find any good DELEG addresses at sub.sld.test, then any usable name servers at sub.sld.test, and then maybe a good DELEG record at test.",
       "createdAt": "2026-03-17T09:36:41Z",
-      "updatedAt": "2026-03-17T10:12:55Z",
-      "closedAt": null,
-      "comments": []
+      "updatedAt": "2026-07-20T08:10:08Z",
+      "closedAt": "2026-07-20T08:10:08Z",
+      "comments": [
+        {
+          "author": "paulehoffman",
+          "authorAssociation": "COLLABORATOR",
+          "body": "No need to do this.",
+          "createdAt": "2026-07-20T08:10:08Z",
+          "updatedAt": "2026-07-20T08:10:08Z"
+        }
+      ]
     },
     {
       "number": 158,
@@ -1506,16 +1527,24 @@
       "id": "I_kwDOO41rkM70bOmL",
       "title": "UPDATE protocol update - RFC 2136",
       "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/issues/165",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "pspacek",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "RFC2136 defines NS RR type special handling in several places. It might need an update - I did not look yet.",
       "createdAt": "2026-03-19T10:30:46Z",
-      "updatedAt": "2026-03-19T10:30:46Z",
-      "closedAt": null,
-      "comments": []
+      "updatedAt": "2026-07-20T08:41:19Z",
+      "closedAt": "2026-07-20T08:41:19Z",
+      "comments": [
+        {
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I think we are done, nobody raised further comments.",
+          "createdAt": "2026-07-20T08:41:19Z",
+          "updatedAt": "2026-07-20T08:41:19Z"
+        }
+      ]
     },
     {
       "number": 166,
@@ -1526,12 +1555,22 @@
       "author": "pspacek",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
-      "labels": [],
+      "labels": [
+        "delext"
+      ],
       "body": "https://datatracker.ietf.org/doc/html/rfc4592#section-4.2 makes me wince. I think we are good with saying 'DELEG is just like NS', but someone should double-check.",
       "createdAt": "2026-03-19T10:47:54Z",
-      "updatedAt": "2026-03-19T10:47:54Z",
+      "updatedAt": "2026-07-20T10:09:09Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "body": "We discussed this a bit and it is MUST NOT for auths - nothing else would work anyway with DNSSEC.",
+          "createdAt": "2026-07-20T10:09:08Z",
+          "updatedAt": "2026-07-20T10:09:08Z"
+        }
+      ]
     },
     {
       "number": 180,
@@ -1610,15 +1649,15 @@
       "id": "I_kwDOO41rkM8AAAABHsE6gA",
       "title": "\"The erroneous inclusion of DELEG RRset at zone's apex will cause DNSSEC validation failures.\"",
       "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/issues/185",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "hardaker",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "it would be helpful to the reader to explain why this is true.\n\n(differing signatures from parent to child I assume, but didn't want to guess)",
       "createdAt": "2026-07-04T23:55:31Z",
-      "updatedAt": "2026-07-07T16:17:38Z",
-      "closedAt": null,
+      "updatedAt": "2026-07-20T10:26:22Z",
+      "closedAt": "2026-07-20T10:26:22Z",
       "comments": [
         {
           "author": "pspacek",
@@ -1626,6 +1665,20 @@
           "body": "Would a reference to DNSSEC section do? I don't want to re-state rules several times in various places.",
           "createdAt": "2026-07-07T16:17:38Z",
           "updatedAt": "2026-07-07T16:17:38Z"
+        },
+        {
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Do you have a proposal how to handle this?",
+          "createdAt": "2026-07-19T08:20:32Z",
+          "updatedAt": "2026-07-19T08:20:32Z"
+        },
+        {
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Hearing nothing, I'm going to close this until there's proposal. Please take it to the mailing list.",
+          "createdAt": "2026-07-20T10:26:22Z",
+          "updatedAt": "2026-07-20T10:26:22Z"
         }
       ]
     },
@@ -1634,15 +1687,15 @@
       "id": "I_kwDOO41rkM8AAAABHsFQ-A",
       "title": "Consider restating all of the \"find the best server to ask\" section",
       "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/issues/186",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "hardaker",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "for section 5.1.3: I think that just relisting step 2 from 1034, which is also affected by 6672, is confusing and prone to error issues by someone trying to piece everything together properly.  I'd suggest that the entire set of steps required for DELEG from start to finish for finding the best servers to ask could be simply restated here to ensure no one makes a mistake.",
       "createdAt": "2026-07-04T23:58:09Z",
-      "updatedAt": "2026-07-08T11:27:59Z",
-      "closedAt": null,
+      "updatedAt": "2026-07-20T10:24:56Z",
+      "closedAt": "2026-07-20T10:24:40Z",
       "comments": [
         {
           "author": "pspacek",
@@ -1650,6 +1703,20 @@
           "body": "I tried to compare the texts and I'm confused.\n\nRight now rfc1034#section-5.3.3 step 2 is literally this:\n>    2. Find the best servers to ask.\n\nIt has description further down on page 34:\n> Step 2 looks for a name server to ask for the required data.  The ...\n\nand the description goes on for rest of page 34 and first half of page 35.\n\nrfc6672#section-3.4.1 has only:\n>    2.  Find the best servers to ask.\n\nWithout further description.\n\nWhat we are trying to do is to replace textual description of \"Step 2\" from RFC 1034 pages 34 and 35.\n\n\nPerhaps I'm misunderstanding, but it seemed you wanted to re-state also steps 1-4? But why? Steps 1, 3, 4 and not changed by DELEG. Can you rephrase what you want to see?",
           "createdAt": "2026-07-08T11:27:59Z",
           "updatedAt": "2026-07-08T11:27:59Z"
+        },
+        {
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Hello?",
+          "createdAt": "2026-07-19T08:20:56Z",
+          "updatedAt": "2026-07-19T08:20:56Z"
+        },
+        {
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "body": "We have discussed this again with authors and we think the risk of diverging unintentionally is not worth it, plus it makes it easier to see what we actually updated without diffing the old and new texts.",
+          "createdAt": "2026-07-20T10:24:40Z",
+          "updatedAt": "2026-07-20T10:24:40Z"
         }
       ]
     },
@@ -1665,7 +1732,7 @@
       "labels": [],
       "body": "I mean, I CAN interpret it -- but a bit of clean up would be nice.  In particular \"MUST NOT instead use\" is an odd phrase.",
       "createdAt": "2026-07-05T00:00:22Z",
-      "updatedAt": "2026-07-07T16:23:36Z",
+      "updatedAt": "2026-07-20T10:08:15Z",
       "closedAt": null,
       "comments": [
         {
@@ -1674,6 +1741,13 @@
           "body": "The current text is:\n> 2.2.1. For a given SNAME, check for the existence of a DELEG RRset. If it exists, the resolver MUST use its content to populate SLIST. However, if the DELEG RRset is known to exist but is unusable (for example, if it is found in DNSSEC BAD cache, or content of individual RRs is unusable for any reason), the resolver MUST NOT instead use an NS RRset; instead, the resolver MUST treat this case as if SLIST is populated with unreachable servers.\n\nI'm open to suggestions - I'm just coming up blank.",
           "createdAt": "2026-07-07T16:23:35Z",
           "updatedAt": "2026-07-07T16:23:35Z"
+        },
+        {
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "body": "@dblacka Reminder to send in suggested improvement, if you can come up with one, please.",
+          "createdAt": "2026-07-20T10:08:15Z",
+          "updatedAt": "2026-07-20T10:08:15Z"
         }
       ]
     },
@@ -1758,15 +1832,15 @@
       "id": "I_kwDOO41rkM8AAAABHsHQUQ",
       "title": "zone manager is undefined",
       "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/issues/190",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "hardaker",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "I mean really really undefined.  It's used in about 6 RFCs, but never actually defined in any of them.\n\n```\nrfc2535.txt\n409:   (RRset) signed by a special private key held by the zone manager.\n\nrfc3658.txt\n297:   private key held by the zone manager.  But the DNS protocol views the\n\nrfc4290.txt\n738:   Of course, zone managers should inform all current registrants when\n\nrfc5891.txt\n347:   actually reaches the zone manager (\"registry\") are outside the scope\n\nrfc5893.txt\n781:   private zone managers can check for this particular condition before\n\nrfc6841.txt\n349:   Most zone managers using DNSSEC will not have the need to create a\n353:   In other cases, a zone manager may provide registration services with\n650:   This subcomponent describes how the child zone manager has initially\n664:   circumstances the child zone manager is required to provide proof of\n1295:        3.2.  Identification and authentication of child zone manager\n\nrfc7583.txt\n123:   When a zone is secured with DNSSEC, the zone manager must be prepared\n365:   timings are not wholly under the control of the zone manager.  If the\n367:   the case where authentication is via a DS record, the zone manager\n868:   record has been submitted to the parent zone manager for it to be\n1416:   control of the zone manager.\n1535:   L         lifetime: interval set by the zone manager\n1544:   control of the zone manager, and an \"L\" interval (lifetime) is chosen\n1545:   by the zone manager and is a feature of policy.\n```\n",
       "createdAt": "2026-07-05T00:11:39Z",
-      "updatedAt": "2026-07-08T05:47:02Z",
-      "closedAt": null,
+      "updatedAt": "2026-07-20T10:25:09Z",
+      "closedAt": "2026-07-20T08:42:33Z",
       "comments": [
         {
           "author": "vttale",
@@ -1816,6 +1890,44 @@
           "body": "Can you describe the difference? I'm failing to see it.",
           "createdAt": "2026-07-08T05:47:02Z",
           "updatedAt": "2026-07-08T05:47:02Z"
+        },
+        {
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Could you provide an example where it changes meaning, please?",
+          "createdAt": "2026-07-19T08:21:38Z",
+          "updatedAt": "2026-07-19T08:21:38Z"
+        },
+        {
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Given no suggestions were provided and neither was an example of where it changes semantics, I will close this for now. If you disagree please take it to the mailing list.",
+          "createdAt": "2026-07-20T08:42:33Z",
+          "updatedAt": "2026-07-20T08:42:33Z"
+        }
+      ]
+    },
+    {
+      "number": 202,
+      "id": "I_kwDOO41rkM8AAAABJhLWHQ",
+      "title": "Compact Denial of Existence and DE=0 DELEG-only occlusion NXDOMAIN for names below zone cut",
+      "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/issues/202",
+      "state": "OPEN",
+      "author": "shuque",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "I stumbled on this issue while trying to implement the latest draft during the IETF 126 hackathon, and also tested the proposed fix I outline below. Without this fix, a normal CDOE response would not be able to satisfy the downgrade resistance property of DELEG in the face of a DE flag stripping (or MITM) adversary.\n\nPlease review carefully to make sure you agree (or argue if you think it's wrong).\n\nPROBLEM STATEMENT\n\nWhen a DELEG-unaware client (EDNS DE flag = 0) queries a name *below* a delegation point that has Delegation Type RRsets but no NS RRset (a \"DELEG-only\" cut), the authoritative server must return an authoritative NXDOMAIN (delext-08 Section 4.1 and Section 8.4; deleg-10 Section 5.2.2.1), and for a signed zone this NXDOMAIN must carry an NSEC/NSEC3 proof showing delegation types present at the delegation point. All existing examples (deleg-10 Appendix A.4.2) assume a conventional signer.\n\nNeither draft specifies what a **Compact Denial of Existence (CDOE)** signer [RFC9824] does in this case, and CDOE's normal behavior conflicts with the requirement in two ways:\n\n1. **RCODE.** A CDOE signer returns the NXDOMAIN rcode only when the client sets\n   the Compact Answers OK (CO) flag; otherwise it returns NOERROR with an\n   NXNAME-based response. In the general case, DE=0 clients cannot be expected to\n   set CO=1 and Section 4.1 / Section 8.4 require an NXDOMAIN. The NXDOMAIN must\n   therefore be emitted **regardless of the CO flag** \u2014 an intentional exception\n   to [RFC9824], with an accompanying actual proof of NXDOMAIN. But setting\n   CO=1 alone would not be sufficient. See (2) below.\n\n2. **Proof style.** CDOE proves nonexistence with a NODATA style response with\n   an NXNAME-bearing NSEC/NSEC3 record *matching the queried name*. That cannot\n   satisfy delext-08 Section 6.2 /Section 8.4: the downgrade-detection signal a\n   validator relies on is the Delegation Type bit in the NSEC/NSEC3 that **matches\n   the delegation point** (an ancestor of the queried name). An NXNAME response\n   matching the queried name carries the NXNAME pseudo-type, not the Delegation\n   Type bit, and its owner lies below the cut in the invisible child namespace; it\n   therefore discloses nothing about the cut and defeats the ADT detection of delext-08\n   Section 6.2.\n\nPROPOSED FIX\n\nThe fix: for this specific case a CDOE signer must fall back to a conventional Name Error proof and set NXDOMAIN independent of CO. (I've tested this fix in my prototype authoritative server during the IETF126 hackathon.)\n\nIt looks like some text on this point will be needed in both the deleg and delext drafts, but I'm choosing to write up the entire issue in this deleg repo only. I will compose some specific suggested edits to both deleg and delext drafts shortly, but the basic text is listed below:\n\nResponding to DO=1 DE=0 queries for names below deleg-only zone cut:\n\n> When the delegating zone employs Compact Denial of Existence [RFC9824], the\n> NXDOMAIN response required above is an exception to that method: it MUST be\n> generated as a conventional Name Error proof ([RFC4035], or [RFC5155] for\n> NSEC3) rather than as an NXNAME-based NODATA response, and it MUST be returned\n> regardless of whether the query sets the Compact Answers OK (CO) flag\n> [RFC9824].\n>\n> For an NSEC zone, a single NSEC record whose owner name matches the delegation\n> point satisfies both aspects of the Name Error proof at once \u2014 it covers both\n> the queried name and the wildcard at the closest encloser \u2014 while its Type Bit\n> Maps field conveys the Delegation Type(s) present at the delegation point.\n>\n> For an NSEC3 zone, the proof is the usual closest-encloser construction of\n> [RFC5155]: the NSEC3 record matching the delegation point (whose Type Bit Map\n> conveys the Delegation Type(s) present there), the NSEC3 record covering the\n> next closer name, and the NSEC3 record covering the source of synthesis\n> (wildcard) at the closest encloser. Unlike the NSEC case, these are in general\n> three distinct records, because NSEC3 hashing does not preserve the name\n> hierarchy.\n>\n> Returning an NXNAME-based response matching the queried name would not convey\n> the presence of Delegation Types at the delegation point and would prevent the\n> downgrade detection described in delext Section 6.2 and Section 8.4.\n\n",
+      "createdAt": "2026-07-20T22:59:29Z",
+      "updatedAt": "2026-07-20T23:03:27Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "shuque",
+          "authorAssociation": "NONE",
+          "body": "If you want to test the fixed CDOE behavior, you can query a name under \"sub5.deleg.huque.com\" (NSEC CDOE). \n\nThe NSEC3 CDOE case is more complex (needs more than one NSEC3), but it also a bit of a corner case, as hardly anyone has actually implemented NSEC3 CDOE.\n",
+          "createdAt": "2026-07-20T23:03:27Z",
+          "updatedAt": "2026-07-20T23:03:27Z"
         }
       ]
     }
@@ -9054,25 +9166,139 @@
       "id": "PR_kwDOO41rkM7zaMCT",
       "title": "Extend failure cases with disallowed combinations of keys",
       "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/pull/198",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "pspacek",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2026-07-18T21:04:41Z",
-      "updatedAt": "2026-07-18T21:04:41Z",
+      "updatedAt": "2026-07-19T08:24:00Z",
       "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
       "baseRefName": "main",
       "baseRefOid": "f0a8d57fc6619452ca5750f54cda61de7f9d2bd9",
       "headRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
       "headRefName": "failure-cases-keys",
       "headRefOid": "a1d6d1e1fab61af8d0ced569e5612173f87b37b7",
+      "closedAt": "2026-07-19T08:24:00Z",
+      "mergedAt": "2026-07-19T08:24:00Z",
+      "mergedBy": "pspacek",
+      "mergeCommit": {
+        "oid": "c02cba504946b28485374c0d3224507d9a2117a0"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOO41rkM8AAAABGfGuzw",
+          "commit": {
+            "abbreviatedOid": "a1d6d1e"
+          },
+          "author": "dblacka",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-07-19T06:11:51Z",
+          "updatedAt": "2026-07-19T06:11:51Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 199,
+      "id": "PR_kwDOO41rkM7zyMR3",
+      "title": "Fix Quote nit",
+      "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/pull/199",
+      "state": "MERGED",
+      "author": "pspacek",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Closes: #151",
+      "createdAt": "2026-07-20T09:49:30Z",
+      "updatedAt": "2026-07-20T09:56:41Z",
+      "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
+      "baseRefName": "main",
+      "baseRefOid": "c02cba504946b28485374c0d3224507d9a2117a0",
+      "headRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
+      "headRefName": "quote-fix",
+      "headRefOid": "a9f46627728cd137b5733c0204e13154f7351376",
+      "closedAt": "2026-07-20T09:56:41Z",
+      "mergedAt": "2026-07-20T09:56:41Z",
+      "mergedBy": "pspacek",
+      "mergeCommit": {
+        "oid": "7f2569bbc7ed2b715a7d4cc1e740f00dfdb70d10"
+      },
+      "comments": [
+        {
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "body": "As requested by Paul Hoffman.",
+          "createdAt": "2026-07-20T09:56:36Z",
+          "updatedAt": "2026-07-20T09:56:36Z"
+        }
+      ],
+      "reviews": []
+    },
+    {
+      "number": 200,
+      "id": "PR_kwDOO41rkM7zynoE",
+      "title": "Typo fix: Alternately -> Alternatively",
+      "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/pull/200",
+      "state": "MERGED",
+      "author": "pspacek",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2026-07-20T10:06:23Z",
+      "updatedAt": "2026-07-20T10:06:34Z",
+      "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
+      "baseRefName": "main",
+      "baseRefOid": "7f2569bbc7ed2b715a7d4cc1e740f00dfdb70d10",
+      "headRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
+      "headRefName": "typo",
+      "headRefOid": "d443bdb5e0e335863d31079a93df4c9777ba7bfc",
+      "closedAt": "2026-07-20T10:06:34Z",
+      "mergedAt": "2026-07-20T10:06:34Z",
+      "mergedBy": "pspacek",
+      "mergeCommit": {
+        "oid": "54f018ce4424d6294a294bb8757aa691c31ed8be"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 201,
+      "id": "PR_kwDOO41rkM70C7xb",
+      "title": "Clarify a sentence in 5.2.2.1",
+      "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/pull/201",
+      "state": "OPEN",
+      "author": "peterthomassen",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2026-07-20T20:37:09Z",
+      "updatedAt": "2026-07-20T21:15:47Z",
+      "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
+      "baseRefName": "main",
+      "baseRefOid": "54f018ce4424d6294a294bb8757aa691c31ed8be",
+      "headRepository": "peterthomassen/draft-ietf-deleg-base",
+      "headRefName": "patch-1",
+      "headRefOid": "4d834a9e0a172da7ae527a754351ed330d55327d",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
-      "comments": [],
+      "comments": [
+        {
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Could you somehow leave \"and subsequent updates\" in it, please? At least the DNAME and DNSSEC do modify it quite a bit.",
+          "createdAt": "2026-07-20T21:15:47Z",
+          "updatedAt": "2026-07-20T21:15:47Z"
+        }
+      ],
       "reviews": []
     }
   ]
