@@ -133,7 +133,8 @@ Table of Contents
        A.4.3.  DO bit clear, DE bit set
        A.4.4.  DO bit set, DE bit set
      A.5.  DELEGPARAM Interpretation
-     A.6.  Failure Cases
+     A.6.  An example of a valid delegation tree
+     A.7.  Failure Cases
    Acknowledgments
    Authors' Addresses
 
@@ -629,24 +630,6 @@ Table of Contents
    Each delegation level can have a mixture of DELEG and NS RR types,
    and DELEG-aware resolvers MUST be able to follow chains of
    delegations which combines both types in arbitrary ways.
-
-   An example of a valid delegation tree:
-
-   ; root zone with NS-only delegations
-   . SOA ...
-   test. NS ...
-
-   ; test. zone with NS+DELEG delegations
-   test. SOA ...
-   sld.test. NS ...
-   sld.test. DELEG ...
-
-   ; sld.test. zone with NS-only delegation
-   sld.test. SOA ...
-   nssub.sld.test. NS ...
-
-   ; nssub.sld.test. zone with DELEG-only delegation
-   delegsub.nssub.sld.test. DELEG ...
 
    The terms SNAME and SLIST used here are defined in Section 5.3.2 of
    [RFC1034]:
@@ -1805,7 +1788,29 @@ test. DELEG server-ipv6=3fff::33
    Implementations are free to use alternative representations for this
    data, as it is not directly exposed via DNS protocol.
 
-A.6.  Failure Cases
+A.6.  An example of a valid delegation tree
+
+   Each delegation level can have a mixture of DELEG and NS RR types,
+   and DELEG-aware resolvers must be able to follow chains of
+   delegations which combines both types in arbitrary ways.
+
+   ; root zone with NS-only delegations
+   . SOA ...
+   test. NS ...
+
+   ; test. zone with NS+DELEG delegations
+   test. SOA ...
+   sld.test. NS ...
+   sld.test. DELEG ...
+
+   ; sld.test. zone with NS-only delegation
+   sld.test. SOA ...
+   nssub.sld.test. NS ...
+
+   ; nssub.sld.test. zone with DELEG-only delegation
+   delegsub.nssub.sld.test. DELEG ...
+
+A.7.  Failure Cases
 
    Several examples of misconfigured delegations which cannot be
    resolved follow.
