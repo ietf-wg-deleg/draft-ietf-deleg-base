@@ -7,8 +7,8 @@ Internet-Draft                                                       ISC
 Updates: 1034, 1035, 4035, 6672, 6840 (if                       R. Weber
          approved)                                   Akamai Technologies
 Intended status: Standards Track                             D. Lawrence
-Expires: 21 January 2027                                      Salesforce
-                                                            20 July 2026
+Expires: 23 January 2027                                      Salesforce
+                                                            22 July 2026
 
 
                      Extensible Delegation for DNS
@@ -61,7 +61,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 21 January 2027.
+   This Internet-Draft will expire on 23 January 2027.
 
 Copyright Notice
 
@@ -894,9 +894,10 @@ Table of Contents
    resolver.  For a query of the delegated zone itself, the response has
    an RCODE of NOERROR; for a query that has more labels than the
    delegated zone, the response has an RCODE of NXDOMAIN; this is no
-   different than what is already specified by algorithms in [RFC1034]
-   and subsequent updates.  NSEC and DS records are returned following
-   the existing rules in [RFC4035].
+   different than the algorithm applicable to DELEG-unaware
+   authoritative servers originally defined in [RFC1034] (and later
+   updated).  NSEC and DS records are returned following the existing
+   rules in [RFC4035].
 
 5.2.2.2.  DELEG-unaware Clients Requesting QTYPE=DELEG
 
