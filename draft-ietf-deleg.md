@@ -962,6 +962,9 @@ A follow-up example in {{delegparam-example}} explains the ultimate meaning of t
     example.   DS    44444 13 2 ABCDEF01234567...
     example.   RRSIG DS 13 1 300 20260101000000 (
                             20250101000000 33333 . SigExampleDS )
+    example.   NSEC  net. NS DS RRSIG NSEC DELEG
+    example.   RRSIG NSEC 13 1 300 20260101000000 (
+                            20250101000000 33333 . SigExampleNSEC+/ )
 
     ;; Additional
     ;; (empty)
