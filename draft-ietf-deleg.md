@@ -312,7 +312,7 @@ See {{slist}}.
 
 This document requires the use of the EDNS0 DE flag and its requirements from {{!I-D.ietf-dnsop-delext}}.
 
-A resolver that is DELEG-aware MUST signal in queries that it supports the DELEG protocol by setting the DE bit to 1 as described in {{!I-D.ietf-dnsop-delext}}.
+A resolver that is DELEG-aware MUST signal in queries that it supports the DELEG protocol by setting the DE bit to 1.
 
 The DE bit set to 0 indicates the resolver is not DELEG-aware, and therefore can only be served referrals with NS records and other data according to non-DELEG specifications.
 Other special scenarios with DE=0 queries to DELEG-aware authorities are addressed in {{authoritative-servers}}.
