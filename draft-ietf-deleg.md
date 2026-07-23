@@ -124,7 +124,7 @@ The RDATA for DELEG records has key=value pairs ({{nameserver-info}}).
 * "include-delegparam" key contains one or more domain names which in turn have more information about the delegation
 * "mandatory" key contains a list of other keys which must be present in the same record, and which the resolver must understand in order to use that record
 
-The DELEG-aware resolver uses the information in the DELEG RRset to form the list of best servers to ask about the delegated zone ({{finding-best}}).
+The DELEG-aware resolver uses the information in the DELEG RRset to form the list of best servers to ask about the delegated zone ({{slist}}).
 If the DELEG RRset contains "include-delegparam", the resolver queries those hostnames for DELEGPARAM RRsets.
 DELEGPARAM records have the same format as DELEG records; thus, they can have the same key=value pairs.
 
@@ -342,64 +342,6 @@ Record types defined as authoritative at a delegation point, currently the DS an
 
 DELEG-unaware resolvers can get different types of answers for QTYPE=DELEG queries based on the configuration of the server, such as whether it is DELEG-aware and whether it also is authoritative for subdomains.
 For example, a DELEG-unaware authoritative name server which has loaded DELEG records via the {{RFC3597}} unknown types mechanism would answer with them only if there were no NS records at the owner name, and answer with an NS delegation otherwise.
-
-### Algorithm for "Finding the Best Servers to Ask" {#finding-best}
-
-This document updates instructions for finding the best servers to ask.
-It was covered in {{!RFC1034}} Section 5.3.3 and {{!RFC6672}} Section 3.4.1 with the text "2. Find the best servers to ask.".
-These instructions were informally updated by {{!RFC4035}} Section 4.2 for the DS RR type but the algorithm change was not made explicit.
-This document simply extends this existing behavior from the DS RR type to the DELEG RR type as well, and makes this special case explicit.
-
-When a DELEG RRset exists for a delegation in a zone, DELEG-aware resolvers ignore any NS RRset for the delegated zone, whether from the delegation point or from the apex of the delegated zone.
-
-Each delegation level can have a mixture of DELEG and NS RR types, and DELEG-aware resolvers MUST be able to follow chains of delegations which combines both types in arbitrary ways.
-
-The terms SNAME and SLIST used here are defined in Section 5.3.2 of {{!RFC1034}}:
-
-- SNAME is the domain name we are searching for.
-
-- SLIST is a structure which describes the name servers and the zone which the resolver is currently trying to query.
-
-This document defines SLIST to be a set. Each individual value MUST be represented only once in the final SLIST even if it was encountered multiple times during SLIST construction.
-
-Neither {{RFC1034}} nor this document define how a resolver uses SLIST; they only define how to populate it.
-
-A DELEG-aware SLIST needs to be able to hold two types of information, delegations defined by NS records and delegations defined by DELEG records.
-DELEG and NS delegations can create cyclic dependencies and/or lead to duplicate entries which point to the same server.
-Resolvers need to enforce suitable limits to prevent runaway processing even if someone has incorrectly configured some of the data used to create an SLIST;
-this is the same recommendation to bound the amount of work as is made in Section 5.3.3 of {{RFC1034}}.
-
-Step 2 of Section 5.3.3 of {{RFC1034}} is just "2. Find the best servers to ask."
-For DELEG-aware resolvers, this description becomes:
-
-\=\=\=\=\=
-
-&#x0032;. Find the best servers to ask:
-
-2.1. Determine deepest possible zone cut which can potentially hold the answer for a given (query name, type, class) combination:
-
-2.1.1. Start with SNAME equal to QNAME.
-
-2.1.2. If QTYPE is a type that is authoritative at the delegation point (DS or the range defined by {{!I-D.ietf-dnsop-delext}}, which includes DELEG), remove the leftmost label from SNAME.
-For example, if the QNAME is "test.example." and the QTYPE is DELEG or DS, set SNAME to "example.".
-
-2.2. Look for locally-available DELEG and NS RRsets, starting at current SNAME.
-
-2.2.1. For a given SNAME, check for the existence of a DELEG RRset.
-If it exists, the resolver MUST use its content to populate SLIST.
-However, if the DELEG RRset is known to exist but is unusable (for example, if it is found in DNSSEC BAD cache, or content of individual RRs is unusable for any reason), the resolver MUST NOT instead use an NS RRset; instead, the resolver MUST treat this case as if SLIST is populated with unreachable servers.
-
-2.2.2. If a given SNAME is proven to not have a DELEG RRset but does have an NS RRset, the resolver MUST copy the NS RRset into SLIST.
-
-2.2.3. If SLIST is now populated, stop walking up the DNS tree.
-
-2.2.4. However, if SLIST is not populated, remove the leftmost label from SNAME and go back to step 2.2, using the newly shortened SNAME.
-
-\=\=\=\=\=
-
-The rest of Step 2's description in Section 5.3.3 of {{RFC1034}} is not affected by this document.
-
-Resolvers MUST respond to "QNAME=. / QTYPE=DELEG" queries in the same fashion as they respond to "QNAME=. / QTYPE=DS" queries.
 
 ### Populating the SLIST from DELEG and DELEGPARAM Records {#slist}
 
@@ -690,7 +632,7 @@ otherwise, the resolver could exhaust some of its resources.
 Note that include-delegparam chains can have CNAME/DNAME steps in them; in such a case, a CNAME step is counted the same as a DELEGPARAM step when determining when to stop following a chain.
 
 Content of SLIST MUST be deduplicated to prevent amplification attacks similar to CVE-2026-3592 which use the resolver to attack other systems.
-See {{finding-best}}.
+See {{slist}}.
 
 ## Preventing Downgrade Attacks {#downgrade-attacks}
 
