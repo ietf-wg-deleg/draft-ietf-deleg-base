@@ -469,7 +469,7 @@ This has several consequences which stem from existing non-DELEG specifications:
 
 See examples in {{example-root}} and {{example-occluded}}.
 
-In order to protect validators from downgrade attacks (see {{downgrade-attacks}}), {{!I-D.ietf-dnsop-delext}} introduces the DNSKEY flag called DNSKEY-ADT.
+In order to protect validators from downgrade attacks, {{!I-D.ietf-dnsop-delext}} introduces the DNSKEY flag called DNSKEY-ADT.
 To achieve downgrade resistance, DNSSEC-signed zones which contain a DELEG RRset MUST follow the rules in  {{!I-D.ietf-dnsop-delext}}.
 
 # Operational Considerations {#operational-considerations}
@@ -527,7 +527,7 @@ Before adding a first DELEG record into a DNS zone, these steps need to be taken
 1. If zone checkers are used: ensure that the zone checkers are DELEG-aware.
 1. Ensure that all authoritative servers serving (and transferring) the zone are DELEG-aware.
 1. If a zone is DNSSEC-signed: ensure that the signer is DELEG-aware.
-1. If a zone is DNSSEC-signed: ensure that at least one DNSKEY record has the DNSKEY-ADT flag set to 1. Failure to do so results in loss of downgrade resistance of the DELEG protocol for this zone; see {{downgrade-attacks}}.
+1. If a zone is DNSSEC-signed: ensure that at least one DNSKEY record has the DNSKEY-ADT flag set to 1. Failure to do so results in loss of downgrade resistance of the DELEG protocol for this zone; see {{!I-D.ietf-dnsop-delext}} section 8.
 
 ### Enabling the DNSKEY-ADT Flag
 
@@ -574,20 +574,8 @@ Note that include-delegparam chains can have CNAME/DNAME steps in them; in such 
 Content of SLIST MUST be deduplicated to prevent amplification attacks similar to CVE-2026-3592 which use the resolver to attack other systems.
 See {{slist}}.
 
-## Preventing Downgrade Attacks {#downgrade-attacks}
-
-During the rollout of the DELEG protocol, the operator of an authoritative server can upgrade the server software to be DELEG-aware before changing any DNS zones.
-Such deployment should work and provide DELEG-aware clients with correct DELEG-aware answers.
-However, the deployment will not be protected from downgrade attacks against the DELEG protocol.
-
-To protect DNSSEC-secure DNS zones that contain DELEG delegations, the delegating zone needs to have at least one DNSKEY with the DNSKEY-ADT flag set to 1.
-Failure to set this flag in a DNSKEY record in the zone allows an attacker to remove the DELEG RRset from referrals which contain the DS RRset, and replace the original signed DELEG RRset with an arbitrary unsigned NS set.
-Doing so would be a downgrade from the strong protection offered by DNSSEC for DELEG.
-That is, the DELEG protocol when used with upgraded DNSKEY records gives the same protection to DELEG that the zone's DS RRset has.
-Without DELEG, there are no security guarantees for delegation NS records.
-
-Please note that a full DNSKEY rollover is not necessary to achieve the downgrade protection for DELEG.
-Any single DNSKEY with the DNSKEY-ADT flag set to 1 is sufficient; the zone can introduce an otherwise unused record into the DNSKEY RRset.
+## Preventing Downgrade Attacks
+{{!I-D.ietf-dnsop-delext}} section 8 applies.
 
 ## DELEG Is Stronger Than NS
 
