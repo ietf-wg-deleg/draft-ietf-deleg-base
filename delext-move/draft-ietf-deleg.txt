@@ -702,10 +702,10 @@ Table of Contents
 
 5.2.1.2.  DELEG-aware Clients with NS RRs Present but No DELEG RRs
 
-   If the delegation does not have a DELEG RRset, the authoritative
-   server MUST put the NS RRset into the authority section of the
-   referral.  The absence of the DELEG RRset MUST be proven as specified
-   by the DNSSEC protocol for authoritative data.
+   According to specification in [I-D.ietf-dnsop-delext], if the
+   delegation does not have a DELEG RRset, the authoritative server puts
+   the NS RRset into the authority section of the referral.  The absence
+   of the DELEG RRset needs to be proven.
 
    Similarly, rules for DS RRset inclusion into referrals apply as
    specified by the DNSSEC protocol.  Please note that, in practice, the

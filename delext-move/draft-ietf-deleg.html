@@ -1828,8 +1828,8 @@ In summary, the server either provides an authoritative DELEG RRset or declares 
             <h5 id="name-deleg-aware-clients-with-ns">
 <a href="#section-5.2.1.2" class="section-number selfRef">5.2.1.2. </a><a href="#name-deleg-aware-clients-with-ns" class="section-name selfRef">DELEG-aware Clients with NS RRs Present but No DELEG RRs</a>
             </h5>
-<p id="section-5.2.1.2-1">If the delegation does not have a DELEG RRset, the authoritative server MUST put the NS RRset into the authority section of the referral.
-The absence of the DELEG RRset MUST be proven as specified by the DNSSEC protocol for authoritative data.<a href="#section-5.2.1.2-1" class="pilcrow">¶</a></p>
+<p id="section-5.2.1.2-1">According to specification in <span>[<a href="#I-D.ietf-dnsop-delext" class="cite xref">I-D.ietf-dnsop-delext</a>]</span>, if the delegation does not have a DELEG RRset, the authoritative server puts the NS RRset into the authority section of the referral.
+The absence of the DELEG RRset needs to be proven.<a href="#section-5.2.1.2-1" class="pilcrow">¶</a></p>
 <p id="section-5.2.1.2-2">Similarly, rules for DS RRset inclusion into referrals apply as specified by the DNSSEC protocol.
 Please note that, in practice, the same process and records are used to prove the non-existence of both DELEG and DS RRsets.<a href="#section-5.2.1.2-2" class="pilcrow">¶</a></p>
 </section>
