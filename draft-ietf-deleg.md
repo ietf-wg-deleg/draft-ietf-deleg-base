@@ -1070,6 +1070,85 @@ Records which are not even allowed in zone file (see also {{RFC9460}} appendix D
     m2.invalid. DELEG mandatory
     ik.invalid. DELEG invalid
 
+# Test Vectors {#testvectors}
+
+These test vectors only contain the RDATA portion of DELEG records in
+presentation format, generic format ({{!RFC3597}}) and wire format. The wire
+format uses hexadecimal (\xNN) for each non-ascii byte. As the wireformat is
+long, it is broken into several lines.
+
+As the encoding rules for DelegInfo and SVCParam are the same, further examples
+of the encoding of different types of values can be found in Appendix D of
+{{!RFC9460}}.
+
+    example.   DELEG mandatory=server-ipv4 server-ipv4=192.0.2.1,192.0.2.2
+    example.   DELEG key0=\000\001 key1=\192\000\002\001\192\000\002\002
+
+    \# 18 (
+    00 00                                              ; key 0
+    00 02                                              ; deleg info length 2
+    00 01                                              ; deleg info value: key 1
+    00 01                                              ; key 1
+    00 08                                              ; deleg info length 8
+    c0 00 02 01                                        ; deleg info value, IP 1
+    c0 00 02 02                                        ; deleg info value, IP 2
+    )
+
+    \x00\x00                                           # key 0
+    \x00\x02                                           # deleg info length 2
+    \x00\x01                                           # deleg info value: key 1
+    \x00\x01                                           # key 1
+    \x00\x08                                           # deleg info length 8
+    \xc0\x00\x02\x01                                   # deleg info value, IP 1
+    \xc0\x00\x02\x02                                   # deleg info value, IP 2
+{: title="A simple example of a mandatory server-ip4 with two IP addresses"}
+
+    example.   DELEG server-ipv6="2001:db8::1,2001:db8::53:1"
+
+    \# 36 (
+    00 02                                              ; key 2
+    00 20                                              ; length 32
+    20 01 0d b8 00 00 00 00 00 00 00 00 00 00 00 01    ; first address
+    20 01 0d b8 00 00 00 00 00 00 00 00 00 53 00 01    ; second address
+    )
+
+    \x00\x02                                           # key 2
+    \x00\x20                                           # length 32
+    \x20\x01\x0d\xb8\x00\x00\x00\x00
+         \x00\x00\x00\x00\x00\x00\x00\x01              # first address
+    \x20\x01\x0d\xb8\x00\x00\x00\x00
+         \x00\x00\x00\x00\x00\x53\x00\x01              # second address
+{: title="Two quoted server-ipv6 addresses"}
+
+    example.   DELEG server-name=NS2.EXAMPLE.NET.,ns3.example.org.
+    example.   DELEG server-name="NS2.EXAMPLE.NET.,ns3.example.org."
+
+    \# 38 (
+    00 03                                              ; key 3
+    00 22                                              ; length 34
+    03 4e 53 32 07 45 58 41 4d 50 4c 45 03 4e 45 54 00 ; first name
+    03 6e 73 33 07 65 78 61 6d 70 6c 65 03 6f 72 67 00 ; second name
+    )
+
+    \x00\x03                                           # key 3
+    \x00\x22                                           # length 34
+    \x03NS2\x07EXAMPLE\x03NET\x00                      # first address
+    \x03ns3\x07example\x03org\x00                      # second address
+{: title="The server-name deleg info with two addresses with different capitalization"}
+
+    example.   DELEG include-delegparam=param.example.net.
+
+    \# 23 (
+    00 04                                                    ; key 4
+    00 13                                                    ; length 19
+    05 70 61 72 61 6d 07 65 78 61 6d 70 6c 65 03 6e 65 74 00 ; name
+    )
+
+    \x00\x04                                           # key 4
+    \x00\x13                                           # length 19
+    \x05param\x07example\x03net\x00                    # name
+{: title="The include-delegparam deleg info with a single value"}
+
 # Acknowledgments
 {:numbered="false"}
 
@@ -1080,4 +1159,4 @@ John Levine, Erik Nygren, Jon Reed, Ben Kaduk, Mashooq Muhaimen, Jason Moreau, J
 Work on DELEG protocol has started at IETF 118 Hackathon.
 Hackathon participants: Christian Elmerot, David Blacka, David Lawrence, Edward Lewis, Erik Nygren, George Michaelson, Jan Včelák, Klaus Darilion, Libor Peltan, Manu Bretelle, Peter van Dijk, Petr Špaček, Philip Homburg, Ralf Weber, Roy Arends, Shane Kerr, Shumon Huque, Vandan Adhvaryu, Vladimír Čunát, Andreas Schulze.
 
-Other people joined the effort after the initial hackaton: Ben Schwartz, Bob Halley, Paul Hoffman, Miek Gieben, Ray Hunter, Håvard Eidnes, Ted Hardie, Michael Richardson, Florian Obser, Evan Hunt, ...
+Other people joined the effort after the initial hackaton: Ben Schwartz, Bob Halley, Paul Hoffman, Miek Gieben, Ray Hunter, Håvard Eidnes, Ted Hardie, Michael Richardson, Florian Obser, Evan Hunt, Pieter Lexis, ...
