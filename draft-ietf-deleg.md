@@ -102,6 +102,7 @@ DELEG-aware software is inherently Delegation-Extension-aware.
 * non-DELEG specifications: DNS protocols that predate this protocol, or are written after this protocol is published but are not related to this protocol.
 * Delegation NS RRset: An NS RRset that delegates authority of a subdomain to a set of authoritative servers.
 * Authoritative NS RRset: An NS RRset at the apex of a zone.
+* server information key: a key used within the DELEG record to indicate the type of value that follows.
 
 # Protocol Overview
 
@@ -228,13 +229,13 @@ The following is a brief summary of semantic differences between the DELEG and D
 - DELEG is authoritative at the delegation point, similar to the DS RR type, and unlike the NS RR type.
 - DELEG is signed when using DNSSEC, similar to the DS RR type, and unlike the NS RR type.
 - DELEG cannot be present at the apex of the delegated zone, similar to the DS RR type, and unlike the NS RR type.
-- DELEG has special processing for being included in answers.
+- DELEG has special processing for being included in answers ({{authoritative-servers}}).
 
 Conversely,
 
 - DELEGPARAM is an ordinary RR and doesn't require any special processing.
 - DELEGPARAM does not create a delegation for its owner name.
-- DELEGPARAM cannot exist at a delegation point.
+- DELEGPARAM cannot exist at a delegation point or at the apex of the delegated zone.
 - DELEGPARAM DNSSEC-signing and record-placement rules are the same as for any ordinary RR type.
 - DELEGPARAM is used as the target of the DELEG protocol's "include-delegparam" mechanism, as described in {{slist}}.
 
@@ -287,8 +288,8 @@ a DELEG or DELEGPARAM record that has a non-empty DelegInfos MUST have one, and 
 This restriction only applies to a single DELEG or DELEGPARAM record; a DELEG or DELEGPARAM RRset can have records with different server information keys.
 Authoritative servers MAY refuse to load zones which have a disallowed combination of keys in a single record.
 
-When using server-name or include-delegparam, the addresses for the names in the set must be fetched as if they were referenced by NS records.
-Because of the lack of Additional Section processing, there are no "glue" records provided for these names, so they cannot be for names inside the delegated domain.
+When using server-name or include-delegparam, the addresses for the names in the set must be resolved as if they were referenced by NS records.
+Because of the lack of Additional Section processing, there are no "glue" records provided for these names, so they MUST NOT be for names inside the delegated domain.
 
 With this initial DELEG specification, servers are still expected to be reached on the standard DNS port for both UDP and TCP, 53.  While a future specification is expected to address other transports using other ports, its eventual semantics are not covered here.
 
@@ -302,7 +303,7 @@ The presentation format for the value MUST be a comma-separated list of one or m
 
 The wire format for the value is a sequence of DelegInfoKey numeric values in network byte order, concatenated, in strictly increasing numeric order.
 
-The "mandatory" key is optional, but when it is present, the RR in which it appears MUST also contain all of the DelegInfoKeys referenced in its DelegInfoValue.
+The "mandatory" key is optional. If present, the DELEG or DELEGPARAM RR in which it appears MUST also contain all of the DelegInfoKeys referenced in its DelegInfoValue.
 Resolvers MUST handle non-compliant RRs as specified in {{slist}}.
 
 A resolver MUST NOT use an RR with a "mandatory" key in the resolution process unless all of the DelegInfoKeys referenced by the "mandatory" DelegInfoValue are supported in the resolver's implementation.
@@ -348,9 +349,9 @@ For example, a DELEG-unaware authoritative name server which has loaded DELEG re
 
 Each individual DELEG record inside a DELEG RRset, or each individual DELEGPARAM record in a DELEGPARAM RRset, can cause the addition of zero or more entries to SLIST.
 
-A resolver processes each individual DELEG record within a DELEG RRset, or each individual DELEGPARAM record in a DELEGPARAM RRset, using the following steps:
+A resolver processes each individual DELEG record within a DELEG RRset, or each individual DELEGPARAM record in a DELEGPARAM RRset, using the following steps.  If during any step processing is stopped, implementations should proceed to the next record until it has run out of records to process.  If processing is stopped for all records and the SLIST is never modified, then SLIST MUST remain unmodified.
 
-1.  Discard all DelegInfo elements with DelegInfoKey values that are not supported by the resolver implementation.
+1.  Discard all DelegInfo elements with DelegInfoKey values that are not supported or cannot be parsed by the resolver implementation.
 If no DelegInfo elements remain after this filtering, stop processing the record.
 Otherwise, continue using only the supported DelegInfo elements.
 
@@ -369,8 +370,7 @@ Stop processing this record.
 1. If server-ipv4 and/or server-ipv6 keys are present inside the record, copy all of the address values into SLIST.
 Stop processing this record.
 
-1. If a server-name key is present in the record, resolve each name in the value into IPv4 and/or IPv6 addresses.
-Copy these addresses into SLIST.
+1. If a server-name key is present in the record, resolve each name in the value into IPv4 and/or IPv6 addresses and copy all successful addresses from the responses into SLIST.
 Stop processing this record.
 
 1. If an include-delegparam key is present in the record, resolve each name in the value using the DELEGPARAM RR type.
