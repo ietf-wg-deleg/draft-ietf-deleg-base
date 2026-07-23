@@ -108,6 +108,8 @@ DELEG-aware software is inherently Delegation-Extension-aware.
 This section is a brief overview of the DELEG protocol.
 It is meant for people who want to understand the protocol before they dive deeper into the specifics.
 
+The DELEG protocol is built on top of {{!I-D.ietf-dnsop-delext}}.
+
 When a DELEG-aware resolver sends DNS queries, it sets the DE bit in the EDNS0 header to 1 in queries to authoritative servers, as a signal that it is DELEG-aware.
 
 DELEG-unaware authoritative servers intrinsically ignore this signal.
@@ -128,8 +130,7 @@ The DELEG-aware resolver uses the information in the DELEG RRset to form the lis
 If the DELEG RRset contains "include-delegparam", the resolver queries those hostnames for DELEGPARAM RRsets.
 DELEGPARAM records have the same format as DELEG records; thus, they can have the same key=value pairs.
 
-The DELEG protocol changes how zones are signed ({{signers}}) and validated ({{dnssec-validators}}).
-The changes are primarily because DELEG RRsets are authoritative at the delegation point and thus are signed and validated as authoritative data, similar to DS records.
+DELEG RR type is a Delegation Type, thus authoritative at the delegation point, signed and validated as authoritative data, similar to DS records.
 
 A zone might be delegated with only DELEG records but no NS records.
 Such a zone would be invisible to DELEG-unaware resolvers.
