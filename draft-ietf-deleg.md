@@ -481,15 +481,17 @@ See examples in {{example-root}} and {{example-occluded}}.
 In order to protect validators from downgrade attacks (see {{downgrade-attacks}}), {{!I-D.ietf-dnsop-delext}} introduces the DNSKEY flag called DNSKEY-ADT.
 To achieve downgrade resistance, DNSSEC-signed zones which contain a DELEG RRset MUST follow the rules in  {{!I-D.ietf-dnsop-delext}}.
 
-## DNSSEC Validators {#dnssec-validators}
+# Operational Considerations {#operational-considerations}
 
-DELEG awareness introduces additional requirements on validators.
+When DELEG is deployed, new operational considerations will apply.
+While the majority of these relate to the operation of DELEG-aware servers or resolvers, there is a more general set of operational practices which will need to apply because not all resolvers will be DELEG-aware.
+This section gives an overview of some of those considerations.
 
-### Chaining
+## Forwarding
 
 A Validating Stub Resolver that is DELEG-aware MUST only use security-aware resolvers that are DELEG-aware.
 A DELEG-aware Validating Resolver that uses forwarders MUST only use DELEG-aware and security-aware forwarders.
-Otherwise DNSSEC-secure zones might fail to validate (see {{legacynxdomain}}) and DNSSEC-insecure zones might observe inconsistent answers (see {{operational-considerations}}).
+Otherwise DNSSEC-secure zones might fail to validate (see {{legacynxdomain}}) and DNSSEC-insecure zones might observe inconsistent answers.
 
 {{!RFC9606}} specifies a DNS resource record type, RESINFO, to allow resolvers to publish information about their capabilities and policies. This can be used to inform DNS clients that DELEG is supported by the DNS resolver.
 
@@ -497,12 +499,6 @@ A resolver which supports {{!RFC9606}} SHOULD add the "deleg" key if it supports
 A resolver that uses forwarders MAY use a RESINFO query to determine if the configured forwarders are DELEG-aware.
 
 Note that, per the rules for the keys defined in Section 6.4 of {{!RFC6763}}, if there is no '=' in a key, then it is a boolean attribute, simply identified as being present with no value.
-
-# Operational Considerations {#operational-considerations}
-
-When DELEG is deployed, new operational considerations will apply.
-While the majority of these relate to the operation of DELEG-aware servers or resolvers, there is a more general set of operational practices which will need to apply because not all resolvers will be DELEG-aware.
-This section gives an overview of some of those considerations.
 
 ## NS Not Required by Protocol
 
