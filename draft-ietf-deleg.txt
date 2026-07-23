@@ -7,8 +7,8 @@ Internet-Draft                                                       ISC
 Updates: 1034, 1035, 4035, 6672, 6840 (if                       R. Weber
          approved)                                   Akamai Technologies
 Intended status: Standards Track                             D. Lawrence
-Expires: 23 January 2027                                      Salesforce
-                                                            22 July 2026
+Expires: 24 January 2027                                      Salesforce
+                                                            23 July 2026
 
 
                      Extensible Delegation for DNS
@@ -61,7 +61,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 23 January 2027.
+   This Internet-Draft will expire on 24 January 2027.
 
 Copyright Notice
 
@@ -92,25 +92,19 @@ Table of Contents
    5.  Use of DELEG Records in the Protocols
      5.1.  Resolvers
        5.1.1.  Delegation point types, QTYPE=DELEG
-       5.1.2.  Algorithm for "Finding the Best Servers to Ask"
-       5.1.3.  Populating the SLIST from DELEG and DELEGPARAM Records
+       5.1.2.  Populating the SLIST from DELEG and DELEGPARAM Records
      5.2.  Authoritative Servers
        5.2.1.  DELEG-aware Clients
        5.2.2.  DELEG-unaware Clients
      5.3.  DNSSEC Signers
-     5.4.  DNSSEC Validators
-       5.4.1.  Clarifications on Nonexistence Proofs
-       5.4.2.  Insecure Delegation Proofs
-       5.4.3.  Referral downgrade protection
-       5.4.4.  Positive responses
-       5.4.5.  Chaining
    6.  Operational Considerations
-     6.1.  NS Not Required by Protocol
-     6.2.  NS Maybe Required in Practice
-     6.3.  NS and DELEG Combined
-     6.4.  Authoritative Deployment
-       6.4.1.  Enabling the DNSKEY-ADT Flag
-     6.5.  Interaction with Dynamic DNS Update
+     6.1.  Forwarding
+     6.2.  NS Not Required by Protocol
+     6.3.  NS Maybe Required in Practice
+     6.4.  NS and DELEG Combined
+     6.5.  Authoritative Deployment
+       6.5.1.  Enabling the DNSKEY-ADT Flag
+     6.6.  Interaction with Dynamic DNS Update
    7.  Security Considerations
      7.1.  Preventing Over-work Attacks
      7.2.  Preventing Downgrade Attacks
@@ -229,6 +223,8 @@ Table of Contents
    for people who want to understand the protocol before they dive
    deeper into the specifics.
 
+   The DELEG protocol is built on top of [I-D.ietf-dnsop-delext].
+
    When a DELEG-aware resolver sends DNS queries, it sets the DE bit in
    the EDNS0 header to 1 in queries to authoritative servers, as a
    signal that it is DELEG-aware.
@@ -267,10 +263,9 @@ Table of Contents
    DELEGPARAM records have the same format as DELEG records; thus, they
    can have the same key=value pairs.
 
-   The DELEG protocol changes how zones are signed (Section 5.3) and
-   validated (Section 5.4).  The changes are primarily because DELEG
-   RRsets are authoritative at the delegation point and thus are signed
-   and validated as authoritative data, similar to DS records.
+   DELEG RR type is a Delegation Type, thus authoritative at the
+   delegation point, signed and validated as authoritative data, similar
+   to DS records.
 
    A zone might be delegated with only DELEG records but no NS records.
    Such a zone would be invisible to DELEG-unaware resolvers.
@@ -433,7 +428,7 @@ Table of Contents
       as for any ordinary RR type.
 
    *  DELEGPARAM is used as the target of the DELEG protocol's "include-
-      delegparam" mechanism, as described in Section 5.1.3.
+      delegparam" mechanism, as described in Section 5.1.2.
 
    Note that neither DELEG nor DELEGPARAM trigger Additional
    Section processing like NS does.  The significance of this difference
@@ -443,7 +438,7 @@ Table of Contents
 
    The DELEG and DELEGPARAM records have four keys that describe
    information about name servers.  The purpose of this information is
-   to populate the SLIST (see Section 5.1.3) with IP addresses of the
+   to populate the SLIST (see Section 5.1.2) with IP addresses of the
    name servers for a zone.
 
    The types of information defined in this document are:
@@ -500,7 +495,7 @@ Table of Contents
    The names in the wire format MUST NOT be compressed, per [RFC3597].
 
    For interoperability with the resolver algorithm defined in
-   Section 5.1.3, a DELEG or DELEGPARAM record that has a non-empty
+   Section 5.1.2, a DELEG or DELEGPARAM record that has a non-empty
    DelegInfos MUST have one, and only one, set of server information
    keys, chosen from the following:
 
@@ -550,12 +545,12 @@ Table of Contents
    The "mandatory" key is optional, but when it is present, the RR in
    which it appears MUST also contain all of the DelegInfoKeys
    referenced in its DelegInfoValue.  Resolvers MUST handle non-
-   compliant RRs as specified in Section 5.1.3.
+   compliant RRs as specified in Section 5.1.2.
 
    A resolver MUST NOT use an RR with a "mandatory" key in the
    resolution process unless all of the DelegInfoKeys referenced by the
    "mandatory" DelegInfoValue are supported in the resolver's
-   implementation.  See Section 5.1.3.
+   implementation.  See Section 5.1.2.
 
 4.  Signaling DELEG Support
 
@@ -563,8 +558,7 @@ Table of Contents
    requirements from [I-D.ietf-dnsop-delext].
 
    A resolver that is DELEG-aware MUST signal in queries that it
-   supports the DELEG protocol by setting the DE bit to 1 as described
-   in [I-D.ietf-dnsop-delext].
+   supports the DELEG protocol by setting the DE bit to 1.
 
    The DE bit set to 0 indicates the resolver is not DELEG-aware, and
    therefore can only be served referrals with NS records and other data
@@ -600,9 +594,8 @@ Table of Contents
 
 5.1.1.  Delegation point types, QTYPE=DELEG
 
-   Record types defined as authoritative at a delegation point,
-   currently the DS and DELEG types, retain the same special handling as
-   described in Section 2.6 of [RFC4035].
+   DELEG RR type is one of Delegation Types with special handling
+   defined defined in [I-D.ietf-dnsop-delext].
 
    DELEG-unaware resolvers can get different types of answers for
    QTYPE=DELEG queries based on the configuration of the server, such as
@@ -612,96 +605,7 @@ Table of Contents
    mechanism would answer with them only if there were no NS records at
    the owner name, and answer with an NS delegation otherwise.
 
-5.1.2.  Algorithm for "Finding the Best Servers to Ask"
-
-   This document updates instructions for finding the best servers to
-   ask.  It was covered in [RFC1034] Section 5.3.3 and [RFC6672]
-   Section 3.4.1 with the text "2.  Find the best servers to ask.".
-   These instructions were informally updated by [RFC4035] Section 4.2
-   for the DS RR type but the algorithm change was not made explicit.
-   This document simply extends this existing behavior from the DS RR
-   type to the DELEG RR type as well, and makes this special case
-   explicit.
-
-   When a DELEG RRset exists for a delegation in a zone, DELEG-aware
-   resolvers ignore any NS RRset for the delegated zone, whether from
-   the delegation point or from the apex of the delegated zone.
-
-   Each delegation level can have a mixture of DELEG and NS RR types,
-   and DELEG-aware resolvers MUST be able to follow chains of
-   delegations which combines both types in arbitrary ways.
-
-   The terms SNAME and SLIST used here are defined in Section 5.3.2 of
-   [RFC1034]:
-
-   *  SNAME is the domain name we are searching for.
-
-   *  SLIST is a structure which describes the name servers and the zone
-      which the resolver is currently trying to query.
-
-   This document defines SLIST to be a set.  Each individual value MUST
-   be represented only once in the final SLIST even if it was
-   encountered multiple times during SLIST construction.
-
-   Neither [RFC1034] nor this document define how a resolver uses SLIST;
-   they only define how to populate it.
-
-   A DELEG-aware SLIST needs to be able to hold two types of
-   information, delegations defined by NS records and delegations
-   defined by DELEG records.  DELEG and NS delegations can create cyclic
-   dependencies and/or lead to duplicate entries which point to the same
-   server.  Resolvers need to enforce suitable limits to prevent runaway
-   processing even if someone has incorrectly configured some of the
-   data used to create an SLIST; this is the same recommendation to
-   bound the amount of work as is made in Section 5.3.3 of [RFC1034].
-
-   Step 2 of Section 5.3.3 of [RFC1034] is just "2.  Find the best
-   servers to ask."  For DELEG-aware resolvers, this description
-   becomes:
-
-   =====
-
-   2.  Find the best servers to ask:
-
-   2.1.  Determine deepest possible zone cut which can potentially hold
-   the answer for a given (query name, type, class) combination:
-
-   2.1.1.  Start with SNAME equal to QNAME.
-
-   2.1.2.  If QTYPE is a type that is authoritative at the delegation
-   point (DS or the range defined by [I-D.ietf-dnsop-delext], which
-   includes DELEG), remove the leftmost label from SNAME.  For example,
-   if the QNAME is "test.example." and the QTYPE is DELEG or DS, set
-   SNAME to "example.".
-
-   2.2.  Look for locally-available DELEG and NS RRsets, starting at
-   current SNAME.
-
-   2.2.1.  For a given SNAME, check for the existence of a DELEG RRset.
-   If it exists, the resolver MUST use its content to populate SLIST.
-   However, if the DELEG RRset is known to exist but is unusable (for
-   example, if it is found in DNSSEC BAD cache, or content of individual
-   RRs is unusable for any reason), the resolver MUST NOT instead use an
-   NS RRset; instead, the resolver MUST treat this case as if SLIST is
-   populated with unreachable servers.
-
-   2.2.2.  If a given SNAME is proven to not have a DELEG RRset but does
-   have an NS RRset, the resolver MUST copy the NS RRset into SLIST.
-
-   2.2.3.  If SLIST is now populated, stop walking up the DNS tree.
-
-   2.2.4.  However, if SLIST is not populated, remove the leftmost label
-   from SNAME and go back to step 2.2, using the newly shortened SNAME.
-
-   =====
-
-   The rest of Step 2's description in Section 5.3.3 of [RFC1034] is not
-   affected by this document.
-
-   Resolvers MUST respond to "QNAME=. / QTYPE=DELEG" queries in the same
-   fashion as they respond to "QNAME=. / QTYPE=DS" queries.
-
-5.1.3.  Populating the SLIST from DELEG and DELEGPARAM Records
+5.1.2.  Populating the SLIST from DELEG and DELEGPARAM Records
 
    Each individual DELEG record inside a DELEG RRset, or each individual
    DELEGPARAM record in a DELEGPARAM RRset, can cause the addition of
@@ -769,13 +673,10 @@ Table of Contents
 5.2.  Authoritative Servers
 
    The DELEG RR type defines a zone cut in a similar way as the NS RR
-   type.  Behavior defined for zone cuts in existing non-DELEG
-   specifications apply to zone cuts created by the DELEG record.  A
-   notable example of this is that the occlusion (usually accidentally)
-   created by delegation NS records would also be created by DELEG
-   records at the same name (see Appendix A.4.1.3).  Rules for setting
-   Authoritative Answer (AA) bit in answers also remain unchanged: the
-   DELEG RR type has the same special treatment as DS RR type.
+   type.  [I-D.ietf-dnsop-delext] section 4 applies.  A notable example
+   of this is that the occlusion (usually accidentally) created by
+   delegation NS records would also be created by DELEG records at the
+   same name (see Appendix A.4.1.3).
 
    DELEG-aware authoritative servers act differently when handling
    queries from DELEG-unaware clients (those with DE=0) than from DELEG-
@@ -798,24 +699,12 @@ Table of Contents
    an authoritative DELEG RRset or declares its non-existence, with
    relevant DNSSEC proofs when requested and available.
 
-5.2.1.2.  Delegation with DELEG
+5.2.1.2.  DELEG-aware Clients with NS RRs Present but No DELEG RRs
 
-   If the delegation has a DELEG RRset, the authoritative server MUST
-   put the DELEG RRset into the Authority section of the referral.  In
-   this case, the server MUST NOT include the NS RRset in the Authority
-   section.
-
-   Non-DELEG DNSSEC specifications for RRSIG inclusion in answers with
-   authoritative RRsets ([RFC4035] Section 3.1.1) MUST be followed.
-   Similarly, rules for DS RRset inclusion in referrals apply as
-   specified by the DNSSEC protocol.
-
-5.2.1.3.  DELEG-aware Clients with NS RRs Present but No DELEG RRs
-
-   If the delegation does not have a DELEG RRset, the authoritative
-   server MUST put the NS RRset into the authority section of the
-   referral.  The absence of the DELEG RRset MUST be proven as specified
-   by the DNSSEC protocol for authoritative data.
+   According to specification in [I-D.ietf-dnsop-delext], if the
+   delegation does not have a DELEG RRset, the authoritative server puts
+   the NS RRset into the authority section of the referral.  The absence
+   of the DELEG RRset needs to be proven.
 
    Similarly, rules for DS RRset inclusion into referrals apply as
    specified by the DNSSEC protocol.  Please note that, in practice, the
@@ -928,92 +817,28 @@ Table of Contents
 
    See examples in Appendix A.1 and Appendix A.4.2.3.
 
-   In order to protect validators from downgrade attacks (see
-   Section 7.2), [I-D.ietf-dnsop-delext] introduces the DNSKEY flag
-   called DNSKEY-ADT.  To achieve downgrade resistance, DNSSEC-signed
-   zones which contain a DELEG RRset MUST follow the rules in
-   [I-D.ietf-dnsop-delext].
+   In order to protect validators from downgrade attacks,
+   [I-D.ietf-dnsop-delext] introduces the DNSKEY flag called DNSKEY-ADT.
+   To achieve downgrade resistance, DNSSEC-signed zones which contain a
+   DELEG RRset MUST follow the rules in [I-D.ietf-dnsop-delext].
 
-5.4.  DNSSEC Validators
+6.  Operational Considerations
 
-   DELEG awareness introduces additional requirements on validators.
+   When DELEG is deployed, new operational considerations will apply.
+   While the majority of these relate to the operation of DELEG-aware
+   servers or resolvers, there is a more general set of operational
+   practices which will need to apply because not all resolvers will be
+   DELEG-aware.  This section gives an overview of some of those
+   considerations.
 
-5.4.1.  Clarifications on Nonexistence Proofs
-
-   This document updates [RFC6840] Section 4.1 to include "NS or DELEG"
-   types in the type bitmap as indication of a delegation point, and
-   generalizes applicability of ancestor delegation proof to all RR
-   types that are authoritative at a delegation point (that is, both DS
-   and DELEG).  The text in that section is updated as follows:
-
-   An "ancestor delegation" NSEC RR (or NSEC3 RR) is one with:
-
-   *  the NS and/or DELEG bit set,
-
-   *  the Start of Authority (SOA) bit clear, and
-
-   *  a signer field that is shorter than the owner name of the NSEC RR,
-      or the original owner name for the NSEC3 RR.
-
-   Ancestor delegation NSEC or NSEC3 RRs MUST NOT be used to assume
-   nonexistence of any RRs below that zone cut, which include all RRs at
-   that original owner name, other than types authoritative at the
-   delegation point (DS and DELEG), and all RRs below that owner name
-   regardless of type.
-
-5.4.2.  Insecure Delegation Proofs
-
-   This document updates [RFC6840] Section 4.4 to include securing DELEG
-   records, and explicitly states that Opt-Out is not applicable to the
-   DELEG protocol.  The first paragraph of that section is updated to
-   read:
-
-   Section 5.2 of [RFC4035] specifies that a validator, when proving a
-   delegation is not secure, needs to check for the absence of the DS
-   and SOA bits in the NSEC (or NSEC3) type bitmap; this was clarified
-   in Section 4.1 of [RFC6840].  This document updates [RFC4035] and
-   [RFC6840] to specify that the validator MUST also check for the
-   presence of the NS or the DELEG bit in the matching NSEC (or NSEC3)
-   RR (proving that there is, indeed, a delegation).  Alternatively, the
-   validator must make sure that the delegation with an NS record is
-   covered by an NSEC3 RR with the Opt-Out flag set.  Opt-Out is not
-   applicable to DELEG RR type because DELEG records are authoritative
-   at the delegation point in the same way that DS RR types are.
-
-5.4.3.  Referral downgrade protection
-
-   If the zone is DNSSEC-secure, and if any DNSKEY of the zone has the
-   DNSKEY-ADT flag (Section 5.3) set to 1, a DELEG-aware validator MUST
-   prove the absence of a DELEG RRset in referral responses from this
-   particular zone.
-
-   Without this check, an attacker could strip the DELEG RRset from a
-   referral response and replace it with an unsigned (and potentially
-   malicious) NS RRset (Section 7.2).  The reason for this is that
-   according to non-DELEG DNSSEC specification, a referral response with
-   an unsigned NS and signed DS RRsets does not require additional
-   proofs of nonexistence.
-
-5.4.4.  Positive responses
-
-   An existing DELEG RRset is authoritative in, and signed by, the
-   delegating zone, similarly to a DS RRset (see Section 5.3).
-
-   A validator SHOULD NOT treat a positive response with a DELEG RRset
-   as DNSSEC-bogus only because all DNSKEYs in the zone have the DNSKEY-
-   ADT flag set to 0.  Such a zone would not be protected from downgrade
-   attacks (Section 7.2) but this behavior is consistent with other non-
-   DELEG DNSSEC specifications: validators are not expected to detect
-   inconsistencies in data if a chain of trust can be established.
-
-5.4.5.  Chaining
+6.1.  Forwarding
 
    A Validating Stub Resolver that is DELEG-aware MUST only use
    security-aware resolvers that are DELEG-aware.  A DELEG-aware
    Validating Resolver that uses forwarders MUST only use DELEG-aware
    and security-aware forwarders.  Otherwise DNSSEC-secure zones might
    fail to validate (see Appendix A.4.2.2) and DNSSEC-insecure zones
-   might observe inconsistent answers (see Section 6).
+   might observe inconsistent answers.
 
    [RFC9606] specifies a DNS resource record type, RESINFO, to allow
    resolvers to publish information about their capabilities and
@@ -1030,16 +855,7 @@ Table of Contents
    [RFC6763], if there is no '=' in a key, then it is a boolean
    attribute, simply identified as being present with no value.
 
-6.  Operational Considerations
-
-   When DELEG is deployed, new operational considerations will apply.
-   While the majority of these relate to the operation of DELEG-aware
-   servers or resolvers, there is a more general set of operational
-   practices which will need to apply because not all resolvers will be
-   DELEG-aware.  This section gives an overview of some of those
-   considerations.
-
-6.1.  NS Not Required by Protocol
+6.2.  NS Not Required by Protocol
 
    A zone delegated exclusively using DELEG records is not resolvable by
    non-DELEG aware resolvers.  In that case the zone is not required to
@@ -1047,7 +863,7 @@ Table of Contents
    manage zone content or check the validity of zones needs to be
    updated to allow zones without an NS RRset at the apex.
 
-6.2.  NS Maybe Required in Practice
+6.3.  NS Maybe Required in Practice
 
    Although DELEG removes the protocol requirement for NS records,
    resolver support for DELEG will not be universal for a long time
@@ -1074,7 +890,7 @@ Table of Contents
    guided by operational measurements of resolver adoption of the DELEG
    protocol.
 
-6.3.  NS and DELEG Combined
+6.4.  NS and DELEG Combined
 
    This document explicitly allows zones to be delegated using DELEG
    records without also using NS records; delegating a zone with both
@@ -1089,7 +905,7 @@ Table of Contents
    independent at the protocol layer, but it does not prohibit a
    provisioning system from generating one record type from the other.
 
-6.4.  Authoritative Deployment
+6.5.  Authoritative Deployment
 
    Before adding a first DELEG record into a DNS zone, these steps need
    to be taken, in this order:
@@ -1106,9 +922,9 @@ Table of Contents
    4.  If a zone is DNSSEC-signed: ensure that at least one DNSKEY
        record has the DNSKEY-ADT flag set to 1.  Failure to do so
        results in loss of downgrade resistance of the DELEG protocol for
-       this zone; see Section 7.2.
+       this zone; see [I-D.ietf-dnsop-delext] section 8.
 
-6.4.1.  Enabling the DNSKEY-ADT Flag
+6.5.1.  Enabling the DNSKEY-ADT Flag
 
    According to the DNSSEC specification, changing flags of a DNSKEY
    record changes its Key Tag and thus requires a key rollover.  For
@@ -1149,7 +965,7 @@ Table of Contents
    DNSKEY record is limited only by DNSKEY TTL + time to sign + time to
    transfer modified DNSKEY RRset.
 
-6.5.  Interaction with Dynamic DNS Update
+6.6.  Interaction with Dynamic DNS Update
 
    DELEG records can be updated like other regular zone data at the
    delegation point, similar to NS records, because dynamic updates work
@@ -1185,29 +1001,7 @@ Table of Contents
 
 7.2.  Preventing Downgrade Attacks
 
-   During the rollout of the DELEG protocol, the operator of an
-   authoritative server can upgrade the server software to be DELEG-
-   aware before changing any DNS zones.  Such deployment should work and
-   provide DELEG-aware clients with correct DELEG-aware answers.
-   However, the deployment will not be protected from downgrade attacks
-   against the DELEG protocol.
-
-   To protect DNSSEC-secure DNS zones that contain DELEG delegations,
-   the delegating zone needs to have at least one DNSKEY with the
-   DNSKEY-ADT flag set to 1.  Failure to set this flag in a DNSKEY
-   record in the zone allows an attacker to remove the DELEG RRset from
-   referrals which contain the DS RRset, and replace the original signed
-   DELEG RRset with an arbitrary unsigned NS set.  Doing so would be a
-   downgrade from the strong protection offered by DNSSEC for DELEG.
-   That is, the DELEG protocol when used with upgraded DNSKEY records
-   gives the same protection to DELEG that the zone's DS RRset has.
-   Without DELEG, there are no security guarantees for delegation NS
-   records.
-
-   Please note that a full DNSKEY rollover is not necessary to achieve
-   the downgrade protection for DELEG.  Any single DNSKEY with the
-   DNSKEY-ADT flag set to 1 is sufficient; the zone can introduce an
-   otherwise unused record into the DNSKEY RRset.
+   [I-D.ietf-dnsop-delext] section 8 applies.
 
 7.3.  DELEG Is Stronger Than NS
 
@@ -1337,9 +1131,9 @@ Change Controller:  Person or entity, with contact information if appropriate
    [I-D.ietf-dnsop-delext]
               Arends, R., van Dijk, P., and P. Špaček, "DNS Protocol
               Modifications for Delegation Extensions", Work in
-              Progress, Internet-Draft, draft-ietf-dnsop-delext-08, 6
+              Progress, Internet-Draft, draft-ietf-dnsop-delext-09, 22
               July 2026, <https://datatracker.ietf.org/doc/html/draft-
-              ietf-dnsop-delext-08>.
+              ietf-dnsop-delext-09>.
 
    [RFC1034]  Mockapetris, P., "Domain names - concepts and facilities",
               STD 13, RFC 1034, DOI 10.17487/RFC1034, November 1987,
@@ -1367,10 +1161,6 @@ Change Controller:  Person or entity, with contact information if appropriate
               Extensions", RFC 4035, DOI 10.17487/RFC4035, March 2005,
               <https://www.rfc-editor.org/rfc/rfc4035>.
 
-   [RFC6672]  Rose, S. and W. Wijngaards, "DNAME Redirection in the
-              DNS", RFC 6672, DOI 10.17487/RFC6672, June 2012,
-              <https://www.rfc-editor.org/rfc/rfc6672>.
-
    [RFC6763]  Cheshire, S. and M. Krochmal, "DNS-Based Service
               Discovery", RFC 6763, DOI 10.17487/RFC6763, February 2013,
               <https://www.rfc-editor.org/rfc/rfc6763>.
@@ -1379,11 +1169,6 @@ Change Controller:  Person or entity, with contact information if appropriate
               Operational Practices, Version 2", RFC 6781,
               DOI 10.17487/RFC6781, December 2012,
               <https://www.rfc-editor.org/rfc/rfc6781>.
-
-   [RFC6840]  Weiler, S., Ed. and D. Blacka, Ed., "Clarifications and
-              Implementation Notes for DNS Security (DNSSEC)", RFC 6840,
-              DOI 10.17487/RFC6840, February 2013,
-              <https://www.rfc-editor.org/rfc/rfc6840>.
 
    [RFC6895]  Eastlake 3rd, D., "Domain Name System (DNS) IANA
               Considerations", BCP 42, RFC 6895, DOI 10.17487/RFC6895,
@@ -1621,7 +1406,7 @@ A.4.2.2.  Query for foo.test
 
    DELEG-aware validators would treat it as DNSSEC-bogus because the
    DELEG bit in NSEC type bitmap would trigger downgrade attack
-   detection (see Section 5.4.3).
+   detection (see [I-D.ietf-dnsop-delext] section 6).
 
    ;; Header: QR DO AA RCODE=NXDOMAIN
    ;;
@@ -1766,7 +1551,7 @@ A.5.  DELEGPARAM Interpretation
    In the examples above, the test.  DELEG record uses indirection and
    points to other domain names with DELEGPARAM, A, AAAA, and CNAME
    records.  During resolution, a resolver will gradually build set of
-   name servers to contact, as defined in Section 5.1.3.
+   name servers to contact, as defined in Section 5.1.2.
 
    To visualize the end result of this process, the full set of name
    servers in form of a 'virtual' DELEG RRset is represented here.
