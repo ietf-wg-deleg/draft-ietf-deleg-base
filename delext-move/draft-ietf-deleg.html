@@ -1740,7 +1740,7 @@ Other special scenarios with DE=0 queries to DELEG-aware authorities are address
           <h4 id="name-delegation-point-types-qtyp">
 <a href="#section-5.1.1" class="section-number selfRef">5.1.1. </a><a href="#name-delegation-point-types-qtyp" class="section-name selfRef">Delegation point types, QTYPE=DELEG</a>
           </h4>
-<p id="section-5.1.1-1">Record types defined as authoritative at a delegation point, currently the DS and DELEG types, retain the same special handling as described in Section 2.6 of <span>[<a href="#RFC4035" class="cite xref">RFC4035</a>]</span>.<a href="#section-5.1.1-1" class="pilcrow">¶</a></p>
+<p id="section-5.1.1-1">DELEG RR type is one of Delegation Types with special handling defined defined in <span>[<a href="#I-D.ietf-dnsop-delext" class="cite xref">I-D.ietf-dnsop-delext</a>]</span>.<a href="#section-5.1.1-1" class="pilcrow">¶</a></p>
 <p id="section-5.1.1-2">DELEG-unaware resolvers can get different types of answers for QTYPE=DELEG queries based on the configuration of the server, such as whether it is DELEG-aware and whether it also is authoritative for subdomains.
 For example, a DELEG-unaware authoritative name server which has loaded DELEG records via the <span>[<a href="#RFC3597" class="cite xref">RFC3597</a>]</span> unknown types mechanism would answer with them only if there were no NS records at the owner name, and answer with an NS delegation otherwise.<a href="#section-5.1.1-2" class="pilcrow">¶</a></p>
 </section>
@@ -1802,9 +1802,8 @@ Recursively apply the algorithm described in this section, after checking that t
 <a href="#section-5.2" class="section-number selfRef">5.2. </a><a href="#name-authoritative-servers" class="section-name selfRef">Authoritative Servers</a>
         </h3>
 <p id="section-5.2-1">The DELEG RR type defines a zone cut in a similar way as the NS RR type.
-Behavior defined for zone cuts in existing non-DELEG specifications apply to zone cuts created by the DELEG record.
-A notable example of this is that the occlusion (usually accidentally) created by delegation NS records would also be created by DELEG records at the same name (see <a href="#occluded-example" class="auto internal xref">Appendix A.4.1.3</a>).
-Rules for setting Authoritative Answer (AA) bit in answers also remain unchanged: the DELEG RR type has the same special treatment as DS RR type.<a href="#section-5.2-1" class="pilcrow">¶</a></p>
+<span>[<a href="#I-D.ietf-dnsop-delext" class="cite xref">I-D.ietf-dnsop-delext</a>]</span> section 4 applies.
+A notable example of this is that the occlusion (usually accidentally) created by delegation NS records would also be created by DELEG records at the same name (see <a href="#occluded-example" class="auto internal xref">Appendix A.4.1.3</a>).<a href="#section-5.2-1" class="pilcrow">¶</a></p>
 <p id="section-5.2-2">DELEG-aware authoritative servers act differently when handling queries from DELEG-unaware clients (those with DE=0) than from DELEG-aware clients (those with DE=1).
 See <a href="#de-bit" class="auto internal xref">Section 4</a> and <a href="#resolvers" class="auto internal xref">Section 5.1</a>.<a href="#section-5.2-2" class="pilcrow">¶</a></p>
 <div id="aware-referral">
@@ -1824,26 +1823,15 @@ All non-DELEG specifications for the special handling of queries with QTYPE=DS a
 In summary, the server either provides an authoritative DELEG RRset or declares its non-existence, with relevant DNSSEC proofs when requested and available.<a href="#section-5.2.1.1-1" class="pilcrow">¶</a></p>
 </section>
 </div>
-<div id="delegation-with-deleg">
-<section id="section-5.2.1.2">
-            <h5 id="name-delegation-with-deleg">
-<a href="#section-5.2.1.2" class="section-number selfRef">5.2.1.2. </a><a href="#name-delegation-with-deleg" class="section-name selfRef">Delegation with DELEG</a>
-            </h5>
-<p id="section-5.2.1.2-1">If the delegation has a DELEG RRset, the authoritative server MUST put the DELEG RRset into the Authority section of the referral.
-In this case, the server MUST NOT include the NS RRset in the Authority section.<a href="#section-5.2.1.2-1" class="pilcrow">¶</a></p>
-<p id="section-5.2.1.2-2">Non-DELEG DNSSEC specifications for RRSIG inclusion in answers with authoritative RRsets (<span>[<a href="#RFC4035" class="cite xref">RFC4035</a>]</span> Section 3.1.1) MUST be followed.
-Similarly, rules for DS RRset inclusion in referrals apply as specified by the DNSSEC protocol.<a href="#section-5.2.1.2-2" class="pilcrow">¶</a></p>
-</section>
-</div>
 <div id="ns-no-deleg">
-<section id="section-5.2.1.3">
+<section id="section-5.2.1.2">
             <h5 id="name-deleg-aware-clients-with-ns">
-<a href="#section-5.2.1.3" class="section-number selfRef">5.2.1.3. </a><a href="#name-deleg-aware-clients-with-ns" class="section-name selfRef">DELEG-aware Clients with NS RRs Present but No DELEG RRs</a>
+<a href="#section-5.2.1.2" class="section-number selfRef">5.2.1.2. </a><a href="#name-deleg-aware-clients-with-ns" class="section-name selfRef">DELEG-aware Clients with NS RRs Present but No DELEG RRs</a>
             </h5>
-<p id="section-5.2.1.3-1">If the delegation does not have a DELEG RRset, the authoritative server MUST put the NS RRset into the authority section of the referral.
-The absence of the DELEG RRset MUST be proven as specified by the DNSSEC protocol for authoritative data.<a href="#section-5.2.1.3-1" class="pilcrow">¶</a></p>
-<p id="section-5.2.1.3-2">Similarly, rules for DS RRset inclusion into referrals apply as specified by the DNSSEC protocol.
-Please note that, in practice, the same process and records are used to prove the non-existence of both DELEG and DS RRsets.<a href="#section-5.2.1.3-2" class="pilcrow">¶</a></p>
+<p id="section-5.2.1.2-1">If the delegation does not have a DELEG RRset, the authoritative server MUST put the NS RRset into the authority section of the referral.
+The absence of the DELEG RRset MUST be proven as specified by the DNSSEC protocol for authoritative data.<a href="#section-5.2.1.2-1" class="pilcrow">¶</a></p>
+<p id="section-5.2.1.2-2">Similarly, rules for DS RRset inclusion into referrals apply as specified by the DNSSEC protocol.
+Please note that, in practice, the same process and records are used to prove the non-existence of both DELEG and DS RRsets.<a href="#section-5.2.1.2-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
