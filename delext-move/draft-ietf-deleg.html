@@ -1710,7 +1710,7 @@ See <a href="#slist" class="auto internal xref">Section 5.1.2</a>.<a href="#sect
 <a href="#section-4" class="section-number selfRef">4. </a><a href="#name-signaling-deleg-support" class="section-name selfRef">Signaling DELEG Support</a>
       </h2>
 <p id="section-4-1">This document requires the use of the EDNS0 DE flag and its requirements from <span>[<a href="#I-D.ietf-dnsop-delext" class="cite xref">I-D.ietf-dnsop-delext</a>]</span>.<a href="#section-4-1" class="pilcrow">¶</a></p>
-<p id="section-4-2">A resolver that is DELEG-aware MUST signal in queries that it supports the DELEG protocol by setting the DE bit to 1 as described in <span>[<a href="#I-D.ietf-dnsop-delext" class="cite xref">I-D.ietf-dnsop-delext</a>]</span>.<a href="#section-4-2" class="pilcrow">¶</a></p>
+<p id="section-4-2">A resolver that is DELEG-aware MUST signal in queries that it supports the DELEG protocol by setting the DE bit to 1.<a href="#section-4-2" class="pilcrow">¶</a></p>
 <p id="section-4-3">The DE bit set to 0 indicates the resolver is not DELEG-aware, and therefore can only be served referrals with NS records and other data according to non-DELEG specifications.
 Other special scenarios with DE=0 queries to DELEG-aware authorities are addressed in <a href="#authoritative-servers" class="auto internal xref">Section 5.2</a>.<a href="#section-4-3" class="pilcrow">¶</a></p>
 </section>
