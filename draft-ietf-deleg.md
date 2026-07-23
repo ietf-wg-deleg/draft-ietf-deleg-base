@@ -484,39 +484,6 @@ To achieve downgrade resistance, DNSSEC-signed zones which contain a DELEG RRset
 
 DELEG awareness introduces additional requirements on validators.
 
-### Clarifications on Nonexistence Proofs
-
-This document updates {{!RFC6840}} Section 4.1 to include "NS or DELEG" types in the type bitmap as indication of a delegation point, and generalizes applicability of ancestor delegation proof to all RR types that are authoritative at a delegation point (that is, both DS and DELEG).
-The text in that section is updated as follows:
-
-An "ancestor delegation" NSEC RR (or NSEC3 RR) is one with:
-
--  the NS and/or DELEG bit set,
-
--  the Start of Authority (SOA) bit clear, and
-
--  a signer field that is shorter than the owner name of the NSEC RR,
-   or the original owner name for the NSEC3 RR.
-
-Ancestor delegation NSEC or NSEC3 RRs MUST NOT be used to assume
-nonexistence of any RRs below that zone cut, which include all RRs at
-that original owner name, other than types authoritative at the delegation point (DS and DELEG), and all RRs below that owner name regardless of type.
-
-### Insecure Delegation Proofs
-
-This document updates {{!RFC6840}} Section 4.4 to include securing DELEG records, and explicitly states that Opt-Out is not applicable to the DELEG protocol.
-The first paragraph of that section is updated to read:
-
-Section 5.2 of {{!RFC4035}} specifies that a validator, when proving a
-delegation is not secure, needs to check for the absence of the DS
-and SOA bits in the NSEC (or NSEC3) type bitmap; this was clarified in Section 4.1 of {{RFC6840}}.
-This document updates {{RFC4035}} and {{RFC6840}} to specify that the validator MUST also check for the presence of the NS or the DELEG bit in the matching NSEC (or NSEC3) RR (proving that there is, indeed, a delegation).
-Alternatively, the validator must make sure that the delegation with an NS record is covered by an NSEC3
-RR with the Opt-Out flag set.
-Opt-Out is not applicable to DELEG RR type
-because DELEG records are authoritative at the delegation point in the same
-way that DS RR types are.
-
 ### Referral downgrade protection {#validator-downgrade-protection}
 
 If the zone is DNSSEC-secure, and if any DNSKEY of the zone has the DNSKEY-ADT flag ({{signers}}) set to 1, a DELEG-aware validator MUST prove the absence of a DELEG RRset in referral responses from this particular zone.
