@@ -1920,7 +1920,7 @@ This has several consequences which stem from existing non-DELEG specifications:
 </li>
         </ul>
 <p id="section-5.3-5">See examples in <a href="#example-root" class="auto internal xref">Appendix A.1</a> and <a href="#example-occluded" class="auto internal xref">Appendix A.4.2.3</a>.<a href="#section-5.3-5" class="pilcrow">¶</a></p>
-<p id="section-5.3-6">In order to protect validators from downgrade attacks (see <a href="#downgrade-attacks" class="auto internal xref">Section 7.2</a>), <span>[<a href="#I-D.ietf-dnsop-delext" class="cite xref">I-D.ietf-dnsop-delext</a>]</span> introduces the DNSKEY flag called DNSKEY-ADT.
+<p id="section-5.3-6">In order to protect validators from downgrade attacks, <span>[<a href="#I-D.ietf-dnsop-delext" class="cite xref">I-D.ietf-dnsop-delext</a>]</span> introduces the DNSKEY flag called DNSKEY-ADT.
 To achieve downgrade resistance, DNSSEC-signed zones which contain a DELEG RRset MUST follow the rules in  <span>[<a href="#I-D.ietf-dnsop-delext" class="cite xref">I-D.ietf-dnsop-delext</a>]</span>.<a href="#section-5.3-6" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -2003,7 +2003,7 @@ but it does not prohibit a provisioning system from generating one record type f
             <p id="section-6.5-2.3.1">If a zone is DNSSEC-signed: ensure that the signer is DELEG-aware.<a href="#section-6.5-2.3.1" class="pilcrow">¶</a></p>
 </li>
           <li id="section-6.5-2.4">
-            <p id="section-6.5-2.4.1">If a zone is DNSSEC-signed: ensure that at least one DNSKEY record has the DNSKEY-ADT flag set to 1. Failure to do so results in loss of downgrade resistance of the DELEG protocol for this zone; see <a href="#downgrade-attacks" class="auto internal xref">Section 7.2</a>.<a href="#section-6.5-2.4.1" class="pilcrow">¶</a></p>
+            <p id="section-6.5-2.4.1">If a zone is DNSSEC-signed: ensure that at least one DNSKEY record has the DNSKEY-ADT flag set to 1. Failure to do so results in loss of downgrade resistance of the DELEG protocol for this zone; see <span>[<a href="#I-D.ietf-dnsop-delext" class="cite xref">I-D.ietf-dnsop-delext</a>]</span> section 8.<a href="#section-6.5-2.4.1" class="pilcrow">¶</a></p>
 </li>
         </ol>
 <div id="enabling-the-dnskey-adt-flag">
@@ -2078,21 +2078,12 @@ Note that include-delegparam chains can have CNAME/DNAME steps in them; in such 
 See <a href="#slist" class="auto internal xref">Section 5.1.2</a>.<a href="#section-7.1-3" class="pilcrow">¶</a></p>
 </section>
 </div>
-<div id="downgrade-attacks">
+<div id="preventing-downgrade-attacks">
 <section id="section-7.2">
         <h3 id="name-preventing-downgrade-attack">
 <a href="#section-7.2" class="section-number selfRef">7.2. </a><a href="#name-preventing-downgrade-attack" class="section-name selfRef">Preventing Downgrade Attacks</a>
         </h3>
-<p id="section-7.2-1">During the rollout of the DELEG protocol, the operator of an authoritative server can upgrade the server software to be DELEG-aware before changing any DNS zones.
-Such deployment should work and provide DELEG-aware clients with correct DELEG-aware answers.
-However, the deployment will not be protected from downgrade attacks against the DELEG protocol.<a href="#section-7.2-1" class="pilcrow">¶</a></p>
-<p id="section-7.2-2">To protect DNSSEC-secure DNS zones that contain DELEG delegations, the delegating zone needs to have at least one DNSKEY with the DNSKEY-ADT flag set to 1.
-Failure to set this flag in a DNSKEY record in the zone allows an attacker to remove the DELEG RRset from referrals which contain the DS RRset, and replace the original signed DELEG RRset with an arbitrary unsigned NS set.
-Doing so would be a downgrade from the strong protection offered by DNSSEC for DELEG.
-That is, the DELEG protocol when used with upgraded DNSKEY records gives the same protection to DELEG that the zone's DS RRset has.
-Without DELEG, there are no security guarantees for delegation NS records.<a href="#section-7.2-2" class="pilcrow">¶</a></p>
-<p id="section-7.2-3">Please note that a full DNSKEY rollover is not necessary to achieve the downgrade protection for DELEG.
-Any single DNSKEY with the DNSKEY-ADT flag set to 1 is sufficient; the zone can introduce an otherwise unused record into the DNSKEY RRset.<a href="#section-7.2-3" class="pilcrow">¶</a></p>
+<p id="section-7.2-1"><span>[<a href="#I-D.ietf-dnsop-delext" class="cite xref">I-D.ietf-dnsop-delext</a>]</span> section 8 applies.<a href="#section-7.2-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="deleg-is-stronger-than-ns">
