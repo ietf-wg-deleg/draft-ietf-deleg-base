@@ -1515,6 +1515,9 @@ A.4.4.1.  Query for foo.example
    example.   DS    44444 13 2 ABCDEF01234567...
    example.   RRSIG DS 13 1 300 20260101000000 (
                            20250101000000 33333 . SigExampleDS )
+   example.   NSEC  net. NS DS RRSIG NSEC DELEG
+   example.   RRSIG NSEC 13 1 300 20260101000000 (
+                           20250101000000 33333 . SigExampleNSEC+/ )
 
    ;; Additional
    ;; (empty)
