@@ -484,21 +484,6 @@ To achieve downgrade resistance, DNSSEC-signed zones which contain a DELEG RRset
 
 DELEG awareness introduces additional requirements on validators.
 
-### Referral downgrade protection {#validator-downgrade-protection}
-
-If the zone is DNSSEC-secure, and if any DNSKEY of the zone has the DNSKEY-ADT flag ({{signers}}) set to 1, a DELEG-aware validator MUST prove the absence of a DELEG RRset in referral responses from this particular zone.
-
-Without this check, an attacker could strip the DELEG RRset from a referral response and replace it with an unsigned (and potentially malicious) NS RRset ({{downgrade-attacks}}).
-The reason for this is that according to non-DELEG DNSSEC specification, a referral response with an unsigned NS and signed DS RRsets does not require additional proofs of nonexistence.
-
-### Positive responses
-
-An existing DELEG RRset is authoritative in, and signed by, the delegating zone, similarly to a DS RRset (see {{signers}}).
-
-A validator SHOULD NOT treat a positive response with a DELEG RRset as DNSSEC-bogus only because all DNSKEYs in the zone have the DNSKEY-ADT flag set to 0.
-Such a zone would not be protected from downgrade attacks ({{downgrade-attacks}}) but this behavior is consistent with other non-DELEG DNSSEC specifications:
-validators are not expected to detect inconsistencies in data if a chain of trust can be established.
-
 ### Chaining
 
 A Validating Stub Resolver that is DELEG-aware MUST only use security-aware resolvers that are DELEG-aware.
@@ -891,7 +876,7 @@ See {{no-ns}}.
 
 DELEG-unaware validators would treat this answer as DNSSEC-secure.
 
-DELEG-aware validators would treat it as DNSSEC-bogus because the DELEG bit in NSEC type bitmap would trigger downgrade attack detection (see {{validator-downgrade-protection}}).
+DELEG-aware validators would treat it as DNSSEC-bogus because the DELEG bit in NSEC type bitmap would trigger downgrade attack detection (see {{!I-D.ietf-dnsop-delext}} section 6).
 
     ;; Header: QR DO AA RCODE=NXDOMAIN
     ;;
