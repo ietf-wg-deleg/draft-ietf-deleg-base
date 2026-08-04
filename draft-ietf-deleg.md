@@ -78,7 +78,7 @@ The DELEGPARAM record is an auxiliary record which contains the same data as DEL
 Instead it is used as the target when DELEG is optionally using indirection.
 This indirection can, for example,
 be used to share the same delegation information across multiple zones and simplify operational management by reducing the number of locations for the delegation information for those zones.
-For example, if the customers of a DNS operator point their delegations to a DELEGPARAM record managed by the DNS operator,
+For example, if the customers of a DNS operator create a DELEG record pointing to a DELEGPARAM record managed by the DNS operator,
 then the operator will be able to make delegation information changes without further customer involvement, and affect all of those customer's delegations with a single change.
 
 Future documents can define additional delegation parameters, for example to advertise support for encrypted transports.
@@ -223,12 +223,12 @@ Some future keys may have no DelegInfoValue, which would be indicated with an ex
 
 The following is a brief summary of semantic differences between the DELEG and DELEGPARAM types.
 
+- DELEG has special processing for being included in answers.
 - DELEG creates a delegation for its owner name, similar to the NS RR type.
 - DELEG and NS RR types can coexist at the same owner name.
 - DELEG is authoritative at the delegation point, similar to the DS RR type, and unlike the NS RR type.
 - DELEG is signed when using DNSSEC, similar to the DS RR type, and unlike the NS RR type.
 - DELEG cannot be present at the apex of the delegated zone, similar to the DS RR type, and unlike the NS RR type.
-- DELEG has special processing for being included in answers.
 
 Conversely,
 
