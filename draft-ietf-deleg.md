@@ -186,7 +186,8 @@ The DelegInfos presentation format is defined exactly the same as SvcParams in S
 - All the requirements in Section 2.1 of {{?RFC9460}} apply.
 
 DelegInfos MAY be zero-length; this is similar to what is allowed in SVCB records.
-
+Note that a zero-length DelegInfos provides no information to the resolution algorithm,
+and thus will be not be processed in step 1 of {{slist}}.
 
 ## RDATA Wire Format
 
@@ -377,6 +378,8 @@ Stop processing this record.
 Recursively apply the algorithm described in this section, after checking that the maximum loop count described in {{too-much-work}} has not been reached.
 
 1. If none of the above applies, SLIST is not modified by this particular record.
+
+Note that the resolution algorithm in {{!I-D.ietf-dnsop-delext}} section 5.3 terminates even if the SLIST is empty.
 
 A DELEG-aware resolver MAY implement lazy filling of SLIST, such as by deferring processing of remaining records, or even individual names or query types, if SLIST already has what the resolver considers a sufficiently large pool of addresses to contact.
 
