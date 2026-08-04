@@ -1534,7 +1534,9 @@ To avoid confusion between the two protocols, the list of key=value parameters u
             <p id="section-3.1-3.3.1">All the requirements in Section 2.1 of <span>[<a href="#RFC9460" class="cite xref">RFC9460</a>]</span> apply.<a href="#section-3.1-3.3.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
-<p id="section-3.1-4">DelegInfos MAY be zero-length; this is similar to what is allowed in SVCB records.<a href="#section-3.1-4" class="pilcrow">¶</a></p>
+<p id="section-3.1-4">DelegInfos MAY be zero-length; this is similar to what is allowed in SVCB records.
+Note that a zero-length DelegInfos provides no information to the resolution algorithm,
+and thus will be not be processed in step 1 of <a href="#slist" class="auto internal xref">Section 5.1.2</a>.<a href="#section-3.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="rdata-wire-format">
@@ -1790,8 +1792,9 @@ Recursively apply the algorithm described in this section, after checking that t
               <p id="section-5.1.2-3.8.1">If none of the above applies, SLIST is not modified by this particular record.<a href="#section-5.1.2-3.8.1" class="pilcrow">¶</a></p>
 </li>
           </ol>
-<p id="section-5.1.2-4">A DELEG-aware resolver MAY implement lazy filling of SLIST, such as by deferring processing of remaining records, or even individual names or query types, if SLIST already has what the resolver considers a sufficiently large pool of addresses to contact.<a href="#section-5.1.2-4" class="pilcrow">¶</a></p>
-<p id="section-5.1.2-5">The order in which to try the servers in the final SLIST is outside the scope of this document.<a href="#section-5.1.2-5" class="pilcrow">¶</a></p>
+<p id="section-5.1.2-4">Note that the resolution algorithm in <span>[<a href="#I-D.ietf-dnsop-delext" class="cite xref">I-D.ietf-dnsop-delext</a>]</span> section 5.3 terminates even if the SLIST is empty.<a href="#section-5.1.2-4" class="pilcrow">¶</a></p>
+<p id="section-5.1.2-5">A DELEG-aware resolver MAY implement lazy filling of SLIST, such as by deferring processing of remaining records, or even individual names or query types, if SLIST already has what the resolver considers a sufficiently large pool of addresses to contact.<a href="#section-5.1.2-5" class="pilcrow">¶</a></p>
+<p id="section-5.1.2-6">The order in which to try the servers in the final SLIST is outside the scope of this document.<a href="#section-5.1.2-6" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
