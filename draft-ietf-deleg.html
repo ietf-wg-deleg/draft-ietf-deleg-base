@@ -1375,7 +1375,7 @@ The combination of DELEG and NS RRsets is compatible with resolvers that do not 
 Instead it is used as the target when DELEG is optionally using indirection.
 This indirection can, for example,
 be used to share the same delegation information across multiple zones and simplify operational management by reducing the number of locations for the delegation information for those zones.
-For example, if the customers of a DNS operator point their delegations to a DELEGPARAM record managed by the DNS operator,
+For example, if the customers of a DNS operator create a DELEG record pointing to a DELEGPARAM record managed by the DNS operator,
 then the operator will be able to make delegation information changes without further customer involvement, and affect all of those customer's delegations with a single change.<a href="#section-1-7" class="pilcrow">¶</a></p>
 <p id="section-1-8">Future documents can define additional delegation parameters, for example to advertise support for encrypted transports.<a href="#section-1-8" class="pilcrow">¶</a></p>
 <div id="terminology">
@@ -1581,22 +1581,22 @@ Some future keys may have no DelegInfoValue, which would be indicated with an ex
 <p id="section-3.3-1">The following is a brief summary of semantic differences between the DELEG and DELEGPARAM types.<a href="#section-3.3-1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-3.3-2.1">
-            <p id="section-3.3-2.1.1">DELEG creates a delegation for its owner name, similar to the NS RR type.<a href="#section-3.3-2.1.1" class="pilcrow">¶</a></p>
+            <p id="section-3.3-2.1.1">DELEG has special processing for being included in answers.<a href="#section-3.3-2.1.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-3.3-2.2">
-            <p id="section-3.3-2.2.1">DELEG and NS RR types can coexist at the same owner name.<a href="#section-3.3-2.2.1" class="pilcrow">¶</a></p>
+            <p id="section-3.3-2.2.1">DELEG creates a delegation for its owner name, similar to the NS RR type.<a href="#section-3.3-2.2.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-3.3-2.3">
-            <p id="section-3.3-2.3.1">DELEG is authoritative at the delegation point, similar to the DS RR type, and unlike the NS RR type.<a href="#section-3.3-2.3.1" class="pilcrow">¶</a></p>
+            <p id="section-3.3-2.3.1">DELEG and NS RR types can coexist at the same owner name.<a href="#section-3.3-2.3.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-3.3-2.4">
-            <p id="section-3.3-2.4.1">DELEG is signed when using DNSSEC, similar to the DS RR type, and unlike the NS RR type.<a href="#section-3.3-2.4.1" class="pilcrow">¶</a></p>
+            <p id="section-3.3-2.4.1">DELEG is authoritative at the delegation point, similar to the DS RR type, and unlike the NS RR type.<a href="#section-3.3-2.4.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-3.3-2.5">
-            <p id="section-3.3-2.5.1">DELEG cannot be present at the apex of the delegated zone, similar to the DS RR type, and unlike the NS RR type.<a href="#section-3.3-2.5.1" class="pilcrow">¶</a></p>
+            <p id="section-3.3-2.5.1">DELEG is signed when using DNSSEC, similar to the DS RR type, and unlike the NS RR type.<a href="#section-3.3-2.5.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-3.3-2.6">
-            <p id="section-3.3-2.6.1">DELEG has special processing for being included in answers.<a href="#section-3.3-2.6.1" class="pilcrow">¶</a></p>
+            <p id="section-3.3-2.6.1">DELEG cannot be present at the apex of the delegated zone, similar to the DS RR type, and unlike the NS RR type.<a href="#section-3.3-2.6.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 <p id="section-3.3-3">Conversely,<a href="#section-3.3-3" class="pilcrow">¶</a></p>
