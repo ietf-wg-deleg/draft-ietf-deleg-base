@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-07-26T01:57:17.403528+00:00",
+  "timestamp": "2026-08-06T01:47:11.920510+00:00",
   "repo": "ietf-wg-deleg/draft-ietf-deleg-base",
   "labels": [
     {
@@ -9546,6 +9546,94 @@
       "mergedBy": "pspacek",
       "mergeCommit": {
         "oid": "32ac047eec572846ece9f5485404beec10f27046"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 208,
+      "id": "PR_kwDOO41rkM76kQEz",
+      "title": "All sections that updated 6672 and 6840 have been moved to delext",
+      "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/pull/208",
+      "state": "MERGED",
+      "author": "pspacek",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [
+        "delext"
+      ],
+      "body": "",
+      "createdAt": "2026-08-04T13:26:57Z",
+      "updatedAt": "2026-08-04T13:28:22Z",
+      "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
+      "baseRefName": "main",
+      "baseRefOid": "6d74ede40f2641851a97456caae37db0842bf8b1",
+      "headRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
+      "headRefName": "fix-updates-tag",
+      "headRefOid": "26fe18e17aa537ee329bd8ba914f703c1b0c5ef5",
+      "closedAt": "2026-08-04T13:28:22Z",
+      "mergedAt": "2026-08-04T13:28:21Z",
+      "mergedBy": "pspacek",
+      "mergeCommit": {
+        "oid": "058a42495787d30f6ce8444193d5e6181fdb4c83"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 209,
+      "id": "PR_kwDOO41rkM76kqgk",
+      "title": "Wording nits",
+      "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/pull/209",
+      "state": "MERGED",
+      "author": "pspacek",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [
+        "nits"
+      ],
+      "body": "",
+      "createdAt": "2026-08-04T13:39:05Z",
+      "updatedAt": "2026-08-04T13:53:30Z",
+      "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
+      "baseRefName": "main",
+      "baseRefOid": "058a42495787d30f6ce8444193d5e6181fdb4c83",
+      "headRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
+      "headRefName": "wording-nits",
+      "headRefOid": "6669db5b5b573258b595018f1c7c0b1ad4a9196f",
+      "closedAt": "2026-08-04T13:40:08Z",
+      "mergedAt": "2026-08-04T13:40:08Z",
+      "mergedBy": "pspacek",
+      "mergeCommit": {
+        "oid": "8af26c7fb812dc55e54126c20c1c776eb358d317"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 210,
+      "id": "PR_kwDOO41rkM76lGBJ",
+      "title": "Clarify behavior of an empty DELEG RR",
+      "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/pull/210",
+      "state": "MERGED",
+      "author": "pspacek",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2026-08-04T13:52:43Z",
+      "updatedAt": "2026-08-04T13:53:50Z",
+      "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
+      "baseRefName": "main",
+      "baseRefOid": "8af26c7fb812dc55e54126c20c1c776eb358d317",
+      "headRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
+      "headRefName": "clarify-empty-deleg",
+      "headRefOid": "98f81852122f756014562b433432fe94ad3c7ab5",
+      "closedAt": "2026-08-04T13:53:49Z",
+      "mergedAt": "2026-08-04T13:53:49Z",
+      "mergedBy": "pspacek",
+      "mergeCommit": {
+        "oid": "bc282371f77666f22a2df27f8ac6cd7a5f48b9c4"
       },
       "comments": [],
       "reviews": []
