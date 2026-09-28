@@ -160,15 +160,15 @@ To avoid confusion between the two protocols, the list of key=value parameters u
 The following rules are adapted from SVCB, but with changed names:
 
 - The whole RDATA consists of a single list called "DelegInfos".
-- DelegInfos consists of individual DelegInfo key=value pairs.
-- Each DelegInfo pair has a DelegInfoKey and a possibly optional DelegInfoValue.
-- Each DelegInfo has a specified presentation format and wire encoding.
+- The DelegInfos list consists of individual DelegInfo element key=value pairs.
+- Each DelegInfo element has a DelegInfoKey and an optional DelegInfoValue.
+- Each DelegInfo element has a specified presentation format and associated wire format.
 - Each DelegInfoKey has a presentation name and a registered key number.
 - Each DelegInfoValue is in a format specific to its DelegInfoKey.
 
 Implementations can reuse the same code to parse SvcParams and DelegInfos and only plug in a different list of key=value pairs for the SVCB/HTTPS and DELEG/DELEGPARAM record families.
 
-The initial set of DelegInfoKeys and their formats are defined in {{nameserver-info}}.
+The initial set of DelegInfoKeys and associated DelegInfoValues, plus their presentation and wire formats, are defined in {{nameserver-info}}.
 
 ## Presentation Format
 
@@ -197,12 +197,12 @@ The RDATA portion of the DELEG and DELEGPARAM resource record is variable length
     /                         DelegInfos                            /
     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 
-The format of the DelegInfos element is identical to the format of the SvcParams element defined in {{?RFC9460}} Section 2.2,
+The format of the DelegInfo element is identical to the format of the SvcParams element defined in {{?RFC9460}} Section 2.2,
 including the requirements for strictly increasing numeric order to keys and no key duplication allowed.
 
 All the requirements in Section 2.2 of {{?RFC9460}} apply.
 
-The DelegInfos element is a sequence of individual DelegInfo elements and MAY be empty.
+The DelegInfos list is a sequence of individual DelegInfo elements and MAY be empty.
 The wire format of an individual DelegInfo element is the same as for a SvcParam element,
 but it references DelegInfo elements instead of SvcParam elements.
 
