@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-08-06T01:47:11.920510+00:00",
+  "timestamp": "2026-09-29T03:26:55.742167+00:00",
   "repo": "ietf-wg-deleg/draft-ietf-deleg-base",
   "labels": [
     {
@@ -9637,6 +9637,46 @@
       },
       "comments": [],
       "reviews": []
+    },
+    {
+      "number": 211,
+      "id": "PR_kwDOO41rkM8AAAABFdkJHw",
+      "title": "Added the editorial changes from Ray Hunter",
+      "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/pull/211",
+      "state": "OPEN",
+      "author": "fl1ger",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Moin!\r\n\r\nThese are the editorial changes Ray Hunter proposed in his email from August 21. They all look ok fro me, but would like @paulehoffman to have a look if they make sense for a native speaker. I did omit the more substantial changes he requested as we think the current text is fine for these. Once this is merged will answer on the list.\r\n\r\nSo long\r\n-Ralf\r\n",
+      "createdAt": "2026-09-28T09:02:12Z",
+      "updatedAt": "2026-09-28T14:16:51Z",
+      "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
+      "baseRefName": "main",
+      "baseRefOid": "bc282371f77666f22a2df27f8ac6cd7a5f48b9c4",
+      "headRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
+      "headRefName": "ray-hunter-editorial",
+      "headRefOid": "f54ee118ebe066dae5073fae32742c9cc76a9457",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOO41rkM8AAAABPklXGg",
+          "commit": {
+            "abbreviatedOid": "f54ee11"
+          },
+          "author": "paulehoffman",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "Good, clear changes",
+          "createdAt": "2026-09-28T14:16:51Z",
+          "updatedAt": "2026-09-28T14:16:51Z",
+          "comments": []
+        }
+      ]
     }
   ]
 }
