@@ -6,9 +6,9 @@ deleg                                                          P. Špaček
 Internet-Draft                                                       ISC
 Updates: 1034, 1035, 4035 (if approved)                         R. Weber
 Intended status: Standards Track                     Akamai Technologies
-Expires: 5 February 2027                                     D. Lawrence
+Expires: 8 April 2027                                        D. Lawrence
                                                               Salesforce
-                                                           4 August 2026
+                                                          5 October 2026
 
 
                      Extensible Delegation for DNS
@@ -61,7 +61,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 5 February 2027.
+   This Internet-Draft will expire on 8 April 2027.
 
 Copyright Notice
 
@@ -306,13 +306,14 @@ Table of Contents
 
    *  The whole RDATA consists of a single list called "DelegInfos".
 
-   *  DelegInfos consists of individual DelegInfo key=value pairs.
+   *  The DelegInfos list consists of individual DelegInfo element
+      key=value pairs.
 
-   *  Each DelegInfo pair has a DelegInfoKey and a possibly optional
+   *  Each DelegInfo element has a DelegInfoKey and an optional
       DelegInfoValue.
 
-   *  Each DelegInfo has a specified presentation format and wire
-      encoding.
+   *  Each DelegInfo element has a specified presentation format and
+      associated wire format.
 
    *  Each DelegInfoKey has a presentation name and a registered key
       number.
@@ -323,8 +324,8 @@ Table of Contents
    DelegInfos and only plug in a different list of key=value pairs for
    the SVCB/HTTPS and DELEG/DELEGPARAM record families.
 
-   The initial set of DelegInfoKeys and their formats are defined in
-   Section 3.4.
+   The initial set of DelegInfoKeys and associated DelegInfoValues, plus
+   their presentation and wire formats, are defined in Section 3.4.
 
 3.1.  Presentation Format
 
@@ -370,14 +371,14 @@ Table of Contents
    /                         DelegInfos                            /
    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 
-   The format of the DelegInfos element is identical to the format of
-   the SvcParams element defined in [RFC9460] Section 2.2, including the
+   The format of the DelegInfo element is identical to the format of the
+   SvcParams element defined in [RFC9460] Section 2.2, including the
    requirements for strictly increasing numeric order to keys and no key
    duplication allowed.
 
    All the requirements in Section 2.2 of [RFC9460] apply.
 
-   The DelegInfos element is a sequence of individual DelegInfo elements
+   The DelegInfos list is a sequence of individual DelegInfo elements
    and MAY be empty.  The wire format of an individual DelegInfo element
    is the same as for a SvcParam element, but it references DelegInfo
    elements instead of SvcParam elements.
@@ -1137,9 +1138,9 @@ Change Controller:  Person or entity, with contact information if appropriate
    [I-D.ietf-dnsop-delext]
               Arends, R., van Dijk, P., and P. Špaček, "DNS Protocol
               Modifications for Delegation Extensions", Work in
-              Progress, Internet-Draft, draft-ietf-dnsop-delext-10, 24
-              July 2026, <https://datatracker.ietf.org/doc/html/draft-
-              ietf-dnsop-delext-10>.
+              Progress, Internet-Draft, draft-ietf-dnsop-delext-11, 17
+              September 2026, <https://datatracker.ietf.org/doc/html/
+              draft-ietf-dnsop-delext-11>.
 
    [RFC1034]  Mockapetris, P., "Domain names - concepts and facilities",
               STD 13, RFC 1034, DOI 10.17487/RFC1034, November 1987,
