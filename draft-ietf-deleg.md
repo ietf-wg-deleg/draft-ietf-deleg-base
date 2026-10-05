@@ -145,7 +145,7 @@ For those readers who learn better from examples than the definitive text, see {
 # DELEG and DELEGPARAM Resource Record Types {#deleg-delegparam}
 
 The DELEG record has an RR type that is TBD1.
-It is a Delegation Type, as defined in {{!I-D.ietf-dnsop-delext}}; thus, TBD1 will be from the 0xF000-0xF1EF range.
+It is an NS-Omitting Delegation Type, as defined in {{!I-D.ietf-dnsop-delext}}; thus, TBD1 will be from the 0xF000-0xF07F range.
 The DELEGPARAM record has an RR type of TBD2.
 It is not a Delegation Type, and thus will not come from the range defined in {{!I-D.ietf-dnsop-delext}}.
 
@@ -340,7 +340,7 @@ Other special scenarios with DE=0 queries to DELEG-aware authorities are address
 
 ### Delegation point types, QTYPE=DELEG
 
-DELEG RR type is one of Delegation Types with special handling defined defined in {{!I-D.ietf-dnsop-delext}}.
+DELEG RR type is one of NS-Omitting Delegation Types with special handling defined in {{!I-D.ietf-dnsop-delext}}.
 
 DELEG-unaware resolvers can get different types of answers for QTYPE=DELEG queries based on the configuration of the server, such as whether it is DELEG-aware and whether it also is authoritative for subdomains.
 For example, a DELEG-unaware authoritative name server which has loaded DELEG records via the {{RFC3597}} unknown types mechanism would answer with them only if there were no NS records at the owner name, and answer with an NS delegation otherwise.
@@ -604,7 +604,7 @@ All new allocations should reference this document.
 
 IANA is requested to assign two types in the Resource Record (RR) TYPEs registry ({{!RFC6895}}):
 
-- TYPE DELEG, Meaning "Extensible Delegation", from the Delegation Types range defined in {{!I-D.ietf-dnsop-delext}}. The requested value is 61440.
+- TYPE DELEG, Meaning "Extensible Delegation", from the NS-Omitting Delegation Types range defined in {{!I-D.ietf-dnsop-delext}}. The requested value is 61440.
 - TYPE DELEGPARAM, Meaning "Extensible Delegation Indirection", Value TBD2 inside one of the ranges marked as "data TYPEs".
 
 IANA is requested to assign a value in the Extended DNS Error Codes registry ({{!RFC8914}}):
