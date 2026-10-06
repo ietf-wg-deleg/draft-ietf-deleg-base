@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-09-29T03:26:55.742167+00:00",
+  "timestamp": "2026-10-06T04:00:45.197508+00:00",
   "repo": "ietf-wg-deleg/draft-ietf-deleg-base",
   "labels": [
     {
@@ -9643,24 +9643,26 @@
       "id": "PR_kwDOO41rkM8AAAABFdkJHw",
       "title": "Added the editorial changes from Ray Hunter",
       "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/pull/211",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "fl1ger",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Moin!\r\n\r\nThese are the editorial changes Ray Hunter proposed in his email from August 21. They all look ok fro me, but would like @paulehoffman to have a look if they make sense for a native speaker. I did omit the more substantial changes he requested as we think the current text is fine for these. Once this is merged will answer on the list.\r\n\r\nSo long\r\n-Ralf\r\n",
       "createdAt": "2026-09-28T09:02:12Z",
-      "updatedAt": "2026-09-28T14:16:51Z",
+      "updatedAt": "2026-10-05T14:31:29Z",
       "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
       "baseRefName": "main",
       "baseRefOid": "bc282371f77666f22a2df27f8ac6cd7a5f48b9c4",
       "headRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
       "headRefName": "ray-hunter-editorial",
       "headRefOid": "f54ee118ebe066dae5073fae32742c9cc76a9457",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2026-10-05T14:31:28Z",
+      "mergedAt": "2026-10-05T14:31:28Z",
+      "mergedBy": "fl1ger",
+      "mergeCommit": {
+        "oid": "2a0cb44108a0229d7cab1742c20e3f93dc6327cd"
+      },
       "comments": [],
       "reviews": [
         {
