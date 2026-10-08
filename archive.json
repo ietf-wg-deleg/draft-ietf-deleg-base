@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-10-06T04:00:45.197508+00:00",
+  "timestamp": "2026-10-08T03:43:30.384147+00:00",
   "repo": "ietf-wg-deleg/draft-ietf-deleg-base",
   "labels": [
     {
@@ -1412,7 +1412,7 @@
       "labels": [],
       "body": "- [ ] DELEG RR type\n- [ ] DELEGPARAM RR type\n- [ ] ADT flag\n- [ ] DE flag\n- [x] EDE code point\n- [ ] resinfo code point",
       "createdAt": "2026-03-17T09:29:21Z",
-      "updatedAt": "2026-07-07T16:06:08Z",
+      "updatedAt": "2026-10-06T06:34:49Z",
       "closedAt": null,
       "comments": [
         {
@@ -1421,6 +1421,13 @@
           "body": "EDE allocated - IANA #1455469",
           "createdAt": "2026-07-07T16:06:08Z",
           "updatedAt": "2026-07-07T16:06:08Z"
+        },
+        {
+          "author": "boucadair",
+          "authorAssociation": "NONE",
+          "body": "Allocated codes:\n \n* Extended DNS Error Codes: 34 | New Delegation Only\n* EDNS Header Flags (16 bits): Bit 2 | DE | Delegation Extensions\n* DNSKEY RR Flags: 14 | Authoritative Delegation Types\n* DNS Resolver Information Keys: deleg resinfo code point assigned",
+          "createdAt": "2026-10-06T06:34:49Z",
+          "updatedAt": "2026-10-06T06:34:49Z"
         }
       ]
     },
