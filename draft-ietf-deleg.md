@@ -938,7 +938,7 @@ This is indicated by NSEC chain which "skips" over the owner name with A RRset.
 
     ;; Authority
     test.      DELEG server-ipv6=3fff::33
-    test.      DELEG include-delegparam=Acfg.example.org.
+    test.      DELEG include-delegparam=Acfg.example.org.,cname.example.org.
     test.      DELEG include-delegparam=config2.example.net.
 
     ;; Additional
@@ -987,7 +987,7 @@ A follow-up example in {{delegparam-example}} explains the ultimate meaning of t
 
     ;; Authority
     test.      DELEG server-ipv6=3fff::33
-    test.      DELEG include-delegparam=Acfg.example.org.
+    test.      DELEG include-delegparam=Acfg.example.org.,cname.example.org.
     test.      DELEG include-delegparam=config2.example.net.
     test.      RRSIG DELEG 13 1 300 20260101000000 (
                             20250101000000 33333 . SigTestDELEG )
