@@ -407,7 +407,7 @@ In summary, the server either provides an authoritative DELEG RRset or declares 
 
 #### DELEG-aware Clients with NS RRs Present but No DELEG RRs {#ns-no-deleg}
 
-According to specification in {{!I-D.ietf-dnsop-delext}}, if the delegation does not have a DELEG RRset, the authoritative server puts the NS RRset into the authority section of the referral.
+According to specification in {{!I-D.ietf-dnsop-delext}}, if the delegation does not have any NS-omitting types, the authoritative server puts the NS RRset into the authority section of the referral.
 The absence of the DELEG RRset needs to be proven.
 
 Similarly, rules for DS RRset inclusion into referrals apply as specified by the DNSSEC protocol.
