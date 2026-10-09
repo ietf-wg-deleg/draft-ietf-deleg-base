@@ -237,7 +237,7 @@ Table of Contents
    a delegation), the authoritative server checks if there is a DELEG
    RRset for the queried zone.  If so, it returns the DELEG RRset
    instead of any NS RRset in the response.  If the response is not a
-   referral, the authoritative server doesn't change anything about how
+   referral, the authoritative server generally doesn't change about how
    it responds.
 
    Records in the DELEG RRset for a zone describe how to find name

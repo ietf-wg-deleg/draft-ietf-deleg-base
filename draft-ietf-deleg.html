@@ -1432,7 +1432,7 @@ It is meant for people who want to understand the protocol before they dive deep
 <p id="section-2-4">DELEG-unaware authoritative servers intrinsically ignore this signal.<a href="#section-2-4" class="pilcrow">¶</a></p>
 <p id="section-2-5">A DELEG-aware authoritative server uses that signal to determine the type of response it will send.
 If the response is a referral (i.e., a delegation), the authoritative server checks if there is a DELEG RRset for the queried zone. If so, it returns the DELEG RRset instead of any NS RRset in the response.
-If the response is not a referral, the authoritative server doesn't change anything about how it responds.<a href="#section-2-5" class="pilcrow">¶</a></p>
+If the response is not a referral, the authoritative server generally doesn't change about how it responds.<a href="#section-2-5" class="pilcrow">¶</a></p>
 <p id="section-2-6">Records in the DELEG RRset for a zone describe how to find name servers for that zone (<a href="#deleg-delegparam" class="auto internal xref">Section 3</a>).
 The RDATA for DELEG records has key=value pairs (<a href="#nameserver-info" class="auto internal xref">Section 3.4</a>).<a href="#section-2-6" class="pilcrow">¶</a></p>
 <ul class="normal">
