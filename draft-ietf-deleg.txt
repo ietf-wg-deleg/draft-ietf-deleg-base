@@ -4,11 +4,11 @@
 
 deleg                                                          P. Špaček
 Internet-Draft                                                       ISC
-Updates: 1034, 1035, 4035 (if approved)                         R. Weber
+Updates: 1034, 1035 (if approved)                               R. Weber
 Intended status: Standards Track                     Akamai Technologies
-Expires: 8 April 2027                                        D. Lawrence
+Expires: 12 April 2027                                       D. Lawrence
                                                               Salesforce
-                                                          5 October 2026
+                                                          9 October 2026
 
 
                      Extensible Delegation for DNS
@@ -61,7 +61,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 8 April 2027.
+   This Internet-Draft will expire on 12 April 2027.
 
 Copyright Notice
 
@@ -1138,9 +1138,9 @@ Change Controller:  Person or entity, with contact information if appropriate
    [I-D.ietf-dnsop-delext]
               Arends, R., van Dijk, P., and P. Špaček, "DNS Protocol
               Modifications for Delegation Extensions", Work in
-              Progress, Internet-Draft, draft-ietf-dnsop-delext-11, 17
-              September 2026, <https://datatracker.ietf.org/doc/html/
-              draft-ietf-dnsop-delext-11>.
+              Progress, Internet-Draft, draft-ietf-dnsop-delext-12, 5
+              October 2026, <https://datatracker.ietf.org/doc/html/
+              draft-ietf-dnsop-delext-12>.
 
    [RFC1034]  Mockapetris, P., "Domain names - concepts and facilities",
               STD 13, RFC 1034, DOI 10.17487/RFC1034, November 1987,
