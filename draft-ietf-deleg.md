@@ -264,9 +264,9 @@ Relative names in the presentation format are interpreted according to the origi
 Parsing the comma-separated list is specified in Section A.1 of {{!RFC9460}}.
 
 The DELEG protocol allows the use of all valid domain names, as defined in {{!RFC1035}} and Section 11 of {{!RFC2181}}.
-The presentation format for names with special characters requires both double-escaping by applying rules of Section 5.1 of {{!RFC1034}} together with the escaping rules from Section A.1 of {{RFC9460}}.
+The presentation format for names with special characters requires both double-escaping by applying rules of Section 5.1 of {{!RFC1035}} together with the escaping rules from Section A.1 of {{RFC9460}}.
 
-For example, assume a list of two domain names. The first domain name is "simple.example". The second domain name is under ".example" whose leftmost label is "abc" followed by a escape character (U+001B), followed by "def", followed by a comma, followed by "ghi". This list would have a presentation value of "simple.example,abc\\027def\,ghi.example".
+For example, assume a list of two relative domain names. The first domain name is "simple.example". The second domain name is under ".example" whose leftmost label is "abc" followed by a escape character (U+001B), followed by "def", followed by a comma, followed by "ghi". This list would have a presentation value of "simple.example,abc\\027def\\,ghi.example".
 
 The wire format for server-name and include-delegparam are each a concatenated unordered collection of wire-format domain names, where the root label provides the separation between names:
 
@@ -756,7 +756,7 @@ The following example shows an excerpt from an unsigned example.net zone.
 
     ns2.example.net.     A          198.51.100.1
 
-    config2.example.net. DELEGPARAM server-name=b.example.org.
+    config2.example.net. DELEGPARAM server-name=ns2.example.org.
 
 
 ## Responses
@@ -927,7 +927,7 @@ This is indicated by NSEC chain which "skips" over the owner name with A RRset.
 
 #### Query for foo.test
 
-    ;; Header: QR RCODE=NOERROR
+    ;; Header: QR DE RCODE=NOERROR
     ;;
 
     ;; Question
@@ -938,7 +938,7 @@ This is indicated by NSEC chain which "skips" over the owner name with A RRset.
 
     ;; Authority
     test.      DELEG server-ipv6=3fff::33
-    test.      DELEG include-delegparam=Acfg.example.org.
+    test.      DELEG include-delegparam=Acfg.example.org.,cname.example.org.
     test.      DELEG include-delegparam=config2.example.net.
 
     ;; Additional
@@ -987,7 +987,7 @@ A follow-up example in {{delegparam-example}} explains the ultimate meaning of t
 
     ;; Authority
     test.      DELEG server-ipv6=3fff::33
-    test.      DELEG include-delegparam=Acfg.example.org.
+    test.      DELEG include-delegparam=Acfg.example.org.,cname.example.org.
     test.      DELEG include-delegparam=config2.example.net.
     test.      RRSIG DELEG 13 1 300 20260101000000 (
                             20250101000000 33333 . SigTestDELEG )
