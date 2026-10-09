@@ -927,7 +927,7 @@ This is indicated by NSEC chain which "skips" over the owner name with A RRset.
 
 #### Query for foo.test
 
-    ;; Header: QR RCODE=NOERROR
+    ;; Header: QR DE RCODE=NOERROR
     ;;
 
     ;; Question
