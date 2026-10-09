@@ -478,14 +478,14 @@ Table of Contents
    The DELEG protocol allows the use of all valid domain names, as
    defined in [RFC1035] and Section 11 of [RFC2181].  The presentation
    format for names with special characters requires both double-
-   escaping by applying rules of Section 5.1 of [RFC1034] together with
+   escaping by applying rules of Section 5.1 of [RFC1035] together with
    the escaping rules from Section A.1 of [RFC9460].
 
-   For example, assume a list of two domain names.  The first domain
-   name is "simple.example".  The second domain name is under ".example"
-   whose leftmost label is "abc" followed by a escape character
-   (U+001B), followed by "def", followed by a comma, followed by "ghi".
-   This list would have a presentation value of
+   For example, assume a list of two relative domain names.  The first
+   domain name is "simple.example".  The second domain name is under
+   ".example" whose leftmost label is "abc" followed by a escape
+   character (U+001B), followed by "def", followed by a comma, followed
+   by "ghi".  This list would have a presentation value of
    "simple.example,abc\027def\,ghi.example".
 
    The wire format for server-name and include-delegparam are each a
@@ -1317,7 +1317,7 @@ A.3.  Example.net zone file
 
    ns2.example.net.     A          198.51.100.1
 
-   config2.example.net. DELEGPARAM server-name=b.example.org.
+   config2.example.net. DELEGPARAM server-name=ns2.example.org.
 
 A.4.  Responses
 
@@ -1485,22 +1485,22 @@ A.4.3.1.  Query for foo.example
 
 A.4.3.2.  Query for foo.test
 
-   ;; Header: QR RCODE=NOERROR
-   ;;
+;; Header: QR DE RCODE=NOERROR
+;;
 
-   ;; Question
-   foo.test.   IN MX
+;; Question
+foo.test.   IN MX
 
-   ;; Answer
-   ;; (empty)
+;; Answer
+;; (empty)
 
-   ;; Authority
-   test.      DELEG server-ipv6=3fff::33
-   test.      DELEG include-delegparam=Acfg.example.org.
-   test.      DELEG include-delegparam=config2.example.net.
+;; Authority
+test.      DELEG server-ipv6=3fff::33
+test.      DELEG include-delegparam=Acfg.example.org.,cname.example.org.
+test.      DELEG include-delegparam=config2.example.net.
 
-   ;; Additional
-   ;; (empty)
+;; Additional
+;; (empty)
 
    A follow-up example in Appendix A.5 explains the ultimate meaning of
    this response.
@@ -1535,27 +1535,27 @@ A.4.4.1.  Query for foo.example
 
 A.4.4.2.  Query for foo.test
 
-   ;; Header: QR DO DE RCODE=NOERROR
-   ;;
+;; Header: QR DO DE RCODE=NOERROR
+;;
 
-   ;; Question
-   foo.test.      IN MX
+;; Question
+foo.test.      IN MX
 
-   ;; Answer
-   ;; (empty)
+;; Answer
+;; (empty)
 
-   ;; Authority
-   test.      DELEG server-ipv6=3fff::33
-   test.      DELEG include-delegparam=Acfg.example.org.
-   test.      DELEG include-delegparam=config2.example.net.
-   test.      RRSIG DELEG 13 1 300 20260101000000 (
-                           20250101000000 33333 . SigTestDELEG )
-   test.      NSEC  . RRSIG NSEC DELEG
-   test.      RRSIG NSEC 13 1 300 20260101000000 (
-                           20250101000000 33333 . SigTestNSEC/ )
+;; Authority
+test.      DELEG server-ipv6=3fff::33
+test.      DELEG include-delegparam=Acfg.example.org.,cname.example.org.
+test.      DELEG include-delegparam=config2.example.net.
+test.      RRSIG DELEG 13 1 300 20260101000000 (
+                        20250101000000 33333 . SigTestDELEG )
+test.      NSEC  . RRSIG NSEC DELEG
+test.      RRSIG NSEC 13 1 300 20260101000000 (
+                        20250101000000 33333 . SigTestNSEC/ )
 
-   ;; Additional
-   ;; (empty)
+;; Additional
+;; (empty)
 
    A follow-up example in Appendix A.5 explains the ultimate meaning of
    this response.
