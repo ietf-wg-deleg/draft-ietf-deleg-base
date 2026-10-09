@@ -756,7 +756,7 @@ The following example shows an excerpt from an unsigned example.net zone.
 
     ns2.example.net.     A          198.51.100.1
 
-    config2.example.net. DELEGPARAM server-name=b.example.org.
+    config2.example.net. DELEGPARAM server-name=ns2.example.org.
 
 
 ## Responses
