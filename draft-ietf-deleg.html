@@ -2016,34 +2016,35 @@ but it does not prohibit a provisioning system from generating one record type f
           </h4>
 <p id="section-6.5.1-1">According to the DNSSEC specification, changing flags of a DNSKEY record changes its Key Tag and thus requires a key rollover.
 For this reason, the DNSKEY-ADT flag cannot be simply enabled on an existing key without other changes to the record.
-Operators are advised to set the DNSKEY-ADT flag at the time of generating a new key, as part of a regular key rollover using established procedures.
-A zone can safely have keys with the DNSKEY-ADT flag set to 1 even if the zone does not have any DELEG records.
-Turning on the DNSKEY-ADT flag can be done months or even years before a first DELEG record is introduced into the zone.<a href="#section-6.5.1-1" class="pilcrow">¶</a></p>
-<p id="section-6.5.1-2">Downgrade protection is effective if any DNSKEY with ADT flag set to 1 is present, even if this key does not sign any RRset.
-In other words, it is sufficient to pre-publish new key, as described in stage 2 of Pre-Publish Zone Signing Key Rollover of <span>[<a href="#RFC6781" class="cite xref">RFC6781</a>]</span> Section 4.1.1.1.<a href="#section-6.5.1-2" class="pilcrow">¶</a></p>
-<p id="section-6.5.1-3">An extremely conservative approach might be:<a href="#section-6.5.1-3" class="pilcrow">¶</a></p>
-<ol start="1" type="1" class="normal type-1" id="section-6.5.1-4">
-<li id="section-6.5.1-4.1">
-              <p id="section-6.5.1-4.1.1">Lower DNSKEY TTL to shorten time to rollback.<a href="#section-6.5.1-4.1.1" class="pilcrow">¶</a></p>
+Operators are advised to set the DNSKEY-ADT flag at the time of generating a new key, as part of a regular key rollover using established procedures.<a href="#section-6.5.1-1" class="pilcrow">¶</a></p>
+<p id="section-6.5.1-2">Before DNSKEY-ADT flag can be enabled, all authoritative servers MUST support behavior described in <a href="#authoritative-servers" class="auto internal xref">Section 5.2</a>.
+After that, a zone can safely have keys with the DNSKEY-ADT flag set to 1 even if the zone does not have any DELEG records.
+Turning on the DNSKEY-ADT flag can be done months or even years before a first DELEG record is introduced into the zone.<a href="#section-6.5.1-2" class="pilcrow">¶</a></p>
+<p id="section-6.5.1-3">Downgrade protection is effective if any DNSKEY with ADT flag set to 1 is present, even if this key does not sign any RRset.
+In other words, it is sufficient to pre-publish new key, as described in stage 2 of Pre-Publish Zone Signing Key Rollover of <span>[<a href="#RFC6781" class="cite xref">RFC6781</a>]</span> Section 4.1.1.1.<a href="#section-6.5.1-3" class="pilcrow">¶</a></p>
+<p id="section-6.5.1-4">An extremely conservative approach might be:<a href="#section-6.5.1-4" class="pilcrow">¶</a></p>
+<ol start="1" type="1" class="normal type-1" id="section-6.5.1-5">
+<li id="section-6.5.1-5.1">
+              <p id="section-6.5.1-5.1.1">Lower DNSKEY TTL to shorten time to rollback.<a href="#section-6.5.1-5.1.1" class="pilcrow">¶</a></p>
 </li>
-            <li id="section-6.5.1-4.2">
-              <p id="section-6.5.1-4.2.1">Add a new DNSKEY with ADT flag set to 1, but do not sign any RRsets with this key.<a href="#section-6.5.1-4.2.1" class="pilcrow">¶</a></p>
+            <li id="section-6.5.1-5.2">
+              <p id="section-6.5.1-5.2.1">Add a new DNSKEY with ADT flag set to 1, but do not sign any RRsets with this key.<a href="#section-6.5.1-5.2.1" class="pilcrow">¶</a></p>
 </li>
-            <li id="section-6.5.1-4.3">
-              <p id="section-6.5.1-4.3.1">Monitor deployment for issues.<a href="#section-6.5.1-4.3.1" class="pilcrow">¶</a></p>
+            <li id="section-6.5.1-5.3">
+              <p id="section-6.5.1-5.3.1">Monitor deployment for issues.<a href="#section-6.5.1-5.3.1" class="pilcrow">¶</a></p>
 </li>
-            <li id="section-6.5.1-4.4">
-              <p id="section-6.5.1-4.4.1">Experiment with adding DELEG records at this point, even if the key rollover is not finished. If there is a problem, withdraw the new, otherwise unused key.<a href="#section-6.5.1-4.4.1" class="pilcrow">¶</a></p>
+            <li id="section-6.5.1-5.4">
+              <p id="section-6.5.1-5.4.1">Experiment with adding DELEG records at this point, even if the key rollover is not finished. If there is a problem, withdraw the new, otherwise unused key.<a href="#section-6.5.1-5.4.1" class="pilcrow">¶</a></p>
 </li>
-            <li id="section-6.5.1-4.5">
-              <p id="section-6.5.1-4.5.1">Finish the key rollover.<a href="#section-6.5.1-4.5.1" class="pilcrow">¶</a></p>
+            <li id="section-6.5.1-5.5">
+              <p id="section-6.5.1-5.5.1">Finish the key rollover.<a href="#section-6.5.1-5.5.1" class="pilcrow">¶</a></p>
 </li>
-            <li id="section-6.5.1-4.6">
-              <p id="section-6.5.1-4.6.1">Restore the original DNSKEY TTL.<a href="#section-6.5.1-4.6.1" class="pilcrow">¶</a></p>
+            <li id="section-6.5.1-5.6">
+              <p id="section-6.5.1-5.6.1">Restore the original DNSKEY TTL.<a href="#section-6.5.1-5.6.1" class="pilcrow">¶</a></p>
 </li>
           </ol>
-<p id="section-6.5.1-5">Such an approach requires changing only the DNSKEY RRset and resigning it.
-Consequently, the time required to withdraw the new DNSKEY record is limited only by DNSKEY TTL + time to sign + time to transfer modified DNSKEY RRset.<a href="#section-6.5.1-5" class="pilcrow">¶</a></p>
+<p id="section-6.5.1-6">Such an approach requires changing only the DNSKEY RRset and resigning it.
+Consequently, the time required to withdraw the new DNSKEY record is limited only by DNSKEY TTL + time to sign + time to transfer modified DNSKEY RRset.<a href="#section-6.5.1-6" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>

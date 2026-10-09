@@ -939,9 +939,12 @@ Table of Contents
    existing key without other changes to the record.  Operators are
    advised to set the DNSKEY-ADT flag at the time of generating a new
    key, as part of a regular key rollover using established procedures.
-   A zone can safely have keys with the DNSKEY-ADT flag set to 1 even if
-   the zone does not have any DELEG records.  Turning on the DNSKEY-ADT
-   flag can be done months or even years before a first DELEG record is
+
+   Before DNSKEY-ADT flag can be enabled, all authoritative servers MUST
+   support behavior described in Section 5.2.  After that, a zone can
+   safely have keys with the DNSKEY-ADT flag set to 1 even if the zone
+   does not have any DELEG records.  Turning on the DNSKEY-ADT flag can
+   be done months or even years before a first DELEG record is
    introduced into the zone.
 
    Downgrade protection is effective if any DNSKEY with ADT flag set to
