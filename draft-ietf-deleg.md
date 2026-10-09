@@ -264,7 +264,7 @@ Relative names in the presentation format are interpreted according to the origi
 Parsing the comma-separated list is specified in Section A.1 of {{!RFC9460}}.
 
 The DELEG protocol allows the use of all valid domain names, as defined in {{!RFC1035}} and Section 11 of {{!RFC2181}}.
-The presentation format for names with special characters requires both double-escaping by applying rules of Section 5.1 of {{!RFC1034}} together with the escaping rules from Section A.1 of {{RFC9460}}.
+The presentation format for names with special characters requires both double-escaping by applying rules of Section 5.1 of {{!RFC1035}} together with the escaping rules from Section A.1 of {{RFC9460}}.
 
 For example, assume a list of two relative domain names. The first domain name is "simple.example". The second domain name is under ".example" whose leftmost label is "abc" followed by a escape character (U+001B), followed by "def", followed by a comma, followed by "ghi". This list would have a presentation value of "simple.example,abc\\027def\\,ghi.example".
 
