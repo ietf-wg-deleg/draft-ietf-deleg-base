@@ -5,7 +5,7 @@ category: std
 
 docname: draft-ietf-deleg-latest
 submissiontype: IETF
-updates: 1034, 1035, 4035
+updates: 1034, 1035
 number:
 date:
 consensus: true
