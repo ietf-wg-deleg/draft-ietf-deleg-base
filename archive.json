@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-10-08T03:43:30.384147+00:00",
+  "timestamp": "2026-10-11T03:05:03.692329+00:00",
   "repo": "ietf-wg-deleg/draft-ietf-deleg-base",
   "labels": [
     {
@@ -1410,9 +1410,9 @@
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
-      "body": "- [ ] DELEG RR type\n- [ ] DELEGPARAM RR type\n- [ ] ADT flag\n- [ ] DE flag\n- [x] EDE code point\n- [ ] resinfo code point",
+      "body": "- [ ] DELEG RR type\n- [ ] DELEGPARAM RR type\n- [x] ADT flag\n- [x] DE flag\n- [x] EDE code point\n- [x] resinfo code point",
       "createdAt": "2026-03-17T09:29:21Z",
-      "updatedAt": "2026-10-06T06:34:49Z",
+      "updatedAt": "2026-10-09T08:31:18Z",
       "closedAt": null,
       "comments": [
         {
@@ -9686,6 +9686,182 @@
           "comments": []
         }
       ]
+    },
+    {
+      "number": 212,
+      "id": "PR_kwDOO41rkM8AAAABHfzmfQ",
+      "title": "Do not update 4035 anymore",
+      "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/pull/212",
+      "state": "MERGED",
+      "author": "pspacek",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2026-10-09T08:36:03Z",
+      "updatedAt": "2026-10-09T08:36:43Z",
+      "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
+      "baseRefName": "main",
+      "baseRefOid": "878d6a8aff92d2c3840694573186a7ddf79c5bb4",
+      "headRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
+      "headRefName": "updates-fix",
+      "headRefOid": "a82e065c6c2fd1dca4ad9256a56413644aad2c12",
+      "closedAt": "2026-10-09T08:36:43Z",
+      "mergedAt": "2026-10-09T08:36:43Z",
+      "mergedBy": "pspacek",
+      "mergeCommit": {
+        "oid": "c587548d6c50d2ed65878337f72d5edb45aaddbe"
+      },
+      "comments": [
+        {
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "body": "See Message-ID: <D2CB675D-09BB-4169-B7CC-513C475937D3@verisign.com>",
+          "createdAt": "2026-10-09T08:36:30Z",
+          "updatedAt": "2026-10-09T08:36:30Z"
+        }
+      ],
+      "reviews": []
+    },
+    {
+      "number": 213,
+      "id": "PR_kwDOO41rkM8AAAABHhc5aw",
+      "title": "Clarify servers MUST be upgraded before setting ADT=1",
+      "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/pull/213",
+      "state": "MERGED",
+      "author": "pspacek",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2026-10-09T11:30:33Z",
+      "updatedAt": "2026-10-09T11:33:59Z",
+      "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
+      "baseRefName": "main",
+      "baseRefOid": "c587548d6c50d2ed65878337f72d5edb45aaddbe",
+      "headRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
+      "headRefName": "adt-ops",
+      "headRefOid": "0506b3e8089aa996e950913ba753ca3e2e0bb8cb",
+      "closedAt": "2026-10-09T11:33:59Z",
+      "mergedAt": "2026-10-09T11:33:59Z",
+      "mergedBy": "pspacek",
+      "mergeCommit": {
+        "oid": "0b001dff6ae3adc528605eda970a8dca78291aad"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 214,
+      "id": "PR_kwDOO41rkM8AAAABHhhLAg",
+      "title": "Adapt resolver algorithm for range of NS-omitting types",
+      "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/pull/214",
+      "state": "MERGED",
+      "author": "pspacek",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2026-10-09T11:37:46Z",
+      "updatedAt": "2026-10-09T11:38:27Z",
+      "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
+      "baseRefName": "main",
+      "baseRefOid": "0b001dff6ae3adc528605eda970a8dca78291aad",
+      "headRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
+      "headRefName": "generalize-ranges",
+      "headRefOid": "a52cbb53fa2afc0f5d2dadbe0317ad295a09f150",
+      "closedAt": "2026-10-09T11:38:27Z",
+      "mergedAt": "2026-10-09T11:38:27Z",
+      "mergedBy": "pspacek",
+      "mergeCommit": {
+        "oid": "4fc2bafd0402567c207690b38f97d54ca820e1e1"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 215,
+      "id": "PR_kwDOO41rkM8AAAABHhk_dw",
+      "title": "Clarify DE=1 is not unique to DELEG",
+      "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/pull/215",
+      "state": "MERGED",
+      "author": "pspacek",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2026-10-09T11:43:46Z",
+      "updatedAt": "2026-10-09T11:45:02Z",
+      "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
+      "baseRefName": "main",
+      "baseRefOid": "4fc2bafd0402567c207690b38f97d54ca820e1e1",
+      "headRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
+      "headRefName": "generalize-de-bit",
+      "headRefOid": "e057667f46a257d86ca3f0eafc25927b3dc3a6bc",
+      "closedAt": "2026-10-09T11:45:02Z",
+      "mergedAt": "2026-10-09T11:45:02Z",
+      "mergedBy": "pspacek",
+      "mergeCommit": {
+        "oid": "7a9b16f4e3389425d4be815a673ee4699c54f0c6"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 216,
+      "id": "PR_kwDOO41rkM8AAAABHh-33Q",
+      "title": "nit: Reportedly 'does not change anything' is too strong",
+      "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/pull/216",
+      "state": "MERGED",
+      "author": "pspacek",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2026-10-09T12:24:17Z",
+      "updatedAt": "2026-10-09T12:24:54Z",
+      "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
+      "baseRefName": "main",
+      "baseRefOid": "7a9b16f4e3389425d4be815a673ee4699c54f0c6",
+      "headRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
+      "headRefName": "nits",
+      "headRefOid": "e5ab0f56749d106987baf015f5b0383affed77f6",
+      "closedAt": "2026-10-09T12:24:54Z",
+      "mergedAt": "2026-10-09T12:24:54Z",
+      "mergedBy": "pspacek",
+      "mergeCommit": {
+        "oid": "6191be299507fbc2b8ffbc5eed75c68b8a8f7872"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 217,
+      "id": "PR_kwDOO41rkM8AAAABHiIGCA",
+      "title": "Example fixes",
+      "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/pull/217",
+      "state": "MERGED",
+      "author": "pspacek",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2026-10-09T12:38:36Z",
+      "updatedAt": "2026-10-09T13:02:18Z",
+      "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
+      "baseRefName": "main",
+      "baseRefOid": "6191be299507fbc2b8ffbc5eed75c68b8a8f7872",
+      "headRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
+      "headRefName": "examples",
+      "headRefOid": "870ee49c5d594e5f4f3aaa9af5d7a9e836ca80d9",
+      "closedAt": "2026-10-09T13:02:18Z",
+      "mergedAt": "2026-10-09T13:02:17Z",
+      "mergedBy": "pspacek",
+      "mergeCommit": {
+        "oid": "72ccd4a1ce1042ed40c0648f40880b4d93e5ccb3"
+      },
+      "comments": [],
+      "reviews": []
     }
   ]
 }
