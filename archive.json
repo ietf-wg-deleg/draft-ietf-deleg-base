@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-10-11T03:05:03.692329+00:00",
+  "timestamp": "2026-10-15T02:30:17.114915+00:00",
   "repo": "ietf-wg-deleg/draft-ietf-deleg-base",
   "labels": [
     {
@@ -2035,6 +2035,22 @@
       "createdAt": "2026-07-21T09:00:03Z",
       "updatedAt": "2026-07-23T16:23:32Z",
       "closedAt": "2026-07-23T16:23:32Z",
+      "comments": []
+    },
+    {
+      "number": 218,
+      "id": "I_kwDOO41rkM8AAAABXILccA",
+      "title": "Suggestions for the Test Harness",
+      "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/issues/218",
+      "state": "OPEN",
+      "author": "pieterlexis",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "In the \"testvectors\" branch of @pspacek's fork, there's a Work-in-Progress test harness for DELEG. After a discussion with him, we decided that this could be extended to a DelExt test harness and to gather ideas in a single issue. Here's this issue :).\n\nIdeas that we've had:\n\n### Add more types of DelExt\n\n* Add NS-preserving DelExt types\n* Add on-demand DelExt types\n\nThis would require starting with expanding the table of responses and adding the requisite types to the zones (both by themselves and alongside other DelExt types) and query for them at different places in the domain tree.\n\n### Add occluded delegations\n\nThe harness should also have a few \"bad\" delegations that would occlude eachother. e.g.\n\n```zone\n$ORIGIN test.\n\n; DELEG is occluded by the NS delegation\nfoo NS ns1.example.\ndeleg.foo DELEG server-ipv4=192.0.2.1\n\n; NS is occluded by the DELEG delegations\nbar DELEG server-ipv4=192.0.2.1\nns.bar NS ns1.example.\n```",
+      "createdAt": "2026-10-14T11:35:40Z",
+      "updatedAt": "2026-10-14T11:35:40Z",
+      "closedAt": null,
       "comments": []
     }
   ],
