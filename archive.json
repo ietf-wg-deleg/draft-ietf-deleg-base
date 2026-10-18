@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-10-15T02:30:17.114915+00:00",
+  "timestamp": "2026-10-18T02:17:28.042256+00:00",
   "repo": "ietf-wg-deleg/draft-ietf-deleg-base",
   "labels": [
     {
@@ -1412,7 +1412,7 @@
       "labels": [],
       "body": "- [ ] DELEG RR type\n- [ ] DELEGPARAM RR type\n- [x] ADT flag\n- [x] DE flag\n- [x] EDE code point\n- [x] resinfo code point",
       "createdAt": "2026-03-17T09:29:21Z",
-      "updatedAt": "2026-10-09T08:31:18Z",
+      "updatedAt": "2026-10-17T05:58:11Z",
       "closedAt": null,
       "comments": [
         {
@@ -1425,9 +1425,9 @@
         {
           "author": "boucadair",
           "authorAssociation": "NONE",
-          "body": "Allocated codes:\n \n* Extended DNS Error Codes: 34 | New Delegation Only\n* EDNS Header Flags (16 bits): Bit 2 | DE | Delegation Extensions\n* DNSKEY RR Flags: 14 | Authoritative Delegation Types\n* DNS Resolver Information Keys: deleg resinfo code point assigned",
+          "body": "Allocated codes:\n \n* Extended DNS Error Codes: 34 | New Delegation Only\n* EDNS Header Flags (16 bits): Bit 2 | DE | Delegation Extensions\n* DNSKEY RR Flags: 14 | Authoritative Delegation Types\n* DNS Resolver Information Keys: deleg resinfo code point assigned\n* DELEGPARAM\t54\tExtensible Delegation Indirection (TEMPORARY - registered 2026-10-16, expires 2027-10-16)\tdraft-ietf-deleg-12\t\t2026-10-16\n* DELEG\t61440\tExtensible Delegation (TEMPORARY - registered 2026-10-16, expires 2027-10-16)\tdraft-ietf-deleg-12\t\t2026-10-16\n",
           "createdAt": "2026-10-06T06:34:49Z",
-          "updatedAt": "2026-10-06T06:34:49Z"
+          "updatedAt": "2026-10-17T05:58:11Z"
         }
       ]
     },
