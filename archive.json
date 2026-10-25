@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-10-18T02:17:28.042256+00:00",
+  "timestamp": "2026-10-25T02:27:47.798255+00:00",
   "repo": "ietf-wg-deleg/draft-ietf-deleg-base",
   "labels": [
     {
@@ -9807,7 +9807,7 @@
       "labels": [],
       "body": "",
       "createdAt": "2026-10-09T11:43:46Z",
-      "updatedAt": "2026-10-09T11:45:02Z",
+      "updatedAt": "2026-10-22T09:44:37Z",
       "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
       "baseRefName": "main",
       "baseRefOid": "4fc2bafd0402567c207690b38f97d54ca820e1e1",
