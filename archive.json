@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-10-25T02:27:47.798255+00:00",
+  "timestamp": "2026-10-29T03:39:10.260072+00:00",
   "repo": "ietf-wg-deleg/draft-ietf-deleg-base",
   "labels": [
     {
@@ -1405,15 +1405,15 @@
       "id": "I_kwDOO41rkM7znvtj",
       "title": "IANA Early Allocation",
       "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/issues/155",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "pspacek",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
-      "body": "- [ ] DELEG RR type\n- [ ] DELEGPARAM RR type\n- [x] ADT flag\n- [x] DE flag\n- [x] EDE code point\n- [x] resinfo code point",
+      "body": "- [x] DELEG RR type\n- [x] DELEGPARAM RR type\n- [x] ADT flag\n- [x] DE flag\n- [x] EDE code point\n- [x] resinfo code point",
       "createdAt": "2026-03-17T09:29:21Z",
-      "updatedAt": "2026-10-17T05:58:11Z",
-      "closedAt": null,
+      "updatedAt": "2026-10-28T14:40:52Z",
+      "closedAt": "2026-10-28T14:40:52Z",
       "comments": [
         {
           "author": "pspacek",
