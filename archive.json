@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-10-29T03:39:10.260072+00:00",
+  "timestamp": "2026-11-03T04:42:19.534763+00:00",
   "repo": "ietf-wg-deleg/draft-ietf-deleg-base",
   "labels": [
     {
@@ -2050,6 +2050,38 @@
       "body": "In the \"testvectors\" branch of @pspacek's fork, there's a Work-in-Progress test harness for DELEG. After a discussion with him, we decided that this could be extended to a DelExt test harness and to gather ideas in a single issue. Here's this issue :).\n\nIdeas that we've had:\n\n### Add more types of DelExt\n\n* Add NS-preserving DelExt types\n* Add on-demand DelExt types\n\nThis would require starting with expanding the table of responses and adding the requisite types to the zones (both by themselves and alongside other DelExt types) and query for them at different places in the domain tree.\n\n### Add occluded delegations\n\nThe harness should also have a few \"bad\" delegations that would occlude eachother. e.g.\n\n```zone\n$ORIGIN test.\n\n; DELEG is occluded by the NS delegation\nfoo NS ns1.example.\ndeleg.foo DELEG server-ipv4=192.0.2.1\n\n; NS is occluded by the DELEG delegations\nbar DELEG server-ipv4=192.0.2.1\nns.bar NS ns1.example.\n```",
       "createdAt": "2026-10-14T11:35:40Z",
       "updatedAt": "2026-10-14T11:35:40Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 219,
+      "id": "I_kwDOO41rkM8AAAABb4nq5A",
+      "title": "markdown / kramdown issue in IANA considerations ?",
+      "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/issues/219",
+      "state": "OPEN",
+      "author": "moonshiner",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "seems like should be fixed up?\n\nReference: {{mandatory}} of this document\n\nReference: {{nameserver-info}} of this document\n\nReference: {{nameserver-info}} of this document\n\nReference: {{nameserver-info}} of this document\n\nReference: {{nameserver-info}} of this document",
+      "createdAt": "2026-11-02T16:09:33Z",
+      "updatedAt": "2026-11-02T16:09:33Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 220,
+      "id": "I_kwDOO41rkM8AAAABb4xsmA",
+      "title": "Mostly Editorial  nits",
+      "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/issues/220",
+      "state": "OPEN",
+      "author": "moonshiner",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "These are mostly editorial, with a few things at the top like the TBD references.  \n\nIs is \"DELEG-unaware\" or is it \"non-DELEG\" ?\n\nDELEGPARAM is now 54\n\nTBD1 should be updated in the document.\n\nThe Third Paragraphs in 4 (Signaling DELEG support) and 5.1 (Resolvers) are almost identical. \nNot sure what to do, just something.\n\n### 3.1 Presentation Format\n\ns/will be not be processed/will  not be processed/\n\n### 3.2. RDATA Wire Format\n\ns/strictly increasing numeric order to keys/strictly increasing numeric order of keys/\n\n### 3.4. Name Server Information for Delegation\n\ns/a escape character/an escape character/\n\n### 4. Signaling DELEG Support\n\ns/the resolver is can only be served/the resolver can only be served/\n\ns/non-[I-D.ietf-dnsop-delext] specifications/specifications not in [I-D.ietf-dnsop-delext]/\n\n### 5.2.1.2. DELEG-aware Clients with NS RRs Present but No DELEG RRs\n\ns/According to specification/According to the specification/\n\n### 6.5. Authoritative Deployment\n\ns/a first DELEG/the first DELEG/\n\nThis is also in 6.5.1\n\n### 7.3. DELEG Is Stronger Than NS\n\ns/DELEG RRtype/The DELEG RR type/\n\nDoes CVE-2026-3592 need a reference ?  I don't know.\n\n\nThere are several nits in the appendix which I skipped for now.\n",
+      "createdAt": "2026-11-02T16:19:18Z",
+      "updatedAt": "2026-11-02T16:19:18Z",
       "closedAt": null,
       "comments": []
     }
