@@ -6,9 +6,9 @@ deleg                                                          P. Špaček
 Internet-Draft                                                       ISC
 Updates: 1034, 1035 (if approved)                               R. Weber
 Intended status: Standards Track                     Akamai Technologies
-Expires: 12 April 2027                                       D. Lawrence
+Expires: 29 May 2027                                         D. Lawrence
                                                               Salesforce
-                                                          9 October 2026
+                                                        25 November 2026
 
 
                      Extensible Delegation for DNS
@@ -61,7 +61,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 12 April 2027.
+   This Internet-Draft will expire on 29 May 2027.
 
 Copyright Notice
 
@@ -109,6 +109,7 @@ Table of Contents
      7.1.  Preventing Over-work Attacks
      7.2.  Preventing Downgrade Attacks
      7.3.  DELEG Is Stronger Than NS
+     7.4.  Interaction with Existing Security Mechanisms
    8.  IANA Considerations
      8.1.  Changes to Existing Registries
      8.2.  New Registry for Delegation Information
@@ -1036,6 +1037,14 @@ Table of Contents
    The feasibility and impact of such attacks depend on the threat
    model, which is outside the scope of this document.
 
+7.4.  Interaction with Existing Security Mechanisms
+
+   There exists security mechanisms inside resolvers that block queries
+   to name servers based on their NS name or IP address.  A DELEG-aware
+   resolver that implements such security mechanisms will need to handle
+   the server-name, server-ipv4, and server-ipv6 DelegInfos in a similar
+   way.
+
 8.  IANA Considerations
 
 8.1.  Changes to Existing Registries
@@ -1142,9 +1151,9 @@ Change Controller:  Person or entity, with contact information if appropriate
    [I-D.ietf-dnsop-delext]
               Arends, R., van Dijk, P., and P. Špaček, "DNS Protocol
               Modifications for Delegation Extensions", Work in
-              Progress, Internet-Draft, draft-ietf-dnsop-delext-12, 5
+              Progress, Internet-Draft, draft-ietf-dnsop-delext-13, 30
               October 2026, <https://datatracker.ietf.org/doc/html/
-              draft-ietf-dnsop-delext-12>.
+              draft-ietf-dnsop-delext-13>.
 
    [RFC1034]  Mockapetris, P., "Domain names - concepts and facilities",
               STD 13, RFC 1034, DOI 10.17487/RFC1034, November 1987,
