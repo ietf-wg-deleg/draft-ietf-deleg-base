@@ -598,6 +598,11 @@ observe traffic, and also monitor the network addresses involved, which might be
 
 The feasibility and impact of such attacks depend on the threat model, which is outside the scope of this document.
 
+## Interaction with Existing Security Mechanisms
+
+There exists security mechanisms inside resolvers that block queries to name servers based on their NS name or IP address.
+A DELEG-aware resolver that implements such security mechanisms will need to handle the server-name, server-ipv4, and server-ipv6 DelegInfos in a similar way.
+
 # IANA Considerations
 
 ## Changes to Existing Registries {#iana-existing}
