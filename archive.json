@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-11-03T04:42:19.534763+00:00",
+  "timestamp": "2026-11-26T06:05:52.680097+00:00",
   "repo": "ietf-wg-deleg/draft-ietf-deleg-base",
   "labels": [
     {
@@ -9910,6 +9910,48 @@
       },
       "comments": [],
       "reviews": []
+    },
+    {
+      "number": 221,
+      "id": "PR_kwDOO41rkM8AAAABRzeJlw",
+      "title": "Add Security Consideration on the interaction between DELEG and RPZ",
+      "url": "https://github.com/ietf-wg-deleg/draft-ietf-deleg-base/pull/221",
+      "state": "MERGED",
+      "author": "pieterlexis",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "This is a small start on non-normative text for the interaction of DELEG with RPZ and similar mechanisms. This follows after a short discussion with Petr.\n",
+      "createdAt": "2026-11-25T10:45:05Z",
+      "updatedAt": "2026-11-25T10:59:53Z",
+      "baseRepository": "ietf-wg-deleg/draft-ietf-deleg-base",
+      "baseRefName": "main",
+      "baseRefOid": "72ccd4a1ce1042ed40c0648f40880b4d93e5ccb3",
+      "headRepository": "pieterlexis/draft-ietf-deleg-base",
+      "headRefName": "rpz-considerations",
+      "headRefOid": "809b54b86ae6d53c718d9ed5102146586ef4ad1c",
+      "closedAt": "2026-11-25T10:59:53Z",
+      "mergedAt": "2026-11-25T10:59:53Z",
+      "mergedBy": "pspacek",
+      "mergeCommit": {
+        "oid": "36a5114950885b500cc0fbff9f0f6fa7136e44ff"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOO41rkM8AAAABaPxkJg",
+          "commit": {
+            "abbreviatedOid": "809b54b"
+          },
+          "author": "pspacek",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "makes sense - thank you!",
+          "createdAt": "2026-11-25T10:59:44Z",
+          "updatedAt": "2026-11-25T10:59:44Z",
+          "comments": []
+        }
+      ]
     }
   ]
 }
